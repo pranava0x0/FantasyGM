@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "/Users/pranava/.local/state/fnm_multishells/91998_1778908850730/bin/node",
+      "runtimeArgs": ["/Users/pranava/Documents/Projects/FantasyGM/scripts/serve.mjs"],
+      "autoPort": true
+    }
+  ]
+}

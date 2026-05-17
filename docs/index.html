@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FantasyGM</title>
+  <meta name="description" content="AI-powered GM for an ESPN fantasy WNBA league. Waiver targets, team weakness, transaction history." />
+  <link rel="preload" href="./data/state.json" as="fetch" type="application/json" crossorigin />
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header role="banner" class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">F<span>·</span>GM</span>
+        <span class="brand-tag" id="league-name">FantasyGM</span>
+      </div>
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+      </button>
+    </div>
+    <div class="meta-strip" aria-live="polite">
+      <span class="meta-item"><span class="meta-label">Period</span> <span class="meta-value" id="meta-period">—</span></span>
+      <span class="meta-item"><span class="meta-label">Matchup</span> <span class="meta-value" id="meta-matchup">—</span></span>
+      <span class="meta-item"><span class="meta-label">Season</span> <span class="meta-value" id="meta-season">—</span></span>
+      <span class="meta-item"><span class="meta-label">Teams</span> <span class="meta-value" id="meta-teams">—</span></span>
+      <span class="meta-item meta-captured"><span class="meta-label">As of</span> <span class="meta-value" id="meta-captured">—</span></span>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <!-- ========== Waiver Targets ========== -->
+    <section class="surface" id="section-waivers" aria-labelledby="h-waivers">
+      <header class="surface-head">
+        <h2 id="h-waivers">Top Waiver Targets</h2>
+        <p class="surface-sub">Ranked by next-period projection. Tap a team chip below to see picks tailored to that team's weakest bucket.</p>
+      </header>
+      <ol class="waiver-list" id="waiver-list">
+        <li class="loading">Loading targets…</li>
+      </ol>
+    </section>
+
+    <!-- ========== Team Weakness ========== -->
+    <section class="surface" id="section-teams" aria-labelledby="h-teams">
+      <header class="surface-head">
+        <h2 id="h-teams">Team Weakness</h2>
+        <p class="surface-sub">Projected production by bucket vs. league average. Tap a card to see that team's tailored waiver list.</p>
+      </header>
+      <div class="team-grid" id="team-grid">
+        <p class="loading">Loading teams…</p>
+      </div>
+    </section>
+
+    <!-- ========== Transactions ========== -->
+    <section class="surface" id="section-transactions" aria-labelledby="h-transactions">
+      <header class="surface-head">
+        <h2 id="h-transactions">Recent Transactions</h2>
+        <p class="surface-sub">Newest first. Team abbreviations only — owner names are never stored.</p>
+      </header>
+      <ul class="txn-list" id="txn-list">
+        <li class="loading">Loading…</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="footer">
+    <p>Data via the user's authenticated ESPN session. Built with <code>python -m pipeline.refresh</code>. <a href="https://github.com/pranava0x0/FantasyGM">Source</a>.</p>
+  </footer>
+
+  <!-- Lazy-mounted toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./assets/app.js" defer></script>
+</body>
+</html>

@@ -16,6 +16,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## Low
 
+- **Resolve transaction player names by ID.** Right now `transaction_items.player_name` is filled only for players currently on a roster or in the FA top-N. When a player was dropped + already picked up by a third team, their name might miss the index and the UI renders `#playerId`. Fix: pull `kona_playercard` for any unresolved IDs at build_state time, or maintain a cumulative `data/history/players.json` index.
 - **Historical drift charts.** Plot each team's win probability / power ranking over time using the raw daily snapshots in `data/raw/`.
 - **Player ownership trends.** Track free-agent percentage-owned changes day-over-day; flag fastest risers.
 - **Discord/Slack/email digest.** Push the daily brief to a channel instead of waiting for the user to load the page.

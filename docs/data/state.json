@@ -1,0 +1,1022 @@
+{
+  "meta": {
+    "league_id": 2043154241,
+    "league_name": "50-40-90 Club",
+    "season_id": 2026,
+    "scoring_period_id": 10,
+    "matchup_period_id": 1,
+    "scoring_type": "H2H_POINTS",
+    "team_count": 3,
+    "captured_at": "2026-05-17T23:33:04Z",
+    "source": "espn-private-api"
+  },
+  "teams": [
+    {
+      "team_id": 1,
+      "abbrev": "KAH",
+      "name": "Copper Futures",
+      "logo_url": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/1c02dee0-4eea-11f1-8cd3-5550ce44b587",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 5,
+      "faab_remaining": 97,
+      "roster": [
+        {
+          "player": {
+            "player_id": 2529140,
+            "name": "Alyssa Thomas",
+            "team": "PHX",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 32.27272727272727,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3917450,
+            "name": "Napheesa Collier",
+            "team": "MIN",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 40.25,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2998938,
+            "name": "Kahleah Copper",
+            "team": "PHX",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 30.642857142857142,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2988756,
+            "name": "Brittney Sykes",
+            "team": "FA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 26.3,
+          "actual_points": 12.0
+        },
+        {
+          "player": {
+            "player_id": 2987869,
+            "name": "Jewell Loyd",
+            "team": "LV",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 31.261904761904763,
+          "actual_points": 22.0
+        },
+        {
+          "player": {
+            "player_id": 3142328,
+            "name": "Gabby Williams",
+            "team": null,
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 22.135135135135137,
+          "actual_points": 0.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 88.2,
+        "forward_proj": 94.66,
+        "center_proj": 0.0,
+        "guard_gap_vs_league": -6.49,
+        "forward_gap_vs_league": 6.68,
+        "center_gap_vs_league": -8.18,
+        "weakest_bucket": "C"
+      }
+    },
+    {
+      "team_id": 2,
+      "abbrev": "PEZ",
+      "name": "Empire State Farm",
+      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/Incredibles/incredibles_12.svg",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 6,
+      "faab_remaining": 95,
+      "roster": [
+        {
+          "player": {
+            "player_id": 4433403,
+            "name": "Caitlin Clark",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 42.07692307692308,
+          "actual_points": 30.0
+        },
+        {
+          "player": {
+            "player_id": 4066533,
+            "name": "Sabrina Ionescu",
+            "team": "NY",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 35.0,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2999101,
+            "name": "Jonquel Jones",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              0
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 32.16279069767442,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4398911,
+            "name": "Shakira Austin",
+            "team": null,
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 24.53125,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2491205,
+            "name": "Skylar Diggins",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 31.4390243902439,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2566106,
+            "name": "Dearica Hamby",
+            "team": "CONN",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 31.795454545454547,
+          "actual_points": 10.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 108.52,
+        "forward_proj": 63.96,
+        "center_proj": 24.53,
+        "guard_gap_vs_league": 13.83,
+        "forward_gap_vs_league": -24.02,
+        "center_gap_vs_league": 16.35,
+        "weakest_bucket": "F"
+      }
+    },
+    {
+      "team_id": 5,
+      "abbrev": "Spda",
+      "name": "Plumdog Millionaire",
+      "logo_url": "https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 4,
+      "faab_remaining": 82,
+      "roster": [
+        {
+          "player": {
+            "player_id": 3149391,
+            "name": "A'ja Wilson",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              0
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 45.83720930232558,
+          "actual_points": 38.0
+        },
+        {
+          "player": {
+            "player_id": 4281929,
+            "name": "Satou Sabally",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 36.142857142857146,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3904577,
+            "name": "Arike Ogunbowale",
+            "team": "ATL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 35.27906976744186,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2529205,
+            "name": "Kayla McBride",
+            "team": "MIN",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 25.833333333333332,
+          "actual_points": 9.0
+        },
+        {
+          "player": {
+            "player_id": 3142010,
+            "name": "Azura Stevens",
+            "team": "WSH",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 23.35135135135135,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2529122,
+            "name": "Chelsea Gray",
+            "team": "LV",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 26.243243243243242,
+          "actual_points": 46.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 87.36,
+        "forward_proj": 105.33,
+        "center_proj": 0.0,
+        "guard_gap_vs_league": -7.33,
+        "forward_gap_vs_league": 17.35,
+        "center_gap_vs_league": -8.18,
+        "weakest_bucket": "C"
+      }
+    }
+  ],
+  "transactions_recent": [
+    {
+      "transaction_id": "b192a419-7590-492c-bb1b-7b61696ee522",
+      "occurred_at": "2026-05-17T16:26:39.323000Z",
+      "scoring_period_id": 10,
+      "team_id": 9,
+      "type": "WAIVER",
+      "bid_amount": 0,
+      "status": "CANCELED",
+      "items": [
+        {
+          "player_id": 3142255,
+          "player_name": null,
+          "from_team_id": 0,
+          "to_team_id": 9,
+          "from_slot_id": -1,
+          "to_slot_id": -1,
+          "type": "ADD"
+        },
+        {
+          "player_id": 5345325,
+          "player_name": null,
+          "from_team_id": 9,
+          "to_team_id": 0,
+          "from_slot_id": 6,
+          "to_slot_id": -1,
+          "type": "DROP"
+        }
+      ]
+    },
+    {
+      "transaction_id": "2bd22907-91a7-40b5-866d-513056c3a370",
+      "occurred_at": "2026-05-17T16:22:31.258000Z",
+      "scoring_period_id": 10,
+      "team_id": 9,
+      "type": "ROSTER",
+      "bid_amount": 0,
+      "status": "EXECUTED",
+      "items": [
+        {
+          "player_id": 4420318,
+          "player_name": null,
+          "from_team_id": 0,
+          "to_team_id": 0,
+          "from_slot_id": 7,
+          "to_slot_id": 6,
+          "type": "LINEUP"
+        },
+        {
+          "player_id": 5345325,
+          "player_name": null,
+          "from_team_id": 0,
+          "to_team_id": 0,
+          "from_slot_id": 6,
+          "to_slot_id": 7,
+          "type": "LINEUP"
+        }
+      ]
+    }
+  ],
+  "waiver_targets_overall": [
+    {
+      "player": {
+        "player_id": 9000003,
+        "name": "Test Forward Top",
+        "team": "LV",
+        "position": "F",
+        "bucket": "F",
+        "eligible_slots": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 41.5,
+      "season_avg_points": 31.0,
+      "percent_owned": 17.4,
+      "percent_change": 2.0,
+      "base_score": 41.5
+    },
+    {
+      "player": {
+        "player_id": 9000001,
+        "name": "Test Guard High",
+        "team": "NY",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 38.0,
+      "season_avg_points": 28.0,
+      "percent_owned": 22.5,
+      "percent_change": 4.2,
+      "base_score": 38.0
+    },
+    {
+      "player": {
+        "player_id": 9000004,
+        "name": "Test Center One",
+        "team": "IND",
+        "position": "C",
+        "bucket": "C",
+        "eligible_slots": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 30.0,
+      "season_avg_points": 18.0,
+      "percent_owned": 11.0,
+      "percent_change": -0.5,
+      "base_score": 30.0
+    },
+    {
+      "player": {
+        "player_id": 9000002,
+        "name": "Test Guard Mid",
+        "team": "PHX",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 22.0,
+      "season_avg_points": 14.0,
+      "percent_owned": 8.1,
+      "percent_change": 0.6,
+      "base_score": 22.0
+    },
+    {
+      "player": {
+        "player_id": 9000005,
+        "name": "Test Center Two",
+        "team": "SEA",
+        "position": "C",
+        "bucket": "C",
+        "eligible_slots": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "DAY_TO_DAY"
+      },
+      "projected_points_next_period": 17.5,
+      "season_avg_points": 9.0,
+      "percent_owned": 4.2,
+      "percent_change": 1.1,
+      "base_score": 17.5
+    }
+  ],
+  "waiver_targets_by_team": [
+    {
+      "team_id": 1,
+      "targets": [
+        {
+          "player": {
+            "player_id": 9000003,
+            "name": "Test Forward Top",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 41.5,
+          "season_avg_points": 31.0,
+          "percent_owned": 17.4,
+          "percent_change": 2.0,
+          "base_score": 41.5
+        },
+        {
+          "player": {
+            "player_id": 9000001,
+            "name": "Test Guard High",
+            "team": "NY",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 38.0,
+          "season_avg_points": 28.0,
+          "percent_owned": 22.5,
+          "percent_change": 4.2,
+          "base_score": 38.0
+        },
+        {
+          "player": {
+            "player_id": 9000004,
+            "name": "Test Center One",
+            "team": "IND",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 30.0,
+          "season_avg_points": 18.0,
+          "percent_owned": 11.0,
+          "percent_change": -0.5,
+          "base_score": 30.0
+        },
+        {
+          "player": {
+            "player_id": 9000002,
+            "name": "Test Guard Mid",
+            "team": "PHX",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.0,
+          "season_avg_points": 14.0,
+          "percent_owned": 8.1,
+          "percent_change": 0.6,
+          "base_score": 22.0
+        },
+        {
+          "player": {
+            "player_id": 9000005,
+            "name": "Test Center Two",
+            "team": "SEA",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "DAY_TO_DAY"
+          },
+          "projected_points_next_period": 17.5,
+          "season_avg_points": 9.0,
+          "percent_owned": 4.2,
+          "percent_change": 1.1,
+          "base_score": 17.5
+        }
+      ]
+    },
+    {
+      "team_id": 2,
+      "targets": [
+        {
+          "player": {
+            "player_id": 9000003,
+            "name": "Test Forward Top",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 41.5,
+          "season_avg_points": 31.0,
+          "percent_owned": 17.4,
+          "percent_change": 2.0,
+          "base_score": 41.5
+        },
+        {
+          "player": {
+            "player_id": 9000001,
+            "name": "Test Guard High",
+            "team": "NY",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 38.0,
+          "season_avg_points": 28.0,
+          "percent_owned": 22.5,
+          "percent_change": 4.2,
+          "base_score": 38.0
+        },
+        {
+          "player": {
+            "player_id": 9000004,
+            "name": "Test Center One",
+            "team": "IND",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 30.0,
+          "season_avg_points": 18.0,
+          "percent_owned": 11.0,
+          "percent_change": -0.5,
+          "base_score": 30.0
+        },
+        {
+          "player": {
+            "player_id": 9000002,
+            "name": "Test Guard Mid",
+            "team": "PHX",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.0,
+          "season_avg_points": 14.0,
+          "percent_owned": 8.1,
+          "percent_change": 0.6,
+          "base_score": 22.0
+        },
+        {
+          "player": {
+            "player_id": 9000005,
+            "name": "Test Center Two",
+            "team": "SEA",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "DAY_TO_DAY"
+          },
+          "projected_points_next_period": 17.5,
+          "season_avg_points": 9.0,
+          "percent_owned": 4.2,
+          "percent_change": 1.1,
+          "base_score": 17.5
+        }
+      ]
+    },
+    {
+      "team_id": 5,
+      "targets": [
+        {
+          "player": {
+            "player_id": 9000003,
+            "name": "Test Forward Top",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 41.5,
+          "season_avg_points": 31.0,
+          "percent_owned": 17.4,
+          "percent_change": 2.0,
+          "base_score": 41.5
+        },
+        {
+          "player": {
+            "player_id": 9000001,
+            "name": "Test Guard High",
+            "team": "NY",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 38.0,
+          "season_avg_points": 28.0,
+          "percent_owned": 22.5,
+          "percent_change": 4.2,
+          "base_score": 38.0
+        },
+        {
+          "player": {
+            "player_id": 9000004,
+            "name": "Test Center One",
+            "team": "IND",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 30.0,
+          "season_avg_points": 18.0,
+          "percent_owned": 11.0,
+          "percent_change": -0.5,
+          "base_score": 30.0
+        },
+        {
+          "player": {
+            "player_id": 9000002,
+            "name": "Test Guard Mid",
+            "team": "PHX",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.0,
+          "season_avg_points": 14.0,
+          "percent_owned": 8.1,
+          "percent_change": 0.6,
+          "base_score": 22.0
+        },
+        {
+          "player": {
+            "player_id": 9000005,
+            "name": "Test Center Two",
+            "team": "SEA",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "DAY_TO_DAY"
+          },
+          "projected_points_next_period": 17.5,
+          "season_avg_points": 9.0,
+          "percent_owned": 4.2,
+          "percent_change": 1.1,
+          "base_score": 17.5
+        }
+      ]
+    }
+  ]
+}
