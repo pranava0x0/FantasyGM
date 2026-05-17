@@ -43,6 +43,9 @@ class Snapshot:
 def snapshot(client: ESPNClient, root: Path, *, today: datetime | None = None) -> Snapshot:
     """Run a full fetch and write raw JSON files under `root/raw/<date>/`.
 
+    PII is stripped before writing — `members[]`, `owners[]`, `primaryOwner`,
+    and `memberId` are dropped so committed snapshots can't leak owner identity.
+
     `today` is injectable for tests.
     """
     captured_at = (today or datetime.now(timezone.utc)).replace(microsecond=0)
@@ -51,6 +54,7 @@ def snapshot(client: ESPNClient, root: Path, *, today: datetime | None = None) -
 
     log.info("ingest: fetching league views=%s", LEAGUE_VIEWS)
     league = client.fetch_league(views=LEAGUE_VIEWS)
+    league = _redact_owners(league)
     _dump(out_dir / "league.json", league)
 
     scoring_period = int(league.get("scoringPeriodId") or 0)
@@ -76,3 +80,43 @@ def _dump(path: Path, obj: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     # Compact-ish: indent=2 for readability + git diff sanity.
     path.write_text(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+
+
+# Fields that identify a league member (a real person). Stripped at ingest so
+# raw snapshots committed to the repo never carry them. Keeping a denylist here
+# (not on the team objects directly) makes the policy obvious in one place.
+_OWNER_FIELDS: tuple[str, ...] = (
+    "owners",
+    "primaryOwner",
+    "memberId",
+    "displayName",
+    "firstName",
+    "lastName",
+    "userId",
+    "isActingAsTeamOwner",
+    "isLeagueManager",
+)
+
+
+def _redact_owners(league: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy with all owner-identifying fields removed.
+
+    Idempotent. Operates recursively on dict values + lists of dicts.
+    """
+    def clean(obj: Any) -> Any:
+        if isinstance(obj, dict):
+            return {k: clean(v) for k, v in obj.items() if k not in _OWNER_FIELDS}
+        if isinstance(obj, list):
+            return [clean(x) for x in obj]
+        return obj
+
+    cleaned = clean(league)
+    # `members` is the league-wide roster of owners; replace with id-only stubs
+    # so anything keyed off member ID still works.
+    if "members" in cleaned:
+        cleaned["members"] = [
+            {"id": m.get("id")}
+            for m in (cleaned["members"] or [])
+            if isinstance(m, dict)
+        ]
+    return cleaned

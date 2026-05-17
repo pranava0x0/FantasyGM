@@ -1,0 +1,1192 @@
+{
+  "id": 2043154241,
+  "seasonId": 2026,
+  "scoringPeriodId": 10,
+  "status": {
+    "currentMatchupPeriod": 1
+  },
+  "settings": {
+    "name": "50-40-90 Club",
+    "size": 8,
+    "scoringSettings": {
+      "scoringType": "H2H_POINTS"
+    },
+    "rosterSettings": {
+      "autoPilotTypeSupported": "NONE",
+      "isBenchUnlimited": true,
+      "isUsingUndroppableList": true,
+      "lineupLocktimeType": "INDIVIDUAL_FIRSTGAME_WEEKLY",
+      "lineupSlotCounts": {
+        "0": 0,
+        "1": 2,
+        "2": 0,
+        "3": 0,
+        "4": 3,
+        "5": 1,
+        "6": 3,
+        "7": 1,
+        "8": 0
+      },
+      "lineupSlotStatLimits": {},
+      "moveLimit": -1,
+      "positionLimits": {
+        "0": 0,
+        "1": -1,
+        "2": -1,
+        "3": 4
+      },
+      "rosterLocktimeType": "FIRSTGAME_WEEKLY",
+      "universeIds": [
+        0
+      ]
+    },
+    "acquisitionSettings": {
+      "acquisitionBudget": 100,
+      "acquisitionLimit": 100,
+      "acquisitionType": "WAIVERS_CONTINUOUS",
+      "finalPlaceTransactionEligible": 0,
+      "isUsingAcquisitionBudget": true,
+      "matchupAcquisitionLimit": 1,
+      "matchupLimitPerScoringPeriod": true,
+      "minimumBid": 0,
+      "transactionLockingEnabled": false,
+      "waiverHours": 48,
+      "waiverOrderReset": true,
+      "waiverProcessDays": [
+        "MONDAY",
+        "SATURDAY"
+      ],
+      "waiverProcessHour": 4
+    }
+  },
+  "teams": [
+    {
+      "id": 1,
+      "abbrev": "KAH",
+      "name": "Copper Futures",
+      "divisionId": 0,
+      "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/1c02dee0-4eea-11f1-8cd3-5550ce44b587",
+      "waiverRank": 5,
+      "record": {
+        "away": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 317,
+          "pointsFor": 295,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      },
+      "transactionCounter": {
+        "acquisitionBudgetSpent": 3,
+        "acquisitions": 2,
+        "drops": 1,
+        "matchupAcquisitionTotals": {
+          "2": 2
+        },
+        "misc": 0,
+        "moveToActive": 0,
+        "moveToIR": 1,
+        "paid": 0,
+        "teamCharges": 0,
+        "trades": 1
+      },
+      "roster": {
+        "entries": [
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 2529140,
+                "fullName": "Alyssa Thomas",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 11,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 99.92,
+                  "percentChange": -0.01
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1583,
+                    "appliedAverage": 40.58974358974359
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 152,
+                    "appliedAverage": 38
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1420,
+                    "appliedAverage": 32.27272727272727
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 5,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 3917450,
+                "fullName": "Napheesa Collier",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 8,
+                "injuryStatus": "OUT",
+                "ownership": {
+                  "percentOwned": 99.65,
+                  "percentChange": -0.02
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1494,
+                    "appliedAverage": 45.27272727272727
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 0,
+                    "appliedAverage": 0
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1610,
+                    "appliedAverage": 40.25
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 1,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 2998938,
+                "fullName": "Kahleah Copper",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 11,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 94.22,
+                  "percentChange": 0.04
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 769,
+                    "appliedAverage": 27.464285714285715
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 113,
+                    "appliedAverage": 28.25
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 858,
+                    "appliedAverage": 30.642857142857142
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 1,
+            "playerPoolEntry": {
+              "appliedStatTotal": 12,
+              "player": {
+                "id": 2988756,
+                "fullName": "Brittney Sykes",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 131935,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 90.81,
+                  "percentChange": 1.95
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1073,
+                    "appliedAverage": 27.512820512820515
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 126,
+                    "appliedAverage": 31.5
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1052,
+                    "appliedAverage": 26.3
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 6,
+            "playerPoolEntry": {
+              "appliedStatTotal": 22,
+              "player": {
+                "id": 2987869,
+                "fullName": "Jewell Loyd",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 17,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 68.71,
+                  "percentChange": -0.98
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1090,
+                    "appliedAverage": 24.772727272727273
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 94,
+                    "appliedAverage": 18.8
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1313,
+                    "appliedAverage": 31.261904761904763
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 3142328,
+                "fullName": "Gabby Williams",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 129689,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 98.99,
+                  "percentChange": 0.02
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1289,
+                    "appliedAverage": 29.295454545454547
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 102,
+                    "appliedAverage": 34
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 819,
+                    "appliedAverage": 22.135135135135137
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "abbrev": "PEZ",
+      "name": "Empire State Farm",
+      "divisionId": 0,
+      "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Incredibles/incredibles_12.svg",
+      "waiverRank": 6,
+      "record": {
+        "away": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 295,
+          "pointsFor": 317,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      },
+      "transactionCounter": {
+        "acquisitionBudgetSpent": 5,
+        "acquisitions": 4,
+        "drops": 3,
+        "matchupAcquisitionTotals": {
+          "2": 4
+        },
+        "misc": 0,
+        "moveToActive": 0,
+        "moveToIR": 1,
+        "paid": 0,
+        "teamCharges": 0,
+        "trades": 0
+      },
+      "roster": {
+        "entries": [
+          {
+            "lineupSlotId": 1,
+            "playerPoolEntry": {
+              "appliedStatTotal": 30,
+              "player": {
+                "id": 4433403,
+                "fullName": "Caitlin Clark",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 5,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 99.81,
+                  "percentChange": 0
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 519,
+                    "appliedAverage": 39.92307692307692
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 170,
+                    "appliedAverage": 42.5
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1641,
+                    "appliedAverage": 42.07692307692308
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 5,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 4066533,
+                "fullName": "Sabrina Ionescu",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 9,
+                "injuryStatus": "OUT",
+                "ownership": {
+                  "percentOwned": 99.83,
+                  "percentChange": -0.01
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1428,
+                    "appliedAverage": 37.578947368421055
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 0,
+                    "appliedAverage": 0
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1435,
+                    "appliedAverage": 35
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 2999101,
+                "fullName": "Jonquel Jones",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  0
+                ],
+                "proTeamId": 9,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 98.81,
+                  "percentChange": -0.12
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1003,
+                    "appliedAverage": 32.354838709677416
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 116,
+                    "appliedAverage": 29
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1383,
+                    "appliedAverage": 32.16279069767442
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 4398911,
+                "fullName": "Shakira Austin",
+                "defaultPositionId": 3,
+                "eligibleSlots": [
+                  0,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 16,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 97.63,
+                  "percentChange": 0.28
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1026,
+                    "appliedAverage": 27
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 118,
+                    "appliedAverage": 39.333333333333336
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 785,
+                    "appliedAverage": 24.53125
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 1,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 2491205,
+                "fullName": "Skylar Diggins",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 19,
+                "injuryStatus": "OUT",
+                "ownership": {
+                  "percentOwned": 98.62,
+                  "percentChange": -0.48
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1384,
+                    "appliedAverage": 32.18604651162791
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 98,
+                    "appliedAverage": 32.666666666666664
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1289,
+                    "appliedAverage": 31.4390243902439
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 10,
+              "player": {
+                "id": 2566106,
+                "fullName": "Dearica Hamby",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 6,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 98.78,
+                  "percentChange": 0.23
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1604,
+                    "appliedAverage": 36.45454545454545
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 92,
+                    "appliedAverage": 23
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1399,
+                    "appliedAverage": 31.795454545454547
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "abbrev": "Spda",
+      "name": "Plumdog Millionaire",
+      "divisionId": 0,
+      "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg",
+      "waiverRank": 4,
+      "record": {
+        "away": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "division": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "home": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 0,
+          "pointsFor": 0,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        },
+        "overall": {
+          "gamesBack": 0,
+          "losses": 0,
+          "percentage": 0,
+          "pointsAgainst": 255,
+          "pointsFor": 306,
+          "streakLength": 0,
+          "streakType": "NONE",
+          "ties": 0,
+          "wins": 0
+        }
+      },
+      "transactionCounter": {
+        "acquisitionBudgetSpent": 18,
+        "acquisitions": 4,
+        "drops": 3,
+        "matchupAcquisitionTotals": {
+          "2": 4
+        },
+        "misc": 0,
+        "moveToActive": 0,
+        "moveToIR": 3,
+        "paid": 0,
+        "teamCharges": 0,
+        "trades": 0
+      },
+      "roster": {
+        "entries": [
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 38,
+              "player": {
+                "id": 3149391,
+                "fullName": "A'ja Wilson",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  0
+                ],
+                "proTeamId": 17,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 99.98,
+                  "percentChange": 0
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1948,
+                    "appliedAverage": 48.7
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 219,
+                    "appliedAverage": 43.8
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1971,
+                    "appliedAverage": 45.83720930232558
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 4281929,
+                "fullName": "Satou Sabally",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 9,
+                "injuryStatus": "OUT",
+                "ownership": {
+                  "percentOwned": 94.34,
+                  "percentChange": -0.65
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1271,
+                    "appliedAverage": 32.58974358974359
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 0,
+                    "appliedAverage": 0
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1265,
+                    "appliedAverage": 36.142857142857146
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 1,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 3904577,
+                "fullName": "Arike Ogunbowale",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 3,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 97.51,
+                  "percentChange": -0.3
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 817,
+                    "appliedAverage": 28.17241379310345
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 75,
+                    "appliedAverage": 25
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1517,
+                    "appliedAverage": 35.27906976744186
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 5,
+            "playerPoolEntry": {
+              "appliedStatTotal": 9,
+              "player": {
+                "id": 2529205,
+                "fullName": "Kayla McBride",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 8,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 90.8,
+                  "percentChange": 0.09
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1132,
+                    "appliedAverage": 29.025641025641026
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 94,
+                    "appliedAverage": 23.5
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1085,
+                    "appliedAverage": 25.833333333333332
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 6,
+            "playerPoolEntry": {
+              "appliedStatTotal": 0,
+              "player": {
+                "id": 3142010,
+                "fullName": "Azura Stevens",
+                "defaultPositionId": 2,
+                "eligibleSlots": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 19,
+                "injuryStatus": "OUT",
+                "ownership": {
+                  "percentOwned": 83.49,
+                  "percentChange": -1.57
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1388,
+                    "appliedAverage": 31.545454545454547
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 0,
+                    "appliedAverage": 0
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 864,
+                    "appliedAverage": 23.35135135135135
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "lineupSlotId": 1,
+            "playerPoolEntry": {
+              "appliedStatTotal": 46,
+              "player": {
+                "id": 2529122,
+                "fullName": "Chelsea Gray",
+                "defaultPositionId": 1,
+                "eligibleSlots": [
+                  1,
+                  3,
+                  5,
+                  6,
+                  7
+                ],
+                "proTeamId": 17,
+                "injuryStatus": "ACTIVE",
+                "ownership": {
+                  "percentOwned": 96.61,
+                  "percentChange": 0.66
+                },
+                "stats": [
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 1298,
+                    "appliedAverage": 29.5
+                  },
+                  {
+                    "statSourceId": 0,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 162,
+                    "appliedAverage": 32.4
+                  },
+                  {
+                    "statSourceId": 1,
+                    "statSplitTypeId": 0,
+                    "scoringPeriodId": 0,
+                    "appliedTotal": 971,
+                    "appliedAverage": 26.243243243243242
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "transactions": [
+    {
+      "id": "2bd22907-91a7-40b5-866d-513056c3a370",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "bidAmount": 0,
+      "proposedDate": 1779034951258,
+      "scoringPeriodId": 10,
+      "teamId": 9,
+      "items": [
+        {
+          "playerId": 4420318,
+          "fromTeamId": 0,
+          "toTeamId": 0,
+          "fromLineupSlotId": 7,
+          "toLineupSlotId": 6,
+          "type": "LINEUP"
+        },
+        {
+          "playerId": 5345325,
+          "fromTeamId": 0,
+          "toTeamId": 0,
+          "fromLineupSlotId": 6,
+          "toLineupSlotId": 7,
+          "type": "LINEUP"
+        }
+      ]
+    },
+    {
+      "id": "b192a419-7590-492c-bb1b-7b61696ee522",
+      "type": "WAIVER",
+      "status": "CANCELED",
+      "bidAmount": 0,
+      "proposedDate": 1779035199323,
+      "scoringPeriodId": 10,
+      "teamId": 9,
+      "items": [
+        {
+          "playerId": 3142255,
+          "fromTeamId": 0,
+          "toTeamId": 9,
+          "fromLineupSlotId": -1,
+          "toLineupSlotId": -1,
+          "type": "ADD"
+        },
+        {
+          "playerId": 5345325,
+          "fromTeamId": 9,
+          "toTeamId": 0,
+          "fromLineupSlotId": 6,
+          "toLineupSlotId": -1,
+          "type": "DROP"
+        }
+      ]
+    }
+  ]
+}
