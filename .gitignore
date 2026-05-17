@@ -1,0 +1,36 @@
+# --- secrets: NEVER commit these ---
+.env
+.env.*
+!.env.example
+cookies.json
+cookies.txt
+secrets/
+*.pem
+*.key
+
+# --- python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- editors / os ---
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# --- node (in case any tooling lands later) ---
+node_modules/
+dist/
+.next/
+
+# --- local scratch ---
+scratch/
+tmp/
