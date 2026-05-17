@@ -259,6 +259,23 @@
   }
 
   // ---------- Render: transactions ----------
+
+  // Mirror of pipeline/positions.py:LINEUP_SLOT_LABEL — keep in sync.
+  // Slot -1 is ESPN's "no slot" sentinel (player wasn't in a lineup);
+  // we render that as null so the formatter knows to skip it.
+  const SLOT_LABEL = {
+    0: "BE", 1: "G", 2: "F", 3: "G/F", 4: "F",
+    5: "F/C", 6: "UTIL", 7: "BE", 8: "BE",
+  };
+  function slotLabel(id) {
+    if (id == null || id < 0) return null;
+    return SLOT_LABEL[id] || `S${id}`;
+  }
+  function teamAbbr(id, teamById) {
+    if (id == null || id === 0) return null;  // 0 = "no team" / FA pool
+    return teamById.get(id)?.abbrev || `T${id}`;
+  }
+
   function txTypeClass(t) {
     const k = (t || "").toUpperCase();
     if (k.includes("ADD")) return "add";
@@ -266,24 +283,31 @@
     if (k.includes("TRADE")) return "trade";
     return "lineup";
   }
+
   function txItemLine(it, teamById) {
-    const pieces = [];
-    pieces.push(el("strong", { text: it.player_name || `#${it.player_id}` }));
-    const moves = [];
-    if (it.from_team_id != null && it.from_team_id !== 0) {
-      moves.push(teamById.get(it.from_team_id)?.abbrev || `T${it.from_team_id}`);
-    }
-    if (it.from_slot_id != null && it.to_slot_id != null && it.from_slot_id !== it.to_slot_id) {
-      moves.push(`S${it.from_slot_id}`);
-    }
-    if (moves.length || it.to_slot_id != null) {
-      pieces.push(el("span", { className: "txn-arrow", text: "→" }));
-      const dest = [];
-      if (it.to_team_id != null && it.to_team_id !== 0) {
-        dest.push(teamById.get(it.to_team_id)?.abbrev || `T${it.to_team_id}`);
-      }
-      if (it.to_slot_id != null) dest.push(`S${it.to_slot_id}`);
-      pieces.push(el("span", { text: dest.join(" · ") || "—" }));
+    const fromTeam = teamAbbr(it.from_team_id, teamById);
+    const toTeam   = teamAbbr(it.to_team_id, teamById);
+    const fromSlot = slotLabel(it.from_slot_id);
+    const toSlot   = slotLabel(it.to_slot_id);
+
+    // Build a human "from → to" string. Each side may be a team, a slot,
+    // both, or neither. Empty sides are rendered as "FA" so the direction
+    // of the move is always legible.
+    const fromParts = [fromTeam, fromSlot].filter(Boolean);
+    const toParts   = [toTeam,   toSlot  ].filter(Boolean);
+    const fromText = fromParts.length ? fromParts.join(" · ") : "FA";
+    const toText   = toParts.length   ? toParts.join(" · ")   : "FA";
+
+    const pieces = [
+      el("strong", { text: it.player_name || `#${it.player_id}` }),
+    ];
+    // Only render the arrow chunk when there's an actual change.
+    if (fromText !== toText) {
+      pieces.push(
+        el("span", { text: fromText }),
+        el("span", { className: "txn-arrow", text: "→" }),
+        el("span", { text: toText }),
+      );
     }
     return el("span", { className: "txn-item", children: pieces });
   }
