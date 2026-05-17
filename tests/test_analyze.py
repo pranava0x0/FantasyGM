@@ -34,6 +34,26 @@ class TestBuildTeamViews:
         assert {"wins", "losses", "ties", "pct"}.issubset(record.keys())
         assert isinstance(record["wins"], int)
 
+    def test_handles_non_dense_team_ids(self) -> None:
+        # Regression for the 50-40-90 Club scar: team IDs are [1,2,5,6,7,8,9,10]
+        # (gaps from prior-season drops). Code must not loop 1..N or assume
+        # team_id == position-in-array.
+        league = {
+            "scoringPeriodId": 10,
+            "teams": [
+                {"id": 1,  "abbrev": "A", "name": "A", "record": {"overall": {"wins": 0, "losses": 0, "ties": 0, "percentage": 0}}, "roster": {"entries": []}},
+                {"id": 7,  "abbrev": "G", "name": "G", "record": {"overall": {"wins": 0, "losses": 0, "ties": 0, "percentage": 0}}, "roster": {"entries": []}},
+                {"id": 10, "abbrev": "J", "name": "J", "record": {"overall": {"wins": 0, "losses": 0, "ties": 0, "percentage": 0}}, "roster": {"entries": []}},
+            ],
+            "settings": {"acquisitionSettings": {}},
+        }
+        views = analyze.build_team_views(league)
+        ids = [v["team_id"] for v in views]
+        assert ids == [1, 7, 10], "team_id must be preserved verbatim, not re-indexed"
+        # Weakness math must use the actual IDs, not 0..len-1.
+        weakness = analyze.compute_team_weakness(views)
+        assert set(weakness.keys()) == {1, 7, 10}
+
 
 class TestComputeTeamWeakness:
     def test_keys_per_team(self, league_raw: dict) -> None:

@@ -31,6 +31,9 @@ AI-powered GM for the user's ESPN fantasy WNBA league (leagueId 2043154241, "50-
 - **`defaultPositionId` 1/2/3 = G/F/C** for WNBA — different from NBA, which uses 1=PG, 2=SG, 3=SF, 4=PF, 5=C. Verified empirically; documented in `positions.py`.
 - **Forwards can fill slot 5 (C-eligible).** Slot 5's count is 1, but the eligible-slot bitmap allows F (2) in addition to C (3). UI should label slot 5 as "F/C," not just "C."
 - **`appliedTotal` and `appliedAverage` from `player.stats[]`** are ESPN's pre-scored fantasy points. Don't re-derive from raw box scores unless you know what you're doing — re-implementing the league's scoring formula is a backlog item, not surprise refactor work.
+- **Team IDs are not dense.** Confirmed on 2026-05-17: the 50-40-90 Club has team IDs `[1, 2, 5, 6, 7, 8, 9, 10]` (gaps at 3 and 4 — orphaned IDs from a prior season). Never loop `1..team_count`, never index by position; always iterate `league.teams[*].id`. The pipeline already does this; tests in `tests/test_analyze.py::TestBuildTeamViews` enforce it.
+- **Standings display order is not team-ID order.** ESPN's standings page sorts by W-L% (then playoff %, then power ranking). "Team #4 in standings" is *not* team_id 4. If you debug by clicking a row on ESPN's site, copy the `?teamId=N` URL — never count positions.
+- **Team names change mid-season.** Observed in this session: team_id 6's name went from `Pheenatics` → `Hot Stew Comin Through` between the start and end of the build. The pipeline keys all UI lookups on `team.id`, so renames don't break continuity or break the transaction history. If you ever see "this team disappeared!" in the UI, check the IDs in `state.teams[*].team_id` before assuming a data bug.
 
 ---
 

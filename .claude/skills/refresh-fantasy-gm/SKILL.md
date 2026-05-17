@@ -143,6 +143,9 @@ These are the gotchas that cost the most time to discover the first time. If the
 | Player positions look wrong | NBA fantasy maps `defaultPositionId` 1=PG, 2=SG, …, 5=C. WNBA uses 1=G, 2=F, 3=C. | `pipeline/positions.py:DEFAULT_POSITION_LABEL` — verified empirically against the 50-40-90 Club roster. |
 | Transactions show `#playerId` instead of names | Player wasn't in the team's current roster or the FA top-N (`_player_name_index` is built from those two sources) | Backlog item: pull `kona_playercard` for unresolved IDs. Cosmetic, not a correctness bug. |
 | `python3 -m http.server` errors with `PermissionError: Operation not permitted` | Sandbox restricts `os.getcwd()` from the preview launcher's CWD | Use `node scripts/serve.mjs` (configured in `.claude/launch.json`) |
+| A team you saw yesterday is "missing" from `state.teams` | The owner renamed the team. Names are mutable; only `team.id` is stable. | Look up by `team.id`. Confirmed 2026-05-17: team_id 6 went Pheenatics → Hot Stew Comin Through mid-session. |
+| Code that loops `for i in range(team_count)` breaks | Team IDs are not dense. The 50-40-90 Club has IDs `[1, 2, 5, 6, 7, 8, 9, 10]` (gaps from prior-season drops). | Always iterate `league.teams[*].id`. Never assume 1..N. |
+| Debugging mentions "team #4" and the wrong team is implicated | Standings display order ≠ team_id order. ESPN sorts standings by W-L %. | Click into the team on ESPN.com and read the `?teamId=N` URL parameter. |
 
 If you discover a new pitfall, **append a row to this table and add the same row to `CLAUDE.md` § "ESPN scar tissue."** The two should stay in sync — CLAUDE.md is read first by every agent; the skill table is read when this specific flow runs.
 
