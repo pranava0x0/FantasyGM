@@ -23,6 +23,15 @@ AI-powered GM for the user's ESPN fantasy WNBA league (leagueId 2043154241, "50-
 - No real database. `data/raw/<date>/*.json` + `data/history/transactions.jsonl` is the audit trail. The UI reads `docs/data/state.json`.
 - No owner names anywhere — not in raw snapshots, not in derived state, not in commit messages, not in test fixtures.
 
+**ESPN scar tissue (read before touching `pipeline/`):**
+
+- **Game code is `wfba`.** Public URL paths use `womens-basketball`; many forum examples show `wbasketball`. The fantasy API only answers to `wfba`. The other codes return 404.
+- **The league is private.** `view=mSettings` returns 401 without cookies even if the league ID is correct. `python -m pipeline.refresh --dry-run` validates cookies cheaply.
+- **`isBenchUnlimited: true` overrides slot counts.** Slot 7 has `count: 1` in `lineupSlotCounts` but the bench is uncapped in practice. `pipeline/positions.py` labels slot 7 as BE for this reason.
+- **`defaultPositionId` 1/2/3 = G/F/C** for WNBA — different from NBA, which uses 1=PG, 2=SG, 3=SF, 4=PF, 5=C. Verified empirically; documented in `positions.py`.
+- **Forwards can fill slot 5 (C-eligible).** Slot 5's count is 1, but the eligible-slot bitmap allows F (2) in addition to C (3). UI should label slot 5 as "F/C," not just "C."
+- **`appliedTotal` and `appliedAverage` from `player.stats[]`** are ESPN's pre-scored fantasy points. Don't re-derive from raw box scores unless you know what you're doing — re-implementing the league's scoring formula is a backlog item, not surprise refactor work.
+
 ---
 
 ## North star: ship small things that work end-to-end

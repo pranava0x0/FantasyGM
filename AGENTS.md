@@ -50,7 +50,43 @@ Default verification matrix (project-specific `AGENTS.md` should override with c
 
 ---
 
-## Common tasks
+## Common tasks (FantasyGM-specific)
+
+### Refresh the league data
+
+```bash
+# 1. One-time: cookies + venv
+cp .env.example .env  # fill in ESPN_SWID and ESPN_S2
+python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+
+# 2. Each run
+python -m pipeline.refresh --dry-run    # validates cookies
+python -m pipeline.refresh              # full pull, writes data/raw + docs/data/state.json
+```
+
+Or via the slash command: `/refresh-fantasy-gm` runs the same flow, shows the diff summary, and asks before committing.
+
+### Preview the static site
+
+```bash
+python3 -m http.server -d docs 8000     # then open http://localhost:8000
+```
+
+The UI reads `docs/data/state.json` only. If you edit that file by hand to test a UI state, **revert before running the pipeline again** — `state.json` is build output, not seed.
+
+### Verifying changes (project-specific overrides)
+
+| Change kind | Run |
+| --- | --- |
+| Schema edit (`pipeline/schema.py`) | `pytest tests/test_schema.py` + a `--dry-run` pipeline (catches mismatches between model and live ESPN response shape) |
+| Analysis math (`pipeline/analyze.py`) | `pytest tests/test_analyze.py` against the committed fixture |
+| Frontend (`docs/`) | Open the site locally, resize to 375px, click through teams + waiver list. Reload after `refresh.py` to confirm no console errors. |
+| Position-ID mapping (`pipeline/positions.py`) | `pytest tests/test_positions.py` + spot-check a player's slot vs ESPN's web UI |
+| ESPN client (`pipeline/espn_client.py`) | `--dry-run` first; if that passes, full refresh against a throwaway data root: `python -m pipeline.refresh --data /tmp/fgm-data --docs /tmp/fgm-docs` |
+
+---
+
+## Common tasks (generic patterns)
 
 ### Adding a record / claim / row (most common)
 

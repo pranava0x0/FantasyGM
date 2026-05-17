@@ -6,6 +6,57 @@
 
 ---
 
+## 0. Project palette + motif (FantasyGM)
+
+**Visual posture:** sports-desk dashboard. The page should read like a Bloomberg terminal for a fantasy GM, not a consumer fan-engagement product. Density over decoration. Tabular numerals everywhere there's a number — projected points, ownership %, gap-vs-league.
+
+**Layout primitives:**
+
+1. **Meta strip** at top — league name, scoring period, matchup period, captured timestamp. Tabular numerals.
+2. **Waiver Targets** as the primary surface (the main product loop). Ranked list cards. Each card: name + WNBA team + position bucket + projected next-period points + ownership %. A small "weakness fit" pill ("strong fit for PHE at C") when adjusted score > base score by ≥ 0.5.
+3. **Team weakness grid** — one card per team. Three mini-bars (G / F / C) with gap-vs-league overlay. Tap to expand → per-team waiver target list reorders.
+4. **Transaction log** as a chronological list at the bottom. Latest first. Each row: team abbrev (no owner names ever), action type, players moved, timestamp.
+
+**Brand-adjacent color encoding (semantic tokens, not brand):**
+
+```css
+:root {
+  --bucket-guard:    #4a90e2;   /* G — cool blue */
+  --bucket-forward:  #f5a623;   /* F — amber */
+  --bucket-center:   #b94aa3;   /* C — magenta */
+  --gap-strong:      #2e7d32;   /* team is above league avg */
+  --gap-weak:        #c62828;   /* team is below league avg */
+  --gap-neutral:     var(--text-muted);
+  --txn-add:         var(--gap-strong);
+  --txn-drop:        var(--gap-weak);
+  --txn-lineup:      var(--text-muted);
+  --txn-trade:       #6f42c1;
+}
+```
+
+Bucket colors are intentionally desaturated relative to ESPN's brand palette — we're not affiliated with ESPN. WNBA team abbreviations render in `--font-mono` to keep G/F/C colors as the load-bearing visual signal.
+
+**Pills used in this project:**
+
+| Pill | Meaning | Style |
+| --- | --- | --- |
+| `G` / `F` / `C` | Position bucket | Outline pill, color from `--bucket-*` |
+| `WK G` / `WK F` / `WK C` | Weakest bucket for the team | Solid pill, `--gap-weak` |
+| `+2.3 vs LG` | Gap to league avg, when positive | Inline span, `--gap-strong` |
+| `-4.1 vs LG` | Gap when negative | Inline span, `--gap-weak` |
+| `ADD` / `DROP` / `TRADE` / `LINEUP` | Transaction type | Outline pill, color from `--txn-*` |
+
+**Content rules:**
+
+- **No owner names, ever.** UI shows team `name` + `abbrev` + `team.id`. Hover-tooltip on the team chip shows ID and division — never a person.
+- **"Captured as of <date>"** is visible in the meta strip. The data is a snapshot, not live.
+- **Empty states** ("no transactions yet this period") render as italic muted — never a blank section.
+- **Projected points always show 1 decimal.** Whole-number projections look fake; one-decimal precision signals "this is a model output."
+
+---
+
+---
+
 ## 1. Posture
 
 Two sentences set every call below:
