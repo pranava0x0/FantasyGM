@@ -98,6 +98,14 @@
     $("#meta-season").textContent = meta.season_id ?? "—";
     $("#meta-teams").textContent = meta.team_count ?? "—";
     $("#meta-captured").textContent = fmtDate(meta.captured_at);
+    const weekEl = $("#meta-week");
+    if (weekEl) {
+      if (meta.week_start_period != null && meta.week_end_period != null) {
+        weekEl.textContent = `P${meta.week_start_period}–${meta.week_end_period}`;
+      } else {
+        weekEl.textContent = "—";
+      }
+    }
   }
 
   // ---------- Render: waiver targets ----------
@@ -108,13 +116,27 @@
     });
   }
 
+  function gamesPill(games) {
+    if (games == null) return null;
+    const n = Number(games);
+    let label, cls;
+    if (n <= 0) { label = "BYE"; cls = "games-bye"; }
+    else if (n === 1) { label = "1g · Tough"; cls = "games-low"; }
+    else if (n === 2) { label = "2g · Light"; cls = "games-low"; }
+    else if (n === 3) { label = "3g"; cls = "games-mid"; }
+    else { label = `${n}g · Heavy`; cls = "games-heavy"; }
+    return el("span", { className: `pill games-pill ${cls}`, text: label });
+  }
+
   function waiverCard(t, idx, fitBucket) {
     const p = t.player;
     const sub = el("span", { className: "waiver-sub" });
     sub.appendChild(bucketPill(p.bucket));
     if (p.team) sub.appendChild(el("span", { className: "pill team-mono", text: p.team }));
-    if (t.season_avg_points != null) {
-      sub.appendChild(el("span", { text: `${fmtPoints(t.season_avg_points)} avg` }));
+    const gp = gamesPill(t.games_this_week);
+    if (gp) sub.appendChild(gp);
+    if (t.projected_per_game != null) {
+      sub.appendChild(el("span", { text: `${fmtPoints(t.projected_per_game)}/g` }));
     }
     if (t.percent_owned != null) {
       const pc = fmtPctChange(t.percent_change);
@@ -133,6 +155,13 @@
     if (fitBucket && p.bucket === fitBucket) {
       nameLine.appendChild(el("span", { className: "fit-pill", text: `Fits ${fitBucket}` }));
     }
+    if (t.promoted_for_need) {
+      nameLine.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
+    }
+
+    const weekProj = t.projected_points_this_week != null
+      ? t.projected_points_this_week
+      : t.projected_points_next_period;
 
     return el("li", {
       className: "waiver-card",
@@ -145,8 +174,8 @@
         el("div", {
           className: "waiver-points",
           children: [
-            document.createTextNode(fmtPoints(t.projected_points_next_period)),
-            el("span", { className: "unit", text: "proj" }),
+            document.createTextNode(fmtPoints(weekProj)),
+            el("span", { className: "unit", text: "week" }),
           ],
         }),
       ],
@@ -233,19 +262,32 @@
     });
 
     const detail = el("div", { className: "team-detail", attrs: { hidden: "" } });
-    detail.appendChild(el("h4", { text: `Top picks for ${team.abbrev} · weakest at ${w.weakest_bucket}` }));
+    const weakLabel = w.weakest_bucket === "FC" ? "F/C (frontcourt)" : w.weakest_bucket;
+    detail.appendChild(el("h4", { text: `Top picks for ${team.abbrev} · weakest at ${weakLabel}` }));
     const list = el("div", { className: "team-targets" });
-    (perTeamTargets || []).slice(0, 6).forEach((t, i) => {
-      const p = t.player;
+    (perTeamTargets || []).slice(0, 6).forEach((tgt, i) => {
+      const p = tgt.player;
+      const nameSpan = el("span", { className: "target-name", text: p.name });
+      if (tgt.promoted_for_need) {
+        nameSpan.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
+      }
+      const sub = el("span", { className: "target-sub" });
+      if (p.team) sub.appendChild(el("span", { className: "pill team-mono", text: p.team }));
+      const gp = gamesPill(tgt.games_this_week);
+      if (gp) sub.appendChild(gp);
+      const adj = tgt.adjusted_score != null ? tgt.adjusted_score : (tgt.projected_points_this_week || tgt.base_score);
       list.appendChild(el("div", {
         className: "team-target-row",
         children: [
           el("span", { className: "target-rank", text: String(i + 1) }),
-          el("span", { className: "target-name", text: p.name }),
+          el("div", {
+            className: "target-body",
+            children: [nameSpan, sub],
+          }),
           bucketPill(p.bucket),
           el("span", {
             className: "target-pts",
-            text: fmtPoints(t.projected_points_next_period),
+            text: fmtPoints(adj),
           }),
         ],
       }));
@@ -281,6 +323,43 @@
     }
     const targetIndex = new Map((byTeam || []).map((row) => [row.team_id, row.targets]));
     teams.forEach((t) => grid.appendChild(teamCard(t, targetIndex.get(t.team_id))));
+  }
+
+  // ---------- Render: news ----------
+  function newsCard(n, playerNameById) {
+    const tags = el("div", { className: "news-tags" });
+    (n.athlete_ids || []).forEach((aid) => {
+      const name = playerNameById.get(aid);
+      if (name) tags.appendChild(el("span", { className: "pill team-mono news-player", text: name }));
+    });
+    const pubLine = n.published_at
+      ? el("span", { className: "news-time", text: fmtTime(n.published_at) })
+      : null;
+    const body = [
+      el("a", {
+        className: "news-headline",
+        attrs: { href: n.url || "#", target: "_blank", rel: "noopener" },
+        text: n.headline,
+      }),
+    ];
+    if (n.description) body.push(el("p", { className: "news-desc", text: n.description }));
+    if (pubLine) body.push(pubLine);
+    if (tags.children.length) body.push(tags);
+    return el("li", { className: "news-card", children: body });
+  }
+
+  function renderNews(news, teams) {
+    const list = $("#news-list");
+    list.replaceChildren();
+    if (!news || news.length === 0) {
+      list.appendChild(el("li", { className: "empty", text: "No news yet — pipeline hasn't fetched the WNBA feed." }));
+      return;
+    }
+    const playerNameById = new Map();
+    (teams || []).forEach((t) => {
+      (t.roster || []).forEach((r) => playerNameById.set(r.player.player_id, r.player.name));
+    });
+    news.slice(0, 12).forEach((n) => list.appendChild(newsCard(n, playerNameById)));
   }
 
   // ---------- Render: transactions ----------
@@ -373,6 +452,8 @@
     renderMeta({});
     $("#waiver-list").replaceChildren(el("li", { className: "empty", text: reason }));
     $("#team-grid").replaceChildren(el("p", { className: "empty", text: reason }));
+    const newsList = $("#news-list");
+    if (newsList) newsList.replaceChildren(el("li", { className: "empty", text: reason }));
     $("#txn-list").replaceChildren(el("li", { className: "empty", text: reason }));
   }
 
@@ -392,6 +473,7 @@
       renderMeta(state.meta || {});
       renderWaivers(state.waiver_targets_overall);
       renderTeams(state.teams, state.waiver_targets_by_team);
+      renderNews(state.news_recent, state.teams);
       renderTxns(state.transactions_recent, state.teams);
     } catch (err) {
       console.error("FantasyGM: failed to load state", err);
