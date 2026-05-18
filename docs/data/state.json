@@ -7,7 +7,7 @@
     "matchup_period_id": 1,
     "scoring_type": "H2H_POINTS",
     "team_count": 8,
-    "captured_at": "2026-05-18T02:22:49Z",
+    "captured_at": "2026-05-18T02:43:45Z",
     "source": "espn-private-api",
     "week_start_period": 11,
     "week_end_period": 17
@@ -49,6 +49,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 34.36585365853659,
+          "projected_per_game": 32.27,
+          "projected_points_this_week": 96.82,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -72,6 +75,9 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 38.32258064516129,
+          "projected_per_game": 40.25,
+          "projected_points_this_week": 80.5,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -94,6 +100,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 26.973684210526315,
+          "projected_per_game": 30.64,
+          "projected_points_this_week": 91.93,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -116,6 +125,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 26.02777777777778,
+          "projected_per_game": 26.3,
+          "projected_points_this_week": 78.9,
+          "games_this_week": 3,
           "actual_points": 58.0
         },
         {
@@ -138,6 +150,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 23.904761904761905,
+          "projected_per_game": 31.26,
+          "projected_points_this_week": 31.26,
+          "games_this_week": 1,
           "actual_points": 22.0
         },
         {
@@ -161,6 +176,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 26.428571428571427,
+          "projected_per_game": 22.14,
+          "projected_points_this_week": 44.27,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -184,6 +202,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 25.523809523809526,
+          "projected_per_game": 25.4,
+          "projected_points_this_week": 101.58,
+          "games_this_week": 4,
           "actual_points": 0.0
         },
         {
@@ -206,6 +227,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 18.857142857142858,
+          "projected_per_game": 18.86,
+          "projected_points_this_week": 56.57,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -228,20 +252,31 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 17.257142857142856,
+          "projected_per_game": 17.26,
+          "projected_points_this_week": 34.51,
+          "games_this_week": 2,
           "actual_points": 0.0
         }
       ],
       "weakness": {
-        "guard_proj": 113.02,
-        "forward_proj": 124.64,
+        "guard_proj": 293.17,
+        "forward_proj": 323.17,
         "center_proj": 0.0,
-        "frontcourt_proj": 124.64,
-        "guard_gap_vs_league": 4.74,
-        "forward_gap_vs_league": 27.67,
-        "center_gap_vs_league": -29.65,
-        "frontcourt_gap_vs_league": -1.98,
+        "frontcourt_proj": 323.17,
+        "guard_gap_vs_league": 51.44,
+        "forward_gap_vs_league": 114.76,
+        "center_gap_vs_league": -77.84,
+        "frontcourt_gap_vs_league": 36.92,
         "weakest_bucket": "FC"
-      }
+      },
+      "summary": [
+        "Top projected scorer this week: Alanna Smith (F, 4 games, ~102 pts).",
+        "2 recent transactions — latest a waiver move."
+      ],
+      "recent_transaction_ids": [
+        "2b1d26d9-ebd3-428e-97d3-bec532d3128f",
+        "6d64dc39-3714-49b8-9c6a-e885c621eb04"
+      ]
     },
     {
       "team_id": 2,
@@ -278,6 +313,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 39.87179487179487,
+          "projected_per_game": 42.08,
+          "projected_points_this_week": 84.15,
+          "games_this_week": 2,
           "actual_points": 49.0
         },
         {
@@ -300,6 +338,9 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 35.529411764705884,
+          "projected_per_game": 35.0,
+          "projected_points_this_week": 70.0,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -324,6 +365,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 29.026315789473685,
+          "projected_per_game": 32.16,
+          "projected_points_this_week": 64.33,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -346,6 +390,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 26.75,
+          "projected_per_game": 24.53,
+          "projected_points_this_week": 49.06,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -368,6 +415,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 30.46511627906977,
+          "projected_per_game": 31.44,
+          "projected_points_this_week": 62.88,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -391,6 +441,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 31.72093023255814,
+          "projected_per_game": 31.8,
+          "projected_points_this_week": 63.59,
+          "games_this_week": 2,
           "actual_points": 40.0
         },
         {
@@ -414,6 +467,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 17.763157894736842,
+          "projected_per_game": 17.76,
+          "projected_points_this_week": 53.29,
+          "games_this_week": 3,
           "actual_points": 30.0
         },
         {
@@ -437,6 +493,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 20.785714285714285,
+          "projected_per_game": 18.06,
+          "projected_points_this_week": 72.23,
+          "games_this_week": 4,
           "actual_points": 0.0
         },
         {
@@ -459,20 +518,29 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 22.424242424242426,
+          "projected_per_game": 23.43,
+          "projected_points_this_week": 46.86,
+          "games_this_week": 2,
           "actual_points": 0.0
         }
       ],
       "weakness": {
-        "guard_proj": 146.05,
-        "forward_proj": 81.53,
-        "center_proj": 26.75,
-        "frontcourt_proj": 108.28,
-        "guard_gap_vs_league": 37.77,
-        "forward_gap_vs_league": -15.44,
-        "center_gap_vs_league": -2.9,
-        "frontcourt_gap_vs_league": -18.34,
+        "guard_proj": 317.18,
+        "forward_proj": 200.15,
+        "center_proj": 49.06,
+        "frontcourt_proj": 249.21,
+        "guard_gap_vs_league": 75.45,
+        "forward_gap_vs_league": -8.26,
+        "center_gap_vs_league": -28.78,
+        "frontcourt_gap_vs_league": -37.04,
         "weakest_bucket": "FC"
-      }
+      },
+      "summary": [
+        "Frontcourt is the structural weak spot — projected ~37 pts below the league average at F/C this week.",
+        "Top projected scorer this week: Caitlin Clark (G, 2 games, ~84 pts).",
+        "7 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": []
     },
     {
       "team_id": 5,
@@ -511,6 +579,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 44.75,
+          "projected_per_game": 45.84,
+          "projected_points_this_week": 45.84,
+          "games_this_week": 1,
           "actual_points": 38.0
         },
         {
@@ -534,6 +605,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 31.81081081081081,
+          "projected_per_game": 36.14,
+          "projected_points_this_week": 72.29,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -556,6 +630,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 32.5,
+          "projected_per_game": 35.28,
+          "projected_points_this_week": 141.12,
+          "games_this_week": 4,
           "actual_points": 0.0
         },
         {
@@ -578,6 +655,9 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 25.17948717948718,
+          "projected_per_game": 25.83,
+          "projected_points_this_week": 51.67,
+          "games_this_week": 2,
           "actual_points": 40.0
         },
         {
@@ -601,6 +681,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 26.216216216216218,
+          "projected_per_game": 23.35,
+          "projected_points_this_week": 46.7,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -623,6 +706,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 27.333333333333332,
+          "projected_per_game": 26.24,
+          "projected_points_this_week": 26.24,
+          "games_this_week": 1,
           "actual_points": 46.0
         },
         {
@@ -645,6 +731,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 19.11904761904762,
+          "projected_per_game": 12.03,
+          "projected_points_this_week": 36.08,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -667,6 +756,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 24.333333333333332,
+          "projected_per_game": 24.21,
+          "projected_points_this_week": 72.64,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -690,20 +782,29 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 16.25,
+          "projected_per_game": 16.25,
+          "projected_points_this_week": 48.75,
+          "games_this_week": 3,
           "actual_points": 32.0
         }
       ],
       "weakness": {
-        "guard_proj": 120.38,
-        "forward_proj": 102.78,
-        "center_proj": 24.33,
-        "frontcourt_proj": 127.11,
-        "guard_gap_vs_league": 12.1,
-        "forward_gap_vs_league": 5.81,
-        "center_gap_vs_league": -5.32,
-        "frontcourt_gap_vs_league": 0.49,
+        "guard_proj": 303.86,
+        "forward_proj": 164.83,
+        "center_proj": 72.64,
+        "frontcourt_proj": 237.47,
+        "guard_gap_vs_league": 62.13,
+        "forward_gap_vs_league": -43.58,
+        "center_gap_vs_league": -5.2,
+        "frontcourt_gap_vs_league": -48.78,
         "weakest_bucket": "FC"
-      }
+      },
+      "summary": [
+        "Frontcourt is the structural weak spot — projected ~49 pts below the league average at F/C this week.",
+        "Top projected scorer this week: Arike Ogunbowale (G, 4 games, ~141 pts).",
+        "5 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": []
     },
     {
       "team_id": 6,
@@ -741,6 +842,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 35.69230769230769,
+          "projected_per_game": 40.93,
+          "projected_points_this_week": 81.86,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -763,6 +867,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 33.91428571428571,
+          "projected_per_game": 32.08,
+          "projected_points_this_week": 64.15,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -785,6 +892,9 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 28.0,
+          "projected_per_game": 27.72,
+          "projected_points_this_week": 83.16,
+          "games_this_week": 3,
           "actual_points": 30.0
         },
         {
@@ -808,6 +918,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 24.444444444444443,
+          "projected_per_game": 21.36,
+          "projected_points_this_week": 64.09,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -830,6 +943,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 26.55263157894737,
+          "projected_per_game": 25.56,
+          "projected_points_this_week": 51.12,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -853,6 +969,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 23.35,
+          "projected_per_game": 24.83,
+          "projected_points_this_week": 49.67,
+          "games_this_week": 2,
           "actual_points": 14.0
         },
         {
@@ -876,6 +995,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 17.093023255813954,
+          "projected_per_game": 16.93,
+          "projected_points_this_week": 50.79,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -900,6 +1022,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 19.605263157894736,
+          "projected_per_game": 18.34,
+          "projected_points_this_week": 73.37,
+          "games_this_week": 4,
           "actual_points": 0.0
         },
         {
@@ -922,20 +1047,28 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 20.516129032258064,
+          "projected_per_game": 21.7,
+          "projected_points_this_week": 43.4,
+          "games_this_week": 2,
           "actual_points": 0.0
         }
       ],
       "weakness": {
-        "guard_proj": 108.98,
-        "forward_proj": 120.19,
+        "guard_proj": 241.83,
+        "forward_proj": 319.78,
         "center_proj": 0.0,
-        "frontcourt_proj": 120.19,
-        "guard_gap_vs_league": 0.7,
-        "forward_gap_vs_league": 23.22,
-        "center_gap_vs_league": -29.65,
-        "frontcourt_gap_vs_league": -6.43,
-        "weakest_bucket": "FC"
-      }
+        "frontcourt_proj": 319.78,
+        "guard_gap_vs_league": 0.1,
+        "forward_gap_vs_league": 111.37,
+        "center_gap_vs_league": -77.84,
+        "frontcourt_gap_vs_league": 33.53,
+        "weakest_bucket": "G"
+      },
+      "summary": [
+        "Top projected scorer this week: Marina Mabrey (G, 3 games, ~83 pts).",
+        "5 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": []
     },
     {
       "team_id": 7,
@@ -972,6 +1105,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 30.27906976744186,
+          "projected_per_game": 30.69,
+          "projected_points_this_week": 30.69,
+          "games_this_week": 1,
           "actual_points": 27.0
         },
         {
@@ -994,6 +1130,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 35.17948717948718,
+          "projected_per_game": 31.93,
+          "projected_points_this_week": 127.7,
+          "games_this_week": 4,
           "actual_points": 0.0
         },
         {
@@ -1017,6 +1156,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 27.414634146341463,
+          "projected_per_game": 32.86,
+          "projected_points_this_week": 65.72,
+          "games_this_week": 2,
           "actual_points": 37.0
         },
         {
@@ -1040,6 +1182,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 23.170731707317074,
+          "projected_per_game": 15.86,
+          "projected_points_this_week": 31.71,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1063,6 +1208,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 22.263157894736842,
+          "projected_per_game": 23.67,
+          "projected_points_this_week": 47.33,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1086,6 +1234,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 25.35483870967742,
+          "projected_per_game": 24.5,
+          "projected_points_this_week": 49.0,
+          "games_this_week": 2,
           "actual_points": 15.0
         },
         {
@@ -1108,6 +1259,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 18.431818181818183,
+          "projected_per_game": 15.0,
+          "projected_points_this_week": 30.0,
+          "games_this_week": 2,
           "actual_points": 17.0
         },
         {
@@ -1131,6 +1285,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 24.548387096774192,
+          "projected_per_game": 24.55,
+          "projected_points_this_week": 49.1,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1154,20 +1311,29 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 17.70731707317073,
+          "projected_per_game": 24.73,
+          "projected_points_this_week": 24.73,
+          "games_this_week": 1,
           "actual_points": 25.0
         }
       ],
       "weakness": {
-        "guard_proj": 83.89,
-        "forward_proj": 140.46,
+        "guard_proj": 188.39,
+        "forward_proj": 267.59,
         "center_proj": 0.0,
-        "frontcourt_proj": 140.46,
-        "guard_gap_vs_league": -24.39,
-        "forward_gap_vs_league": 43.49,
-        "center_gap_vs_league": -29.65,
-        "frontcourt_gap_vs_league": 13.84,
+        "frontcourt_proj": 267.59,
+        "guard_gap_vs_league": -53.34,
+        "forward_gap_vs_league": 59.18,
+        "center_gap_vs_league": -77.84,
+        "frontcourt_gap_vs_league": -18.66,
         "weakest_bucket": "G"
-      }
+      },
+      "summary": [
+        "Backcourt is the structural weak spot — projected ~53 pts below the league average at Guard this week.",
+        "Top projected scorer this week: Paige Bueckers (G, 4 games, ~128 pts).",
+        "8 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": []
     },
     {
       "team_id": 8,
@@ -1206,6 +1372,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 30.558139534883722,
+          "projected_per_game": 33.17,
+          "projected_points_this_week": 66.34,
+          "games_this_week": 2,
           "actual_points": 29.0
         },
         {
@@ -1228,6 +1397,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 29.545454545454547,
+          "projected_per_game": 27.25,
+          "projected_points_this_week": 54.5,
+          "games_this_week": 2,
           "actual_points": 27.0
         },
         {
@@ -1251,6 +1423,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 27.0,
+          "projected_per_game": 27.0,
+          "projected_points_this_week": 54.0,
+          "games_this_week": 2,
           "actual_points": 32.0
         },
         {
@@ -1273,6 +1448,9 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 28.23076923076923,
+          "projected_per_game": 25.31,
+          "projected_points_this_week": 50.61,
+          "games_this_week": 2,
           "actual_points": 38.0
         },
         {
@@ -1295,6 +1473,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 24.15,
+          "projected_per_game": 26.78,
+          "projected_points_this_week": 53.56,
+          "games_this_week": 2,
           "actual_points": 30.0
         },
         {
@@ -1318,6 +1499,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 26.488372093023255,
+          "projected_per_game": 18.8,
+          "projected_points_this_week": 37.61,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1341,6 +1525,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 35.256410256410255,
+          "projected_per_game": 34.33,
+          "projected_points_this_week": 68.65,
+          "games_this_week": 2,
           "actual_points": 22.0
         },
         {
@@ -1363,6 +1550,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 23.972972972972972,
+          "projected_per_game": 31.03,
+          "projected_points_this_week": 93.09,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -1386,20 +1576,29 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 20.942857142857143,
+          "projected_per_game": 21.91,
+          "projected_points_this_week": 21.91,
+          "games_this_week": 1,
           "actual_points": 12.0
         }
       ],
       "weakness": {
-        "guard_proj": 80.7,
-        "forward_proj": 113.25,
-        "center_proj": 52.2,
-        "frontcourt_proj": 165.45,
-        "guard_gap_vs_league": -27.58,
-        "forward_gap_vs_league": 16.28,
-        "center_gap_vs_league": 22.55,
-        "frontcourt_gap_vs_league": 38.83,
+        "guard_proj": 162.06,
+        "forward_proj": 194.51,
+        "center_proj": 143.7,
+        "frontcourt_proj": 338.21,
+        "guard_gap_vs_league": -79.67,
+        "forward_gap_vs_league": -13.9,
+        "center_gap_vs_league": 65.86,
+        "frontcourt_gap_vs_league": 51.96,
         "weakest_bucket": "G"
-      }
+      },
+      "summary": [
+        "Backcourt is the structural weak spot — projected ~80 pts below the league average at Guard this week.",
+        "Top projected scorer this week: Brittney Griner (C, 3 games, ~93 pts).",
+        "8 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": []
     },
     {
       "team_id": 9,
@@ -1436,6 +1635,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 32.404761904761905,
+          "projected_per_game": 30.3,
+          "projected_points_this_week": 60.6,
+          "games_this_week": 2,
           "actual_points": 39.0
         },
         {
@@ -1458,6 +1660,9 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 30.523809523809526,
+          "projected_per_game": 28.95,
+          "projected_points_this_week": 57.91,
+          "games_this_week": 2,
           "actual_points": 38.0
         },
         {
@@ -1481,6 +1686,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 25.615384615384617,
+          "projected_per_game": 25.62,
+          "projected_points_this_week": 51.23,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1503,6 +1711,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 29.302325581395348,
+          "projected_per_game": 24.15,
+          "projected_points_this_week": 48.29,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1526,6 +1737,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 22.56756756756757,
+          "projected_per_game": 22.57,
+          "projected_points_this_week": 45.14,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1548,6 +1762,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 20.88372093023256,
+          "projected_per_game": 24.76,
+          "projected_points_this_week": 49.53,
+          "games_this_week": 2,
           "actual_points": 15.0
         },
         {
@@ -1570,6 +1787,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 24.59375,
+          "projected_per_game": 29.02,
+          "projected_points_this_week": 87.07,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -1593,6 +1813,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 17.41025641025641,
+          "projected_per_game": 17.41,
+          "projected_points_this_week": 52.23,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -1616,20 +1839,33 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 18.25,
+          "projected_per_game": 12.37,
+          "projected_points_this_week": 24.74,
+          "games_this_week": 2,
           "actual_points": 11.0
         }
       ],
       "weakness": {
-        "guard_proj": 92.23,
-        "forward_proj": 40.82,
-        "center_proj": 88.5,
-        "frontcourt_proj": 129.32,
-        "guard_gap_vs_league": -16.05,
-        "forward_gap_vs_league": -56.15,
-        "center_gap_vs_league": 58.85,
-        "frontcourt_gap_vs_league": 2.7,
+        "guard_proj": 166.8,
+        "forward_proj": 69.88,
+        "center_proj": 240.06,
+        "frontcourt_proj": 309.94,
+        "guard_gap_vs_league": -74.93,
+        "forward_gap_vs_league": -138.53,
+        "center_gap_vs_league": 162.22,
+        "frontcourt_gap_vs_league": 23.69,
         "weakest_bucket": "G"
-      }
+      },
+      "summary": [
+        "Backcourt is the structural weak spot — projected ~75 pts below the league average at Guard this week.",
+        "Top projected scorer this week: Ezi Magbegor (C, 3 games, ~87 pts).",
+        "2 recent transactions — latest a waiver move.",
+        "7 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": [
+        "b192a419-7590-492c-bb1b-7b61696ee522",
+        "2bd22907-91a7-40b5-866d-513056c3a370"
+      ]
     },
     {
       "team_id": 10,
@@ -1668,6 +1904,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 31.15909090909091,
+          "projected_per_game": 31.25,
+          "projected_points_this_week": 62.5,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1690,6 +1929,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 27.818181818181817,
+          "projected_per_game": 25.56,
+          "projected_points_this_week": 51.12,
+          "games_this_week": 2,
           "actual_points": 28.0
         },
         {
@@ -1713,6 +1955,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 25.70731707317073,
+          "projected_per_game": 25.71,
+          "projected_points_this_week": 102.83,
+          "games_this_week": 4,
           "actual_points": 0.0
         },
         {
@@ -1735,6 +1980,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 25.083333333333332,
+          "projected_per_game": 28.17,
+          "projected_points_this_week": 56.33,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1757,6 +2005,9 @@
           "lineup_slot_label": "UTIL",
           "is_active": true,
           "projected_points": 25.413793103448278,
+          "projected_per_game": 23.71,
+          "projected_points_this_week": 47.42,
+          "games_this_week": 2,
           "actual_points": 33.0
         },
         {
@@ -1780,6 +2031,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 20.95,
+          "projected_per_game": 21.62,
+          "projected_points_this_week": 64.88,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -1802,6 +2056,9 @@
           "lineup_slot_label": "G",
           "is_active": true,
           "projected_points": 25.261904761904763,
+          "projected_per_game": 12.77,
+          "projected_points_this_week": 25.54,
+          "games_this_week": 2,
           "actual_points": 0.0
         },
         {
@@ -1824,6 +2081,9 @@
           "lineup_slot_label": "F",
           "is_active": true,
           "projected_points": 20.323529411764707,
+          "projected_per_game": 20.32,
+          "projected_points_this_week": 60.97,
+          "games_this_week": 3,
           "actual_points": 0.0
         },
         {
@@ -1847,20 +2107,29 @@
           "lineup_slot_label": "F/C",
           "is_active": true,
           "projected_points": 16.82051282051282,
+          "projected_per_game": 16.82,
+          "projected_points_this_week": 33.64,
+          "games_this_week": 2,
           "actual_points": 37.0
         }
       ],
       "weakness": {
-        "guard_proj": 121.02,
-        "forward_proj": 52.11,
-        "center_proj": 45.41,
-        "frontcourt_proj": 97.52,
-        "guard_gap_vs_league": 12.74,
-        "forward_gap_vs_league": -44.86,
-        "center_gap_vs_league": 15.76,
-        "frontcourt_gap_vs_league": -29.1,
+        "guard_proj": 260.55,
+        "forward_proj": 127.38,
+        "center_proj": 117.3,
+        "frontcourt_proj": 244.68,
+        "guard_gap_vs_league": 18.82,
+        "forward_gap_vs_league": -81.03,
+        "center_gap_vs_league": 39.46,
+        "frontcourt_gap_vs_league": -41.57,
         "weakest_bucket": "FC"
-      }
+      },
+      "summary": [
+        "Frontcourt is the structural weak spot — projected ~42 pts below the league average at F/C this week.",
+        "Top projected scorer this week: Azzi Fudd (G, 4 games, ~103 pts).",
+        "6 of 9 active starters have only 1–2 games this week — light slate."
+      ],
+      "recent_transaction_ids": []
     }
   ],
   "transactions_recent": [
@@ -2003,8 +2272,8 @@
       "projected_points_this_week": 75.31,
       "games_this_week": 4,
       "season_avg_points": 22.67,
-      "percent_owned": 18.19,
-      "percent_change": 0.4,
+      "percent_owned": 18.32,
+      "percent_change": 0.53,
       "base_score": 75.31
     },
     {
@@ -2028,8 +2297,8 @@
       "projected_points_this_week": 73.5,
       "games_this_week": 3,
       "season_avg_points": 24.5,
-      "percent_owned": 16.83,
-      "percent_change": 1.35,
+      "percent_owned": 16.78,
+      "percent_change": 1.25,
       "base_score": 73.5
     },
     {
@@ -2054,8 +2323,8 @@
       "projected_points_this_week": 65.0,
       "games_this_week": 2,
       "season_avg_points": 32.5,
-      "percent_owned": 43.51,
-      "percent_change": 1.67,
+      "percent_owned": 43.61,
+      "percent_change": 1.77,
       "base_score": 65.0
     },
     {
@@ -2079,8 +2348,8 @@
       "projected_points_this_week": 61.85,
       "games_this_week": 4,
       "season_avg_points": 16.0,
-      "percent_owned": 8.81,
-      "percent_change": -0.28,
+      "percent_owned": 8.8,
+      "percent_change": -0.29,
       "base_score": 61.85
     },
     {
@@ -2104,8 +2373,8 @@
       "projected_points_this_week": 58.5,
       "games_this_week": 3,
       "season_avg_points": 19.5,
-      "percent_owned": 13.71,
-      "percent_change": 1.44,
+      "percent_owned": 13.93,
+      "percent_change": 1.67,
       "base_score": 58.5
     },
     {
@@ -2131,8 +2400,8 @@
       "projected_points_this_week": 57.75,
       "games_this_week": 3,
       "season_avg_points": 19.25,
-      "percent_owned": 2.89,
-      "percent_change": 1.53,
+      "percent_owned": 2.91,
+      "percent_change": 1.49,
       "base_score": 57.75
     },
     {
@@ -2156,8 +2425,8 @@
       "projected_points_this_week": 57.36,
       "games_this_week": 3,
       "season_avg_points": 17.0,
-      "percent_owned": 26.0,
-      "percent_change": 0.1,
+      "percent_owned": 26.09,
+      "percent_change": 0.2,
       "base_score": 57.36
     },
     {
@@ -2181,7 +2450,7 @@
       "projected_points_this_week": 56.13,
       "games_this_week": 3,
       "season_avg_points": 16.0,
-      "percent_owned": 7.71,
+      "percent_owned": 7.68,
       "percent_change": -0.86,
       "base_score": 56.13
     },
@@ -2207,7 +2476,7 @@
       "games_this_week": 3,
       "season_avg_points": 18.5,
       "percent_owned": 3.08,
-      "percent_change": 0.01,
+      "percent_change": -0.01,
       "base_score": 55.5
     },
     {
@@ -2232,8 +2501,8 @@
       "projected_points_this_week": 51.0,
       "games_this_week": 3,
       "season_avg_points": 17.0,
-      "percent_owned": 3.16,
-      "percent_change": 0.03,
+      "percent_owned": 3.05,
+      "percent_change": -0.09,
       "base_score": 51.0
     },
     {
@@ -2257,7 +2526,7 @@
       "projected_points_this_week": 49.56,
       "games_this_week": 3,
       "season_avg_points": null,
-      "percent_owned": 7.11,
+      "percent_owned": 7.1,
       "percent_change": -0.21,
       "base_score": 49.56
     },
@@ -2334,8 +2603,8 @@
       "projected_points_this_week": 49.42,
       "games_this_week": 3,
       "season_avg_points": null,
-      "percent_owned": 2.2,
-      "percent_change": -0.01,
+      "percent_owned": 2.22,
+      "percent_change": 0.0,
       "base_score": 49.42
     },
     {
@@ -2360,8 +2629,8 @@
       "projected_points_this_week": 48.75,
       "games_this_week": 3,
       "season_avg_points": 18.25,
-      "percent_owned": 13.62,
-      "percent_change": 0.03,
+      "percent_owned": 13.7,
+      "percent_change": 0.11,
       "base_score": 48.75
     }
   ],
@@ -2392,8 +2661,8 @@
           "projected_points_this_week": 57.75,
           "games_this_week": 3,
           "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
+          "percent_owned": 2.91,
+          "percent_change": 1.49,
           "base_score": 57.75
         },
         {
@@ -2417,8 +2686,8 @@
           "projected_points_this_week": 75.31,
           "games_this_week": 4,
           "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
           "base_score": 75.31
         },
         {
@@ -2442,8 +2711,8 @@
           "projected_points_this_week": 73.5,
           "games_this_week": 3,
           "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
           "base_score": 73.5
         },
         {
@@ -2468,8 +2737,8 @@
           "projected_points_this_week": 51.0,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 3.16,
-          "percent_change": 0.03,
+          "percent_owned": 3.05,
+          "percent_change": -0.09,
           "base_score": 51.0
         },
         {
@@ -2521,8 +2790,8 @@
           "projected_points_this_week": 48.0,
           "games_this_week": 4,
           "season_avg_points": 6.0,
-          "percent_owned": 2.12,
-          "percent_change": -0.07,
+          "percent_owned": 2.13,
+          "percent_change": -0.06,
           "base_score": 48.0
         },
         {
@@ -2546,8 +2815,8 @@
           "projected_points_this_week": 47.57,
           "games_this_week": 3,
           "season_avg_points": 6.0,
-          "percent_owned": 8.51,
-          "percent_change": -0.53,
+          "percent_owned": 8.47,
+          "percent_change": -0.56,
           "base_score": 47.57
         },
         {
@@ -2572,8 +2841,8 @@
           "projected_points_this_week": 46.0,
           "games_this_week": 3,
           "season_avg_points": 15.33,
-          "percent_owned": 0.87,
-          "percent_change": 0.28,
+          "percent_owned": 0.91,
+          "percent_change": 0.31,
           "base_score": 46.0
         },
         {
@@ -2598,8 +2867,8 @@
           "projected_points_this_week": 65.0,
           "games_this_week": 2,
           "season_avg_points": 32.5,
-          "percent_owned": 43.51,
-          "percent_change": 1.67,
+          "percent_owned": 43.61,
+          "percent_change": 1.77,
           "base_score": 65.0
         },
         {
@@ -2624,7 +2893,7 @@
           "projected_points_this_week": 45.0,
           "games_this_week": 3,
           "season_avg_points": 15.0,
-          "percent_owned": 0.37,
+          "percent_owned": 0.36,
           "percent_change": -0.05,
           "base_score": 45.0
         }
@@ -2656,8 +2925,8 @@
           "projected_points_this_week": 57.75,
           "games_this_week": 3,
           "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
+          "percent_owned": 2.91,
+          "percent_change": 1.49,
           "base_score": 57.75
         },
         {
@@ -2682,34 +2951,9 @@
           "projected_points_this_week": 51.0,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 3.16,
-          "percent_change": 0.03,
+          "percent_owned": 3.05,
+          "percent_change": -0.09,
           "base_score": 51.0
-        },
-        {
-          "player": {
-            "player_id": 2529047,
-            "name": "Odyssey Sims",
-            "team": "DAL",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 18.83,
-          "projected_per_game": 18.83,
-          "projected_points_this_week": 75.31,
-          "games_this_week": 4,
-          "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
-          "base_score": 75.31
         },
         {
           "player": {
@@ -2740,31 +2984,6 @@
         },
         {
           "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 24.5,
-          "projected_points_this_week": 73.5,
-          "games_this_week": 3,
-          "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
-          "base_score": 73.5
-        },
-        {
-          "player": {
             "player_id": 924,
             "name": "Alysha Clark",
             "team": "DAL",
@@ -2785,8 +3004,8 @@
           "projected_points_this_week": 48.0,
           "games_this_week": 4,
           "season_avg_points": 6.0,
-          "percent_owned": 2.12,
-          "percent_change": -0.07,
+          "percent_owned": 2.13,
+          "percent_change": -0.06,
           "base_score": 48.0
         },
         {
@@ -2810,9 +3029,34 @@
           "projected_points_this_week": 47.57,
           "games_this_week": 3,
           "season_avg_points": 6.0,
-          "percent_owned": 8.51,
-          "percent_change": -0.53,
+          "percent_owned": 8.47,
+          "percent_change": -0.56,
           "base_score": 47.57
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "projected_per_game": 18.83,
+          "projected_points_this_week": 75.31,
+          "games_this_week": 4,
+          "season_avg_points": 22.67,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
+          "base_score": 75.31
         },
         {
           "player": {
@@ -2836,9 +3080,34 @@
           "projected_points_this_week": 46.0,
           "games_this_week": 3,
           "season_avg_points": 15.33,
-          "percent_owned": 0.87,
-          "percent_change": 0.28,
+          "percent_owned": 0.91,
+          "percent_change": 0.31,
           "base_score": 46.0
+        },
+        {
+          "player": {
+            "player_id": 5017726,
+            "name": "Jade Melbourne",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 24.5,
+          "projected_points_this_week": 73.5,
+          "games_this_week": 3,
+          "season_avg_points": 24.5,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
+          "base_score": 73.5
         },
         {
           "player": {
@@ -2862,7 +3131,7 @@
           "projected_points_this_week": 45.0,
           "games_this_week": 3,
           "season_avg_points": 15.0,
-          "percent_owned": 0.37,
+          "percent_owned": 0.36,
           "percent_change": -0.05,
           "base_score": 45.0
         },
@@ -2889,8 +3158,8 @@
           "projected_points_this_week": 43.89,
           "games_this_week": 3,
           "season_avg_points": 14.67,
-          "percent_owned": 9.47,
-          "percent_change": -0.31,
+          "percent_owned": 9.46,
+          "percent_change": -0.32,
           "base_score": 43.89
         }
       ]
@@ -2921,59 +3190,9 @@
           "projected_points_this_week": 57.75,
           "games_this_week": 3,
           "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
+          "percent_owned": 2.91,
+          "percent_change": 1.49,
           "base_score": 57.75
-        },
-        {
-          "player": {
-            "player_id": 2529047,
-            "name": "Odyssey Sims",
-            "team": "DAL",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 18.83,
-          "projected_per_game": 18.83,
-          "projected_points_this_week": 75.31,
-          "games_this_week": 4,
-          "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
-          "base_score": 75.31
-        },
-        {
-          "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 24.5,
-          "projected_points_this_week": 73.5,
-          "games_this_week": 3,
-          "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
-          "base_score": 73.5
         },
         {
           "player": {
@@ -2997,8 +3216,8 @@
           "projected_points_this_week": 51.0,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 3.16,
-          "percent_change": 0.03,
+          "percent_owned": 3.05,
+          "percent_change": -0.09,
           "base_score": 51.0
         },
         {
@@ -3050,8 +3269,8 @@
           "projected_points_this_week": 48.0,
           "games_this_week": 4,
           "season_avg_points": 6.0,
-          "percent_owned": 2.12,
-          "percent_change": -0.07,
+          "percent_owned": 2.13,
+          "percent_change": -0.06,
           "base_score": 48.0
         },
         {
@@ -3075,8 +3294,8 @@
           "projected_points_this_week": 47.57,
           "games_this_week": 3,
           "season_avg_points": 6.0,
-          "percent_owned": 8.51,
-          "percent_change": -0.53,
+          "percent_owned": 8.47,
+          "percent_change": -0.56,
           "base_score": 47.57
         },
         {
@@ -3101,15 +3320,15 @@
           "projected_points_this_week": 46.0,
           "games_this_week": 3,
           "season_avg_points": 15.33,
-          "percent_owned": 0.87,
-          "percent_change": 0.28,
+          "percent_owned": 0.91,
+          "percent_change": 0.31,
           "base_score": 46.0
         },
         {
           "player": {
-            "player_id": 5345320,
-            "name": "Pauline Astier",
-            "team": "NY",
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -3117,19 +3336,18 @@
               3,
               5,
               6,
-              7,
-              9
+              7
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 32.5,
-          "projected_points_this_week": 65.0,
-          "games_this_week": 2,
-          "season_avg_points": 32.5,
-          "percent_owned": 43.51,
-          "percent_change": 1.67,
-          "base_score": 65.0
+          "projected_points_next_period": 18.83,
+          "projected_per_game": 18.83,
+          "projected_points_this_week": 75.31,
+          "games_this_week": 4,
+          "season_avg_points": 22.67,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
+          "base_score": 75.31
         },
         {
           "player": {
@@ -3153,9 +3371,61 @@
           "projected_points_this_week": 45.0,
           "games_this_week": 3,
           "season_avg_points": 15.0,
-          "percent_owned": 0.37,
+          "percent_owned": 0.36,
           "percent_change": -0.05,
           "base_score": 45.0
+        },
+        {
+          "player": {
+            "player_id": 5017726,
+            "name": "Jade Melbourne",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 24.5,
+          "projected_points_this_week": 73.5,
+          "games_this_week": 3,
+          "season_avg_points": 24.5,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
+          "base_score": 73.5
+        },
+        {
+          "player": {
+            "player_id": 4398966,
+            "name": "Olivia Nelson-Ododa",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              0
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 14.63,
+          "projected_per_game": 14.63,
+          "projected_points_this_week": 43.89,
+          "games_this_week": 3,
+          "season_avg_points": 14.67,
+          "percent_owned": 9.46,
+          "percent_change": -0.32,
+          "base_score": 43.89
         }
       ]
     },
@@ -3183,8 +3453,8 @@
           "projected_points_this_week": 75.31,
           "games_this_week": 4,
           "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
           "base_score": 75.31
         },
         {
@@ -3208,9 +3478,85 @@
           "projected_points_this_week": 73.5,
           "games_this_week": 3,
           "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
           "base_score": 73.5
+        },
+        {
+          "player": {
+            "player_id": 5345320,
+            "name": "Pauline Astier",
+            "team": "NY",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 32.5,
+          "projected_points_this_week": 65.0,
+          "games_this_week": 2,
+          "season_avg_points": 32.5,
+          "percent_owned": 43.61,
+          "percent_change": 1.77,
+          "base_score": 65.0
+        },
+        {
+          "player": {
+            "player_id": 4433807,
+            "name": "Aziaha James",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 15.46,
+          "projected_per_game": 15.46,
+          "projected_points_this_week": 61.85,
+          "games_this_week": 4,
+          "season_avg_points": 16.0,
+          "percent_owned": 8.8,
+          "percent_change": -0.29,
+          "base_score": 61.85
+        },
+        {
+          "player": {
+            "player_id": 4433412,
+            "name": "Hailey Van Lith",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 19.5,
+          "projected_points_this_week": 58.5,
+          "games_this_week": 3,
+          "season_avg_points": 19.5,
+          "percent_owned": 13.93,
+          "percent_change": 1.67,
+          "base_score": 58.5
         },
         {
           "player": {
@@ -3235,85 +3581,9 @@
           "projected_points_this_week": 57.75,
           "games_this_week": 3,
           "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
+          "percent_owned": 2.91,
+          "percent_change": 1.49,
           "base_score": 57.75
-        },
-        {
-          "player": {
-            "player_id": 5345320,
-            "name": "Pauline Astier",
-            "team": "NY",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 32.5,
-          "projected_points_this_week": 65.0,
-          "games_this_week": 2,
-          "season_avg_points": 32.5,
-          "percent_owned": 43.51,
-          "percent_change": 1.67,
-          "base_score": 65.0
-        },
-        {
-          "player": {
-            "player_id": 4433807,
-            "name": "Aziaha James",
-            "team": "DAL",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 15.46,
-          "projected_per_game": 15.46,
-          "projected_points_this_week": 61.85,
-          "games_this_week": 4,
-          "season_avg_points": 16.0,
-          "percent_owned": 8.81,
-          "percent_change": -0.28,
-          "base_score": 61.85
-        },
-        {
-          "player": {
-            "player_id": 4433412,
-            "name": "Hailey Van Lith",
-            "team": "CON",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 19.5,
-          "projected_points_this_week": 58.5,
-          "games_this_week": 3,
-          "season_avg_points": 19.5,
-          "percent_owned": 13.71,
-          "percent_change": 1.44,
-          "base_score": 58.5
         },
         {
           "player": {
@@ -3336,8 +3606,8 @@
           "projected_points_this_week": 57.36,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 26.0,
-          "percent_change": 0.1,
+          "percent_owned": 26.09,
+          "percent_change": 0.2,
           "base_score": 57.36
         },
         {
@@ -3361,7 +3631,7 @@
           "projected_points_this_week": 56.13,
           "games_this_week": 3,
           "season_avg_points": 16.0,
-          "percent_owned": 7.71,
+          "percent_owned": 7.68,
           "percent_change": -0.86,
           "base_score": 56.13
         },
@@ -3387,7 +3657,7 @@
           "games_this_week": 3,
           "season_avg_points": 18.5,
           "percent_owned": 3.08,
-          "percent_change": 0.01,
+          "percent_change": -0.01,
           "base_score": 55.5
         },
         {
@@ -3412,8 +3682,8 @@
           "projected_points_this_week": 51.0,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 3.16,
-          "percent_change": 0.03,
+          "percent_owned": 3.05,
+          "percent_change": -0.09,
           "base_score": 51.0
         }
       ]
@@ -3442,8 +3712,8 @@
           "projected_points_this_week": 75.31,
           "games_this_week": 4,
           "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
           "base_score": 75.31
         },
         {
@@ -3467,8 +3737,8 @@
           "projected_points_this_week": 73.5,
           "games_this_week": 3,
           "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
           "base_score": 73.5
         },
         {
@@ -3493,8 +3763,8 @@
           "projected_points_this_week": 65.0,
           "games_this_week": 2,
           "season_avg_points": 32.5,
-          "percent_owned": 43.51,
-          "percent_change": 1.67,
+          "percent_owned": 43.61,
+          "percent_change": 1.77,
           "base_score": 65.0
         },
         {
@@ -3518,8 +3788,8 @@
           "projected_points_this_week": 61.85,
           "games_this_week": 4,
           "season_avg_points": 16.0,
-          "percent_owned": 8.81,
-          "percent_change": -0.28,
+          "percent_owned": 8.8,
+          "percent_change": -0.29,
           "base_score": 61.85
         },
         {
@@ -3543,8 +3813,8 @@
           "projected_points_this_week": 58.5,
           "games_this_week": 3,
           "season_avg_points": 19.5,
-          "percent_owned": 13.71,
-          "percent_change": 1.44,
+          "percent_owned": 13.93,
+          "percent_change": 1.67,
           "base_score": 58.5
         },
         {
@@ -3568,8 +3838,8 @@
           "projected_points_this_week": 57.36,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 26.0,
-          "percent_change": 0.1,
+          "percent_owned": 26.09,
+          "percent_change": 0.2,
           "base_score": 57.36
         },
         {
@@ -3593,7 +3863,7 @@
           "projected_points_this_week": 56.13,
           "games_this_week": 3,
           "season_avg_points": 16.0,
-          "percent_owned": 7.71,
+          "percent_owned": 7.68,
           "percent_change": -0.86,
           "base_score": 56.13
         },
@@ -3619,7 +3889,7 @@
           "games_this_week": 3,
           "season_avg_points": 18.5,
           "percent_owned": 3.08,
-          "percent_change": 0.01,
+          "percent_change": -0.01,
           "base_score": 55.5
         },
         {
@@ -3645,8 +3915,8 @@
           "projected_points_this_week": 57.75,
           "games_this_week": 3,
           "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
+          "percent_owned": 2.91,
+          "percent_change": 1.49,
           "base_score": 57.75
         },
         {
@@ -3670,7 +3940,7 @@
           "projected_points_this_week": 49.56,
           "games_this_week": 3,
           "season_avg_points": null,
-          "percent_owned": 7.11,
+          "percent_owned": 7.1,
           "percent_change": -0.21,
           "base_score": 49.56
         }
@@ -3700,8 +3970,8 @@
           "projected_points_this_week": 75.31,
           "games_this_week": 4,
           "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
           "base_score": 75.31
         },
         {
@@ -3725,8 +3995,8 @@
           "projected_points_this_week": 73.5,
           "games_this_week": 3,
           "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
           "base_score": 73.5
         },
         {
@@ -3751,8 +4021,8 @@
           "projected_points_this_week": 65.0,
           "games_this_week": 2,
           "season_avg_points": 32.5,
-          "percent_owned": 43.51,
-          "percent_change": 1.67,
+          "percent_owned": 43.61,
+          "percent_change": 1.77,
           "base_score": 65.0
         },
         {
@@ -3776,8 +4046,8 @@
           "projected_points_this_week": 61.85,
           "games_this_week": 4,
           "season_avg_points": 16.0,
-          "percent_owned": 8.81,
-          "percent_change": -0.28,
+          "percent_owned": 8.8,
+          "percent_change": -0.29,
           "base_score": 61.85
         },
         {
@@ -3801,8 +4071,8 @@
           "projected_points_this_week": 58.5,
           "games_this_week": 3,
           "season_avg_points": 19.5,
-          "percent_owned": 13.71,
-          "percent_change": 1.44,
+          "percent_owned": 13.93,
+          "percent_change": 1.67,
           "base_score": 58.5
         },
         {
@@ -3826,8 +4096,8 @@
           "projected_points_this_week": 57.36,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 26.0,
-          "percent_change": 0.1,
+          "percent_owned": 26.09,
+          "percent_change": 0.2,
           "base_score": 57.36
         },
         {
@@ -3851,7 +4121,7 @@
           "projected_points_this_week": 56.13,
           "games_this_week": 3,
           "season_avg_points": 16.0,
-          "percent_owned": 7.71,
+          "percent_owned": 7.68,
           "percent_change": -0.86,
           "base_score": 56.13
         },
@@ -3877,35 +4147,8 @@
           "games_this_week": 3,
           "season_avg_points": 18.5,
           "percent_owned": 3.08,
-          "percent_change": 0.01,
+          "percent_change": -0.01,
           "base_score": 55.5
-        },
-        {
-          "player": {
-            "player_id": 5345444,
-            "name": "Laura Juskaite",
-            "team": "TOR",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 19.25,
-          "projected_points_this_week": 57.75,
-          "games_this_week": 3,
-          "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
-          "base_score": 57.75
         },
         {
           "player": {
@@ -3928,9 +4171,34 @@
           "projected_points_this_week": 49.56,
           "games_this_week": 3,
           "season_avg_points": null,
-          "percent_owned": 7.11,
+          "percent_owned": 7.1,
           "percent_change": -0.21,
           "base_score": 49.56
+        },
+        {
+          "player": {
+            "player_id": 4595910,
+            "name": "Haley Jones",
+            "team": "POR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 16.51,
+          "projected_per_game": 16.51,
+          "projected_points_this_week": 49.54,
+          "games_this_week": 3,
+          "season_avg_points": 12.67,
+          "percent_owned": 3.33,
+          "percent_change": -0.03,
+          "base_score": 49.54
         }
       ]
     },
@@ -3958,8 +4226,8 @@
           "projected_points_this_week": 75.31,
           "games_this_week": 4,
           "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
           "base_score": 75.31
         },
         {
@@ -3983,8 +4251,8 @@
           "projected_points_this_week": 73.5,
           "games_this_week": 3,
           "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
           "base_score": 73.5
         },
         {
@@ -4009,8 +4277,8 @@
           "projected_points_this_week": 65.0,
           "games_this_week": 2,
           "season_avg_points": 32.5,
-          "percent_owned": 43.51,
-          "percent_change": 1.67,
+          "percent_owned": 43.61,
+          "percent_change": 1.77,
           "base_score": 65.0
         },
         {
@@ -4034,8 +4302,8 @@
           "projected_points_this_week": 61.85,
           "games_this_week": 4,
           "season_avg_points": 16.0,
-          "percent_owned": 8.81,
-          "percent_change": -0.28,
+          "percent_owned": 8.8,
+          "percent_change": -0.29,
           "base_score": 61.85
         },
         {
@@ -4059,8 +4327,8 @@
           "projected_points_this_week": 58.5,
           "games_this_week": 3,
           "season_avg_points": 19.5,
-          "percent_owned": 13.71,
-          "percent_change": 1.44,
+          "percent_owned": 13.93,
+          "percent_change": 1.67,
           "base_score": 58.5
         },
         {
@@ -4084,8 +4352,8 @@
           "projected_points_this_week": 57.36,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 26.0,
-          "percent_change": 0.1,
+          "percent_owned": 26.09,
+          "percent_change": 0.2,
           "base_score": 57.36
         },
         {
@@ -4109,7 +4377,7 @@
           "projected_points_this_week": 56.13,
           "games_this_week": 3,
           "season_avg_points": 16.0,
-          "percent_owned": 7.71,
+          "percent_owned": 7.68,
           "percent_change": -0.86,
           "base_score": 56.13
         },
@@ -4135,35 +4403,8 @@
           "games_this_week": 3,
           "season_avg_points": 18.5,
           "percent_owned": 3.08,
-          "percent_change": 0.01,
+          "percent_change": -0.01,
           "base_score": 55.5
-        },
-        {
-          "player": {
-            "player_id": 5345444,
-            "name": "Laura Juskaite",
-            "team": "TOR",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 19.25,
-          "projected_points_this_week": 57.75,
-          "games_this_week": 3,
-          "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
-          "base_score": 57.75
         },
         {
           "player": {
@@ -4186,9 +4427,34 @@
           "projected_points_this_week": 49.56,
           "games_this_week": 3,
           "season_avg_points": null,
-          "percent_owned": 7.11,
+          "percent_owned": 7.1,
           "percent_change": -0.21,
           "base_score": 49.56
+        },
+        {
+          "player": {
+            "player_id": 4595910,
+            "name": "Haley Jones",
+            "team": "POR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 16.51,
+          "projected_per_game": 16.51,
+          "projected_points_this_week": 49.54,
+          "games_this_week": 3,
+          "season_avg_points": 12.67,
+          "percent_owned": 3.33,
+          "percent_change": -0.03,
+          "base_score": 49.54
         }
       ]
     },
@@ -4218,8 +4484,8 @@
           "projected_points_this_week": 57.75,
           "games_this_week": 3,
           "season_avg_points": 19.25,
-          "percent_owned": 2.89,
-          "percent_change": 1.53,
+          "percent_owned": 2.91,
+          "percent_change": 1.49,
           "base_score": 57.75
         },
         {
@@ -4244,8 +4510,8 @@
           "projected_points_this_week": 51.0,
           "games_this_week": 3,
           "season_avg_points": 17.0,
-          "percent_owned": 3.16,
-          "percent_change": 0.03,
+          "percent_owned": 3.05,
+          "percent_change": -0.09,
           "base_score": 51.0
         },
         {
@@ -4277,31 +4543,6 @@
         },
         {
           "player": {
-            "player_id": 2529047,
-            "name": "Odyssey Sims",
-            "team": "DAL",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 18.83,
-          "projected_per_game": 18.83,
-          "projected_points_this_week": 75.31,
-          "games_this_week": 4,
-          "season_avg_points": 22.67,
-          "percent_owned": 18.19,
-          "percent_change": 0.4,
-          "base_score": 75.31
-        },
-        {
-          "player": {
             "player_id": 924,
             "name": "Alysha Clark",
             "team": "DAL",
@@ -4322,8 +4563,8 @@
           "projected_points_this_week": 48.0,
           "games_this_week": 4,
           "season_avg_points": 6.0,
-          "percent_owned": 2.12,
-          "percent_change": -0.07,
+          "percent_owned": 2.13,
+          "percent_change": -0.06,
           "base_score": 48.0
         },
         {
@@ -4347,15 +4588,15 @@
           "projected_points_this_week": 47.57,
           "games_this_week": 3,
           "season_avg_points": 6.0,
-          "percent_owned": 8.51,
-          "percent_change": -0.53,
+          "percent_owned": 8.47,
+          "percent_change": -0.56,
           "base_score": 47.57
         },
         {
           "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -4367,14 +4608,14 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 24.5,
-          "projected_points_this_week": 73.5,
-          "games_this_week": 3,
-          "season_avg_points": 24.5,
-          "percent_owned": 16.83,
-          "percent_change": 1.35,
-          "base_score": 73.5
+          "projected_points_next_period": 18.83,
+          "projected_per_game": 18.83,
+          "projected_points_this_week": 75.31,
+          "games_this_week": 4,
+          "season_avg_points": 22.67,
+          "percent_owned": 18.32,
+          "percent_change": 0.53,
+          "base_score": 75.31
         },
         {
           "player": {
@@ -4398,9 +4639,34 @@
           "projected_points_this_week": 46.0,
           "games_this_week": 3,
           "season_avg_points": 15.33,
-          "percent_owned": 0.87,
-          "percent_change": 0.28,
+          "percent_owned": 0.91,
+          "percent_change": 0.31,
           "base_score": 46.0
+        },
+        {
+          "player": {
+            "player_id": 5017726,
+            "name": "Jade Melbourne",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 24.5,
+          "projected_points_this_week": 73.5,
+          "games_this_week": 3,
+          "season_avg_points": 24.5,
+          "percent_owned": 16.78,
+          "percent_change": 1.25,
+          "base_score": 73.5
         },
         {
           "player": {
@@ -4424,7 +4690,7 @@
           "projected_points_this_week": 45.0,
           "games_this_week": 3,
           "season_avg_points": 15.0,
-          "percent_owned": 0.37,
+          "percent_owned": 0.36,
           "percent_change": -0.05,
           "base_score": 45.0
         },
@@ -4451,8 +4717,8 @@
           "projected_points_this_week": 43.89,
           "games_this_week": 3,
           "season_avg_points": 14.67,
-          "percent_owned": 9.47,
-          "percent_change": -0.31,
+          "percent_owned": 9.46,
+          "percent_change": -0.32,
           "base_score": 43.89
         }
       ]
@@ -4462,9 +4728,9 @@
     {
       "id": 48801983,
       "headline": "Clark sets WNBA record after stat change, then sets it again",
-      "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+      "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
       "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-      "published_at": "2026-05-18T02:17:43Z",
+      "published_at": "2026-05-18T02:37:27Z",
       "athlete_ids": [
         4433403
       ],
@@ -6065,9 +6331,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -6289,9 +6555,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -7163,9 +7429,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -8017,9 +8283,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -8087,9 +8353,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -8285,9 +8551,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -8672,9 +8938,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -9078,9 +9344,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -10333,9 +10599,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -10498,9 +10764,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -11351,9 +11617,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -11597,9 +11863,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -11667,9 +11933,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -14953,9 +15219,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -15664,9 +15930,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -15955,9 +16221,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -16343,9 +16609,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -16934,9 +17200,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -17302,9 +17568,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -17372,9 +17638,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
@@ -17767,9 +18033,9 @@
       {
         "id": 48801983,
         "headline": "Clark sets WNBA record after stat change, then sets it again",
-        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance on Sunday.",
+        "description": "A statistical correction helped Caitlin Clark set a WNBA record for 20-point, 10-assist games hours before she added to it with another stellar performance Sunday.",
         "url": "https://www.espn.com/wnba/story/_/id/48801983/clark-sets-wnba-record-stat-change-sets-again",
-        "published_at": "2026-05-18T02:17:43Z",
+        "published_at": "2026-05-18T02:37:27Z",
         "athlete_ids": [
           4433403
         ],
