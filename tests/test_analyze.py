@@ -95,10 +95,36 @@ class TestRankFreeAgents:
 
     def test_top_pick_is_test_forward_top(self, free_agents_raw: dict) -> None:
         # The fixture sets Test Forward Top to 41.5 projected — highest.
+        # With no games_by_pro_team provided we fall back to the single-period
+        # projection, so the legacy contract still holds.
         ranked = analyze.rank_free_agents(free_agents_raw, scoring_period_id=10, limit=10)
         assert ranked[0]["name"] == "Test Forward Top"
         assert ranked[0]["base_score"] == 41.5
         assert ranked[0]["bucket"] == "F"
+
+    def test_games_this_week_drives_ranking(self, free_agents_raw: dict) -> None:
+        # Fixture players' proTeamIds: 9 (NY), 11 (PHX), 17 (LV), 20 (IND), 14 (SEA).
+        # We give NY 4 games and everyone else 1 — Test Guard High (NY) should
+        # leap to the top, even though Test Forward Top has a higher base proj.
+        games = {9: 4, 11: 1, 14: 1, 17: 1, 20: 1}
+        ranked = analyze.rank_free_agents(
+            free_agents_raw, scoring_period_id=10, limit=10, games_by_pro_team=games,
+        )
+        assert ranked[0]["name"] == "Test Guard High"
+        assert ranked[0]["games_this_week"] == 4
+        # Forward Top still has its per-game number, but multiplied by 1 game
+        # it ranks lower than Guard High's 4-game total.
+        forward_top = next(r for r in ranked if r["name"] == "Test Forward Top")
+        assert forward_top["games_this_week"] == 1
+        assert ranked[0]["base_score"] > forward_top["base_score"]
+
+    def test_zero_games_zeroes_the_week_proj(self, free_agents_raw: dict) -> None:
+        # A bye-week player must not be elevated by upstream weakness boosts.
+        games = {9: 0, 11: 0, 14: 0, 17: 0, 20: 0}
+        ranked = analyze.rank_free_agents(
+            free_agents_raw, scoring_period_id=10, limit=10, games_by_pro_team=games,
+        )
+        assert all(r["base_score"] == 0.0 for r in ranked)
 
     def test_falls_back_to_season_avg_when_no_period_projection(self) -> None:
         # Player with only season projection should still appear with that avg.

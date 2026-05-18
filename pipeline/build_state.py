@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pipeline import analyze, schema
+from pipeline import analyze, schedule, schema
 
 log = logging.getLogger(__name__)
 
@@ -30,10 +30,17 @@ def build_state(
     """Compose the LeagueState from raw responses + analysis."""
     teams_view = analyze.build_team_views(league_raw)
     weakness = analyze.compute_team_weakness(teams_view)
+
+    # Compute the upcoming week's game-count signal so waiver ranking
+    # rewards 4-game-week players over 1-game-week duds.
+    week_start, week_end = schedule.upcoming_week_periods(league_raw)
+    games_by_pro_team = schedule.games_per_team(league_raw, week_start, week_end)
+
     ranked_fas_dicts = analyze.rank_free_agents(
         free_agents_raw,
         scoring_period_id=int(league_raw.get("scoringPeriodId") or 0),
         limit=25,
+        games_by_pro_team=games_by_pro_team,
     )
 
     # Player id -> name, for transaction items.
@@ -134,6 +141,8 @@ def build_state(
         scoring_type=str(((league_raw.get("settings") or {}).get("scoringSettings") or {}).get("scoringType") or "UNKNOWN"),
         team_count=len(teams),
         captured_at=captured_at,
+        week_start_period=week_start,
+        week_end_period=week_end,
     )
 
     return schema.LeagueState(
@@ -219,6 +228,9 @@ def _to_waiver_target(d: dict[str, Any]) -> schema.WaiverTarget:
             injury_status=d["injury_status"],
         ),
         projected_points_next_period=float(d["projected_points_next_period"]),
+        projected_per_game=float(d.get("projected_per_game", 0.0)),
+        projected_points_this_week=float(d.get("projected_points_this_week", d.get("base_score", 0.0))),
+        games_this_week=int(d.get("games_this_week", 0)),
         season_avg_points=d["season_avg_points"],
         percent_owned=d["percent_owned"],
         percent_change=d["percent_change"],

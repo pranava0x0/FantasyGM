@@ -86,11 +86,14 @@ class TeamState(_Strict):
 class WaiverTarget(_Strict):
     """A free-agent ranked for pickup, optionally with per-team adjustment."""
     player: PlayerRef
-    projected_points_next_period: float
+    projected_points_next_period: float = Field(..., description="Single-period (often 1-day) projection")
+    projected_per_game: float = Field(..., description="Per-game projection (season basis)")
+    projected_points_this_week: float = Field(..., description="proj_per_game × games_this_week")
+    games_this_week: int = Field(..., description="Pro-team games in the upcoming window")
     season_avg_points: float | None = None
     percent_owned: float | None = None
     percent_change: float | None = None
-    base_score: float = Field(..., description="Raw projected score, position-agnostic")
+    base_score: float = Field(..., description="Sorting key = projected_points_this_week")
 
 
 class TransactionItem(_Strict):
@@ -124,6 +127,8 @@ class LeagueMeta(_Strict):
     team_count: int
     captured_at: datetime
     source: str = "espn-private-api"
+    week_start_period: int = Field(..., description="Inclusive start of the upcoming-week window")
+    week_end_period: int = Field(..., description="Inclusive end of the upcoming-week window")
 
 
 class WaiverTargetsByTeam(_Strict):

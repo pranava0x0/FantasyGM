@@ -219,18 +219,39 @@ def rank_free_agents(
     scoring_period_id: int,
     *,
     limit: int = 25,
+    games_by_pro_team: dict[int, int] | None = None,
 ) -> list[dict[str, Any]]:
-    """Sort the free-agent pool by projected points for the current period.
+    """Sort the free-agent pool by *projected points this week*.
 
-    Each entry carries enough info for the UI: name, position, percent
-    ownership, projected next-period score, season average.
+    The base score is the player's per-game projection multiplied by how
+    many games their pro team plays in the upcoming window. A player on
+    a 4-game team should outrank an identically-projected player on a
+    1-game team — that's the signal the user flagged ("4 games is amazing,
+    1-2 is low"). When `games_by_pro_team` is None (legacy or tests), we
+    fall back to the single-period projection so the ranker still works.
+
+    Per-game projection priority:
+    1. `appliedAverage` from the season-projection stat block (ESPN's own
+       per-game estimate — most reliable when present).
+    2. `season_avg_points` (actual per-game so far this season).
+    3. `projected_points_next_period` (single-period projection — least
+       informative once we know the schedule).
     """
+    games_map = games_by_pro_team or {}
     out = []
     for entry in free_agents_raw.get("players") or []:
         player = entry.get("player") or {}
-        proj = _player_projected_points(player, scoring_period_id)
+        proj_period = _player_projected_points(player, scoring_period_id)
+        proj_per_game = _player_projected_per_game(player)
         season_avg = _player_season_avg_actual(player)
         ownership = player.get("ownership") or {}
+        per_game = proj_per_game or season_avg or proj_period
+        per_game = float(per_game or 0.0)
+        games = int(games_map.get(int(player.get("proTeamId") or 0), 0)) if games_map else 0
+        if games_map:
+            week_proj = round(per_game * games, 2)
+        else:
+            week_proj = round(proj_period, 2)
         out.append({
             "player_id": player.get("id"),
             "name": player.get("fullName"),
@@ -239,14 +260,36 @@ def rank_free_agents(
             "bucket": position_bucket(player.get("defaultPositionId"), player.get("eligibleSlots") or []),
             "eligible_slots": list(player.get("eligibleSlots") or []),
             "injury_status": player.get("injuryStatus"),
-            "projected_points_next_period": round(proj, 2),
+            "projected_points_next_period": round(proj_period, 2),
+            "projected_per_game": round(per_game, 2),
+            "projected_points_this_week": week_proj,
+            "games_this_week": games,
             "season_avg_points": round(season_avg, 2) if season_avg is not None else None,
             "percent_owned": ownership.get("percentOwned"),
             "percent_change": ownership.get("percentChange"),
-            "base_score": round(proj, 2),
+            "base_score": week_proj,
         })
     out.sort(key=lambda r: r["base_score"], reverse=True)
     return out[:limit]
+
+
+def _player_projected_per_game(player: dict[str, Any]) -> float:
+    """ESPN's season-projection per-game average (statSourceId=1, split=0).
+
+    Returns 0.0 if unavailable. We prefer this over single-period projections
+    because the ranker multiplies it by games-this-week downstream.
+    """
+    for s in player.get("stats") or []:
+        if s.get("statSourceId") != PROJECTED_SOURCE:
+            continue
+        if s.get("statSplitTypeId") == 0:  # season-level
+            avg = float(s.get("appliedAverage") or 0.0)
+            if avg:
+                return avg
+            total = float(s.get("appliedTotal") or 0.0)
+            # ESPN sometimes ships total only; ~36-game season rough divisor.
+            return total / 36 if total else 0.0
+    return 0.0
 
 
 def waiver_targets_for_team(
