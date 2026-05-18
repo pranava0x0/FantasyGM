@@ -41,7 +41,8 @@ def test_teams_have_weakness_payload(
         league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
     )
     for t in state.teams:
-        assert t.weakness.weakest_bucket in ("G", "F", "C")
+        # WNBA fantasy uses shared F/C slots — weakest is G vs combined FC.
+        assert t.weakness.weakest_bucket in ("G", "FC")
 
 
 def test_waiver_targets_present(

@@ -66,12 +66,16 @@ class TestComputeTeamWeakness:
         weakness = analyze.compute_team_weakness(views)
         sample = next(iter(weakness.values()))
         required = {
-            "guard_proj", "forward_proj", "center_proj",
-            "guard_gap_vs_league", "forward_gap_vs_league", "center_gap_vs_league",
+            "guard_proj", "forward_proj", "center_proj", "frontcourt_proj",
+            "guard_gap_vs_league", "forward_gap_vs_league",
+            "center_gap_vs_league", "frontcourt_gap_vs_league",
             "weakest_bucket", "league_avg",
         }
         assert required.issubset(sample.keys())
-        assert sample["weakest_bucket"] in ("G", "F", "C")
+        # WNBA fantasy uses shared F/C slots — weakest is G vs combined frontcourt.
+        assert sample["weakest_bucket"] in ("G", "FC")
+        # Frontcourt math must be the sum, not something derived elsewhere.
+        assert sample["frontcourt_proj"] == round(sample["forward_proj"] + sample["center_proj"], 2)
 
     def test_gaps_sum_to_zero_across_league(self, league_raw: dict) -> None:
         # Sum of (team_proj - league_avg) across all teams should be ~0 per bucket
@@ -128,25 +132,24 @@ class TestWaiverTargetsForTeam:
     def test_no_boost_when_team_strong_everywhere(self, free_agents_raw: dict) -> None:
         weakness = {
             "guard_gap_vs_league": 5.0,
-            "forward_gap_vs_league": 5.0,
-            "center_gap_vs_league": 5.0,
+            "frontcourt_gap_vs_league": 5.0,
         }
         ranked = analyze.rank_free_agents(free_agents_raw, scoring_period_id=10, limit=10)
         boosted = analyze.waiver_targets_for_team(weakness, ranked)
         assert all(r["team_bonus"] == 0.0 for r in boosted)
         assert all(r["adjusted_score"] == r["base_score"] for r in boosted)
 
-    def test_boost_lifts_weak_position_players(self, free_agents_raw: dict) -> None:
-        # Team is 20 points behind at center — center pickups should boost.
+    def test_boost_lifts_weak_frontcourt_players(self, free_agents_raw: dict) -> None:
+        # Team is 20 points behind at frontcourt — both F and C pickups boost,
+        # because F and C share lineup slots.
         weakness = {
             "guard_gap_vs_league": 0.0,
-            "forward_gap_vs_league": 0.0,
-            "center_gap_vs_league": -20.0,
+            "frontcourt_gap_vs_league": -20.0,
         }
         ranked = analyze.rank_free_agents(free_agents_raw, scoring_period_id=10, limit=10)
         boosted = analyze.waiver_targets_for_team(weakness, ranked)
         for r in boosted:
-            if r["bucket"] == "C":
+            if r["bucket"] in ("F", "C"):
                 assert r["team_bonus"] > 0
                 assert r["adjusted_score"] > r["base_score"]
             else:
@@ -157,8 +160,7 @@ class TestWaiverTargetsForTeam:
         # above legitimate top picks.
         weakness = {
             "guard_gap_vs_league": 0.0,
-            "forward_gap_vs_league": 0.0,
-            "center_gap_vs_league": -100.0,
+            "frontcourt_gap_vs_league": -100.0,
         }
         ranked = [{
             "player_id": 1, "name": "Tiny Center", "pro_team_id": 9,

@@ -181,6 +181,32 @@
     });
   }
 
+  // Frontcourt bar uses a dual-color fill so the F-vs-C split inside FC
+  // stays readable without adding a third row. CSS handles via inline style.
+  function frontcourtRow(forward_proj, center_proj, gap, isWeakest) {
+    const total = forward_proj + center_proj;
+    const cls = gap > 0 ? "pos" : gap < 0 ? "neg" : "zero";
+    const sign = gap > 0 ? "+" : "";
+    const pill = el("span", { className: "pill outline bucket-F", text: "F/C" });
+    const max = Math.max(40, Math.abs(total) * 1.2, 1);
+    const pct = Math.min(100, (Math.max(0, total) / max) * 100);
+    const fSplit = total > 0 ? Math.round((forward_proj / total) * 100) : 0;
+    const fill = el("span", { className: `bucket-fill ${isWeakest ? "weakest" : ""}` });
+    fill.style.width = `${pct}%`;
+    // F portion in amber, C in magenta — narrow stripe inside the bar.
+    fill.style.background = isWeakest
+      ? "var(--gap-weak)"
+      : `linear-gradient(to right, var(--bucket-forward) 0 ${fSplit}%, var(--bucket-center) ${fSplit}% 100%)`;
+    return el("div", {
+      className: "bucket-row",
+      children: [
+        pill,
+        el("div", { className: "bucket-bar", children: [fill] }),
+        el("span", { className: `bucket-gap ${cls}`, text: `${sign}${gap.toFixed(1)}` }),
+      ],
+    });
+  }
+
   function teamCard(team, perTeamTargets) {
     const w = team.weakness;
     const head = el("div", {
@@ -202,8 +228,7 @@
       className: "bucket-rows",
       children: [
         bucketRow("G", w.guard_proj, w.guard_gap_vs_league, w.weakest_bucket === "G"),
-        bucketRow("F", w.forward_proj, w.forward_gap_vs_league, w.weakest_bucket === "F"),
-        bucketRow("C", w.center_proj, w.center_gap_vs_league, w.weakest_bucket === "C"),
+        frontcourtRow(w.forward_proj, w.center_proj, w.frontcourt_gap_vs_league, w.weakest_bucket === "FC"),
       ],
     });
 

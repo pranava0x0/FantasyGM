@@ -50,14 +50,24 @@ class TeamRecord(_Strict):
 
 
 class TeamWeakness(_Strict):
-    """Per-team production by bucket, with league-average comparison."""
+    """Per-team production by bucket, with league-average comparison.
+
+    The load-bearing comparison is **G vs FC** (frontcourt = F + C combined),
+    because WNBA fantasy uses shared F/C lineup slots — a team with zero
+    `defaultPositionId=3` players isn't structurally weak at "C" if they
+    fill those slots with Forwards. The granular F and C breakdowns are
+    kept for diagnostics, but `weakest_bucket` and waiver-target adjustment
+    use the combined frontcourt number.
+    """
     guard_proj: float
     forward_proj: float
     center_proj: float
+    frontcourt_proj: float = Field(..., description="forward_proj + center_proj")
     guard_gap_vs_league: float = Field(..., description="team - league avg, negative = weakness")
     forward_gap_vs_league: float
     center_gap_vs_league: float
-    weakest_bucket: Literal["G", "F", "C"]
+    frontcourt_gap_vs_league: float
+    weakest_bucket: Literal["G", "FC"]
 
 
 class TeamState(_Strict):

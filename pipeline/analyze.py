@@ -171,21 +171,45 @@ def league_bucket_averages(teams: list[dict[str, Any]]) -> dict[Bucket, float]:
 
 
 def compute_team_weakness(teams: list[dict[str, Any]]) -> dict[int, dict[str, Any]]:
-    """For each team, compute bucket projection + gap to league average."""
+    """For each team, compute bucket projection + gap to league average.
+
+    Returns a payload per team. The structural decision: WNBA fantasy uses
+    shared F/C lineup slots, so we treat F+C as a single 'frontcourt' bucket
+    for weakness reasoning. A team with zero pure-Center players isn't
+    really weak at 'C' if they fill slot 5 with a Forward — the data above
+    shows three teams in the 50-40-90 Club where this happens.
+
+    `weakest_bucket` is therefore the worse of two combined buckets:
+    'G' (backcourt) or 'FC' (frontcourt). The granular F / C numbers stay
+    in the payload for display.
+    """
     avg = league_bucket_averages(teams)
+    avg_fc = round(avg["F"] + avg["C"], 2)
     out: dict[int, dict[str, Any]] = {}
     for t in teams:
-        gaps = {b: round(t["bucket_proj"][b] - avg[b], 2) for b in BUCKETS}
-        weakest = min(BUCKETS, key=lambda b: gaps[b])
+        guard_proj = round(t["bucket_proj"]["G"], 2)
+        forward_proj = round(t["bucket_proj"]["F"], 2)
+        center_proj = round(t["bucket_proj"]["C"], 2)
+        frontcourt_proj = round(forward_proj + center_proj, 2)
+
+        guard_gap = round(guard_proj - avg["G"], 2)
+        forward_gap = round(forward_proj - avg["F"], 2)
+        center_gap = round(center_proj - avg["C"], 2)
+        frontcourt_gap = round(frontcourt_proj - avg_fc, 2)
+
+        weakest: Literal["G", "FC"] = "G" if guard_gap < frontcourt_gap else "FC"
+
         out[t["team_id"]] = {
-            "guard_proj": round(t["bucket_proj"]["G"], 2),
-            "forward_proj": round(t["bucket_proj"]["F"], 2),
-            "center_proj": round(t["bucket_proj"]["C"], 2),
-            "guard_gap_vs_league": gaps["G"],
-            "forward_gap_vs_league": gaps["F"],
-            "center_gap_vs_league": gaps["C"],
+            "guard_proj": guard_proj,
+            "forward_proj": forward_proj,
+            "center_proj": center_proj,
+            "frontcourt_proj": frontcourt_proj,
+            "guard_gap_vs_league": guard_gap,
+            "forward_gap_vs_league": forward_gap,
+            "center_gap_vs_league": center_gap,
+            "frontcourt_gap_vs_league": frontcourt_gap,
             "weakest_bucket": weakest,
-            "league_avg": avg,
+            "league_avg": {**avg, "FC": avg_fc},
         }
     return out
 
@@ -234,23 +258,23 @@ def waiver_targets_for_team(
 ) -> list[dict[str, Any]]:
     """Re-rank the FA pool for a single team using bucket-gap weighting.
 
-    For each bucket where the team is below league average (negative gap),
-    boost the projected score for FAs in that bucket by
-    `weakness_bonus_per_neg_point * -gap`. A team that's 20 pts behind at
-    Center gets a +1.0 effective bonus on center pickups; a strong team at
-    Guard sees no boost on guards.
+    The boost is computed against the **combined frontcourt gap** (F + C),
+    not against F and C separately — because WNBA fantasy uses shared F/C
+    slots. A team that's structurally weak in their frontcourt benefits
+    equally from picking up a Forward or a Center; ranking those buckets
+    separately would discourage F pickups when their gap is fine but C is
+    bad (or vice versa). See `compute_team_weakness` for the rationale.
 
     Cap the bonus at 50% of base score so we don't catapult a useless
     bench center over a top-10 guard.
     """
-    gaps = {
-        "G": team_weakness["guard_gap_vs_league"],
-        "F": team_weakness["forward_gap_vs_league"],
-        "C": team_weakness["center_gap_vs_league"],
-    }
+    gap_g = float(team_weakness["guard_gap_vs_league"])
+    gap_fc = float(team_weakness["frontcourt_gap_vs_league"])
+    bucket_to_gap = {"G": gap_g, "F": gap_fc, "C": gap_fc}
+
     boosted = []
     for fa in ranked_fas:
-        gap = gaps.get(fa["bucket"], 0.0)
+        gap = bucket_to_gap.get(fa["bucket"], 0.0)
         bonus = 0.0
         if gap < 0:
             raw_bonus = (-gap) * weakness_bonus_per_neg_point
