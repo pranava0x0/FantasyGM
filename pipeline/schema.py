@@ -136,6 +136,16 @@ class WaiverTargetsByTeam(_Strict):
     targets: list[WaiverTarget]
 
 
+class NewsItem(_Strict):
+    id: int
+    headline: str
+    description: str = ""
+    url: str | None = None
+    published_at: datetime | None = None
+    athlete_ids: list[int] = Field(default_factory=list)
+    pro_team_ids: list[int] = Field(default_factory=list)
+
+
 class LeagueState(_Strict):
     """Top-level object written to `docs/data/state.json`."""
     meta: LeagueMeta
@@ -143,3 +153,5 @@ class LeagueState(_Strict):
     transactions_recent: list[Transaction]
     waiver_targets_overall: list[WaiverTarget]
     waiver_targets_by_team: list[WaiverTargetsByTeam]
+    news_recent: list[NewsItem] = Field(default_factory=list)
+    news_by_player: dict[int, list[NewsItem]] = Field(default_factory=dict)

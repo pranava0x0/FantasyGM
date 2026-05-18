@@ -9,7 +9,8 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 ## Medium
 
 - **Projection sources beyond ESPN.** Pull projections from wnba.com, Yahoo Sports, and basketball-reference.com to triangulate ESPN's numbers. Reduces single-source bias on waiver-target ranking.
-- **News + social signal layer.** Surface injury reports and credible Twitter/X signal earlier than ESPN's own status updates — backup PG promotions, minute redistributions on injuries, etc. Affects waiver target ranking.
+- **Twitter / X signal layer.** Surface beat-writer + player tweets earlier than ESPN's own status updates — backup-PG promotions, minute redistributions on injuries, late scratches. Requires X API keys (no scraping). Should feed the waiver-ranker as a bonus tier.
+- **Reddit r/wnba signal.** Public JSON endpoint (`reddit.com/r/wnba/new.json`) is no-auth. Surface posts flaired "Injury" / "News" / "Game Thread" and match to players by name. Lower precedence than ESPN's official feed.
 - **My team mode.** Lets the user designate "their" team (via team ID) and gets a daily personalized brief: weak slots this week, who to drop, who to bid, projected matchup margin.
 - **Trade analyzer.** Given two rosters, project the weekly H2H point swing if they traded specific players.
 - **Matchup preview cards.** For the upcoming week, show each opposing team's projected output vs. ours by position.

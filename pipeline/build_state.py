@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pipeline import analyze, schedule, schema
+from pipeline import analyze, news, schedule, schema
 
 log = logging.getLogger(__name__)
 
@@ -26,8 +26,14 @@ def build_state(
     league_raw: dict[str, Any],
     free_agents_raw: dict[str, Any],
     captured_at: datetime,
+    news_raw: dict[str, Any] | None = None,
 ) -> schema.LeagueState:
-    """Compose the LeagueState from raw responses + analysis."""
+    """Compose the LeagueState from raw responses + analysis.
+
+    `news_raw` is ESPN's public WNBA news feed. When None we skip news
+    (legacy/tests). Passing it in lets us match articles to players that
+    are on rosters or in the FA pool.
+    """
     teams_view = analyze.build_team_views(league_raw)
     weakness = analyze.compute_team_weakness(teams_view)
 
@@ -149,12 +155,67 @@ def build_state(
         week_end_period=week_end,
     )
 
+    # News: cheap to compute from the raw feed; falls back to empty when
+    # the caller didn't pass news_raw.
+    news_items: list[schema.NewsItem] = []
+    news_by_player: dict[int, list[schema.NewsItem]] = {}
+    if news_raw:
+        articles = news.normalize_articles(news_raw)
+        news_items = [_to_news_item(a) for a in articles[:30]]
+
+        # Build the player → news map (rostered players + waiver targets).
+        all_player_ids: set[int] = set()
+        pro_team_to_players: dict[int, set[int]] = {}
+        for t in teams:
+            for r in t.roster:
+                all_player_ids.add(r.player.player_id)
+                if r.player.team is not None:
+                    pass  # We need proTeamId int, not abbrev — see below.
+        # Rebuild proTeam → player_id map from raw league for proper int keys.
+        for raw_team in league_raw.get("teams") or []:
+            for e in (raw_team.get("roster") or {}).get("entries") or []:
+                p = (e.get("playerPoolEntry") or {}).get("player") or {}
+                pid = p.get("id")
+                tid = p.get("proTeamId")
+                if pid is not None and tid is not None:
+                    pro_team_to_players.setdefault(int(tid), set()).add(int(pid))
+        for fa_entry in free_agents_raw.get("players") or []:
+            p = fa_entry.get("player") or {}
+            pid = p.get("id")
+            tid = p.get("proTeamId")
+            if pid is not None:
+                all_player_ids.add(int(pid))
+            if pid is not None and tid is not None:
+                pro_team_to_players.setdefault(int(tid), set()).add(int(pid))
+
+        raw_player_to_articles = news.match_to_players(
+            articles, all_player_ids, pro_team_to_players,
+        )
+        # Cap per-player article count so a verbose team day doesn't flood
+        # the UI; convert to NewsItem.
+        for pid, arts in raw_player_to_articles.items():
+            news_by_player[pid] = [_to_news_item(a) for a in arts[:5]]
+
     return schema.LeagueState(
         meta=meta,
         teams=teams,
         transactions_recent=transactions_view,
         waiver_targets_overall=overall_targets,
         waiver_targets_by_team=by_team_targets,
+        news_recent=news_items,
+        news_by_player=news_by_player,
+    )
+
+
+def _to_news_item(d: dict[str, Any]) -> schema.NewsItem:
+    return schema.NewsItem(
+        id=int(d["id"]),
+        headline=d["headline"],
+        description=d.get("description") or "",
+        url=d.get("url"),
+        published_at=d.get("published_at"),
+        athlete_ids=list(d.get("athlete_ids") or []),
+        pro_team_ids=list(d.get("pro_team_ids") or []),
     )
 
 

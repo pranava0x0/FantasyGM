@@ -11,13 +11,14 @@ Reads .env automatically.
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 from pipeline import build_state as build_state_mod
-from pipeline import ingest
+from pipeline import ingest, news
 from pipeline.espn_client import (
     ESPNAPIError,
     ESPNAuthError,
@@ -101,10 +102,18 @@ def main(argv: list[str] | None = None) -> int:
             log.error("ingest failed: %s", e)
             return 3
 
+    # News is fetched outside the ESPN client (public endpoint, no auth).
+    log.info("refresh: fetching WNBA news feed")
+    news_raw = news.fetch_news(limit=50)
+    # Stash a copy with the daily snapshot so we can replay analysis
+    # without re-fetching.
+    (snap.out_dir / "news.json").write_text(json.dumps(news_raw, indent=2) + "\n")
+
     state = build_state_mod.build_state(
         league_raw=snap.league,
         free_agents_raw=snap.free_agents,
         captured_at=snap.captured_at,
+        news_raw=news_raw,
     )
 
     state_path = build_state_mod.write_state(state, docs_root)
