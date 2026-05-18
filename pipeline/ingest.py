@@ -30,6 +30,8 @@ _UUID_BRACE = re.compile(
 _MEMBER_ID_PLACEHOLDER = "REDACTED-MEMBER-ID"
 
 # Views we always pull. mTransactions2 gives the full transaction log.
+# proTeamSchedules_wl gives per-WNBA-team schedules keyed by scoringPeriodId —
+# needed for the games-this-week weighting in `analyze.rank_free_agents`.
 LEAGUE_VIEWS = [
     "mSettings",
     "mTeam",
@@ -39,6 +41,7 @@ LEAGUE_VIEWS = [
     "mSchedule",
     "mNav",
     "mStatus",
+    "proTeamSchedules_wl",
 ]
 
 
