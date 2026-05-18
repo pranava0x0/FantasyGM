@@ -30,8 +30,9 @@ _UUID_BRACE = re.compile(
 _MEMBER_ID_PLACEHOLDER = "REDACTED-MEMBER-ID"
 
 # Views we always pull. mTransactions2 gives the full transaction log.
-# proTeamSchedules_wl gives per-WNBA-team schedules keyed by scoringPeriodId —
-# needed for the games-this-week weighting in `analyze.rank_free_agents`.
+# proTeamSchedules_wl is NOT here — it's only served at the season endpoint
+# (see espn_client.fetch_pro_team_schedules); the league endpoint silently
+# drops it.
 LEAGUE_VIEWS = [
     "mSettings",
     "mTeam",
@@ -41,7 +42,6 @@ LEAGUE_VIEWS = [
     "mSchedule",
     "mNav",
     "mStatus",
-    "proTeamSchedules_wl",
 ]
 
 
@@ -52,6 +52,7 @@ class Snapshot:
     out_dir: Path
     league: dict[str, Any]
     free_agents: dict[str, Any]
+    pro_schedules: dict[str, Any]
 
 
 def snapshot(client: ESPNClient, root: Path, *, today: datetime | None = None) -> Snapshot:
@@ -76,18 +77,37 @@ def snapshot(client: ESPNClient, root: Path, *, today: datetime | None = None) -
     free_agents = client.fetch_free_agents(scoring_period_id=scoring_period, limit=200)
     _dump(out_dir / "free_agents.json", free_agents)
 
+    log.info("ingest: fetching pro-team schedules (season-level)")
+    pro_schedules = client.fetch_pro_team_schedules()
+    _dump(out_dir / "pro_schedules.json", pro_schedules)
+
+    # Splice the pro-team schedules into the league dict so downstream
+    # callers can read settings.proTeams from a single source. The shape
+    # matches what the league endpoint *would* return if ESPN served the
+    # view there — keeps `pipeline.schedule` indifferent to provenance.
+    league_settings = league.setdefault("settings", {})
+    pro_settings = (pro_schedules.get("settings") or {})
+    if pro_settings.get("proTeams"):
+        league_settings["proTeams"] = pro_settings["proTeams"]
+        # Re-dump league with the merged proTeams so the raw snapshot is
+        # self-contained and replayable from disk.
+        _dump(out_dir / "league.json", league)
+
     # Capture a tiny metadata file so consumers know provenance + when.
     meta = {
         "league_id": client.league_id,
         "season": client.season,
         "scoring_period_id": scoring_period,
         "captured_at": captured_at.isoformat(),
-        "views": LEAGUE_VIEWS,
+        "views": LEAGUE_VIEWS + ["proTeamSchedules_wl(season)"],
     }
     _dump(out_dir / "_meta.json", meta)
 
     log.info("ingest: wrote %s", out_dir)
-    return Snapshot(captured_at=captured_at, out_dir=out_dir, league=league, free_agents=free_agents)
+    return Snapshot(
+        captured_at=captured_at, out_dir=out_dir,
+        league=league, free_agents=free_agents, pro_schedules=pro_schedules,
+    )
 
 
 def _dump(path: Path, obj: Any) -> None:

@@ -108,6 +108,8 @@ def build_team_views(league_raw: dict[str, Any]) -> list[dict[str, Any]]:
         record = (t.get("record") or {}).get("overall") or {}
         roster = []
         bucket_proj: dict[Bucket, float] = {"G": 0.0, "F": 0.0, "C": 0.0}
+        active_counts: dict[Bucket, int] = {"G": 0, "F": 0, "C": 0}
+        total_counts: dict[Bucket, int] = {"G": 0, "F": 0, "C": 0}
         for e in (t.get("roster") or {}).get("entries") or []:
             flat = _flatten_player(e)
             proj = _player_projected_points(flat["raw_player"], scoring_period)
@@ -116,8 +118,10 @@ def build_team_views(league_raw: dict[str, Any]) -> list[dict[str, Any]]:
             flat["actual_points"] = float(actual) if actual is not None else None
             flat["is_active"] = flat["lineup_slot_id"] in ACTIVE_SLOT_IDS
             roster.append(flat)
+            total_counts[flat["bucket"]] += 1
             if flat["is_active"]:
                 bucket_proj[flat["bucket"]] += proj
+                active_counts[flat["bucket"]] += 1
         teams.append({
             "team_id": t.get("id"),
             "abbrev": t.get("abbrev"),
@@ -134,6 +138,8 @@ def build_team_views(league_raw: dict[str, Any]) -> list[dict[str, Any]]:
             },
             "roster": roster,
             "bucket_proj": bucket_proj,
+            "active_counts": active_counts,
+            "total_counts": total_counts,
         })
     return teams
 
@@ -292,40 +298,107 @@ def _player_projected_per_game(player: dict[str, Any]) -> float:
     return 0.0
 
 
+# WNBA roster: 2 G slots + 3 F slots + 1 F/C slot + 3 UTIL (any) = 9 active.
+# "Practical maximum" per bucket = bucket-specific slots + UTIL flex:
+#   G:  2 + 3 = 5
+#   FC: 3 + 1 + 3 = 7
+# Beyond these counts, additional pickups warm the bench and contribute
+# nothing to weekly production.
+SATURATION_THRESHOLD_G = 5
+SATURATION_THRESHOLD_FC = 7
+
+# Top-K positions in the per-team list we want to *guarantee* include at
+# least one player at the team's weakest bucket. Drives visible variance
+# across teams even when the FA pool is dominated by one bucket.
+NEEDS_PICK_TOP_K = 3
+
+
 def waiver_targets_for_team(
     team_weakness: dict[str, Any],
     ranked_fas: list[dict[str, Any]],
     *,
+    active_counts: dict[str, int] | None = None,
     limit: int = 10,
-    weakness_bonus_per_neg_point: float = 0.05,
 ) -> list[dict[str, Any]]:
-    """Re-rank the FA pool for a single team using bucket-gap weighting.
+    """Re-rank the FA pool for a single team. Three layered adjustments
+    on top of `base_score` (= projected points this week):
 
-    The boost is computed against the **combined frontcourt gap** (F + C),
-    not against F and C separately — because WNBA fantasy uses shared F/C
-    slots. A team that's structurally weak in their frontcourt benefits
-    equally from picking up a Forward or a Center; ranking those buckets
-    separately would discourage F pickups when their gap is fine but C is
-    bad (or vice versa). See `compute_team_weakness` for the rationale.
+    1. **Gap bonus.** When the team is below league average for a bucket,
+       boost FAs in that bucket. Weight scales with severity:
+         - Severe gap (≤ -10):  0.15 per negative point
+         - Moderate (-10..-5):  0.08
+         - Mild      (-5..0):   0.04
+       Caps at 50% of base so a 2-point bench center doesn't leap top-10.
 
-    Cap the bonus at 50% of base score so we don't catapult a useless
-    bench center over a top-10 guard.
+    2. **Saturation penalty.** When a team already carries more than the
+       practical-max active players in a bucket (G ≥ 5 OR FC ≥ 7),
+       additional pickups in that bucket lose 30% of their base score.
+
+    3. **Needs guarantee.** After scoring, the top `NEEDS_PICK_TOP_K`
+       picks must include at least one player from the team's weakest
+       bucket (G if `weakest_bucket == 'G'`, F or C if 'FC'). If none
+       naturally surfaced (because the FA pool is dominated by the
+       opposite bucket), promote the highest-scoring weak-bucket player
+       into the K-th slot. This guarantees the per-team picks look
+       visibly different across teams.
+
+    Per-bucket gap uses the combined frontcourt gap (F + C share slots);
+    see `compute_team_weakness` for the rationale.
     """
     gap_g = float(team_weakness["guard_gap_vs_league"])
     gap_fc = float(team_weakness["frontcourt_gap_vs_league"])
     bucket_to_gap = {"G": gap_g, "F": gap_fc, "C": gap_fc}
+    weakest = team_weakness.get("weakest_bucket")  # "G" or "FC"
+    weakest_buckets = {"G"} if weakest == "G" else {"F", "C"}
+
+    counts = active_counts or {"G": 0, "F": 0, "C": 0}
+    g_active = int(counts.get("G", 0))
+    fc_active = int(counts.get("F", 0)) + int(counts.get("C", 0))
+
+    def _saturated(bucket: str) -> bool:
+        if bucket == "G":
+            return g_active >= SATURATION_THRESHOLD_G
+        return fc_active >= SATURATION_THRESHOLD_FC  # F and C share frontcourt slots
 
     boosted = []
     for fa in ranked_fas:
-        gap = bucket_to_gap.get(fa["bucket"], 0.0)
+        bucket = fa["bucket"]
+        gap = bucket_to_gap.get(bucket, 0.0)
+        base = float(fa["base_score"])
+
         bonus = 0.0
         if gap < 0:
-            raw_bonus = (-gap) * weakness_bonus_per_neg_point
-            cap = fa["base_score"] * 0.5
-            bonus = min(raw_bonus, cap)
-        score = fa["base_score"] + bonus
-        boosted.append({**fa, "team_bonus": round(bonus, 2), "adjusted_score": round(score, 2)})
+            weight = (
+                0.15 if gap <= -10.0 else
+                0.08 if gap <= -5.0 else
+                0.04
+            )
+            raw = (-gap) * weight
+            bonus = min(raw, base * 0.5)
+
+        penalty = -base * 0.30 if _saturated(bucket) else 0.0
+
+        boosted.append({
+            **fa,
+            "team_bonus": round(bonus, 2),
+            "saturation_penalty": round(penalty, 2),
+            "adjusted_score": round(base + bonus + penalty, 2),
+        })
     boosted.sort(key=lambda r: r["adjusted_score"], reverse=True)
+
+    # Needs guarantee — only when we have an explicit weakest bucket and
+    # the natural top-K already excludes it.
+    if weakest and not any(r["bucket"] in weakest_buckets for r in boosted[:NEEDS_PICK_TOP_K]):
+        # Highest-scoring weak-bucket pick that didn't make the top K.
+        for i, r in enumerate(boosted[NEEDS_PICK_TOP_K:], start=NEEDS_PICK_TOP_K):
+            if r["bucket"] in weakest_buckets:
+                promoted = {**r, "promoted_for_need": True}
+                # Insert at position K-1 (the bottom of the top K), demoting
+                # the displaced entry by one slot.
+                boosted.pop(i)
+                boosted.insert(NEEDS_PICK_TOP_K - 1, promoted)
+                break
+
     return boosted[:limit]
 
 

@@ -95,7 +95,11 @@ def build_state(
         )
         teams.append(team_state)
 
-        team_targets = analyze.waiver_targets_for_team(w, ranked_fas_dicts, limit=10)
+        team_targets = analyze.waiver_targets_for_team(
+            w, ranked_fas_dicts,
+            active_counts={k: int(v) for k, v in t["active_counts"].items()},
+            limit=10,
+        )
         by_team_targets.append(
             schema.WaiverTargetsByTeam(
                 team_id=int(t["team_id"]),

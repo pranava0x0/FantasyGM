@@ -25,6 +25,9 @@ BASE_URL_TMPL = (
     "https://lm-api-reads.fantasy.espn.com/apis/v3/games/wfba"
     "/seasons/{season}/segments/0/leagues/{league_id}"
 )
+SEASON_URL_TMPL = (
+    "https://lm-api-reads.fantasy.espn.com/apis/v3/games/wfba/seasons/{season}"
+)
 
 DEFAULT_TIMEOUT = httpx.Timeout(20.0, connect=10.0)
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
@@ -78,6 +81,7 @@ class ESPNClient:
         self.season = season
         self._creds = creds
         self._base_url = BASE_URL_TMPL.format(season=season, league_id=league_id)
+        self._season_url = SEASON_URL_TMPL.format(season=season)
         self._client = client or httpx.Client(
             timeout=DEFAULT_TIMEOUT,
             headers={
@@ -93,6 +97,18 @@ class ESPNClient:
         """Fetch the league with one or more `view` filters."""
         params = [("view", v) for v in views]
         return self._request("GET", self._base_url, params=params)
+
+    def fetch_pro_team_schedules(self) -> dict[str, Any]:
+        """Fetch the season-level pro-team schedule view.
+
+        This view (`proTeamSchedules_wl`) is *only* served at the season
+        endpoint — the league endpoint silently returns `settings: {name}`
+        and zero proTeams. Discovered 2026-05-17 while wiring game-count
+        weighting; see CLAUDE.md scar tissue.
+        """
+        return self._request(
+            "GET", self._season_url, params=[("view", "proTeamSchedules_wl")]
+        )
 
     def fetch_free_agents(
         self,
