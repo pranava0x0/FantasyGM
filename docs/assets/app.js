@@ -32,7 +32,36 @@
       const cur = document.documentElement.getAttribute("data-theme") || "light";
       applyTheme(cur === "light" ? "dark" : "light");
     }
+    const tabBtn = e.target.closest(".tab");
+    if (tabBtn) {
+      const panelId = tabBtn.getAttribute("aria-controls");
+      if (panelId) selectTab(panelId);
+    }
   });
+
+  // ---------- Tabs ----------
+  function selectTab(panelId) {
+    $$(".tab").forEach((b) => {
+      b.setAttribute("aria-selected", b.getAttribute("aria-controls") === panelId ? "true" : "false");
+    });
+    $$(".tab-panel").forEach((p) => {
+      if (p.id === panelId) p.removeAttribute("hidden");
+      else p.setAttribute("hidden", "");
+    });
+    // Persist in the URL so a refresh keeps your tab and you can deep-link.
+    const slug = panelId.replace("section-", "");
+    if (location.hash.replace(/^#/, "") !== slug) {
+      history.replaceState(null, "", `#${slug}`);
+    }
+    // Reset scroll so a tab change feels like a navigation, not a partial swap.
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+  function initTabsFromHash() {
+    const slug = (location.hash || "").replace(/^#/, "").trim();
+    const valid = $$(".tab-panel").map((p) => p.id.replace("section-", ""));
+    if (slug && valid.includes(slug)) selectTab(`section-${slug}`);
+  }
+  window.addEventListener("hashchange", initTabsFromHash);
 
   // ---------- Toast ----------
   let toastTimer = null;
@@ -236,7 +265,93 @@
     });
   }
 
-  function teamCard(team, perTeamTargets) {
+  function rosterTable(team) {
+    const wrap = el("div", { className: "roster-table" });
+    // Group by slot label so active slots come first (G, F, F/C, UTIL),
+    // then bench. Preserves the slot order in pipeline/positions.py.
+    const groups = new Map();
+    (team.roster || []).forEach((r) => {
+      const key = r.lineup_slot_label || "?";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(r);
+    });
+    const ORDER = ["G", "F", "F/C", "UTIL", "BE", "G/F", "?"];
+    const seenOrder = ORDER.filter((k) => groups.has(k))
+                            .concat([...groups.keys()].filter((k) => !ORDER.includes(k)));
+    seenOrder.forEach((slot) => {
+      const rows = groups.get(slot) || [];
+      // Sort active slots by projected points desc; bench too.
+      rows.sort((a, b) => (b.projected_points_this_week || 0) - (a.projected_points_this_week || 0));
+      rows.forEach((r) => wrap.appendChild(rosterRow(slot, r)));
+    });
+    if (!seenOrder.length) wrap.appendChild(el("p", { className: "muted-cell", text: "Roster empty." }));
+    return wrap;
+  }
+
+  function rosterRow(slotLabel, r) {
+    const p = r.player;
+    const slotChip = el("span", { className: `pill slot-chip ${r.is_active ? "slot-active" : "slot-bench"}`, text: slotLabel });
+    const nameSpan = el("span", { className: "roster-name", text: p.name });
+    const sub = el("span", { className: "roster-sub" });
+    sub.appendChild(bucketPill(p.bucket));
+    if (p.team) sub.appendChild(el("span", { className: "pill team-mono", text: p.team }));
+    const gp = gamesPill(r.games_this_week);
+    if (gp) sub.appendChild(gp);
+    if (p.injury_status && p.injury_status !== "ACTIVE") {
+      sub.appendChild(el("span", { className: "own-neg", text: p.injury_status }));
+    }
+    const proj = r.projected_points_this_week != null
+      ? r.projected_points_this_week
+      : r.projected_points;
+    return el("div", {
+      className: `roster-row ${r.is_active ? "" : "is-bench"}`.trim(),
+      children: [
+        slotChip,
+        el("div", { className: "roster-body", children: [nameSpan, sub] }),
+        el("span", { className: "roster-pts", text: fmtPoints(proj) }),
+      ],
+    });
+  }
+
+  function teamTransactionsBlock(team, teamLookupByAbbr, txnsById) {
+    const ids = team.recent_transaction_ids || [];
+    if (!ids.length) return el("p", { className: "muted-cell", text: "No transactions yet this period." });
+    const teamByIdMap = teamLookupByAbbr || new Map();
+    const list = el("ul", { className: "txn-list compact" });
+    ids.slice(0, 8).forEach((id) => {
+      const tx = txnsById.get(String(id));
+      if (!tx) return;
+      list.appendChild(renderTxnCard(tx, teamByIdMap));
+    });
+    if (!list.children.length) {
+      return el("p", { className: "muted-cell", text: "No matching transactions in the recent feed." });
+    }
+    return list;
+  }
+
+  // Renders a single txn card. Shared between the per-team pop-out and the
+  // global Transactions tab.
+  function renderTxnCard(tx, teamById) {
+    const head = el("div", {
+      className: "txn-head",
+      children: [
+        el("span", {
+          className: `txn-type ${txTypeClass(tx.type)}`,
+          text: (tx.type || "").replace(/_/g, " "),
+        }),
+        tx.team_id != null
+          ? el("span", { className: "pill team-mono", text: teamById.get(tx.team_id)?.abbrev || `T${tx.team_id}` })
+          : null,
+        el("span", { className: "txn-time", text: fmtTime(tx.occurred_at) }),
+        tx.bid_amount > 0 ? el("span", { text: `$${tx.bid_amount}` }) : null,
+      ].filter(Boolean),
+    });
+    const items = el("div", { className: "txn-items" });
+    (tx.items || []).forEach((it) => items.appendChild(txItemLine(it, teamById)));
+    return el("li", { className: "txn-card", children: [head, items] });
+  }
+
+  function teamCard(team, perTeamTargets, allTeamsForLookup, txnsByIdLookup) {
     const w = team.weakness;
     const head = el("div", {
       className: "team-head",
@@ -262,8 +377,20 @@
     });
 
     const detail = el("div", { className: "team-detail", attrs: { hidden: "" } });
+
+    // Auto-generated summary bullets (marked with accent left-border per DESIGN.md).
+    if (Array.isArray(team.summary) && team.summary.length > 0) {
+      const sumBlock = el("div", { className: "team-summary", attrs: { "aria-label": "Auto-generated team summary" } });
+      sumBlock.appendChild(el("h4", { text: "Summary · auto-generated" }));
+      const ul = el("ul", { className: "team-summary-list" });
+      team.summary.forEach((b) => ul.appendChild(el("li", { text: b })));
+      sumBlock.appendChild(ul);
+      detail.appendChild(sumBlock);
+    }
+
+    // Top picks for this team
     const weakLabel = w.weakest_bucket === "FC" ? "F/C (frontcourt)" : w.weakest_bucket;
-    detail.appendChild(el("h4", { text: `Top picks for ${team.abbrev} · weakest at ${weakLabel}` }));
+    detail.appendChild(el("h4", { className: "team-detail-head", text: `Top picks · weakest at ${weakLabel}` }));
     const list = el("div", { className: "team-targets" });
     (perTeamTargets || []).slice(0, 6).forEach((tgt, i) => {
       const p = tgt.player;
@@ -297,6 +424,15 @@
     }
     detail.appendChild(list);
 
+    // Full roster grouped by lineup-slot type so the user can see who's
+    // active vs on the bench, with weekly projections.
+    detail.appendChild(el("h4", { className: "team-detail-head", text: "Full roster" }));
+    detail.appendChild(rosterTable(team));
+
+    // Recent transactions for this team (joins on recent_transaction_ids).
+    detail.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
+    detail.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
+
     const btn = el("button", {
       className: "team-card",
       attrs: { type: "button", "aria-expanded": "false", "data-team-id": String(team.team_id) },
@@ -314,7 +450,7 @@
     return btn;
   }
 
-  function renderTeams(teams, byTeam) {
+  function renderTeams(teams, byTeam, transactions) {
     const grid = $("#team-grid");
     grid.replaceChildren();
     if (!teams || teams.length === 0) {
@@ -322,7 +458,9 @@
       return;
     }
     const targetIndex = new Map((byTeam || []).map((row) => [row.team_id, row.targets]));
-    teams.forEach((t) => grid.appendChild(teamCard(t, targetIndex.get(t.team_id))));
+    const teamByIdMap = new Map((teams || []).map((t) => [t.team_id, t]));
+    const txnsByIdMap = new Map((transactions || []).map((tx) => [String(tx.transaction_id), tx]));
+    teams.forEach((t) => grid.appendChild(teamCard(t, targetIndex.get(t.team_id), teamByIdMap, txnsByIdMap)));
   }
 
   // ---------- Render: news ----------
@@ -423,28 +561,7 @@
       return;
     }
     const teamById = new Map((teams || []).map((t) => [t.team_id, t]));
-    txns.slice(0, 30).forEach((tx) => {
-      const head = el("div", {
-        className: "txn-head",
-        children: [
-          el("span", {
-            className: `txn-type ${txTypeClass(tx.type)}`,
-            text: (tx.type || "").replace(/_/g, " "),
-          }),
-          tx.team_id != null
-            ? el("span", { className: "pill team-mono", text: teamById.get(tx.team_id)?.abbrev || `T${tx.team_id}` })
-            : null,
-          el("span", { className: "txn-time", text: fmtTime(tx.occurred_at) }),
-          tx.bid_amount > 0 ? el("span", { text: `$${tx.bid_amount}` }) : null,
-        ].filter(Boolean),
-      });
-      const items = el("div", { className: "txn-items" });
-      (tx.items || []).forEach((it) => items.appendChild(txItemLine(it, teamById)));
-      list.appendChild(el("li", {
-        className: "txn-card",
-        children: [head, items],
-      }));
-    });
+    txns.slice(0, 30).forEach((tx) => list.appendChild(renderTxnCard(tx, teamById)));
   }
 
   // ---------- Render error states ----------
@@ -460,6 +577,7 @@
   // ---------- Bootstrap ----------
   async function main() {
     initTheme();
+    initTabsFromHash();
     try {
       const resp = await fetch(STATE_URL, { cache: "no-store" });
       if (!resp.ok) {
@@ -472,7 +590,7 @@
       const state = await resp.json();
       renderMeta(state.meta || {});
       renderWaivers(state.waiver_targets_overall);
-      renderTeams(state.teams, state.waiver_targets_by_team);
+      renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);
       renderNews(state.news_recent, state.teams);
       renderTxns(state.transactions_recent, state.teams);
     } catch (err) {

@@ -152,10 +152,43 @@ main {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 24px 16px 64px;
+  padding: 16px 16px 64px;
   display: grid;
-  gap: 28px;
+  gap: 16px;
 }
+
+/* Tab strip — primary navigation between Waivers / Team Needs / News /
+   Transactions. Mobile-first: horizontal scroll if needed at narrow widths. */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  background: transparent;
+  border: 0;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  min-height: 44px;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab-panel { /* defaults; hidden attribute does the hiding */ }
+.tab-panel[hidden] { display: none; }
 
 .surface {
   background: var(--surface);
@@ -278,6 +311,30 @@ main {
   background: var(--gap-weak);
 }
 
+/* Footnote at the bottom of the Team Needs tab — explains the math. */
+.surface-footnote {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.surface-footnote h3 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+}
+.surface-footnote p { margin: 0 0 8px; }
+.surface-footnote p:last-child { margin-bottom: 0; }
+.surface-footnote em { font-style: italic; color: var(--text); }
+.surface-footnote strong { color: var(--text); }
+.surface-footnote .muted { color: var(--text-muted); font-size: 12px; }
+
 /* Games-per-week chip — colored by tier so a glance tells you a player's
    opportunity floor. Heavy 4+ games is green; 1–2 is red; 3 is neutral. */
 .games-pill {
@@ -392,13 +449,96 @@ main {
   padding-top: 12px;
   border-top: 1px dashed var(--border);
 }
-.team-detail h4 {
-  margin: 0 0 8px;
+.team-detail h4,
+.team-detail-head {
+  margin: 14px 0 8px;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
 }
+.team-detail h4:first-child,
+.team-summary h4 { margin-top: 0; }
+
+/* Auto-generated summary block — accent left-border per DESIGN.md §11. */
+.team-summary {
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 10px 12px 10px 14px;
+  margin-bottom: 8px;
+}
+.team-summary h4 {
+  margin: 0 0 6px;
+  font-size: 10px;
+  color: var(--accent);
+}
+.team-summary-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.team-summary-list li { margin: 2px 0; }
+
+/* Full-roster table inside the team pop-out. */
+.roster-table {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.roster-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 13px;
+}
+.roster-row.is-bench { color: var(--text-muted); }
+.roster-row.is-bench .roster-name { font-weight: 400; }
+.roster-row .roster-body {
+  display: grid; gap: 2px; min-width: 0;
+}
+.roster-row .roster-name {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  font-weight: 500;
+}
+.roster-row .roster-sub {
+  display: inline-flex; gap: 6px; flex-wrap: wrap;
+  font-size: 11px; color: var(--text-muted);
+}
+.roster-row .roster-pts {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.slot-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+  min-width: 36px;
+  justify-content: center;
+}
+.slot-chip.slot-active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.slot-chip.slot-bench {
+  color: var(--text-muted);
+  background: var(--surface-2);
+}
+
+/* Compact transaction list (in-pop-out variant). */
+.txn-list.compact { gap: 6px; }
+.txn-list.compact .txn-card { padding: 8px 10px; }
+.txn-list.compact .txn-items { font-size: 12.5px; }
 .team-targets { display: grid; gap: 4px; }
 .team-target-row {
   display: grid;

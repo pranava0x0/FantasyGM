@@ -32,30 +32,50 @@
   </header>
 
   <main id="main" role="main">
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" id="tab-waivers"      aria-controls="section-waivers"      aria-selected="true">Waivers</button>
+      <button class="tab" role="tab" id="tab-teams"        aria-controls="section-teams"        aria-selected="false">Team Needs</button>
+      <button class="tab" role="tab" id="tab-news"         aria-controls="section-news"         aria-selected="false">News</button>
+      <button class="tab" role="tab" id="tab-transactions" aria-controls="section-transactions" aria-selected="false">Transactions</button>
+    </nav>
+
     <!-- ========== Waiver Targets ========== -->
-    <section class="surface" id="section-waivers" aria-labelledby="h-waivers">
+    <section class="surface tab-panel" id="section-waivers" role="tabpanel" aria-labelledby="tab-waivers">
       <header class="surface-head">
         <h2 id="h-waivers">Top Waiver Targets</h2>
-        <p class="surface-sub">Ranked by next-period projection. Tap a team chip below to see picks tailored to that team's weakest bucket.</p>
+        <p class="surface-sub">Ranked by projected points this week (per-game projection × games this week). Open the Team Needs tab to see picks tailored to each team.</p>
       </header>
       <ol class="waiver-list" id="waiver-list">
         <li class="loading">Loading targets…</li>
       </ol>
     </section>
 
-    <!-- ========== Team Weakness ========== -->
-    <section class="surface" id="section-teams" aria-labelledby="h-teams">
+    <!-- ========== Team Needs ========== -->
+    <section class="surface tab-panel" id="section-teams" role="tabpanel" aria-labelledby="tab-teams" hidden>
       <header class="surface-head">
-        <h2 id="h-teams">Team Weakness</h2>
-        <p class="surface-sub">Projected production by bucket vs. league average. Tap a card to see that team's tailored waiver list.</p>
+        <h2 id="h-teams">Team Needs</h2>
+        <p class="surface-sub">Projected weekly production by bucket vs. league average. Tap a card to see that team's tailored waiver list, full roster, recent transactions, and a season summary.</p>
       </header>
       <div class="team-grid" id="team-grid">
         <p class="loading">Loading teams…</p>
       </div>
+      <footer class="surface-footnote" id="team-needs-footnote" aria-label="How team needs are calculated">
+        <h3>How "weakest at" is calculated</h3>
+        <p>
+          For each active roster slot (the 9 non-bench / non-IR slots in WNBA fantasy: 2 G + 3 F + 1 F/C + 3 UTIL), we estimate the player's points this week as
+          <em>per-game projection × games this week</em>. Players are bucketed by their <em>default ESPN position</em> (1 = G, 2 = F, 3 = C). Bucket totals per team are compared to the league average for that bucket. <strong>Weakest</strong> is whichever bucket — Guards (G) or combined Frontcourt (F + C) — has the largest negative gap.
+        </p>
+        <p>
+          F and C are bucketed together because WNBA fantasy has shared F/C lineup slots — a team without a pure Center isn't structurally weak there if they fill slot 5 with a Forward.
+        </p>
+        <p class="muted">
+          Note: the comparison is on total weekly production, not per-player average. A team with three high-scoring Guards may still show as "weakest at G" if other teams have four or five Guards contributing comparable totals. The Waiver Targets tab boosts picks at the team's weakest bucket and penalizes picks at saturated positions (≥ 5 active Gs or ≥ 7 active F/Cs).
+        </p>
+      </footer>
     </section>
 
     <!-- ========== News ========== -->
-    <section class="surface" id="section-news" aria-labelledby="h-news">
+    <section class="surface tab-panel" id="section-news" role="tabpanel" aria-labelledby="tab-news" hidden>
       <header class="surface-head">
         <h2 id="h-news">Recent WNBA News</h2>
         <p class="surface-sub">From ESPN's public feed. Headlines tagged with a player on your watch / waiver list are highlighted.</p>
@@ -66,7 +86,7 @@
     </section>
 
     <!-- ========== Transactions ========== -->
-    <section class="surface" id="section-transactions" aria-labelledby="h-transactions">
+    <section class="surface tab-panel" id="section-transactions" role="tabpanel" aria-labelledby="tab-transactions" hidden>
       <header class="surface-head">
         <h2 id="h-transactions">Recent Transactions</h2>
         <p class="surface-sub">Newest first. Team abbreviations only — owner names are never stored.</p>
