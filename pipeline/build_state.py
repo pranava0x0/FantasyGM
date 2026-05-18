@@ -78,9 +78,11 @@ def build_state(
                 guard_proj=w["guard_proj"],
                 forward_proj=w["forward_proj"],
                 center_proj=w["center_proj"],
+                frontcourt_proj=w["frontcourt_proj"],
                 guard_gap_vs_league=w["guard_gap_vs_league"],
                 forward_gap_vs_league=w["forward_gap_vs_league"],
                 center_gap_vs_league=w["center_gap_vs_league"],
+                frontcourt_gap_vs_league=w["frontcourt_gap_vs_league"],
                 weakest_bucket=w["weakest_bucket"],
             ),
         )
@@ -224,25 +226,37 @@ def _to_waiver_target(d: dict[str, Any]) -> schema.WaiverTarget:
     )
 
 
-# WNBA pro team ID -> abbreviation. ESPN's proTeamId values for WNBA.
-# Seeded from observed data + ESPN's WNBA team list. Anything unknown
-# falls through as None — never a wrong abbr.
+# WNBA pro team ID -> abbreviation. CANONICAL map, pulled from ESPN's
+# public site API on 2026-05-17:
+#
+#   curl https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams
+#
+# To refresh: `python scripts/refresh_pro_teams.py`.
+#
+# Earlier versions of this file had a guess-based map adapted from NBA
+# conventions; almost every ID was wrong (3 was DAL not ATL, 6 was LA not
+# CONN, 19 was CHI not WSH, etc.). The lesson: do not infer WNBA team IDs
+# from NBA habits; ESPN assigns them independently and the league's
+# expansion teams (TOR / GS / POR) have 6-digit IDs. See CLAUDE.md scar
+# tissue.
+#
+# ID 0 means "no team" (free-agent / unsigned) — intentionally absent.
 WNBA_TEAM_ABBR: dict[int, str] = {
-    3: "ATL",
-    5: "CHI",
-    6: "CONN",
-    8: "MIN",
-    9: "NY",
-    11: "PHX",
-    14: "SEA",
-    17: "LV",
-    19: "WSH",
-    20: "IND",
-    129: "DAL",
-    130: "LA",
-    131: "GS",     # Golden State Valkyries
-    132: "TOR",    # Toronto Tempo (placeholder until confirmed)
-    131935: "FA",  # Free-agent shell team in ESPN — players between teams
+    3: "DAL",       # Dallas Wings
+    5: "IND",       # Indiana Fever
+    6: "LA",        # Los Angeles Sparks
+    8: "MIN",       # Minnesota Lynx
+    9: "NY",        # New York Liberty
+    11: "PHX",      # Phoenix Mercury
+    14: "SEA",      # Seattle Storm
+    16: "WSH",      # Washington Mystics
+    17: "LV",       # Las Vegas Aces
+    18: "CON",      # Connecticut Sun
+    19: "CHI",      # Chicago Sky
+    20: "ATL",      # Atlanta Dream
+    129689: "GS",   # Golden State Valkyries (2026 expansion)
+    131935: "TOR",  # Toronto Tempo (2026 expansion)
+    132052: "POR",  # Portland Fire (2026 expansion)
 }
 
 

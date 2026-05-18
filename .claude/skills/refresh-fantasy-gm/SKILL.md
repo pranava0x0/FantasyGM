@@ -146,6 +146,7 @@ These are the gotchas that cost the most time to discover the first time. If the
 | A team you saw yesterday is "missing" from `state.teams` | The owner renamed the team. Names are mutable; only `team.id` is stable. | Look up by `team.id`. Confirmed 2026-05-17: team_id 6 went Pheenatics → Hot Stew Comin Through mid-session. |
 | Code that loops `for i in range(team_count)` breaks | Team IDs are not dense. The 50-40-90 Club has IDs `[1, 2, 5, 6, 7, 8, 9, 10]` (gaps from prior-season drops). | Always iterate `league.teams[*].id`. Never assume 1..N. |
 | Debugging mentions "team #4" and the wrong team is implicated | Standings display order ≠ team_id order. ESPN sorts standings by W-L %. | Click into the team on ESPN.com and read the `?teamId=N` URL parameter. |
+| Waiver-target / roster entries show wrong WNBA team abbrev (e.g. Brittney Sykes labeled "FA") | The `WNBA_TEAM_ABBR` map in `pipeline/build_state.py` is stale — likely missing an expansion team's 6-digit ID, or guessing NBA conventions. | `python scripts/refresh_pro_teams.py` regenerates the dict from ESPN's public site API. Paste output over `WNBA_TEAM_ABBR`. Re-run `pipeline.refresh`. |
 
 If you discover a new pitfall, **append a row to this table and add the same row to `CLAUDE.md` § "ESPN scar tissue."** The two should stay in sync — CLAUDE.md is read first by every agent; the skill table is read when this specific flow runs.
 
