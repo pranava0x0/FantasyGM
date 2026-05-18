@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pipeline import analyze, news, schedule, schema
+from pipeline import analyze, news, schedule, schema, summary
 
 log = logging.getLogger(__name__)
 
@@ -34,13 +34,15 @@ def build_state(
     (legacy/tests). Passing it in lets us match articles to players that
     are on rosters or in the FA pool.
     """
-    teams_view = analyze.build_team_views(league_raw)
-    weakness = analyze.compute_team_weakness(teams_view)
-
-    # Compute the upcoming week's game-count signal so waiver ranking
-    # rewards 4-game-week players over 1-game-week duds.
+    # Compute the upcoming week's game-count signal first; team views and
+    # waiver ranking both consume it. Without it, team production is
+    # measured in 1-day projection sums which conflates roster
+    # composition with player quality.
     week_start, week_end = schedule.upcoming_week_periods(league_raw)
     games_by_pro_team = schedule.games_per_team(league_raw, week_start, week_end)
+
+    teams_view = analyze.build_team_views(league_raw, games_by_pro_team=games_by_pro_team)
+    weakness = analyze.compute_team_weakness(teams_view)
 
     ranked_fas_dicts = analyze.rank_free_agents(
         free_agents_raw,
@@ -51,6 +53,27 @@ def build_state(
 
     # Player id -> name, for transaction items.
     player_name_index = _player_name_index(league_raw, free_agents_raw)
+
+    # Normalize transactions once up front — we need them for both the
+    # global feed and per-team grouping.
+    transactions_raw = analyze.normalize_transactions(league_raw)
+
+    # Generate the per-team narrative bullets up front, using the
+    # already-built teams_view + weakness + transactions.
+    summaries = summary.build_team_summaries(
+        teams_view,
+        weakness,
+        transactions_raw,
+        matchup_period_id=int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0),
+    )
+
+    # Per-team transaction id grouping (newest first).
+    team_txn_ids: dict[int, list[str]] = {}
+    for tx in transactions_raw:
+        tid = tx.get("team_id")
+        if tid is None:
+            continue
+        team_txn_ids.setdefault(int(tid), []).append(str(tx.get("transaction_id") or ""))
 
     teams: list[schema.TeamState] = []
     by_team_targets: list[schema.WaiverTargetsByTeam] = []
@@ -70,7 +93,10 @@ def build_state(
                 lineup_slot_id=int(p["lineup_slot_id"]),
                 lineup_slot_label=p["lineup_slot_label"],
                 is_active=bool(p["is_active"]),
-                projected_points=float(p["projected_points"] or 0.0),
+                projected_points=float(p.get("projected_points") or 0.0),
+                projected_per_game=float(p.get("projected_per_game") or 0.0) or None,
+                projected_points_this_week=float(p.get("projected_points_this_week") or 0.0) or None,
+                games_this_week=int(p.get("games_this_week") or 0),
                 actual_points=p["actual_points"],
             )
             for p in t["roster"]
@@ -98,6 +124,8 @@ def build_state(
                 frontcourt_gap_vs_league=w["frontcourt_gap_vs_league"],
                 weakest_bucket=w["weakest_bucket"],
             ),
+            summary=summaries.get(int(t["team_id"]), []),
+            recent_transaction_ids=team_txn_ids.get(int(t["team_id"]), []),
         )
         teams.append(team_state)
 
@@ -115,7 +143,6 @@ def build_state(
 
     overall_targets = [_to_waiver_target(d) for d in ranked_fas_dicts[:15]]
 
-    transactions_raw = analyze.normalize_transactions(league_raw)
     transactions_view: list[schema.Transaction] = []
     for tx in transactions_raw[:50]:
         items = [

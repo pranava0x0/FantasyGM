@@ -38,7 +38,10 @@ class RosterEntry(_Strict):
     lineup_slot_id: int
     lineup_slot_label: str
     is_active: bool = Field(..., description="True if slot counts toward weekly production")
-    projected_points: float | None = None
+    projected_points: float | None = Field(None, description="Single-period (1-day) projection")
+    projected_per_game: float | None = None
+    projected_points_this_week: float | None = None
+    games_this_week: int = 0
     actual_points: float | None = None
 
 
@@ -81,6 +84,11 @@ class TeamState(_Strict):
     faab_remaining: int | None = None
     roster: list[RosterEntry]
     weakness: TeamWeakness
+    summary: list[str] = Field(default_factory=list, description="Auto-generated bullet summary")
+    recent_transaction_ids: list[str] = Field(
+        default_factory=list,
+        description="IDs of transactions attributable to this team (most recent first); UI joins to transactions_recent.",
+    )
 
 
 class WaiverTarget(_Strict):

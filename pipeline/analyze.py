@@ -100,9 +100,21 @@ def _flatten_player(entry: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_team_views(league_raw: dict[str, Any]) -> list[dict[str, Any]]:
-    """Normalize each team into a roster + production summary."""
+def build_team_views(
+    league_raw: dict[str, Any],
+    *,
+    games_by_pro_team: dict[int, int] | None = None,
+) -> list[dict[str, Any]]:
+    """Normalize each team into a roster + weekly production summary.
+
+    `bucket_proj` is the team's projected production for the upcoming
+    week, summed by bucket. Per-player contribution is
+    `per_game_projection × games_this_week`. When `games_by_pro_team`
+    is None (tests / legacy) we fall back to the single-period
+    projection so the math stays defined.
+    """
     scoring_period = int(league_raw.get("scoringPeriodId") or 0)
+    games_map = games_by_pro_team or {}
     teams = []
     for t in league_raw.get("teams") or []:
         record = (t.get("record") or {}).get("overall") or {}
@@ -112,15 +124,28 @@ def build_team_views(league_raw: dict[str, Any]) -> list[dict[str, Any]]:
         total_counts: dict[Bucket, int] = {"G": 0, "F": 0, "C": 0}
         for e in (t.get("roster") or {}).get("entries") or []:
             flat = _flatten_player(e)
-            proj = _player_projected_points(flat["raw_player"], scoring_period)
+            player = flat["raw_player"]
+            proj_period = _player_projected_points(player, scoring_period)
+            proj_per_game = _player_projected_per_game(player)
+            season_avg = _player_season_avg_actual(player)
+            per_game = proj_per_game or season_avg or proj_period or 0.0
+            games_this_week = int(games_map.get(int(player.get("proTeamId") or 0), 0)) if games_map else 0
+            if games_map:
+                week_proj = round(float(per_game) * games_this_week, 2)
+            else:
+                week_proj = round(proj_period, 2)
             actual = (e.get("playerPoolEntry") or {}).get("appliedStatTotal")
-            flat["projected_points"] = proj
+
+            flat["projected_points"] = proj_period
+            flat["projected_per_game"] = round(float(per_game), 2)
+            flat["games_this_week"] = games_this_week
+            flat["projected_points_this_week"] = week_proj
             flat["actual_points"] = float(actual) if actual is not None else None
             flat["is_active"] = flat["lineup_slot_id"] in ACTIVE_SLOT_IDS
             roster.append(flat)
             total_counts[flat["bucket"]] += 1
             if flat["is_active"]:
-                bucket_proj[flat["bucket"]] += proj
+                bucket_proj[flat["bucket"]] += week_proj
                 active_counts[flat["bucket"]] += 1
         teams.append({
             "team_id": t.get("id"),
