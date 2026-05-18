@@ -7,18 +7,43 @@ import json
 from pipeline.ingest import _redact_owners
 
 
-def test_strips_top_level_members() -> None:
+# Synthetic UUIDs only — never paste a real SWID into a committed test.
+_FAKE_SWID_1 = "{AAAA1111-2222-3333-4444-555566667777}"
+_FAKE_SWID_2 = "{BBBB1111-2222-3333-4444-555566667777}"
+
+
+def test_drops_members_array_entirely() -> None:
+    # members[] is dropped wholesale. Each entry's `id` is a UUID-in-braces
+    # which is identical in shape to the user's SWID auth cookie; preserving
+    # even id-only stubs leaks identifiable session material.
     raw = {
         "id": 1,
         "members": [
-            {"id": "M1", "displayName": "ALICE", "firstName": "Alice", "lastName": "X"},
-            {"id": "M2", "displayName": "BOB", "userId": "u-bob"},
+            {"id": _FAKE_SWID_1, "displayName": "ALICE"},
+            {"id": _FAKE_SWID_2, "displayName": "BOB"},
         ],
     }
     out = _redact_owners(raw)
-    assert out["members"] == [{"id": "M1"}, {"id": "M2"}]
-    # No display name survived anywhere.
-    assert "displayName" not in json.dumps(out)
+    assert "members" not in out, "members[] must be removed entirely"
+
+
+def test_scrubs_uuid_in_braces_anywhere_in_tree() -> None:
+    # Even after dropping fields by name, a member-ID-shaped UUID
+    # appearing deep in the tree (transactions[*].source, etc.) must
+    # be replaced with a stable placeholder.
+    raw = {
+        "transactions": [
+            {"id": "txn-1", "source": _FAKE_SWID_1, "items": []},
+        ],
+        "settings": {
+            "weirdNested": {"someId": _FAKE_SWID_2},
+        },
+    }
+    out = _redact_owners(raw)
+    blob = json.dumps(out)
+    assert "AAAA1111" not in blob
+    assert "BBBB1111" not in blob
+    assert "REDACTED-MEMBER-ID" in blob
 
 
 def test_strips_team_owners() -> None:

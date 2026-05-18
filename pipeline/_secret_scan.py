@@ -47,6 +47,7 @@ ALLOWLIST_PATHS = {
     "pipeline/_secret_scan.py",
     "README.md",
     "tests/test_secret_scan.py",
+    "tests/test_ingest_redaction.py",  # synthetic UUIDs for the redaction tests
 }
 
 

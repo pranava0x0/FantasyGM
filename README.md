@@ -15,7 +15,10 @@ pip install -r requirements.txt
 cp .env.example .env
 # edit .env to add ESPN_SWID and ESPN_S2 (see comments in .env.example)
 
-# 3. Refresh
+# 3. Install pre-commit hooks (one-time) — blocks accidental cookie commits
+bash scripts/install_hooks.sh
+
+# 4. Refresh
 python -m pipeline.refresh
 
 # 4. Open the static site

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -17,6 +18,16 @@ from typing import Any
 from pipeline.espn_client import ESPNClient
 
 log = logging.getLogger(__name__)
+
+# ESPN member IDs are UUIDs wrapped in curly braces — the exact shape
+# as the SWID auth cookie. The user's own member ID literally IS their
+# SWID value. Scrubbing any string matching this pattern is a defense
+# against committing the user's own SWID to git. Discovered 2026-05-17:
+# the pre-commit scanner caught members[].id values that were UUID-shaped.
+_UUID_BRACE = re.compile(
+    r"^\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}$"
+)
+_MEMBER_ID_PLACEHOLDER = "REDACTED-MEMBER-ID"
 
 # Views we always pull. mTransactions2 gives the full transaction log.
 LEAGUE_VIEWS = [
@@ -101,22 +112,32 @@ _OWNER_FIELDS: tuple[str, ...] = (
 def _redact_owners(league: dict[str, Any]) -> dict[str, Any]:
     """Return a copy with all owner-identifying fields removed.
 
-    Idempotent. Operates recursively on dict values + lists of dicts.
+    Two passes:
+    1. Drop fields by name (_OWNER_FIELDS): owners[], primaryOwner, memberId,
+       displayName, firstName, lastName, userId, isLeagueManager,
+       isActingAsTeamOwner.
+    2. Drop the `members` array entirely. Each member's `id` is a UUID in
+       braces — the *same shape* as the SWID auth cookie. The user's own
+       member ID literally IS their SWID value, so even an id-only stub
+       leaks identifiable session material into the committed snapshot.
+    3. Recursively replace any string value matching the UUID-in-braces
+       pattern with a stable placeholder. Catches member IDs that travel
+       in other fields (e.g. `transactions[*].source`) and any new
+       member-ID surface ESPN adds in the future without us noticing.
+
+    Idempotent.
     """
     def clean(obj: Any) -> Any:
         if isinstance(obj, dict):
             return {k: clean(v) for k, v in obj.items() if k not in _OWNER_FIELDS}
         if isinstance(obj, list):
             return [clean(x) for x in obj]
+        if isinstance(obj, str) and _UUID_BRACE.match(obj):
+            return _MEMBER_ID_PLACEHOLDER
         return obj
 
     cleaned = clean(league)
-    # `members` is the league-wide roster of owners; replace with id-only stubs
-    # so anything keyed off member ID still works.
-    if "members" in cleaned:
-        cleaned["members"] = [
-            {"id": m.get("id")}
-            for m in (cleaned["members"] or [])
-            if isinstance(m, dict)
-        ]
+    # Even after key+value scrubbing, drop members[] entirely — we never
+    # consume it downstream, so the safest move is "no member list at all".
+    cleaned.pop("members", None)
     return cleaned

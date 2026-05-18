@@ -6,8 +6,8 @@
     "scoring_period_id": 10,
     "matchup_period_id": 1,
     "scoring_type": "H2H_POINTS",
-    "team_count": 3,
-    "captured_at": "2026-05-17T23:33:04Z",
+    "team_count": 8,
+    "captured_at": "2026-05-18T00:04:27Z",
     "source": "espn-private-api"
   },
   "teams": [
@@ -46,7 +46,7 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 32.27272727272727,
+          "projected_points": 34.36585365853659,
           "actual_points": 0.0
         },
         {
@@ -69,7 +69,7 @@
           "lineup_slot_id": 5,
           "lineup_slot_label": "F/C",
           "is_active": true,
-          "projected_points": 40.25,
+          "projected_points": 38.32258064516129,
           "actual_points": 0.0
         },
         {
@@ -91,14 +91,14 @@
           "lineup_slot_id": 1,
           "lineup_slot_label": "G",
           "is_active": true,
-          "projected_points": 30.642857142857142,
+          "projected_points": 26.973684210526315,
           "actual_points": 0.0
         },
         {
           "player": {
             "player_id": 2988756,
             "name": "Brittney Sykes",
-            "team": "FA",
+            "team": "TOR",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -113,8 +113,8 @@
           "lineup_slot_id": 1,
           "lineup_slot_label": "G",
           "is_active": true,
-          "projected_points": 26.3,
-          "actual_points": 12.0
+          "projected_points": 26.02777777777778,
+          "actual_points": 23.0
         },
         {
           "player": {
@@ -135,14 +135,14 @@
           "lineup_slot_id": 6,
           "lineup_slot_label": "UTIL",
           "is_active": true,
-          "projected_points": 31.261904761904763,
+          "projected_points": 23.904761904761905,
           "actual_points": 22.0
         },
         {
           "player": {
             "player_id": 3142328,
             "name": "Gabby Williams",
-            "team": null,
+            "team": "GS",
             "position": "F",
             "bucket": "F",
             "eligible_slots": [
@@ -158,18 +158,87 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 22.135135135135137,
+          "projected_points": 26.428571428571427,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3913881,
+            "name": "Alanna Smith",
+            "team": "DAL",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 25.523809523809526,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 5208981,
+            "name": "Leila Lacan",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 18.857142857142858,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4704180,
+            "name": "Georgia Amoore",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 17.257142857142856,
           "actual_points": 0.0
         }
       ],
       "weakness": {
-        "guard_proj": 88.2,
-        "forward_proj": 94.66,
+        "guard_proj": 113.02,
+        "forward_proj": 124.64,
         "center_proj": 0.0,
-        "guard_gap_vs_league": -6.49,
-        "forward_gap_vs_league": 6.68,
-        "center_gap_vs_league": -8.18,
-        "weakest_bucket": "C"
+        "frontcourt_proj": 124.64,
+        "guard_gap_vs_league": 4.74,
+        "forward_gap_vs_league": 27.67,
+        "center_gap_vs_league": -29.65,
+        "frontcourt_gap_vs_league": -1.98,
+        "weakest_bucket": "FC"
       }
     },
     {
@@ -191,7 +260,7 @@
           "player": {
             "player_id": 4433403,
             "name": "Caitlin Clark",
-            "team": "CHI",
+            "team": "IND",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -206,8 +275,8 @@
           "lineup_slot_id": 1,
           "lineup_slot_label": "G",
           "is_active": true,
-          "projected_points": 42.07692307692308,
-          "actual_points": 30.0
+          "projected_points": 39.87179487179487,
+          "actual_points": 44.0
         },
         {
           "player": {
@@ -228,7 +297,7 @@
           "lineup_slot_id": 5,
           "lineup_slot_label": "F/C",
           "is_active": true,
-          "projected_points": 35.0,
+          "projected_points": 35.529411764705884,
           "actual_points": 0.0
         },
         {
@@ -252,14 +321,14 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 32.16279069767442,
+          "projected_points": 29.026315789473685,
           "actual_points": 0.0
         },
         {
           "player": {
             "player_id": 4398911,
             "name": "Shakira Austin",
-            "team": null,
+            "team": "WSH",
             "position": "C",
             "bucket": "C",
             "eligible_slots": [
@@ -274,14 +343,14 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 24.53125,
+          "projected_points": 26.75,
           "actual_points": 0.0
         },
         {
           "player": {
             "player_id": 2491205,
             "name": "Skylar Diggins",
-            "team": "WSH",
+            "team": "CHI",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -296,14 +365,14 @@
           "lineup_slot_id": 1,
           "lineup_slot_label": "G",
           "is_active": true,
-          "projected_points": 31.4390243902439,
+          "projected_points": 30.46511627906977,
           "actual_points": 0.0
         },
         {
           "player": {
             "player_id": 2566106,
             "name": "Dearica Hamby",
-            "team": "CONN",
+            "team": "LA",
             "position": "F",
             "bucket": "F",
             "eligible_slots": [
@@ -319,18 +388,88 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 31.795454545454547,
-          "actual_points": 10.0
+          "projected_points": 31.72093023255814,
+          "actual_points": 22.0
+        },
+        {
+          "player": {
+            "player_id": 4698736,
+            "name": "Flau'jae Johnson",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 17.763157894736842,
+          "actual_points": 22.0
+        },
+        {
+          "player": {
+            "player_id": 4399415,
+            "name": "Maddy Siegrist",
+            "team": "DAL",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 20.785714285714285,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 22.424242424242426,
+          "actual_points": 0.0
         }
       ],
       "weakness": {
-        "guard_proj": 108.52,
-        "forward_proj": 63.96,
-        "center_proj": 24.53,
-        "guard_gap_vs_league": 13.83,
-        "forward_gap_vs_league": -24.02,
-        "center_gap_vs_league": 16.35,
-        "weakest_bucket": "F"
+        "guard_proj": 146.05,
+        "forward_proj": 81.53,
+        "center_proj": 26.75,
+        "frontcourt_proj": 108.28,
+        "guard_gap_vs_league": 37.77,
+        "forward_gap_vs_league": -15.44,
+        "center_gap_vs_league": -2.9,
+        "frontcourt_gap_vs_league": -18.34,
+        "weakest_bucket": "FC"
       }
     },
     {
@@ -369,7 +508,7 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 45.83720930232558,
+          "projected_points": 44.75,
           "actual_points": 38.0
         },
         {
@@ -392,14 +531,14 @@
           "lineup_slot_id": 4,
           "lineup_slot_label": "F",
           "is_active": true,
-          "projected_points": 36.142857142857146,
+          "projected_points": 31.81081081081081,
           "actual_points": 0.0
         },
         {
           "player": {
             "player_id": 3904577,
             "name": "Arike Ogunbowale",
-            "team": "ATL",
+            "team": "DAL",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -414,7 +553,7 @@
           "lineup_slot_id": 1,
           "lineup_slot_label": "G",
           "is_active": true,
-          "projected_points": 35.27906976744186,
+          "projected_points": 32.5,
           "actual_points": 0.0
         },
         {
@@ -436,14 +575,14 @@
           "lineup_slot_id": 5,
           "lineup_slot_label": "F/C",
           "is_active": true,
-          "projected_points": 25.833333333333332,
-          "actual_points": 9.0
+          "projected_points": 25.17948717948718,
+          "actual_points": 19.0
         },
         {
           "player": {
             "player_id": 3142010,
             "name": "Azura Stevens",
-            "team": "WSH",
+            "team": "CHI",
             "position": "F",
             "bucket": "F",
             "eligible_slots": [
@@ -459,7 +598,7 @@
           "lineup_slot_id": 6,
           "lineup_slot_label": "UTIL",
           "is_active": true,
-          "projected_points": 23.35135135135135,
+          "projected_points": 26.216216216216218,
           "actual_points": 0.0
         },
         {
@@ -481,18 +620,1244 @@
           "lineup_slot_id": 1,
           "lineup_slot_label": "G",
           "is_active": true,
-          "projected_points": 26.243243243243242,
+          "projected_points": 27.333333333333332,
           "actual_points": 46.0
+        },
+        {
+          "player": {
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 19.11904761904762,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 5220150,
+            "name": "Dominique Malonga",
+            "team": "SEA",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 24.333333333333332,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4565505,
+            "name": "Kiki Rice",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 16.25,
+          "actual_points": 13.0
         }
       ],
       "weakness": {
-        "guard_proj": 87.36,
-        "forward_proj": 105.33,
+        "guard_proj": 120.38,
+        "forward_proj": 102.78,
+        "center_proj": 24.33,
+        "frontcourt_proj": 127.11,
+        "guard_gap_vs_league": 12.1,
+        "forward_gap_vs_league": 5.81,
+        "center_gap_vs_league": -5.32,
+        "frontcourt_gap_vs_league": 0.49,
+        "weakest_bucket": "FC"
+      }
+    },
+    {
+      "team_id": 6,
+      "abbrev": "Nut",
+      "name": "Hot Stew Comin Through",
+      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/StarWarsTheRiseOfSkywalker/rise-skywalker-chewy.svg",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 1,
+      "faab_remaining": 100,
+      "roster": [
+        {
+          "player": {
+            "player_id": 2998928,
+            "name": "Breanna Stewart",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 35.69230769230769,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4398674,
+            "name": "Rhyne Howard",
+            "team": "ATL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 33.91428571428571,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3904576,
+            "name": "Marina Mabrey",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 28.0,
+          "actual_points": 13.0
+        },
+        {
+          "player": {
+            "player_id": 869,
+            "name": "DeWanna Bonner",
+            "team": "PHX",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 24.444444444444443,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3146151,
+            "name": "Ariel Atkins",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 26.55263157894737,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4433630,
+            "name": "Rickea Jackson",
+            "team": "CHI",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 23.35,
+          "actual_points": 9.0
+        },
+        {
+          "player": {
+            "player_id": 3906972,
+            "name": "Bridget Carleton",
+            "team": "POR",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 17.093023255813954,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3906949,
+            "name": "Jessica Shepard",
+            "team": "DAL",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              0
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 19.605263157894736,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 1054,
+            "name": "Tiffany Hayes",
+            "team": "GS",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 20.516129032258064,
+          "actual_points": 0.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 108.98,
+        "forward_proj": 120.19,
         "center_proj": 0.0,
-        "guard_gap_vs_league": -7.33,
-        "forward_gap_vs_league": 17.35,
-        "center_gap_vs_league": -8.18,
-        "weakest_bucket": "C"
+        "frontcourt_proj": 120.19,
+        "guard_gap_vs_league": 0.7,
+        "forward_gap_vs_league": 23.22,
+        "center_gap_vs_league": -29.65,
+        "frontcourt_gap_vs_league": -6.43,
+        "weakest_bucket": "FC"
+      }
+    },
+    {
+      "team_id": 7,
+      "abbrev": "C9",
+      "name": "Honolulu Cloud Wine",
+      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_doughnut.svg",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 7,
+      "faab_remaining": 98,
+      "roster": [
+        {
+          "player": {
+            "player_id": 4065870,
+            "name": "Jackie Young",
+            "team": "LV",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 30.27906976744186,
+          "actual_points": 27.0
+        },
+        {
+          "player": {
+            "player_id": 4433730,
+            "name": "Paige Bueckers",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 35.17948717948718,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2529130,
+            "name": "Natasha Howard",
+            "team": "MIN",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 27.414634146341463,
+          "actual_points": 17.0
+        },
+        {
+          "player": {
+            "player_id": 2529622,
+            "name": "Kayla Thornton",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 23.170731707317074,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4790264,
+            "name": "Janelle Salaun",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 22.263157894736842,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4433404,
+            "name": "Cameron Brink",
+            "team": "LA",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 25.35483870967742,
+          "actual_points": 12.0
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 18.431818181818183,
+          "actual_points": 5.0
+        },
+        {
+          "player": {
+            "player_id": 4398938,
+            "name": "Dorka Juhasz",
+            "team": "MIN",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 24.548387096774192,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4398776,
+            "name": "NaLyssa Smith",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 17.70731707317073,
+          "actual_points": 25.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 83.89,
+        "forward_proj": 140.46,
+        "center_proj": 0.0,
+        "frontcourt_proj": 140.46,
+        "guard_gap_vs_league": -24.39,
+        "forward_gap_vs_league": 43.49,
+        "center_gap_vs_league": -29.65,
+        "frontcourt_gap_vs_league": 13.84,
+        "weakest_bucket": "G"
+      }
+    },
+    {
+      "team_id": 8,
+      "abbrev": "KylB",
+      "name": "Rhyne 'em dine 'em 69 'em",
+      "logo_url": "https://www.athletespeakers.com/storage/celebrities/1661452080_Screenshot%202022-08-25%20142501.png",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 2,
+      "faab_remaining": 95,
+      "roster": [
+        {
+          "player": {
+            "player_id": 1068,
+            "name": "Nneka Ogwumike",
+            "team": "LA",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              0
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 30.558139534883722,
+          "actual_points": 16.0
+        },
+        {
+          "player": {
+            "player_id": 3142191,
+            "name": "Kelsey Mitchell",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 29.545454545454547,
+          "actual_points": 22.0
+        },
+        {
+          "player": {
+            "player_id": 4433791,
+            "name": "Olivia Miles",
+            "team": "MIN",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 27.0,
+          "actual_points": 12.0
+        },
+        {
+          "player": {
+            "player_id": 4433405,
+            "name": "Kamilla Cardoso",
+            "team": "CHI",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 28.23076923076923,
+          "actual_points": 17.0
+        },
+        {
+          "player": {
+            "player_id": 2529137,
+            "name": "Natasha Cloud",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 24.15,
+          "actual_points": 12.0
+        },
+        {
+          "player": {
+            "player_id": 4898384,
+            "name": "Kiki Iriafen",
+            "team": "WSH",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 26.488372093023255,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4433402,
+            "name": "Angel Reese",
+            "team": "ATL",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 35.256410256410255,
+          "actual_points": 22.0
+        },
+        {
+          "player": {
+            "player_id": 2490553,
+            "name": "Brittney Griner",
+            "team": "CON",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 23.972972972972972,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 20.942857142857143,
+          "actual_points": 12.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 80.7,
+        "forward_proj": 113.25,
+        "center_proj": 52.2,
+        "frontcourt_proj": 165.45,
+        "guard_gap_vs_league": -27.58,
+        "forward_gap_vs_league": 16.28,
+        "center_gap_vs_league": 22.55,
+        "frontcourt_gap_vs_league": 38.83,
+        "weakest_bucket": "G"
+      }
+    },
+    {
+      "team_id": 9,
+      "abbrev": "EET",
+      "name": "Elisah's Excellent Team",
+      "logo_url": "https://g.espncdn.com/lm-static/fba/images/default_logos/1.svg",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 8,
+      "faab_remaining": 100,
+      "roster": [
+        {
+          "player": {
+            "player_id": 3065570,
+            "name": "Kelsey Plum",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 32.404761904761905,
+          "actual_points": 11.0
+        },
+        {
+          "player": {
+            "player_id": 3058901,
+            "name": "Allisha Gray",
+            "team": "ATL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 30.523809523809526,
+          "actual_points": 38.0
+        },
+        {
+          "player": {
+            "player_id": 5105737,
+            "name": "Lauren Betts",
+            "team": "WSH",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 25.615384615384617,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4433524,
+            "name": "Sonia Citron",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 29.302325581395348,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2593770,
+            "name": "Betnijah Laney-Hamilton",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 22.56756756756757,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2566081,
+            "name": "Elizabeth Williams",
+            "team": "CHI",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 20.88372093023256,
+          "actual_points": 7.0
+        },
+        {
+          "player": {
+            "player_id": 4420318,
+            "name": "Ezi Magbegor",
+            "team": "SEA",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 24.59375,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 5345325,
+            "name": "Awa Fam",
+            "team": "SEA",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 17.41025641025641,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4398915,
+            "name": "Naz Hillmon",
+            "team": "ATL",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 18.25,
+          "actual_points": 11.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 92.23,
+        "forward_proj": 40.82,
+        "center_proj": 88.5,
+        "frontcourt_proj": 129.32,
+        "guard_gap_vs_league": -16.05,
+        "forward_gap_vs_league": -56.15,
+        "center_gap_vs_league": 58.85,
+        "frontcourt_gap_vs_league": 2.7,
+        "weakest_bucket": "G"
+      }
+    },
+    {
+      "team_id": 10,
+      "abbrev": "A-B",
+      "name": "Nobody's Business",
+      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_beer.svg",
+      "division_id": 0,
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0,
+        "pct": 0.0
+      },
+      "waiver_position": 3,
+      "faab_remaining": 100,
+      "roster": [
+        {
+          "player": {
+            "player_id": 4432831,
+            "name": "Aliyah Boston",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              0
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 31.15909090909091,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 2987891,
+            "name": "Courtney Williams",
+            "team": "MIN",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 27.818181818181817,
+          "actual_points": 15.0
+        },
+        {
+          "player": {
+            "player_id": 4433790,
+            "name": "Azzi Fudd",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 25.70731707317073,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3058895,
+            "name": "Brionna Jones",
+            "team": "ATL",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 25.083333333333332,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 3142250,
+            "name": "Jordin Canada",
+            "team": "ATL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 6,
+          "lineup_slot_label": "UTIL",
+          "is_active": true,
+          "projected_points": 25.413793103448278,
+          "actual_points": 33.0
+        },
+        {
+          "player": {
+            "player_id": 4684384,
+            "name": "Aneesah Morrow",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 20.95,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4398935,
+            "name": "Veronica Burton",
+            "team": "GS",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "lineup_slot_id": 1,
+          "lineup_slot_label": "G",
+          "is_active": true,
+          "projected_points": 25.261904761904763,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4682797,
+            "name": "Luisa Geiselsoder",
+            "team": "POR",
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 4,
+          "lineup_slot_label": "F",
+          "is_active": true,
+          "projected_points": 20.323529411764707,
+          "actual_points": 0.0
+        },
+        {
+          "player": {
+            "player_id": 4858656,
+            "name": "Gabriela Jaquez",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "lineup_slot_id": 5,
+          "lineup_slot_label": "F/C",
+          "is_active": true,
+          "projected_points": 16.82051282051282,
+          "actual_points": 16.0
+        }
+      ],
+      "weakness": {
+        "guard_proj": 121.02,
+        "forward_proj": 52.11,
+        "center_proj": 45.41,
+        "frontcourt_proj": 97.52,
+        "guard_gap_vs_league": 12.74,
+        "forward_gap_vs_league": -44.86,
+        "center_gap_vs_league": 15.76,
+        "frontcourt_gap_vs_league": -29.1,
+        "weakest_bucket": "FC"
       }
     }
   ],
@@ -508,7 +1873,7 @@
       "items": [
         {
           "player_id": 3142255,
-          "player_name": null,
+          "player_name": "Monique Billings",
           "from_team_id": 0,
           "to_team_id": 9,
           "from_slot_id": -1,
@@ -517,7 +1882,7 @@
         },
         {
           "player_id": 5345325,
-          "player_name": null,
+          "player_name": "Awa Fam",
           "from_team_id": 9,
           "to_team_id": 0,
           "from_slot_id": 6,
@@ -537,7 +1902,7 @@
       "items": [
         {
           "player_id": 4420318,
-          "player_name": null,
+          "player_name": "Ezi Magbegor",
           "from_team_id": 0,
           "to_team_id": 0,
           "from_slot_id": 7,
@@ -546,7 +1911,7 @@
         },
         {
           "player_id": 5345325,
-          "player_name": null,
+          "player_name": "Awa Fam",
           "from_team_id": 0,
           "to_team_id": 0,
           "from_slot_id": 6,
@@ -559,8 +1924,30 @@
   "waiver_targets_overall": [
     {
       "player": {
-        "player_id": 9000003,
-        "name": "Test Forward Top",
+        "player_id": 981,
+        "name": "Courtney Vandersloot",
+        "team": "CHI",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "OUT"
+      },
+      "projected_points_next_period": 22.42,
+      "season_avg_points": null,
+      "percent_owned": 24.43,
+      "percent_change": -0.69,
+      "base_score": 22.42
+    },
+    {
+      "player": {
+        "player_id": 2529458,
+        "name": "Cheyenne Parker-Tyus",
         "team": "LV",
         "position": "F",
         "bucket": "F",
@@ -574,17 +1961,17 @@
         ],
         "injury_status": "ACTIVE"
       },
-      "projected_points_next_period": 41.5,
-      "season_avg_points": 31.0,
-      "percent_owned": 17.4,
-      "percent_change": 2.0,
-      "base_score": 41.5
+      "projected_points_next_period": 20.94,
+      "season_avg_points": 14.2,
+      "percent_owned": 26.78,
+      "percent_change": -0.48,
+      "base_score": 20.94
     },
     {
       "player": {
-        "player_id": 9000001,
-        "name": "Test Guard High",
-        "team": "NY",
+        "player_id": 4433514,
+        "name": "Saniya Rivers",
+        "team": "CON",
         "position": "G",
         "bucket": "G",
         "eligible_slots": [
@@ -596,20 +1983,154 @@
         ],
         "injury_status": "ACTIVE"
       },
-      "projected_points_next_period": 38.0,
-      "season_avg_points": 28.0,
-      "percent_owned": 22.5,
-      "percent_change": 4.2,
-      "base_score": 38.0
+      "projected_points_next_period": 19.12,
+      "season_avg_points": 17.0,
+      "percent_owned": 25.85,
+      "percent_change": -0.07,
+      "base_score": 19.12
     },
     {
       "player": {
-        "player_id": 9000004,
-        "name": "Test Center One",
+        "player_id": 2529047,
+        "name": "Odyssey Sims",
+        "team": "DAL",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 18.83,
+      "season_avg_points": 22.67,
+      "percent_owned": 17.98,
+      "percent_change": 0.18,
+      "base_score": 18.83
+    },
+    {
+      "player": {
+        "player_id": 4001679,
+        "name": "Julie Allemand",
+        "team": "TOR",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "OUT"
+      },
+      "projected_points_next_period": 18.71,
+      "season_avg_points": 16.0,
+      "percent_owned": 7.78,
+      "percent_change": -0.83,
+      "base_score": 18.71
+    },
+    {
+      "player": {
+        "player_id": 4066553,
+        "name": "Aari McDonald",
         "team": "IND",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": null
+      },
+      "projected_points_next_period": 18.64,
+      "season_avg_points": null,
+      "percent_owned": 1.08,
+      "percent_change": -0.05,
+      "base_score": 18.64
+    },
+    {
+      "player": {
+        "player_id": 2491214,
+        "name": "Erica Wheeler",
+        "team": "LA",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 18.43,
+      "season_avg_points": 13.5,
+      "percent_owned": 28.98,
+      "percent_change": -0.17,
+      "base_score": 18.43
+    },
+    {
+      "player": {
+        "player_id": 4683006,
+        "name": "Leonie Fiebich",
+        "team": "NY",
+        "position": "F",
+        "bucket": "F",
+        "eligible_slots": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "injury_status": null
+      },
+      "projected_points_next_period": 18.18,
+      "season_avg_points": null,
+      "percent_owned": 12.5,
+      "percent_change": -0.18,
+      "base_score": 18.18
+    },
+    {
+      "player": {
+        "player_id": 3913903,
+        "name": "Teaira McCowan",
+        "team": null,
         "position": "C",
         "bucket": "C",
         "eligible_slots": [
+          0,
+          4,
+          5,
+          6,
+          7
+        ],
+        "injury_status": null
+      },
+      "projected_points_next_period": 17.94,
+      "season_avg_points": null,
+      "percent_owned": 4.66,
+      "percent_change": -0.11,
+      "base_score": 17.94
+    },
+    {
+      "player": {
+        "player_id": 3142055,
+        "name": "Myisha Hines-Allen",
+        "team": "IND",
+        "position": "F",
+        "bucket": "F",
+        "eligible_slots": [
+          2,
           3,
           4,
           5,
@@ -618,16 +2139,60 @@
         ],
         "injury_status": "ACTIVE"
       },
-      "projected_points_next_period": 30.0,
-      "season_avg_points": 18.0,
-      "percent_owned": 11.0,
-      "percent_change": -0.5,
-      "base_score": 30.0
+      "projected_points_next_period": 17.85,
+      "season_avg_points": 16.25,
+      "percent_owned": 14.05,
+      "percent_change": 0.17,
+      "base_score": 17.85
     },
     {
       "player": {
-        "player_id": 9000002,
-        "name": "Test Guard Mid",
+        "player_id": 3907781,
+        "name": "Sophie Cunningham",
+        "team": "IND",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 17.79,
+      "season_avg_points": 18.5,
+      "percent_owned": 32.54,
+      "percent_change": -0.15,
+      "base_score": 17.79
+    },
+    {
+      "player": {
+        "player_id": 4704180,
+        "name": "Georgia Amoore",
+        "team": "WSH",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": null
+      },
+      "projected_points_next_period": 17.26,
+      "season_avg_points": 19.33,
+      "percent_owned": 10.68,
+      "percent_change": -0.49,
+      "base_score": 17.26
+    },
+    {
+      "player": {
+        "player_id": 887,
+        "name": "Sami Whitcomb",
         "team": "PHX",
         "position": "G",
         "bucket": "G",
@@ -638,35 +2203,57 @@
           6,
           7
         ],
-        "injury_status": "ACTIVE"
+        "injury_status": "OUT"
       },
-      "projected_points_next_period": 22.0,
-      "season_avg_points": 14.0,
-      "percent_owned": 8.1,
-      "percent_change": 0.6,
-      "base_score": 22.0
+      "projected_points_next_period": 16.52,
+      "season_avg_points": null,
+      "percent_owned": 7.13,
+      "percent_change": -0.21,
+      "base_score": 16.52
     },
     {
       "player": {
-        "player_id": 9000005,
-        "name": "Test Center Two",
-        "team": "SEA",
-        "position": "C",
-        "bucket": "C",
+        "player_id": 4595910,
+        "name": "Haley Jones",
+        "team": "POR",
+        "position": "G",
+        "bucket": "G",
         "eligible_slots": [
+          1,
           3,
-          4,
           5,
           6,
           7
         ],
-        "injury_status": "DAY_TO_DAY"
+        "injury_status": "ACTIVE"
       },
-      "projected_points_next_period": 17.5,
-      "season_avg_points": 9.0,
-      "percent_owned": 4.2,
-      "percent_change": 1.1,
-      "base_score": 17.5
+      "projected_points_next_period": 16.51,
+      "season_avg_points": 12.67,
+      "percent_owned": 3.32,
+      "percent_change": -0.05,
+      "base_score": 16.51
+    },
+    {
+      "player": {
+        "player_id": 4066548,
+        "name": "DiJonai Carrington",
+        "team": "CHI",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "OUT"
+      },
+      "projected_points_next_period": 16.47,
+      "season_avg_points": null,
+      "percent_owned": 17.2,
+      "percent_change": -0.43,
+      "base_score": 16.47
     }
   ],
   "waiver_targets_by_team": [
@@ -675,8 +2262,30 @@
       "targets": [
         {
           "player": {
-            "player_id": 9000003,
-            "name": "Test Forward Top",
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
             "team": "LV",
             "position": "F",
             "bucket": "F",
@@ -690,17 +2299,17 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 41.5,
-          "season_avg_points": 31.0,
-          "percent_owned": 17.4,
-          "percent_change": 2.0,
-          "base_score": 41.5
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
         },
         {
           "player": {
-            "player_id": 9000001,
-            "name": "Test Guard High",
-            "team": "NY",
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -712,39 +2321,83 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 38.0,
-          "season_avg_points": 28.0,
-          "percent_owned": 22.5,
-          "percent_change": 4.2,
-          "base_score": 38.0
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
         },
         {
           "player": {
-            "player_id": 9000004,
-            "name": "Test Center One",
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
             "team": "IND",
-            "position": "C",
-            "bucket": "C",
+            "position": "G",
+            "bucket": "G",
             "eligible_slots": [
+              1,
               3,
-              4,
               5,
               6,
               7
             ],
-            "injury_status": "ACTIVE"
+            "injury_status": null
           },
-          "projected_points_next_period": 30.0,
-          "season_avg_points": 18.0,
-          "percent_owned": 11.0,
-          "percent_change": -0.5,
-          "base_score": 30.0
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
         },
         {
           "player": {
-            "player_id": 9000002,
-            "name": "Test Guard Mid",
-            "team": "PHX",
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -756,33 +2409,79 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 22.0,
-          "season_avg_points": 14.0,
-          "percent_owned": 8.1,
-          "percent_change": 0.6,
-          "base_score": 22.0
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
         },
         {
           "player": {
-            "player_id": 9000005,
-            "name": "Test Center Two",
-            "team": "SEA",
-            "position": "C",
-            "bucket": "C",
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
+              2,
               3,
               4,
               5,
               6,
               7
             ],
-            "injury_status": "DAY_TO_DAY"
+            "injury_status": null
           },
-          "projected_points_next_period": 17.5,
-          "season_avg_points": 9.0,
-          "percent_owned": 4.2,
-          "percent_change": 1.1,
-          "base_score": 17.5
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        },
+        {
+          "player": {
+            "player_id": 3913903,
+            "name": "Teaira McCowan",
+            "team": null,
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.94,
+          "season_avg_points": null,
+          "percent_owned": 4.66,
+          "percent_change": -0.11,
+          "base_score": 17.94
+        },
+        {
+          "player": {
+            "player_id": 3142055,
+            "name": "Myisha Hines-Allen",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.85,
+          "season_avg_points": 16.25,
+          "percent_owned": 14.05,
+          "percent_change": 0.17,
+          "base_score": 17.85
         }
       ]
     },
@@ -791,8 +2490,30 @@
       "targets": [
         {
           "player": {
-            "player_id": 9000003,
-            "name": "Test Forward Top",
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
             "team": "LV",
             "position": "F",
             "bucket": "F",
@@ -806,17 +2527,84 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 41.5,
-          "season_avg_points": 31.0,
-          "percent_owned": 17.4,
-          "percent_change": 2.0,
-          "base_score": 41.5
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
         },
         {
           "player": {
-            "player_id": 9000001,
-            "name": "Test Guard High",
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
+        },
+        {
+          "player": {
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
             "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        },
+        {
+          "player": {
+            "player_id": 3913903,
+            "name": "Teaira McCowan",
+            "team": null,
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.94,
+          "season_avg_points": null,
+          "percent_owned": 4.66,
+          "percent_change": -0.11,
+          "base_score": 17.94
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -828,20 +2616,21 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 38.0,
-          "season_avg_points": 28.0,
-          "percent_owned": 22.5,
-          "percent_change": 4.2,
-          "base_score": 38.0
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
         },
         {
           "player": {
-            "player_id": 9000004,
-            "name": "Test Center One",
+            "player_id": 3142055,
+            "name": "Myisha Hines-Allen",
             "team": "IND",
-            "position": "C",
-            "bucket": "C",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
+              2,
               3,
               4,
               5,
@@ -850,17 +2639,61 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 30.0,
-          "season_avg_points": 18.0,
-          "percent_owned": 11.0,
-          "percent_change": -0.5,
-          "base_score": 30.0
+          "projected_points_next_period": 17.85,
+          "season_avg_points": 16.25,
+          "percent_owned": 14.05,
+          "percent_change": 0.17,
+          "base_score": 17.85
         },
         {
           "player": {
-            "player_id": 9000002,
-            "name": "Test Guard Mid",
-            "team": "PHX",
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -872,33 +2705,11 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 22.0,
-          "season_avg_points": 14.0,
-          "percent_owned": 8.1,
-          "percent_change": 0.6,
-          "base_score": 22.0
-        },
-        {
-          "player": {
-            "player_id": 9000005,
-            "name": "Test Center Two",
-            "team": "SEA",
-            "position": "C",
-            "bucket": "C",
-            "eligible_slots": [
-              3,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "DAY_TO_DAY"
-          },
-          "projected_points_next_period": 17.5,
-          "season_avg_points": 9.0,
-          "percent_owned": 4.2,
-          "percent_change": 1.1,
-          "base_score": 17.5
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
         }
       ]
     },
@@ -907,8 +2718,30 @@
       "targets": [
         {
           "player": {
-            "player_id": 9000003,
-            "name": "Test Forward Top",
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
             "team": "LV",
             "position": "F",
             "bucket": "F",
@@ -922,17 +2755,17 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 41.5,
-          "season_avg_points": 31.0,
-          "percent_owned": 17.4,
-          "percent_change": 2.0,
-          "base_score": 41.5
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
         },
         {
           "player": {
-            "player_id": 9000001,
-            "name": "Test Guard High",
-            "team": "NY",
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -944,39 +2777,83 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 38.0,
-          "season_avg_points": 28.0,
-          "percent_owned": 22.5,
-          "percent_change": 4.2,
-          "base_score": 38.0
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
         },
         {
           "player": {
-            "player_id": 9000004,
-            "name": "Test Center One",
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
             "team": "IND",
-            "position": "C",
-            "bucket": "C",
+            "position": "G",
+            "bucket": "G",
             "eligible_slots": [
+              1,
               3,
-              4,
               5,
               6,
               7
             ],
-            "injury_status": "ACTIVE"
+            "injury_status": null
           },
-          "projected_points_next_period": 30.0,
-          "season_avg_points": 18.0,
-          "percent_owned": 11.0,
-          "percent_change": -0.5,
-          "base_score": 30.0
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
         },
         {
           "player": {
-            "player_id": 9000002,
-            "name": "Test Guard Mid",
-            "team": "PHX",
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -988,33 +2865,1216 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 22.0,
-          "season_avg_points": 14.0,
-          "percent_owned": 8.1,
-          "percent_change": 0.6,
-          "base_score": 22.0
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
         },
         {
           "player": {
-            "player_id": 9000005,
-            "name": "Test Center Two",
-            "team": "SEA",
-            "position": "C",
-            "bucket": "C",
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
+              2,
               3,
               4,
               5,
               6,
               7
             ],
-            "injury_status": "DAY_TO_DAY"
+            "injury_status": null
           },
-          "projected_points_next_period": 17.5,
-          "season_avg_points": 9.0,
-          "percent_owned": 4.2,
-          "percent_change": 1.1,
-          "base_score": 17.5
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        },
+        {
+          "player": {
+            "player_id": 3913903,
+            "name": "Teaira McCowan",
+            "team": null,
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.94,
+          "season_avg_points": null,
+          "percent_owned": 4.66,
+          "percent_change": -0.11,
+          "base_score": 17.94
+        },
+        {
+          "player": {
+            "player_id": 3142055,
+            "name": "Myisha Hines-Allen",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.85,
+          "season_avg_points": 16.25,
+          "percent_owned": 14.05,
+          "percent_change": 0.17,
+          "base_score": 17.85
+        }
+      ]
+    },
+    {
+      "team_id": 6,
+      "targets": [
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
+        },
+        {
+          "player": {
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
+        },
+        {
+          "player": {
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
+        },
+        {
+          "player": {
+            "player_id": 3913903,
+            "name": "Teaira McCowan",
+            "team": null,
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.94,
+          "season_avg_points": null,
+          "percent_owned": 4.66,
+          "percent_change": -0.11,
+          "base_score": 17.94
+        },
+        {
+          "player": {
+            "player_id": 3142055,
+            "name": "Myisha Hines-Allen",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.85,
+          "season_avg_points": 16.25,
+          "percent_owned": 14.05,
+          "percent_change": 0.17,
+          "base_score": 17.85
+        }
+      ]
+    },
+    {
+      "team_id": 7,
+      "targets": [
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
+        },
+        {
+          "player": {
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
+        },
+        {
+          "player": {
+            "player_id": 3907781,
+            "name": "Sophie Cunningham",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.79,
+          "season_avg_points": 18.5,
+          "percent_owned": 32.54,
+          "percent_change": -0.15,
+          "base_score": 17.79
+        },
+        {
+          "player": {
+            "player_id": 4704180,
+            "name": "Georgia Amoore",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.26,
+          "season_avg_points": 19.33,
+          "percent_owned": 10.68,
+          "percent_change": -0.49,
+          "base_score": 17.26
+        },
+        {
+          "player": {
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        }
+      ]
+    },
+    {
+      "team_id": 8,
+      "targets": [
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
+        },
+        {
+          "player": {
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
+        },
+        {
+          "player": {
+            "player_id": 3907781,
+            "name": "Sophie Cunningham",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.79,
+          "season_avg_points": 18.5,
+          "percent_owned": 32.54,
+          "percent_change": -0.15,
+          "base_score": 17.79
+        },
+        {
+          "player": {
+            "player_id": 4704180,
+            "name": "Georgia Amoore",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.26,
+          "season_avg_points": 19.33,
+          "percent_owned": 10.68,
+          "percent_change": -0.49,
+          "base_score": 17.26
+        },
+        {
+          "player": {
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        }
+      ]
+    },
+    {
+      "team_id": 9,
+      "targets": [
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
+        },
+        {
+          "player": {
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
+        },
+        {
+          "player": {
+            "player_id": 3907781,
+            "name": "Sophie Cunningham",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.79,
+          "season_avg_points": 18.5,
+          "percent_owned": 32.54,
+          "percent_change": -0.15,
+          "base_score": 17.79
+        },
+        {
+          "player": {
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        },
+        {
+          "player": {
+            "player_id": 4704180,
+            "name": "Georgia Amoore",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.26,
+          "season_avg_points": 19.33,
+          "percent_owned": 10.68,
+          "percent_change": -0.49,
+          "base_score": 17.26
+        }
+      ]
+    },
+    {
+      "team_id": 10,
+      "targets": [
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 22.42,
+          "season_avg_points": null,
+          "percent_owned": 24.43,
+          "percent_change": -0.69,
+          "base_score": 22.42
+        },
+        {
+          "player": {
+            "player_id": 2529458,
+            "name": "Cheyenne Parker-Tyus",
+            "team": "LV",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 20.94,
+          "season_avg_points": 14.2,
+          "percent_owned": 26.78,
+          "percent_change": -0.48,
+          "base_score": 20.94
+        },
+        {
+          "player": {
+            "player_id": 4683006,
+            "name": "Leonie Fiebich",
+            "team": "NY",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.18,
+          "season_avg_points": null,
+          "percent_owned": 12.5,
+          "percent_change": -0.18,
+          "base_score": 18.18
+        },
+        {
+          "player": {
+            "player_id": 3913903,
+            "name": "Teaira McCowan",
+            "team": null,
+            "position": "C",
+            "bucket": "C",
+            "eligible_slots": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 17.94,
+          "season_avg_points": null,
+          "percent_owned": 4.66,
+          "percent_change": -0.11,
+          "base_score": 17.94
+        },
+        {
+          "player": {
+            "player_id": 3142055,
+            "name": "Myisha Hines-Allen",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.85,
+          "season_avg_points": 16.25,
+          "percent_owned": 14.05,
+          "percent_change": 0.17,
+          "base_score": 17.85
+        },
+        {
+          "player": {
+            "player_id": 4433514,
+            "name": "Saniya Rivers",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 19.12,
+          "season_avg_points": 17.0,
+          "percent_owned": 25.85,
+          "percent_change": -0.07,
+          "base_score": 19.12
+        },
+        {
+          "player": {
+            "player_id": 2529047,
+            "name": "Odyssey Sims",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.83,
+          "season_avg_points": 22.67,
+          "percent_owned": 17.98,
+          "percent_change": 0.18,
+          "base_score": 18.83
+        },
+        {
+          "player": {
+            "player_id": 4001679,
+            "name": "Julie Allemand",
+            "team": "TOR",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "OUT"
+          },
+          "projected_points_next_period": 18.71,
+          "season_avg_points": 16.0,
+          "percent_owned": 7.78,
+          "percent_change": -0.83,
+          "base_score": 18.71
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "season_avg_points": null,
+          "percent_owned": 1.08,
+          "percent_change": -0.05,
+          "base_score": 18.64
+        },
+        {
+          "player": {
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 18.43,
+          "season_avg_points": 13.5,
+          "percent_owned": 28.98,
+          "percent_change": -0.17,
+          "base_score": 18.43
         }
       ]
     }

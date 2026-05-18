@@ -1,0 +1,16 @@
+{
+  "captured_at": "2026-05-18T00:04:27+00:00",
+  "league_id": 2043154241,
+  "scoring_period_id": 10,
+  "season": 2026,
+  "views": [
+    "mSettings",
+    "mTeam",
+    "mRoster",
+    "mStandings",
+    "mTransactions2",
+    "mSchedule",
+    "mNav",
+    "mStatus"
+  ]
+}
