@@ -13,15 +13,41 @@ import subprocess
 import sys
 
 # Patterns that should NEVER appear in committed code.
-# Each pattern is (label, compiled-regex).
+# Each pattern is (label, compiled-regex). Matching is case-sensitive.
+#
+# We cast a wide net intentionally — false positives go on ALLOWLIST_PATHS
+# (docs that talk about the shape of the patterns); a missed leak has no
+# such safety net.
 PATTERNS: list[tuple[str, re.Pattern[str]]] = [
-    ("ESPN espn_s2 cookie value", re.compile(r"espn_s2\s*=\s*[A-Za-z0-9%]{30,}")),
-    ("ESPN SWID cookie value",    re.compile(r"SWID\s*=\s*\{[0-9A-Fa-f-]{30,}\}")),
-    ("Generic curly-brace UUID",  re.compile(r"\{[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}\}")),
+    # Cookie value shapes, regardless of variable name (catches paste into
+    # any file, not just .env-style key=value).
+    ("ESPN SWID cookie value (UUID in braces)",
+     re.compile(r"\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}")),
+    ("Long URL-encoded blob (likely espn_s2)",
+     re.compile(r"[A-Za-z0-9]{4,}(?:%[0-9A-Fa-f]{2}[A-Za-z0-9]*){2,}")),
+
+    # .env-style key=value pairs whose RHS is non-trivial. Catches the case
+    # where someone accidentally stages `.env` itself or pastes a snippet
+    # of it elsewhere.
+    ("ESPN_SWID env var with value",
+     re.compile(r"^\s*ESPN_SWID\s*=\s*\S{10,}", re.MULTILINE)),
+    ("ESPN_S2 env var with value",
+     re.compile(r"^\s*ESPN_S2\s*=\s*\S{30,}", re.MULTILINE)),
+    ("Lowercase espn_s2 cookie pair",
+     re.compile(r"espn_s2\s*=\s*[A-Za-z0-9%]{30,}")),
+    ("Bare SWID cookie pair",
+     re.compile(r"\bSWID\s*=\s*\{[0-9A-Fa-f-]{30,}\}")),
 ]
 
-# Files that intentionally describe the patterns (docs). Stripped from results.
-ALLOWLIST_PATHS = {"security.md", ".env.example", "pipeline/_secret_scan.py", "README.md"}
+# Files that intentionally describe the shape of the patterns (docs only;
+# they show templates, never real values). Matches checked literally.
+ALLOWLIST_PATHS = {
+    "security.md",
+    ".env.example",
+    "pipeline/_secret_scan.py",
+    "README.md",
+    "tests/test_secret_scan.py",
+}
 
 
 def staged_diff() -> str:
