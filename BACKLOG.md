@@ -8,6 +8,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## Medium
 
+- **Player-specific pop-outs / pages.** Each player name should be clickable into a per-player view (modal on mobile, side panel on desktop, or `/player/<id>` route). Show: photo, position + pro team, season + last-7 stats, projection per game + total this week, full transaction history involving the player (added/dropped/lineup moves across all teams), news headlines tagged with their `athleteId`, and a deep-link to their ESPN player page. State.json can already supply most of this from `news_by_player` and `data/history/transactions.jsonl`; need to also extract per-player splits from the existing roster `playerPoolEntry.player.stats`. Critical for the "scouting" loop — right now users see a ranked list but can't drill in.
 - **Projection sources beyond ESPN.** Pull projections from wnba.com, Yahoo Sports, and basketball-reference.com to triangulate ESPN's numbers. Reduces single-source bias on waiver-target ranking.
 - **Twitter / X signal layer.** Surface beat-writer + player tweets earlier than ESPN's own status updates — backup-PG promotions, minute redistributions on injuries, late scratches. Requires X API keys (no scraping). Should feed the waiver-ranker as a bonus tier.
 - **Reddit r/wnba signal.** Public JSON endpoint (`reddit.com/r/wnba/new.json`) is no-auth. Surface posts flaired "Injury" / "News" / "Game Thread" and match to players by name. Lower precedence than ESPN's official feed.
