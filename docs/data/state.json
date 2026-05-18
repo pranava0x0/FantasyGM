@@ -258,7 +258,7 @@
           "actual_points": 0.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 293.17,
         "forward_proj": 323.17,
         "center_proj": 0.0,
@@ -267,7 +267,7 @@
         "forward_gap_vs_league": 114.76,
         "center_gap_vs_league": -77.84,
         "frontcourt_gap_vs_league": 36.92,
-        "weakest_bucket": "FC"
+        "top_need_bucket": "FC"
       },
       "summary": [
         "Top projected scorer this week: Alanna Smith (F, 4 games, ~102 pts).",
@@ -524,7 +524,7 @@
           "actual_points": 0.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 317.18,
         "forward_proj": 200.15,
         "center_proj": 49.06,
@@ -533,10 +533,10 @@
         "forward_gap_vs_league": -8.26,
         "center_gap_vs_league": -28.78,
         "frontcourt_gap_vs_league": -37.04,
-        "weakest_bucket": "FC"
+        "top_need_bucket": "FC"
       },
       "summary": [
-        "Frontcourt is the structural weak spot — projected ~37 pts below the league average at F/C this week.",
+        "Top need: add F/C production — ~37 pts below league average this week.",
         "Top projected scorer this week: Caitlin Clark (G, 2 games, ~84 pts).",
         "7 of 9 active starters have only 1–2 games this week — light slate."
       ],
@@ -788,7 +788,7 @@
           "actual_points": 32.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 303.86,
         "forward_proj": 164.83,
         "center_proj": 72.64,
@@ -797,10 +797,10 @@
         "forward_gap_vs_league": -43.58,
         "center_gap_vs_league": -5.2,
         "frontcourt_gap_vs_league": -48.78,
-        "weakest_bucket": "FC"
+        "top_need_bucket": "FC"
       },
       "summary": [
-        "Frontcourt is the structural weak spot — projected ~49 pts below the league average at F/C this week.",
+        "Top need: add F/C production — ~49 pts below league average this week.",
         "Top projected scorer this week: Arike Ogunbowale (G, 4 games, ~141 pts).",
         "5 of 9 active starters have only 1–2 games this week — light slate."
       ],
@@ -1053,7 +1053,7 @@
           "actual_points": 0.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 241.83,
         "forward_proj": 319.78,
         "center_proj": 0.0,
@@ -1062,7 +1062,7 @@
         "forward_gap_vs_league": 111.37,
         "center_gap_vs_league": -77.84,
         "frontcourt_gap_vs_league": 33.53,
-        "weakest_bucket": "G"
+        "top_need_bucket": "G"
       },
       "summary": [
         "Top projected scorer this week: Marina Mabrey (G, 3 games, ~83 pts).",
@@ -1317,7 +1317,7 @@
           "actual_points": 25.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 188.39,
         "forward_proj": 267.59,
         "center_proj": 0.0,
@@ -1326,10 +1326,10 @@
         "forward_gap_vs_league": 59.18,
         "center_gap_vs_league": -77.84,
         "frontcourt_gap_vs_league": -18.66,
-        "weakest_bucket": "G"
+        "top_need_bucket": "G"
       },
       "summary": [
-        "Backcourt is the structural weak spot — projected ~53 pts below the league average at Guard this week.",
+        "Top need: add Guard production — ~53 pts below league average this week.",
         "Top projected scorer this week: Paige Bueckers (G, 4 games, ~128 pts).",
         "8 of 9 active starters have only 1–2 games this week — light slate."
       ],
@@ -1582,7 +1582,7 @@
           "actual_points": 12.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 162.06,
         "forward_proj": 194.51,
         "center_proj": 143.7,
@@ -1591,10 +1591,10 @@
         "forward_gap_vs_league": -13.9,
         "center_gap_vs_league": 65.86,
         "frontcourt_gap_vs_league": 51.96,
-        "weakest_bucket": "G"
+        "top_need_bucket": "G"
       },
       "summary": [
-        "Backcourt is the structural weak spot — projected ~80 pts below the league average at Guard this week.",
+        "Top need: add Guard production — ~80 pts below league average this week.",
         "Top projected scorer this week: Brittney Griner (C, 3 games, ~93 pts).",
         "8 of 9 active starters have only 1–2 games this week — light slate."
       ],
@@ -1845,7 +1845,7 @@
           "actual_points": 11.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 166.8,
         "forward_proj": 69.88,
         "center_proj": 240.06,
@@ -1854,10 +1854,10 @@
         "forward_gap_vs_league": -138.53,
         "center_gap_vs_league": 162.22,
         "frontcourt_gap_vs_league": 23.69,
-        "weakest_bucket": "G"
+        "top_need_bucket": "G"
       },
       "summary": [
-        "Backcourt is the structural weak spot — projected ~75 pts below the league average at Guard this week.",
+        "Top need: add Guard production — ~75 pts below league average this week.",
         "Top projected scorer this week: Ezi Magbegor (C, 3 games, ~87 pts).",
         "2 recent transactions — latest a waiver move.",
         "7 of 9 active starters have only 1–2 games this week — light slate."
@@ -2113,7 +2113,7 @@
           "actual_points": 37.0
         }
       ],
-      "weakness": {
+      "needs": {
         "guard_proj": 260.55,
         "forward_proj": 127.38,
         "center_proj": 117.3,
@@ -2122,10 +2122,10 @@
         "forward_gap_vs_league": -81.03,
         "center_gap_vs_league": 39.46,
         "frontcourt_gap_vs_league": -41.57,
-        "weakest_bucket": "FC"
+        "top_need_bucket": "FC"
       },
       "summary": [
-        "Frontcourt is the structural weak spot — projected ~42 pts below the league average at F/C this week.",
+        "Top need: add F/C production — ~42 pts below league average this week.",
         "Top projected scorer this week: Azzi Fudd (G, 4 games, ~103 pts).",
         "6 of 9 active starters have only 1–2 games this week — light slate."
       ],

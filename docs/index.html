@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FantasyGM</title>
-  <meta name="description" content="AI-powered GM for an ESPN fantasy WNBA league. Waiver targets, team weakness, transaction history." />
+  <title>Fantasy GM</title>
+  <meta name="description" content="AI-powered GM for an ESPN fantasy WNBA league. Waiver targets, team needs, transaction history." />
   <link rel="preload" href="./data/state.json" as="fetch" type="application/json" crossorigin />
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
@@ -15,7 +15,7 @@
     <div class="topbar-inner">
       <div class="brand">
         <span class="brand-mark" aria-hidden="true">F<span>·</span>GM</span>
-        <span class="brand-tag" id="league-name">FantasyGM</span>
+        <span class="brand-tag" id="league-name">Fantasy GM</span>
       </div>
       <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle theme">
         <span class="theme-icon" aria-hidden="true">◐</span>
@@ -60,16 +60,16 @@
         <p class="loading">Loading teams…</p>
       </div>
       <footer class="surface-footnote" id="team-needs-footnote" aria-label="How team needs are calculated">
-        <h3>How "weakest at" is calculated</h3>
+        <h3>How "top need" is calculated</h3>
         <p>
           For each active roster slot (the 9 non-bench / non-IR slots in WNBA fantasy: 2 G + 3 F + 1 F/C + 3 UTIL), we estimate the player's points this week as
-          <em>per-game projection × games this week</em>. Players are bucketed by their <em>default ESPN position</em> (1 = G, 2 = F, 3 = C). Bucket totals per team are compared to the league average for that bucket. <strong>Weakest</strong> is whichever bucket — Guards (G) or combined Frontcourt (F + C) — has the largest negative gap.
+          <em>per-game projection × games this week</em>. Players are bucketed by their <em>default ESPN position</em> (1 = G, 2 = F, 3 = C). Bucket totals per team are compared to the league average for that bucket. <strong>Top need</strong> is whichever bucket — Guards (G) or combined Frontcourt (F + C) — has the largest negative gap, i.e. the biggest upgrade opportunity.
         </p>
         <p>
-          F and C are bucketed together because WNBA fantasy has shared F/C lineup slots — a team without a pure Center isn't structurally weak there if they fill slot 5 with a Forward.
+          F and C are bucketed together because WNBA fantasy has shared F/C lineup slots — a team without a pure Center isn't structurally short there if they fill slot 5 with a Forward.
         </p>
         <p class="muted">
-          Note: the comparison is on total weekly production, not per-player average. A team with three high-scoring Guards may still show as "weakest at G" if other teams have four or five Guards contributing comparable totals. The Waiver Targets tab boosts picks at the team's weakest bucket and penalizes picks at saturated positions (≥ 5 active Gs or ≥ 7 active F/Cs).
+          Note: the comparison is on total weekly production, not per-player average. A team with three high-scoring Guards may still show its top need as G if other teams have four or five Guards contributing comparable totals. The Waiver Targets tab boosts picks at the team's top-need bucket and penalizes picks at saturated positions (≥ 5 active Gs or ≥ 7 active F/Cs).
         </p>
       </footer>
     </section>
@@ -103,6 +103,36 @@
 
   <!-- Lazy-mounted toast -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Player detail modal — populated on click of any player name. -->
+  <div id="player-modal" class="player-modal" role="dialog" aria-modal="true" aria-labelledby="player-modal-name" aria-hidden="true" hidden>
+    <div class="player-modal-backdrop" data-modal-close></div>
+    <div class="player-modal-panel" role="document">
+      <button type="button" class="player-modal-close" data-modal-close aria-label="Close player details">×</button>
+      <header class="player-modal-head">
+        <div class="player-modal-photo-wrap">
+          <img class="player-modal-photo" alt="" />
+        </div>
+        <div class="player-modal-id">
+          <h3 class="player-modal-name" id="player-modal-name">—</h3>
+          <div class="player-modal-meta" id="player-modal-meta"></div>
+          <div class="player-modal-status" id="player-modal-status"></div>
+        </div>
+      </header>
+      <section class="player-modal-stats" id="player-modal-stats" aria-label="Key stats"></section>
+      <section class="player-modal-section" aria-labelledby="player-modal-news-h">
+        <h4 id="player-modal-news-h" class="player-modal-section-h">Recent news</h4>
+        <ul class="player-modal-news" id="player-modal-news"></ul>
+      </section>
+      <section class="player-modal-section" aria-labelledby="player-modal-txns-h">
+        <h4 id="player-modal-txns-h" class="player-modal-section-h">Recent transactions</h4>
+        <ul class="player-modal-txns" id="player-modal-txns"></ul>
+      </section>
+      <footer class="player-modal-footer">
+        <a class="player-modal-espn" id="player-modal-espn" href="#" target="_blank" rel="noopener">View on ESPN ↗</a>
+      </footer>
+    </div>
+  </div>
 
   <script src="./assets/app.js" defer></script>
 </body>

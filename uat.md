@@ -25,7 +25,7 @@ _Last run: 2026-05-17_
 | Topbar / Brand / Theme toggle | 2026-05-17 | Stable. Toggle is a 44×44 button (touch target ✓). |
 | Meta strip | 2026-05-17 | Wraps on narrow widths; "As of" pushes to right edge on wide. |
 | Top Waiver Targets | 2026-05-17 | Card grid: rank · name+pills · projection. Bucket colors (G blue / F amber / C magenta) render. |
-| Team Weakness | 2026-05-17 | 1-up at <640px, 2-up at 640–1023, 4-up at ≥1024. Bar fill goes red on the weakest bucket. |
+| Team Needs | 2026-05-17 | 1-up at <640px, 2-up at 640–1023, 4-up at ≥1024. Bar fill goes red on the top-need bucket. |
 | Recent Transactions | 2026-05-17 | Fixed in this UAT pass — see "Known stable" below. |
 | Empty / error state | 2026-05-17 | Tested via DevTools: fetch failure shows "Couldn't load state.json" line per section. |
 

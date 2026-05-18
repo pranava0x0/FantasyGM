@@ -10,7 +10,7 @@ The bullets follow a fixed precedence so the team's biggest signal
 surfaces first:
 
   1. Win-loss record (only included once we're past matchup 1)
-  2. Weakest bucket + the gap, framed as "needs more X"
+  2. Top need + the gap, framed proactively as "add more X"
   3. Top per-week projected scorer on the roster + their bucket
   4. Recent transaction activity (count + most-recent type)
   5. Active-roster shape ("guard-heavy", "frontcourt-balanced", etc.)
@@ -26,7 +26,7 @@ from typing import Any
 
 def build_team_summaries(
     teams_view: list[dict[str, Any]],
-    weakness_by_team: dict[int, dict[str, Any]],
+    needs_by_team: dict[int, dict[str, Any]],
     transactions: list[dict[str, Any]],
     *,
     matchup_period_id: int = 0,
@@ -48,7 +48,7 @@ def build_team_summaries(
     out: dict[int, list[str]] = {}
     for t in teams_view:
         tid = int(t["team_id"])
-        bullets = list(_bullets_for_team(t, weakness_by_team.get(tid, {}),
+        bullets = list(_bullets_for_team(t, needs_by_team.get(tid, {}),
                                          by_team_txn.get(tid, []),
                                          matchup_period_id=matchup_period_id))
         if bullets:
@@ -58,7 +58,7 @@ def build_team_summaries(
 
 def _bullets_for_team(
     team_view: dict[str, Any],
-    weakness: dict[str, Any],
+    needs: dict[str, Any],
     team_txns: list[dict[str, Any]],
     *,
     matchup_period_id: int,
@@ -70,19 +70,19 @@ def _bullets_for_team(
     if matchup_period_id >= 2 and (wins + losses + ties) > 0:
         bullets.append(_record_bullet(wins, losses, ties))
 
-    weakest = weakness.get("weakest_bucket")
-    if weakest == "G":
-        gap = float(weakness.get("guard_gap_vs_league") or 0.0)
+    top_need = needs.get("top_need_bucket")
+    if top_need == "G":
+        gap = float(needs.get("guard_gap_vs_league") or 0.0)
         if gap <= -10.0:
-            bullets.append(f"Backcourt is the structural weak spot — projected ~{abs(gap):.0f} pts below the league average at Guard this week.")
+            bullets.append(f"Top need: add Guard production — ~{abs(gap):.0f} pts below league average this week.")
         elif gap < 0:
-            bullets.append(f"Slightly thin at Guard (~{abs(gap):.0f} pts below league average this week).")
-    elif weakest == "FC":
-        gap = float(weakness.get("frontcourt_gap_vs_league") or 0.0)
+            bullets.append(f"Room to add a Guard — ~{abs(gap):.0f} pts below league average this week.")
+    elif top_need == "FC":
+        gap = float(needs.get("frontcourt_gap_vs_league") or 0.0)
         if gap <= -10.0:
-            bullets.append(f"Frontcourt is the structural weak spot — projected ~{abs(gap):.0f} pts below the league average at F/C this week.")
+            bullets.append(f"Top need: add F/C production — ~{abs(gap):.0f} pts below league average this week.")
         elif gap < 0:
-            bullets.append(f"Slightly thin at F/C (~{abs(gap):.0f} pts below league average this week).")
+            bullets.append(f"Room to add a F/C — ~{abs(gap):.0f} pts below league average this week.")
 
     top_scorer = _top_active_scorer(team_view)
     if top_scorer:

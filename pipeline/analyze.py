@@ -6,7 +6,7 @@ Inputs:
 
 Outputs (pure data — `build_state.py` wraps them into the LeagueState schema):
 - per-team production projection split by G / F / C
-- team weakness gaps vs league average
+- team-needs gaps vs league average (positive framing — biggest upgrade area)
 - ranked waiver targets (overall + per-team adjusted)
 - a cleaned transaction list
 
@@ -201,16 +201,18 @@ def league_bucket_averages(teams: list[dict[str, Any]]) -> dict[Bucket, float]:
     return {b: round(totals[b] / len(teams), 2) for b in BUCKETS}
 
 
-def compute_team_weakness(teams: list[dict[str, Any]]) -> dict[int, dict[str, Any]]:
+def compute_team_needs(teams: list[dict[str, Any]]) -> dict[int, dict[str, Any]]:
     """For each team, compute bucket projection + gap to league average.
 
-    Returns a payload per team. The structural decision: WNBA fantasy uses
-    shared F/C lineup slots, so we treat F+C as a single 'frontcourt' bucket
-    for weakness reasoning. A team with zero pure-Center players isn't
-    really weak at 'C' if they fill slot 5 with a Forward — the data above
-    shows three teams in the 50-40-90 Club where this happens.
+    Framed proactively as *needs*: `top_need_bucket` is the bucket with the
+    largest negative gap — the team's biggest upgrade opportunity.
 
-    `weakest_bucket` is therefore the worse of two combined buckets:
+    The structural decision: WNBA fantasy uses shared F/C lineup slots, so
+    we treat F+C as a single 'frontcourt' bucket. A team with zero
+    pure-Center players doesn't have a structural C need if they fill slot
+    5 with a Forward — three teams in the 50-40-90 Club do exactly that.
+
+    `top_need_bucket` is therefore the worse of two combined buckets:
     'G' (backcourt) or 'FC' (frontcourt). The granular F / C numbers stay
     in the payload for display.
     """
@@ -228,7 +230,7 @@ def compute_team_weakness(teams: list[dict[str, Any]]) -> dict[int, dict[str, An
         center_gap = round(center_proj - avg["C"], 2)
         frontcourt_gap = round(frontcourt_proj - avg_fc, 2)
 
-        weakest: Literal["G", "FC"] = "G" if guard_gap < frontcourt_gap else "FC"
+        top_need: Literal["G", "FC"] = "G" if guard_gap < frontcourt_gap else "FC"
 
         out[t["team_id"]] = {
             "guard_proj": guard_proj,
@@ -239,7 +241,7 @@ def compute_team_weakness(teams: list[dict[str, Any]]) -> dict[int, dict[str, An
             "forward_gap_vs_league": forward_gap,
             "center_gap_vs_league": center_gap,
             "frontcourt_gap_vs_league": frontcourt_gap,
-            "weakest_bucket": weakest,
+            "top_need_bucket": top_need,
             "league_avg": {**avg, "FC": avg_fc},
         }
     return out
@@ -333,13 +335,13 @@ SATURATION_THRESHOLD_G = 5
 SATURATION_THRESHOLD_FC = 7
 
 # Top-K positions in the per-team list we want to *guarantee* include at
-# least one player at the team's weakest bucket. Drives visible variance
+# least one player at the team's top-need bucket. Drives visible variance
 # across teams even when the FA pool is dominated by one bucket.
 NEEDS_PICK_TOP_K = 3
 
 
 def waiver_targets_for_team(
-    team_weakness: dict[str, Any],
+    team_needs: dict[str, Any],
     ranked_fas: list[dict[str, Any]],
     *,
     active_counts: dict[str, int] | None = None,
@@ -360,21 +362,21 @@ def waiver_targets_for_team(
        additional pickups in that bucket lose 30% of their base score.
 
     3. **Needs guarantee.** After scoring, the top `NEEDS_PICK_TOP_K`
-       picks must include at least one player from the team's weakest
-       bucket (G if `weakest_bucket == 'G'`, F or C if 'FC'). If none
+       picks must include at least one player from the team's top-need
+       bucket (G if `top_need_bucket == 'G'`, F or C if 'FC'). If none
        naturally surfaced (because the FA pool is dominated by the
-       opposite bucket), promote the highest-scoring weak-bucket player
-       into the K-th slot. This guarantees the per-team picks look
-       visibly different across teams.
+       opposite bucket), promote the highest-scoring top-need-bucket
+       player into the K-th slot. This guarantees the per-team picks
+       look visibly different across teams.
 
     Per-bucket gap uses the combined frontcourt gap (F + C share slots);
-    see `compute_team_weakness` for the rationale.
+    see `compute_team_needs` for the rationale.
     """
-    gap_g = float(team_weakness["guard_gap_vs_league"])
-    gap_fc = float(team_weakness["frontcourt_gap_vs_league"])
+    gap_g = float(team_needs["guard_gap_vs_league"])
+    gap_fc = float(team_needs["frontcourt_gap_vs_league"])
     bucket_to_gap = {"G": gap_g, "F": gap_fc, "C": gap_fc}
-    weakest = team_weakness.get("weakest_bucket")  # "G" or "FC"
-    weakest_buckets = {"G"} if weakest == "G" else {"F", "C"}
+    top_need = team_needs.get("top_need_bucket")  # "G" or "FC"
+    top_need_buckets = {"G"} if top_need == "G" else {"F", "C"}
 
     counts = active_counts or {"G": 0, "F": 0, "C": 0}
     g_active = int(counts.get("G", 0))
@@ -411,12 +413,12 @@ def waiver_targets_for_team(
         })
     boosted.sort(key=lambda r: r["adjusted_score"], reverse=True)
 
-    # Needs guarantee — only when we have an explicit weakest bucket and
+    # Needs guarantee — only when we have an explicit top-need bucket and
     # the natural top-K already excludes it.
-    if weakest and not any(r["bucket"] in weakest_buckets for r in boosted[:NEEDS_PICK_TOP_K]):
-        # Highest-scoring weak-bucket pick that didn't make the top K.
+    if top_need and not any(r["bucket"] in top_need_buckets for r in boosted[:NEEDS_PICK_TOP_K]):
+        # Highest-scoring top-need-bucket pick that didn't make the top K.
         for i, r in enumerate(boosted[NEEDS_PICK_TOP_K:], start=NEEDS_PICK_TOP_K):
-            if r["bucket"] in weakest_buckets:
+            if r["bucket"] in top_need_buckets:
                 promoted = {**r, "promoted_for_need": True}
                 # Insert at position K-1 (the bottom of the top K), demoting
                 # the displaced entry by one slot.

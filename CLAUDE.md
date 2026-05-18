@@ -6,9 +6,11 @@
 
 ---
 
-## Project intent (FantasyGM)
+## Project intent (Fantasy GM)
 
-AI-powered GM for the user's ESPN fantasy WNBA league (leagueId 2043154241, "50-40-90 Club"). Primary product loop: identify trending waiver-wire pickups, with positional weak-spot reasoning per team. Surfaces as a static page (GitHub Pages, `docs/`). Pipeline runs **locally** through the `/refresh-fantasy-gm` skill — never in CI — because the data path is authenticated with the user's ESPN session cookies (`SWID`, `espn_s2`) and those must never leave the user's machine.
+AI-powered GM for the user's ESPN fantasy WNBA league (leagueId 2043154241, "50-40-90 Club"). Primary product loop: identify trending waiver-wire pickups, with each team's "top need" (positional upgrade opportunity, proactively framed — never "weakness") driving the per-team reorder. Surfaces as a static page (GitHub Pages, `docs/`). Pipeline runs **locally** through the `/refresh-fantasy-gm` skill — never in CI — because the data path is authenticated with the user's ESPN session cookies (`SWID`, `espn_s2`) and those must never leave the user's machine.
+
+**Vocabulary discipline:** UI strings + data fields use *needs* / *top need* / *upgrade opportunity*, never *weakness* / *weakest*. The schema field is `teams[].needs.top_need_bucket`, not `teams[].weakness.weakest_bucket`. If you find a `weakness`/`weakest`/`weak spot` reference in user-facing code, replace it; if it's in a one-off `--gap-weak` CSS color name describing a value, that's fine — the var name describes the *number being weak* (below average), not the team.
 
 **Data source:** ESPN private fantasy API at `lm-api-reads.fantasy.espn.com/apis/v3/games/wfba/...`. Game code is `wfba`, not `wbasketball`. League is private so the API returns 401 without cookies. Browser scraping is the documented fallback for surfaces the API doesn't cover.
 

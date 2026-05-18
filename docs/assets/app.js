@@ -1,7 +1,8 @@
 /* ============================================================
-   FantasyGM — frontend app.
+   Fantasy GM — frontend app.
    Reads ./data/state.json (built by pipeline.refresh) and renders
-   waiver targets, team weakness cards, and the transaction log.
+   waiver targets, Team Needs cards, the transaction log, and the
+   per-player detail modal.
 
    No build step. No dependencies. ES2020+.
    ============================================================ */
@@ -118,10 +119,34 @@
     return e;
   }
 
+  // Render any player name as a click-to-open <button> that drives the
+  // detail modal. `className` keeps callers in charge of layout (e.g.
+  // `waiver-name`, `roster-name`); the button just adds the trigger.
+  // Listener is attached directly (not delegated) so we can stopPropagation
+  // and prevent the parent team-card from toggling when a name is clicked.
+  function playerNameBtn(playerId, name, className) {
+    const btn = el("button", {
+      className: `player-name-btn ${className || ""}`.trim(),
+      text: name,
+      attrs: {
+        type: "button",
+        "data-player-id": String(playerId),
+        "aria-haspopup": "dialog",
+      },
+    });
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      lastFocusedTrigger = btn;
+      openPlayerModal(String(playerId));
+    });
+    return btn;
+  }
+
   // ---------- Render: meta strip ----------
   function renderMeta(meta) {
-    $("#league-name").textContent = meta.league_name || "FantasyGM";
-    document.title = `${meta.league_name || "FantasyGM"} · FantasyGM`;
+    $("#league-name").textContent = meta.league_name || "Fantasy GM";
+    document.title = `${meta.league_name || "Fantasy GM"} · Fantasy GM`;
     $("#meta-period").textContent = meta.scoring_period_id ?? "—";
     $("#meta-matchup").textContent = meta.matchup_period_id ?? "—";
     $("#meta-season").textContent = meta.season_id ?? "—";
@@ -180,7 +205,8 @@
       sub.appendChild(el("span", { className: "own-neg", text: p.injury_status }));
     }
 
-    const nameLine = el("span", { className: "waiver-name", text: p.name });
+    const nameLine = el("span", { className: "waiver-name" });
+    nameLine.appendChild(playerNameBtn(p.player_id, p.name, "waiver-name-text"));
     if (fitBucket && p.bucket === fitBucket) {
       nameLine.appendChild(el("span", { className: "fit-pill", text: `Fits ${fitBucket}` }));
     }
@@ -221,13 +247,13 @@
     overall.forEach((t, i) => list.appendChild(waiverCard(t, i)));
   }
 
-  // ---------- Render: team weakness ----------
-  function bucketRow(label, proj, gap, isWeakest) {
+  // ---------- Render: team needs ----------
+  function bucketRow(label, proj, gap, isTopNeed) {
     const cls = gap > 0 ? "pos" : gap < 0 ? "neg" : "zero";
     const sign = gap > 0 ? "+" : "";
     const max = Math.max(40, Math.abs(proj) * 1.2, 1);
     const pct = Math.min(100, (Math.max(0, proj) / max) * 100);
-    const fill = el("span", { className: `bucket-fill ${isWeakest ? "weakest" : ""}` });
+    const fill = el("span", { className: `bucket-fill ${isTopNeed ? "top-need" : ""}` });
     fill.style.width = `${pct}%`;
     return el("div", {
       className: "bucket-row",
@@ -241,7 +267,7 @@
 
   // Frontcourt bar uses a dual-color fill so the F-vs-C split inside FC
   // stays readable without adding a third row. CSS handles via inline style.
-  function frontcourtRow(forward_proj, center_proj, gap, isWeakest) {
+  function frontcourtRow(forward_proj, center_proj, gap, isTopNeed) {
     const total = forward_proj + center_proj;
     const cls = gap > 0 ? "pos" : gap < 0 ? "neg" : "zero";
     const sign = gap > 0 ? "+" : "";
@@ -249,10 +275,10 @@
     const max = Math.max(40, Math.abs(total) * 1.2, 1);
     const pct = Math.min(100, (Math.max(0, total) / max) * 100);
     const fSplit = total > 0 ? Math.round((forward_proj / total) * 100) : 0;
-    const fill = el("span", { className: `bucket-fill ${isWeakest ? "weakest" : ""}` });
+    const fill = el("span", { className: `bucket-fill ${isTopNeed ? "top-need" : ""}` });
     fill.style.width = `${pct}%`;
     // F portion in amber, C in magenta — narrow stripe inside the bar.
-    fill.style.background = isWeakest
+    fill.style.background = isTopNeed
       ? "var(--gap-weak)"
       : `linear-gradient(to right, var(--bucket-forward) 0 ${fSplit}%, var(--bucket-center) ${fSplit}% 100%)`;
     return el("div", {
@@ -291,7 +317,8 @@
   function rosterRow(slotLabel, r) {
     const p = r.player;
     const slotChip = el("span", { className: `pill slot-chip ${r.is_active ? "slot-active" : "slot-bench"}`, text: slotLabel });
-    const nameSpan = el("span", { className: "roster-name", text: p.name });
+    const nameSpan = el("span", { className: "roster-name" });
+    nameSpan.appendChild(playerNameBtn(p.player_id, p.name, "roster-name-text"));
     const sub = el("span", { className: "roster-sub" });
     sub.appendChild(bucketPill(p.bucket));
     if (p.team) sub.appendChild(el("span", { className: "pill team-mono", text: p.team }));
@@ -352,7 +379,7 @@
   }
 
   function teamCard(team, perTeamTargets, allTeamsForLookup, txnsByIdLookup) {
-    const w = team.weakness;
+    const n = team.needs;
     const head = el("div", {
       className: "team-head",
       children: [
@@ -371,8 +398,8 @@
     const rows = el("div", {
       className: "bucket-rows",
       children: [
-        bucketRow("G", w.guard_proj, w.guard_gap_vs_league, w.weakest_bucket === "G"),
-        frontcourtRow(w.forward_proj, w.center_proj, w.frontcourt_gap_vs_league, w.weakest_bucket === "FC"),
+        bucketRow("G", n.guard_proj, n.guard_gap_vs_league, n.top_need_bucket === "G"),
+        frontcourtRow(n.forward_proj, n.center_proj, n.frontcourt_gap_vs_league, n.top_need_bucket === "FC"),
       ],
     });
 
@@ -389,12 +416,13 @@
     }
 
     // Top picks for this team
-    const weakLabel = w.weakest_bucket === "FC" ? "F/C (frontcourt)" : w.weakest_bucket;
-    detail.appendChild(el("h4", { className: "team-detail-head", text: `Top picks · weakest at ${weakLabel}` }));
+    const needLabel = n.top_need_bucket === "FC" ? "F/C (frontcourt)" : n.top_need_bucket;
+    detail.appendChild(el("h4", { className: "team-detail-head", text: `Top picks · top need: ${needLabel}` }));
     const list = el("div", { className: "team-targets" });
     (perTeamTargets || []).slice(0, 6).forEach((tgt, i) => {
       const p = tgt.player;
-      const nameSpan = el("span", { className: "target-name", text: p.name });
+      const nameSpan = el("span", { className: "target-name" });
+      nameSpan.appendChild(playerNameBtn(p.player_id, p.name, "target-name-text"));
       if (tgt.promoted_for_need) {
         nameSpan.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
       }
@@ -433,21 +461,34 @@
     detail.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
     detail.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
 
-    const btn = el("button", {
+    // The card is a div+role rather than <button> so we can nest the
+    // clickable player-name buttons inside it (button-in-button is
+    // invalid HTML). tabindex + Enter/Space handling keep it
+    // keyboard-equivalent.
+    const card = el("div", {
       className: "team-card",
-      attrs: { type: "button", "aria-expanded": "false", "data-team-id": String(team.team_id) },
+      attrs: {
+        role: "button",
+        tabindex: "0",
+        "aria-expanded": "false",
+        "data-team-id": String(team.team_id),
+      },
       children: [head, meta, rows, detail],
     });
-    btn.addEventListener("click", () => {
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", expanded ? "false" : "true");
-      if (expanded) {
-        detail.setAttribute("hidden", "");
-      } else {
-        detail.removeAttribute("hidden");
+    const toggle = () => {
+      const expanded = card.getAttribute("aria-expanded") === "true";
+      card.setAttribute("aria-expanded", expanded ? "false" : "true");
+      if (expanded) detail.setAttribute("hidden", "");
+      else detail.removeAttribute("hidden");
+    };
+    card.addEventListener("click", toggle);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
       }
     });
-    return btn;
+    return card;
   }
 
   function renderTeams(teams, byTeam, transactions) {
@@ -468,7 +509,7 @@
     const tags = el("div", { className: "news-tags" });
     (n.athlete_ids || []).forEach((aid) => {
       const name = playerNameById.get(aid);
-      if (name) tags.appendChild(el("span", { className: "pill team-mono news-player", text: name }));
+      if (name) tags.appendChild(playerNameBtn(aid, name, "pill team-mono news-player"));
     });
     const pubLine = n.published_at
       ? el("span", { className: "news-time", text: fmtTime(n.published_at) })
@@ -540,9 +581,15 @@
     const fromText = fromParts.length ? fromParts.join(" · ") : "FA";
     const toText   = toParts.length   ? toParts.join(" · ")   : "FA";
 
-    const pieces = [
-      el("strong", { text: it.player_name || `#${it.player_id}` }),
-    ];
+    // Name is clickable when we have a real player_id (always true for ESPN
+    // transaction items); the strong wrapper keeps the visual weight.
+    const nameStrong = el("strong");
+    if (it.player_id != null) {
+      nameStrong.appendChild(playerNameBtn(it.player_id, it.player_name || `#${it.player_id}`, "txn-name-text"));
+    } else {
+      nameStrong.textContent = it.player_name || `#${it.player_id}`;
+    }
+    const pieces = [nameStrong];
     // Only render the arrow chunk when there's an actual change.
     if (fromText !== toText) {
       pieces.push(
@@ -563,6 +610,301 @@
     const teamById = new Map((teams || []).map((t) => [t.team_id, t]));
     txns.slice(0, 30).forEach((tx) => list.appendChild(renderTxnCard(tx, teamById)));
   }
+
+  // ---------- Player detail modal ----------
+  //
+  // A single modal at the body level is populated on demand from a
+  // per-player index built once when state.json loads. Index keys are
+  // string player IDs (matches the `data-player-id` attribute we put on
+  // every clickable player name). The index covers everything we know
+  // locally — there's no extra network call to open the modal.
+  //
+  // Long-term, this is the foundation for the player-page backlog item:
+  // when we add per-player splits / cumulative transaction history, the
+  // schema flows into the index, the modal picks up new sections.
+
+  // ESPN player headshot URL pattern. Some retired or minor players don't
+  // have a headshot — the <img> error handler hides the broken icon.
+  const ESPN_HEADSHOT = (pid) =>
+    `https://a.espncdn.com/i/headshots/wnba/players/full/${pid}.png`;
+  const ESPN_PLAYER_PAGE = (pid) =>
+    `https://www.espn.com/wnba/player/_/id/${pid}`;
+
+  // Player ID -> { profile, rosteredBy, waiverTarget, perTeamTarget,
+  //                news, txns }. Set once on bootstrap.
+  let PLAYER_INDEX = new Map();
+  // Team ID -> team object, used by the modal for "rostered by".
+  let TEAM_BY_ID = new Map();
+  // Element to restore focus to when the modal closes.
+  let lastFocusedTrigger = null;
+
+  function buildPlayerIndex(state) {
+    const idx = new Map();
+    const teamsById = new Map((state.teams || []).map((t) => [t.team_id, t]));
+    TEAM_BY_ID = teamsById;
+
+    const ensure = (pid) => {
+      if (!idx.has(pid)) {
+        idx.set(pid, {
+          profile: null,
+          rostered_by: null,
+          waiver_target: null,
+          per_team_targets: [],
+          news: [],
+          txns: [],
+        });
+      }
+      return idx.get(pid);
+    };
+
+    (state.teams || []).forEach((t) => {
+      (t.roster || []).forEach((r) => {
+        const entry = ensure(r.player.player_id);
+        entry.profile = entry.profile || r.player;
+        entry.rostered_by = {
+          team_id: t.team_id,
+          team_name: t.name,
+          team_abbrev: t.abbrev,
+          lineup_slot_label: r.lineup_slot_label,
+          is_active: r.is_active,
+          projected_per_game: r.projected_per_game,
+          projected_points_this_week: r.projected_points_this_week,
+          games_this_week: r.games_this_week,
+        };
+      });
+    });
+
+    (state.waiver_targets_overall || []).forEach((t) => {
+      const entry = ensure(t.player.player_id);
+      entry.profile = entry.profile || t.player;
+      entry.waiver_target = t;
+    });
+
+    (state.waiver_targets_by_team || []).forEach((row) => {
+      const teamMeta = teamsById.get(row.team_id);
+      (row.targets || []).forEach((t) => {
+        const entry = ensure(t.player.player_id);
+        entry.profile = entry.profile || t.player;
+        entry.per_team_targets.push({
+          team_id: row.team_id,
+          team_name: teamMeta ? teamMeta.name : `Team ${row.team_id}`,
+          team_abbrev: teamMeta ? teamMeta.abbrev : `T${row.team_id}`,
+          adjusted_score: t.adjusted_score,
+          projected_points_this_week: t.projected_points_this_week,
+          promoted_for_need: !!t.promoted_for_need,
+        });
+      });
+    });
+
+    // News tagged with this player's athleteId. Cap at 8.
+    Object.entries(state.news_by_player || {}).forEach(([pid, articles]) => {
+      const num = Number(pid);
+      if (!Number.isFinite(num)) return;
+      const entry = ensure(num);
+      entry.news = (articles || []).slice(0, 8);
+    });
+
+    // Transactions where this player appears in any line item.
+    (state.transactions_recent || []).forEach((tx) => {
+      (tx.items || []).forEach((it) => {
+        if (it.player_id == null) return;
+        const entry = ensure(it.player_id);
+        entry.txns.push({ tx, item: it });
+      });
+    });
+
+    return idx;
+  }
+
+  function openPlayerModal(playerId) {
+    const modal = $("#player-modal");
+    if (!modal) return;
+    const entry = PLAYER_INDEX.get(Number(playerId));
+    if (!entry || !entry.profile) {
+      toast("No details on this player yet.");
+      return;
+    }
+    populatePlayerModal(entry);
+    modal.removeAttribute("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    // Focus the close button so Esc / Enter work immediately.
+    const closeBtn = modal.querySelector(".player-modal-close");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closePlayerModal() {
+    const modal = $("#player-modal");
+    if (!modal) return;
+    modal.setAttribute("hidden", "");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    if (lastFocusedTrigger && document.contains(lastFocusedTrigger)) {
+      lastFocusedTrigger.focus();
+    }
+    lastFocusedTrigger = null;
+  }
+
+  function populatePlayerModal(entry) {
+    const p = entry.profile;
+    const photo = $("#player-modal-photo") || $(".player-modal-photo");
+    if (photo) {
+      photo.src = ESPN_HEADSHOT(p.player_id);
+      photo.alt = `${p.name} headshot`;
+      photo.classList.remove("is-fallback");
+      photo.onerror = () => {
+        // Hide the broken image; fall back to initials block via CSS class.
+        photo.classList.add("is-fallback");
+        photo.removeAttribute("src");
+      };
+    }
+
+    $("#player-modal-name").textContent = p.name;
+
+    const metaWrap = $("#player-modal-meta");
+    metaWrap.replaceChildren();
+    metaWrap.appendChild(bucketPill(p.bucket));
+    if (p.team) metaWrap.appendChild(el("span", { className: "pill team-mono", text: p.team }));
+    if (p.position && p.position !== p.bucket) {
+      metaWrap.appendChild(el("span", { className: "player-modal-pos", text: p.position }));
+    }
+    if (p.injury_status && p.injury_status !== "ACTIVE") {
+      metaWrap.appendChild(el("span", { className: "own-neg player-modal-injury", text: p.injury_status }));
+    }
+
+    const statusWrap = $("#player-modal-status");
+    statusWrap.replaceChildren();
+    if (entry.rostered_by) {
+      const r = entry.rostered_by;
+      const slot = r.lineup_slot_label || "?";
+      const activeLabel = r.is_active ? "active" : "bench";
+      statusWrap.appendChild(el("span", {
+        className: "player-modal-status-line",
+        text: `Rostered by ${r.team_name} (${r.team_abbrev}) · ${slot} · ${activeLabel}`,
+      }));
+    } else if (entry.waiver_target) {
+      statusWrap.appendChild(el("span", {
+        className: "player-modal-status-line player-modal-status-fa",
+        text: `Free agent · ${fmtPct(entry.waiver_target.percent_owned)} owned league-wide`,
+      }));
+    } else {
+      statusWrap.appendChild(el("span", {
+        className: "player-modal-status-line muted",
+        text: "Not currently rostered in this league.",
+      }));
+    }
+
+    // Stats grid — pull from whichever context has them.
+    const r = entry.rostered_by;
+    const wt = entry.waiver_target;
+    const perGame = r?.projected_per_game ?? wt?.projected_per_game;
+    const weekProj = r?.projected_points_this_week ?? wt?.projected_points_this_week;
+    const games = r?.games_this_week ?? wt?.games_this_week;
+    const seasonAvg = wt?.season_avg_points;
+    const ownership = wt?.percent_owned;
+    const ownChange = wt?.percent_change;
+
+    const statsWrap = $("#player-modal-stats");
+    statsWrap.replaceChildren();
+    statsWrap.appendChild(statBlock("This week", fmtPoints(weekProj), "proj pts"));
+    statsWrap.appendChild(statBlock("Per game", fmtPoints(perGame), "proj"));
+    statsWrap.appendChild(statBlock("Games", games != null ? String(games) : "—", "this week"));
+    if (seasonAvg != null) statsWrap.appendChild(statBlock("Season", fmtPoints(seasonAvg), "actual /g"));
+    if (ownership != null) {
+      const ch = fmtPctChange(ownChange);
+      const sub = ch ? `${ch} 7d` : "owned";
+      statsWrap.appendChild(statBlock("Ownership", fmtPct(ownership), sub));
+    }
+
+    // News
+    const newsList = $("#player-modal-news");
+    newsList.replaceChildren();
+    if (entry.news && entry.news.length) {
+      entry.news.forEach((n) => {
+        const li = el("li", { className: "player-modal-news-item" });
+        li.appendChild(el("a", {
+          className: "player-modal-news-headline",
+          text: n.headline,
+          attrs: { href: n.url || "#", target: "_blank", rel: "noopener" },
+        }));
+        if (n.published_at) {
+          li.appendChild(el("span", { className: "player-modal-news-time", text: fmtTime(n.published_at) }));
+        }
+        if (n.description) {
+          li.appendChild(el("p", { className: "player-modal-news-desc", text: n.description }));
+        }
+        newsList.appendChild(li);
+      });
+    } else {
+      newsList.appendChild(el("li", { className: "empty", text: "No tagged headlines in the recent news feed." }));
+    }
+
+    // Transactions (most recent first; entries already in feed order).
+    const txnList = $("#player-modal-txns");
+    txnList.replaceChildren();
+    if (entry.txns && entry.txns.length) {
+      entry.txns.slice(0, 10).forEach(({ tx, item }) => {
+        const teamBy = TEAM_BY_ID;
+        const head = el("div", {
+          className: "player-modal-txn-head",
+          children: [
+            el("span", { className: `txn-type ${txTypeClass(tx.type)}`, text: (tx.type || "").replace(/_/g, " ") }),
+            tx.team_id != null
+              ? el("span", { className: "pill team-mono", text: teamBy.get(tx.team_id)?.abbrev || `T${tx.team_id}` })
+              : null,
+            el("span", { className: "txn-time", text: fmtTime(tx.occurred_at) }),
+          ].filter(Boolean),
+        });
+        const direction = formatTxnDirection(item, teamBy);
+        const body = el("div", { className: "player-modal-txn-body", text: direction });
+        txnList.appendChild(el("li", {
+          className: "player-modal-txn-item",
+          children: [head, body],
+        }));
+      });
+    } else {
+      txnList.appendChild(el("li", { className: "empty", text: "No transactions involving this player in the recent window." }));
+    }
+
+    // ESPN deep link
+    $("#player-modal-espn").href = ESPN_PLAYER_PAGE(p.player_id);
+  }
+
+  function statBlock(label, value, sub) {
+    return el("div", {
+      className: "player-modal-stat",
+      children: [
+        el("span", { className: "player-modal-stat-label", text: label }),
+        el("span", { className: "player-modal-stat-value", text: value }),
+        sub ? el("span", { className: "player-modal-stat-sub", text: sub }) : null,
+      ].filter(Boolean),
+    });
+  }
+
+  function formatTxnDirection(it, teamBy) {
+    const fromTeam = teamAbbr(it.from_team_id, teamBy);
+    const toTeam   = teamAbbr(it.to_team_id, teamBy);
+    const fromSlot = slotLabel(it.from_slot_id);
+    const toSlot   = slotLabel(it.to_slot_id);
+    const fromParts = [fromTeam, fromSlot].filter(Boolean);
+    const toParts   = [toTeam,   toSlot  ].filter(Boolean);
+    const fromText = fromParts.length ? fromParts.join(" · ") : "FA";
+    const toText   = toParts.length   ? toParts.join(" · ")   : "FA";
+    return fromText === toText ? fromText : `${fromText} → ${toText}`;
+  }
+
+  // Player-name buttons attach their own click listeners (see
+  // `playerNameBtn`) so we only need delegation for the modal close
+  // affordances and a global Escape key.
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-modal-close]")) closePlayerModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const modal = $("#player-modal");
+      if (modal && !modal.hasAttribute("hidden")) closePlayerModal();
+    }
+  });
 
   // ---------- Render error states ----------
   function renderEmptyAll(reason) {
@@ -588,6 +930,10 @@
         return;
       }
       const state = await resp.json();
+      // Build the per-player index BEFORE rendering — the player-name
+      // buttons rendered inside team cards, waivers, and txns expect it
+      // to exist when a click fires.
+      PLAYER_INDEX = buildPlayerIndex(state);
       renderMeta(state.meta || {});
       renderWaivers(state.waiver_targets_overall);
       renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);

@@ -27,7 +27,7 @@ class PlayerRef(_Strict):
     name: str
     team: str | None = Field(None, description="WNBA team abbreviation, e.g. NY")
     position: str = Field(..., description="G / F / C / ? — derived from defaultPositionId")
-    bucket: Literal["G", "F", "C"] = Field(..., description="G / F / C bucket used for weakness math")
+    bucket: Literal["G", "F", "C"] = Field(..., description="G / F / C bucket used for team-needs math")
     eligible_slots: list[int] = Field(default_factory=list)
     injury_status: str | None = None
 
@@ -52,25 +52,29 @@ class TeamRecord(_Strict):
     pct: float
 
 
-class TeamWeakness(_Strict):
+class TeamNeeds(_Strict):
     """Per-team production by bucket, with league-average comparison.
+
+    Framed proactively as *needs* — the bucket with the largest negative
+    gap-vs-league is the team's biggest upgrade opportunity, surfaced as
+    `top_need_bucket`.
 
     The load-bearing comparison is **G vs FC** (frontcourt = F + C combined),
     because WNBA fantasy uses shared F/C lineup slots — a team with zero
-    `defaultPositionId=3` players isn't structurally weak at "C" if they
+    `defaultPositionId=3` players doesn't have a structural C need if they
     fill those slots with Forwards. The granular F and C breakdowns are
-    kept for diagnostics, but `weakest_bucket` and waiver-target adjustment
-    use the combined frontcourt number.
+    kept for diagnostics, but `top_need_bucket` and waiver-target
+    adjustment use the combined frontcourt number.
     """
     guard_proj: float
     forward_proj: float
     center_proj: float
     frontcourt_proj: float = Field(..., description="forward_proj + center_proj")
-    guard_gap_vs_league: float = Field(..., description="team - league avg, negative = weakness")
+    guard_gap_vs_league: float = Field(..., description="team - league avg, negative = need")
     forward_gap_vs_league: float
     center_gap_vs_league: float
     frontcourt_gap_vs_league: float
-    weakest_bucket: Literal["G", "FC"]
+    top_need_bucket: Literal["G", "FC"]
 
 
 class TeamState(_Strict):
@@ -83,7 +87,7 @@ class TeamState(_Strict):
     waiver_position: int | None = None
     faab_remaining: int | None = None
     roster: list[RosterEntry]
-    weakness: TeamWeakness
+    needs: TeamNeeds
     summary: list[str] = Field(default_factory=list, description="Auto-generated bullet summary")
     recent_transaction_ids: list[str] = Field(
         default_factory=list,

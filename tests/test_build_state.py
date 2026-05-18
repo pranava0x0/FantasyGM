@@ -34,15 +34,15 @@ def test_meta_populated(
     assert state.meta.captured_at == captured_at
 
 
-def test_teams_have_weakness_payload(
+def test_teams_have_needs_payload(
     league_raw: dict, free_agents_raw: dict, captured_at: datetime
 ) -> None:
     state = bs.build_state(
         league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
     )
     for t in state.teams:
-        # WNBA fantasy uses shared F/C slots — weakest is G vs combined FC.
-        assert t.weakness.weakest_bucket in ("G", "FC")
+        # WNBA fantasy uses shared F/C slots — top need is G vs combined FC.
+        assert t.needs.top_need_bucket in ("G", "FC")
 
 
 def test_waiver_targets_present(

@@ -42,7 +42,7 @@ def build_state(
     games_by_pro_team = schedule.games_per_team(league_raw, week_start, week_end)
 
     teams_view = analyze.build_team_views(league_raw, games_by_pro_team=games_by_pro_team)
-    weakness = analyze.compute_team_weakness(teams_view)
+    needs = analyze.compute_team_needs(teams_view)
 
     ranked_fas_dicts = analyze.rank_free_agents(
         free_agents_raw,
@@ -59,10 +59,10 @@ def build_state(
     transactions_raw = analyze.normalize_transactions(league_raw)
 
     # Generate the per-team narrative bullets up front, using the
-    # already-built teams_view + weakness + transactions.
+    # already-built teams_view + needs + transactions.
     summaries = summary.build_team_summaries(
         teams_view,
-        weakness,
+        needs,
         transactions_raw,
         matchup_period_id=int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0),
     )
@@ -78,7 +78,7 @@ def build_state(
     teams: list[schema.TeamState] = []
     by_team_targets: list[schema.WaiverTargetsByTeam] = []
     for t in teams_view:
-        w = weakness[t["team_id"]]
+        w = needs[t["team_id"]]
         roster_entries = [
             schema.RosterEntry(
                 player=schema.PlayerRef(
@@ -113,7 +113,7 @@ def build_state(
             waiver_position=t["waiver_position"],
             faab_remaining=t["faab_remaining"],
             roster=roster_entries,
-            weakness=schema.TeamWeakness(
+            needs=schema.TeamNeeds(
                 guard_proj=w["guard_proj"],
                 forward_proj=w["forward_proj"],
                 center_proj=w["center_proj"],
@@ -122,7 +122,7 @@ def build_state(
                 forward_gap_vs_league=w["forward_gap_vs_league"],
                 center_gap_vs_league=w["center_gap_vs_league"],
                 frontcourt_gap_vs_league=w["frontcourt_gap_vs_league"],
-                weakest_bucket=w["weakest_bucket"],
+                top_need_bucket=w["top_need_bucket"],
             ),
             summary=summaries.get(int(t["team_id"]), []),
             recent_transaction_ids=team_txn_ids.get(int(t["team_id"]), []),

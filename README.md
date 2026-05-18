@@ -1,6 +1,6 @@
-# FantasyGM
+# Fantasy GM
 
-AI-powered GM for an ESPN fantasy WNBA league. Identifies trending waiver-wire targets, flags positional weaknesses across teams, and tracks transactions over time.
+AI-powered GM for an ESPN fantasy WNBA league. Identifies trending waiver-wire targets, surfaces each team's biggest positional need (proactive framing — "top need," not "weakness"), and tracks transactions over time.
 
 The data pipeline runs locally on your machine. The output is a static page hosted on GitHub Pages. No backend, no secrets in this repo.
 
@@ -33,7 +33,7 @@ Or trigger the whole thing through Claude Code: `/refresh-fantasy-gm`.
 pipeline/        Python data pipeline (idempotent)
   espn_client.py    Auth + thin wrapper over ESPN private API
   ingest.py         Fetch + dump raw snapshots to data/raw/<date>/
-  analyze.py        Position weakness + waiver target ranking
+  analyze.py        Team-needs gaps + waiver target ranking
   build_state.py    Write docs/data/state.json (single UI source of truth)
   schema.py         Pydantic models — single source of truth for shapes
   refresh.py        CLI entrypoint that runs the full pipeline
@@ -47,7 +47,7 @@ tests/           pytest suite (schema + analysis fixtures)
 ## What it does
 
 - **Teams & rosters.** Pulls every team's name, roster, record, FAAB / waiver position, and transaction history. Tracks teams by stable ESPN team ID across name changes.
-- **Position weakness scan.** Compares each team's guard production vs forward/center production vs the league average. Surfaces under-performing slots.
+- **Team-needs scan.** Compares each team's guard production vs forward/center production vs the league average. Surfaces the bucket with the biggest upgrade opportunity ("top need") for each team.
 - **Waiver target ranking.** Ranks the free-agent pool by projected fantasy production, then re-weights for each team's positional gaps.
 - **Transaction history.** Records every add, drop, trade, lineup change with timestamps. Persisted to `data/history/transactions.jsonl`.
 

@@ -6,16 +6,19 @@
 
 ---
 
-## 0. Project palette + motif (FantasyGM)
+## 0. Project palette + motif (Fantasy GM)
 
 **Visual posture:** sports-desk dashboard. The page should read like a Bloomberg terminal for a fantasy GM, not a consumer fan-engagement product. Density over decoration. Tabular numerals everywhere there's a number — projected points, ownership %, gap-vs-league.
+
+**Voice:** proactive and opportunity-framed. Avoid loaded words like *weakness*, *poor*, *struggling*. Use *top need*, *biggest upgrade*, *room to add*, *opportunity*. The user is a GM looking forward, not auditing past failure.
 
 **Layout primitives:**
 
 1. **Meta strip** at top — league name, scoring period, matchup period, captured timestamp. Tabular numerals.
-2. **Waiver Targets** as the primary surface (the main product loop). Ranked list cards. Each card: name + WNBA team + position bucket + projected next-period points + ownership %. A small "weakness fit" pill ("strong fit for PHE at C") when adjusted score > base score by ≥ 0.5.
-3. **Team weakness grid** — one card per team. Three mini-bars (G / F / C) with gap-vs-league overlay. Tap to expand → per-team waiver target list reorders.
+2. **Waiver Targets** as the primary surface (the main product loop). Ranked list cards. Each card: name + WNBA team + position bucket + projected next-period points + ownership %. A small "fits N need" pill ("Fits FC", "Need") when adjusted score > base score and the pick targets the team's top need.
+3. **Team Needs grid** — one card per team. Two mini-bars (G / F-C combined) with gap-vs-league overlay. The bar for the team's *top need bucket* renders in `--gap-weak` to draw the eye to the biggest upgrade area. Tap to expand → per-team waiver target list reorders.
 4. **Transaction log** as a chronological list at the bottom. Latest first. Each row: team abbrev (no owner names ever), action type, players moved, timestamp.
+5. **Player detail modal** — any player name (in waivers, rosters, team-target lists, transaction items, news tags) is a button that opens a centered modal with photo, position + pro team, stat blocks, status (rostered-by vs free agent), tagged news, recent transactions involving the player, and a deep-link to their ESPN page. Foundation for the "scouting" loop.
 
 **Brand-adjacent color encoding (semantic tokens, not brand):**
 
@@ -41,7 +44,7 @@ Bucket colors are intentionally desaturated relative to ESPN's brand palette —
 | Pill | Meaning | Style |
 | --- | --- | --- |
 | `G` / `F` / `C` | Position bucket | Outline pill, color from `--bucket-*` |
-| `WK G` / `WK F` / `WK C` | Weakest bucket for the team | Solid pill, `--gap-weak` |
+| `Fits FC` / `Need` | Pick targets this team's top need | Solid pill, `--accent` (Fits) or `--gap-weak` (Need) |
 | `+2.3 vs LG` | Gap to league avg, when positive | Inline span, `--gap-strong` |
 | `-4.1 vs LG` | Gap when negative | Inline span, `--gap-weak` |
 | `ADD` / `DROP` / `TRADE` / `LINEUP` | Transaction type | Outline pill, color from `--txn-*` |

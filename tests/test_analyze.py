@@ -52,30 +52,30 @@ class TestBuildTeamViews:
         views = analyze.build_team_views(league)
         ids = [v["team_id"] for v in views]
         assert ids == [1, 7, 10], "team_id must be preserved verbatim, not re-indexed"
-        # Weakness math must use the actual IDs, not 0..len-1.
-        weakness = analyze.compute_team_weakness(views)
-        assert set(weakness.keys()) == {1, 7, 10}
+        # Needs math must use the actual IDs, not 0..len-1.
+        needs = analyze.compute_team_needs(views)
+        assert set(needs.keys()) == {1, 7, 10}
 
 
-class TestComputeTeamWeakness:
+class TestComputeTeamNeeds:
     def test_keys_per_team(self, league_raw: dict) -> None:
         views = analyze.build_team_views(league_raw)
-        weakness = analyze.compute_team_weakness(views)
-        assert len(weakness) == len(views)
+        needs = analyze.compute_team_needs(views)
+        assert len(needs) == len(views)
 
-    def test_weakness_payload_shape(self, league_raw: dict) -> None:
+    def test_needs_payload_shape(self, league_raw: dict) -> None:
         views = analyze.build_team_views(league_raw)
-        weakness = analyze.compute_team_weakness(views)
-        sample = next(iter(weakness.values()))
+        needs = analyze.compute_team_needs(views)
+        sample = next(iter(needs.values()))
         required = {
             "guard_proj", "forward_proj", "center_proj", "frontcourt_proj",
             "guard_gap_vs_league", "forward_gap_vs_league",
             "center_gap_vs_league", "frontcourt_gap_vs_league",
-            "weakest_bucket", "league_avg",
+            "top_need_bucket", "league_avg",
         }
         assert required.issubset(sample.keys())
-        # WNBA fantasy uses shared F/C slots — weakest is G vs combined frontcourt.
-        assert sample["weakest_bucket"] in ("G", "FC")
+        # WNBA fantasy uses shared F/C slots — top need is G vs combined frontcourt.
+        assert sample["top_need_bucket"] in ("G", "FC")
         # Frontcourt math must be the sum, not something derived elsewhere.
         assert sample["frontcourt_proj"] == round(sample["forward_proj"] + sample["center_proj"], 2)
 
@@ -83,9 +83,9 @@ class TestComputeTeamWeakness:
         # Sum of (team_proj - league_avg) across all teams should be ~0 per bucket
         # (modulo rounding to 2 decimals).
         views = analyze.build_team_views(league_raw)
-        weakness = analyze.compute_team_weakness(views)
+        needs = analyze.compute_team_needs(views)
         for bucket_key in ("guard_gap_vs_league", "forward_gap_vs_league", "center_gap_vs_league"):
-            total = sum(w[bucket_key] for w in weakness.values())
+            total = sum(w[bucket_key] for w in needs.values())
             assert abs(total) < 0.05, f"{bucket_key} sums to {total}, expected ~0"
 
 
@@ -121,7 +121,7 @@ class TestRankFreeAgents:
         assert ranked[0]["base_score"] > forward_top["base_score"]
 
     def test_zero_games_zeroes_the_week_proj(self, free_agents_raw: dict) -> None:
-        # A bye-week player must not be elevated by upstream weakness boosts.
+        # A bye-week player must not be elevated by upstream needs boosts.
         games = {9: 0, 11: 0, 14: 0, 17: 0, 20: 0}
         ranked = analyze.rank_free_agents(
             free_agents_raw, scoring_period_id=10, limit=10, games_by_pro_team=games,
@@ -158,12 +158,12 @@ class TestRankFreeAgents:
 
 class TestWaiverTargetsForTeam:
     def test_no_boost_when_team_strong_everywhere(self, free_agents_raw: dict) -> None:
-        weakness = {
+        needs = {
             "guard_gap_vs_league": 5.0,
             "frontcourt_gap_vs_league": 5.0,
         }
         ranked = analyze.rank_free_agents(free_agents_raw, scoring_period_id=10, limit=10)
-        boosted = analyze.waiver_targets_for_team(weakness, ranked)
+        boosted = analyze.waiver_targets_for_team(needs, ranked)
         assert all(r["team_bonus"] == 0.0 for r in boosted)
         # When no boost AND no saturation, adjusted = base.
         assert all(r["adjusted_score"] == r["base_score"] for r in boosted)
@@ -171,12 +171,12 @@ class TestWaiverTargetsForTeam:
     def test_severe_gap_uses_larger_weight(self, free_agents_raw: dict) -> None:
         # Severe (-15) frontcourt gap: weight 0.15 → bonus = 15 * 0.15 = 2.25
         # (subject to 50% base-score cap).
-        weakness = {
+        needs = {
             "guard_gap_vs_league": 0.0,
             "frontcourt_gap_vs_league": -15.0,
         }
         ranked = analyze.rank_free_agents(free_agents_raw, scoring_period_id=10, limit=10)
-        boosted = analyze.waiver_targets_for_team(weakness, ranked)
+        boosted = analyze.waiver_targets_for_team(needs, ranked)
         fc_targets = [r for r in boosted if r["bucket"] in ("F", "C")]
         assert fc_targets, "expected at least one FC target in the FA pool"
         for r in fc_targets:
@@ -186,7 +186,7 @@ class TestWaiverTargetsForTeam:
 
     def test_boost_capped_at_half_base_score(self) -> None:
         # 100-pt gap must not catapult a 2-pt bench player above legit picks.
-        weakness = {
+        needs = {
             "guard_gap_vs_league": 0.0,
             "frontcourt_gap_vs_league": -100.0,
         }
@@ -198,14 +198,14 @@ class TestWaiverTargetsForTeam:
             "percent_owned": 0.0, "percent_change": 0.0,
             "base_score": 2.0,
         }]
-        boosted = analyze.waiver_targets_for_team(weakness, ranked)
+        boosted = analyze.waiver_targets_for_team(needs, ranked)
         # bonus capped at base * 0.5 = 1.0.
         assert boosted[0]["team_bonus"] == 1.0
         assert boosted[0]["adjusted_score"] == 3.0
 
     def test_saturation_penalty_on_overloaded_bucket(self) -> None:
         # Team with 7 active guards should see guard picks penalized.
-        weakness = {"guard_gap_vs_league": 0.0, "frontcourt_gap_vs_league": 0.0}
+        needs = {"guard_gap_vs_league": 0.0, "frontcourt_gap_vs_league": 0.0}
         ranked = [
             {"player_id": 1, "name": "G One", "pro_team_id": 9, "position": "G",
              "bucket": "G", "eligible_slots": [1], "injury_status": "ACTIVE",
@@ -217,7 +217,7 @@ class TestWaiverTargetsForTeam:
              "percent_owned": 0.0, "percent_change": 0.0, "base_score": 18.0},
         ]
         boosted = analyze.waiver_targets_for_team(
-            weakness, ranked, active_counts={"G": 7, "F": 2, "C": 0},
+            needs, ranked, active_counts={"G": 7, "F": 2, "C": 0},
         )
         # F One now ranks above G One (20 base vs 18 base, but G penalized -6).
         assert boosted[0]["name"] == "F One"
@@ -227,9 +227,9 @@ class TestWaiverTargetsForTeam:
 
     def test_no_active_counts_means_no_saturation(self, free_agents_raw: dict) -> None:
         # Legacy callers (no active_counts) get no saturation penalty.
-        weakness = {"guard_gap_vs_league": 0.0, "frontcourt_gap_vs_league": 0.0}
+        needs = {"guard_gap_vs_league": 0.0, "frontcourt_gap_vs_league": 0.0}
         ranked = analyze.rank_free_agents(free_agents_raw, scoring_period_id=10, limit=10)
-        boosted = analyze.waiver_targets_for_team(weakness, ranked)
+        boosted = analyze.waiver_targets_for_team(needs, ranked)
         assert all(r["saturation_penalty"] == 0.0 for r in boosted)
 
 

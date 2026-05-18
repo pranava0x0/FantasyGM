@@ -70,7 +70,7 @@ def slot_label(lineup_slot_id: int | None) -> str:
 
 
 def position_bucket(default_position_id: int | None, eligible_slots: Iterable[int] | None = None) -> PositionBucket:
-    """Bucket a player into G / F / C for weakness analysis.
+    """Bucket a player into G / F / C for team-needs analysis.
 
     Uses defaultPositionId as the primary signal. Falls back to scanning
     eligibleSlots if the default position is unknown. Defaults to F for

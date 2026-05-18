@@ -39,26 +39,26 @@ def _team_view(
     }
 
 
-def _weakness(weakest: str = "FC", g_gap: float = 0.0, fc_gap: float = 0.0) -> dict:
+def _needs(top_need: str = "FC", g_gap: float = 0.0, fc_gap: float = 0.0) -> dict:
     return {
-        "weakest_bucket": weakest,
+        "top_need_bucket": top_need,
         "guard_gap_vs_league": g_gap,
         "frontcourt_gap_vs_league": fc_gap,
     }
 
 
 class TestBuildTeamSummaries:
-    def test_severe_fc_weakness_makes_first_bullet(self) -> None:
+    def test_severe_fc_need_makes_first_bullet(self) -> None:
         out = build_team_summaries(
-            [_team_view(1)], {1: _weakness("FC", fc_gap=-25.0)}, [],
+            [_team_view(1)], {1: _needs("FC", fc_gap=-25.0)}, [],
         )
-        assert "Frontcourt is the structural weak spot" in out[1][0]
+        assert "Top need: add F/C production" in out[1][0]
         assert "25" in out[1][0]
 
     def test_top_scorer_bullet_includes_position_and_games(self) -> None:
         out = build_team_summaries(
             [_team_view(1, top_scorer=("A'ja Wilson", "C", 120.5, 4))],
-            {1: _weakness()}, [],
+            {1: _needs()}, [],
         )
         joined = " ".join(out[1])
         assert "A'ja Wilson" in joined
@@ -67,7 +67,7 @@ class TestBuildTeamSummaries:
 
     def test_record_bullet_skipped_before_matchup_2(self) -> None:
         out = build_team_summaries(
-            [_team_view(1, record=(5, 3, 0))], {1: _weakness()}, [],
+            [_team_view(1, record=(5, 3, 0))], {1: _needs()}, [],
             matchup_period_id=1,
         )
         # Matchup 1 = season hasn't really started; record is 0-0 by definition.
@@ -77,7 +77,7 @@ class TestBuildTeamSummaries:
 
     def test_record_bullet_included_from_matchup_2(self) -> None:
         out = build_team_summaries(
-            [_team_view(1, record=(5, 3, 0))], {1: _weakness()}, [],
+            [_team_view(1, record=(5, 3, 0))], {1: _needs()}, [],
             matchup_period_id=4,
         )
         joined = " ".join(out[1])
@@ -86,12 +86,12 @@ class TestBuildTeamSummaries:
     def test_guard_heavy_only_at_6_plus_actives(self) -> None:
         # 5 G / 4 FC is the normal league lineup — should NOT trigger.
         out_normal = build_team_summaries(
-            [_team_view(1, g_active=5, fc_active=4)], {1: _weakness()}, [],
+            [_team_view(1, g_active=5, fc_active=4)], {1: _needs()}, [],
         )
         assert all("Guard-heavy" not in b for b in out_normal[1])
         # 6+ G should trigger.
         out_heavy = build_team_summaries(
-            [_team_view(1, g_active=6, fc_active=3)], {1: _weakness()}, [],
+            [_team_view(1, g_active=6, fc_active=3)], {1: _needs()}, [],
         )
         assert any("Guard-heavy" in b for b in out_heavy[1])
 
@@ -101,14 +101,14 @@ class TestBuildTeamSummaries:
             {"transaction_id": "b", "team_id": 1, "type": "TRADE_ACCEPT"},
             {"transaction_id": "c", "team_id": 2, "type": "WAIVER"},  # other team
         ]
-        out = build_team_summaries([_team_view(1)], {1: _weakness()}, txns)
+        out = build_team_summaries([_team_view(1)], {1: _needs()}, txns)
         joined = " ".join(out[1])
         assert "2 recent transactions" in joined
 
     def test_capped_at_5_bullets(self) -> None:
         out = build_team_summaries(
             [_team_view(1, g_active=6, fc_active=3, record=(5, 3, 0))],
-            {1: _weakness("FC", fc_gap=-30.0)},
+            {1: _needs("FC", fc_gap=-30.0)},
             [{"transaction_id": "a", "team_id": 1, "type": "WAIVER"}],
             matchup_period_id=4,
         )

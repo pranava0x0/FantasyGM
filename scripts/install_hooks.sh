@@ -10,7 +10,11 @@
 set -euo pipefail
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-HOOK_PATH="$REPO_ROOT/.git/hooks/pre-commit"
+# Hooks live in the common .git/hooks (shared across worktrees). Resolve via
+# --git-common-dir so this works from a linked worktree too.
+COMMON_GIT_DIR="$(git rev-parse --git-common-dir)"
+case "$COMMON_GIT_DIR" in /*) ;; *) COMMON_GIT_DIR="$REPO_ROOT/$COMMON_GIT_DIR" ;; esac
+HOOK_PATH="$COMMON_GIT_DIR/hooks/pre-commit"
 
 cat > "$HOOK_PATH" <<'HOOK'
 #!/usr/bin/env bash
@@ -22,7 +26,15 @@ cat > "$HOOK_PATH" <<'HOOK'
 set -euo pipefail
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
+# In a worktree, $REPO_ROOT is the worktree (no .venv there). Also probe the
+# main checkout via --git-common-dir so the venv-Python is found from any
+# worktree.
+COMMON_GIT_DIR="$(git rev-parse --git-common-dir)"
+case "$COMMON_GIT_DIR" in /*) ;; *) COMMON_GIT_DIR="$REPO_ROOT/$COMMON_GIT_DIR" ;; esac
+MAIN_REPO_ROOT="$(dirname "$COMMON_GIT_DIR")"
+
 PY="$REPO_ROOT/.venv/bin/python"
+[ -x "$PY" ] || PY="$MAIN_REPO_ROOT/.venv/bin/python"
 [ -x "$PY" ] || PY="python3"
 
 if ! "$PY" -m pipeline._secret_scan; then

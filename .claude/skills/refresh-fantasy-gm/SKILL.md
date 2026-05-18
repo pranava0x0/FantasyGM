@@ -85,7 +85,7 @@ git diff --stat docs/data/state.json data/history/transactions.jsonl
 
 Then read the relevant slice of `docs/data/state.json` and summarize for the user in ~5 bullet points:
 - League name + scoring period.
-- Number of teams; any with a new weakness (gap > 8 worse than yesterday).
+- Number of teams; any with a new top need (gap > 8 worse than yesterday).
 - Top 3 waiver targets (name · bucket · projected points · ownership %).
 - Recent transactions (count + last-seen timestamp).
 - New transactions appended today.
