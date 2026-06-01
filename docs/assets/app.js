@@ -704,6 +704,14 @@
       entry.news = (articles || []).slice(0, 8);
     });
 
+    // Reddit r/wnba posts mentioning this player. Cap at 5.
+    Object.entries(state.reddit_posts_by_player || {}).forEach(([pid, posts]) => {
+      const num = Number(pid);
+      if (!Number.isFinite(num)) return;
+      const entry = ensure(num);
+      entry.reddit = (posts || []).slice(0, 5);
+    });
+
     // Transactions where this player appears in any line item.
     (state.transactions_recent || []).forEach((tx) => {
       (tx.items || []).forEach((it) => {
@@ -864,6 +872,26 @@
       });
     } else {
       txnList.appendChild(el("li", { className: "empty", text: "No transactions involving this player in the recent window." }));
+    }
+
+    // Reddit posts
+    const redditList = $("#player-modal-reddit");
+    redditList.replaceChildren();
+    if (entry.reddit && entry.reddit.length) {
+      entry.reddit.forEach((post) => {
+        const li = el("li", { className: "player-modal-reddit-item" });
+        li.appendChild(el("a", {
+          className: "player-modal-reddit-title",
+          text: post.title,
+          attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
+        }));
+        if (post.published_at) {
+          li.appendChild(el("span", { className: "player-modal-reddit-time", text: fmtTime(post.published_at) }));
+        }
+        redditList.appendChild(li);
+      });
+    } else {
+      redditList.appendChild(el("li", { className: "empty", text: "No recent r/wnba posts mentioning this player." }));
     }
 
     // ESPN deep link

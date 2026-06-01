@@ -1,7 +1,7 @@
 # UAT Baseline — FantasyGM
 
 _Created: 2026-05-17_
-_Last run: 2026-05-17_
+_Last run: 2026-06-01_
 
 ## Project Info
 
@@ -22,12 +22,15 @@ _Last run: 2026-05-17_
 
 | Section | Last Tested | Notes |
 | --- | --- | --- |
-| Topbar / Brand / Theme toggle | 2026-05-17 | Stable. Toggle is a 44×44 button (touch target ✓). |
-| Meta strip | 2026-05-17 | Wraps on narrow widths; "As of" pushes to right edge on wide. |
-| Top Waiver Targets | 2026-05-17 | Card grid: rank · name+pills · projection. Bucket colors (G blue / F amber / C magenta) render. |
-| Team Needs | 2026-05-17 | 1-up at <640px, 2-up at 640–1023, 4-up at ≥1024. Bar fill goes red on the top-need bucket. |
-| Recent Transactions | 2026-05-17 | Fixed in this UAT pass — see "Known stable" below. |
-| Empty / error state | 2026-05-17 | Tested via DevTools: fetch failure shows "Couldn't load state.json" line per section. |
+| Topbar / Brand / Theme toggle | 2026-06-01 | Stable. Light↔dark toggle persists via localStorage. |
+| Meta strip | 2026-06-01 | Wraps to 3 lines at 375px. "As of" aligns right. All 8 teams reflected. |
+| Waivers tab | 2026-06-01 | 15 healthy targets render. OUT players correctly excluded. Bucket pills (G/F/C), per-game, ownership %, trend all present. Player modal opens and closes. |
+| Team Needs tab | 2026-06-01 | 4-up desktop, 2-up tablet, 1-up mobile. Expand/collapse works. Summary bullets, tailored picks, full roster, transactions shown. |
+| News tab | 2026-06-01 | **Unstable** — non-WNBA articles leaking in (see UAT-004/005). |
+| Transactions tab | 2026-06-01 | Stable. All 5 today's transactions render. Slot labels correct. FAAB bids shown. Player name buttons present. |
+| Mobile 375px | 2026-06-01 | Tab nav truncates "Transactions" → "Transact" (see UAT-006). Rest of layout correct. |
+| Tablet 768px | 2026-06-01 | 2-up team grid confirmed. Tabs fit without clipping. |
+| Dark mode | 2026-06-01 | Stable. All surfaces, text, pills correctly themed. |
 
 ## Known stable areas
 
@@ -39,7 +42,8 @@ _Last run: 2026-05-17_
 
 ## Known flaky / unstable areas
 
-- **None known.** First UAT pass uncovered three transaction-rendering bugs (UAT-001..003 in `ISSUES.md`); fixed and confirmed in this run.
+- **News tab** — ESPN's news feed is multi-sport; non-WNBA articles bleed in. Also athlete IDs are not sport-scoped, causing false player tags on unrelated articles. See UAT-004/005.
+- **Mobile tab nav** — "Transactions" truncates to "Transact" at 375px due to `flex-shrink: 1` on `.tab`. See UAT-006.
 
 ## Exploration notes
 
@@ -55,8 +59,14 @@ Things worth trying on future runs:
 
 ## Issues found this run
 
-See `ISSUES.md` for the audit table:
+See `issues.md` for the audit table.
 
-- **UAT-001** Slot ID `-1` rendered literally as `S-1` (sentinel value). Fixed.
-- **UAT-002** Team ID `0` rendered as `T0` (no-team sentinel). Fixed.
-- **UAT-003** Raw `S1` / `S6` instead of slot labels (G / UTIL / BE). Fixed.
+**2026-05-17 (first run):**
+- UAT-001: Slot ID `-1` rendered as `S-1`. Fixed.
+- UAT-002: Team ID `0` rendered as `T0`. Fixed.
+- UAT-003: Raw `S1`/`S6` instead of slot labels. Fixed.
+
+**2026-06-01 (this run — first pass against real 8-team data):**
+- UAT-004: Non-WNBA articles in "Recent WNBA News" (e.g. OBJ story). Open.
+- UAT-005: False player tag — DeWanna Bonner tagged on OBJ article via cross-sport athlete ID collision (id=869). Open.
+- UAT-006: "Transactions" tab truncates to "Transact" at 375px mobile. `flex-shrink: 1` on `.tab` is the fix target. Open.

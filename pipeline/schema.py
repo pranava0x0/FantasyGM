@@ -171,6 +171,12 @@ class NewsItem(_Strict):
     pro_team_ids: list[int] = Field(default_factory=list)
 
 
+class RedditPost(_Strict):
+    title: str
+    url: str
+    published_at: datetime | None = None
+
+
 class LeagueState(_Strict):
     """Top-level object written to `docs/data/state.json`."""
     meta: LeagueMeta
@@ -180,3 +186,4 @@ class LeagueState(_Strict):
     waiver_targets_by_team: list[WaiverTargetsByTeam]
     news_recent: list[NewsItem] = Field(default_factory=list)
     news_by_player: dict[int, list[NewsItem]] = Field(default_factory=dict)
+    reddit_posts_by_player: dict[int, list[RedditPost]] = Field(default_factory=dict)

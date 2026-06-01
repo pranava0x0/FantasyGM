@@ -181,6 +181,7 @@ main {
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   min-height: 44px;
+  flex-shrink: 0;
 }
 .tab:hover { color: var(--text); }
 .tab[aria-selected="true"] {
@@ -896,8 +897,18 @@ body.modal-open { overflow: hidden; }
   color: var(--text-muted);
 }
 
+.player-modal-section-source {
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  opacity: 0.7;
+  margin-left: 6px;
+}
+
 .player-modal-news,
-.player-modal-txns {
+.player-modal-txns,
+.player-modal-reddit {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -956,6 +967,26 @@ body.modal-open { overflow: hidden; }
   font-size: 12.5px;
   color: var(--text);
   font-variant-numeric: tabular-nums;
+}
+
+.player-modal-reddit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.player-modal-reddit-item:last-child { border-bottom: 0; }
+.player-modal-reddit-title {
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.player-modal-reddit-title:hover { color: var(--accent); text-decoration: underline; }
+.player-modal-reddit-time {
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 .player-modal-footer {

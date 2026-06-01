@@ -26,6 +26,13 @@ log = logging.getLogger(__name__)
 NEWS_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/news"
 USER_AGENT = "FantasyGM/0.1 news-ingest (+github.com/pranava0x0/FantasyGM)"
 
+# Canonical WNBA pro-team IDs (mirrors WNBA_TEAM_ABBR in build_state.py — keep in sync).
+# Articles whose pro_team_ids contain ANY ID outside this set are rejected as non-WNBA.
+WNBA_TEAM_IDS: frozenset[int] = frozenset({
+    3, 5, 6, 8, 9, 11, 14, 16, 17, 18, 19, 20,
+    129689, 131935, 132052,  # 2026 expansion: GS / TOR / POR
+})
+
 
 def fetch_news(limit: int = 50, *, _opener: Any = None) -> dict[str, Any]:
     """Hit ESPN's WNBA news endpoint. Raw response, no transformation.
@@ -55,6 +62,10 @@ def normalize_articles(raw: dict[str, Any]) -> list[dict[str, Any]]:
       }
 
     Premium-locked articles are filtered out (can't link them).
+    Non-WNBA articles are filtered: any article whose pro_team_ids contains an
+    ID not in WNBA_TEAM_IDS is rejected. Articles with no team tags are kept
+    only when they have at least one athlete_id (so pure cross-sport stories
+    with no athlete tagging are also dropped).
     """
     out: list[dict[str, Any]] = []
     for a in raw.get("articles") or []:
@@ -68,6 +79,13 @@ def normalize_articles(raw: dict[str, Any]) -> list[dict[str, Any]]:
                 athletes.append(int(c["athleteId"]))
             elif t == "team" and c.get("teamId") is not None:
                 teams.append(int(c["teamId"]))
+        # Reject non-WNBA articles: if any pro_team_id is outside the WNBA set
+        # it's a cross-sport story (NFL/NBA sharing ESPN's ID space).
+        if teams and not all(tid in WNBA_TEAM_IDS for tid in teams):
+            continue
+        # Articles with no team tag and no athlete tag are generic fluff — skip.
+        if not teams and not athletes:
+            continue
         url = _extract_web_url(a)
         published = _parse_published(a.get("published"))
         out.append({

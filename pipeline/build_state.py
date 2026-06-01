@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pipeline import analyze, news, schedule, schema, summary
+from pipeline import analyze, news, reddit as reddit_mod, schedule, schema, summary
 
 log = logging.getLogger(__name__)
 
@@ -27,12 +27,13 @@ def build_state(
     free_agents_raw: dict[str, Any],
     captured_at: datetime,
     news_raw: dict[str, Any] | None = None,
+    reddit_posts: list[dict[str, Any]] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
-    `news_raw` is ESPN's public WNBA news feed. When None we skip news
-    (legacy/tests). Passing it in lets us match articles to players that
-    are on rosters or in the FA pool.
+    `news_raw` is ESPN's public WNBA news feed. When None we skip news.
+    `reddit_posts` is the normalized output of `reddit.fetch_reddit()`.
+    Both default to None so tests and legacy callers don't need to change.
     """
     # Compute the upcoming week's game-count signal first; team views and
     # waiver ranking both consume it. Without it, team production is
@@ -229,6 +230,22 @@ def build_state(
         for pid, arts in raw_player_to_articles.items():
             news_by_player[pid] = [_to_news_item(a) for a in arts[:5]]
 
+    # Reddit: match posts to players by name. Builds a name map from all
+    # rostered players + FA top-N so the match scope mirrors the news layer.
+    reddit_by_player: dict[int, list[schema.RedditPost]] = {}
+    if reddit_posts:
+        player_name_map = _player_name_index(league_raw, free_agents_raw)
+        raw_reddit_by_player = reddit_mod.match_to_players(reddit_posts, player_name_map)
+        for pid, posts in raw_reddit_by_player.items():
+            reddit_by_player[pid] = [
+                schema.RedditPost(
+                    title=p["title"],
+                    url=p["url"],
+                    published_at=p.get("published_at"),
+                )
+                for p in posts[:5]
+            ]
+
     return schema.LeagueState(
         meta=meta,
         teams=teams,
@@ -237,6 +254,7 @@ def build_state(
         waiver_targets_by_team=by_team_targets,
         news_recent=news_items,
         news_by_player=news_by_player,
+        reddit_posts_by_player=reddit_by_player,
     )
 
 
