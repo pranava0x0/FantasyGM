@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from pipeline import build_state as build_state_mod
-from pipeline import ingest, news, reddit as reddit_mod
+from pipeline import bluesky as bluesky_mod, ingest, news, reddit as reddit_mod, twitter as twitter_mod
 from pipeline.espn_client import (
     ESPNAPIError,
     ESPNAuthError,
@@ -107,9 +107,17 @@ def main(argv: list[str] | None = None) -> int:
     news_raw = news.fetch_news(limit=50)
     (snap.out_dir / "news.json").write_text(json.dumps(news_raw, indent=2) + "\n")
 
-    log.info("refresh: fetching Reddit r/wnba RSS")
-    reddit_posts = reddit_mod.fetch_reddit(limit=50)
-    log.info("refresh: %d Reddit posts fetched", len(reddit_posts))
+    log.info("refresh: loading Reddit posts (r/wnba + r/fantasywnba)")
+    reddit_posts = reddit_mod.load_reddit(raw_dir=snap.out_dir, limit=50)
+    log.info("refresh: %d Reddit posts loaded", len(reddit_posts))
+
+    log.info("refresh: loading Twitter/X WNBA posts")
+    twitter_posts = twitter_mod.load_tweets(raw_dir=snap.out_dir, query="wnba", limit=50)
+    log.info("refresh: %d Twitter posts loaded", len(twitter_posts))
+
+    log.info("refresh: loading Bluesky posts")
+    bluesky_posts = bluesky_mod.load_bluesky(raw_dir=snap.out_dir)
+    log.info("refresh: %d Bluesky posts loaded", len(bluesky_posts))
 
     state = build_state_mod.build_state(
         league_raw=snap.league,
@@ -117,6 +125,8 @@ def main(argv: list[str] | None = None) -> int:
         captured_at=snap.captured_at,
         news_raw=news_raw,
         reddit_posts=reddit_posts,
+        twitter_posts=twitter_posts,
+        bluesky_posts=bluesky_posts,
     )
 
     state_path = build_state_mod.write_state(state, docs_root)
@@ -131,6 +141,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  teams:           {len(state.teams)}")
     print(f"  transactions:    {len(state.transactions_recent)} recent / {new_tx} new appended")
     print(f"  waiver targets:  {len(state.waiver_targets_overall)} overall")
+    print(f"  reddit posts:    {sum(len(v) for v in state.reddit_posts_by_player.values())} matched")
+    print(f"  twitter posts:   {sum(len(v) for v in state.twitter_posts_by_player.values())} matched")
+    print(f"  bluesky posts:   {sum(len(v) for v in state.bluesky_posts_by_player.values())} matched")
     print(f"  snapshot:        {snap.out_dir.relative_to(root)}")
     print(f"  state file:      {state_path.relative_to(root)}")
     return 0

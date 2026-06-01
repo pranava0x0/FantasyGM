@@ -60,7 +60,94 @@ Idempotent — if `.venv` already exists, this is fast.
 - Exit 2 → `.env` is missing or `ESPN_SWID` / `ESPN_S2` are unset. Stop and instruct the user to copy `.env.example` → `.env` and follow the comments. **Never print or repeat the values back to the user.**
 - Exit 3 → cookies expired. Tell the user to re-copy `SWID` and `espn_s2` from Chrome DevTools (Application → Cookies → fantasy.espn.com) and update `.env`.
 
-### 4. Full refresh
+### 4. Scrape Twitter/X WNBA mentions (Chrome)
+
+Use `mcp__Claude_in_Chrome__navigate` and `mcp__Claude_in_Chrome__javascript_tool` to do a
+**per-player search** for every top-15 waiver target plus a final general WNBA sweep.
+All canonical tweet URLs are preserved in full.
+
+**Step 4a — get today's top-15 waiver target names:**
+```bash
+python3 -c "
+import json
+state = json.load(open('docs/data/state.json'))
+names = [t['player']['name'] for t in state.get('waiver_targets_overall', [])[:15]]
+for n in names: print(n)
+"
+```
+If `docs/data/state.json` doesn't exist yet (first ever run), skip to step 4d.
+
+**Step 4b — check login:**
+Navigate to `https://x.com/search?q=wnba&f=live`. If you land on a login page, skip
+the rest of step 4 and note "Twitter/X skipped — not logged in" in the summary.
+
+**Step 4c — per-player + general scrape:**
+
+Use a **running Python list** in your working memory to accumulate results across all
+searches (the browser context resets on each navigation). The accumulator key is the
+canonical URL — deduplicate on it.
+
+For **each player name** from step 4a, plus the final query `wnba`:
+
+1. Navigate to:
+   ```
+   https://x.com/search?q="PLAYER+NAME"+wnba&f=live
+   ```
+   (for the general sweep use `https://x.com/search?q=wnba&f=live`)
+
+2. Scroll 3 times (run the extract JS after each scroll to catch new tweets):
+   ```javascript
+   // Run via mcp__Claude_in_Chrome__javascript_tool after each scroll
+   window.scrollTo(0, document.body.scrollHeight);
+   (() => {
+     const articles = [...document.querySelectorAll('article[data-testid="tweet"]')];
+     return articles.map(a => {
+       const textEl = a.querySelector('[data-testid="tweetText"]');
+       const text = textEl ? textEl.innerText.trim() : '';
+       if (!text) return null;
+       // Build canonical URL from pathname — avoids tracking query params
+       // while preserving the real status link.
+       const statusLink = [...a.querySelectorAll('a[href*="/status/"]')]
+         .find(l => /\/status\/\d+/.test(l.pathname));
+       const url = statusLink ? 'https://x.com' + statusLink.pathname.replace(/\/$/, '') : '';
+       const timeEl = a.querySelector('time');
+       const publishedAt = timeEl ? timeEl.getAttribute('datetime') : null;
+       const nameEl = a.querySelector('[data-testid="User-Name"] a[role="link"]');
+       const screenName = nameEl ? nameEl.pathname.replace(/^\//, '') : '';
+       return { title: text, url, published_at: publishedAt, screen_name: screenName };
+     }).filter(Boolean);
+   })()
+   ```
+
+3. Add the returned objects to your running accumulator, deduplicating on `url`.
+
+4. Move to the next player. (No need to clear `window._tweets` — each navigation
+   gives a fresh page context.)
+
+**Step 4d — write to today's raw data dir:**
+
+Write the deduplicated accumulator to:
+```
+data/raw/<YYYY-MM-DD>/twitter_raw.json
+```
+
+The file is a JSON array; every entry has these exact fields (preserve originals as-is):
+```json
+[
+  {
+    "title": "<full tweet text>",
+    "url": "https://x.com/<screen_name>/status/<tweet_id>",
+    "published_at": "2026-06-01T19:05:43.000Z",
+    "screen_name": "<handle>"
+  }
+]
+```
+
+Write an empty array `[]` if no tweets were collected, so the pipeline knows the step ran.
+
+Log: "Twitter/X: wrote N tweets (M players × ~K tweets each) to data/raw/<date>/twitter_raw.json"
+
+### 5. Full refresh
 
 ```bash
 .venv/bin/python -m pipeline.refresh
@@ -68,7 +155,7 @@ Idempotent — if `.venv` already exists, this is fast.
 
 This writes `data/raw/<date>/*.json`, appends to `data/history/transactions.jsonl`, and rewrites `docs/data/state.json`. Print the CLI's summary verbatim — it includes scoring period, transactions appended, and the snapshot path.
 
-### 5. Tests + secret scan
+### 6. Tests + secret scan
 
 ```bash
 .venv/bin/python -m pytest -q && .venv/bin/python -m pipeline._secret_scan
@@ -76,7 +163,7 @@ This writes `data/raw/<date>/*.json`, appends to `data/history/transactions.json
 
 If either fails, **stop**. Don't commit. Show the failure and ask the user how to proceed.
 
-### 6. Summarize what changed
+### 7. Summarize what changed
 
 ```bash
 git status --short
@@ -92,7 +179,7 @@ Then read the relevant slice of `docs/data/state.json` and summarize for the use
 
 Keep the summary tight. The user is checking-in, not asking for a report.
 
-### 7. Confirm before committing
+### 8. Confirm before committing
 
 Before running any `git add` / `git commit` / `git push`, ask the user explicitly:
 > "Pipeline ran clean. Commit and push to GitHub? [y/N]"
@@ -105,6 +192,7 @@ git commit -m "$(cat <<'EOF'
 data: refresh league snapshot
 
 - ESPN ingest: data/raw/<date>/{league,free_agents}.json
+- Twitter/X: data/raw/<date>/twitter_raw.json
 - Transactions appended to data/history/transactions.jsonl
 - docs/data/state.json rebuilt
 EOF
@@ -114,7 +202,7 @@ git push origin main
 
 If no, leave the working tree as-is. The user can preview locally before deciding.
 
-### 8. Optional: preview
+### 9. Optional: preview
 
 If the user wants to see the result locally before pushing, the static dev server is wired in `.claude/launch.json`. The skill caller can suggest it:
 
@@ -125,7 +213,7 @@ node scripts/serve.mjs   # then open http://127.0.0.1:9876
 ## Common pitfalls
 
 - **Don't run with `--no-verify`.** The secret scan exists because someone got burned.
-- **Don't `git add -A`.** Use the explicit paths in step 7 so a stray `.env` or scratch file can't sneak in.
+- **Don't `git add -A`.** Use the explicit paths in step 8 so a stray `.env` or scratch file can't sneak in.
 - **Don't commit `data/raw/` outside today's folder.** If `git status` shows raw files from a past date are dirty, that's an editing bug — investigate before adding.
 - **The skill never reads or echoes the cookie values.** Cookies live in `.env`, which is gitignored. If the user asks for help debugging an auth error, never paste the cookie string back — tell them the *shape* (e.g. "SWID should be wrapped in curly braces").
 - **Owner privacy.** ESPN responses contain member names. The pipeline's `_redact_owners` strips them before writing raw snapshots. If you ever need to debug a transaction by name, do it in memory only — don't write the unredacted JSON to disk or paste it to the chat.

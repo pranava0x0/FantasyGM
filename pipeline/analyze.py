@@ -253,6 +253,7 @@ def rank_free_agents(
     *,
     limit: int = 25,
     games_by_pro_team: dict[int, int] | None = None,
+    games_by_pro_team_next_week: dict[int, int] | None = None,
 ) -> list[dict[str, Any]]:
     """Sort the free-agent pool by *projected points this week*.
 
@@ -271,6 +272,7 @@ def rank_free_agents(
        informative once we know the schedule).
     """
     games_map = games_by_pro_team or {}
+    games_map_nw = games_by_pro_team_next_week or {}
     out = []
     for entry in free_agents_raw.get("players") or []:
         player = entry.get("player") or {}
@@ -282,11 +284,15 @@ def rank_free_agents(
         ownership = player.get("ownership") or {}
         per_game = proj_per_game or season_avg or proj_period
         per_game = float(per_game or 0.0)
-        games = int(games_map.get(int(player.get("proTeamId") or 0), 0)) if games_map else 0
+        pro_team_id = int(player.get("proTeamId") or 0)
+        games = int(games_map.get(pro_team_id, 0)) if games_map else 0
+        games_nw = int(games_map_nw.get(pro_team_id, 0)) if games_map_nw else 0
         if games_map:
             week_proj = round(per_game * games, 2)
+            week_proj_nw = round(per_game * games_nw, 2)
         else:
             week_proj = round(proj_period, 2)
+            week_proj_nw = 0.0
         out.append({
             "player_id": player.get("id"),
             "name": player.get("fullName"),
@@ -299,6 +305,8 @@ def rank_free_agents(
             "projected_per_game": round(per_game, 2),
             "projected_points_this_week": week_proj,
             "games_this_week": games,
+            "projected_points_next_week": week_proj_nw,
+            "games_next_week": games_nw,
             "season_avg_points": round(season_avg, 2) if season_avg is not None else None,
             "percent_owned": ownership.get("percentOwned"),
             "percent_change": ownership.get("percentChange"),

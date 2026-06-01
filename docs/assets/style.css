@@ -257,23 +257,39 @@ main {
 .waiver-sub .own-change { font-variant-numeric: tabular-nums; }
 .own-pos { color: var(--gap-strong); }
 .own-neg { color: var(--gap-weak); }
-.waiver-points {
+.waiver-schedule {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+.week-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 0 8px;
+  border-left: 1px solid var(--border);
+  min-width: 56px;
+}
+.week-block:first-child { border-left: none; padding-left: 0; }
+.week-pts {
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: var(--text);
 }
-.waiver-points .unit {
-  font-family: var(--font-sans);
+.week-meta {
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  display: block;
-  margin-top: 2px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
+.week-meta.games-bye  { color: var(--text-muted); }
+.week-meta.games-low  { color: var(--gap-weak); }
+.week-meta.games-mid  { color: var(--text-muted); }
+.week-meta.games-heavy { color: var(--gap-strong); }
 
 /* ---------- Pills ---------- */
 
@@ -570,9 +586,16 @@ main {
   display: inline-flex; gap: 6px; flex-wrap: wrap;
   font-size: 11px; color: var(--text-muted);
 }
-.team-target-row .target-pts {
+.team-target-row .target-schedule {
+  gap: 6px;
+}
+.team-target-row .target-schedule .week-block {
+  min-width: 44px;
+  padding: 0 6px;
+}
+.team-target-row .target-schedule .week-pts {
   font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
+  font-size: 14px;
 }
 
 /* News cards — editorial layout: headline as a serif link, then meta + tags. */
@@ -911,7 +934,9 @@ body.modal-open { overflow: hidden; }
 
 .player-modal-news,
 .player-modal-txns,
-.player-modal-reddit {
+.player-modal-reddit,
+.player-modal-twitter,
+.player-modal-bluesky {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -999,6 +1024,79 @@ body.modal-open { overflow: hidden; }
 }
 .player-modal-reddit-title:hover { color: var(--accent); text-decoration: underline; }
 .player-modal-reddit-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.player-modal-twitter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.player-modal-twitter-item:last-child { border-bottom: 0; }
+.player-modal-twitter-title {
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.player-modal-twitter-title:hover { color: var(--accent); text-decoration: underline; }
+.player-modal-twitter-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.player-modal-twitter-handle {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.player-modal-twitter-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.player-modal-reddit-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.player-modal-reddit-sub {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.player-modal-bluesky-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.player-modal-bluesky-item:last-child { border-bottom: 0; }
+.player-modal-bluesky-title {
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.player-modal-bluesky-title:hover { color: var(--accent); text-decoration: underline; }
+.player-modal-bluesky-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.player-modal-bluesky-handle {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.player-modal-bluesky-time {
   font-size: 11px;
   color: var(--text-muted);
 }
