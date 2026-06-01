@@ -102,6 +102,19 @@ def upcoming_week_periods(
     return (int(start), int(end))
 
 
+def next_week_periods(
+    league_raw: dict[str, Any],
+    *,
+    days: int = 7,
+) -> tuple[int, int]:
+    """Return the (start, end) scoring-period range for the week *after* the
+    upcoming week — i.e. the window immediately following `upcoming_week_periods`.
+    """
+    _, this_end = upcoming_week_periods(league_raw, days=days)
+    start = this_end + 1
+    return (start, start + max(1, days) - 1)
+
+
 def game_count_multiplier(games: int) -> float:
     """Multiplier applied to per-game projection to estimate week production.
 

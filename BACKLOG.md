@@ -4,7 +4,8 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## High
 
-- *(empty for now — populated as the product grows)*
+- **Social signals expansion — Bluesky + Reddit r/fantasywbasketball.** Full spec in [docs/social-signals-plan.md](docs/social-signals-plan.md). Bluesky: public AT Protocol API (`public.api.bsky.app/xrpc/app.bsky.feed.searchPosts`), no auth, per-player queries for top-15 targets. Reddit: add `r/fantasywbasketball` RSS alongside existing `r/wnba` feed (same code path, one URL addition). Both land together. Preserve canonical URLs in full.
+- **Social signals expansion — Threads.** Full spec in [docs/social-signals-plan.md](docs/social-signals-plan.md). Chrome scraping step in skill (same pattern as X), `threads_raw.json`, `pipeline/threads.py`. Depends on user having Instagram session in browser. Ship after Bluesky is stable.
 
 ## Medium
 
@@ -17,7 +18,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 - **Cumulative cross-team transaction history per player.** Player modal currently only shows the recent (last 50) transaction window. Ship `data/history/transactions.jsonl` to `docs/data/` (or a slimmed version) so the modal can show every move involving the player across the whole season.
 - **Player ownership trend in the modal.** Sparkline of `percent_owned` over the last 14 days, sourced from the daily raw snapshots. Fast-rising % owned is a leading indicator of "claim them now."
 - **Projection sources beyond ESPN.** Pull projections from wnba.com, Yahoo Sports, and basketball-reference.com to triangulate ESPN's numbers. Reduces single-source bias on waiver-target ranking.
-- **Twitter / X signal layer.** Surface beat-writer + player tweets earlier than ESPN's own status updates — backup-PG promotions, minute redistributions on injuries, late scratches. Requires X API keys (no scraping). Should feed the waiver-ranker as a bonus tier.
+- ~~**Twitter / X signal layer (paid API).**~~ Superseded by the session-cookie approach shipped in Low — no paid keys needed.
 - **Reddit r/wnba signal.** Public JSON endpoint (`reddit.com/r/wnba/new.json`) is no-auth. Surface posts flaired "Injury" / "News" / "Game Thread" and match to players by name. Lower precedence than ESPN's official feed.
 - **My team mode.** Lets the user designate "their" team (via team ID) and gets a daily personalized brief: top need this week, who to drop, who to bid, projected matchup margin.
 - **Trade analyzer.** Given two rosters, project the weekly H2H point swing if they traded specific players.
@@ -29,7 +30,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## Low
 
-- **Twitter / X signal layer.** Surface beat-writer + player tweets without paid API keys. Approach: read `TWITTER_AUTH_TOKEN` and `TWITTER_CT0` session cookies from `.env` (same pattern as ESPN) and call Twitter's internal GraphQL search endpoint (the same one the web app uses). No paid keys needed — just the user's own session. Falls back gracefully if not configured. Matches tweets to players by name, same as the Reddit pipeline. Pipeline stores `twitter_posts_by_player` in state, frontend renders in player modal below r/wnba section.
+- ~~**Twitter / X signal layer.**~~ Shipped: `pipeline/twitter.py` uses internal `twitter.com/i/api/1.1/search/tweets.json` + user session cookies (`TWITTER_AUTH_TOKEN`, `TWITTER_CT0` in `.env`). Matches tweets to players by name, stores `twitter_posts_by_player` in state, renders in player modal below r/wnba section. Falls back gracefully if credentials absent or stale. Chrome tool use is the manual fallback when cookies expire.
 - **Audit league scoring settings.** Pull the scoring settings from `view=mSettings` (`settings.scoringSettings`) and surface the per-stat point values in the UI or at minimum validate they match the league's stated format. Relevant for confirming `appliedTotal` interpretation and catching any mid-season scoring-rule changes. Raw field: `league_raw['settings']['scoringSettings']`; inspect today via `python3 -c "import json,pprint; pprint.pprint(json.load(open('data/raw/2026-06-01/league.json')).get('settings',{}).get('scoringSettings',{}))"`.
 - **Resolve transaction player names by ID.** Right now `transaction_items.player_name` is filled only for players currently on a roster or in the FA top-N. When a player was dropped + already picked up by a third team, their name might miss the index and the UI renders `#playerId`. Fix: pull `kona_playercard` for any unresolved IDs at build_state time, or maintain a cumulative `data/history/players.json` index.
 - **Historical drift charts.** Plot each team's win probability / power ranking over time using the raw daily snapshots in `data/raw/`.

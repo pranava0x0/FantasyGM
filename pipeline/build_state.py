@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pipeline import analyze, news, reddit as reddit_mod, schedule, schema, summary
+from pipeline import analyze, bluesky as bluesky_mod, news, reddit as reddit_mod, schedule, schema, summary, twitter as twitter_mod
 
 log = logging.getLogger(__name__)
 
@@ -28,12 +28,15 @@ def build_state(
     captured_at: datetime,
     news_raw: dict[str, Any] | None = None,
     reddit_posts: list[dict[str, Any]] | None = None,
+    twitter_posts: list[dict[str, Any]] | None = None,
+    bluesky_posts: list[dict[str, Any]] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
     `news_raw` is ESPN's public WNBA news feed. When None we skip news.
     `reddit_posts` is the normalized output of `reddit.fetch_reddit()`.
-    Both default to None so tests and legacy callers don't need to change.
+    `twitter_posts` is the normalized output of `twitter.fetch_twitter()`.
+    All default to None so tests and legacy callers don't need to change.
     """
     # Compute the upcoming week's game-count signal first; team views and
     # waiver ranking both consume it. Without it, team production is
@@ -41,6 +44,8 @@ def build_state(
     # composition with player quality.
     week_start, week_end = schedule.upcoming_week_periods(league_raw)
     games_by_pro_team = schedule.games_per_team(league_raw, week_start, week_end)
+    nw_start, nw_end = schedule.next_week_periods(league_raw)
+    games_by_pro_team_next_week = schedule.games_per_team(league_raw, nw_start, nw_end)
 
     teams_view = analyze.build_team_views(league_raw, games_by_pro_team=games_by_pro_team)
     needs = analyze.compute_team_needs(teams_view)
@@ -50,6 +55,7 @@ def build_state(
         scoring_period_id=int(league_raw.get("scoringPeriodId") or 0),
         limit=25,
         games_by_pro_team=games_by_pro_team,
+        games_by_pro_team_next_week=games_by_pro_team_next_week,
     )
 
     # Player id -> name, for transaction items.
@@ -230,18 +236,47 @@ def build_state(
         for pid, arts in raw_player_to_articles.items():
             news_by_player[pid] = [_to_news_item(a) for a in arts[:5]]
 
-    # Reddit: match posts to players by name. Builds a name map from all
-    # rostered players + FA top-N so the match scope mirrors the news layer.
+    # Reddit: match posts to players by name.
     reddit_by_player: dict[int, list[schema.RedditPost]] = {}
     if reddit_posts:
-        player_name_map = _player_name_index(league_raw, free_agents_raw)
-        raw_reddit_by_player = reddit_mod.match_to_players(reddit_posts, player_name_map)
+        raw_reddit_by_player = reddit_mod.match_to_players(reddit_posts, player_name_index)
         for pid, posts in raw_reddit_by_player.items():
             reddit_by_player[pid] = [
                 schema.RedditPost(
                     title=p["title"],
                     url=p["url"],
                     published_at=p.get("published_at"),
+                    subreddit=p.get("subreddit") or "wnba",
+                )
+                for p in posts[:5]
+            ]
+
+    # Twitter/X: match tweets to players by name.
+    twitter_by_player: dict[int, list[schema.TwitterPost]] = {}
+    if twitter_posts:
+        raw_twitter_by_player = twitter_mod.match_to_players(twitter_posts, player_name_index)
+        for pid, tweets in raw_twitter_by_player.items():
+            twitter_by_player[pid] = [
+                schema.TwitterPost(
+                    title=t["title"],
+                    url=t["url"],
+                    published_at=t.get("published_at"),
+                    screen_name=t.get("screen_name") or "",
+                )
+                for t in tweets[:5]
+            ]
+
+    # Bluesky: match posts to players by name.
+    bluesky_by_player: dict[int, list[schema.BlueskyPost]] = {}
+    if bluesky_posts:
+        raw_bsky_by_player = bluesky_mod.match_to_players(bluesky_posts, player_name_index)
+        for pid, posts in raw_bsky_by_player.items():
+            bluesky_by_player[pid] = [
+                schema.BlueskyPost(
+                    title=p["title"],
+                    url=p["url"],
+                    published_at=p.get("published_at"),
+                    handle=p.get("handle") or "",
                 )
                 for p in posts[:5]
             ]
@@ -255,6 +290,8 @@ def build_state(
         news_recent=news_items,
         news_by_player=news_by_player,
         reddit_posts_by_player=reddit_by_player,
+        twitter_posts_by_player=twitter_by_player,
+        bluesky_posts_by_player=bluesky_by_player,
     )
 
 
@@ -396,6 +433,8 @@ def _to_waiver_target(d: dict[str, Any]) -> schema.WaiverTarget:
         projected_per_game=float(d.get("projected_per_game", 0.0)),
         projected_points_this_week=float(d.get("projected_points_this_week", d.get("base_score", 0.0))),
         games_this_week=int(d.get("games_this_week", 0)),
+        projected_points_next_week=float(d.get("projected_points_next_week", 0.0)),
+        games_next_week=int(d.get("games_next_week", 0)),
         season_avg_points=d["season_avg_points"],
         percent_owned=d["percent_owned"],
         percent_change=d["percent_change"],

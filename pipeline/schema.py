@@ -115,6 +115,8 @@ class WaiverTarget(_Strict):
     projected_per_game: float = Field(..., description="Per-game projection (season basis)")
     projected_points_this_week: float = Field(..., description="proj_per_game × games_this_week")
     games_this_week: int = Field(..., description="Pro-team games in the upcoming window")
+    projected_points_next_week: float = Field(0.0, description="proj_per_game × games_next_week")
+    games_next_week: int = Field(0, description="Pro-team games in the following week's window")
     season_avg_points: float | None = None
     percent_owned: float | None = None
     percent_change: float | None = None
@@ -175,6 +177,21 @@ class RedditPost(_Strict):
     title: str
     url: str
     published_at: datetime | None = None
+    subreddit: str = "wnba"
+
+
+class BlueskyPost(_Strict):
+    title: str
+    url: str
+    published_at: datetime | None = None
+    handle: str = ""
+
+
+class TwitterPost(_Strict):
+    title: str
+    url: str
+    published_at: datetime | None = None
+    screen_name: str = ""
 
 
 class LeagueState(_Strict):
@@ -187,3 +204,5 @@ class LeagueState(_Strict):
     news_recent: list[NewsItem] = Field(default_factory=list)
     news_by_player: dict[int, list[NewsItem]] = Field(default_factory=dict)
     reddit_posts_by_player: dict[int, list[RedditPost]] = Field(default_factory=dict)
+    twitter_posts_by_player: dict[int, list[TwitterPost]] = Field(default_factory=dict)
+    bluesky_posts_by_player: dict[int, list[BlueskyPost]] = Field(default_factory=dict)

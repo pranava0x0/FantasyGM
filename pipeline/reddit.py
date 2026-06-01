@@ -15,34 +15,68 @@ import unicodedata
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
+import json
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 log = logging.getLogger(__name__)
 
-REDDIT_RSS_URL = "https://www.reddit.com/r/wnba/new/.rss?limit=50"
+REDDIT_RSS_URLS = [
+    ("https://www.reddit.com/r/wnba/new/.rss?limit=50", "wnba"),
+    ("https://www.reddit.com/r/fantasywnba/new/.rss?limit=50", "fantasywnba"),
+]
 USER_AGENT = "FantasyGM/0.1 reddit-ingest (+github.com/pranava0x0/FantasyGM)"
+_RAW_FILENAME = "reddit_raw.json"
 
 _ATOM_NS = "http://www.w3.org/2005/Atom"
 
 
+def load_reddit(raw_dir: Path | None = None, limit: int = 50) -> list[dict[str, Any]]:
+    """Load Reddit posts: pre-scraped file first, then live RSS fallback."""
+    if raw_dir is not None:
+        path = raw_dir / _RAW_FILENAME
+        if path.exists():
+            try:
+                raw = json.loads(path.read_text())
+                if isinstance(raw, list) and raw:
+                    out = []
+                    for item in raw:
+                        if not isinstance(item, dict):
+                            continue
+                        title = (item.get("title") or "").strip()
+                        url = item.get("url") or ""
+                        pub = _parse_dt(item.get("published_at"))
+                        sub = item.get("subreddit") or "wnba"
+                        if title and url:
+                            out.append({"title": title, "url": url, "published_at": pub, "subreddit": sub})
+                    log.info("reddit: loaded %d posts from %s", len(out), path)
+                    return out
+            except (json.JSONDecodeError, OSError) as e:
+                log.warning("reddit: failed to read %s (%s) — falling back to RSS", path, e)
+    return fetch_reddit(limit=limit)
+
+
 def fetch_reddit(limit: int = 50) -> list[dict[str, Any]]:
-    """Fetch r/wnba newest posts via RSS. Returns raw normalized post dicts.
+    """Fetch r/wnba + r/fantasywnba RSS. Returns raw normalized post dicts."""
+    posts: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for url_tmpl, subreddit in REDDIT_RSS_URLS:
+        url = url_tmpl.replace("limit=50", f"limit={limit}")
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                body = resp.read()
+            for p in _parse_rss(body, subreddit=subreddit):
+                if p["url"] not in seen:
+                    seen.add(p["url"])
+                    posts.append(p)
+        except urllib.error.URLError as e:
+            log.warning("reddit: RSS fetch failed for r/%s (%s) — skipping", subreddit, e)
+    return posts
 
-    Returns [] on any fetch/parse failure so the pipeline degrades gracefully.
-    """
-    url = f"https://www.reddit.com/r/wnba/new/.rss?limit={limit}"
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            body = resp.read()
-    except urllib.error.URLError as e:
-        log.warning("reddit: RSS fetch failed (%s) — skipping", e)
-        return []
-    return _parse_rss(body)
 
-
-def _parse_rss(body: bytes) -> list[dict[str, Any]]:
+def _parse_rss(body: bytes, subreddit: str = "wnba") -> list[dict[str, Any]]:
     try:
         root = ET.fromstring(body)
     except ET.ParseError as e:
@@ -59,7 +93,7 @@ def _parse_rss(body: bytes) -> list[dict[str, Any]]:
         title = (title_el.text or "").strip()
         url = link_el.get("href", "")
         published_at = _parse_dt(pub_el.text if pub_el is not None else None)
-        out.append({"title": title, "url": url, "published_at": published_at})
+        out.append({"title": title, "url": url, "published_at": published_at, "subreddit": subreddit})
     return out
 
 

@@ -182,20 +182,33 @@
     return el("span", { className: `pill games-pill ${cls}`, text: label });
   }
 
+  function weekBlock(games, pts, label) {
+    const gamesNum = games != null ? games : 0;
+    const ptsNum = pts != null ? pts : 0;
+    let gamesCls = "games-mid";
+    if (gamesNum <= 0) gamesCls = "games-bye";
+    else if (gamesNum <= 2) gamesCls = "games-low";
+    else if (gamesNum >= 4) gamesCls = "games-heavy";
+    return el("div", {
+      className: "week-block",
+      children: [
+        el("span", { className: "week-pts", text: fmtPoints(ptsNum) }),
+        el("span", { className: `week-meta ${gamesCls}`, text: `${gamesNum}g · ${label}` }),
+      ],
+    });
+  }
+
   function waiverCard(t, idx, fitBucket) {
     const p = t.player;
     const sub = el("span", { className: "waiver-sub" });
     sub.appendChild(bucketPill(p.bucket));
     if (p.team) sub.appendChild(el("span", { className: "pill team-mono", text: p.team }));
-    const gp = gamesPill(t.games_this_week);
-    if (gp) sub.appendChild(gp);
     if (t.projected_per_game != null) {
       sub.appendChild(el("span", { text: `${fmtPoints(t.projected_per_game)}/g` }));
     }
     if (t.percent_owned != null) {
       const pc = fmtPctChange(t.percent_change);
-      const ownText = `${fmtPct(t.percent_owned)} owned`;
-      sub.appendChild(el("span", { text: ownText }));
+      sub.appendChild(el("span", { text: `${fmtPct(t.percent_owned)} owned` }));
       if (pc != null) {
         const cls = (t.percent_change || 0) > 0 ? "own-pos" : (t.percent_change || 0) < 0 ? "own-neg" : "";
         sub.appendChild(el("span", { className: `own-change ${cls}`.trim(), text: pc }));
@@ -214,9 +227,8 @@
       nameLine.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
     }
 
-    const weekProj = t.projected_points_this_week != null
-      ? t.projected_points_this_week
-      : t.projected_points_next_period;
+    const thisWkPts = t.projected_points_this_week ?? t.projected_points_next_period ?? 0;
+    const nextWkPts = t.projected_points_next_week ?? 0;
 
     return el("li", {
       className: "waiver-card",
@@ -227,10 +239,10 @@
           children: [nameLine, sub],
         }),
         el("div", {
-          className: "waiver-points",
+          className: "waiver-schedule",
           children: [
-            document.createTextNode(fmtPoints(weekProj)),
-            el("span", { className: "unit", text: "week" }),
+            weekBlock(t.games_this_week, thisWkPts, "this wk"),
+            weekBlock(t.games_next_week, nextWkPts, "next wk"),
           ],
         }),
       ],
@@ -428,8 +440,6 @@
       }
       const sub = el("span", { className: "target-sub" });
       if (p.team) sub.appendChild(el("span", { className: "pill team-mono", text: p.team }));
-      const gp = gamesPill(tgt.games_this_week);
-      if (gp) sub.appendChild(gp);
       const adj = tgt.adjusted_score != null ? tgt.adjusted_score : (tgt.projected_points_this_week || tgt.base_score);
       list.appendChild(el("div", {
         className: "team-target-row",
@@ -440,9 +450,12 @@
             children: [nameSpan, sub],
           }),
           bucketPill(p.bucket),
-          el("span", {
-            className: "target-pts",
-            text: fmtPoints(adj),
+          el("div", {
+            className: "waiver-schedule target-schedule",
+            children: [
+              weekBlock(tgt.games_this_week, adj, "this wk"),
+              weekBlock(tgt.games_next_week, tgt.projected_points_next_week ?? 0, "next wk"),
+            ],
           }),
         ],
       }));
@@ -712,6 +725,22 @@
       entry.reddit = (posts || []).slice(0, 5);
     });
 
+    // Twitter/X posts mentioning this player. Cap at 5.
+    Object.entries(state.twitter_posts_by_player || {}).forEach(([pid, tweets]) => {
+      const num = Number(pid);
+      if (!Number.isFinite(num)) return;
+      const entry = ensure(num);
+      entry.twitter = (tweets || []).slice(0, 5);
+    });
+
+    // Bluesky posts mentioning this player. Cap at 5.
+    Object.entries(state.bluesky_posts_by_player || {}).forEach(([pid, posts]) => {
+      const num = Number(pid);
+      if (!Number.isFinite(num)) return;
+      const entry = ensure(num);
+      entry.bluesky = (posts || []).slice(0, 5);
+    });
+
     // Transactions where this player appears in any line item.
     (state.transactions_recent || []).forEach((tx) => {
       (tx.items || []).forEach((it) => {
@@ -893,13 +922,61 @@
           text: post.title,
           attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
         }));
-        if (post.published_at) {
-          li.appendChild(el("span", { className: "player-modal-reddit-time", text: fmtTime(post.published_at) }));
+        const meta = el("div", { className: "player-modal-reddit-meta" });
+        if (post.subreddit && post.subreddit !== "wnba") {
+          meta.appendChild(el("span", { className: "player-modal-reddit-sub", text: `r/${post.subreddit}` }));
         }
+        if (post.published_at) {
+          meta.appendChild(el("span", { className: "player-modal-reddit-time", text: fmtTime(post.published_at) }));
+        }
+        if (meta.childNodes.length) li.appendChild(meta);
         redditList.appendChild(li);
       });
     } else {
       redditList.appendChild(el("li", { className: "empty", text: "No recent r/wnba posts mentioning this player." }));
+    }
+
+    // Twitter/X posts
+    const twitterList = $("#player-modal-twitter");
+    twitterList.replaceChildren();
+    if (entry.twitter && entry.twitter.length) {
+      entry.twitter.forEach((tweet) => {
+        const li = el("li", { className: "player-modal-twitter-item" });
+        const byline = tweet.screen_name ? `@${tweet.screen_name}` : null;
+        li.appendChild(el("a", {
+          className: "player-modal-twitter-title",
+          text: tweet.title,
+          attrs: { href: tweet.url || "#", target: "_blank", rel: "noopener noreferrer" },
+        }));
+        const meta = el("div", { className: "player-modal-twitter-meta" });
+        if (byline) meta.appendChild(el("span", { className: "player-modal-twitter-handle", text: byline }));
+        if (tweet.published_at) meta.appendChild(el("span", { className: "player-modal-twitter-time", text: fmtTime(tweet.published_at) }));
+        if (meta.childNodes.length) li.appendChild(meta);
+        twitterList.appendChild(li);
+      });
+    } else {
+      twitterList.appendChild(el("li", { className: "empty", text: "No recent X/Twitter posts mentioning this player." }));
+    }
+
+    // Bluesky posts
+    const bskyList = $("#player-modal-bluesky");
+    bskyList.replaceChildren();
+    if (entry.bluesky && entry.bluesky.length) {
+      entry.bluesky.forEach((post) => {
+        const li = el("li", { className: "player-modal-bluesky-item" });
+        li.appendChild(el("a", {
+          className: "player-modal-bluesky-title",
+          text: post.title,
+          attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
+        }));
+        const meta = el("div", { className: "player-modal-bluesky-meta" });
+        if (post.handle) meta.appendChild(el("span", { className: "player-modal-bluesky-handle", text: `@${post.handle}` }));
+        if (post.published_at) meta.appendChild(el("span", { className: "player-modal-bluesky-time", text: fmtTime(post.published_at) }));
+        if (meta.childNodes.length) li.appendChild(meta);
+        bskyList.appendChild(li);
+      });
+    } else {
+      bskyList.appendChild(el("li", { className: "empty", text: "No recent Bluesky posts mentioning this player." }));
     }
 
     // ESPN deep link
