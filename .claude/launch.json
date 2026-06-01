@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "site",
-      "runtimeExecutable": "/Users/pranava/.local/state/fnm_multishells/91998_1778908850730/bin/node",
-      "runtimeArgs": ["/Users/pranava/Documents/Projects/FantasyGM/scripts/serve.mjs"],
-      "autoPort": true
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/pranava/Projects/FantasyGM/scripts/serve.mjs"],
+      "port": 9876
     }
   ]
 }
