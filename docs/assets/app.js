@@ -823,12 +823,17 @@
       const sub = ch ? `${ch} 7d` : "owned";
       statsWrap.appendChild(statBlock("Ownership", fmtPct(ownership), sub));
     }
+    // Force a fixed 3-column grid so orphan stats (e.g. 5th item) stay at
+    // column-width and don't stretch to fill the row.
+    statsWrap.style.gridTemplateColumns = "repeat(3, 1fr)";
 
-    // News
+    // News — articles tagged by athlete ID are player-specific; articles
+    // tagged only by team are contextual ("team news").
     const newsList = $("#player-modal-news");
     newsList.replaceChildren();
     if (entry.news && entry.news.length) {
       entry.news.forEach((n) => {
+        const isDirectMention = Array.isArray(n.athlete_ids) && n.athlete_ids.includes(p.player_id);
         const li = el("li", { className: "player-modal-news-item" });
         li.appendChild(el("a", {
           className: "player-modal-news-headline",
@@ -837,6 +842,9 @@
         }));
         if (n.published_at) {
           li.appendChild(el("span", { className: "player-modal-news-time", text: fmtTime(n.published_at) }));
+        }
+        if (!isDirectMention) {
+          li.appendChild(el("span", { className: "player-modal-news-team-tag", text: "Team news" }));
         }
         if (n.description) {
           li.appendChild(el("p", { className: "player-modal-news-desc", text: n.description }));

@@ -1,7 +1,7 @@
 # UAT Baseline — FantasyGM
 
 _Created: 2026-05-17_
-_Last run: 2026-06-01_
+_Last run: 2026-06-01 (second pass)_
 
 ## Project Info
 
@@ -26,11 +26,14 @@ _Last run: 2026-06-01_
 | Meta strip | 2026-06-01 | Wraps to 3 lines at 375px. "As of" aligns right. All 8 teams reflected. |
 | Waivers tab | 2026-06-01 | 15 healthy targets render. OUT players correctly excluded. Bucket pills (G/F/C), per-game, ownership %, trend all present. Player modal opens and closes. |
 | Team Needs tab | 2026-06-01 | 4-up desktop, 2-up tablet, 1-up mobile. Expand/collapse works. Summary bullets, tailored picks, full roster, transactions shown. |
-| News tab | 2026-06-01 | **Unstable** — non-WNBA articles leaking in (see UAT-004/005). |
-| Transactions tab | 2026-06-01 | Stable. All 5 today's transactions render. Slot labels correct. FAAB bids shown. Player name buttons present. |
-| Mobile 375px | 2026-06-01 | Tab nav truncates "Transactions" → "Transact" (see UAT-006). Rest of layout correct. |
+| News tab | 2026-06-01 | Stable. WNBA-only articles. Player tags visible on highlighted items. |
+| Transactions tab | 2026-06-01 | Stable. All 5 today's transactions render. Slot labels correct. FAAB bids shown. |
+| Player modal — Desktop | 2026-06-01 | Stable. Opens from waivers, roster, transactions, team picks. Escape/backdrop close. Stats grid, news with TEAM NEWS badges, Reddit section, ESPN link. |
+| Player modal — Mobile | 2026-06-01 | Stable. Fits 375px. 3-stat and 5-stat layouts correct. TEAM NEWS badges readable. Reddit section present. |
+| Mobile 375px | 2026-06-01 | All 4 tab labels fully visible (padding-inline:8px at ≤420px). Layout correct at 1-up. |
 | Tablet 768px | 2026-06-01 | 2-up team grid confirmed. Tabs fit without clipping. |
-| Dark mode | 2026-06-01 | Stable. All surfaces, text, pills correctly themed. |
+| Dark mode (mobile) | 2026-06-01 | Stable. All surfaces, TEAM NEWS badges, Reddit section themed correctly. |
+| Wide viewport 1920px | 2026-06-01 | Content centres at max-width. No horizontal scroll. Footer visible. |
 
 ## Known stable areas
 
@@ -42,8 +45,7 @@ _Last run: 2026-06-01_
 
 ## Known flaky / unstable areas
 
-- **News tab** — ESPN's news feed is multi-sport; non-WNBA articles bleed in. Also athlete IDs are not sport-scoped, causing false player tags on unrelated articles. See UAT-004/005.
-- **Mobile tab nav** — "Transactions" truncates to "Transact" at 375px due to `flex-shrink: 1` on `.tab`. See UAT-006.
+- **None known.** All previously open issues resolved.
 
 ## Exploration notes
 
@@ -66,7 +68,11 @@ See `issues.md` for the audit table.
 - UAT-002: Team ID `0` rendered as `T0`. Fixed.
 - UAT-003: Raw `S1`/`S6` instead of slot labels. Fixed.
 
-**2026-06-01 (this run — first pass against real 8-team data):**
-- UAT-004: Non-WNBA articles in "Recent WNBA News" (e.g. OBJ story). Open.
-- UAT-005: False player tag — DeWanna Bonner tagged on OBJ article via cross-sport athlete ID collision (id=869). Open.
-- UAT-006: "Transactions" tab truncates to "Transact" at 375px mobile. `flex-shrink: 1` on `.tab` is the fix target. Open.
+**2026-06-01 (first pass — real 8-team data):**
+- UAT-004: Non-WNBA articles in "Recent WNBA News" (e.g. OBJ story). Fixed.
+- UAT-005: False player tag — DeWanna Bonner on OBJ article. Fixed.
+- UAT-006: "Transactions" tab truncates at 375px. Fixed.
+
+**2026-06-01 (second pass — desktop + mobile UAT):**
+- UAT-007: Team-tagged news in player modal had no label. Fixed — "TEAM NEWS" badge added.
+- UAT-008: 5-stat free-agent modal orphan row (Season + Ownership stretched to 50%). Fixed — `repeat(3, 1fr)` grid.

@@ -188,6 +188,9 @@ main {
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
+@media (max-width: 420px) {
+  .tab { padding-inline: 8px; }
+}
 .tab-panel { /* defaults; hidden attribute does the hiding */ }
 .tab-panel[hidden] { display: none; }
 
@@ -932,6 +935,17 @@ body.modal-open { overflow: hidden; }
   line-height: 1.35;
 }
 .player-modal-news-headline:hover { color: var(--accent); text-decoration: underline; }
+.player-modal-news-team-tag {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  align-self: flex-start;
+}
 .player-modal-news-time {
   font-family: var(--font-mono);
   font-size: 10.5px;
