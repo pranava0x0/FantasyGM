@@ -136,3 +136,32 @@ def test_no_owner_fields_in_state(
     # Sanity: none of the canonical owner-identifying field names made it in.
     for forbidden in ("displayName", "primaryOwner", "memberId", "firstName", "lastName"):
         assert forbidden not in blob, f"state.json contains '{forbidden}'"
+
+
+def test_ai_summary_attached_to_waiver_targets(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    """ai_summaries (keyed by str player_id) flow onto WaiverTarget.ai_summary."""
+    summaries = {"9000001": "Pick them up — full slate this week."}
+    state = bs.build_state(
+        league_raw=league_raw,
+        free_agents_raw=free_agents_raw,
+        captured_at=captured_at,
+        ai_summaries=summaries,
+    )
+    matched = [t for t in state.waiver_targets_overall if t.player.player_id == 9000001]
+    assert matched, "expected player 9000001 among overall targets"
+    assert matched[0].ai_summary == "Pick them up — full slate this week."
+    # Players without an authored summary stay None, not "".
+    others = [t for t in state.waiver_targets_overall if t.player.player_id != 9000001]
+    assert all(t.ai_summary is None for t in others)
+
+
+def test_ai_summary_absent_by_default(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    """No ai_summaries arg → every waiver target has ai_summary None."""
+    state = bs.build_state(
+        league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
+    )
+    assert all(t.ai_summary is None for t in state.waiver_targets_overall)

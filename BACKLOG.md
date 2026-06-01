@@ -26,6 +26,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## Done
 
+- ~~**AI "why pick them up" summaries for the top free agents.**~~ Shipped: a per-player GM take for the top 30 free agents, grounded in that snapshot's per-game projection, schedule (games this week / next), ownership trend, and X/Bluesky/Reddit/news signals. Authored out-of-band in `data/ai_summaries.json` (keyed by `player_id`), attached to `WaiverTarget.ai_summary` by `build_state`, rendered as a clamped line on each waiver card + a "GM take · AI" panel in the player modal. **Follow-up (Medium):** auto-generate at refresh time via the Anthropic SDK rather than hand-authoring, so summaries refresh with the data. Pre-filter to the top-N for cost; cache by a hash of each player's stat+signal inputs so unchanged players aren't re-summarized.
 - ~~**Player-specific pop-outs / pages.**~~ Shipped: every player name in waivers, rosters, team targets, transactions, and news tags opens a centered modal with photo, position + pro team, projection per game + total this week, rostered-by status, news tagged to their `athleteId`, recent transactions involving the player, and a deep-link to their ESPN page. Foundation for the per-player game-log + cross-team history items in **Medium**.
 
 ## Low
