@@ -155,6 +155,70 @@ Log: "Twitter/X: wrote N tweets (M players × ~K tweets each) to data/raw/<date>
 
 This writes `data/raw/<date>/*.json`, appends to `data/history/transactions.jsonl`, and rewrites `docs/data/state.json`. Print the CLI's summary verbatim — it includes scoring period, transactions appended, and the snapshot path.
 
+The refresh reads `data/ai_summaries.json` (the AI "why pick them up" GM takes) **before** building state, so on this first pass the summaries attached are still the *previous* run's. Step 5b regenerates them for today's top 30 and re-attaches.
+
+### 5b. Regenerate AI free-agent summaries
+
+The top-30 free agents shift every refresh, so the per-player "GM take" summaries
+in `data/ai_summaries.json` must be re-authored to stay accurate. These are
+**AI-authored by you (the agent running this skill)** — not produced by Python —
+because they synthesize projections + schedule + ownership trend + social/news
+signals into prose. (Auto-generating them via the Anthropic SDK at refresh time
+is a Medium backlog item; until then, author them here.)
+
+**Step 5b-i — pull today's top 30 + their signals.** This dumps each target's
+stats and any matched news/X/Bluesky/Reddit so you can write grounded takes:
+
+```bash
+python3 - <<'PY'
+import json
+s = json.load(open('docs/data/state.json'))
+def txt(p): return p.get('title') or p.get('headline') or ''
+for i, t in enumerate(s['waiver_targets_overall'][:30], 1):
+    p = t['player']; pid = str(p['player_id'])
+    sig = []
+    for a in (s['news_by_player'].get(pid) or [])[:1]:
+        sig.append('news: ' + a['headline'])
+    for key, lbl in (('twitter_posts_by_player','X'),('bluesky_posts_by_player','BS'),('reddit_posts_by_player','RD')):
+        for post in (s[key].get(pid) or [])[:1]:
+            sig.append(f'{lbl}: ' + txt(post)[:120])
+    print(f"{i:2}. {pid} {p['name']} ({p['bucket']}/{p['position']} {p['team']}) "
+          f"wk={t['projected_points_this_week']}({t['games_this_week']}g) "
+          f"next={t['projected_points_next_week']}({t['games_next_week']}g) "
+          f"/g={t['projected_per_game']} seas={t['season_avg_points']} "
+          f"own={t['percent_owned']} chg={t['percent_change']} inj={p['injury_status']}")
+    for x in sig: print('      ', x)
+print('\nTEAM NEEDS — G:', [tm['abbrev'] for tm in s['teams'] if tm['needs']['top_need_bucket']=='G'])
+print('TEAM NEEDS — FC:', [tm['abbrev'] for tm in s['teams'] if tm['needs']['top_need_bucket']=='FC'])
+PY
+```
+
+**Step 5b-ii — author `data/ai_summaries.json`.** Overwrite the `summaries` map
+with one entry per top-30 `player_id` (string key). Each value is a 2–3 sentence
+"why pick them up" take grounded in the dump above — lead with the strongest
+signal (volume of games this week, per-game punch, rising ownership, a role
+change from the news/social feed), name the league fit ("for the Guard-need
+teams" / "Frontcourt-need teams"), and flag caveats (injury, light next-week
+slate). Use the *needs / upgrade* vocabulary, never *weakness*. Bump
+`generated_at` to today and keep `model` set to the model you're running as.
+Drop entries for players who fell out of the top 30.
+
+**Step 5b-iii — re-attach without re-hitting ESPN.** `rebuild_state.py` replays
+today's raw snapshot (no cookies) and folds in the new summaries:
+
+```bash
+python3 scripts/rebuild_state.py
+```
+
+Confirm every overall target now carries a summary:
+
+```bash
+python3 -c "import json; o=json.load(open('docs/data/state.json'))['waiver_targets_overall']; print(f'{sum(1 for t in o if t.get(\"ai_summary\"))}/{len(o)} targets have an AI summary')"
+```
+
+It should print `30/30`. If a player is missing one, you skipped their key in
+`data/ai_summaries.json` — add it and re-run `rebuild_state.py`.
+
 ### 6. Tests + secret scan
 
 ```bash
@@ -194,11 +258,16 @@ data: refresh league snapshot
 - ESPN ingest: data/raw/<date>/{league,free_agents}.json
 - Twitter/X: data/raw/<date>/twitter_raw.json
 - Transactions appended to data/history/transactions.jsonl
+- AI free-agent summaries re-authored: data/ai_summaries.json
 - docs/data/state.json rebuilt
 EOF
 )"
 git push origin main
 ```
+
+`git add data/` picks up both today's raw snapshot *and* the re-authored
+`data/ai_summaries.json` — both should be staged alongside `state.json` so the
+audit trail stays consistent (see the raw↔state pitfall below).
 
 If no, leave the working tree as-is. The user can preview locally before deciding.
 
@@ -210,8 +279,33 @@ If the user wants to see the result locally before pushing, the static dev serve
 node scripts/serve.mjs   # then open http://127.0.0.1:9876
 ```
 
+## Rebuilding state without ESPN cookies
+
+`scripts/rebuild_state.py` regenerates `docs/data/state.json` from the latest
+on-disk `data/raw/<date>/` snapshot — **no network, no cookies**. Use it after a
+code or data-only change (new AI summaries in `data/ai_summaries.json`, a schema
+tweak, a frontend-adjacent build_state change) when you don't need a fresh ESPN
+pull:
+
+```bash
+python3 scripts/rebuild_state.py            # latest snapshot
+python3 scripts/rebuild_state.py 2026-06-01 # a specific date
+```
+
+It replays the same news/Reddit/X/Bluesky raw files, so the social layer is
+preserved. Note it rebuilds from whatever raw snapshot is on disk — if that
+snapshot is older than the live league, the rebuilt state will be too.
+
 ## Common pitfalls
 
+- **Keep raw ↔ state consistent.** `docs/data/state.json` must be built from the
+  committed `data/raw/<date>/{league,free_agents}.json`. On 2026-06-01 a refresh
+  committed a newer `state.json` than the raw files it came from, so state carried
+  transactions/periods absent from the audit trail. After a full refresh, sanity
+  check: `state.meta.captured_at` should match `data/raw/<date>/_meta.json`'s
+  `captured_at`, and `git status` should show both `data/raw/<date>/` and
+  `docs/data/state.json` staged together. If only state is dirty, the raw pull
+  didn't get re-fetched — investigate before committing.
 - **Don't run with `--no-verify`.** The secret scan exists because someone got burned.
 - **Don't `git add -A`.** Use the explicit paths in step 8 so a stray `.env` or scratch file can't sneak in.
 - **Don't commit `data/raw/` outside today's folder.** If `git status` shows raw files from a past date are dirty, that's an editing bug — investigate before adding.
