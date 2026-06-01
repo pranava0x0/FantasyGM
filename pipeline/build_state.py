@@ -30,6 +30,7 @@ def build_state(
     reddit_posts: list[dict[str, Any]] | None = None,
     twitter_posts: list[dict[str, Any]] | None = None,
     bluesky_posts: list[dict[str, Any]] | None = None,
+    ai_summaries: dict[str, str] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
@@ -53,10 +54,14 @@ def build_state(
     ranked_fas_dicts = analyze.rank_free_agents(
         free_agents_raw,
         scoring_period_id=int(league_raw.get("scoringPeriodId") or 0),
-        limit=25,
+        limit=40,
         games_by_pro_team=games_by_pro_team,
         games_by_pro_team_next_week=games_by_pro_team_next_week,
     )
+
+    # AI "why pick them up" summaries, keyed by str(player_id). Authored
+    # out-of-band (data/ai_summaries.json) and attached to waiver targets.
+    ai_summaries = ai_summaries or {}
 
     # Player id -> name, for transaction items.
     player_name_index = _player_name_index(league_raw, free_agents_raw)
@@ -150,11 +155,11 @@ def build_state(
         by_team_targets.append(
             schema.WaiverTargetsByTeam(
                 team_id=team_id_int,
-                targets=[_to_waiver_target(d) for d in team_targets],
+                targets=[_to_waiver_target(d, ai_summaries) for d in team_targets],
             )
         )
 
-    overall_targets = [_to_waiver_target(d) for d in ranked_fas_dicts[:15]]
+    overall_targets = [_to_waiver_target(d, ai_summaries) for d in ranked_fas_dicts[:30]]
 
     transactions_view: list[schema.Transaction] = []
     for tx in transactions_raw[:50]:
@@ -418,7 +423,11 @@ def _player_name_index(
     return idx
 
 
-def _to_waiver_target(d: dict[str, Any]) -> schema.WaiverTarget:
+def _to_waiver_target(
+    d: dict[str, Any],
+    ai_summaries: dict[str, str] | None = None,
+) -> schema.WaiverTarget:
+    pid = str(d["player_id"])
     return schema.WaiverTarget(
         player=schema.PlayerRef(
             player_id=int(d["player_id"]),
@@ -439,6 +448,7 @@ def _to_waiver_target(d: dict[str, Any]) -> schema.WaiverTarget:
         percent_owned=d["percent_owned"],
         percent_change=d["percent_change"],
         base_score=float(d["base_score"]),
+        ai_summary=(ai_summaries or {}).get(pid),
     )
 
 

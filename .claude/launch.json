@@ -4,7 +4,7 @@
     {
       "name": "site",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["/Users/pranava/Projects/FantasyGM/scripts/serve.mjs"],
+      "runtimeArgs": ["scripts/serve.mjs"],
       "port": 9876
     }
   ]

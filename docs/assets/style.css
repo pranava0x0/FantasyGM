@@ -22,6 +22,7 @@
   --text:        #18171a;
   --text-muted:  #5d5a52;
   --accent:      #1f5fa1;
+  --accent-soft: rgba(31, 95, 161, 0.09);
 
   /* Semantic tokens. */
   --bucket-guard:    #2563eb;
@@ -49,6 +50,7 @@
   --text:        #f3f1eb;
   --text-muted:  #9e9a90;
   --accent:      #6aa3e0;
+  --accent-soft: rgba(106, 163, 224, 0.14);
 
   --bucket-guard:    #60a5fa;
   --bucket-forward:  #fbbf24;
@@ -227,15 +229,73 @@ main {
   padding: 10px 12px;
   display: grid;
   grid-template-columns: 28px 1fr auto;
+  grid-template-areas:
+    "rank body schedule"
+    "rank summary summary";
   align-items: center;
-  gap: 12px;
+  column-gap: 12px;
+  row-gap: 8px;
   min-height: 44px;
+}
+.waiver-rank { grid-area: rank; align-self: center; }
+.waiver-body { grid-area: body; }
+.waiver-schedule { grid-area: schedule; }
+.waiver-summary { grid-area: summary; }
+
+/* AI "why pick them up" take on each waiver card. Clamped to 2 lines so
+   the 30-deep list stays scannable; the modal shows the full text. */
+.waiver-summary {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.waiver-summary-text {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.waiver-summary-badge {
+  flex: none;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--accent-soft, rgba(31, 95, 161, 0.12));
+  color: var(--accent);
+  text-transform: uppercase;
 }
 .waiver-rank {
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--text-muted);
   text-align: right;
+}
+
+/* Narrow screens: the two-block schedule eats the width and clips the
+   player name. Drop it to its own row — rank spans both rows on the left,
+   name + meta get the full width up top, schedule sits below left-aligned. */
+@media (max-width: 480px) {
+  .waiver-card {
+    grid-template-columns: 24px 1fr;
+    grid-template-areas:
+      "rank body"
+      "rank schedule"
+      "summary summary";
+    align-items: start;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+  .waiver-rank { align-self: center; }
+  .waiver-schedule { justify-content: flex-start; }
+  .waiver-schedule .week-block:first-child { padding-left: 0; }
 }
 .waiver-body {
   display: grid;
@@ -563,15 +623,35 @@ main {
 .team-target-row {
   display: grid;
   grid-template-columns: 20px 1fr auto auto;
+  grid-template-areas: "rank body bucket schedule";
   gap: 8px;
   align-items: center;
   font-size: 13px;
   padding: 6px 0;
 }
+.team-target-row .target-rank { grid-area: rank; }
+.team-target-row .target-body { grid-area: body; }
+.team-target-row > .pill { grid-area: bucket; }
+.team-target-row .target-schedule { grid-area: schedule; }
 .team-target-row .target-rank {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
+}
+
+/* Narrow screens: same fix as the waiver card — the schedule blocks drop
+   to their own row so the player name isn't clipped and the bucket pill
+   stops colliding with the team abbreviation. */
+@media (max-width: 480px) {
+  .team-target-row {
+    grid-template-columns: 20px 1fr auto;
+    grid-template-areas:
+      "rank body bucket"
+      "rank schedule schedule";
+    row-gap: 8px;
+  }
+  .team-target-row .target-schedule { justify-content: flex-start; }
+  .team-target-row .target-schedule .week-block:first-child { padding-left: 0; }
 }
 .team-target-row .target-body {
   display: grid;
@@ -912,6 +992,42 @@ body.modal-open { overflow: hidden; }
 .player-modal-stat-sub {
   font-size: 10.5px;
   color: var(--text-muted);
+}
+
+/* AI GM take — accented call-out panel above the news section. */
+.player-modal-gmtake {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--accent-soft, rgba(31, 95, 161, 0.08));
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+}
+.player-modal-gmtake[hidden] { display: none; }
+.player-modal-gmtake-h {
+  margin: 0 0 6px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.player-modal-gmtake-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+}
+.player-modal-gmtake-body {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text);
 }
 
 .player-modal-section { display: grid; gap: 6px; }

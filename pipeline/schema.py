@@ -121,6 +121,10 @@ class WaiverTarget(_Strict):
     percent_owned: float | None = None
     percent_change: float | None = None
     base_score: float = Field(..., description="Sorting key = projected_points_this_week")
+    ai_summary: str | None = Field(
+        None,
+        description="AI-authored 'why pick them up' GM take, keyed by player_id from data/ai_summaries.json. None when no summary exists for this player.",
+    )
 
 
 class TransactionItem(_Strict):

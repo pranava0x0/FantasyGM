@@ -1,7 +1,7 @@
 # UAT Baseline — FantasyGM
 
 _Created: 2026-05-17_
-_Last run: 2026-06-01 (second pass)_
+_Last run: 2026-06-01 (third pass — AI summaries + mobile reflow)_
 
 ## Project Info
 
@@ -76,3 +76,17 @@ See `issues.md` for the audit table.
 **2026-06-01 (second pass — desktop + mobile UAT):**
 - UAT-007: Team-tagged news in player modal had no label. Fixed — "TEAM NEWS" badge added.
 - UAT-008: 5-stat free-agent modal orphan row (Season + Ownership stretched to 50%). Fixed — `repeat(3, 1fr)` grid.
+
+**2026-06-01 (third pass — desktop + mobile UAT, AI summaries):**
+- UAT-009: Waiver-card player names clipped at 375px ("Jade M", "Elizabe"). Fixed — responsive grid-areas drop the schedule to its own row below 480px so the name gets full width.
+- UAT-010: Team-detail "Top picks" rows clipped names and the bucket pill overlapped the team abbrev at 375px. Fixed — same grid-area reflow on `.team-target-row`.
+- UAT-011: Ownership change rendered `-0.0%` for near-zero values. Fixed — `fmtPctChange` collapses `|v| < 0.05` to `0`.
+- UAT-012 (data integrity): committed `state.json` was newer than the committed raw snapshot — state derived from data not in the audit trail. Fixed — `scripts/rebuild_state.py` regenerates state deterministically from the on-disk raw snapshot.
+- Feature: AI "GM take" summaries for the top 30 free agents — clamped line on each waiver card + accented panel in the player modal (light + dark verified, mobile + desktop).
+
+### Verified this pass
+- Waivers (desktop + 375px): 30 targets, full names, AI summary line renders with badge; `-0.0%` gone.
+- Team Needs (375px): expanded card "Top picks" rows clean, no clipping, no pill overlap.
+- Player modal (desktop + 375px, light + dark): "GM take · AI" panel renders above Recent News; hidden when a player has no summary.
+- News / Transactions tabs: unchanged, still clean.
+- `pytest`: 103 passed. Secret scan: clean.

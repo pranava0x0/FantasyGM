@@ -86,8 +86,10 @@
   }
   function fmtPctChange(n) {
     if (n == null || Number.isNaN(n)) return null;
-    const v = Number(n);
-    const sign = v > 0 ? "+" : v < 0 ? "" : "";
+    let v = Number(n);
+    // Collapse values that round to zero so we never render "-0.0%".
+    if (Math.abs(v) < 0.05) v = 0;
+    const sign = v > 0 ? "+" : "";
     return `${sign}${v.toFixed(1)}%`;
   }
   function fmtDate(iso) {
@@ -230,23 +232,34 @@
     const thisWkPts = t.projected_points_this_week ?? t.projected_points_next_period ?? 0;
     const nextWkPts = t.projected_points_next_week ?? 0;
 
-    return el("li", {
-      className: "waiver-card",
-      children: [
-        el("span", { className: "waiver-rank", text: String(idx + 1) }),
-        el("div", {
-          className: "waiver-body",
-          children: [nameLine, sub],
-        }),
-        el("div", {
-          className: "waiver-schedule",
-          children: [
-            weekBlock(t.games_this_week, thisWkPts, "this wk"),
-            weekBlock(t.games_next_week, nextWkPts, "next wk"),
-          ],
-        }),
-      ],
-    });
+    const children = [
+      el("span", { className: "waiver-rank", text: String(idx + 1) }),
+      el("div", {
+        className: "waiver-body",
+        children: [nameLine, sub],
+      }),
+      el("div", {
+        className: "waiver-schedule",
+        children: [
+          weekBlock(t.games_this_week, thisWkPts, "this wk"),
+          weekBlock(t.games_next_week, nextWkPts, "next wk"),
+        ],
+      }),
+    ];
+
+    // AI "why pick them up" take, spanning the full card width below the
+    // top row. Clamped to keep the list scannable; full text in the modal.
+    if (t.ai_summary) {
+      children.push(el("div", {
+        className: "waiver-summary",
+        children: [
+          el("span", { className: "waiver-summary-badge", text: "AI" }),
+          el("span", { className: "waiver-summary-text", text: t.ai_summary }),
+        ],
+      }));
+    }
+
+    return el("li", { className: "waiver-card", children });
   }
 
   function renderWaivers(overall) {
@@ -691,6 +704,7 @@
       const entry = ensure(t.player.player_id);
       entry.profile = entry.profile || t.player;
       entry.waiver_target = t;
+      if (t.ai_summary) entry.ai_summary = t.ai_summary;
     });
 
     (state.waiver_targets_by_team || []).forEach((row) => {
@@ -698,6 +712,7 @@
       (row.targets || []).forEach((t) => {
         const entry = ensure(t.player.player_id);
         entry.profile = entry.profile || t.player;
+        if (t.ai_summary && !entry.ai_summary) entry.ai_summary = t.ai_summary;
         entry.per_team_targets.push({
           team_id: row.team_id,
           team_name: teamMeta ? teamMeta.name : `Team ${row.team_id}`,
@@ -855,6 +870,19 @@
     // Force a fixed 3-column grid so orphan stats (e.g. 5th item) stay at
     // column-width and don't stretch to fill the row.
     statsWrap.style.gridTemplateColumns = "repeat(3, 1fr)";
+
+    // GM take — AI-authored "why pick them up". Hidden when absent.
+    const gmTake = $("#player-modal-gmtake");
+    const gmBody = $("#player-modal-gmtake-body");
+    if (gmTake && gmBody) {
+      if (entry.ai_summary) {
+        gmBody.textContent = entry.ai_summary;
+        gmTake.removeAttribute("hidden");
+      } else {
+        gmBody.textContent = "";
+        gmTake.setAttribute("hidden", "");
+      }
+    }
 
     // News — articles tagged by athlete ID are player-specific; articles
     // tagged only by team are contextual ("team news").

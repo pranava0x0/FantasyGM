@@ -119,6 +119,17 @@ def main(argv: list[str] | None = None) -> int:
     bluesky_posts = bluesky_mod.load_bluesky(raw_dir=snap.out_dir)
     log.info("refresh: %d Bluesky posts loaded", len(bluesky_posts))
 
+    # AI "why pick them up" summaries, authored out-of-band and committed at
+    # data/ai_summaries.json. Optional — absent file just means no summaries.
+    ai_path = data_root / "ai_summaries.json"
+    ai_summaries: dict[str, str] = {}
+    if ai_path.exists():
+        try:
+            ai_summaries = json.loads(ai_path.read_text()).get("summaries") or {}
+        except (json.JSONDecodeError, OSError) as e:
+            log.warning("refresh: failed to read %s (%s)", ai_path, e)
+    log.info("refresh: %d AI summaries loaded", len(ai_summaries))
+
     state = build_state_mod.build_state(
         league_raw=snap.league,
         free_agents_raw=snap.free_agents,
@@ -127,6 +138,7 @@ def main(argv: list[str] | None = None) -> int:
         reddit_posts=reddit_posts,
         twitter_posts=twitter_posts,
         bluesky_posts=bluesky_posts,
+        ai_summaries=ai_summaries,
     )
 
     state_path = build_state_mod.write_state(state, docs_root)
