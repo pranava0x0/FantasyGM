@@ -29,6 +29,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## Low
 
+- **Audit league scoring settings.** Pull the scoring settings from `view=mSettings` (`settings.scoringSettings`) and surface the per-stat point values in the UI or at minimum validate they match the league's stated format. Relevant for confirming `appliedTotal` interpretation and catching any mid-season scoring-rule changes. Raw field: `league_raw['settings']['scoringSettings']`; inspect today via `python3 -c "import json,pprint; pprint.pprint(json.load(open('data/raw/2026-06-01/league.json')).get('settings',{}).get('scoringSettings',{}))"`.
 - **Resolve transaction player names by ID.** Right now `transaction_items.player_name` is filled only for players currently on a roster or in the FA top-N. When a player was dropped + already picked up by a third team, their name might miss the index and the UI renders `#playerId`. Fix: pull `kona_playercard` for any unresolved IDs at build_state time, or maintain a cumulative `data/history/players.json` index.
 - **Historical drift charts.** Plot each team's win probability / power ranking over time using the raw daily snapshots in `data/raw/`.
 - **Player ownership trends.** Track free-agent percentage-owned changes day-over-day; flag fastest risers.

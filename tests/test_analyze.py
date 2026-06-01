@@ -156,6 +156,64 @@ class TestRankFreeAgents:
         assert len(ranked) == 2
 
 
+class TestRankFreeAgentsOutFilter:
+    def test_out_players_excluded(self) -> None:
+        fas = {
+            "players": [
+                {
+                    "player": {
+                        "id": 1, "fullName": "Healthy Guard", "defaultPositionId": 1,
+                        "eligibleSlots": [1, 6, 7], "proTeamId": 9,
+                        "injuryStatus": "ACTIVE",
+                        "ownership": {"percentOwned": 10.0, "percentChange": 0.0},
+                        "stats": [{"statSourceId": 1, "statSplitTypeId": 0,
+                                   "scoringPeriodId": 0, "appliedTotal": 300, "appliedAverage": 20.0}],
+                    }
+                },
+                {
+                    "player": {
+                        "id": 2, "fullName": "Injured Center", "defaultPositionId": 3,
+                        "eligibleSlots": [3, 5, 6, 7], "proTeamId": 9,
+                        "injuryStatus": "OUT",
+                        "ownership": {"percentOwned": 40.0, "percentChange": 0.0},
+                        "stats": [{"statSourceId": 1, "statSplitTypeId": 0,
+                                   "scoringPeriodId": 0, "appliedTotal": 600, "appliedAverage": 40.0}],
+                    }
+                },
+                {
+                    "player": {
+                        "id": 3, "fullName": "IR Forward", "defaultPositionId": 2,
+                        "eligibleSlots": [2, 4, 6, 7], "proTeamId": 9,
+                        "injuryStatus": "INJURY_RESERVE",
+                        "ownership": {"percentOwned": 5.0, "percentChange": 0.0},
+                        "stats": [{"statSourceId": 1, "statSplitTypeId": 0,
+                                   "scoringPeriodId": 0, "appliedTotal": 400, "appliedAverage": 25.0}],
+                    }
+                },
+            ]
+        }
+        ranked = analyze.rank_free_agents(fas, scoring_period_id=10)
+        assert len(ranked) == 1
+        assert ranked[0]["name"] == "Healthy Guard"
+
+    def test_dtd_players_included(self) -> None:
+        fas = {
+            "players": [{
+                "player": {
+                    "id": 1, "fullName": "Day To Day", "defaultPositionId": 1,
+                    "eligibleSlots": [1, 6, 7], "proTeamId": 9,
+                    "injuryStatus": "DAY_TO_DAY",
+                    "ownership": {"percentOwned": 5.0, "percentChange": 0.0},
+                    "stats": [{"statSourceId": 1, "statSplitTypeId": 0,
+                               "scoringPeriodId": 0, "appliedTotal": 200, "appliedAverage": 15.0}],
+                }
+            }]
+        }
+        ranked = analyze.rank_free_agents(fas, scoring_period_id=10)
+        assert len(ranked) == 1
+        assert ranked[0]["name"] == "Day To Day"
+
+
 class TestWaiverTargetsForTeam:
     def test_no_boost_when_team_strong_everywhere(self, free_agents_raw: dict) -> None:
         needs = {
@@ -169,8 +227,8 @@ class TestWaiverTargetsForTeam:
         assert all(r["adjusted_score"] == r["base_score"] for r in boosted)
 
     def test_severe_gap_uses_larger_weight(self, free_agents_raw: dict) -> None:
-        # Severe (-15) frontcourt gap: weight 0.15 → bonus = 15 * 0.15 = 2.25
-        # (subject to 50% base-score cap).
+        # Severe (-15) frontcourt gap: weight 0.20 → bonus = 15 * 0.20 = 3.0
+        # (subject to 75% base-score cap).
         needs = {
             "guard_gap_vs_league": 0.0,
             "frontcourt_gap_vs_league": -15.0,
@@ -180,11 +238,11 @@ class TestWaiverTargetsForTeam:
         fc_targets = [r for r in boosted if r["bucket"] in ("F", "C")]
         assert fc_targets, "expected at least one FC target in the FA pool"
         for r in fc_targets:
-            expected_raw = 15.0 * 0.15
-            expected_capped = min(expected_raw, r["base_score"] * 0.5)
+            expected_raw = 15.0 * 0.20
+            expected_capped = min(expected_raw, r["base_score"] * 0.75)
             assert r["team_bonus"] == pytest.approx(round(expected_capped, 2))
 
-    def test_boost_capped_at_half_base_score(self) -> None:
+    def test_boost_capped_at_75pct_base_score(self) -> None:
         # 100-pt gap must not catapult a 2-pt bench player above legit picks.
         needs = {
             "guard_gap_vs_league": 0.0,
@@ -199,9 +257,9 @@ class TestWaiverTargetsForTeam:
             "base_score": 2.0,
         }]
         boosted = analyze.waiver_targets_for_team(needs, ranked)
-        # bonus capped at base * 0.5 = 1.0.
-        assert boosted[0]["team_bonus"] == 1.0
-        assert boosted[0]["adjusted_score"] == 3.0
+        # bonus capped at base * 0.75 = 1.5.
+        assert boosted[0]["team_bonus"] == 1.5
+        assert boosted[0]["adjusted_score"] == 3.5
 
     def test_saturation_penalty_on_overloaded_bucket(self) -> None:
         # Team with 7 active guards should see guard picks penalized.

@@ -274,6 +274,8 @@ def rank_free_agents(
     out = []
     for entry in free_agents_raw.get("players") or []:
         player = entry.get("player") or {}
+        if _is_out(player):
+            continue
         proj_period = _player_projected_points(player, scoring_period_id)
         proj_per_game = _player_projected_per_game(player)
         season_avg = _player_season_avg_actual(player)
@@ -304,6 +306,16 @@ def rank_free_agents(
         })
     out.sort(key=lambda r: r["base_score"], reverse=True)
     return out[:limit]
+
+
+def _is_out(player: dict[str, Any]) -> bool:
+    """True when the player is confirmed unavailable (OUT or IR).
+
+    DTD and QUESTIONABLE stay in the pool — they may play.
+    ESPN uses the string "OUT" and "INJURY_RESERVE".
+    """
+    status = (player.get("injuryStatus") or "").upper()
+    return status in {"OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"}
 
 
 def _player_projected_per_game(player: dict[str, Any]) -> float:
@@ -396,12 +408,12 @@ def waiver_targets_for_team(
         bonus = 0.0
         if gap < 0:
             weight = (
-                0.15 if gap <= -10.0 else
-                0.08 if gap <= -5.0 else
-                0.04
+                0.20 if gap <= -10.0 else
+                0.12 if gap <= -5.0 else
+                0.06
             )
             raw = (-gap) * weight
-            bonus = min(raw, base * 0.5)
+            bonus = min(raw, base * 0.75)
 
         penalty = -base * 0.30 if _saturated(bucket) else 0.0
 

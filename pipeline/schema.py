@@ -52,6 +52,15 @@ class TeamRecord(_Strict):
     pct: float
 
 
+class MatchupResult(_Strict):
+    """One completed H2H matchup for a team."""
+    matchup_period_id: int
+    opponent_team_id: int
+    team_points: float
+    opponent_points: float
+    result: Literal["W", "L", "T"]
+
+
 class TeamNeeds(_Strict):
     """Per-team production by bucket, with league-average comparison.
 
@@ -84,6 +93,10 @@ class TeamState(_Strict):
     logo_url: str | None = None
     division_id: int | None = None
     record: TeamRecord
+    matchup_history: list[MatchupResult] = Field(
+        default_factory=list,
+        description="Completed H2H matchup results, sorted by matchup_period_id ascending.",
+    )
     waiver_position: int | None = None
     faab_remaining: int | None = None
     roster: list[RosterEntry]

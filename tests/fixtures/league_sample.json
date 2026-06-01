@@ -3,7 +3,7 @@
   "seasonId": 2026,
   "scoringPeriodId": 10,
   "status": {
-    "currentMatchupPeriod": 1
+    "currentMatchupPeriod": 3
   },
   "settings": {
     "name": "50-40-90 Club",
@@ -1187,6 +1187,47 @@
           "type": "DROP"
         }
       ]
+    }
+  ],
+  "schedule": [
+    {
+      "home": {
+        "teamId": 1,
+        "totalPoints": 350.0,
+        "gamesPlayed": 0
+      },
+      "away": {
+        "teamId": 5,
+        "totalPoints": 430.0,
+        "gamesPlayed": 0
+      },
+      "matchupPeriodId": 1
+    },
+    {
+      "home": {
+        "teamId": 2,
+        "totalPoints": 375.0,
+        "gamesPlayed": 0
+      },
+      "away": {
+        "teamId": 1,
+        "totalPoints": 260.0,
+        "gamesPlayed": 0
+      },
+      "matchupPeriodId": 2
+    },
+    {
+      "home": {
+        "teamId": 1,
+        "totalPoints": 0.0,
+        "gamesPlayed": 0
+      },
+      "away": {
+        "teamId": 2,
+        "totalPoints": 0.0,
+        "gamesPlayed": 0
+      },
+      "matchupPeriodId": 3
     }
   ]
 }

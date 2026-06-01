@@ -58,14 +58,18 @@ def build_state(
     # global feed and per-team grouping.
     transactions_raw = analyze.normalize_transactions(league_raw)
 
+    current_matchup_period = int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0)
+
     # Generate the per-team narrative bullets up front, using the
     # already-built teams_view + needs + transactions.
     summaries = summary.build_team_summaries(
         teams_view,
         needs,
         transactions_raw,
-        matchup_period_id=int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0),
+        matchup_period_id=current_matchup_period,
     )
+
+    matchup_history_by_team = _build_matchup_history(league_raw, current_matchup_period)
 
     # Per-team transaction id grouping (newest first).
     team_txn_ids: dict[int, list[str]] = {}
@@ -103,13 +107,15 @@ def build_state(
             if p["player_id"] is not None
         ]
 
+        team_id_int = int(t["team_id"])
         team_state = schema.TeamState(
-            team_id=int(t["team_id"]),
+            team_id=team_id_int,
             abbrev=str(t["abbrev"] or f"T{t['team_id']}"),
             name=str(t["name"]),
             logo_url=t["logo"],
             division_id=t["division_id"],
             record=schema.TeamRecord(**t["record"]),
+            matchup_history=matchup_history_by_team.get(team_id_int, []),
             waiver_position=t["waiver_position"],
             faab_remaining=t["faab_remaining"],
             roster=roster_entries,
@@ -124,8 +130,8 @@ def build_state(
                 frontcourt_gap_vs_league=w["frontcourt_gap_vs_league"],
                 top_need_bucket=w["top_need_bucket"],
             ),
-            summary=summaries.get(int(t["team_id"]), []),
-            recent_transaction_ids=team_txn_ids.get(int(t["team_id"]), []),
+            summary=summaries.get(team_id_int, []),
+            recent_transaction_ids=team_txn_ids.get(team_id_int, []),
         )
         teams.append(team_state)
 
@@ -136,7 +142,7 @@ def build_state(
         )
         by_team_targets.append(
             schema.WaiverTargetsByTeam(
-                team_id=int(t["team_id"]),
+                team_id=team_id_int,
                 targets=[_to_waiver_target(d) for d in team_targets],
             )
         )
@@ -174,7 +180,7 @@ def build_state(
         league_name=str((league_raw.get("settings") or {}).get("name") or "Unknown League"),
         season_id=int(league_raw.get("seasonId") or 0),
         scoring_period_id=int(league_raw.get("scoringPeriodId") or 0),
-        matchup_period_id=int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0),
+        matchup_period_id=current_matchup_period,
         scoring_type=str(((league_raw.get("settings") or {}).get("scoringSettings") or {}).get("scoringType") or "UNKNOWN"),
         team_count=len(teams),
         captured_at=captured_at,
@@ -289,6 +295,55 @@ def append_transactions_history(
 
 
 # --- helpers --------------------------------------------------------------
+
+def _build_matchup_history(
+    league_raw: dict[str, Any],
+    current_matchup_period: int,
+) -> dict[int, list[schema.MatchupResult]]:
+    """Return a per-team dict of completed H2H matchup results (sorted ascending).
+
+    Only includes periods strictly before the current matchup period, where
+    both sides have non-zero points (i.e., the week is complete).
+    """
+    by_team: dict[int, list[schema.MatchupResult]] = {}
+    for m in league_raw.get("schedule") or []:
+        period = int(m.get("matchupPeriodId") or 0)
+        if period >= current_matchup_period:
+            continue
+        home = m.get("home") or {}
+        away = m.get("away") or {}
+        home_id = int(home.get("teamId") or 0)
+        away_id = int(away.get("teamId") or 0)
+        home_pts = float(home.get("totalPoints") or 0.0)
+        away_pts = float(away.get("totalPoints") or 0.0)
+        if home_pts == 0.0 and away_pts == 0.0:
+            continue
+        if home_pts > away_pts:
+            home_result, away_result = "W", "L"
+        elif away_pts > home_pts:
+            home_result, away_result = "L", "W"
+        else:
+            home_result, away_result = "T", "T"
+        if home_id:
+            by_team.setdefault(home_id, []).append(schema.MatchupResult(
+                matchup_period_id=period,
+                opponent_team_id=away_id,
+                team_points=home_pts,
+                opponent_points=away_pts,
+                result=home_result,
+            ))
+        if away_id:
+            by_team.setdefault(away_id, []).append(schema.MatchupResult(
+                matchup_period_id=period,
+                opponent_team_id=home_id,
+                team_points=away_pts,
+                opponent_points=home_pts,
+                result=away_result,
+            ))
+    for results in by_team.values():
+        results.sort(key=lambda r: r.matchup_period_id)
+    return by_team
+
 
 def _player_name_index(
     league_raw: dict[str, Any],

@@ -94,6 +94,38 @@ def test_append_transactions_history_dedupes(
     assert n2 == 0
 
 
+def test_matchup_history_populated(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    state = bs.build_state(
+        league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
+    )
+    # Fixture has currentMatchupPeriod=3 with 2 completed periods (1 and 2).
+    team_by_id = {t.team_id: t for t in state.teams}
+
+    # team1: lost period 1 to team5, lost period 2 to team2
+    t1 = team_by_id[1]
+    assert len(t1.matchup_history) == 2
+    p1 = next(m for m in t1.matchup_history if m.matchup_period_id == 1)
+    assert p1.opponent_team_id == 5
+    assert p1.result == "L"
+    assert p1.team_points == 350.0
+    assert p1.opponent_points == 430.0
+    p2 = next(m for m in t1.matchup_history if m.matchup_period_id == 2)
+    assert p2.opponent_team_id == 2
+    assert p2.result == "L"
+
+    # team5: won period 1 vs team1; no period 2 matchup in fixture
+    t5 = team_by_id[5]
+    assert len(t5.matchup_history) == 1
+    assert t5.matchup_history[0].result == "W"
+    assert t5.matchup_history[0].opponent_team_id == 1
+
+    # period 3 is in progress (both 0.0) — must not appear
+    for t in state.teams:
+        assert all(m.matchup_period_id < 3 for m in t.matchup_history)
+
+
 def test_no_owner_fields_in_state(
     league_raw: dict, free_agents_raw: dict, captured_at: datetime
 ) -> None:
