@@ -358,6 +358,7 @@ def rank_free_agents(
             window_games_map=window_games_map,
         )
         base_score = round(week_proj * boost, 2)
+        recent = _player_recent_games(player, scoring_period_id)
 
         out.append({
             "player_id": player.get("id"),
@@ -378,6 +379,7 @@ def rank_free_agents(
             "percent_change": ownership.get("percentChange"),
             "base_score": base_score,
             "injury_signal": inj_signal,
+            "recent_games": recent,
         })
     out.sort(key=lambda r: r["base_score"], reverse=True)
     return out[:limit]
@@ -471,6 +473,34 @@ def _injury_signal(
         absence_rate * 100, season_avg,
     )
     return "returning", _RETURN_BOOST
+
+
+def _player_recent_games(
+    player: dict[str, Any],
+    current_period: int,
+    *,
+    limit: int = 10,
+) -> list[dict[str, Any]]:
+    """Return individual game entries for the last ~2 weeks, newest first.
+
+    Each entry: {scoring_period_id, fantasy_points}. Zero-total entries
+    (DNP / no game) are excluded. Capped at `limit` games.
+    """
+    window_start = max(1, current_period - 14)
+    games = []
+    for s in player.get("stats") or []:
+        if s.get("statSourceId") != ACTUAL_SOURCE:
+            continue
+        if s.get("statSplitTypeId") != 5:
+            continue
+        period = int(s.get("scoringPeriodId") or 0)
+        if period < window_start or period > current_period:
+            continue
+        total = float(s.get("appliedTotal") or 0.0)
+        if total > 0:
+            games.append({"scoring_period_id": period, "fantasy_points": total})
+    games.sort(key=lambda g: g["scoring_period_id"], reverse=True)
+    return games[:limit]
 
 
 def _player_projected_per_game(

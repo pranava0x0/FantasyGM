@@ -891,35 +891,93 @@
       }
     }
 
-    // News — articles tagged by athlete ID are player-specific; articles
-    // tagged only by team are contextual ("team news").
+    // Recent games (last 2 weeks) — row of score pills, newest first.
+    const recentWrap = $("#player-modal-recent-wrap");
+    const recentGames = entry.waiver_target?.recent_games || [];
+    if (recentWrap) {
+      if (recentGames.length) {
+        recentWrap.removeAttribute("hidden");
+        const container = $("#player-modal-recent-games");
+        container.replaceChildren();
+        const max = Math.max(...recentGames.map((g) => g.fantasy_points));
+        recentGames.forEach((g) => {
+          const isHigh = g.fantasy_points === max && max >= 20;
+          container.appendChild(el("span", {
+            className: `recent-game-pill${isHigh ? " recent-game-pill--high" : ""}`,
+            text: String(Math.round(g.fantasy_points)),
+            attrs: { title: `Period ${g.scoring_period_id}: ${g.fantasy_points} fpts` },
+          }));
+        });
+        const avg = recentGames.reduce((s, g) => s + g.fantasy_points, 0) / recentGames.length;
+        container.appendChild(el("span", { className: "recent-game-avg", text: `avg ${avg.toFixed(1)}` }));
+      } else {
+        recentWrap.setAttribute("hidden", "");
+      }
+    }
+
+    // Social — Reddit + Twitter + Bluesky merged, sorted newest-first.
+    const socialWrap = $("#player-modal-social-wrap");
+    const socialList = $("#player-modal-social");
+    if (socialWrap && socialList) {
+      const allPosts = [
+        ...(entry.reddit || []).map((post) => ({
+          source: "reddit", label: `r/${post.subreddit || "wnba"}`,
+          title: post.title, url: post.url, ts: post.published_at,
+        })),
+        ...(entry.twitter || []).map((post) => ({
+          source: "twitter", label: post.screen_name ? `@${post.screen_name}` : "X",
+          title: post.title, url: post.url, ts: post.published_at,
+        })),
+        ...(entry.bluesky || []).map((post) => ({
+          source: "bluesky", label: post.handle ? `@${post.handle}` : "Bluesky",
+          title: post.title, url: post.url, ts: post.published_at,
+        })),
+      ].sort((a, b) => (b.ts || "").localeCompare(a.ts || ""));
+
+      if (allPosts.length) {
+        socialWrap.removeAttribute("hidden");
+        socialList.replaceChildren();
+        allPosts.slice(0, 12).forEach((post) => {
+          const li = el("li", { className: "social-item" });
+          li.appendChild(el("span", { className: `social-badge social-badge--${post.source}`, text: post.label }));
+          li.appendChild(el("a", {
+            className: "social-title",
+            text: post.title,
+            attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
+          }));
+          if (post.ts) li.appendChild(el("span", { className: "social-time", text: fmtTime(post.ts) }));
+          socialList.appendChild(li);
+        });
+      } else {
+        socialWrap.setAttribute("hidden", "");
+      }
+    }
+
+    // News — compact: headline + time + direct/team tag only (no description).
     const newsList = $("#player-modal-news");
     newsList.replaceChildren();
     if (entry.news && entry.news.length) {
       entry.news.forEach((n) => {
         const isDirectMention = Array.isArray(n.athlete_ids) && n.athlete_ids.includes(p.player_id);
         const li = el("li", { className: "player-modal-news-item" });
-        li.appendChild(el("a", {
+        const row = el("div", { className: "player-modal-news-row" });
+        row.appendChild(el("a", {
           className: "player-modal-news-headline",
           text: n.headline,
           attrs: { href: n.url || "#", target: "_blank", rel: "noopener" },
         }));
-        if (n.published_at) {
-          li.appendChild(el("span", { className: "player-modal-news-time", text: fmtTime(n.published_at) }));
-        }
-        if (!isDirectMention) {
-          li.appendChild(el("span", { className: "player-modal-news-team-tag", text: "Team news" }));
-        }
-        if (n.description) {
-          li.appendChild(el("p", { className: "player-modal-news-desc", text: n.description }));
-        }
+        const meta = el("span", { className: "player-modal-news-meta" });
+        if (n.published_at) meta.appendChild(el("span", { className: "player-modal-news-time", text: fmtTime(n.published_at) }));
+        if (!isDirectMention) meta.appendChild(el("span", { className: "player-modal-news-team-tag", text: "Team" }));
+        row.appendChild(meta);
+        li.appendChild(row);
         newsList.appendChild(li);
       });
     } else {
-      newsList.appendChild(el("li", { className: "empty", text: "No tagged headlines in the recent news feed." }));
+      newsList.appendChild(el("li", { className: "empty", text: "No tagged headlines." }));
     }
 
-    // Transactions (most recent first; entries already in feed order).
+    // Transactions (most recent first).
     const txnList = $("#player-modal-txns");
     txnList.replaceChildren();
     if (entry.txns && entry.txns.length) {
@@ -943,75 +1001,7 @@
         }));
       });
     } else {
-      txnList.appendChild(el("li", { className: "empty", text: "No transactions involving this player in the recent window." }));
-    }
-
-    // Reddit posts
-    const redditList = $("#player-modal-reddit");
-    redditList.replaceChildren();
-    if (entry.reddit && entry.reddit.length) {
-      entry.reddit.forEach((post) => {
-        const li = el("li", { className: "player-modal-reddit-item" });
-        li.appendChild(el("a", {
-          className: "player-modal-reddit-title",
-          text: post.title,
-          attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
-        }));
-        const meta = el("div", { className: "player-modal-reddit-meta" });
-        if (post.subreddit && post.subreddit !== "wnba") {
-          meta.appendChild(el("span", { className: "player-modal-reddit-sub", text: `r/${post.subreddit}` }));
-        }
-        if (post.published_at) {
-          meta.appendChild(el("span", { className: "player-modal-reddit-time", text: fmtTime(post.published_at) }));
-        }
-        if (meta.childNodes.length) li.appendChild(meta);
-        redditList.appendChild(li);
-      });
-    } else {
-      redditList.appendChild(el("li", { className: "empty", text: "No recent r/wnba posts mentioning this player." }));
-    }
-
-    // Twitter/X posts
-    const twitterList = $("#player-modal-twitter");
-    twitterList.replaceChildren();
-    if (entry.twitter && entry.twitter.length) {
-      entry.twitter.forEach((tweet) => {
-        const li = el("li", { className: "player-modal-twitter-item" });
-        const byline = tweet.screen_name ? `@${tweet.screen_name}` : null;
-        li.appendChild(el("a", {
-          className: "player-modal-twitter-title",
-          text: tweet.title,
-          attrs: { href: tweet.url || "#", target: "_blank", rel: "noopener noreferrer" },
-        }));
-        const meta = el("div", { className: "player-modal-twitter-meta" });
-        if (byline) meta.appendChild(el("span", { className: "player-modal-twitter-handle", text: byline }));
-        if (tweet.published_at) meta.appendChild(el("span", { className: "player-modal-twitter-time", text: fmtTime(tweet.published_at) }));
-        if (meta.childNodes.length) li.appendChild(meta);
-        twitterList.appendChild(li);
-      });
-    } else {
-      twitterList.appendChild(el("li", { className: "empty", text: "No recent X/Twitter posts mentioning this player." }));
-    }
-
-    // Bluesky posts
-    const bskyList = $("#player-modal-bluesky");
-    bskyList.replaceChildren();
-    if (entry.bluesky && entry.bluesky.length) {
-      entry.bluesky.forEach((post) => {
-        const li = el("li", { className: "player-modal-bluesky-item" });
-        li.appendChild(el("a", {
-          className: "player-modal-bluesky-title",
-          text: post.title,
-          attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
-        }));
-        const meta = el("div", { className: "player-modal-bluesky-meta" });
-        if (post.handle) meta.appendChild(el("span", { className: "player-modal-bluesky-handle", text: `@${post.handle}` }));
-        if (post.published_at) meta.appendChild(el("span", { className: "player-modal-bluesky-time", text: fmtTime(post.published_at) }));
-        if (meta.childNodes.length) li.appendChild(meta);
-        bskyList.appendChild(li);
-      });
-    } else {
-      bskyList.appendChild(el("li", { className: "empty", text: "No recent Bluesky posts mentioning this player." }));
+      txnList.appendChild(el("li", { className: "empty", text: "No transactions in the recent window." }));
     }
 
     // ESPN deep link

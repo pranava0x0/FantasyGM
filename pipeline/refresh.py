@@ -25,6 +25,7 @@ from pipeline.espn_client import (
     ESPNClient,
     ESPNCredentials,
 )
+from pipeline.ai_summary import generate_summaries
 from pipeline.projections_ext import fetch_all_external
 from pipeline.scoring_formula import ScoringFormula
 
@@ -121,20 +122,8 @@ def main(argv: list[str] | None = None) -> int:
     bluesky_posts = bluesky_mod.load_bluesky(raw_dir=snap.out_dir)
     log.info("refresh: %d Bluesky posts loaded", len(bluesky_posts))
 
-    # AI "why pick them up" summaries, authored out-of-band and committed at
-    # data/ai_summaries.json. Optional — absent file just means no summaries.
-    ai_path = data_root / "ai_summaries.json"
-    ai_summaries: dict[str, str] = {}
-    if ai_path.exists():
-        try:
-            ai_summaries = json.loads(ai_path.read_text()).get("summaries") or {}
-        except (json.JSONDecodeError, OSError) as e:
-            log.warning("refresh: failed to read %s (%s)", ai_path, e)
-    log.info("refresh: %d AI summaries loaded", len(ai_summaries))
-
-    # External projections (CBS Sports, Yahoo Sports). Fail gracefully —
-    # network errors or changed page structure return empty dicts and the
-    # pipeline continues with ESPN-only projections.
+    # External projections first so ranked_fas has accurate scores before AI
+    # summary generation (the AI prompt includes the blended projection).
     log.info("refresh: fetching external projections (CBS Sports, Yahoo Sports)")
     scoring_formula = ScoringFormula.from_league_raw(snap.league)
     ext_projections_by_source = fetch_all_external(
@@ -146,6 +135,40 @@ def main(argv: list[str] | None = None) -> int:
         log.info("refresh: external projection sources loaded: %s", counts)
     else:
         log.info("refresh: no external projections available — using ESPN only")
+
+    # Build a preliminary ranked FA list (no AI summaries yet) so the AI
+    # prompt can include accurate blended projections and recent game data.
+    from pipeline import analyze, schedule as schedule_mod
+    from pipeline.projections_ext import resolve_external_projections
+    _player_name_idx = {
+        int((e.get("player") or {}).get("id") or 0): str((e.get("player") or {}).get("fullName") or "")
+        for e in (snap.free_agents.get("players") or [])
+    }
+    _ext_by_player = resolve_external_projections(_player_name_idx, ext_projections_by_source) if ext_projections_by_source else {}
+    _current_period = int(snap.league.get("scoringPeriodId") or 0)
+    _week_start, _week_end = schedule_mod.upcoming_week_periods(snap.league)
+    _games_map = schedule_mod.games_per_team(snap.league, _week_start, _week_end)
+    _rolling_window = schedule_mod.games_per_team(snap.league, max(1, _current_period - 14), _current_period)
+    ranked_fas_for_ai = analyze.rank_free_agents(
+        snap.free_agents,
+        scoring_period_id=_current_period,
+        limit=30,
+        games_by_pro_team=_games_map,
+        games_in_rolling_window_by_team=_rolling_window,
+        ext_projections_by_player=_ext_by_player,
+    )
+
+    # AI "GM take" summaries — auto-generated for top N targets, cached and
+    # invalidated only when a player's score changes meaningfully (±5 pts).
+    ai_path = data_root / "ai_summaries.json"
+    log.info("refresh: generating AI summaries for top waiver targets")
+    ai_summaries = generate_summaries(
+        ranked_fas_for_ai,
+        summaries_path=ai_path,
+        league_name=(snap.league.get("settings") or {}).get("name") or "the league",
+        dry_run=args.dry_run,
+    )
+    log.info("refresh: %d AI summaries available", len(ai_summaries))
 
     state = build_state_mod.build_state(
         league_raw=snap.league,
