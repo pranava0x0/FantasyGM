@@ -390,6 +390,9 @@ main {
 .fit-pill.need {
   background: var(--gap-weak);
 }
+.fit-pill.returning {
+  background: #b45309;
+}
 
 /* Footnote at the bottom of the Team Needs tab — explains the math. */
 .surface-footnote {

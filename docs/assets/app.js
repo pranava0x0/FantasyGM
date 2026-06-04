@@ -228,6 +228,13 @@
     if (t.promoted_for_need) {
       nameLine.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
     }
+    if (t.injury_signal === "returning") {
+      nameLine.appendChild(el("span", {
+        className: "fit-pill returning",
+        attrs: { title: "Missed 50%+ of team’s recent games — potential return from injury. Score boosted +15%." },
+        text: "Returning",
+      }));
+    }
 
     const thisWkPts = t.projected_points_this_week ?? t.projected_points_next_period ?? 0;
     const nextWkPts = t.projected_points_next_week ?? 0;

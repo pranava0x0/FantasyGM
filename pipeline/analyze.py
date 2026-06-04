@@ -10,9 +10,19 @@ Outputs (pure data — `build_state.py` wraps them into the LeagueState schema):
 - ranked waiver targets (overall + per-team adjusted)
 - a cleaned transaction list
 
-We intentionally use ESPN's own projected/applied points (`appliedTotal` from
-the stat blocks) rather than re-deriving from raw stats. ESPN's scoring
-formula is in the league settings; replicating it is on BACKLOG.md.
+Per-game projection blends up to four sources (average of available values):
+  1. Actual season average so far (statSourceId=0, statSplitTypeId=0 appliedAverage).
+     ESPN's preseason projection (statSourceId=1) is a full-season forecast made
+     before the season opens and never updated; the actual average is used instead.
+     The preseason projection is only kept as a fallback when fewer than 3 games
+     have been played (sample too small to trust alone).
+  2. ESPN 2-week rolling actual average (per-game actual blocks, statSplitTypeId=5)
+  3. CBS Sports per-game projection (external scrape, optional)
+  4. Yahoo Sports per-game stats (external scrape, optional)
+
+Sources 3 and 4 come pre-converted to fantasy points using the league's
+ScoringFormula (extracted from mSettings). Missing or zero sources are
+excluded from the average so a single missing source doesn't dilute the result.
 """
 
 from __future__ import annotations
@@ -79,6 +89,24 @@ def _player_season_avg_actual(player: dict[str, Any]) -> float | None:
     return None
 
 
+def _player_actual_game_count(player: dict[str, Any]) -> int:
+    """Number of actual games played this season (from season totals block).
+
+    Used to decide whether to include the ESPN preseason projection as a
+    fallback anchor: if fewer than 3 games have been played the observed
+    sample is too small to stand alone.
+    """
+    for s in player.get("stats") or []:
+        if s.get("statSourceId") != ACTUAL_SOURCE:
+            continue
+        if s.get("statSplitTypeId") == 0:  # season
+            avg = float(s.get("appliedAverage") or 0.0)
+            total = float(s.get("appliedTotal") or 0.0)
+            if avg and total:
+                return round(total / avg)
+    return 0
+
+
 def _flatten_player(entry: dict[str, Any]) -> dict[str, Any]:
     """Pull what we need from a roster `entry`."""
     pool = entry.get("playerPoolEntry") or {}
@@ -104,6 +132,7 @@ def build_team_views(
     league_raw: dict[str, Any],
     *,
     games_by_pro_team: dict[int, int] | None = None,
+    ext_projections_by_player: dict[int, dict[str, float]] | None = None,
 ) -> list[dict[str, Any]]:
     """Normalize each team into a roster + weekly production summary.
 
@@ -112,9 +141,14 @@ def build_team_views(
     `per_game_projection × games_this_week`. When `games_by_pro_team`
     is None (tests / legacy) we fall back to the single-period
     projection so the math stays defined.
+
+    `ext_projections_by_player` maps player_id → {source_name: per_game_fpts}
+    from CBS Sports / Yahoo Sports. When present these are averaged in with
+    the ESPN projection and 2-week rolling average.
     """
     scoring_period = int(league_raw.get("scoringPeriodId") or 0)
     games_map = games_by_pro_team or {}
+    ext_map = ext_projections_by_player or {}
     teams = []
     for t in league_raw.get("teams") or []:
         record = (t.get("record") or {}).get("overall") or {}
@@ -125,8 +159,14 @@ def build_team_views(
         for e in (t.get("roster") or {}).get("entries") or []:
             flat = _flatten_player(e)
             player = flat["raw_player"]
+            player_id = int(player.get("id") or 0)
+            ext_proj = ext_map.get(player_id)
             proj_period = _player_projected_points(player, scoring_period)
-            proj_per_game = _player_projected_per_game(player)
+            proj_per_game = _player_projected_per_game(
+                player,
+                scoring_period_id=scoring_period,
+                ext_projections=ext_proj,
+            )
             season_avg = _player_season_avg_actual(player)
             per_game = proj_per_game or season_avg or proj_period or 0.0
             games_this_week = int(games_map.get(int(player.get("proTeamId") or 0), 0)) if games_map else 0
@@ -254,6 +294,8 @@ def rank_free_agents(
     limit: int = 25,
     games_by_pro_team: dict[int, int] | None = None,
     games_by_pro_team_next_week: dict[int, int] | None = None,
+    games_in_rolling_window_by_team: dict[int, int] | None = None,
+    ext_projections_by_player: dict[int, dict[str, float]] | None = None,
 ) -> list[dict[str, Any]]:
     """Sort the free-agent pool by *projected points this week*.
 
@@ -264,22 +306,35 @@ def rank_free_agents(
     1-2 is low"). When `games_by_pro_team` is None (legacy or tests), we
     fall back to the single-period projection so the ranker still works.
 
-    Per-game projection priority:
-    1. `appliedAverage` from the season-projection stat block (ESPN's own
-       per-game estimate — most reliable when present).
-    2. `season_avg_points` (actual per-game so far this season).
-    3. `projected_points_next_period` (single-period projection — least
-       informative once we know the schedule).
+    Per-game projection is a blend of (available sources only):
+    1. Actual season average so far (statSourceId=0, statSplitTypeId=0).
+    2. ESPN 2-week rolling actual average (per-game actuals, statSplitTypeId=5).
+    3. CBS Sports per-game projection (pre-converted via ScoringFormula).
+    4. Yahoo Sports per-game stats (pre-converted via ScoringFormula).
+
+    `games_in_rolling_window_by_team` maps proTeamId → game count in the
+    current rolling window. Used to detect players who missed most of their
+    team's recent games (potential returners from injury/rest).
+
+    `ext_projections_by_player` maps player_id → {source_name: per_game_fpts}.
     """
     games_map = games_by_pro_team or {}
     games_map_nw = games_by_pro_team_next_week or {}
+    window_games_map = games_in_rolling_window_by_team or {}
+    ext_map = ext_projections_by_player or {}
     out = []
     for entry in free_agents_raw.get("players") or []:
         player = entry.get("player") or {}
         if _is_out(player):
             continue
+        player_id = int(player.get("id") or 0)
+        ext_proj = ext_map.get(player_id)
         proj_period = _player_projected_points(player, scoring_period_id)
-        proj_per_game = _player_projected_per_game(player)
+        proj_per_game = _player_projected_per_game(
+            player,
+            scoring_period_id=scoring_period_id,
+            ext_projections=ext_proj,
+        )
         season_avg = _player_season_avg_actual(player)
         ownership = player.get("ownership") or {}
         per_game = proj_per_game or season_avg or proj_period
@@ -293,6 +348,17 @@ def rank_free_agents(
         else:
             week_proj = round(proj_period, 2)
             week_proj_nw = 0.0
+
+        # Injury / return signal: compare how many games the player played
+        # in the rolling window vs how many their team played.
+        inj_signal, boost = _injury_signal(
+            player,
+            pro_team_id=pro_team_id,
+            scoring_period_id=scoring_period_id,
+            window_games_map=window_games_map,
+        )
+        base_score = round(week_proj * boost, 2)
+
         out.append({
             "player_id": player.get("id"),
             "name": player.get("fullName"),
@@ -310,7 +376,8 @@ def rank_free_agents(
             "season_avg_points": round(season_avg, 2) if season_avg is not None else None,
             "percent_owned": ownership.get("percentOwned"),
             "percent_change": ownership.get("percentChange"),
-            "base_score": week_proj,
+            "base_score": base_score,
+            "injury_signal": inj_signal,
         })
     out.sort(key=lambda r: r["base_score"], reverse=True)
     return out[:limit]
@@ -326,11 +393,148 @@ def _is_out(player: dict[str, Any]) -> bool:
     return status in {"OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"}
 
 
-def _player_projected_per_game(player: dict[str, Any]) -> float:
+def _player_rolling_game_count(player: dict[str, Any], scoring_period_id: int) -> int:
+    """Count how many games the player actually played in the rolling window.
+
+    Counts per-game actual blocks (statSourceId=0, statSplitTypeId=5) where
+    appliedTotal > 0. Zero-total blocks (DNP / no-game) are not counted.
+    """
+    window_start = max(1, scoring_period_id - 14)
+    return sum(
+        1
+        for s in player.get("stats") or []
+        if s.get("statSourceId") == ACTUAL_SOURCE
+        and s.get("statSplitTypeId") == 5
+        and window_start <= int(s.get("scoringPeriodId") or 0) <= scoring_period_id
+        and float(s.get("appliedTotal") or 0.0) > 0
+    )
+
+
+# How many of their team's rolling-window games a player must have missed
+# before we call them a return candidate. 0.5 = missed more than half.
+_ABSENCE_THRESHOLD = 0.50
+# Minimum team games in the window before we can make an absence call.
+# Avoids false positives when a team simply has a very light schedule.
+_MIN_TEAM_GAMES_IN_WINDOW = 3
+# Minimum actual season average (fpts/game) for a player to be considered
+# a meaningful return target. Filters out fringe/end-of-bench players.
+_RETURN_MIN_SEASON_AVG = 10.0
+# Minimum number of actual games played (overall) for the season average
+# to be trustworthy enough to use as the return signal.
+_RETURN_MIN_GAMES_PLAYED = 3
+# Score multiplier applied to returning players.
+_RETURN_BOOST = 1.15
+
+
+def _injury_signal(
+    player: dict[str, Any],
+    *,
+    pro_team_id: int,
+    scoring_period_id: int,
+    window_games_map: dict[int, int],
+) -> tuple[str | None, float]:
+    """Return (signal_label, score_multiplier) for a player.
+
+    Signal:
+      "returning" — player missed ≥50% of their team's rolling-window games
+                    while having a meaningful season history. Base score is
+                    boosted ×1.15 to surface them above players whose rolling
+                    average is fully populated.
+      None        — no anomaly detected; multiplier is 1.0.
+
+    ESPN's WNBA injury system is binary (ACTIVE / OUT). There is no DTD or
+    QUESTIONABLE status. Players marked OUT are already removed by _is_out(),
+    so this function only sees ACTIVE players. The absence signal is the only
+    reliable way to detect a player who was recently unavailable and has now
+    returned to the pool.
+    """
+    team_games = int(window_games_map.get(pro_team_id, 0))
+    if team_games < _MIN_TEAM_GAMES_IN_WINDOW:
+        return None, 1.0
+
+    player_games = _player_rolling_game_count(player, scoring_period_id)
+    absence_rate = 1.0 - (player_games / team_games)
+    if absence_rate < _ABSENCE_THRESHOLD:
+        return None, 1.0
+
+    # Enough absence — check if the player's season history makes them worth
+    # flagging (filters out injured bench players who don't matter anyway).
+    season_avg = _player_season_avg_actual(player) or 0.0
+    actual_games = _player_actual_game_count(player)
+    if season_avg < _RETURN_MIN_SEASON_AVG or actual_games < _RETURN_MIN_GAMES_PLAYED:
+        return None, 1.0
+
+    log.debug(
+        "injury_signal: %s flagged 'returning' "
+        "(team_games=%d player_games=%d absence=%.0f%% season_avg=%.1f)",
+        player.get("fullName"), team_games, player_games,
+        absence_rate * 100, season_avg,
+    )
+    return "returning", _RETURN_BOOST
+
+
+def _player_projected_per_game(
+    player: dict[str, Any],
+    *,
+    scoring_period_id: int = 0,
+    ext_projections: dict[str, float] | None = None,
+) -> float:
+    """Blended per-game projection from up to four sources.
+
+    Sources averaged (only those with a positive value contribute):
+      1. Actual season average so far (statSourceId=0, statSplitTypeId=0,
+         appliedAverage). Preferred over the ESPN preseason projection because
+         ESPN's statSourceId=1 block encodes a full-season preseason forecast
+         (e.g. 44 games × 18.43 = 811 total) that never updates mid-season.
+         The actual average reflects real observed performance.
+      2. ESPN 2-week rolling actual average (per-game actuals, statSplitTypeId=5)
+      3. CBS Sports per-game fantasy points (pre-converted, optional)
+      4. Yahoo Sports per-game fantasy points (pre-converted, optional)
+
+    When the season is very early and fewer than 3 actual games exist, the
+    ESPN preseason projection is included as a fallback anchor so we don't
+    rank entirely on a tiny sample.
+
+    Returns 0.0 if no source is available.
+    """
+    sources: list[float] = []
+
+    # Source 1: actual season-average so far.
+    season_avg = _player_season_avg_actual(player)
+    actual_game_count = _player_actual_game_count(player)
+    if season_avg and season_avg > 0:
+        sources.append(season_avg)
+
+    # Fallback: ESPN preseason projection. Only used when the player has
+    # fewer than 3 actual games — at that point the observed sample is too
+    # small to trust alone, so the preseason projection anchors the estimate.
+    if actual_game_count < 3:
+        espn_proj = _espn_projected_avg(player)
+        if espn_proj > 0:
+            sources.append(espn_proj)
+
+    # Source 2: ESPN 2-week rolling actual average.
+    rolling = _player_rolling_2w_avg(player, scoring_period_id)
+    if rolling is not None and rolling > 0:
+        sources.append(rolling)
+
+    # Sources 3 & 4: external per-game projections (CBS, Yahoo) pre-keyed by
+    # source name.
+    if ext_projections:
+        for val in ext_projections.values():
+            if val and float(val) > 0:
+                sources.append(float(val))
+
+    if not sources:
+        return 0.0
+    return sum(sources) / len(sources)
+
+
+def _espn_projected_avg(player: dict[str, Any]) -> float:
     """ESPN's season-projection per-game average (statSourceId=1, split=0).
 
-    Returns 0.0 if unavailable. We prefer this over single-period projections
-    because the ranker multiplies it by games-this-week downstream.
+    Returns 0.0 if unavailable. Extracted as a separate helper so both
+    `_player_projected_per_game` and `build_team_views` can call it directly.
     """
     for s in player.get("stats") or []:
         if s.get("statSourceId") != PROJECTED_SOURCE:
@@ -343,6 +547,35 @@ def _player_projected_per_game(player: dict[str, Any]) -> float:
             # ESPN sometimes ships total only; ~36-game season rough divisor.
             return total / 36 if total else 0.0
     return 0.0
+
+
+def _player_rolling_2w_avg(player: dict[str, Any], current_period: int) -> float | None:
+    """Average fantasy points over the player's most recent games (~2 weeks).
+
+    Uses per-game actual stat blocks (statSourceId=0, statSplitTypeId=5).
+    These carry ESPN's pre-scored `appliedTotal` per game, so no formula
+    conversion is needed. Only counts games where `appliedTotal > 0`
+    (games where the player was inactive or didn't play have total=0 and
+    are excluded so they don't drag the average down).
+
+    Returns None if no qualifying game blocks are found.
+    """
+    window_start = max(1, current_period - 14)
+    game_totals: list[float] = []
+    for s in player.get("stats") or []:
+        if s.get("statSourceId") != ACTUAL_SOURCE:
+            continue
+        if s.get("statSplitTypeId") != 5:  # 5 = individual game log entry
+            continue
+        period = int(s.get("scoringPeriodId") or 0)
+        if period < window_start or period > current_period:
+            continue
+        total = float(s.get("appliedTotal") or 0.0)
+        if total > 0:
+            game_totals.append(total)
+    if not game_totals:
+        return None
+    return sum(game_totals) / len(game_totals)
 
 
 # WNBA roster: 2 G slots + 3 F slots + 1 F/C slot + 3 UTIL (any) = 9 active.
