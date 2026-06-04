@@ -624,6 +624,13 @@ def _to_waiver_target(
         percent_change=d["percent_change"],
         base_score=float(d["base_score"]),
         injury_signal=d.get("injury_signal"),
+        recent_games=[
+            schema.RecentGame(
+                scoring_period_id=int(g["scoring_period_id"]),
+                fantasy_points=float(g["fantasy_points"]),
+            )
+            for g in (d.get("recent_games") or [])
+        ],
         ai_summary=(ai_summaries or {}).get(pid),
     )
 

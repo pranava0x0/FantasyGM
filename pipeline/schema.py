@@ -21,6 +21,12 @@ class _Strict(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class RecentGame(_Strict):
+    """One actual game entry from the last ~2 weeks (statSplitTypeId=5)."""
+    scoring_period_id: int
+    fantasy_points: float
+
+
 class PlayerRef(_Strict):
     """Minimal player reference, embedded in roster slots and waiver targets."""
     player_id: int
@@ -130,6 +136,10 @@ class WaiverTarget(_Strict):
             "Base score boosted +15% to surface them. "
             "None = no anomaly detected."
         ),
+    )
+    recent_games: list[RecentGame] = Field(
+        default_factory=list,
+        description="Per-game fantasy point totals for the last ~14 scoring periods, newest first.",
     )
     ai_summary: str | None = Field(
         None,

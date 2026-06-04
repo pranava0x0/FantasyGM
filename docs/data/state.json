@@ -2681,6 +2681,28 @@
       "percent_change": 7.06,
       "base_score": 78.2,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 30.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 14.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 39.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 25.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 31.0
+        }
+      ],
       "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
     },
     {
@@ -2710,6 +2732,24 @@
       "percent_change": -0.34,
       "base_score": 75.94,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 24.0
+        },
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 39.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 34.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 16.0
+        }
+      ],
       "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
     },
     {
@@ -2739,6 +2779,28 @@
       "percent_change": 0.67,
       "base_score": 72.15,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 33.0
+        },
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 29.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 23.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 22.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -2768,6 +2830,28 @@
       "percent_change": 1.97,
       "base_score": 63.6,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 31.0
+        },
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 20.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 22.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 27.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -2797,6 +2881,28 @@
       "percent_change": 1.18,
       "base_score": 62.53,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 23.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 20.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 20.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 18.0
+        }
+      ],
       "ai_summary": "The #1 Guard-need pick this week: ~21.9 pts/game anchors a full 3-game slate both this week and next, while betting markets are consistently backing her 14.5 PRA line — a reliable volume signal. Ownership is climbing (+1.2%) as the league wakes up, but she's still only 16% rostered. Priority add for any of the four Guard-need teams."
     },
     {
@@ -2826,6 +2932,24 @@
       "percent_change": -0.02,
       "base_score": 58.31,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 26.0
+        },
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 23.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 22.0
+        }
+      ],
       "ai_summary": "A Sparks wing guard whose season average (~18/g) is running well ahead of the projection — the conservative model undersells the recent volume. Three games this week, 2 next. A sneaky Guard-need add if you trust the recent production; ownership has barely moved."
     },
     {
@@ -2856,6 +2980,20 @@
       "percent_change": -0.04,
       "base_score": 57.5,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 14.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 36.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 18.0
+        }
+      ],
       "ai_summary": "A direct-opportunity add: with Jacquez sidelined, Taylor has stepped into a starter-like role and posted a 27-point effort recently. The projection (~15.7/g) likely undersells her ceiling if the usage holds. Only ~1% owned — a Guard-need pickup whose value is tied to Jacquez's return timeline."
     },
     {
@@ -2886,6 +3024,12 @@
       "percent_change": 0.05,
       "base_score": 57.0,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 19.0
+        }
+      ],
       "ai_summary": "A full-week opportunity play: filling Seattle's short-handed frontcourt at ~19 pts/game over 3 games both this week and next, with social coverage on the Storm's depth rotation confirming the minutes are real. Essentially unowned (0.1%) — no competition to claim her. Free Frontcourt-need grab."
     },
     {
@@ -2916,6 +3060,28 @@
       "percent_change": 2.15,
       "base_score": 55.97,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 16.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 25.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 17.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 16.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 32.0
+        }
+      ],
       "ai_summary": "The fastest-rising Seattle piece — ownership jumped +2.1% after her season debut, with social confirming she looked improved from an offseason in Australia. ~16.1/g over a full 3-game schedule both this week and next. Getting ahead of this trend for Frontcourt-need teams is the move before the next spike."
     },
     {
@@ -2945,6 +3111,28 @@
       "percent_change": 1.32,
       "base_score": 54.53,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 6.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 32.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 21.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 12.0
+        }
+      ],
       "ai_summary": "A dependable veteran center whose season average (~18.6/g) is well ahead of the projection — the scoring floor is higher than the model suggests. Ownership rising (+1.3%) as managers recognize the consistency. Three games this week and next. A stronger Frontcourt-need add than the speculative options ranked below."
     },
     {
@@ -2974,6 +3162,28 @@
       "percent_change": -6.04,
       "base_score": 54.15,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 24,
+          "fantasy_points": 1.0
+        },
+        {
+          "scoring_period_id": 21,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 30.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 27.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -3003,6 +3213,28 @@
       "percent_change": -0.01,
       "base_score": 52.0,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 2.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 6.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 20.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 40.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 17.0
+        }
+      ],
       "ai_summary": "A badly under-owned scoring guard at ~17.7/game across 3 games this week and next. Re-signed by Seattle and drawing genuine Sixth Player of the Year buzz — the usage and opportunity are both confirmed. At only ~5% owned, she's one of the cleaner Guard-need adds on the board."
     },
     {
@@ -3033,6 +3265,24 @@
       "percent_change": -0.08,
       "base_score": 59.51,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 14.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 26.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 19.0
+        }
+      ],
       "ai_summary": "A playmaking revelation — 9 assists in her WNBA debut puts her among the best debut assist totals in league history. Projects ~17/g over 3 games. She was flagged Questionable with a lower back issue; confirm active status before claiming, but if healthy it's a nearly free grab at 0.2% owned for Guard-need rosters."
     },
     {
@@ -3062,6 +3312,24 @@
       "percent_change": 0.24,
       "base_score": 50.25,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 19.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 35.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -3092,6 +3360,28 @@
       "percent_change": -1.58,
       "base_score": 48.11,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 24,
+          "fantasy_points": 8.0
+        },
+        {
+          "scoring_period_id": 21,
+          "fantasy_points": 16.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 25.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 7.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 20.0
+        }
+      ],
       "ai_summary": "A bet on role stabilization: re-signed by Golden State (confirming the front office wants her) and projecting ~16.9/g over 3 games, but ownership is dipping (-1.6%) as the market questions her consistency. A speculative Frontcourt-need add for teams willing to absorb variance in exchange for upside."
     },
     {
@@ -3121,6 +3411,28 @@
       "percent_change": 1.61,
       "base_score": 55.2,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 29.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 14.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 17.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 23.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 7.0
+        }
+      ],
       "ai_summary": "Trending back: ownership rising +1.6% and social confirming she's returning to form in Seattle's rotation. ~14/g over a full 3-game week, same next week. Multi-category Guard production at only ~2% owned. A buy-the-rebound pick for Guard-need teams."
     },
     {
@@ -3151,6 +3463,24 @@
       "percent_change": 0.01,
       "base_score": 54.34,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 17.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 24.0
+        }
+      ],
       "ai_summary": "A nearly unowned Lynx forward carving out consistent minutes at ~15.8/g over 3 games. Essentially a free Frontcourt-need pickup with no competition on a contending roster. A streaming floor rather than a ceiling play, but the volume is real."
     },
     {
@@ -3180,6 +3510,12 @@
       "percent_change": 0.22,
       "base_score": 52.83,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 14.0
+        }
+      ],
       "ai_summary": "A 6'7\" rim presence who just locked in a rest-of-season deal with Minnesota — the role is confirmed and her ~18/g projection will grow as the minutes expand. Still only ~4% owned with a full 3-game week. Frontcourt-need teams should grab the size before the market catches on."
     },
     {
@@ -3209,6 +3545,24 @@
       "percent_change": -0.25,
       "base_score": 45.75,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 27.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 15.0
+        }
+      ],
       "ai_summary": "The most reliable frontcourt add on the board: ~20.9 pts/game over 3 games this week with a confirmed multi-year re-signing in Chicago, so the role is locked for the rest of 2026. Already ~36% owned for a reason. Chicago drops to 2 games next week, so she's the strongest this-week play for Frontcourt-need teams."
     },
     {
@@ -3238,6 +3592,12 @@
       "percent_change": -0.02,
       "base_score": 43.99,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 21.0
+        }
+      ],
       "ai_summary": "One of the best pure passers available: ~18.7/g and Toronto's primary playmaker, with 2 games this week and 3 next (~56 projected). Only ~5% owned. If your Guard-need is assists, stash her now for next week's heavier expansion-team slate."
     },
     {
@@ -3267,6 +3627,28 @@
       "percent_change": -0.53,
       "base_score": 43.24,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 24,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 21,
+          "fantasy_points": 11.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 19.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 23.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 8.0
+        }
+      ],
       "ai_summary": "Re-signed by Golden State into an expanded role and generating Most Improved Player chatter, she's ~14.6/g over 3 games at only ~2% owned. The market hasn't caught up to her new status on the roster. A trend-ahead Guard-need pickup with real season-long upside."
     },
     {
@@ -3296,6 +3678,24 @@
       "percent_change": -0.05,
       "base_score": 43.18,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 5.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 21.0
+        }
+      ],
       "ai_summary": "A floor-spacing Guard-need stream at ~12.6/g over 3 games, both this week and next. The community is debating her roster security vs. Rivers, so confirm she's active before claiming. Lightly owned (~3%) — a situational streaming option, not a long-term build piece."
     },
     {
@@ -3326,6 +3726,20 @@
       "percent_change": 0.24,
       "base_score": 42.55,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 10.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 14.0
+        },
+        {
+          "scoring_period_id": 17,
+          "fantasy_points": 13.0
+        }
+      ],
       "ai_summary": "A stretch forward just making her season debut alongside Mackenzie Holmes for Seattle — the Storm's crowded frontcourt means a shared role. ~12.3/g projection over 3 games, essentially unowned. Pure speculative Frontcourt-need flier on a player whose ceiling is higher than the early projection suggests."
     },
     {
@@ -3356,6 +3770,28 @@
       "percent_change": -0.13,
       "base_score": 41.1,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 37.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 11.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 9.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 16.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 32.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -3386,6 +3822,16 @@
       "percent_change": 0.14,
       "base_score": 40.0,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 13.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 27.0
+        }
+      ],
       "ai_summary": "A deep speculative Guard on Washington: ~20/g when she plays, 2 games this week and 3 next projecting ~60 points. Essentially unowned (0.7%) — a free look at a high-ceiling international player for large rosters. Best as a Guard-need flier for teams comfortable streaming the back of the board."
     },
     {
@@ -3415,6 +3861,24 @@
       "percent_change": -0.3,
       "base_score": 39.0,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 26.0
+        },
+        {
+          "scoring_period_id": 21,
+          "fantasy_points": 20.0
+        },
+        {
+          "scoring_period_id": 15,
+          "fantasy_points": 21.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 10.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -3446,6 +3910,20 @@
       "percent_change": -0.2,
       "base_score": 37.75,
       "injury_signal": "returning",
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 16.0
+        },
+        {
+          "scoring_period_id": 18,
+          "fantasy_points": 17.0
+        }
+      ],
       "ai_summary": null
     },
     {
@@ -3477,6 +3955,28 @@
       "percent_change": 0.25,
       "base_score": 37.49,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 23,
+          "fantasy_points": 33.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 19.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 6.0
+        },
+        {
+          "scoring_period_id": 14,
+          "fantasy_points": 13.0
+        },
+        {
+          "scoring_period_id": 12,
+          "fantasy_points": 22.0
+        }
+      ],
       "ai_summary": "An expansion-team (Toronto) forward delivering real production (~18.9/g) with a next-week heavy 3-game slate projecting ~57 points. Only ~4.5% owned and trending up. A smart next-week stash for Frontcourt-need teams before her ownership catches up to the volume."
     },
     {
@@ -3506,6 +4006,7 @@
       "percent_change": -0.01,
       "base_score": 37.27,
       "injury_signal": null,
+      "recent_games": [],
       "ai_summary": "A nearly unowned Fever guard projecting ~18.6/game — 2 games this week, 3 next (~56 projected). No injury flags and under 1% owned. A clean next-week buy with backcourt scoring and steals upside for Guard-need teams with patience."
     },
     {
@@ -3535,6 +4036,24 @@
       "percent_change": -0.45,
       "base_score": 36.75,
       "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 22,
+          "fantasy_points": 9.0
+        },
+        {
+          "scoring_period_id": 20,
+          "fantasy_points": 4.0
+        },
+        {
+          "scoring_period_id": 16,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 13,
+          "fantasy_points": 3.0
+        }
+      ],
       "ai_summary": null
     }
   ],
@@ -3569,6 +4088,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -3598,6 +4139,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -3627,6 +4186,28 @@
           "percent_change": 0.67,
           "base_score": 72.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -3656,6 +4237,28 @@
           "percent_change": 1.18,
           "base_score": 62.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "The #1 Guard-need pick this week: ~21.9 pts/game anchors a full 3-game slate both this week and next, while betting markets are consistently backing her 14.5 PRA line — a reliable volume signal. Ownership is climbing (+1.2%) as the league wakes up, but she's still only 16% rostered. Priority add for any of the four Guard-need teams."
         },
         {
@@ -3686,6 +4289,24 @@
           "percent_change": -0.08,
           "base_score": 59.51,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A playmaking revelation — 9 assists in her WNBA debut puts her among the best debut assist totals in league history. Projects ~17/g over 3 games. She was flagged Questionable with a lower back issue; confirm active status before claiming, but if healthy it's a nearly free grab at 0.2% owned for Guard-need rosters."
         },
         {
@@ -3715,6 +4336,24 @@
           "percent_change": -0.02,
           "base_score": 58.31,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": "A Sparks wing guard whose season average (~18/g) is running well ahead of the projection — the conservative model undersells the recent volume. Three games this week, 2 next. A sneaky Guard-need add if you trust the recent production; ownership has barely moved."
         },
         {
@@ -3745,6 +4384,20 @@
           "percent_change": -0.04,
           "base_score": 57.5,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 36.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "A direct-opportunity add: with Jacquez sidelined, Taylor has stepped into a starter-like role and posted a 27-point effort recently. The projection (~15.7/g) likely undersells her ceiling if the usage holds. Only ~1% owned — a Guard-need pickup whose value is tied to Jacquez's return timeline."
         },
         {
@@ -3774,6 +4427,28 @@
           "percent_change": 1.61,
           "base_score": 55.2,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 7.0
+            }
+          ],
           "ai_summary": "Trending back: ownership rising +1.6% and social confirming she's returning to form in Seattle's rotation. ~14/g over a full 3-game week, same next week. Multi-category Guard production at only ~2% owned. A buy-the-rebound pick for Guard-need teams."
         },
         {
@@ -3803,6 +4478,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -3832,6 +4529,28 @@
           "percent_change": -6.04,
           "base_score": 54.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 1.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         }
       ]
@@ -3866,6 +4585,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -3896,6 +4637,12 @@
           "percent_change": 0.05,
           "base_score": 57.0,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A full-week opportunity play: filling Seattle's short-handed frontcourt at ~19 pts/game over 3 games both this week and next, with social coverage on the Storm's depth rotation confirming the minutes are real. Essentially unowned (0.1%) — no competition to claim her. Free Frontcourt-need grab."
         },
         {
@@ -3926,6 +4673,28 @@
           "percent_change": 2.15,
           "base_score": 55.97,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 32.0
+            }
+          ],
           "ai_summary": "The fastest-rising Seattle piece — ownership jumped +2.1% after her season debut, with social confirming she looked improved from an offseason in Australia. ~16.1/g over a full 3-game schedule both this week and next. Getting ahead of this trend for Frontcourt-need teams is the move before the next spike."
         },
         {
@@ -3955,6 +4724,28 @@
           "percent_change": 1.32,
           "base_score": 54.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 6.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 12.0
+            }
+          ],
           "ai_summary": "A dependable veteran center whose season average (~18.6/g) is well ahead of the projection — the scoring floor is higher than the model suggests. Ownership rising (+1.3%) as managers recognize the consistency. Three games this week and next. A stronger Frontcourt-need add than the speculative options ranked below."
         },
         {
@@ -3985,6 +4776,24 @@
           "percent_change": 0.01,
           "base_score": 54.34,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 24.0
+            }
+          ],
           "ai_summary": "A nearly unowned Lynx forward carving out consistent minutes at ~15.8/g over 3 games. Essentially a free Frontcourt-need pickup with no competition on a contending roster. A streaming floor rather than a ceiling play, but the volume is real."
         },
         {
@@ -4014,6 +4823,12 @@
           "percent_change": 0.22,
           "base_score": 52.83,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            }
+          ],
           "ai_summary": "A 6'7\" rim presence who just locked in a rest-of-season deal with Minnesota — the role is confirmed and her ~18/g projection will grow as the minutes expand. Still only ~4% owned with a full 3-game week. Frontcourt-need teams should grab the size before the market catches on."
         },
         {
@@ -4043,6 +4858,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -4073,6 +4910,28 @@
           "percent_change": -1.58,
           "base_score": 48.11,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 8.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 7.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 20.0
+            }
+          ],
           "ai_summary": "A bet on role stabilization: re-signed by Golden State (confirming the front office wants her) and projecting ~16.9/g over 3 games, but ownership is dipping (-1.6%) as the market questions her consistency. A speculative Frontcourt-need add for teams willing to absorb variance in exchange for upside."
         },
         {
@@ -4102,6 +4961,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -4131,6 +5008,24 @@
           "percent_change": -0.25,
           "base_score": 45.75,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 15.0
+            }
+          ],
           "ai_summary": "The most reliable frontcourt add on the board: ~20.9 pts/game over 3 games this week with a confirmed multi-year re-signing in Chicago, so the role is locked for the rest of 2026. Already ~36% owned for a reason. Chicago drops to 2 games next week, so she's the strongest this-week play for Frontcourt-need teams."
         }
       ]
@@ -4165,6 +5060,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -4195,6 +5112,12 @@
           "percent_change": 0.05,
           "base_score": 57.0,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A full-week opportunity play: filling Seattle's short-handed frontcourt at ~19 pts/game over 3 games both this week and next, with social coverage on the Storm's depth rotation confirming the minutes are real. Essentially unowned (0.1%) — no competition to claim her. Free Frontcourt-need grab."
         },
         {
@@ -4224,6 +5147,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -4254,6 +5199,28 @@
           "percent_change": 2.15,
           "base_score": 55.97,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 32.0
+            }
+          ],
           "ai_summary": "The fastest-rising Seattle piece — ownership jumped +2.1% after her season debut, with social confirming she looked improved from an offseason in Australia. ~16.1/g over a full 3-game schedule both this week and next. Getting ahead of this trend for Frontcourt-need teams is the move before the next spike."
         },
         {
@@ -4283,6 +5250,28 @@
           "percent_change": 1.32,
           "base_score": 54.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 6.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 12.0
+            }
+          ],
           "ai_summary": "A dependable veteran center whose season average (~18.6/g) is well ahead of the projection — the scoring floor is higher than the model suggests. Ownership rising (+1.3%) as managers recognize the consistency. Three games this week and next. A stronger Frontcourt-need add than the speculative options ranked below."
         },
         {
@@ -4313,6 +5302,24 @@
           "percent_change": 0.01,
           "base_score": 54.34,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 24.0
+            }
+          ],
           "ai_summary": "A nearly unowned Lynx forward carving out consistent minutes at ~15.8/g over 3 games. Essentially a free Frontcourt-need pickup with no competition on a contending roster. A streaming floor rather than a ceiling play, but the volume is real."
         },
         {
@@ -4342,6 +5349,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -4371,6 +5396,12 @@
           "percent_change": 0.22,
           "base_score": 52.83,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            }
+          ],
           "ai_summary": "A 6'7\" rim presence who just locked in a rest-of-season deal with Minnesota — the role is confirmed and her ~18/g projection will grow as the minutes expand. Still only ~4% owned with a full 3-game week. Frontcourt-need teams should grab the size before the market catches on."
         },
         {
@@ -4400,6 +5431,28 @@
           "percent_change": 0.67,
           "base_score": 72.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -4430,6 +5483,28 @@
           "percent_change": -1.58,
           "base_score": 48.11,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 8.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 7.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 20.0
+            }
+          ],
           "ai_summary": "A bet on role stabilization: re-signed by Golden State (confirming the front office wants her) and projecting ~16.9/g over 3 games, but ownership is dipping (-1.6%) as the market questions her consistency. A speculative Frontcourt-need add for teams willing to absorb variance in exchange for upside."
         }
       ]
@@ -4464,6 +5539,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -4493,6 +5590,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -4522,6 +5637,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -4551,6 +5688,28 @@
           "percent_change": 0.67,
           "base_score": 72.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -4581,6 +5740,12 @@
           "percent_change": 0.05,
           "base_score": 57.0,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A full-week opportunity play: filling Seattle's short-handed frontcourt at ~19 pts/game over 3 games both this week and next, with social coverage on the Storm's depth rotation confirming the minutes are real. Essentially unowned (0.1%) — no competition to claim her. Free Frontcourt-need grab."
         },
         {
@@ -4611,6 +5776,28 @@
           "percent_change": 2.15,
           "base_score": 55.97,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 32.0
+            }
+          ],
           "ai_summary": "The fastest-rising Seattle piece — ownership jumped +2.1% after her season debut, with social confirming she looked improved from an offseason in Australia. ~16.1/g over a full 3-game schedule both this week and next. Getting ahead of this trend for Frontcourt-need teams is the move before the next spike."
         },
         {
@@ -4640,6 +5827,28 @@
           "percent_change": 1.32,
           "base_score": 54.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 6.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 12.0
+            }
+          ],
           "ai_summary": "A dependable veteran center whose season average (~18.6/g) is well ahead of the projection — the scoring floor is higher than the model suggests. Ownership rising (+1.3%) as managers recognize the consistency. Three games this week and next. A stronger Frontcourt-need add than the speculative options ranked below."
         },
         {
@@ -4670,6 +5879,24 @@
           "percent_change": 0.01,
           "base_score": 54.34,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 24.0
+            }
+          ],
           "ai_summary": "A nearly unowned Lynx forward carving out consistent minutes at ~15.8/g over 3 games. Essentially a free Frontcourt-need pickup with no competition on a contending roster. A streaming floor rather than a ceiling play, but the volume is real."
         },
         {
@@ -4699,6 +5926,28 @@
           "percent_change": 1.18,
           "base_score": 62.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "The #1 Guard-need pick this week: ~21.9 pts/game anchors a full 3-game slate both this week and next, while betting markets are consistently backing her 14.5 PRA line — a reliable volume signal. Ownership is climbing (+1.2%) as the league wakes up, but she's still only 16% rostered. Priority add for any of the four Guard-need teams."
         },
         {
@@ -4728,6 +5977,12 @@
           "percent_change": 0.22,
           "base_score": 52.83,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            }
+          ],
           "ai_summary": "A 6'7\" rim presence who just locked in a rest-of-season deal with Minnesota — the role is confirmed and her ~18/g projection will grow as the minutes expand. Still only ~4% owned with a full 3-game week. Frontcourt-need teams should grab the size before the market catches on."
         }
       ]
@@ -4762,6 +6017,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -4791,6 +6068,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -4820,6 +6115,28 @@
           "percent_change": 0.67,
           "base_score": 72.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -4849,6 +6166,28 @@
           "percent_change": 1.18,
           "base_score": 62.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "The #1 Guard-need pick this week: ~21.9 pts/game anchors a full 3-game slate both this week and next, while betting markets are consistently backing her 14.5 PRA line — a reliable volume signal. Ownership is climbing (+1.2%) as the league wakes up, but she's still only 16% rostered. Priority add for any of the four Guard-need teams."
         },
         {
@@ -4879,6 +6218,24 @@
           "percent_change": -0.08,
           "base_score": 59.51,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A playmaking revelation — 9 assists in her WNBA debut puts her among the best debut assist totals in league history. Projects ~17/g over 3 games. She was flagged Questionable with a lower back issue; confirm active status before claiming, but if healthy it's a nearly free grab at 0.2% owned for Guard-need rosters."
         },
         {
@@ -4908,6 +6265,24 @@
           "percent_change": -0.02,
           "base_score": 58.31,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": "A Sparks wing guard whose season average (~18/g) is running well ahead of the projection — the conservative model undersells the recent volume. Three games this week, 2 next. A sneaky Guard-need add if you trust the recent production; ownership has barely moved."
         },
         {
@@ -4938,6 +6313,20 @@
           "percent_change": -0.04,
           "base_score": 57.5,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 36.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "A direct-opportunity add: with Jacquez sidelined, Taylor has stepped into a starter-like role and posted a 27-point effort recently. The projection (~15.7/g) likely undersells her ceiling if the usage holds. Only ~1% owned — a Guard-need pickup whose value is tied to Jacquez's return timeline."
         },
         {
@@ -4967,6 +6356,28 @@
           "percent_change": 1.61,
           "base_score": 55.2,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 7.0
+            }
+          ],
           "ai_summary": "Trending back: ownership rising +1.6% and social confirming she's returning to form in Seattle's rotation. ~14/g over a full 3-game week, same next week. Multi-category Guard production at only ~2% owned. A buy-the-rebound pick for Guard-need teams."
         },
         {
@@ -4996,6 +6407,28 @@
           "percent_change": -6.04,
           "base_score": 54.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 1.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -5025,6 +6458,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         }
       ]
@@ -5059,6 +6514,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -5088,6 +6565,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -5117,6 +6612,28 @@
           "percent_change": 0.67,
           "base_score": 72.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -5146,6 +6663,28 @@
           "percent_change": 1.18,
           "base_score": 62.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "The #1 Guard-need pick this week: ~21.9 pts/game anchors a full 3-game slate both this week and next, while betting markets are consistently backing her 14.5 PRA line — a reliable volume signal. Ownership is climbing (+1.2%) as the league wakes up, but she's still only 16% rostered. Priority add for any of the four Guard-need teams."
         },
         {
@@ -5176,6 +6715,24 @@
           "percent_change": -0.08,
           "base_score": 59.51,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A playmaking revelation — 9 assists in her WNBA debut puts her among the best debut assist totals in league history. Projects ~17/g over 3 games. She was flagged Questionable with a lower back issue; confirm active status before claiming, but if healthy it's a nearly free grab at 0.2% owned for Guard-need rosters."
         },
         {
@@ -5205,6 +6762,24 @@
           "percent_change": -0.02,
           "base_score": 58.31,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": "A Sparks wing guard whose season average (~18/g) is running well ahead of the projection — the conservative model undersells the recent volume. Three games this week, 2 next. A sneaky Guard-need add if you trust the recent production; ownership has barely moved."
         },
         {
@@ -5234,6 +6809,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -5264,6 +6861,20 @@
           "percent_change": -0.04,
           "base_score": 57.5,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 36.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "A direct-opportunity add: with Jacquez sidelined, Taylor has stepped into a starter-like role and posted a 27-point effort recently. The projection (~15.7/g) likely undersells her ceiling if the usage holds. Only ~1% owned — a Guard-need pickup whose value is tied to Jacquez's return timeline."
         },
         {
@@ -5293,6 +6904,28 @@
           "percent_change": 1.61,
           "base_score": 55.2,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 7.0
+            }
+          ],
           "ai_summary": "Trending back: ownership rising +1.6% and social confirming she's returning to form in Seattle's rotation. ~14/g over a full 3-game week, same next week. Multi-category Guard production at only ~2% owned. A buy-the-rebound pick for Guard-need teams."
         },
         {
@@ -5322,6 +6955,28 @@
           "percent_change": -6.04,
           "base_score": 54.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 1.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         }
       ]
@@ -5356,6 +7011,28 @@
           "percent_change": 7.06,
           "base_score": 78.2,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 31.0
+            }
+          ],
           "ai_summary": "The fastest-moving Guard this cycle: ownership spiked +7 points after a 24-point career night, and her season average (~24/g) is miles ahead of the conservative projection. At ~33% owned she's the hottest target — Guard-need teams should still prioritize if she's unclaimed, but act before Wednesday's deadline or she'll be gone."
         },
         {
@@ -5385,6 +7062,24 @@
           "percent_change": -0.34,
           "base_score": 75.94,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 34.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 16.0
+            }
+          ],
           "ai_summary": "A veteran floor-raiser: season average (~22/g) is running well ahead of the projection, and ESPN's analysts called out the LA backcourt in their weekly pickup column. Three games this week, 2 next. Solid, production-proven Guard-need add for teams that want floor over ceiling."
         },
         {
@@ -5414,6 +7109,28 @@
           "percent_change": 0.67,
           "base_score": 72.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -5443,6 +7160,28 @@
           "percent_change": 1.18,
           "base_score": 62.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "The #1 Guard-need pick this week: ~21.9 pts/game anchors a full 3-game slate both this week and next, while betting markets are consistently backing her 14.5 PRA line — a reliable volume signal. Ownership is climbing (+1.2%) as the league wakes up, but she's still only 16% rostered. Priority add for any of the four Guard-need teams."
         },
         {
@@ -5472,6 +7211,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -5502,6 +7263,24 @@
           "percent_change": -0.08,
           "base_score": 59.51,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A playmaking revelation — 9 assists in her WNBA debut puts her among the best debut assist totals in league history. Projects ~17/g over 3 games. She was flagged Questionable with a lower back issue; confirm active status before claiming, but if healthy it's a nearly free grab at 0.2% owned for Guard-need rosters."
         },
         {
@@ -5531,6 +7310,24 @@
           "percent_change": -0.02,
           "base_score": 58.31,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 22.0
+            }
+          ],
           "ai_summary": "A Sparks wing guard whose season average (~18/g) is running well ahead of the projection — the conservative model undersells the recent volume. Three games this week, 2 next. A sneaky Guard-need add if you trust the recent production; ownership has barely moved."
         },
         {
@@ -5561,6 +7358,20 @@
           "percent_change": -0.04,
           "base_score": 57.5,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 36.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 18.0
+            }
+          ],
           "ai_summary": "A direct-opportunity add: with Jacquez sidelined, Taylor has stepped into a starter-like role and posted a 27-point effort recently. The projection (~15.7/g) likely undersells her ceiling if the usage holds. Only ~1% owned — a Guard-need pickup whose value is tied to Jacquez's return timeline."
         },
         {
@@ -5590,6 +7401,28 @@
           "percent_change": 1.61,
           "base_score": 55.2,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 29.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 23.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 7.0
+            }
+          ],
           "ai_summary": "Trending back: ownership rising +1.6% and social confirming she's returning to form in Seattle's rotation. ~14/g over a full 3-game week, same next week. Multi-category Guard production at only ~2% owned. A buy-the-rebound pick for Guard-need teams."
         },
         {
@@ -5619,6 +7452,28 @@
           "percent_change": -6.04,
           "base_score": 54.15,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 1.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         }
       ]
@@ -5653,6 +7508,28 @@
           "percent_change": 1.97,
           "base_score": 63.6,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 20.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 27.0
+            }
+          ],
           "ai_summary": null
         },
         {
@@ -5683,6 +7560,12 @@
           "percent_change": 0.05,
           "base_score": 57.0,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 19.0
+            }
+          ],
           "ai_summary": "A full-week opportunity play: filling Seattle's short-handed frontcourt at ~19 pts/game over 3 games both this week and next, with social coverage on the Storm's depth rotation confirming the minutes are real. Essentially unowned (0.1%) — no competition to claim her. Free Frontcourt-need grab."
         },
         {
@@ -5713,6 +7596,28 @@
           "percent_change": 2.15,
           "base_score": 55.97,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 32.0
+            }
+          ],
           "ai_summary": "The fastest-rising Seattle piece — ownership jumped +2.1% after her season debut, with social confirming she looked improved from an offseason in Australia. ~16.1/g over a full 3-game schedule both this week and next. Getting ahead of this trend for Frontcourt-need teams is the move before the next spike."
         },
         {
@@ -5742,6 +7647,28 @@
           "percent_change": 1.32,
           "base_score": 54.53,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 6.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 12.0
+            }
+          ],
           "ai_summary": "A dependable veteran center whose season average (~18.6/g) is well ahead of the projection — the scoring floor is higher than the model suggests. Ownership rising (+1.3%) as managers recognize the consistency. Three games this week and next. A stronger Frontcourt-need add than the speculative options ranked below."
         },
         {
@@ -5772,6 +7699,24 @@
           "percent_change": 0.01,
           "base_score": 54.34,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 24.0
+            }
+          ],
           "ai_summary": "A nearly unowned Lynx forward carving out consistent minutes at ~15.8/g over 3 games. Essentially a free Frontcourt-need pickup with no competition on a contending roster. A streaming floor rather than a ceiling play, but the volume is real."
         },
         {
@@ -5801,6 +7746,12 @@
           "percent_change": 0.22,
           "base_score": 52.83,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 14.0
+            }
+          ],
           "ai_summary": "A 6'7\" rim presence who just locked in a rest-of-season deal with Minnesota — the role is confirmed and her ~18/g projection will grow as the minutes expand. Still only ~4% owned with a full 3-game week. Frontcourt-need teams should grab the size before the market catches on."
         },
         {
@@ -5831,6 +7782,28 @@
           "percent_change": -1.58,
           "base_score": 48.11,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 24,
+              "fantasy_points": 8.0
+            },
+            {
+              "scoring_period_id": 21,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 25.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 7.0
+            },
+            {
+              "scoring_period_id": 14,
+              "fantasy_points": 20.0
+            }
+          ],
           "ai_summary": "A bet on role stabilization: re-signed by Golden State (confirming the front office wants her) and projecting ~16.9/g over 3 games, but ownership is dipping (-1.6%) as the market questions her consistency. A speculative Frontcourt-need add for teams willing to absorb variance in exchange for upside."
         },
         {
@@ -5860,6 +7833,24 @@
           "percent_change": -0.25,
           "base_score": 45.75,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 22,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 16,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 15.0
+            }
+          ],
           "ai_summary": "The most reliable frontcourt add on the board: ~20.9 pts/game over 3 games this week with a confirmed multi-year re-signing in Chicago, so the role is locked for the rest of 2026. Already ~36% owned for a reason. Chicago drops to 2 games next week, so she's the strongest this-week play for Frontcourt-need teams."
         },
         {
@@ -5890,6 +7881,20 @@
           "percent_change": 0.24,
           "base_score": 42.55,
           "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 17,
+              "fantasy_points": 13.0
+            }
+          ],
           "ai_summary": "A stretch forward just making her season debut alongside Mackenzie Holmes for Seattle — the Storm's crowded frontcourt means a shared role. ~12.3/g projection over 3 games, essentially unowned. Pure speculative Frontcourt-need flier on a player whose ceiling is higher than the early projection suggests."
         },
         {
@@ -5920,6 +7925,28 @@
           "percent_change": -0.13,
           "base_score": 41.1,
           "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 23,
+              "fantasy_points": 37.0
+            },
+            {
+              "scoring_period_id": 20,
+              "fantasy_points": 11.0
+            },
+            {
+              "scoring_period_id": 18,
+              "fantasy_points": 9.0
+            },
+            {
+              "scoring_period_id": 15,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 13,
+              "fantasy_points": 32.0
+            }
+          ],
           "ai_summary": null
         }
       ]
