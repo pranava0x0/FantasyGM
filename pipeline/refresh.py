@@ -26,6 +26,7 @@ from pipeline.espn_client import (
     ESPNCredentials,
 )
 from pipeline.ai_summary import generate_summaries
+from pipeline.game_log import append_game_logs, backfill_from_snapshots, load_game_log
 from pipeline.projections_ext import fetch_all_external
 from pipeline.scoring_formula import ScoringFormula
 
@@ -122,8 +123,27 @@ def main(argv: list[str] | None = None) -> int:
     bluesky_posts = bluesky_mod.load_bluesky(raw_dir=snap.out_dir)
     log.info("refresh: %d Bluesky posts loaded", len(bluesky_posts))
 
-    # External projections first so ranked_fas has accurate scores before AI
-    # summary generation (the AI prompt includes the blended projection).
+    # Game log: accumulate per-game actual scores before building state.
+    # On first run (no log file yet) this auto-backfills from all existing
+    # raw snapshots so history starts from day one of the season.
+    history_root = data_root / "history"
+    game_log_path = history_root / "game_logs.jsonl"
+    if not game_log_path.exists():
+        log.info("refresh: game_logs.jsonl absent — backfilling from existing snapshots")
+        backfilled = backfill_from_snapshots(data_root / "raw", history_root)
+        log.info("refresh: backfill complete (%d entries)", backfilled)
+    else:
+        new_games = append_game_logs(snap.free_agents, snap.league, history_root)
+        log.info("refresh: game_log appended %d new entries", new_games)
+
+    season_id = int(snap.league.get("seasonId") or 0)
+    player_game_log = load_game_log(history_root, season_id=season_id)
+    log.info(
+        "refresh: game_log loaded %d players (season %d)",
+        len(player_game_log), season_id,
+    )
+
+    # External projections (CBS, Yahoo) — cached per-day to snap.out_dir.
     log.info("refresh: fetching external projections (CBS Sports, Yahoo Sports)")
     scoring_formula = ScoringFormula.from_league_raw(snap.league)
     ext_projections_by_source = fetch_all_external(
@@ -137,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
         log.info("refresh: no external projections available — using ESPN only")
 
     # Build a preliminary ranked FA list (no AI summaries yet) so the AI
-    # prompt can include accurate blended projections and recent game data.
+    # prompt can include accurate blended projections and full game history.
     from pipeline import analyze, schedule as schedule_mod
     from pipeline.projections_ext import resolve_external_projections
     _player_name_idx = {
@@ -156,6 +176,7 @@ def main(argv: list[str] | None = None) -> int:
         games_by_pro_team=_games_map,
         games_in_rolling_window_by_team=_rolling_window,
         ext_projections_by_player=_ext_by_player,
+        player_game_log=player_game_log,
     )
 
     # AI "GM take" summaries — auto-generated for top N targets, cached and
@@ -180,6 +201,7 @@ def main(argv: list[str] | None = None) -> int:
         bluesky_posts=bluesky_posts,
         ai_summaries=ai_summaries,
         ext_projections_by_source=ext_projections_by_source or None,
+        player_game_log=player_game_log,
     )
 
     state_path = build_state_mod.write_state(state, docs_root)
@@ -188,6 +210,7 @@ def main(argv: list[str] | None = None) -> int:
     # Concise summary for humans + the skill flow.
     ext_sources = list(ext_projections_by_source.keys()) if ext_projections_by_source else []
     proj_sources = ["espn-proj", "espn-2w-rolling"] + ext_sources
+    total_game_log_entries = sum(len(v) for v in player_game_log.values())
     print()
     print(f"  league:          {state.meta.league_name}")
     print(f"  season:          {state.meta.season_id}")
@@ -196,6 +219,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  teams:           {len(state.teams)}")
     print(f"  transactions:    {len(state.transactions_recent)} recent / {new_tx} new appended")
     print(f"  waiver targets:  {len(state.waiver_targets_overall)} overall")
+    print(f"  game log:        {total_game_log_entries} entries / {len(player_game_log)} players")
     print(f"  projection srcs: {', '.join(proj_sources)}")
     print(f"  reddit posts:    {sum(len(v) for v in state.reddit_posts_by_player.values())} matched")
     print(f"  twitter posts:   {sum(len(v) for v in state.twitter_posts_by_player.values())} matched")

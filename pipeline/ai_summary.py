@@ -24,6 +24,8 @@ from typing import Any
 
 log = logging.getLogger(__name__)
 
+# claude-haiku-4-5 is the lightest/cheapest model in the current session.
+# Full model ID with date suffix as returned by the API.
 _MODEL = "claude-haiku-4-5-20251001"
 _MAX_TOKENS = 120
 _TOP_N = 25            # generate summaries for the top N ranked free agents

@@ -161,6 +161,7 @@ def build_state(
     bluesky_posts: list[dict[str, Any]] | None = None,
     ai_summaries: dict[str, str] | None = None,
     ext_projections_by_source: dict[str, dict[str, float]] | None = None,
+    player_game_log: dict[int, list[dict[str, Any]]] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
@@ -169,6 +170,9 @@ def build_state(
     `twitter_posts` is the normalized output of `twitter.fetch_twitter()`.
     `ext_projections_by_source` maps source_name → {player_name_lower: per_game_fpts}
     from CBS Sports / Yahoo Sports; used to blend multi-source projections.
+    `player_game_log` is the accumulated per-game history from game_log.py —
+    {player_id → [{scoring_period_id, fantasy_points}]}. Extends rolling
+    averages and "Last 2 weeks" displays beyond ESPN's current snapshot window.
     All default to None so tests and legacy callers don't need to change.
     """
     # Compute the upcoming week's game-count signal first; team views and
@@ -204,6 +208,7 @@ def build_state(
         league_raw,
         games_by_pro_team=games_by_pro_team,
         ext_projections_by_player=ext_projections_by_player,
+        player_game_log=player_game_log,
     )
     needs = analyze.compute_team_needs(teams_view)
 
@@ -215,6 +220,7 @@ def build_state(
         games_by_pro_team_next_week=games_by_pro_team_next_week,
         games_in_rolling_window_by_team=games_in_rolling_window,
         ext_projections_by_player=ext_projections_by_player,
+        player_game_log=player_game_log,
     )
 
     # Social-media return signal: scan news + social posts for players whose
