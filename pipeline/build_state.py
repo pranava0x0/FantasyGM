@@ -16,7 +16,136 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pipeline import analyze, bluesky as bluesky_mod, news, reddit as reddit_mod, schedule, schema, summary, twitter as twitter_mod
+import re
+
+from pipeline import analyze, bluesky as bluesky_mod, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
+from pipeline.projections_ext import resolve_external_projections
+
+# ---------------------------------------------------------------------------
+# Social-media return-from-injury signal detection
+# ---------------------------------------------------------------------------
+
+# Strong multi-word phrases that nearly always mean a player is returning.
+# Checked against lowercased post text with simple substring search.
+_RETURN_STRONG_PHRASES: frozenset[str] = frozenset({
+    "return from injur",
+    "returns from injur",
+    "back from injur",
+    "cleared to play",
+    "cleared to return",
+    "cleared for play",
+    "off the injury report",
+    "off ir",
+    "off the ir",
+    "activated from",
+    "coming back from",
+    "expected to return",
+    "targeting a return",
+    "return to action",
+    "return to play",
+    "back in the lineup",
+    "back on the court",
+    "return to the court",
+    "set to return",
+    "making her return",
+    "could return",
+})
+
+# Injury-context words. A post must contain at least one of these alongside
+# a return-action word to qualify as a Tier-2 signal.
+_INJURY_CONTEXT_WORDS: frozenset[str] = frozenset({
+    "injur", "ir", "sideline", "surgery", "knee", "ankle",
+    "achilles", "hamstring", "shoulder", "wrist", "recovery", "rehab",
+})
+
+# Return-action words. Used with an injury-context word for Tier-2 detection.
+_RETURN_ACTION_WORDS: frozenset[str] = frozenset({
+    "return", "returning", "back", "cleared", "activat", "recover",
+    "healthy", "practice",
+})
+
+# Minimum characters a player name must have before we try to match it
+# in social text (guards against matching one-letter tokens).
+_MIN_NAME_LEN = 5
+
+
+def _text_has_return_signal(text: str) -> bool:
+    """Return True if lowercase `text` signals a player returning from injury.
+
+    Two-tier:
+    1. Strong phrase — single substring match is enough.
+    2. Injury-context word AND a return-action word — both must appear.
+    """
+    for phrase in _RETURN_STRONG_PHRASES:
+        if phrase in text:
+            return True
+    has_injury = any(w in text for w in _INJURY_CONTEXT_WORDS)
+    has_return = any(w in text for w in _RETURN_ACTION_WORDS)
+    return has_injury and has_return
+
+
+def _collect_social_texts(
+    reddit_posts: list[dict[str, Any]] | None,
+    twitter_posts: list[dict[str, Any]] | None,
+    bluesky_posts: list[dict[str, Any]] | None,
+    news_raw: dict[str, Any] | None,
+) -> list[str]:
+    """Flatten all post/headline texts into a single lowercased list."""
+    texts: list[str] = []
+    for source in (reddit_posts or [], twitter_posts or [], bluesky_posts or []):
+        for post in source:
+            t = str(post.get("title") or "").lower().strip()
+            if t:
+                texts.append(t)
+    if news_raw:
+        articles = news_raw.get("articles") or []
+        for a in articles:
+            for field in ("headline", "description"):
+                t = str(a.get(field) or "").lower().strip()
+                if t:
+                    texts.append(t)
+    return texts
+
+
+def _detect_social_return_signals(
+    player_id_to_name: dict[int, str],
+    fa_player_ids: set[int],
+    social_texts: list[str],
+) -> set[int]:
+    """Return IDs of FA players whose name appears in a return-signal text.
+
+    For each free-agent player, check whether any social/news text both
+    mentions their name and contains a return-from-injury signal. Name
+    matching is done on last name (≥5 chars) plus first-initial to reduce
+    false positives from common last names.
+    """
+    if not social_texts or not fa_player_ids:
+        return set()
+
+    result: set[int] = set()
+    for pid in fa_player_ids:
+        full_name = (player_id_to_name.get(pid) or "").strip()
+        if not full_name:
+            continue
+
+        parts = full_name.lower().split()
+        # Build match tokens: full name, last name (if ≥5 chars), and
+        # first-initial + last ("a. wilson").
+        tokens: list[str] = [full_name.lower()]
+        if len(parts) >= 2 and len(parts[-1]) >= _MIN_NAME_LEN:
+            tokens.append(parts[-1])
+            tokens.append(f"{parts[0][0]}. {parts[-1]}")
+
+        for text in social_texts:
+            if any(tok in text for tok in tokens):
+                if _text_has_return_signal(text):
+                    result.add(pid)
+                    log.debug(
+                        "build_state: social return signal → %s (pid=%d)", full_name, pid
+                    )
+                    break  # one match per player is enough
+
+    return result
 
 log = logging.getLogger(__name__)
 
@@ -31,12 +160,15 @@ def build_state(
     twitter_posts: list[dict[str, Any]] | None = None,
     bluesky_posts: list[dict[str, Any]] | None = None,
     ai_summaries: dict[str, str] | None = None,
+    ext_projections_by_source: dict[str, dict[str, float]] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
     `news_raw` is ESPN's public WNBA news feed. When None we skip news.
     `reddit_posts` is the normalized output of `reddit.fetch_reddit()`.
     `twitter_posts` is the normalized output of `twitter.fetch_twitter()`.
+    `ext_projections_by_source` maps source_name → {player_name_lower: per_game_fpts}
+    from CBS Sports / Yahoo Sports; used to blend multi-source projections.
     All default to None so tests and legacy callers don't need to change.
     """
     # Compute the upcoming week's game-count signal first; team views and
@@ -48,23 +180,66 @@ def build_state(
     nw_start, nw_end = schedule.next_week_periods(league_raw)
     games_by_pro_team_next_week = schedule.games_per_team(league_raw, nw_start, nw_end)
 
-    teams_view = analyze.build_team_views(league_raw, games_by_pro_team=games_by_pro_team)
+    current_period = int(league_raw.get("scoringPeriodId") or 0)
+    rolling_window_start = max(1, current_period - 14)
+    games_in_rolling_window = schedule.games_per_team(league_raw, rolling_window_start, current_period)
+
+    # Build the player name index first so external projections can be
+    # resolved by player_id before the main analysis runs.
+    player_name_index = _player_name_index(league_raw, free_agents_raw)
+
+    # Resolve external projections (CBS, Yahoo) from name → player_id.
+    ext_projections_by_player: dict[int, dict[str, float]] = {}
+    if ext_projections_by_source:
+        ext_projections_by_player = resolve_external_projections(
+            player_name_index, ext_projections_by_source
+        )
+        log.info(
+            "build_state: external projections resolved for %d players from %d sources",
+            len(ext_projections_by_player),
+            len(ext_projections_by_source),
+        )
+
+    teams_view = analyze.build_team_views(
+        league_raw,
+        games_by_pro_team=games_by_pro_team,
+        ext_projections_by_player=ext_projections_by_player,
+    )
     needs = analyze.compute_team_needs(teams_view)
 
     ranked_fas_dicts = analyze.rank_free_agents(
         free_agents_raw,
-        scoring_period_id=int(league_raw.get("scoringPeriodId") or 0),
+        scoring_period_id=current_period,
         limit=40,
         games_by_pro_team=games_by_pro_team,
         games_by_pro_team_next_week=games_by_pro_team_next_week,
+        games_in_rolling_window_by_team=games_in_rolling_window,
+        ext_projections_by_player=ext_projections_by_player,
     )
+
+    # Social-media return signal: scan news + social posts for players whose
+    # name appears alongside return-from-injury language. If confirmed, set
+    # injury_signal = "returning" and apply the same +15% boost used by the
+    # game-absence detector (idempotent — already-flagged players aren't
+    # double-boosted).
+    social_texts = _collect_social_texts(reddit_posts, twitter_posts, bluesky_posts, news_raw)
+    fa_ids = {int(d.get("player_id") or 0) for d in ranked_fas_dicts}
+    social_returners = _detect_social_return_signals(player_name_index, fa_ids, social_texts)
+    if social_returners:
+        log.info(
+            "build_state: social return signals for %d player(s): %s",
+            len(social_returners),
+            [player_name_index.get(pid, str(pid)) for pid in sorted(social_returners)],
+        )
+    for fa in ranked_fas_dicts:
+        if int(fa.get("player_id") or 0) in social_returners:
+            if fa.get("injury_signal") is None:
+                fa["injury_signal"] = "returning"
+                fa["base_score"] = round(float(fa["base_score"]) * analyze._RETURN_BOOST, 2)
 
     # AI "why pick them up" summaries, keyed by str(player_id). Authored
     # out-of-band (data/ai_summaries.json) and attached to waiver targets.
     ai_summaries = ai_summaries or {}
-
-    # Player id -> name, for transaction items.
-    player_name_index = _player_name_index(league_raw, free_agents_raw)
 
     # Normalize transactions once up front — we need them for both the
     # global feed and per-team grouping.
@@ -448,6 +623,7 @@ def _to_waiver_target(
         percent_owned=d["percent_owned"],
         percent_change=d["percent_change"],
         base_score=float(d["base_score"]),
+        injury_signal=d.get("injury_signal"),
         ai_summary=(ai_summaries or {}).get(pid),
     )
 
