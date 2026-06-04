@@ -25,6 +25,8 @@ from pipeline.espn_client import (
     ESPNClient,
     ESPNCredentials,
 )
+from pipeline.projections_ext import fetch_all_external
+from pipeline.scoring_formula import ScoringFormula
 
 
 def _setup_logging(verbose: bool) -> None:
@@ -130,6 +132,21 @@ def main(argv: list[str] | None = None) -> int:
             log.warning("refresh: failed to read %s (%s)", ai_path, e)
     log.info("refresh: %d AI summaries loaded", len(ai_summaries))
 
+    # External projections (CBS Sports, Yahoo Sports). Fail gracefully —
+    # network errors or changed page structure return empty dicts and the
+    # pipeline continues with ESPN-only projections.
+    log.info("refresh: fetching external projections (CBS Sports, Yahoo Sports)")
+    scoring_formula = ScoringFormula.from_league_raw(snap.league)
+    ext_projections_by_source = fetch_all_external(
+        scoring_formula,
+        cache_dir=snap.out_dir,
+    )
+    if ext_projections_by_source:
+        counts = {src: len(proj) for src, proj in ext_projections_by_source.items()}
+        log.info("refresh: external projection sources loaded: %s", counts)
+    else:
+        log.info("refresh: no external projections available — using ESPN only")
+
     state = build_state_mod.build_state(
         league_raw=snap.league,
         free_agents_raw=snap.free_agents,
@@ -139,12 +156,15 @@ def main(argv: list[str] | None = None) -> int:
         twitter_posts=twitter_posts,
         bluesky_posts=bluesky_posts,
         ai_summaries=ai_summaries,
+        ext_projections_by_source=ext_projections_by_source or None,
     )
 
     state_path = build_state_mod.write_state(state, docs_root)
     new_tx = build_state_mod.append_transactions_history(state, data_root / "history")
 
     # Concise summary for humans + the skill flow.
+    ext_sources = list(ext_projections_by_source.keys()) if ext_projections_by_source else []
+    proj_sources = ["espn-proj", "espn-2w-rolling"] + ext_sources
     print()
     print(f"  league:          {state.meta.league_name}")
     print(f"  season:          {state.meta.season_id}")
@@ -153,6 +173,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  teams:           {len(state.teams)}")
     print(f"  transactions:    {len(state.transactions_recent)} recent / {new_tx} new appended")
     print(f"  waiver targets:  {len(state.waiver_targets_overall)} overall")
+    print(f"  projection srcs: {', '.join(proj_sources)}")
     print(f"  reddit posts:    {sum(len(v) for v in state.reddit_posts_by_player.values())} matched")
     print(f"  twitter posts:   {sum(len(v) for v in state.twitter_posts_by_player.values())} matched")
     print(f"  bluesky posts:   {sum(len(v) for v in state.bluesky_posts_by_player.values())} matched")

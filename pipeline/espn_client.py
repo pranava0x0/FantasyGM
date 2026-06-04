@@ -114,11 +114,16 @@ class ESPNClient:
         self,
         scoring_period_id: int,
         limit: int = 200,
+        stats_lookback: int = 14,
     ) -> dict[str, Any]:
         """Fetch the free-agent / waiver pool ranked by % ownership.
 
         Uses ESPN's `kona_player_info` view + the `X-Fantasy-Filter` JSON
         header which is how the fantasy site itself paginates and sorts.
+
+        `stats_lookback` controls how many per-game stat blocks ESPN returns
+        (the `filterStatsForTopScoringPeriodIds.value`). We use 14 to get
+        ~2 weeks of individual game logs for the rolling-average projection.
         """
         x_fantasy_filter = {
             "players": {
@@ -129,7 +134,7 @@ class ESPNClient:
                 "offset": 0,
                 "sortPercOwned": {"sortAsc": False, "sortPriority": 1},
                 "filterStatsForTopScoringPeriodIds": {
-                    "value": 5,
+                    "value": stats_lookback,
                     "additionalValue": [
                         f"00{self.season}",
                         f"10{self.season}",
