@@ -133,6 +133,7 @@ def build_team_views(
     *,
     games_by_pro_team: dict[int, int] | None = None,
     ext_projections_by_player: dict[int, dict[str, float]] | None = None,
+    player_game_log: dict[int, list[dict[str, Any]]] | None = None,
 ) -> list[dict[str, Any]]:
     """Normalize each team into a roster + weekly production summary.
 
@@ -145,10 +146,15 @@ def build_team_views(
     `ext_projections_by_player` maps player_id → {source_name: per_game_fpts}
     from CBS Sports / Yahoo Sports. When present these are averaged in with
     the ESPN projection and 2-week rolling average.
+
+    `player_game_log` is the accumulated game history from game_log.py:
+    {player_id → [{scoring_period_id, fantasy_points}]}. Extends the rolling
+    average beyond ESPN's current snapshot window.
     """
     scoring_period = int(league_raw.get("scoringPeriodId") or 0)
     games_map = games_by_pro_team or {}
     ext_map = ext_projections_by_player or {}
+    log_map = player_game_log or {}
     teams = []
     for t in league_raw.get("teams") or []:
         record = (t.get("record") or {}).get("overall") or {}
@@ -161,11 +167,13 @@ def build_team_views(
             player = flat["raw_player"]
             player_id = int(player.get("id") or 0)
             ext_proj = ext_map.get(player_id)
+            hist_games = log_map.get(player_id)
             proj_period = _player_projected_points(player, scoring_period)
             proj_per_game = _player_projected_per_game(
                 player,
                 scoring_period_id=scoring_period,
                 ext_projections=ext_proj,
+                historical_games=hist_games,
             )
             season_avg = _player_season_avg_actual(player)
             per_game = proj_per_game or season_avg or proj_period or 0.0
@@ -296,6 +304,7 @@ def rank_free_agents(
     games_by_pro_team_next_week: dict[int, int] | None = None,
     games_in_rolling_window_by_team: dict[int, int] | None = None,
     ext_projections_by_player: dict[int, dict[str, float]] | None = None,
+    player_game_log: dict[int, list[dict[str, Any]]] | None = None,
 ) -> list[dict[str, Any]]:
     """Sort the free-agent pool by *projected points this week*.
 
@@ -308,7 +317,7 @@ def rank_free_agents(
 
     Per-game projection is a blend of (available sources only):
     1. Actual season average so far (statSourceId=0, statSplitTypeId=0).
-    2. ESPN 2-week rolling actual average (per-game actuals, statSplitTypeId=5).
+    2. Rolling 2-week average drawn from accumulated game log + snapshot.
     3. CBS Sports per-game projection (pre-converted via ScoringFormula).
     4. Yahoo Sports per-game stats (pre-converted via ScoringFormula).
 
@@ -317,11 +326,15 @@ def rank_free_agents(
     team's recent games (potential returners from injury/rest).
 
     `ext_projections_by_player` maps player_id → {source_name: per_game_fpts}.
+
+    `player_game_log` is the accumulated game history {player_id → games list}
+    from game_log.py. Extends the rolling average beyond ESPN's snapshot window.
     """
     games_map = games_by_pro_team or {}
     games_map_nw = games_by_pro_team_next_week or {}
     window_games_map = games_in_rolling_window_by_team or {}
     ext_map = ext_projections_by_player or {}
+    log_map = player_game_log or {}
     out = []
     for entry in free_agents_raw.get("players") or []:
         player = entry.get("player") or {}
@@ -329,11 +342,13 @@ def rank_free_agents(
             continue
         player_id = int(player.get("id") or 0)
         ext_proj = ext_map.get(player_id)
+        hist_games = log_map.get(player_id)
         proj_period = _player_projected_points(player, scoring_period_id)
         proj_per_game = _player_projected_per_game(
             player,
             scoring_period_id=scoring_period_id,
             ext_projections=ext_proj,
+            historical_games=hist_games,
         )
         season_avg = _player_season_avg_actual(player)
         ownership = player.get("ownership") or {}
@@ -358,7 +373,9 @@ def rank_free_agents(
             window_games_map=window_games_map,
         )
         base_score = round(week_proj * boost, 2)
-        recent = _player_recent_games(player, scoring_period_id)
+        recent = _player_recent_games(
+            player, scoring_period_id, historical_games=hist_games
+        )
 
         out.append({
             "player_id": player.get("id"),
@@ -479,26 +496,46 @@ def _player_recent_games(
     player: dict[str, Any],
     current_period: int,
     *,
+    historical_games: list[dict[str, Any]] | None = None,
     limit: int = 10,
 ) -> list[dict[str, Any]]:
     """Return individual game entries for the last ~2 weeks, newest first.
+
+    Merges the full accumulated `historical_games` log (from game_log.py)
+    with any per-game stat blocks present in the current snapshot. Historical
+    data takes precedence for duplicate periods; snapshot data fills in
+    very-recent games not yet committed to the log.
 
     Each entry: {scoring_period_id, fantasy_points}. Zero-total entries
     (DNP / no game) are excluded. Capped at `limit` games.
     """
     window_start = max(1, current_period - 14)
-    games = []
+
+    # Build a period → fpts map starting from history (full accumulated record).
+    period_to_fpts: dict[int, float] = {}
+    for g in (historical_games or []):
+        p = int(g.get("scoring_period_id") or 0)
+        f = float(g.get("fantasy_points") or 0.0)
+        if p > 0 and f > 0:
+            period_to_fpts[p] = f
+
+    # Overlay current snapshot stat blocks — they may contain games too new
+    # to be in the log yet (today's games before tonight's refresh commit).
     for s in player.get("stats") or []:
         if s.get("statSourceId") != ACTUAL_SOURCE:
             continue
         if s.get("statSplitTypeId") != 5:
             continue
         period = int(s.get("scoringPeriodId") or 0)
-        if period < window_start or period > current_period:
-            continue
         total = float(s.get("appliedTotal") or 0.0)
-        if total > 0:
-            games.append({"scoring_period_id": period, "fantasy_points": total})
+        if period > 0 and total > 0:
+            period_to_fpts.setdefault(period, total)  # don't overwrite history
+
+    games = [
+        {"scoring_period_id": p, "fantasy_points": f}
+        for p, f in period_to_fpts.items()
+        if window_start <= p <= current_period
+    ]
     games.sort(key=lambda g: g["scoring_period_id"], reverse=True)
     return games[:limit]
 
@@ -508,6 +545,7 @@ def _player_projected_per_game(
     *,
     scoring_period_id: int = 0,
     ext_projections: dict[str, float] | None = None,
+    historical_games: list[dict[str, Any]] | None = None,
 ) -> float:
     """Blended per-game projection from up to four sources.
 
@@ -517,7 +555,10 @@ def _player_projected_per_game(
          ESPN's statSourceId=1 block encodes a full-season preseason forecast
          (e.g. 44 games × 18.43 = 811 total) that never updates mid-season.
          The actual average reflects real observed performance.
-      2. ESPN 2-week rolling actual average (per-game actuals, statSplitTypeId=5)
+      2. Rolling 2-week actual average — drawn from the full accumulated game
+         log (historical_games) merged with the current snapshot's stat blocks.
+         Using the log extends this beyond ESPN's API window (which caps at
+         filterStatsForTopScoringPeriodIds, currently 14 entries).
       3. CBS Sports per-game fantasy points (pre-converted, optional)
       4. Yahoo Sports per-game fantasy points (pre-converted, optional)
 
@@ -543,8 +584,10 @@ def _player_projected_per_game(
         if espn_proj > 0:
             sources.append(espn_proj)
 
-    # Source 2: ESPN 2-week rolling actual average.
-    rolling = _player_rolling_2w_avg(player, scoring_period_id)
+    # Source 2: rolling 2-week actual average (merged history + snapshot).
+    rolling = _player_rolling_2w_avg(
+        player, scoring_period_id, historical_games=historical_games
+    )
     if rolling is not None and rolling > 0:
         sources.append(rolling)
 
@@ -579,30 +622,46 @@ def _espn_projected_avg(player: dict[str, Any]) -> float:
     return 0.0
 
 
-def _player_rolling_2w_avg(player: dict[str, Any], current_period: int) -> float | None:
+def _player_rolling_2w_avg(
+    player: dict[str, Any],
+    current_period: int,
+    *,
+    historical_games: list[dict[str, Any]] | None = None,
+) -> float | None:
     """Average fantasy points over the player's most recent games (~2 weeks).
 
-    Uses per-game actual stat blocks (statSourceId=0, statSplitTypeId=5).
-    These carry ESPN's pre-scored `appliedTotal` per game, so no formula
-    conversion is needed. Only counts games where `appliedTotal > 0`
-    (games where the player was inactive or didn't play have total=0 and
-    are excluded so they don't drag the average down).
+    Merges the full accumulated game log (`historical_games`, sorted asc)
+    with per-game stat blocks from the current snapshot. Using the log
+    extends the rolling window beyond ESPN's API cap so early-season games
+    are not lost as the season progresses.
 
-    Returns None if no qualifying game blocks are found.
+    Only counts games with fantasy_points > 0 (zero means DNP / no game).
+    Returns None if no qualifying games are found.
     """
+    # Build the same period_to_fpts map as _player_recent_games uses.
     window_start = max(1, current_period - 14)
-    game_totals: list[float] = []
+    period_to_fpts: dict[int, float] = {}
+
+    for g in (historical_games or []):
+        p = int(g.get("scoring_period_id") or 0)
+        f = float(g.get("fantasy_points") or 0.0)
+        if p > 0 and f > 0:
+            period_to_fpts[p] = f
+
     for s in player.get("stats") or []:
         if s.get("statSourceId") != ACTUAL_SOURCE:
             continue
-        if s.get("statSplitTypeId") != 5:  # 5 = individual game log entry
+        if s.get("statSplitTypeId") != 5:
             continue
         period = int(s.get("scoringPeriodId") or 0)
-        if period < window_start or period > current_period:
-            continue
         total = float(s.get("appliedTotal") or 0.0)
-        if total > 0:
-            game_totals.append(total)
+        if period > 0 and total > 0:
+            period_to_fpts.setdefault(period, total)
+
+    game_totals = [
+        f for p, f in period_to_fpts.items()
+        if window_start <= p <= current_period
+    ]
     if not game_totals:
         return None
     return sum(game_totals) / len(game_totals)
