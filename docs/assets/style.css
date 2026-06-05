@@ -305,9 +305,17 @@ main {
 .waiver-name {
   font-size: 15px;
   font-weight: 600;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+button.waiver-name-text {
+  flex: 1 1 0%;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .waiver-sub {
   font-size: 12.5px;
@@ -625,36 +633,24 @@ main {
 .team-targets { display: grid; gap: 4px; }
 .team-target-row {
   display: grid;
-  grid-template-columns: 20px 1fr auto auto;
-  grid-template-areas: "rank body bucket schedule";
-  gap: 8px;
+  grid-template-columns: 20px 1fr auto;
+  grid-template-areas:
+    "rank body bucket"
+    "rank schedule schedule";
+  gap: 4px 8px;
   align-items: center;
   font-size: 13px;
   padding: 6px 0;
 }
-.team-target-row .target-rank { grid-area: rank; }
+.team-target-row .target-rank { grid-area: rank; align-self: start; padding-top: 2px; }
 .team-target-row .target-body { grid-area: body; }
 .team-target-row > .pill { grid-area: bucket; }
-.team-target-row .target-schedule { grid-area: schedule; }
+.team-target-row .target-schedule { grid-area: schedule; justify-content: flex-start; }
+.team-target-row .target-schedule .week-block:first-child { padding-left: 0; border-left: none; }
 .team-target-row .target-rank {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-}
-
-/* Narrow screens: same fix as the waiver card — the schedule blocks drop
-   to their own row so the player name isn't clipped and the bucket pill
-   stops colliding with the team abbreviation. */
-@media (max-width: 480px) {
-  .team-target-row {
-    grid-template-columns: 20px 1fr auto;
-    grid-template-areas:
-      "rank body bucket"
-      "rank schedule schedule";
-    row-gap: 8px;
-  }
-  .team-target-row .target-schedule { justify-content: flex-start; }
-  .team-target-row .target-schedule .week-block:first-child { padding-left: 0; }
 }
 .team-target-row .target-body {
   display: grid;
@@ -662,8 +658,18 @@ main {
   min-width: 0;
 }
 .team-target-row .target-name {
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
   font-weight: 500;
+}
+.team-target-row button.target-name-text {
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .team-target-row .target-sub {
   display: inline-flex; gap: 6px; flex-wrap: wrap;
