@@ -34,3 +34,4 @@ dist/
 # --- local scratch ---
 scratch/
 tmp/
+data/raw/*/yahoo_stats.html

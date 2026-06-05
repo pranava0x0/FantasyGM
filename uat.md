@@ -1,7 +1,7 @@
 # UAT Baseline — FantasyGM
 
 _Created: 2026-05-17_
-_Last run: 2026-06-01 (third pass — AI summaries + mobile reflow)_
+_Last run: 2026-06-05 (post-refresh pass — scoring period 29, fresh AI summaries, X/Twitter signals)_
 
 ## Project Info
 
@@ -23,14 +23,14 @@ _Last run: 2026-06-01 (third pass — AI summaries + mobile reflow)_
 | Section | Last Tested | Notes |
 | --- | --- | --- |
 | Topbar / Brand / Theme toggle | 2026-06-01 | Stable. Light↔dark toggle persists via localStorage. |
-| Meta strip | 2026-06-01 | Wraps to 3 lines at 375px. "As of" aligns right. All 8 teams reflected. |
-| Waivers tab | 2026-06-01 | 15 healthy targets render. OUT players correctly excluded. Bucket pills (G/F/C), per-game, ownership %, trend all present. Player modal opens and closes. |
-| Team Needs tab | 2026-06-01 | 4-up desktop, 2-up tablet, 1-up mobile. Expand/collapse works. Summary bullets, tailored picks, full roster, transactions shown. |
+| Meta strip | 2026-06-05 | Period 29 / P32–38 / Matchup 4 / Teams 8 / 2026-06-05 13:40Z. Wraps to 3 lines at 375px. |
+| Waivers tab | 2026-06-05 | 30 targets render. AI "GM Take" summaries show on all cards with correct fresh text. RETURNING badges on Hiedeman, Allemand, Melbourne. Bucket pills, per-game, ownership %, trend all present. |
+| Team Needs tab | 2026-06-05 | All 8 teams present. G and FC bars rendering. FC-need teams: KAH, PEZ, C9 clearly FC-negative. G-need teams: KylB (-37.9), EET (-51.2). Expand/collapse and SUMMARY · AUTO-GENERATED work. |
 | News tab | 2026-06-01 | Stable. WNBA-only articles. Player tags visible on highlighted items. |
-| Transactions tab | 2026-06-01 | Stable. All 5 today's transactions render. Slot labels correct. FAAB bids shown. |
-| Player modal — Desktop | 2026-06-01 | Stable. Opens from waivers, roster, transactions, team picks. Escape/backdrop close. Stats grid, news with TEAM NEWS badges, Reddit section, ESPN link. |
+| Transactions tab | 2026-06-05 | 1 FUTURE ROSTER transaction (Spda lineup swap: Kiki Rice F/C↔UTIL, Arike Ogunbowale UTIL↔F/C). Slot labels correct. Player names resolving. |
+| Player modal — Desktop | 2026-06-05 | Stable. Fresh GM Take panel with today's AI text. Last-2-weeks game log. Social (X) feed: @BallersNewz, @DanielleHobeika, @EJayArrow, @WNBAStormChaser all rendering. |
 | Player modal — Mobile | 2026-06-01 | Stable. Fits 375px. 3-stat and 5-stat layouts correct. TEAM NEWS badges readable. Reddit section present. |
-| Mobile 375px | 2026-06-01 | All 4 tab labels fully visible (padding-inline:8px at ≤420px). Layout correct at 1-up. |
+| Mobile 375px | 2026-06-05 | All 4 tab labels fully visible. Player names unclipped. AI summary line rendering. No horizontal overflow. |
 | Tablet 768px | 2026-06-01 | 2-up team grid confirmed. Tabs fit without clipping. |
 | Dark mode (mobile) | 2026-06-01 | Stable. All surfaces, TEAM NEWS badges, Reddit section themed correctly. |
 | Wide viewport 1920px | 2026-06-01 | Content centres at max-width. No horizontal scroll. Footer visible. |
@@ -84,9 +84,7 @@ See `issues.md` for the audit table.
 - UAT-012 (data integrity): committed `state.json` was newer than the committed raw snapshot — state derived from data not in the audit trail. Fixed — `scripts/rebuild_state.py` regenerates state deterministically from the on-disk raw snapshot.
 - Feature: AI "GM take" summaries for the top 30 free agents — clamped line on each waiver card + accented panel in the player modal (light + dark verified, mobile + desktop).
 
-### Verified this pass
-- Waivers (desktop + 375px): 30 targets, full names, AI summary line renders with badge; `-0.0%` gone.
-- Team Needs (375px): expanded card "Top picks" rows clean, no clipping, no pill overlap.
-- Player modal (desktop + 375px, light + dark): "GM take · AI" panel renders above Recent News; hidden when a player has no summary.
-- News / Transactions tabs: unchanged, still clean.
-- `pytest`: 103 passed. Secret scan: clean.
+**2026-06-05 (post-refresh pass):**
+- No new issues found.
+- Verified: scoring period 29, 2026-06-05 capture date, 30/30 AI summaries with today's fresh text, X/Twitter social feed in player modal, all 8 teams in Team Needs with FC/G bars, FUTURE ROSTER transaction with correct slot labels, mobile 375px clean.
+- `pytest`: 138 passed. Secret scan: clean.
