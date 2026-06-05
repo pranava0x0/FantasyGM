@@ -548,7 +548,7 @@ button.waiver-name-text {
 @media (min-width: 1024px) {
   .team-card[aria-expanded="true"] .team-detail {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: 0 32px;
     align-items: start;
   }

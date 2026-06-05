@@ -96,7 +96,7 @@
     if (!iso) return "—";
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return "—";
-    return d.toISOString().slice(0, 16).replace("T", " ") + "Z";
+    return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   }
   function fmtTime(iso) {
     if (!iso) return "—";
@@ -487,15 +487,17 @@
       list.appendChild(el("p", { className: "muted-cell", text: "No targets ranked." }));
     }
     detailPrimary.appendChild(list);
-    detail.appendChild(detailPrimary);
 
-    // Right column: full roster + recent transactions
+    // Left column: full roster + recent transactions
     const detailSecondary = el("div", { className: "team-detail-secondary" });
     detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Full roster" }));
     detailSecondary.appendChild(rosterTable(team));
     detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
     detailSecondary.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
     detail.appendChild(detailSecondary);
+
+    // Right column: summary + top picks
+    detail.appendChild(detailPrimary);
 
     // The card is a div+role rather than <button> so we can nest the
     // clickable player-name buttons inside it (button-in-button is
