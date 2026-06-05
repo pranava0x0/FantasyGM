@@ -437,6 +437,9 @@
 
     const detail = el("div", { className: "team-detail", attrs: { hidden: "" } });
 
+    // Left column: summary + top picks
+    const detailPrimary = el("div", { className: "team-detail-primary" });
+
     // Auto-generated summary bullets (marked with accent left-border per DESIGN.md).
     if (Array.isArray(team.summary) && team.summary.length > 0) {
       const sumBlock = el("div", { className: "team-summary", attrs: { "aria-label": "Auto-generated team summary" } });
@@ -444,12 +447,12 @@
       const ul = el("ul", { className: "team-summary-list" });
       team.summary.forEach((b) => ul.appendChild(el("li", { text: b })));
       sumBlock.appendChild(ul);
-      detail.appendChild(sumBlock);
+      detailPrimary.appendChild(sumBlock);
     }
 
     // Top picks for this team
     const needLabel = n.top_need_bucket === "FC" ? "F/C (frontcourt)" : n.top_need_bucket;
-    detail.appendChild(el("h4", { className: "team-detail-head", text: `Top picks · top need: ${needLabel}` }));
+    detailPrimary.appendChild(el("h4", { className: "team-detail-head", text: `Top picks · top need: ${needLabel}` }));
     const list = el("div", { className: "team-targets" });
     (perTeamTargets || []).slice(0, 6).forEach((tgt, i) => {
       const p = tgt.player;
@@ -483,16 +486,16 @@
     if (!(perTeamTargets && perTeamTargets.length)) {
       list.appendChild(el("p", { className: "muted-cell", text: "No targets ranked." }));
     }
-    detail.appendChild(list);
+    detailPrimary.appendChild(list);
+    detail.appendChild(detailPrimary);
 
-    // Full roster grouped by lineup-slot type so the user can see who's
-    // active vs on the bench, with weekly projections.
-    detail.appendChild(el("h4", { className: "team-detail-head", text: "Full roster" }));
-    detail.appendChild(rosterTable(team));
-
-    // Recent transactions for this team (joins on recent_transaction_ids).
-    detail.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
-    detail.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
+    // Right column: full roster + recent transactions
+    const detailSecondary = el("div", { className: "team-detail-secondary" });
+    detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Full roster" }));
+    detailSecondary.appendChild(rosterTable(team));
+    detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
+    detailSecondary.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
+    detail.appendChild(detailSecondary);
 
     // The card is a div+role rather than <button> so we can nest the
     // clickable player-name buttons inside it (button-in-button is

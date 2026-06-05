@@ -474,6 +474,11 @@ button.waiver-name-text {
   border-color: var(--accent);
   box-shadow: 0 4px 12px rgba(31, 95, 161, 0.15);
 }
+@media (min-width: 640px) {
+  .team-card[aria-expanded="true"] {
+    grid-column: 1 / -1;
+  }
+}
 
 .team-head {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -539,6 +544,14 @@ button.waiver-name-text {
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px dashed var(--border);
+}
+@media (min-width: 1024px) {
+  .team-card[aria-expanded="true"] .team-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 0 32px;
+    align-items: start;
+  }
 }
 .team-detail h4,
 .team-detail-head {
