@@ -768,6 +768,22 @@
       entry.bluesky = (posts || []).slice(0, 5);
     });
 
+    // Instagram posts from/about this player. Cap at 5.
+    Object.entries(state.instagram_posts_by_player || {}).forEach(([pid, posts]) => {
+      const num = Number(pid);
+      if (!Number.isFinite(num)) return;
+      const entry = ensure(num);
+      entry.instagram = (posts || []).slice(0, 5);
+    });
+
+    // Social profile handles (for links in the modal footer).
+    Object.entries(state.player_socials || {}).forEach(([pid, handles]) => {
+      const num = Number(pid);
+      if (!Number.isFinite(num)) return;
+      const entry = ensure(num);
+      entry.socials = handles;
+    });
+
     // Transactions where this player appears in any line item.
     (state.transactions_recent || []).forEach((tx) => {
       (tx.items || []).forEach((it) => {
@@ -920,7 +936,7 @@
       }
     }
 
-    // Social — Reddit + Twitter + Bluesky merged, sorted newest-first.
+    // Social — Reddit + Twitter + Bluesky + Instagram merged, sorted newest-first.
     const socialWrap = $("#player-modal-social-wrap");
     const socialList = $("#player-modal-social");
     if (socialWrap && socialList) {
@@ -935,6 +951,11 @@
         })),
         ...(entry.bluesky || []).map((post) => ({
           source: "bluesky", label: post.handle ? `@${post.handle}` : "Bluesky",
+          title: post.title, url: post.url, ts: post.published_at,
+        })),
+        ...(entry.instagram || []).map((post) => ({
+          source: "instagram",
+          label: post.username ? `@${post.username}` : "Instagram",
           title: post.title, url: post.url, ts: post.published_at,
         })),
       ].sort((a, b) => (b.ts || "").localeCompare(a.ts || ""));
@@ -1007,6 +1028,27 @@
       });
     } else {
       txnList.appendChild(el("li", { className: "empty", text: "No transactions in the recent window." }));
+    }
+
+    // Social profile links in footer.
+    const socialLinksEl = $("#player-modal-social-links");
+    if (socialLinksEl) {
+      socialLinksEl.replaceChildren();
+      const handles = entry.socials || {};
+      if (handles.twitter) {
+        socialLinksEl.appendChild(el("a", {
+          className: "player-modal-social-link player-modal-social-link--twitter",
+          text: "X / Twitter",
+          attrs: { href: `https://x.com/${handles.twitter}`, target: "_blank", rel: "noopener noreferrer" },
+        }));
+      }
+      if (handles.instagram) {
+        socialLinksEl.appendChild(el("a", {
+          className: "player-modal-social-link player-modal-social-link--instagram",
+          text: "Instagram",
+          attrs: { href: `https://instagram.com/${handles.instagram}`, target: "_blank", rel: "noopener noreferrer" },
+        }));
+      }
     }
 
     // ESPN deep link

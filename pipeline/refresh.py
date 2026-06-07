@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from pipeline import build_state as build_state_mod
-from pipeline import bluesky as bluesky_mod, ingest, news, reddit as reddit_mod, twitter as twitter_mod
+from pipeline import bluesky as bluesky_mod, instagram as instagram_mod, ingest, news, reddit as reddit_mod, twitter as twitter_mod
 from pipeline.espn_client import (
     ESPNAPIError,
     ESPNAuthError,
@@ -123,6 +123,20 @@ def main(argv: list[str] | None = None) -> int:
     bluesky_posts = bluesky_mod.load_bluesky(raw_dir=snap.out_dir)
     log.info("refresh: %d Bluesky posts loaded", len(bluesky_posts))
 
+    log.info("refresh: loading Instagram posts")
+    instagram_posts = instagram_mod.load_instagram(raw_dir=snap.out_dir)
+    log.info("refresh: %d Instagram posts loaded", len(instagram_posts))
+
+    player_socials_path = data_root / "player_socials.json"
+    player_socials_raw: dict[str, dict[str, str]] = {}
+    if player_socials_path.exists():
+        try:
+            raw_soc = json.loads(player_socials_path.read_text())
+            player_socials_raw = raw_soc.get("players") or {}
+            log.info("refresh: loaded %d player social profiles", len(player_socials_raw))
+        except (json.JSONDecodeError, OSError) as e:
+            log.warning("refresh: failed to read player_socials.json (%s)", e)
+
     # Game log: accumulate per-game actual scores before building state.
     # On first run (no log file yet) this auto-backfills from all existing
     # raw snapshots so history starts from day one of the season.
@@ -199,6 +213,8 @@ def main(argv: list[str] | None = None) -> int:
         reddit_posts=reddit_posts,
         twitter_posts=twitter_posts,
         bluesky_posts=bluesky_posts,
+        instagram_posts=instagram_posts,
+        player_socials_raw=player_socials_raw,
         ai_summaries=ai_summaries,
         ext_projections_by_source=ext_projections_by_source or None,
         player_game_log=player_game_log,
