@@ -24,7 +24,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from pipeline import build_state as build_state_mod
-from pipeline import bluesky as bluesky_mod, reddit as reddit_mod, twitter as twitter_mod
+from pipeline import bluesky as bluesky_mod, instagram as instagram_mod, reddit as reddit_mod, twitter as twitter_mod
 
 log = logging.getLogger("rebuild_state")
 
@@ -58,6 +58,16 @@ def main(argv: list[str] | None = None) -> int:
     reddit_posts = reddit_mod.load_reddit(raw_dir=raw_dir, limit=50)
     twitter_posts = twitter_mod.load_tweets(raw_dir=raw_dir, query="wnba", limit=50)
     bluesky_posts = bluesky_mod.load_bluesky(raw_dir=raw_dir)
+    instagram_posts = instagram_mod.load_instagram(raw_dir=raw_dir)
+
+    player_socials_path = ROOT / "data" / "player_socials.json"
+    player_socials_raw: dict[str, dict[str, str]] = {}
+    if player_socials_path.exists():
+        try:
+            raw_soc = json.loads(player_socials_path.read_text())
+            player_socials_raw = raw_soc.get("players") or {}
+        except Exception:
+            pass
 
     ai_path = ROOT / "data" / "ai_summaries.json"
     ai_summaries = (
@@ -83,13 +93,15 @@ def main(argv: list[str] | None = None) -> int:
         reddit_posts=reddit_posts,
         twitter_posts=twitter_posts,
         bluesky_posts=bluesky_posts,
+        instagram_posts=instagram_posts,
+        player_socials_raw=player_socials_raw,
         ai_summaries=ai_summaries,
     )
 
     out = build_state_mod.write_state(state, DOCS)
     log.info(
         "wrote %s | %d teams, %d overall targets, %d news, "
-        "reddit=%d twitter=%d bluesky=%d",
+        "reddit=%d twitter=%d bluesky=%d instagram=%d socials=%d",
         out.relative_to(ROOT),
         len(state.teams),
         len(state.waiver_targets_overall),
@@ -97,6 +109,8 @@ def main(argv: list[str] | None = None) -> int:
         sum(len(v) for v in state.reddit_posts_by_player.values()),
         sum(len(v) for v in state.twitter_posts_by_player.values()),
         sum(len(v) for v in state.bluesky_posts_by_player.values()),
+        sum(len(v) for v in state.instagram_posts_by_player.values()),
+        len(state.player_socials),
     )
     return 0
 
