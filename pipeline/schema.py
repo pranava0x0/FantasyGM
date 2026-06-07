@@ -218,6 +218,19 @@ class TwitterPost(_Strict):
     screen_name: str = ""
 
 
+class InstagramPost(_Strict):
+    title: str
+    url: str
+    published_at: datetime | None = None
+    username: str = ""
+    post_type: str = "post"   # "post" | "reel" | "comment"
+
+
+class PlayerSocials(_Strict):
+    twitter: str = ""      # handle without @
+    instagram: str = ""    # handle without @
+
+
 class LeagueState(_Strict):
     """Top-level object written to `docs/data/state.json`."""
     meta: LeagueMeta
@@ -230,3 +243,5 @@ class LeagueState(_Strict):
     reddit_posts_by_player: dict[int, list[RedditPost]] = Field(default_factory=dict)
     twitter_posts_by_player: dict[int, list[TwitterPost]] = Field(default_factory=dict)
     bluesky_posts_by_player: dict[int, list[BlueskyPost]] = Field(default_factory=dict)
+    instagram_posts_by_player: dict[int, list[InstagramPost]] = Field(default_factory=dict)
+    player_socials: dict[int, PlayerSocials] = Field(default_factory=dict)

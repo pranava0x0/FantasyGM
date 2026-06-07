@@ -18,7 +18,7 @@ from typing import Any
 
 import re
 
-from pipeline import analyze, bluesky as bluesky_mod, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
+from pipeline import analyze, bluesky as bluesky_mod, instagram as instagram_mod, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
 from pipeline.projections_ext import resolve_external_projections
 
 # ---------------------------------------------------------------------------
@@ -89,10 +89,11 @@ def _collect_social_texts(
     twitter_posts: list[dict[str, Any]] | None,
     bluesky_posts: list[dict[str, Any]] | None,
     news_raw: dict[str, Any] | None,
+    instagram_posts: list[dict[str, Any]] | None = None,
 ) -> list[str]:
     """Flatten all post/headline texts into a single lowercased list."""
     texts: list[str] = []
-    for source in (reddit_posts or [], twitter_posts or [], bluesky_posts or []):
+    for source in (reddit_posts or [], twitter_posts or [], bluesky_posts or [], instagram_posts or []):
         for post in source:
             t = str(post.get("title") or "").lower().strip()
             if t:
@@ -159,6 +160,8 @@ def build_state(
     reddit_posts: list[dict[str, Any]] | None = None,
     twitter_posts: list[dict[str, Any]] | None = None,
     bluesky_posts: list[dict[str, Any]] | None = None,
+    instagram_posts: list[dict[str, Any]] | None = None,
+    player_socials_raw: dict[str, dict[str, str]] | None = None,
     ai_summaries: dict[str, str] | None = None,
     ext_projections_by_source: dict[str, dict[str, float]] | None = None,
     player_game_log: dict[int, list[dict[str, Any]]] | None = None,
@@ -242,6 +245,11 @@ def build_state(
             if fa.get("injury_signal") is None:
                 fa["injury_signal"] = "returning"
                 fa["base_score"] = round(float(fa["base_score"]) * analyze._RETURN_BOOST, 2)
+    # Re-sort so social-boosted players surface at the correct rank in the
+    # overall list (absence-detector boosts were applied before the first sort
+    # in rank_free_agents; social boosts land after, so we need a second pass).
+    if social_returners:
+        ranked_fas_dicts.sort(key=lambda r: r["base_score"], reverse=True)
 
     # AI "why pick them up" summaries, keyed by str(player_id). Authored
     # out-of-band (data/ai_summaries.json) and attached to waiver targets.
@@ -467,6 +475,39 @@ def build_state(
                 for p in posts[:5]
             ]
 
+    # Instagram: match posts to players by profile handle or name mention.
+    instagram_by_player: dict[int, list[schema.InstagramPost]] = {}
+    if instagram_posts:
+        socials_for_match = {
+            int(pid): v for pid, v in (player_socials_raw or {}).items() if pid.isdigit()
+        }
+        raw_ig_by_player = instagram_mod.match_to_players(
+            instagram_posts, player_name_index, player_socials=socials_for_match
+        )
+        for pid, posts in raw_ig_by_player.items():
+            instagram_by_player[pid] = [
+                schema.InstagramPost(
+                    title=p["title"],
+                    url=p["url"],
+                    published_at=p.get("published_at"),
+                    username=p.get("username") or "",
+                    post_type=p.get("post_type") or "post",
+                )
+                for p in posts[:5]
+            ]
+
+    # Player social profiles (for direct links in the UI).
+    player_socials_by_id: dict[int, schema.PlayerSocials] = {}
+    for pid_str, handles in (player_socials_raw or {}).items():
+        try:
+            pid = int(pid_str)
+        except (ValueError, TypeError):
+            continue
+        player_socials_by_id[pid] = schema.PlayerSocials(
+            twitter=handles.get("twitter") or "",
+            instagram=handles.get("instagram") or "",
+        )
+
     return schema.LeagueState(
         meta=meta,
         teams=teams,
@@ -478,6 +519,8 @@ def build_state(
         reddit_posts_by_player=reddit_by_player,
         twitter_posts_by_player=twitter_by_player,
         bluesky_posts_by_player=bluesky_by_player,
+        instagram_posts_by_player=instagram_by_player,
+        player_socials=player_socials_by_id,
     )
 
 
