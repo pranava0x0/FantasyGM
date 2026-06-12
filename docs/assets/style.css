@@ -1453,6 +1453,7 @@ body.modal-open { overflow: hidden; }
   background: var(--surface);
   max-height: 280px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 4px 0;
 }
 
@@ -1468,13 +1469,22 @@ body.modal-open { overflow: hidden; }
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 10px;
-  cursor: pointer;
+  min-height: 44px;
+  padding: 0 10px;
   border-radius: 4px;
   transition: background 80ms ease;
 }
 
 .trade-calc-player:hover { background: var(--surface-2); }
+
+.trade-calc-check-area {
+  display: flex;
+  align-items: center;
+  min-width: 32px;
+  min-height: 44px;
+  cursor: pointer;
+  flex: none;
+}
 
 .trade-calc-check { flex: none; cursor: pointer; }
 
@@ -1525,11 +1535,12 @@ body.modal-open { overflow: hidden; }
   color: #fff;
   border: 0;
   border-radius: 8px;
-  padding: 9px 28px;
+  padding: 12px 28px;
   font: inherit;
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
+  touch-action: manipulation;
   transition: opacity 120ms ease;
 }
 
