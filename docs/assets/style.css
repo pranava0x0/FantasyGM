@@ -1052,6 +1052,30 @@ body.modal-open { overflow: hidden; }
   line-height: 1.5;
   color: var(--text);
 }
+.gm-take-date {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+.gm-take-date[hidden] { display: none; }
+.gm-take-date--stale { color: var(--gap-weak, #c46b00); opacity: 1; }
+
+/* Stale summary on waiver card: dim the whole row slightly */
+.waiver-summary--stale .waiver-summary-text { opacity: 0.65; }
+.waiver-summary--stale .waiver-summary-badge {
+  background: var(--border);
+  color: var(--text-muted);
+}
+/* Small date label on the waiver card next to the AI badge */
+.waiver-summary-date {
+  flex: none;
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-left: auto;
+  white-space: nowrap;
+}
 
 .player-modal-section { display: grid; gap: 6px; }
 .player-modal-section-h {
