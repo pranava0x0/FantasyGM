@@ -1506,11 +1506,13 @@
         const ppg = e.projected_per_game != null ? `${fmtPoints(e.projected_per_game)}/g` : "—";
         const beTag = e.is_active ? "" : `<span class="trade-calc-bench">BE</span>`;
         const bkt = `<span class="waiver-bucket bucket-${e.player.bucket}">${e.player.bucket}</span>`;
-        return `<label class="trade-calc-player">
-          <input type="checkbox" class="trade-calc-check" data-side="${side}" value="${e.player.player_id}"/>
-          <span class="trade-calc-player-name">${e.player.name}</span>
+        return `<div class="trade-calc-player">
+          <label class="trade-calc-check-area">
+            <input type="checkbox" class="trade-calc-check" data-side="${side}" value="${e.player.player_id}" aria-label="Trade ${e.player.name}"/>
+          </label>
+          <button class="player-name-btn trade-calc-player-name" type="button" data-player-id="${e.player.player_id}">${e.player.name}</button>
           <span class="trade-calc-player-meta">${bkt}${ppg}${beTag}</span>
-        </label>`;
+        </div>`;
       }).join("");
     }
 
@@ -1532,6 +1534,9 @@
         listEl.innerHTML = rosterListHtml(teamById[teamId], side);
         listEl.querySelectorAll('input[type="checkbox"]').forEach(cb =>
           cb.addEventListener("change", updateEvalBtn)
+        );
+        listEl.querySelectorAll('.player-name-btn[data-player-id]').forEach(btn =>
+          btn.addEventListener("click", (e) => { e.stopPropagation(); openPlayerModal(Number(btn.dataset.playerId)); })
         );
       }
       // Hide result when teams change
