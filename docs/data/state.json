@@ -36250,5 +36250,1543 @@
       "twitter": "RebekahGardner4",
       "instagram": ""
     }
-  }
+  },
+  "trade_scenarios": [
+    {
+      "team_id": 1,
+      "team_abbrev": "KAH",
+      "team_name": "Copper Futures",
+      "best_player": {
+        "player_id": 2988756,
+        "name": "Brittney Sykes",
+        "fantasy_team_id": 1,
+        "fantasy_team_abbrev": "KAH",
+        "projected_per_game": 42.3,
+        "bucket": "G"
+      },
+      "top_need_bucket": "G",
+      "offers": [
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398674,
+                "name": "Rhyne Howard",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 42.0,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 42.0
+          },
+          "value_ratio": 0.993,
+          "need_fit_score": 1.0,
+          "composite_score": 0.996
+        },
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433730,
+                "name": "Paige Bueckers",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 43.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 43.5
+          },
+          "value_ratio": 1.03,
+          "need_fit_score": 1.0,
+          "composite_score": 0.982
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3065570,
+                "name": "Kelsey Plum",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 40.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.9
+          },
+          "value_ratio": 0.967,
+          "need_fit_score": 1.0,
+          "composite_score": 0.98
+        },
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4698736,
+                "name": "Flau'jae Johnson",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 29.5,
+                "bucket": "G"
+              },
+              {
+                "player_id": 5274110,
+                "name": "Monique Akoa Makani",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 14.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 44.3
+          },
+          "value_ratio": 1.048,
+          "need_fit_score": 1.0,
+          "composite_score": 0.971
+        },
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2529122,
+                "name": "Chelsea Gray",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 40.2,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.2
+          },
+          "value_ratio": 0.952,
+          "need_fit_score": 1.0,
+          "composite_score": 0.971
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398935,
+                "name": "Veronica Burton",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 29.8,
+                "bucket": "G"
+              },
+              {
+                "player_id": 4858656,
+                "name": "Gabriela Jaquez",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 15.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 45.3
+          },
+          "value_ratio": 1.072,
+          "need_fit_score": 1.0,
+          "composite_score": 0.957
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433791,
+                "name": "Olivia Miles",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 38.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 38.8
+          },
+          "value_ratio": 0.919,
+          "need_fit_score": 1.0,
+          "composite_score": 0.951
+        }
+      ]
+    },
+    {
+      "team_id": 2,
+      "team_abbrev": "PEZ",
+      "team_name": "Empire State Farm",
+      "best_player": {
+        "player_id": 4433403,
+        "name": "Caitlin Clark",
+        "fantasy_team_id": 2,
+        "fantasy_team_abbrev": "PEZ",
+        "projected_per_game": 47.5,
+        "bucket": "G"
+      },
+      "top_need_bucket": "G",
+      "offers": [
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2998938,
+                "name": "Kahleah Copper",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 23.7,
+                "bucket": "G"
+              },
+              {
+                "player_id": 5208982,
+                "name": "Carla Leite",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 23.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 47.3
+          },
+          "value_ratio": 0.996,
+          "need_fit_score": 1.0,
+          "composite_score": 0.997
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433790,
+                "name": "Azzi Fudd",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 31.2,
+                "bucket": "G"
+              },
+              {
+                "player_id": 4858656,
+                "name": "Gabriela Jaquez",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 15.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 46.7
+          },
+          "value_ratio": 0.985,
+          "need_fit_score": 1.0,
+          "composite_score": 0.991
+        },
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3904577,
+                "name": "Arike Ogunbowale",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 23.1,
+                "bucket": "G"
+              },
+              {
+                "player_id": 4565505,
+                "name": "Kiki Rice",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 25.6,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 48.7
+          },
+          "value_ratio": 1.026,
+          "need_fit_score": 1.0,
+          "composite_score": 0.984
+        },
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433730,
+                "name": "Paige Bueckers",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 43.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 43.5
+          },
+          "value_ratio": 0.917,
+          "need_fit_score": 1.0,
+          "composite_score": 0.95
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433524,
+                "name": "Sonia Citron",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 28.2,
+                "bucket": "G"
+              },
+              {
+                "player_id": 3906753,
+                "name": "Natisha Hiedeman",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 23.2,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 51.4
+          },
+          "value_ratio": 1.084,
+          "need_fit_score": 1.0,
+          "composite_score": 0.95
+        },
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3146151,
+                "name": "Ariel Atkins",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 28.7,
+                "bucket": "G"
+              },
+              {
+                "player_id": 1054,
+                "name": "Tiffany Hayes",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 23.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 52.6
+          },
+          "value_ratio": 1.108,
+          "need_fit_score": 1.0,
+          "composite_score": 0.935
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3142191,
+                "name": "Kelsey Mitchell",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 34.4,
+                "bucket": "G"
+              },
+              {
+                "player_id": 2529137,
+                "name": "Natasha Cloud",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 20.6,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 55.0
+          },
+          "value_ratio": 1.158,
+          "need_fit_score": 1.0,
+          "composite_score": 0.905
+        }
+      ]
+    },
+    {
+      "team_id": 5,
+      "team_abbrev": "Spda",
+      "team_name": "Plumdog Millionaire",
+      "best_player": {
+        "player_id": 3149391,
+        "name": "A'ja Wilson",
+        "fantasy_team_id": 5,
+        "fantasy_team_abbrev": "Spda",
+        "projected_per_game": 50.9,
+        "bucket": "F"
+      },
+      "top_need_bucket": "FC",
+      "offers": [
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2529130,
+                "name": "Natasha Howard",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 25.8,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4433404,
+                "name": "Cameron Brink",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 24.9,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 50.7
+          },
+          "value_ratio": 0.997,
+          "need_fit_score": 1.0,
+          "composite_score": 0.998
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2593770,
+                "name": "Betnijah Laney-Hamilton",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 9.0,
+                "bucket": "F"
+              },
+              {
+                "player_id": 5345325,
+                "name": "Awa Fam",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 24.2,
+                "bucket": "C"
+              },
+              {
+                "player_id": 4398915,
+                "name": "Naz Hillmon",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 17.8,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 51.0
+          },
+          "value_ratio": 1.003,
+          "need_fit_score": 1.0,
+          "composite_score": 0.998
+        },
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3142328,
+                "name": "Gabby Williams",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 29.3,
+                "bucket": "F"
+              },
+              {
+                "player_id": 3913881,
+                "name": "Alanna Smith",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 21.1,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 50.4
+          },
+          "value_ratio": 0.99,
+          "need_fit_score": 1.0,
+          "composite_score": 0.994
+        },
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 869,
+                "name": "DeWanna Bonner",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 22.2,
+                "bucket": "F"
+              },
+              {
+                "player_id": 3906972,
+                "name": "Bridget Carleton",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 19.3,
+                "bucket": "F"
+              },
+              {
+                "player_id": 2590093,
+                "name": "Kiah Stokes",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 10.0,
+                "bucket": "C"
+              }
+            ],
+            "total_ppg": 51.5
+          },
+          "value_ratio": 1.012,
+          "need_fit_score": 1.0,
+          "composite_score": 0.993
+        },
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2566106,
+                "name": "Dearica Hamby",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 28.7,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4257500,
+                "name": "Cecilia Zandalasini",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 21.2,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 49.9
+          },
+          "value_ratio": 0.982,
+          "need_fit_score": 1.0,
+          "composite_score": 0.989
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433405,
+                "name": "Kamilla Cardoso",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 22.9,
+                "bucket": "C"
+              },
+              {
+                "player_id": 4898384,
+                "name": "Kiki Iriafen",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 26.8,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 49.6
+          },
+          "value_ratio": 0.976,
+          "need_fit_score": 1.0,
+          "composite_score": 0.986
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4684384,
+                "name": "Aneesah Morrow",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 19.3,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4068042,
+                "name": "Natasha Mack",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 16.6,
+                "bucket": "F"
+              },
+              {
+                "player_id": 3054590,
+                "name": "Nia Coffey",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 12.7,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 48.6
+          },
+          "value_ratio": 0.956,
+          "need_fit_score": 1.0,
+          "composite_score": 0.974
+        }
+      ]
+    },
+    {
+      "team_id": 6,
+      "team_abbrev": "Nut",
+      "team_name": "Hot Stew Comin Through",
+      "best_player": {
+        "player_id": 2998928,
+        "name": "Breanna Stewart",
+        "fantasy_team_id": 6,
+        "fantasy_team_abbrev": "Nut",
+        "projected_per_game": 42.0,
+        "bucket": "F"
+      },
+      "top_need_bucket": "G",
+      "offers": [
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2988756,
+                "name": "Brittney Sykes",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 42.3,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 42.3
+          },
+          "value_ratio": 1.007,
+          "need_fit_score": 1.0,
+          "composite_score": 0.996
+        },
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4065870,
+                "name": "Jackie Young",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 40.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.9
+          },
+          "value_ratio": 0.974,
+          "need_fit_score": 1.0,
+          "composite_score": 0.984
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3065570,
+                "name": "Kelsey Plum",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 40.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.9
+          },
+          "value_ratio": 0.974,
+          "need_fit_score": 1.0,
+          "composite_score": 0.984
+        },
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2529122,
+                "name": "Chelsea Gray",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 40.2,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.2
+          },
+          "value_ratio": 0.959,
+          "need_fit_score": 1.0,
+          "composite_score": 0.975
+        },
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4698736,
+                "name": "Flau'jae Johnson",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 29.5,
+                "bucket": "G"
+              },
+              {
+                "player_id": 5274110,
+                "name": "Monique Akoa Makani",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 14.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 44.3
+          },
+          "value_ratio": 1.056,
+          "need_fit_score": 1.0,
+          "composite_score": 0.967
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433791,
+                "name": "Olivia Miles",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 38.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 38.8
+          },
+          "value_ratio": 0.925,
+          "need_fit_score": 1.0,
+          "composite_score": 0.955
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398935,
+                "name": "Veronica Burton",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 29.8,
+                "bucket": "G"
+              },
+              {
+                "player_id": 4858656,
+                "name": "Gabriela Jaquez",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 15.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 45.3
+          },
+          "value_ratio": 1.08,
+          "need_fit_score": 1.0,
+          "composite_score": 0.952
+        }
+      ]
+    },
+    {
+      "team_id": 7,
+      "team_abbrev": "C9",
+      "team_name": "Honolulu Cloud Wine",
+      "best_player": {
+        "player_id": 4433730,
+        "name": "Paige Bueckers",
+        "fantasy_team_id": 7,
+        "fantasy_team_abbrev": "C9",
+        "projected_per_game": 43.5,
+        "bucket": "G"
+      },
+      "top_need_bucket": "G",
+      "offers": [
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4698736,
+                "name": "Flau'jae Johnson",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 29.5,
+                "bucket": "G"
+              },
+              {
+                "player_id": 5274110,
+                "name": "Monique Akoa Makani",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 14.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 44.3
+          },
+          "value_ratio": 1.018,
+          "need_fit_score": 1.0,
+          "composite_score": 0.989
+        },
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2988756,
+                "name": "Brittney Sykes",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 42.3,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 42.3
+          },
+          "value_ratio": 0.971,
+          "need_fit_score": 1.0,
+          "composite_score": 0.982
+        },
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398674,
+                "name": "Rhyne Howard",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 42.0,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 42.0
+          },
+          "value_ratio": 0.964,
+          "need_fit_score": 1.0,
+          "composite_score": 0.978
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398935,
+                "name": "Veronica Burton",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 29.8,
+                "bucket": "G"
+              },
+              {
+                "player_id": 4858656,
+                "name": "Gabriela Jaquez",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 15.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 45.3
+          },
+          "value_ratio": 1.041,
+          "need_fit_score": 1.0,
+          "composite_score": 0.975
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3065570,
+                "name": "Kelsey Plum",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 40.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.9
+          },
+          "value_ratio": 0.939,
+          "need_fit_score": 1.0,
+          "composite_score": 0.963
+        },
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2529122,
+                "name": "Chelsea Gray",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 40.2,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.2
+          },
+          "value_ratio": 0.925,
+          "need_fit_score": 1.0,
+          "composite_score": 0.955
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433791,
+                "name": "Olivia Miles",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 38.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 38.8
+          },
+          "value_ratio": 0.892,
+          "need_fit_score": 1.0,
+          "composite_score": 0.935
+        }
+      ]
+    },
+    {
+      "team_id": 8,
+      "team_abbrev": "KylB",
+      "team_name": "Rhyne 'em dine 'em 69 'em",
+      "best_player": {
+        "player_id": 4433402,
+        "name": "Angel Reese",
+        "fantasy_team_id": 8,
+        "fantasy_team_abbrev": "KylB",
+        "projected_per_game": 39.9,
+        "bucket": "F"
+      },
+      "top_need_bucket": "G",
+      "offers": [
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2529122,
+                "name": "Chelsea Gray",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 40.2,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.2
+          },
+          "value_ratio": 1.009,
+          "need_fit_score": 1.0,
+          "composite_score": 0.995
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3065570,
+                "name": "Kelsey Plum",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 40.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.9
+          },
+          "value_ratio": 1.024,
+          "need_fit_score": 1.0,
+          "composite_score": 0.986
+        },
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4065870,
+                "name": "Jackie Young",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 40.9,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 40.9
+          },
+          "value_ratio": 1.025,
+          "need_fit_score": 1.0,
+          "composite_score": 0.985
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3142250,
+                "name": "Jordin Canada",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 22.8,
+                "bucket": "G"
+              },
+              {
+                "player_id": 4858656,
+                "name": "Gabriela Jaquez",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 15.5,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 38.2
+          },
+          "value_ratio": 0.959,
+          "need_fit_score": 1.0,
+          "composite_score": 0.975
+        },
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398674,
+                "name": "Rhyne Howard",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 42.0,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 42.0
+          },
+          "value_ratio": 1.052,
+          "need_fit_score": 1.0,
+          "composite_score": 0.969
+        },
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2988756,
+                "name": "Brittney Sykes",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 42.3,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 42.3
+          },
+          "value_ratio": 1.059,
+          "need_fit_score": 1.0,
+          "composite_score": 0.965
+        },
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4698736,
+                "name": "Flau'jae Johnson",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 29.5,
+                "bucket": "G"
+              },
+              {
+                "player_id": 5274110,
+                "name": "Monique Akoa Makani",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 14.8,
+                "bucket": "G"
+              }
+            ],
+            "total_ppg": 44.3
+          },
+          "value_ratio": 1.11,
+          "need_fit_score": 1.0,
+          "composite_score": 0.934
+        }
+      ]
+    },
+    {
+      "team_id": 9,
+      "team_abbrev": "NNZ",
+      "team_name": "Nothing But Net Zero",
+      "best_player": {
+        "player_id": 3065570,
+        "name": "Kelsey Plum",
+        "fantasy_team_id": 9,
+        "fantasy_team_abbrev": "NNZ",
+        "projected_per_game": 40.9,
+        "bucket": "G"
+      },
+      "top_need_bucket": "FC",
+      "offers": [
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 869,
+                "name": "DeWanna Bonner",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 22.2,
+                "bucket": "F"
+              },
+              {
+                "player_id": 3906972,
+                "name": "Bridget Carleton",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 19.3,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 41.5
+          },
+          "value_ratio": 1.015,
+          "need_fit_score": 1.0,
+          "composite_score": 0.991
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4433402,
+                "name": "Angel Reese",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 39.9,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 39.9
+          },
+          "value_ratio": 0.977,
+          "need_fit_score": 1.0,
+          "composite_score": 0.986
+        },
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2999101,
+                "name": "Jonquel Jones",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 39.2,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 39.2
+          },
+          "value_ratio": 0.959,
+          "need_fit_score": 1.0,
+          "composite_score": 0.975
+        },
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3913881,
+                "name": "Alanna Smith",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 21.1,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4398729,
+                "name": "Emily Engstler",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 17.1,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 38.2
+          },
+          "value_ratio": 0.934,
+          "need_fit_score": 1.0,
+          "composite_score": 0.96
+        },
+        {
+          "from_team_id": 10,
+          "from_team_abbrev": "A-B",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4684384,
+                "name": "Aneesah Morrow",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 19.3,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4068042,
+                "name": "Natasha Mack",
+                "fantasy_team_id": 10,
+                "fantasy_team_abbrev": "A-B",
+                "projected_per_game": 16.6,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 35.9
+          },
+          "value_ratio": 0.879,
+          "need_fit_score": 1.0,
+          "composite_score": 0.927
+        },
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4790264,
+                "name": "Janelle Salaun",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 23.2,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4398776,
+                "name": "NaLyssa Smith",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 24.5,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 47.7
+          },
+          "value_ratio": 1.167,
+          "need_fit_score": 1.0,
+          "composite_score": 0.9
+        },
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4281929,
+                "name": "Satou Sabally",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 32.3,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 32.3
+          },
+          "value_ratio": 0.79,
+          "need_fit_score": 1.0,
+          "composite_score": 0.874
+        }
+      ]
+    },
+    {
+      "team_id": 10,
+      "team_abbrev": "A-B",
+      "team_name": "Nobody's Business",
+      "best_player": {
+        "player_id": 4432831,
+        "name": "Aliyah Boston",
+        "fantasy_team_id": 10,
+        "fantasy_team_abbrev": "A-B",
+        "projected_per_game": 48.0,
+        "bucket": "F"
+      },
+      "top_need_bucket": "FC",
+      "offers": [
+        {
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4790264,
+                "name": "Janelle Salaun",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 23.2,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4433404,
+                "name": "Cameron Brink",
+                "fantasy_team_id": 7,
+                "fantasy_team_abbrev": "C9",
+                "projected_per_game": 24.9,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 48.1
+          },
+          "value_ratio": 1.002,
+          "need_fit_score": 1.0,
+          "composite_score": 0.999
+        },
+        {
+          "from_team_id": 2,
+          "from_team_abbrev": "PEZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398911,
+                "name": "Shakira Austin",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 27.0,
+                "bucket": "C"
+              },
+              {
+                "player_id": 4257500,
+                "name": "Cecilia Zandalasini",
+                "fantasy_team_id": 2,
+                "fantasy_team_abbrev": "PEZ",
+                "projected_per_game": 21.2,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 48.2
+          },
+          "value_ratio": 1.004,
+          "need_fit_score": 1.0,
+          "composite_score": 0.997
+        },
+        {
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4898384,
+                "name": "Kiki Iriafen",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 26.8,
+                "bucket": "F"
+              },
+              {
+                "player_id": 2490553,
+                "name": "Brittney Griner",
+                "fantasy_team_id": 8,
+                "fantasy_team_abbrev": "KylB",
+                "projected_per_game": 21.8,
+                "bucket": "C"
+              }
+            ],
+            "total_ppg": 48.6
+          },
+          "value_ratio": 1.012,
+          "need_fit_score": 1.0,
+          "composite_score": 0.993
+        },
+        {
+          "from_team_id": 1,
+          "from_team_abbrev": "KAH",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 4398729,
+                "name": "Emily Engstler",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 17.1,
+                "bucket": "F"
+              },
+              {
+                "player_id": 5345444,
+                "name": "Laura Juskaite",
+                "fantasy_team_id": 1,
+                "fantasy_team_abbrev": "KAH",
+                "projected_per_game": 32.0,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 49.2
+          },
+          "value_ratio": 1.024,
+          "need_fit_score": 1.0,
+          "composite_score": 0.986
+        },
+        {
+          "from_team_id": 9,
+          "from_team_abbrev": "NNZ",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 2593770,
+                "name": "Betnijah Laney-Hamilton",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 9.0,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4398915,
+                "name": "Naz Hillmon",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 17.8,
+                "bucket": "F"
+              },
+              {
+                "player_id": 4683006,
+                "name": "Leonie Fiebich",
+                "fantasy_team_id": 9,
+                "fantasy_team_abbrev": "NNZ",
+                "projected_per_game": 19.1,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 46.0
+          },
+          "value_ratio": 0.957,
+          "need_fit_score": 1.0,
+          "composite_score": 0.974
+        },
+        {
+          "from_team_id": 5,
+          "from_team_abbrev": "Spda",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 3149391,
+                "name": "A'ja Wilson",
+                "fantasy_team_id": 5,
+                "fantasy_team_abbrev": "Spda",
+                "projected_per_game": 50.9,
+                "bucket": "F"
+              }
+            ],
+            "total_ppg": 50.9
+          },
+          "value_ratio": 1.059,
+          "need_fit_score": 1.0,
+          "composite_score": 0.964
+        },
+        {
+          "from_team_id": 6,
+          "from_team_abbrev": "Nut",
+          "pkg_received": {
+            "players": [
+              {
+                "player_id": 869,
+                "name": "DeWanna Bonner",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 22.2,
+                "bucket": "F"
+              },
+              {
+                "player_id": 3906972,
+                "name": "Bridget Carleton",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 19.3,
+                "bucket": "F"
+              },
+              {
+                "player_id": 2590093,
+                "name": "Kiah Stokes",
+                "fantasy_team_id": 6,
+                "fantasy_team_abbrev": "Nut",
+                "projected_per_game": 10.0,
+                "bucket": "C"
+              }
+            ],
+            "total_ppg": 51.5
+          },
+          "value_ratio": 1.073,
+          "need_fit_score": 1.0,
+          "composite_score": 0.957
+        }
+      ]
+    }
+  ]
 }

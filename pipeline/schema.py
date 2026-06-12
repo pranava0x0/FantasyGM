@@ -235,6 +235,45 @@ class PlayerSocials(_Strict):
     instagram: str = ""    # handle without @
 
 
+class TradePlayer(_Strict):
+    """A player referenced in a trade scenario."""
+    player_id: int
+    name: str
+    fantasy_team_id: int
+    fantasy_team_abbrev: str
+    projected_per_game: float
+    bucket: Literal["G", "F", "C"]
+
+
+class TradePkg(_Strict):
+    """A 1–3-player package from one fantasy team."""
+    players: list[TradePlayer]
+    total_ppg: float
+
+
+class TradeOffer(_Strict):
+    """One potential offer from an opposing team."""
+    from_team_id: int
+    from_team_abbrev: str
+    pkg_received: TradePkg
+    value_ratio: float = Field(..., description="pkg total ppg / target ppg; 1.0 = perfectly fair")
+    need_fit_score: float = Field(..., description="0–1: how well received players fill team's top need")
+    composite_score: float = Field(..., description="0.6×fairness + 0.4×need_fit; higher is better")
+
+
+class TradeScenario(_Strict):
+    """One team's 'trade your best player' analysis."""
+    team_id: int
+    team_abbrev: str
+    team_name: str
+    best_player: TradePlayer
+    top_need_bucket: Literal["G", "FC"]
+    offers: list[TradeOffer] = Field(
+        default_factory=list,
+        description="Best offer per opposing team, sorted by composite_score descending.",
+    )
+
+
 class LeagueState(_Strict):
     """Top-level object written to `docs/data/state.json`."""
     meta: LeagueMeta
@@ -249,3 +288,4 @@ class LeagueState(_Strict):
     bluesky_posts_by_player: dict[int, list[BlueskyPost]] = Field(default_factory=dict)
     instagram_posts_by_player: dict[int, list[InstagramPost]] = Field(default_factory=dict)
     player_socials: dict[int, PlayerSocials] = Field(default_factory=dict)
+    trade_scenarios: list[TradeScenario] = Field(default_factory=list)

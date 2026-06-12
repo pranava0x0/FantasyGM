@@ -376,6 +376,10 @@ def build_state(
 
     overall_targets = [_to_waiver_target(d, ai_summaries, summary_dates) for d in ranked_fas_dicts[:30]]
 
+    # Trade scenario evaluator: per-team "trade your best player" analysis.
+    from pipeline import trades as trades_mod
+    trade_scenarios = trades_mod.build_trade_scenarios(teams)
+
     transactions_view: list[schema.Transaction] = []
     for tx in transactions_raw:
         items = [
@@ -547,6 +551,7 @@ def build_state(
         bluesky_posts_by_player=bluesky_by_player,
         instagram_posts_by_player=instagram_by_player,
         player_socials=player_socials_by_id,
+        trade_scenarios=trade_scenarios,
     )
 
 
