@@ -204,6 +204,12 @@ def main(argv: list[str] | None = None) -> int:
         dry_run=args.dry_run,
     )
     log.info("refresh: %d AI summaries available", len(ai_summaries))
+    summary_dates: dict[str, str] = {}
+    try:
+        if ai_path.exists():
+            summary_dates = json.loads(ai_path.read_text()).get("summary_dates") or {}
+    except (json.JSONDecodeError, OSError):
+        pass
 
     state = build_state_mod.build_state(
         league_raw=snap.league,
@@ -216,6 +222,7 @@ def main(argv: list[str] | None = None) -> int:
         instagram_posts=instagram_posts,
         player_socials_raw=player_socials_raw,
         ai_summaries=ai_summaries,
+        summary_dates=summary_dates,
         ext_projections_by_source=ext_projections_by_source or None,
         player_game_log=player_game_log,
     )

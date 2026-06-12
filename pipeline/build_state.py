@@ -163,6 +163,7 @@ def build_state(
     instagram_posts: list[dict[str, Any]] | None = None,
     player_socials_raw: dict[str, dict[str, str]] | None = None,
     ai_summaries: dict[str, str] | None = None,
+    summary_dates: dict[str, str] | None = None,
     ext_projections_by_source: dict[str, dict[str, float]] | None = None,
     player_game_log: dict[int, list[dict[str, Any]]] | None = None,
     extra_transactions: list[dict[str, Any]] | None = None,
@@ -255,6 +256,7 @@ def build_state(
     # AI "why pick them up" summaries, keyed by str(player_id). Authored
     # out-of-band (data/ai_summaries.json) and attached to waiver targets.
     ai_summaries = ai_summaries or {}
+    summary_dates = summary_dates or {}
 
     # Normalize transactions once up front — we need them for both the
     # global feed and per-team grouping.
@@ -368,11 +370,11 @@ def build_state(
         by_team_targets.append(
             schema.WaiverTargetsByTeam(
                 team_id=team_id_int,
-                targets=[_to_waiver_target(d, ai_summaries) for d in team_targets],
+                targets=[_to_waiver_target(d, ai_summaries, summary_dates) for d in team_targets],
             )
         )
 
-    overall_targets = [_to_waiver_target(d, ai_summaries) for d in ranked_fas_dicts[:30]]
+    overall_targets = [_to_waiver_target(d, ai_summaries, summary_dates) for d in ranked_fas_dicts[:30]]
 
     transactions_view: list[schema.Transaction] = []
     for tx in transactions_raw:
@@ -674,6 +676,7 @@ def _player_name_index(
 def _to_waiver_target(
     d: dict[str, Any],
     ai_summaries: dict[str, str] | None = None,
+    summary_dates: dict[str, str] | None = None,
 ) -> schema.WaiverTarget:
     pid = str(d["player_id"])
     return schema.WaiverTarget(
@@ -705,6 +708,7 @@ def _to_waiver_target(
             for g in (d.get("recent_games") or [])
         ],
         ai_summary=(ai_summaries or {}).get(pid),
+        ai_summary_date=(summary_dates or {}).get(pid),
     )
 
 

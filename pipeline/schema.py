@@ -145,6 +145,10 @@ class WaiverTarget(_Strict):
         None,
         description="AI-authored 'why pick them up' GM take, keyed by player_id from data/ai_summaries.json. None when no summary exists for this player.",
     )
+    ai_summary_date: str | None = Field(
+        None,
+        description="ISO date (YYYY-MM-DD) when ai_summary was last authored. Used to surface staleness when a player drops off the top-30 and the summary is not refreshed.",
+    )
 
 
 class TransactionItem(_Strict):

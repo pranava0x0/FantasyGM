@@ -121,6 +121,14 @@
     return e;
   }
 
+  // Returns true when a YYYY-MM-DD summary date is older than 7 days.
+  function _isSummaryStale(dateStr) {
+    try {
+      const d = new Date(dateStr + "T00:00:00Z");
+      return (Date.now() - d.getTime()) > 7 * 24 * 60 * 60 * 1000;
+    } catch (_) { return false; }
+  }
+
   // Render any player name as a click-to-open <button> that drives the
   // detail modal. `className` keeps callers in charge of layout (e.g.
   // `waiver-name`, `roster-name`); the button just adds the trigger.
@@ -257,11 +265,14 @@
     // AI "why pick them up" take, spanning the full card width below the
     // top row. Clamped to keep the list scannable; full text in the modal.
     if (t.ai_summary) {
+      const summaryDate = t.ai_summary_date || null;
+      const isStale = summaryDate && _isSummaryStale(summaryDate);
       children.push(el("div", {
-        className: "waiver-summary",
+        className: "waiver-summary" + (isStale ? " waiver-summary--stale" : ""),
         children: [
           el("span", { className: "waiver-summary-badge", text: "AI" }),
           el("span", { className: "waiver-summary-text", text: t.ai_summary }),
+          ...(summaryDate ? [el("span", { className: "waiver-summary-date", text: summaryDate })] : []),
         ],
       }));
     }
@@ -722,6 +733,7 @@
       entry.profile = entry.profile || t.player;
       entry.waiver_target = t;
       if (t.ai_summary) entry.ai_summary = t.ai_summary;
+      if (t.ai_summary_date) entry.ai_summary_date = t.ai_summary_date;
     });
 
     (state.waiver_targets_by_team || []).forEach((row) => {
@@ -730,6 +742,7 @@
         const entry = ensure(t.player.player_id);
         entry.profile = entry.profile || t.player;
         if (t.ai_summary && !entry.ai_summary) entry.ai_summary = t.ai_summary;
+        if (t.ai_summary_date && !entry.ai_summary_date) entry.ai_summary_date = t.ai_summary_date;
         entry.per_team_targets.push({
           team_id: row.team_id,
           team_name: teamMeta ? teamMeta.name : `Team ${row.team_id}`,
@@ -910,6 +923,15 @@
     if (gmTake && gmBody) {
       if (entry.ai_summary) {
         gmBody.textContent = entry.ai_summary;
+        const dateEl = gmTake.querySelector(".gm-take-date");
+        if (dateEl && entry.ai_summary_date) {
+          const stale = _isSummaryStale(entry.ai_summary_date);
+          dateEl.textContent = "as of " + entry.ai_summary_date + (stale ? " · may be stale" : "");
+          dateEl.classList.toggle("gm-take-date--stale", stale);
+          dateEl.removeAttribute("hidden");
+        } else if (dateEl) {
+          dateEl.setAttribute("hidden", "");
+        }
         gmTake.removeAttribute("hidden");
       } else {
         gmBody.textContent = "";

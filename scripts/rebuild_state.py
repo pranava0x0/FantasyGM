@@ -81,11 +81,15 @@ def main(argv: list[str] | None = None) -> int:
             pass
 
     ai_path = ROOT / "data" / "ai_summaries.json"
-    ai_summaries = (
-        (json.loads(ai_path.read_text()).get("summaries") or {})
-        if ai_path.exists()
-        else {}
-    )
+    ai_summaries: dict[str, str] = {}
+    summary_dates: dict[str, str] = {}
+    if ai_path.exists():
+        try:
+            raw_ai = json.loads(ai_path.read_text())
+            ai_summaries = raw_ai.get("summaries") or {}
+            summary_dates = raw_ai.get("summary_dates") or {}
+        except (json.JSONDecodeError, OSError):
+            pass
     log.info("loaded %d AI summaries", len(ai_summaries))
 
     # Load full transaction history from the append-only log so state.json
@@ -121,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
         instagram_posts=instagram_posts,
         player_socials_raw=player_socials_raw,
         ai_summaries=ai_summaries,
+        summary_dates=summary_dates,
         extra_transactions=extra_transactions,
     )
 
