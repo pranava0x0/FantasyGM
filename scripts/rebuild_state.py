@@ -28,7 +28,18 @@ from pipeline import bluesky as bluesky_mod, instagram as instagram_mod, reddit 
 
 log = logging.getLogger("rebuild_state")
 
-ROOT = Path(__file__).resolve().parent.parent
+_SCRIPT_ROOT = Path(__file__).resolve().parent.parent
+
+
+def _find_project_root(start: Path) -> Path:
+    """Return the nearest ancestor that contains a .env file, else the script root."""
+    for p in [start, *start.parents]:
+        if (p / ".env").exists():
+            return p
+    return start
+
+
+ROOT = _find_project_root(_SCRIPT_ROOT)
 DATA_RAW = ROOT / "data" / "raw"
 DOCS = ROOT / "docs"
 
@@ -77,6 +88,20 @@ def main(argv: list[str] | None = None) -> int:
     )
     log.info("loaded %d AI summaries", len(ai_summaries))
 
+    # Load full transaction history from the append-only log so state.json
+    # reflects the complete season, not just the current period's snapshot.
+    txn_history_path = ROOT / "data" / "history" / "transactions.jsonl"
+    extra_transactions: list[dict] = []
+    if txn_history_path.exists():
+        for line in txn_history_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            try:
+                extra_transactions.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+        log.info("loaded %d transactions from history log", len(extra_transactions))
+
     meta = json.loads((raw_dir / "_meta.json").read_text()) if (raw_dir / "_meta.json").exists() else {}
     captured_raw = meta.get("captured_at")
     captured_at = (
@@ -96,6 +121,7 @@ def main(argv: list[str] | None = None) -> int:
         instagram_posts=instagram_posts,
         player_socials_raw=player_socials_raw,
         ai_summaries=ai_summaries,
+        extra_transactions=extra_transactions,
     )
 
     out = build_state_mod.write_state(state, DOCS)

@@ -93,9 +93,19 @@ class ESPNClient:
 
     # --- public surface --------------------------------------------------
 
-    def fetch_league(self, views: list[str]) -> dict[str, Any]:
-        """Fetch the league with one or more `view` filters."""
+    def fetch_league(
+        self,
+        views: list[str],
+        scoring_period_id: int | None = None,
+    ) -> dict[str, Any]:
+        """Fetch the league with one or more `view` filters.
+
+        `scoring_period_id` scopes views like mTransactions2 to a specific
+        period; used by the backfill script to retrieve full-season history.
+        """
         params = [("view", v) for v in views]
+        if scoring_period_id is not None:
+            params.append(("scoringPeriodId", str(scoring_period_id)))
         return self._request("GET", self._base_url, params=params)
 
     def fetch_pro_team_schedules(self) -> dict[str, Any]:

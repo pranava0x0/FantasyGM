@@ -646,7 +646,12 @@
       return;
     }
     const teamById = new Map((teams || []).map((t) => [t.team_id, t]));
-    txns.slice(0, 30).forEach((tx) => list.appendChild(renderTxnCard(tx, teamById)));
+    const showing = Math.min(txns.length, 50);
+    txns.slice(0, showing).forEach((tx) => list.appendChild(renderTxnCard(tx, teamById)));
+    if (txns.length > showing) {
+      const more = el("li", { className: "muted-cell", text: `Showing ${showing} of ${txns.length} total` });
+      list.appendChild(more);
+    }
   }
 
   // ---------- Player detail modal ----------
