@@ -35,6 +35,7 @@
     <nav class="tabs" role="tablist" aria-label="Sections">
       <button class="tab" role="tab" id="tab-waivers"      aria-controls="section-waivers"      aria-selected="true">Waivers</button>
       <button class="tab" role="tab" id="tab-teams"        aria-controls="section-teams"        aria-selected="false">Team Needs</button>
+      <button class="tab" role="tab" id="tab-trades"       aria-controls="section-trades"       aria-selected="false">Trades</button>
       <button class="tab" role="tab" id="tab-news"         aria-controls="section-news"         aria-selected="false">News</button>
       <button class="tab" role="tab" id="tab-transactions" aria-controls="section-transactions" aria-selected="false">Transactions</button>
     </nav>
@@ -72,6 +73,17 @@
           Note: the comparison is on total weekly production, not per-player average. A team with three high-scoring Guards may still show its top need as G if other teams have four or five Guards contributing comparable totals. The Waiver Targets tab boosts picks at the team's top-need bucket and penalizes picks at saturated positions (≥ 5 active Gs or ≥ 7 active F/Cs).
         </p>
       </footer>
+    </section>
+
+    <!-- ========== Trades ========== -->
+    <section class="surface tab-panel" id="section-trades" role="tabpanel" aria-labelledby="tab-trades" hidden>
+      <header class="surface-head">
+        <h2 id="h-trades">Trade Scenarios</h2>
+        <p class="surface-sub">For each team: if they trade their best active player, what fair return packages exist from every other team? Ranked by value balance + positional fit for the trading team's top need.</p>
+      </header>
+      <div class="trades-grid" id="trades-grid">
+        <p class="loading">Loading trade scenarios…</p>
+      </div>
     </section>
 
     <!-- ========== News ========== -->

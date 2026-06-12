@@ -1118,6 +1118,71 @@
     }
   });
 
+  // ---------- Trades ----------
+  function renderTrades(scenarios) {
+    const grid = $("#trades-grid");
+    if (!grid) return;
+    if (!scenarios || !scenarios.length) {
+      grid.innerHTML = '<p class="empty">No trade scenarios available. Run the pipeline to generate them.</p>';
+      return;
+    }
+
+    function fairBadge(ratio) {
+      if (ratio >= 0.93 && ratio <= 1.07) return { cls: "trade-fair-badge--even", label: "Even" };
+      if (ratio >= 0.85 && ratio <= 1.15) return { cls: "trade-fair-badge--slight", label: ratio > 1 ? "Slight +give" : "Slight +get" };
+      return { cls: "trade-fair-badge--lean", label: ratio > 1 ? "Overpay" : "Underpay" };
+    }
+
+    const html = scenarios.map(sc => {
+      const bp = sc.best_player;
+      const needLabel = sc.top_need_bucket === "G" ? "Guards" : "Frontcourt";
+
+      const offersHtml = !sc.offers || !sc.offers.length
+        ? '<p class="trade-no-offers">No team has a fair package within ±25% value.</p>'
+        : sc.offers.map((offer, i) => {
+            const pkg = offer.pkg_received;
+            const badge = fairBadge(offer.value_ratio);
+
+            const pkgHtml = pkg.players.map(p =>
+              `<span class="trade-pkg-player">` +
+              `<button class="player-name-btn" data-player-id="${p.player_id}">${p.name}</button>` +
+              `<span class="trade-pkg-ppg">${fmtPoints(p.projected_per_game)}/g</span>` +
+              `</span>`
+            ).join('<span class="trade-pkg-plus">+</span>');
+
+            const rankClass = i < 3 ? ` trade-offer--rank${i + 1}` : "";
+            return `<li class="trade-offer${rankClass}">` +
+              `<div class="trade-offer-rank">${i + 1}</div>` +
+              `<div class="trade-offer-body">` +
+              `<div class="trade-offer-from">From <strong>${offer.from_team_abbrev}</strong></div>` +
+              `<div class="trade-offer-pkg">${pkgHtml}</div>` +
+              `<div class="trade-offer-meta">` +
+              `<span class="trade-pkg-total">${fmtPoints(pkg.total_ppg)}/g total</span>` +
+              `<span class="trade-fair-badge ${badge.cls}">${badge.label}</span>` +
+              `<span class="trade-fit-score">Fit ${Math.round(offer.need_fit_score * 100)}%</span>` +
+              `</div></div></li>`;
+          }).join("");
+
+      return `<div class="trade-scenario">` +
+        `<div class="trade-scenario-head">` +
+        `<span class="trade-scenario-team">${sc.team_abbrev}</span>` +
+        `<span class="trade-scenario-title">Give up ` +
+        `<button class="player-name-btn" data-player-id="${bp.player_id}">${bp.name}</button>` +
+        `<span class="trade-best-ppg">${fmtPoints(bp.projected_per_game)}/g</span>` +
+        `</span>` +
+        `<span class="trade-scenario-sub">Top need: ${needLabel}</span>` +
+        `</div>` +
+        `<ol class="trade-offer-list">${offersHtml}</ol>` +
+        `</div>`;
+    }).join("");
+
+    grid.innerHTML = html;
+
+    grid.querySelectorAll(".player-name-btn[data-player-id]").forEach(btn => {
+      btn.addEventListener("click", () => openPlayerModal(Number(btn.dataset.playerId)));
+    });
+  }
+
   // ---------- Render error states ----------
   function renderEmptyAll(reason) {
     renderMeta({});
@@ -1149,6 +1214,7 @@
       renderMeta(state.meta || {});
       renderWaivers(state.waiver_targets_overall);
       renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);
+      renderTrades(state.trade_scenarios);
       renderNews(state.news_recent, state.teams);
       renderTxns(state.transactions_recent, state.teams);
     } catch (err) {
