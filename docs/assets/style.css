@@ -157,6 +157,7 @@ main {
   padding: 16px 16px 64px;
   display: grid;
   gap: 16px;
+  align-content: start;
 }
 
 /* Tab strip — primary navigation between Waivers / Team Needs / News /
