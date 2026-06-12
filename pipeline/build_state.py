@@ -165,6 +165,7 @@ def build_state(
     ai_summaries: dict[str, str] | None = None,
     ext_projections_by_source: dict[str, dict[str, float]] | None = None,
     player_game_log: dict[int, list[dict[str, Any]]] | None = None,
+    extra_transactions: list[dict[str, Any]] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
@@ -259,6 +260,29 @@ def build_state(
     # global feed and per-team grouping.
     transactions_raw = analyze.normalize_transactions(league_raw)
 
+    # Merge in extra transactions (e.g. full season history from transactions.jsonl).
+    # extra_transactions dicts have occurred_at as ISO string or datetime.
+    if extra_transactions:
+        seen_ids = {t["transaction_id"] for t in transactions_raw}
+        for tx in extra_transactions:
+            tid = tx.get("transaction_id")
+            if not tid or tid in seen_ids:
+                continue
+            # Normalize occurred_at to datetime if it came as a string
+            occ = tx.get("occurred_at")
+            if isinstance(occ, str):
+                try:
+                    occ = datetime.fromisoformat(occ.replace("Z", "+00:00"))
+                except ValueError:
+                    occ = None
+            transactions_raw.append({**tx, "occurred_at": occ})
+            seen_ids.add(tid)
+        transactions_raw.sort(
+            key=lambda r: r["occurred_at"] or datetime.min.replace(tzinfo=timezone.utc),
+            reverse=True,
+        )
+        log.info("build_state: merged %d extra transactions (total=%d)", len(extra_transactions), len(transactions_raw))
+
     current_matchup_period = int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0)
 
     # Generate the per-team narrative bullets up front, using the
@@ -351,7 +375,7 @@ def build_state(
     overall_targets = [_to_waiver_target(d, ai_summaries) for d in ranked_fas_dicts[:30]]
 
     transactions_view: list[schema.Transaction] = []
-    for tx in transactions_raw[:50]:
+    for tx in transactions_raw:
         items = [
             schema.TransactionItem(
                 player_id=int(it["player_id"]),
