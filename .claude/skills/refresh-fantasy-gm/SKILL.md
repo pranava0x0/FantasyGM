@@ -274,6 +274,14 @@ python3 -c "import json; o=json.load(open('docs/data/state.json'))['waiver_targe
 It should print `30/30`. If a player is missing one, you skipped their key in
 `data/ai_summaries.json` — add it and re-run `rebuild_state.py`.
 
+Also confirm trade scenarios were rebuilt:
+
+```bash
+python3 -c "import json; s=json.load(open('docs/data/state.json')); print(f'{len(s[\"trade_scenarios\"])} trade scenarios built')"
+```
+
+Should print `8 trade scenarios built` (one per team). If it prints 0, check that `pipeline/trades.py` ran without error — `build_state.py` calls `build_trade_scenarios()` which requires active roster entries with projections.
+
 ### 6. Tests + secret scan
 
 ```bash

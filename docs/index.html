@@ -78,9 +78,11 @@
     <!-- ========== Trades ========== -->
     <section class="surface tab-panel" id="section-trades" role="tabpanel" aria-labelledby="tab-trades" hidden>
       <header class="surface-head">
-        <h2 id="h-trades">Trade Scenarios</h2>
-        <p class="surface-sub">For each team: if they trade their best active player, what fair return packages exist from every other team? Ranked by value balance + positional fit for the trading team's top need.</p>
+        <h2 id="h-trades">Trade Evaluator</h2>
+        <p class="surface-sub">Calculator: pick players from two teams to model the projected lineup and rest-of-season impact for both sides. Auto-generated scenarios below rank fair packages for each team's best player.</p>
       </header>
+      <div id="trade-calc-mount"></div>
+      <div class="trade-section-sep" aria-hidden="true"><span>Auto-generated scenarios</span></div>
       <div class="trades-grid" id="trades-grid">
         <p class="loading">Loading trade scenarios…</p>
       </div>
