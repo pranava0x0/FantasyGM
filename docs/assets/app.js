@@ -111,6 +111,96 @@
            d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
   }
 
+  // ---- Shared trade result helpers ----
+  function fmtDelta(n) { return `${n >= 0 ? "+" : ""}${n.toFixed(1)}`; }
+  function tradeDeltaClass(n) {
+    return n > 0.05 ? "trade-result-delta--pos" : n < -0.05 ? "trade-result-delta--neg" : "trade-result-delta--zero";
+  }
+  function tradeVerdictLabel(dPpg) {
+    if (dPpg > 0.5)  return { cls: "trade-result-verdict--win",  text: "Wins trade" };
+    if (dPpg < -0.5) return { cls: "trade-result-verdict--lose", text: "Loses trade" };
+    return { cls: "trade-result-verdict--even", text: "Even" };
+  }
+  function tradeSideHtml(side) {
+    const { team, before, after, dWeek, dNext, dPpg, given, received } = side;
+    const verdict   = tradeVerdictLabel(dPpg);
+    const sideClass = verdict.cls.replace("trade-result-verdict--", "trade-result-side--");
+
+    const movementHtml = [
+      ...given.map(e =>
+        `<div class="trade-result-player-row">
+          <span class="trade-result-tag trade-result-tag--out">OUT</span>
+          <button class="player-name-btn" data-player-id="${e.player.player_id}">${e.player.name}</button>
+          <span class="trade-result-ppg">${fmtPoints(e.projected_per_game || 0)}/g</span>
+        </div>`),
+      ...received.map(e =>
+        `<div class="trade-result-player-row">
+          <span class="trade-result-tag trade-result-tag--in">IN</span>
+          <button class="player-name-btn" data-player-id="${e.player.player_id}">${e.player.name}</button>
+          <span class="trade-result-ppg">${fmtPoints(e.projected_per_game || 0)}/g</span>
+        </div>`),
+    ].join("");
+
+    const receivedIds = new Set(received.map(e => e.player.player_id));
+    const lineupHtml  = after.activeSlots.map(({ entry: e, sim_slot }) => {
+      const isNew = receivedIds.has(e.player.player_id);
+      return `<div class="trade-result-lineup-row${isNew ? " trade-result-lineup-row--new" : ""}">
+        <span class="trade-result-slot">${sim_slot}</span>
+        <button class="player-name-btn" data-player-id="${e.player.player_id}">${e.player.name}</button>
+        <span class="trade-result-ppg">${fmtPoints(e.projected_per_game || 0)}/g</span>
+        ${isNew ? '<span class="trade-result-tag trade-result-tag--in">NEW</span>' : ""}
+      </div>`;
+    }).join("");
+
+    const newBench  = after.bench.filter(e => receivedIds.has(e.player.player_id));
+    const benchHtml = newBench.length
+      ? `<div class="trade-result-bench-sep">Bench (new)</div>` +
+        newBench.map(e =>
+          `<div class="trade-result-lineup-row trade-result-lineup-row--new">
+            <span class="trade-result-slot">BE</span>
+            <button class="player-name-btn" data-player-id="${e.player.player_id}">${e.player.name}</button>
+            <span class="trade-result-ppg">${fmtPoints(e.projected_per_game || 0)}/g</span>
+            <span class="trade-result-tag trade-result-tag--in">NEW</span>
+          </div>`).join("")
+      : "";
+
+    return `<div class="trade-result-side ${sideClass}">
+      <div class="trade-result-team-row">
+        <span class="trade-result-team">${team.abbrev}</span>
+        <span class="trade-result-verdict ${verdict.cls}">${verdict.text}</span>
+      </div>
+      <div class="trade-result-movement">${movementHtml}</div>
+      <div class="trade-result-stats">
+        <div class="trade-result-stat-row">
+          <span class="trade-result-stat-label">This week</span>
+          <span class="trade-result-stat-before">${fmtPoints(before.thisWeek)}</span>
+          <span class="trade-result-stat-sep">→</span>
+          <span class="trade-result-stat-after">${fmtPoints(after.thisWeek)}</span>
+          <span class="trade-result-delta ${tradeDeltaClass(dWeek)}">${fmtDelta(dWeek)}</span>
+        </div>
+        ${(before.nextWeek > 0.5 || after.nextWeek > 0.5) ? `<div class="trade-result-stat-row">
+          <span class="trade-result-stat-label">Next week</span>
+          <span class="trade-result-stat-before">${fmtPoints(before.nextWeek)}</span>
+          <span class="trade-result-stat-sep">→</span>
+          <span class="trade-result-stat-after">${fmtPoints(after.nextWeek)}</span>
+          <span class="trade-result-delta ${tradeDeltaClass(dNext)}">${fmtDelta(dNext)}</span>
+        </div>` : ""}
+        <div class="trade-result-stat-row">
+          <span class="trade-result-stat-label">Proj/game</span>
+          <span class="trade-result-stat-before">${fmtPoints(before.ppg)}/g</span>
+          <span class="trade-result-stat-sep">→</span>
+          <span class="trade-result-stat-after">${fmtPoints(after.ppg)}/g</span>
+          <span class="trade-result-delta ${tradeDeltaClass(dPpg)}">${fmtDelta(dPpg)}/g</span>
+        </div>
+      </div>
+      <div class="trade-result-ros-note">Proj/game × remaining schedule = rest-of-season impact</div>
+      <div class="trade-result-lineup">
+        <div class="trade-result-lineup-h">Simulated starting lineup</div>
+        ${lineupHtml}${benchHtml}
+      </div>
+    </div>`;
+  }
+
   function el(tag, opts = {}) {
     const e = document.createElement(tag);
     if (opts.className) e.className = opts.className;
@@ -1119,12 +1209,35 @@
   });
 
   // ---------- Trades ----------
-  function renderTrades(scenarios) {
+  function renderTrades(state) {
     const grid = $("#trades-grid");
     if (!grid) return;
-    if (!scenarios || !scenarios.length) {
+    const scenarios = state.trade_scenarios || [];
+    if (!scenarios.length) {
       grid.innerHTML = '<p class="empty">No trade scenarios available. Run the pipeline to generate them.</p>';
       return;
+    }
+
+    // Build player stats lookup from waiver targets (free agents have rich data)
+    // and roster entries (rostered players — ppg only).
+    const playerStats = {};
+    for (const wt of (state.waiver_targets_overall || [])) {
+      playerStats[wt.player.player_id] = {
+        ppg: wt.projected_per_game || 0,
+        nextWeek: wt.projected_points_next_week || 0,
+        gamesNext: wt.games_next_week || 0,
+        seasonAvg: wt.season_avg_points || 0,
+      };
+    }
+    const teamById = {};
+    for (const team of (state.teams || [])) {
+      teamById[team.team_id] = team;
+      for (const entry of (team.roster || [])) {
+        const pid = entry.player.player_id;
+        if (!playerStats[pid]) {
+          playerStats[pid] = { ppg: entry.projected_per_game || 0, nextWeek: 0, gamesNext: 0, seasonAvg: 0 };
+        }
+      }
     }
 
     function fairBadge(ratio) {
@@ -1133,13 +1246,27 @@
       return { cls: "trade-fair-badge--lean", label: ratio > 1 ? "Overpay" : "Underpay" };
     }
 
-    const html = scenarios.map(sc => {
+    // Compact player-stat row for the offer detail panel.
+    function playerStatRow(player, tag) {
+      const st = playerStats[player.player_id] || {};
+      const nxt = st.gamesNext ? `${fmtPoints(st.nextWeek)} (${st.gamesNext}g)` : "—";
+      const sea = st.seasonAvg  ? `${fmtPoints(st.seasonAvg)}/g` : "—";
+      return `<div class="trade-offer-player-row">
+        <span class="trade-result-tag ${tag === "OUT" ? "trade-result-tag--out" : "trade-result-tag--in"}">${tag}</span>
+        <button class="player-name-btn" data-player-id="${player.player_id}">${player.name}</button>
+        <span class="trade-offer-stat"><span class="trade-offer-stat-label">/g</span> ${fmtPoints(player.projected_per_game)}</span>
+        <span class="trade-offer-stat"><span class="trade-offer-stat-label">nxt wk</span> ${nxt}</span>
+        <span class="trade-offer-stat"><span class="trade-offer-stat-label">seas</span> ${sea}</span>
+      </div>`;
+    }
+
+    const html = scenarios.map((sc, si) => {
       const bp = sc.best_player;
       const needLabel = sc.top_need_bucket === "G" ? "Guards" : "Frontcourt";
 
       const offersHtml = !sc.offers || !sc.offers.length
         ? '<p class="trade-no-offers">No team has a fair package within ±25% value.</p>'
-        : sc.offers.map((offer, i) => {
+        : sc.offers.map((offer, oi) => {
             const pkg = offer.pkg_received;
             const badge = fairBadge(offer.value_ratio);
 
@@ -1150,36 +1277,282 @@
               `</span>`
             ).join('<span class="trade-pkg-plus">+</span>');
 
-            const rankClass = i < 3 ? ` trade-offer--rank${i + 1}` : "";
-            return `<li class="trade-offer${rankClass}">` +
-              `<div class="trade-offer-rank">${i + 1}</div>` +
-              `<div class="trade-offer-body">` +
-              `<div class="trade-offer-from">From <strong>${offer.from_team_abbrev}</strong></div>` +
-              `<div class="trade-offer-pkg">${pkgHtml}</div>` +
-              `<div class="trade-offer-meta">` +
-              `<span class="trade-pkg-total">${fmtPoints(pkg.total_ppg)}/g total</span>` +
-              `<span class="trade-fair-badge ${badge.cls}">${badge.label}</span>` +
-              `<span class="trade-fit-score">Fit ${Math.round(offer.need_fit_score * 100)}%</span>` +
-              `</div></div></li>`;
+            const rankClass = oi < 3 ? ` trade-offer--rank${oi + 1}` : "";
+            return `<li class="trade-offer${rankClass}" data-si="${si}" data-oi="${oi}">
+              <div class="trade-offer-summary">
+                <div class="trade-offer-rank">${oi + 1}</div>
+                <div class="trade-offer-body">
+                  <div class="trade-offer-from">From <strong>${offer.from_team_abbrev}</strong></div>
+                  <div class="trade-offer-pkg">${pkgHtml}</div>
+                  <div class="trade-offer-meta">
+                    <span class="trade-pkg-total">${fmtPoints(pkg.total_ppg)}/g total</span>
+                    <span class="trade-fair-badge ${badge.cls}">${badge.label}</span>
+                    <span class="trade-fit-score">Fit ${Math.round(offer.need_fit_score * 100)}%</span>
+                  </div>
+                </div>
+                <span class="trade-offer-chevron" aria-hidden="true">▶</span>
+              </div>
+              <div class="trade-offer-detail" hidden></div>
+            </li>`;
           }).join("");
 
-      return `<div class="trade-scenario">` +
-        `<div class="trade-scenario-head">` +
-        `<span class="trade-scenario-team">${sc.team_abbrev}</span>` +
-        `<span class="trade-scenario-title">Give up ` +
-        `<button class="player-name-btn" data-player-id="${bp.player_id}">${bp.name}</button>` +
-        `<span class="trade-best-ppg">${fmtPoints(bp.projected_per_game)}/g</span>` +
-        `</span>` +
-        `<span class="trade-scenario-sub">Top need: ${needLabel}</span>` +
-        `</div>` +
-        `<ol class="trade-offer-list">${offersHtml}</ol>` +
-        `</div>`;
+      return `<div class="trade-scenario" data-si="${si}">
+        <div class="trade-scenario-head">
+          <div class="trade-scenario-head-content">
+            <span class="trade-scenario-team">${sc.team_abbrev}</span>
+            <span class="trade-scenario-title">Give up
+              <button class="player-name-btn" data-player-id="${bp.player_id}">${bp.name}</button>
+              <span class="trade-best-ppg">${fmtPoints(bp.projected_per_game)}/g</span>
+            </span>
+            <span class="trade-scenario-sub">Top need: ${needLabel}</span>
+          </div>
+          <button class="trade-scenario-toggle" type="button"
+            aria-expanded="false" aria-controls="trade-sc-body-${si}"
+            aria-label="Expand ${sc.team_abbrev} trade offers">▶</button>
+        </div>
+        <div class="trade-scenario-body" id="trade-sc-body-${si}">
+          <ol class="trade-offer-list">${offersHtml}</ol>
+        </div>
+      </div>`;
     }).join("");
 
     grid.innerHTML = html;
 
-    grid.querySelectorAll(".player-name-btn[data-player-id]").forEach(btn => {
+    // Scenario collapse/expand via the toggle button.
+    grid.querySelectorAll(".trade-scenario-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const sc = btn.closest(".trade-scenario");
+        const open = sc.classList.toggle("trade-scenario--open");
+        btn.setAttribute("aria-expanded", String(open));
+        btn.textContent = open ? "▼" : "▶";
+      });
+    });
+
+    // Offer expand/collapse with lazy lineup simulation.
+    grid.querySelectorAll(".trade-offer").forEach(li => {
+      li.addEventListener("click", e => {
+        if (e.target.closest(".player-name-btn")) return;
+
+        const detail = li.querySelector(".trade-offer-detail");
+        const isOpen = li.classList.toggle("trade-offer--open");
+        const chevron = li.querySelector(".trade-offer-chevron");
+        if (chevron) chevron.textContent = isOpen ? "▼" : "▶";
+
+        if (isOpen && detail && !detail.dataset.rendered) {
+          detail.dataset.rendered = "1";
+          const si     = Number(li.dataset.si);
+          const oi     = Number(li.dataset.oi);
+          const sc     = scenarios[si];
+          const offer  = sc.offers[oi];
+          const teamRecv = teamById[sc.team_id];
+          const teamOffr = teamById[offer.from_team_id];
+
+          const bpRow   = playerStatRow(sc.best_player, "OUT");
+          const pkgRows = offer.pkg_received.players.map(p => playerStatRow(p, "IN")).join("");
+
+          let impactHtml = "";
+          if (teamRecv && teamOffr) {
+            const giveIds    = new Set([sc.best_player.player_id]);
+            const receiveIds = new Set(offer.pkg_received.players.map(p => p.player_id));
+            const result     = evaluateTrade(teamRecv, teamOffr, giveIds, receiveIds);
+            impactHtml = `<div class="trade-offer-detail-impact">
+              <div class="trade-result-grid">${tradeSideHtml(result.teamA)}${tradeSideHtml(result.teamB)}</div>
+            </div>`;
+          }
+
+          detail.innerHTML = `<div class="trade-offer-detail-players">${bpRow}${pkgRows}</div>${impactHtml}`;
+          detail.querySelectorAll(".player-name-btn[data-player-id]").forEach(btn => {
+            btn.addEventListener("click", ev => { ev.stopPropagation(); openPlayerModal(Number(btn.dataset.playerId)); });
+          });
+        }
+
+        if (detail) detail.hidden = !isOpen;
+      });
+    });
+
+    // Player-name buttons in offer summaries open the modal without toggling.
+    grid.querySelectorAll(".trade-offer-summary .player-name-btn[data-player-id]").forEach(btn => {
+      btn.addEventListener("click", e => { e.stopPropagation(); openPlayerModal(Number(btn.dataset.playerId)); });
+    });
+    // Best-player button in the scenario head.
+    grid.querySelectorAll(".trade-scenario-head .player-name-btn[data-player-id]").forEach(btn => {
+      btn.addEventListener("click", e => { e.stopPropagation(); openPlayerModal(Number(btn.dataset.playerId)); });
+    });
+  }
+
+  // ---------- Trade Calculator ----------
+
+  // Optimal lineup simulation after a trade.
+  // WNBA fantasy slots: 2 G, 3 F, 1 F/C, 3 UTIL — 9 active total.
+  function simulateLineup(rosterEntries) {
+    const byPpg = [...rosterEntries].sort((a, b) => (b.projected_per_game || 0) - (a.projected_per_game || 0));
+    const assigned = new Set();
+    const activeSlots = [];
+
+    function fill(slotLabel, n, test) {
+      let filled = 0;
+      for (const e of byPpg) {
+        if (filled >= n) break;
+        const pid = e.player.player_id;
+        if (!assigned.has(pid) && (e.projected_per_game || 0) > 0 && test(e)) {
+          assigned.add(pid);
+          activeSlots.push({ entry: e, sim_slot: slotLabel });
+          filled++;
+        }
+      }
+    }
+
+    fill("G",    2, e => e.player.bucket === "G");
+    fill("F",    3, e => e.player.bucket === "F");
+    fill("F/C",  1, e => e.player.bucket === "F" || e.player.bucket === "C");
+    fill("UTIL", 3, () => true);
+
+    const bench = byPpg.filter(e => !assigned.has(e.player.player_id));
+    const thisWeek = activeSlots.reduce((s, { entry: e }) => s + (e.projected_points_this_week || 0), 0);
+    const nextWeek = activeSlots.reduce((s, { entry: e }) => s + (e.projected_points_next_week || 0), 0);
+    const ppg      = activeSlots.reduce((s, { entry: e }) => s + (e.projected_per_game || 0), 0);
+
+    return { activeSlots, bench, thisWeek, nextWeek, ppg };
+  }
+
+  function evaluateTrade(teamA, teamB, giveIds, receiveIds) {
+    function postTradeRoster(myTeam, give, receive, otherTeam) {
+      const kept     = myTeam.roster.filter(e => !give.has(e.player.player_id));
+      const incoming = otherTeam.roster.filter(e => receive.has(e.player.player_id));
+      return [...kept, ...incoming];
+    }
+
+    const beforeA = simulateLineup(teamA.roster);
+    const afterA  = simulateLineup(postTradeRoster(teamA, giveIds, receiveIds, teamB));
+    const beforeB = simulateLineup(teamB.roster);
+    const afterB  = simulateLineup(postTradeRoster(teamB, receiveIds, giveIds, teamA));
+
+    return {
+      teamA: {
+        team: teamA, before: beforeA, after: afterA,
+        dWeek: afterA.thisWeek - beforeA.thisWeek,
+        dNext: afterA.nextWeek - beforeA.nextWeek,
+        dPpg:  afterA.ppg - beforeA.ppg,
+        given:    teamA.roster.filter(e => giveIds.has(e.player.player_id)),
+        received: teamB.roster.filter(e => receiveIds.has(e.player.player_id)),
+      },
+      teamB: {
+        team: teamB, before: beforeB, after: afterB,
+        dWeek: afterB.thisWeek - beforeB.thisWeek,
+        dNext: afterB.nextWeek - beforeB.nextWeek,
+        dPpg:  afterB.ppg - beforeB.ppg,
+        given:    teamB.roster.filter(e => receiveIds.has(e.player.player_id)),
+        received: teamA.roster.filter(e => giveIds.has(e.player.player_id)),
+      },
+    };
+  }
+
+  function renderTradeResult(result) {
+    const container = $("#trade-calc-result");
+    if (!container) return;
+    container.removeAttribute("hidden");
+
+    container.innerHTML = `<div class="trade-result-grid">${tradeSideHtml(result.teamA)}${tradeSideHtml(result.teamB)}</div>`;
+
+    container.querySelectorAll(".player-name-btn[data-player-id]").forEach(btn => {
       btn.addEventListener("click", () => openPlayerModal(Number(btn.dataset.playerId)));
+    });
+  }
+
+  function initTradeCalc(state) {
+    const mount = $("#trade-calc-mount");
+    if (!mount) return;
+    const teams = (state.teams || []).slice().sort((a, b) => a.abbrev.localeCompare(b.abbrev));
+    if (!teams.length) return;
+
+    const teamById = {};
+    teams.forEach(t => { teamById[t.team_id] = t; });
+
+    const teamOptions = teams.map(t =>
+      `<option value="${t.team_id}">${t.abbrev} — ${t.name}</option>`
+    ).join("");
+
+    mount.innerHTML = `
+      <div class="trade-calc">
+        <h3 class="trade-calc-h">Trade Calculator</h3>
+        <p class="trade-calc-sub">Select players from two rosters. The calculator re-optimizes each team's lineup after the trade and projects the impact on this week, next week, and the per-game rate.</p>
+        <div class="trade-calc-form">
+          <div class="trade-calc-side">
+            <label class="trade-calc-team-label" for="calc-team-a">Your team</label>
+            <select class="trade-calc-team-sel" id="calc-team-a">
+              <option value="">— pick a team —</option>${teamOptions}
+            </select>
+            <div class="trade-calc-players" id="calc-players-a"><p class="trade-calc-hint">Pick a team to see their roster.</p></div>
+          </div>
+          <div class="trade-calc-divider-col" aria-hidden="true">⇄</div>
+          <div class="trade-calc-side">
+            <label class="trade-calc-team-label" for="calc-team-b">Trade with</label>
+            <select class="trade-calc-team-sel" id="calc-team-b">
+              <option value="">— pick a team —</option>${teamOptions}
+            </select>
+            <div class="trade-calc-players" id="calc-players-b"><p class="trade-calc-hint">Pick a team to see their roster.</p></div>
+          </div>
+        </div>
+        <div class="trade-calc-actions">
+          <button class="trade-calc-btn" id="calc-evaluate" disabled>Evaluate trade</button>
+        </div>
+        <div class="trade-calc-result" id="trade-calc-result" hidden></div>
+      </div>
+    `;
+
+    function rosterListHtml(team, side) {
+      const sorted = [...team.roster].sort((a, b) => (b.projected_per_game || 0) - (a.projected_per_game || 0));
+      return sorted.map(e => {
+        const ppg = e.projected_per_game != null ? `${fmtPoints(e.projected_per_game)}/g` : "—";
+        const beTag = e.is_active ? "" : `<span class="trade-calc-bench">BE</span>`;
+        const bkt = `<span class="waiver-bucket bucket-${e.player.bucket}">${e.player.bucket}</span>`;
+        return `<label class="trade-calc-player">
+          <input type="checkbox" class="trade-calc-check" data-side="${side}" value="${e.player.player_id}"/>
+          <span class="trade-calc-player-name">${e.player.name}</span>
+          <span class="trade-calc-player-meta">${bkt}${ppg}${beTag}</span>
+        </label>`;
+      }).join("");
+    }
+
+    function updateEvalBtn() {
+      const teamAId = parseInt($("#calc-team-a").value || "0");
+      const teamBId = parseInt($("#calc-team-b").value || "0");
+      const hasA = $$('#calc-players-a .trade-calc-check:checked').length > 0;
+      const hasB = $$('#calc-players-b .trade-calc-check:checked').length > 0;
+      $("#calc-evaluate").disabled = !teamAId || !teamBId || teamAId === teamBId || (!hasA && !hasB);
+    }
+
+    function onTeamChange(side) {
+      const selEl = $(`#calc-team-${side}`);
+      const listEl = $(`#calc-players-${side}`);
+      const teamId = parseInt(selEl.value || "0");
+      if (!teamId || !teamById[teamId]) {
+        listEl.innerHTML = '<p class="trade-calc-hint">Pick a team to see their roster.</p>';
+      } else {
+        listEl.innerHTML = rosterListHtml(teamById[teamId], side);
+        listEl.querySelectorAll('input[type="checkbox"]').forEach(cb =>
+          cb.addEventListener("change", updateEvalBtn)
+        );
+      }
+      // Hide result when teams change
+      const res = $("#trade-calc-result");
+      if (res) res.setAttribute("hidden", "");
+      updateEvalBtn();
+    }
+
+    $("#calc-team-a").addEventListener("change", () => onTeamChange("a"));
+    $("#calc-team-b").addEventListener("change", () => onTeamChange("b"));
+
+    $("#calc-evaluate").addEventListener("click", () => {
+      const teamAId = parseInt($("#calc-team-a").value || "0");
+      const teamBId = parseInt($("#calc-team-b").value || "0");
+      const giveIds    = new Set([...$$('#calc-players-a .trade-calc-check:checked')].map(cb => parseInt(cb.value)));
+      const receiveIds = new Set([...$$('#calc-players-b .trade-calc-check:checked')].map(cb => parseInt(cb.value)));
+      const result = evaluateTrade(teamById[teamAId], teamById[teamBId], giveIds, receiveIds);
+      renderTradeResult(result);
+      // Scroll result into view
+      const res = $("#trade-calc-result");
+      if (res) res.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
   }
 
@@ -1214,7 +1587,8 @@
       renderMeta(state.meta || {});
       renderWaivers(state.waiver_targets_overall);
       renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);
-      renderTrades(state.trade_scenarios);
+      renderTrades(state);
+      initTradeCalc(state);
       renderNews(state.news_recent, state.teams);
       renderTxns(state.transactions_recent, state.teams);
     } catch (err) {
