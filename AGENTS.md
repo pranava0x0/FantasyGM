@@ -70,6 +70,26 @@ Default verification matrix (project-specific `AGENTS.md` should override with c
 
 ---
 
+## Multi-agent patterns
+
+Rules learned from running research and data-collection workflows across this folder. Apply whenever spawning more than one agent for a task.
+
+**1 — Size to the shelf.** Ask each agent for exactly the N records the destination surface holds, already ranked. If the waiver list shows 30 players, the prompt says "return the top 30 ranked by X" — not "as many as you can find." Over-collecting forces a post-hoc ranking pass you have to trust blindly; under-collecting silently leaves slots empty. Rank inside the agent, where signals are visible.
+
+**2 — Partition entities.** Each entity belongs to exactly one agent. Siblings get an explicit "covered elsewhere — skip" list in their prompt. Without it, two agents race to cover the same record, one wins, and the other's output is quietly discarded — or both land and you deduplicate downstream with no way to tell which version is authoritative.
+
+**3 — Validator bar + early bail.** Put required fields in the system prompt and instruct: "if you complete 2 searches without finding {required_field}, set `skip: true` and return immediately." This kills the tail of agents that loop on genuinely missing data. Without it, a patient agent will exhaust its tool budget retrying a search that will never succeed.
+
+**4 — Results to disk.** Agents `Write` JSON to `data/research/<run-id>/<entity>.json`; they return only counts + path + surprises as text. Returning full payloads as agent text inflates context, triggers output filters, and makes retry loops expensive. Disk is cheap; context is not.
+
+**5 — Max 2 sources per claim at collection time.** Cap it in the prompt, not in post-processing. A third source almost never changes the conclusion and triples the token bill. If two sources disagree, surface the conflict as a surprise in the return value — that's worth human attention; a third corroborating source is not.
+
+**6 — DOM-count before screenshot.** A ~100-token `preview_eval` that counts elements (e.g. `document.querySelectorAll('.trade-scenario').length`) catches what 1–2K-token screenshots miss when the viewport is blank-because-scrolled, and what passing test suites miss when the old JS is still cached. Use it as the first verification step for any DOM-rendering change. Screenshots are for visual confirmation after the count is right, not for discovering whether the elements exist.
+
+**7 — Seed-then-spawn.** Run cheap inline searches first to fix the JSON contract (field names, id shapes, ranking keys). Only then spawn agents with the exact schema baked into their prompt. This session had zero parse/retry loops because the contract was proven before agents were launched. Spawning first and debugging the schema across 8 parallel agents costs 8× the tokens.
+
+---
+
 ## Common tasks (FantasyGM-specific)
 
 ### Refresh the league data

@@ -1453,6 +1453,7 @@ body.modal-open { overflow: hidden; }
   background: var(--surface);
   max-height: 280px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 4px 0;
 }
 
@@ -1468,13 +1469,22 @@ body.modal-open { overflow: hidden; }
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 10px;
-  cursor: pointer;
+  min-height: 44px;
+  padding: 0 10px;
   border-radius: 4px;
   transition: background 80ms ease;
 }
 
 .trade-calc-player:hover { background: var(--surface-2); }
+
+.trade-calc-check-area {
+  display: flex;
+  align-items: center;
+  min-width: 32px;
+  min-height: 44px;
+  cursor: pointer;
+  flex: none;
+}
 
 .trade-calc-check { flex: none; cursor: pointer; }
 
@@ -1525,11 +1535,12 @@ body.modal-open { overflow: hidden; }
   color: #fff;
   border: 0;
   border-radius: 8px;
-  padding: 9px 28px;
+  padding: 12px 28px;
   font: inherit;
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
+  touch-action: manipulation;
   transition: opacity 120ms ease;
 }
 
@@ -1752,12 +1763,21 @@ body.modal-open { overflow: hidden; }
   overflow: hidden;
 }
 
+/* ----- Scenario header (always visible) ----- */
 .trade-scenario-head {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 8px;
+  cursor: default;
+}
+
+.trade-scenario-head-content {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
 }
 
@@ -1789,22 +1809,53 @@ body.modal-open { overflow: hidden; }
   margin-top: 2px;
 }
 
+/* Toggle button (▶ / ▼) */
+.trade-scenario-toggle {
+  flex: none;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.trade-scenario-toggle:hover { background: var(--surface); }
+.trade-scenario-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ----- Collapsible body ----- */
+.trade-scenario-body {
+  display: none;
+  border-top: 1px solid var(--border);
+}
+.trade-scenario--open .trade-scenario-body {
+  display: block;
+}
+
+/* ----- Offer list ----- */
 .trade-offer-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+/* Each offer is a column: summary row + collapsible detail panel */
 .trade-offer {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.trade-offer:last-child { border-bottom: none; }
+.trade-offer:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
+
+.trade-offer-summary {
   display: flex;
   gap: 10px;
   padding: 9px 14px;
-  border-bottom: 1px solid var(--border);
   align-items: flex-start;
-}
-
-.trade-offer:last-child {
-  border-bottom: none;
 }
 
 .trade-offer-rank {
@@ -1832,6 +1883,61 @@ body.modal-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+/* Chevron on the right of each offer row */
+.trade-offer-chevron {
+  flex: none;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  align-self: center;
+  padding-left: 4px;
+}
+
+/* ----- Offer detail panel (expanded) ----- */
+.trade-offer-detail {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* Per-player projection rows inside the detail */
+.trade-offer-detail-players {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.trade-offer-player-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  flex-wrap: wrap;
+}
+
+.trade-offer-stat {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.trade-offer-stat-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+/* Impact grid inside the detail (reuses .trade-result-* styles) */
+.trade-offer-detail-impact .trade-result-grid {
+  margin-top: 0;
+}
+
+.trade-offer-detail-impact .trade-result-side {
+  padding: 10px 12px;
 }
 
 .trade-offer-from {
