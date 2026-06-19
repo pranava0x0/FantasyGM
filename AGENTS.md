@@ -22,12 +22,32 @@ Before touching code, read:
 
 Documented in detail in [CLAUDE.md](CLAUDE.md). Concretely inside any repo:
 
-- **Explore.** Use `grep`, `find`, or an Explore agent to find relevant code. Most projects here are small enough that a single read of the main module + the data schema covers ~80% of the surface.
+- **Explore.** Default to `grep`/`rg` + a targeted `Read` of the matched lines. These repos are small (≈6–7k lines of source total — `git ls-files '*.py' '*.js' '*.html' | xargs wc -l`), so a literal search is cheaper *and* more complete than a subagent, and a single read of the main module + the data schema covers ~80% of the surface. Reserve `Explore`/`general-purpose` subagents for genuine fan-out — many whole files to read, an unknown-shape question across a large tree, or independent investigations you want run in parallel. See **§ Search economics** below before spawning one.
 - **Plan.** For anything beyond a one-line fix, present 2–3 approaches with pros/cons before writing code. Changes that touch the data schema, the editorial rules, or the visual identity ALWAYS need a plan surface — they reshape the product.
 - **Code.** Edit existing files first; only create new files when the task genuinely requires it. No new helpers for one-shot operations.
 - **Verify.** Run the test suite. Use the feature in a browser (or invoke the CLI) before declaring done.
 
 **Per-item cadence in multi-item sessions.** Surface design questions up front, then do **tests + docs + commit per item**, not batched at the end. Catches issues early and produces a clean bisect history.
+
+---
+
+## Search economics (don't over-spend to find code)
+
+A subagent is not a free "go find it" button. It carries fixed overhead — its own system prompt, the full tool schemas, and a verbose final report — and it hands back a *summary*, not the code. For a "where is X?" question on a codebase this size, that's the wrong trade on both axes: it costs thousands of tokens and a semantic reader can **silently miss a call site** a literal grep would catch.
+
+**Default ladder — climb only as far as the question forces you:**
+
+1. **`grep`/`rg` for the mechanism, not the concept.** Changing a sort? `grep -rn '\.sort(\|sorted(' pipeline/ docs/` lists *every* call site in one cheap call. Renaming a field? Grep the field name. The literal pattern is exhaustive where a concept-search ("find the sorting logic") is not.
+2. **Targeted `Read`** of the 2–3 matched files/lines that matter. Read the slice, not the whole file, when you already know the line.
+3. **Subagent** only when the work is genuinely large or parallel: many whole files to digest, an unknown-shape question across a big unfamiliar tree, or independent investigations worth fanning out. If you can name the grep pattern, you don't need step 3.
+
+**Rules:**
+
+- **Don't double-search.** If you grep, don't also spawn an agent for the same question; if you spawn an agent, trust its result instead of re-reading the same files. Pick the cheaper tool and commit to it.
+- **Verify a subagent's "complete" list against a grep** before acting on it for mechanical changes (every call site, every reference, every usage). Agents report what they noticed; grep reports what exists.
+- **Scope the read.** Prefer `Read` with `offset`/`limit` over whole-file reads once a grep has given you line numbers.
+
+> **Scar tissue (2026-06-19).** Spawned an `Explore` agent to "find the sorting logic" for the waiver list. It cost a large multi-file report and recommended two edit sites — but **missed `build_state.py:254`**, a downstream re-sort that actually controlled the displayed order. `grep -rn '\.sort(\|sorted(' pipeline/ docs/` would have surfaced all 22 sort sites (including that one) in a single cheap call. Lesson: for "where is X?" on a greppable codebase, grep first; reserve subagents for real fan-out.
 
 ---
 
