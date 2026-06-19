@@ -398,7 +398,8 @@ def rank_free_agents(
             "injury_signal": inj_signal,
             "recent_games": recent,
         })
-    out.sort(key=lambda r: r["base_score"], reverse=True)
+    # Sort by next week's projection first, then this week's score as tiebreaker.
+    out.sort(key=lambda r: (r["projected_points_next_week"], r["base_score"]), reverse=True)
     return out[:limit]
 
 
