@@ -1085,6 +1085,13 @@ body.modal-open { overflow: hidden; }
   text-transform: uppercase;
   color: var(--text-muted);
 }
+.recent-games-hint {
+  margin-left: 6px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: 400;
+  opacity: 0.7;
+}
 
 .player-modal-section-source {
   font-size: 10px;
@@ -1101,14 +1108,21 @@ body.modal-open { overflow: hidden; }
 .player-modal-recent-games {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
+  align-items: flex-start;
+}
+.recent-game {
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
+  gap: 2px;
+  cursor: default;
 }
 .recent-game-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
+  min-width: 34px;
   padding: 3px 7px;
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -1117,18 +1131,24 @@ body.modal-open { overflow: hidden; }
   font-size: 12px;
   font-weight: 600;
   color: var(--text);
-  cursor: default;
 }
 .recent-game-pill--high {
   background: var(--accent-soft);
   border-color: var(--accent);
   color: var(--accent);
 }
+.recent-game-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--text-muted);
+}
 .recent-game-avg {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-  margin-left: 4px;
+  /* Align with the number row, not the date caption below it. */
+  margin: 5px 0 0 4px;
 }
 
 /* Unified social feed */

@@ -98,6 +98,29 @@
     if (Number.isNaN(d.getTime())) return "—";
     return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   }
+  // WNBA scoring periods are daily, so a game's date is the capture date
+  // (= the current/latest period) shifted by the period delta. Anchored on
+  // META.scoring_period_id / META.captured_at; returns a UTC Date or null.
+  function periodToDate(period) {
+    const anchorPeriod = Number(META.scoring_period_id);
+    if (!anchorPeriod || !META.captured_at) return null;
+    const base = new Date(META.captured_at);
+    if (Number.isNaN(base.getTime())) return null;
+    const d = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth(), base.getUTCDate()));
+    d.setUTCDate(d.getUTCDate() + (period - anchorPeriod));
+    return d;
+  }
+  // Compact "M/D" for the pill caption; falls back to "" when undatable.
+  function shortGameDate(period) {
+    const d = periodToDate(period);
+    return d ? `${d.getUTCMonth() + 1}/${d.getUTCDate()}` : "";
+  }
+  // "Mon Jun 16" for the hover tooltip; falls back to the period number.
+  function longGameDate(period) {
+    const d = periodToDate(period);
+    if (!d) return `Period ${period}`;
+    return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
+  }
   function fmtTime(iso) {
     if (!iso) return "—";
     const d = new Date(iso);
@@ -779,11 +802,14 @@
   let PLAYER_INDEX = new Map();
   // Team ID -> team object, used by the modal for "rostered by".
   let TEAM_BY_ID = new Map();
+  // League meta (scoring period + capture date), used to date recent games.
+  let META = {};
   // Element to restore focus to when the modal closes.
   let lastFocusedTrigger = null;
 
   function buildPlayerIndex(state) {
     const idx = new Map();
+    META = state.meta || {};
     const teamsById = new Map((state.teams || []).map((t) => [t.team_id, t]));
     TEAM_BY_ID = teamsById;
 
@@ -1041,9 +1067,15 @@
         recentGames.forEach((g) => {
           const isHigh = g.fantasy_points === max && max >= 20;
           container.appendChild(el("span", {
-            className: `recent-game-pill${isHigh ? " recent-game-pill--high" : ""}`,
-            text: String(Math.round(g.fantasy_points)),
-            attrs: { title: `Period ${g.scoring_period_id}: ${g.fantasy_points} fpts` },
+            className: "recent-game",
+            attrs: { title: `${longGameDate(g.scoring_period_id)} · ${g.fantasy_points} fpts` },
+            children: [
+              el("span", {
+                className: `recent-game-pill${isHigh ? " recent-game-pill--high" : ""}`,
+                text: String(Math.round(g.fantasy_points)),
+              }),
+              el("span", { className: "recent-game-date", text: shortGameDate(g.scoring_period_id) }),
+            ],
           }));
         });
         const avg = recentGames.reduce((s, g) => s + g.fantasy_points, 0) / recentGames.length;
