@@ -251,7 +251,10 @@ def build_state(
     # overall list (absence-detector boosts were applied before the first sort
     # in rank_free_agents; social boosts land after, so we need a second pass).
     if social_returners:
-        ranked_fas_dicts.sort(key=lambda r: r["base_score"], reverse=True)
+        ranked_fas_dicts.sort(
+            key=lambda r: (r["projected_points_next_week"], r["base_score"]),
+            reverse=True,
+        )
 
     # AI "why pick them up" summaries, keyed by str(player_id). Authored
     # out-of-band (data/ai_summaries.json) and attached to waiver targets.
