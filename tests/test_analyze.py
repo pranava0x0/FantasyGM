@@ -120,6 +120,24 @@ class TestRankFreeAgents:
         assert forward_top["games_this_week"] == 1
         assert ranked[0]["base_score"] > forward_top["base_score"]
 
+    def test_next_week_games_drive_ranking(self, free_agents_raw: dict) -> None:
+        # Sort key is (projected_points_next_week, base_score): next week first,
+        # this week as tiebreaker. Give NY the same single game this week as
+        # everyone but two games NEXT week — Test Guard High (NY) must lead even
+        # though Test Forward Top has the higher single-game base projection.
+        games = {9: 1, 11: 1, 14: 1, 17: 1, 20: 1}
+        games_nw = {9: 2, 11: 1, 14: 1, 17: 1, 20: 1}
+        ranked = analyze.rank_free_agents(
+            free_agents_raw, scoring_period_id=10, limit=10,
+            games_by_pro_team=games, games_by_pro_team_next_week=games_nw,
+        )
+        assert ranked[0]["name"] == "Test Guard High"
+        assert ranked[0]["games_next_week"] == 2
+        # Next-week projection is the primary key, so the leader's must be the max.
+        assert ranked[0]["projected_points_next_week"] == max(
+            r["projected_points_next_week"] for r in ranked
+        )
+
     def test_zero_games_zeroes_the_week_proj(self, free_agents_raw: dict) -> None:
         # A bye-week player must not be elevated by upstream needs boosts.
         games = {9: 0, 11: 0, 14: 0, 17: 0, 20: 0}
