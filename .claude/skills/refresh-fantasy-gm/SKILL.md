@@ -50,17 +50,20 @@ test -d .venv || python3 -m venv .venv && .venv/bin/pip install -q -r requiremen
 
 Idempotent — if `.venv` already exists, this is fast.
 
-### 3. Validate cookies (dry-run)
+### 3. Validate cookies (dry-run) — or fall back to social-only mode
 
 ```bash
 .venv/bin/python -m pipeline.refresh --dry-run
+EXIT=$?
 ```
 
-- Exit 0 → cookies fine, proceed.
-- Exit 2 → `.env` is missing or `ESPN_SWID` / `ESPN_S2` are unset. Stop and instruct the user to copy `.env.example` → `.env` and follow the comments. **Never print or repeat the values back to the user.**
-- Exit 3 → cookies expired. Tell the user to re-copy `SWID` and `espn_s2` from Chrome DevTools (Application → Cookies → fantasy.espn.com) and update `.env`.
+- Exit 0 → cookies fine, proceed with full refresh (steps 4–9).
+- Exit 2 → `.env` missing or credentials unset. **In cloud sessions, fall back to social-only mode.** Ask the user if they want to proceed with social media + public stats updates only (skip steps 4–5, do steps 6–9 with `--social-only` flag). If they prefer to set up cookies for a full refresh, instruct them to copy `.env.example` → `.env` and add `ESPN_SWID` and `ESPN_S2` from Chrome DevTools (Application → Cookies → fantasy.espn.com). **Never print or repeat the cookie values back.**
+- Exit 3 → cookies expired. Tell the user to re-copy `SWID` and `espn_s2` from Chrome DevTools and update `.env`; then re-run.
 
-### 4. Scrape Twitter/X WNBA mentions (Chrome)
+### 4. Scrape Twitter/X WNBA mentions (Chrome) — *full refresh only*
+
+*(Skip this step if running `--social-only` mode.)*
 
 Use `mcp__Claude_in_Chrome__navigate` and `mcp__Claude_in_Chrome__javascript_tool` to do a
 **per-player search** for every top-15 waiver target plus a final general WNBA sweep.
@@ -202,13 +205,29 @@ Write an empty array `[]` if no tweets were collected, so the pipeline knows the
 
 Log: "Twitter/X: wrote N tweets (M players × ~K tweets each) to data/raw/<date>/twitter_raw.json"
 
-### 5. Full refresh
+### 5. Full refresh (ESPN + social) — *if cookies are available*
 
 ```bash
 .venv/bin/python -m pipeline.refresh
 ```
 
 This writes `data/raw/<date>/*.json`, appends to `data/history/transactions.jsonl`, and rewrites `docs/data/state.json`. Print the CLI's summary verbatim — it includes scoring period, transactions appended, and the snapshot path.
+
+**For social-only mode (no ESPN credentials):**
+
+```bash
+.venv/bin/python -m pipeline.refresh --social-only
+```
+
+This:
+- Loads the latest committed `data/raw/<date>/` ESPN snapshot as baseline (no fresh ESPN API call).
+- Fetches fresh news, Reddit, Twitter/X, Bluesky, and Instagram posts.
+- Pulls updated WNBA team stats from ESPN's public standings API (no auth needed).
+- Re-ranks free agents based on updated public stats.
+- Rebuilds `docs/data/state.json` with refreshed social signals.
+
+Skips: authenticated ESPN API calls, game logs (uses existing), AI summaries regeneration (uses cached).
+Log output will note "(social-only mode)" and list what was refreshed.
 
 The refresh reads `data/ai_summaries.json` (the AI "why pick them up" GM takes) **before** building state, so on this first pass the summaries attached are still the *previous* run's. Step 5b regenerates them for today's top 30 and re-attaches.
 
