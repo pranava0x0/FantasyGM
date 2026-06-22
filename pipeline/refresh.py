@@ -66,6 +66,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--data", default="data", help="Data root (default: data)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Validate cookies + fetch a single view, do not write anything.")
+    parser.add_argument("--social-only", action="store_true",
+                        help="Refresh social media + public stats without ESPN API auth (uses latest snapshot as baseline).")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args(argv)
 
@@ -76,35 +78,52 @@ def main(argv: list[str] | None = None) -> int:
     _load_dotenv(root)
 
     import os
+    creds = None
     try:
         creds = ESPNCredentials.from_env()
     except ESPNAuthError as e:
-        log.error(str(e))
-        return 2
+        if not args.social_only:
+            log.error(str(e))
+            return 2
+        log.warning("ESPN credentials missing; running in social-only mode: %s", e)
 
     league_id = int(os.environ.get("ESPN_LEAGUE_ID", "2043154241"))
     season = int(os.environ.get("ESPN_SEASON", "2026"))
-    log.info("league_id=%d season=%d dry_run=%s", league_id, season, args.dry_run)
+    log.info("league_id=%d season=%d dry_run=%s social_only=%s", league_id, season, args.dry_run, args.social_only)
 
     data_root = root / args.data
     docs_root = root / args.docs
 
-    with ESPNClient(league_id, season, creds) as client:
-        if args.dry_run:
-            try:
-                league = client.fetch_league(views=["mSettings"])
-            except (ESPNAuthError, ESPNAPIError) as e:
-                log.error("dry-run failed: %s", e)
-                return 3
-            name = (league.get("settings") or {}).get("name")
-            log.info("dry-run OK: league=%r scoringPeriod=%s", name, league.get("scoringPeriodId"))
-            return 0
+    # Full ESPN refresh if credentials available
+    if creds:
+        with ESPNClient(league_id, season, creds) as client:
+            if args.dry_run:
+                try:
+                    league = client.fetch_league(views=["mSettings"])
+                except (ESPNAuthError, ESPNAPIError) as e:
+                    log.error("dry-run failed: %s", e)
+                    return 3
+                name = (league.get("settings") or {}).get("name")
+                log.info("dry-run OK: league=%r scoringPeriod=%s", name, league.get("scoringPeriodId"))
+                return 0
 
-        try:
-            snap = ingest.snapshot(client, data_root)
-        except (ESPNAuthError, ESPNAPIError) as e:
-            log.error("ingest failed: %s", e)
+            try:
+                snap = ingest.snapshot(client, data_root)
+            except (ESPNAuthError, ESPNAPIError) as e:
+                log.error("ingest failed: %s", e)
+                return 3
+    # Social-only mode: load latest snapshot from disk
+    else:
+        if args.dry_run:
+            log.error("--dry-run requires ESPN credentials")
+            return 2
+        log.info("social-only mode: loading latest snapshot from disk")
+        from pipeline import ingest as ingest_mod
+        snap = ingest_mod.load_latest_snapshot(data_root)
+        if snap is None:
+            log.error("no previous snapshot found in data/raw/ — cannot proceed in social-only mode")
             return 3
+        log.info("loaded snapshot from %s", snap.out_dir)
 
     # News + Reddit are fetched outside the ESPN client (public, no auth).
     log.info("refresh: fetching WNBA news feed")
