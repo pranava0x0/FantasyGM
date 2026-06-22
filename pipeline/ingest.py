@@ -55,6 +55,51 @@ class Snapshot:
     pro_schedules: dict[str, Any]
 
 
+def load_latest_snapshot(root: Path) -> Snapshot | None:
+    """Load the most recent snapshot from disk without making API calls.
+
+    Used in social-only mode to refresh social signals without ESPN auth.
+    Returns None if no snapshots exist.
+    """
+    raw_dir = root / "raw"
+    if not raw_dir.exists():
+        return None
+
+    # Find latest date-based directory
+    dates = sorted([d for d in raw_dir.iterdir() if d.is_dir() and re.match(r"^\d{4}-\d{2}-\d{2}$", d.name)])
+    if not dates:
+        return None
+
+    latest_dir = dates[-1]
+    log.info("load_latest_snapshot: found %s", latest_dir)
+
+    # Load the raw JSON files
+    try:
+        league = json.loads((latest_dir / "league.json").read_text())
+        free_agents = json.loads((latest_dir / "free_agents.json").read_text())
+        pro_schedules_path = latest_dir / "pro_schedules.json"
+        pro_schedules = json.loads(pro_schedules_path.read_text()) if pro_schedules_path.exists() else {}
+
+        # Parse captured_at from meta
+        meta_path = latest_dir / "_meta.json"
+        captured_at = datetime.now(timezone.utc).replace(microsecond=0)
+        if meta_path.exists():
+            meta = json.loads(meta_path.read_text())
+            if meta.get("captured_at"):
+                captured_at = datetime.fromisoformat(meta["captured_at"])
+
+        return Snapshot(
+            captured_at=captured_at,
+            out_dir=latest_dir,
+            league=league,
+            free_agents=free_agents,
+            pro_schedules=pro_schedules,
+        )
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        log.error("load_latest_snapshot: failed to load from %s: %s", latest_dir, e)
+        return None
+
+
 def snapshot(client: ESPNClient, root: Path, *, today: datetime | None = None) -> Snapshot:
     """Run a full fetch and write raw JSON files under `root/raw/<date>/`.
 
