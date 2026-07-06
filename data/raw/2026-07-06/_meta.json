@@ -1,0 +1,17 @@
+{
+  "captured_at": "2026-07-06T00:42:24+00:00",
+  "league_id": 2043154241,
+  "scoring_period_id": 59,
+  "season": 2026,
+  "views": [
+    "mSettings",
+    "mTeam",
+    "mRoster",
+    "mStandings",
+    "mTransactions2",
+    "mSchedule",
+    "mNav",
+    "mStatus",
+    "proTeamSchedules_wl(season)"
+  ]
+}
