@@ -333,6 +333,8 @@ Before running any `git add` / `git commit` / `git push`, ask the user explicitl
 If yes, run:
 
 ```bash
+git config user.name "pranava0x0"
+git config user.email "2497510+pranava0x0@users.noreply.github.com"
 git add data/ docs/data/state.json
 git commit -m "$(cat <<'EOF'
 data: refresh league snapshot
@@ -346,6 +348,7 @@ EOF
 )"
 git push origin main
 ```
+The `git config` lines are local (repo-scoped), not `--global` — a cloud-run session has no pre-existing identity and would otherwise commit as its own default bot account.
 
 `git add data/` picks up both today's raw snapshot *and* the re-authored
 `data/ai_summaries.json` — both should be staged alongside `state.json` so the
