@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from pipeline import build_state as bs
+from pipeline import news as news_mod
 from pipeline.schema import LeagueState
 
 
@@ -92,6 +93,93 @@ def test_append_transactions_history_dedupes(
     # First call writes everything; second writes nothing.
     assert n1 == len(state.transactions_recent)
     assert n2 == 0
+
+
+def _news_raw(*articles: dict) -> dict:
+    return {"articles": list(articles)}
+
+
+def _article(article_id: int, *, headline: str = "h", athletes: list[int] | None = None,
+             teams: list[int] | None = None, published: str = "2026-05-18T02:00:00Z") -> dict:
+    categories = [{"type": "athlete", "athleteId": a} for a in (athletes or [])]
+    categories += [{"type": "team", "teamId": t} for t in (teams or [])]
+    return {
+        "id": article_id,
+        "headline": headline,
+        "description": "stub",
+        "published": published,
+        "premium": False,
+        "categories": categories,
+        "links": {"web": {"href": f"https://espn.com/wnba/{article_id}"}},
+    }
+
+
+def test_append_news_history_dedupes(tmp_path: Path) -> None:
+    raw = _news_raw(_article(1, athletes=[4433403]), _article(2, athletes=[4433403]))
+    n1 = bs.append_news_history(raw, tmp_path)
+    n2 = bs.append_news_history(raw, tmp_path)
+    assert n1 == 2
+    assert n2 == 0
+
+
+def test_load_news_history_round_trips(tmp_path: Path) -> None:
+    raw = _news_raw(_article(1, headline="Clark drops 30", athletes=[4433403]))
+    bs.append_news_history(raw, tmp_path)
+    loaded = bs.load_news_history(tmp_path)
+    assert len(loaded) == 1
+    assert loaded[0]["id"] == 1
+    assert loaded[0]["headline"] == "Clark drops 30"
+
+
+def test_append_social_history_dedupes_by_source_and_url(tmp_path: Path) -> None:
+    posts = {
+        "reddit": [{"title": "t1", "url": "https://reddit.com/1", "published_at": None, "subreddit": "wnba"}],
+        "twitter": [{"title": "t2", "url": "https://x.com/1", "published_at": None, "screen_name": "a"}],
+    }
+    n1 = bs.append_social_history(posts, tmp_path)
+    n2 = bs.append_social_history(posts, tmp_path)
+    assert n1 == 2
+    assert n2 == 0
+    loaded = bs.load_social_history(tmp_path)
+    assert len(loaded["reddit"]) == 1
+    assert len(loaded["twitter"]) == 1
+    assert loaded["bluesky"] == []
+
+
+def test_build_state_merges_extra_news_into_player_history(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    # Caitlin Clark (4433403) has no news in today's feed, but an older
+    # archived article — already normalized, as load_news_history() returns —
+    # should still surface in her history.
+    archived = news_mod.normalize_articles(_news_raw(
+        _article(99, headline="old Clark story", athletes=[4433403], published="2026-04-01T00:00:00Z"),
+    ))
+    state = bs.build_state(
+        league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
+        extra_news=archived,
+    )
+    assert 4433403 in state.news_by_player
+    assert any(n.id == 99 for n in state.news_by_player[4433403])
+
+
+def test_build_state_caps_team_only_news_lower_than_direct(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    # 15 team-tagged articles (proTeamId 5 = Clark's team) that never name
+    # her directly — these are "ambient" and should cap at
+    # MAX_TEAM_ONLY_NEWS_PER_PLAYER, not the full per-player cap.
+    archived = news_mod.normalize_articles(_news_raw(*[
+        _article(100 + i, headline=f"team recap {i}", teams=[5], athletes=[9999990 + i])
+        for i in range(15)
+    ]))
+    state = bs.build_state(
+        league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
+        extra_news=archived,
+    )
+    clark_news = state.news_by_player.get(4433403, [])
+    assert len(clark_news) == bs.MAX_TEAM_ONLY_NEWS_PER_PLAYER
+    assert all(4433403 not in n.athlete_ids for n in clark_news)
 
 
 def test_matchup_history_populated(
