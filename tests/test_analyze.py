@@ -56,6 +56,30 @@ class TestBuildTeamViews:
         needs = analyze.compute_team_needs(views)
         assert set(needs.keys()) == {1, 7, 10}
 
+    def test_next_week_fields_default_to_zero_without_games_map(self, league_raw: dict) -> None:
+        # Omitting games_by_pro_team_next_week (legacy/tests) must not crash —
+        # the UI's start/sit recommendation just sees zero next-week production.
+        views = analyze.build_team_views(league_raw)
+        roster = views[0]["roster"]
+        assert roster, "fixture team should have a roster"
+        for p in roster:
+            assert p["games_next_week"] == 0
+            assert p["projected_points_next_week"] == 0.0
+
+    def test_next_week_fields_use_next_week_games_map(self, league_raw: dict) -> None:
+        # Alyssa Thomas (proTeamId 11) is on team 1 in the fixture. 3 games
+        # next week at her per-game rate should flow through to the roster
+        # entry the same way games_this_week does today.
+        views = analyze.build_team_views(
+            league_raw,
+            games_by_pro_team={11: 2},
+            games_by_pro_team_next_week={11: 3},
+        )
+        team1_roster = next(v["roster"] for v in views if v["team_id"] == 1)
+        thomas = next(p for p in team1_roster if p["name"] == "Alyssa Thomas")
+        assert thomas["games_next_week"] == 3
+        assert thomas["projected_points_next_week"] == round(thomas["projected_per_game"] * 3, 2)
+
 
 class TestComputeTeamNeeds:
     def test_keys_per_team(self, league_raw: dict) -> None:

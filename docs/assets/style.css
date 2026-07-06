@@ -443,6 +443,19 @@ button.waiver-name-text {
 .games-pill.games-low   { color: var(--gap-weak); border-color: var(--gap-weak); }
 .games-pill.games-bye   { color: #fff; background: var(--text-muted); }
 
+/* Next-week start/sit recommendation pill in the Full roster table. */
+.nextwk-pill {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+.nextwk-pill.nextwk-start { color: var(--gap-strong); border-color: var(--gap-strong); }
+.nextwk-pill.nextwk-sit   { color: var(--text-muted); border-color: var(--border); }
+
 /* ---------- Team grid ---------- */
 
 .team-grid {
@@ -564,6 +577,13 @@ button.waiver-name-text {
 }
 .team-detail h4:first-child,
 .team-summary h4 { margin-top: 0; }
+
+.roster-table-caption {
+  margin: -4px 0 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
 
 /* Auto-generated summary block — accent left-border per DESIGN.md §11. */
 .team-summary {

@@ -132,6 +132,7 @@ def build_team_views(
     league_raw: dict[str, Any],
     *,
     games_by_pro_team: dict[int, int] | None = None,
+    games_by_pro_team_next_week: dict[int, int] | None = None,
     ext_projections_by_player: dict[int, dict[str, float]] | None = None,
     player_game_log: dict[int, list[dict[str, Any]]] | None = None,
 ) -> list[dict[str, Any]]:
@@ -143,6 +144,11 @@ def build_team_views(
     is None (tests / legacy) we fall back to the single-period
     projection so the math stays defined.
 
+    `games_by_pro_team_next_week` drives each roster entry's
+    `games_next_week` / `projected_points_next_week` — used by the UI to
+    recommend next week's start/sit lineup. Optional; defaults to 0 when
+    omitted so tests/legacy callers don't need to change.
+
     `ext_projections_by_player` maps player_id → {source_name: per_game_fpts}
     from CBS Sports / Yahoo Sports. When present these are averaged in with
     the ESPN projection and 2-week rolling average.
@@ -153,6 +159,7 @@ def build_team_views(
     """
     scoring_period = int(league_raw.get("scoringPeriodId") or 0)
     games_map = games_by_pro_team or {}
+    games_map_nw = games_by_pro_team_next_week or {}
     ext_map = ext_projections_by_player or {}
     log_map = player_game_log or {}
     teams = []
@@ -177,17 +184,22 @@ def build_team_views(
             )
             season_avg = _player_season_avg_actual(player)
             per_game = proj_per_game or season_avg or proj_period or 0.0
-            games_this_week = int(games_map.get(int(player.get("proTeamId") or 0), 0)) if games_map else 0
+            pro_team_id = int(player.get("proTeamId") or 0)
+            games_this_week = int(games_map.get(pro_team_id, 0)) if games_map else 0
             if games_map:
                 week_proj = round(float(per_game) * games_this_week, 2)
             else:
                 week_proj = round(proj_period, 2)
+            games_next_week = int(games_map_nw.get(pro_team_id, 0)) if games_map_nw else 0
+            week_proj_nw = round(float(per_game) * games_next_week, 2) if games_map_nw else 0.0
             actual = (e.get("playerPoolEntry") or {}).get("appliedStatTotal")
 
             flat["projected_points"] = proj_period
             flat["projected_per_game"] = round(float(per_game), 2)
             flat["games_this_week"] = games_this_week
             flat["projected_points_this_week"] = week_proj
+            flat["games_next_week"] = games_next_week
+            flat["projected_points_next_week"] = week_proj_nw
             flat["actual_points"] = float(actual) if actual is not None else None
             flat["is_active"] = flat["lineup_slot_id"] in ACTIVE_SLOT_IDS
             roster.append(flat)

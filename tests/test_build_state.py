@@ -46,6 +46,21 @@ def test_teams_have_needs_payload(
         assert t.needs.top_need_bucket in ("G", "FC")
 
 
+def test_roster_entries_carry_next_week_projection(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    # Regression: the Team Needs "start/sit next week" recommendation in
+    # app.js needs games_next_week / projected_points_next_week on every
+    # RosterEntry, not just on free-agent waiver targets.
+    state = bs.build_state(
+        league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
+    )
+    for t in state.teams:
+        for r in t.roster:
+            assert r.games_next_week >= 0
+            assert r.projected_points_next_week is None or r.projected_points_next_week >= 0
+
+
 def test_waiver_targets_present(
     league_raw: dict, free_agents_raw: dict, captured_at: datetime
 ) -> None:

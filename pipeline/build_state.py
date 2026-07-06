@@ -234,6 +234,7 @@ def build_state(
     teams_view = analyze.build_team_views(
         league_raw,
         games_by_pro_team=games_by_pro_team,
+        games_by_pro_team_next_week=games_by_pro_team_next_week,
         ext_projections_by_player=ext_projections_by_player,
         player_game_log=player_game_log,
     )
@@ -353,6 +354,8 @@ def build_state(
                 projected_per_game=float(p.get("projected_per_game") or 0.0) or None,
                 projected_points_this_week=float(p.get("projected_points_this_week") or 0.0) or None,
                 games_this_week=int(p.get("games_this_week") or 0),
+                projected_points_next_week=float(p.get("projected_points_next_week") or 0.0) or None,
+                games_next_week=int(p.get("games_next_week") or 0),
                 actual_points=p["actual_points"],
             )
             for p in t["roster"]

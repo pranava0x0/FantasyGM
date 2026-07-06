@@ -471,8 +471,57 @@
     });
   }
 
+  // Fills the 9 active WNBA fantasy slots (2 G, 3 F, 1 F/C, 3 UTIL) from a
+  // roster, ranking candidates within each slot by `scoreFn` descending.
+  // Shared by the trade calculator's post-trade simulation and the Team
+  // Needs tab's next-week start/sit recommendation.
+  function optimalLineupSlots(rosterEntries, scoreFn) {
+    const ranked = [...rosterEntries].sort((a, b) => scoreFn(b) - scoreFn(a));
+    const assigned = new Set();
+    const activeSlots = [];
+
+    function fill(slotLabel, n, test) {
+      let filled = 0;
+      for (const e of ranked) {
+        if (filled >= n) break;
+        const pid = e.player.player_id;
+        if (!assigned.has(pid) && (e.projected_per_game || 0) > 0 && test(e)) {
+          assigned.add(pid);
+          activeSlots.push({ entry: e, sim_slot: slotLabel });
+          filled++;
+        }
+      }
+    }
+
+    fill("G",    2, e => e.player.bucket === "G");
+    fill("F",    3, e => e.player.bucket === "F");
+    fill("F/C",  1, e => e.player.bucket === "F" || e.player.bucket === "C");
+    fill("UTIL", 3, () => true);
+
+    const bench = ranked.filter(e => !assigned.has(e.player.player_id));
+    return { activeSlots, bench };
+  }
+
+  // Mirrors pipeline/analyze.py's _is_out() — statuses ESPN uses for
+  // confirmed-unavailable players. DTD/QUESTIONABLE stay eligible (may play).
+  const CONFIRMED_OUT_STATUSES = new Set(["OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"]);
+
+  // Recommended starters for *next* week — ranks by projected_points_next_week
+  // (per-game rate × next week's game count) rather than the flat per-game
+  // rate, so a player with a bye/light slate next week correctly drops
+  // behind a lower-ppg player who has more games. Confirmed-unavailable
+  // players are excluded from the candidate pool entirely so they never
+  // show as a recommended starter. Returns a Set of player_ids that should
+  // start.
+  function recommendedStartersNextWeek(rosterEntries) {
+    const eligible = rosterEntries.filter((e) => !CONFIRMED_OUT_STATUSES.has(e.player.injury_status));
+    const { activeSlots } = optimalLineupSlots(eligible, (e) => e.projected_points_next_week || 0);
+    return new Set(activeSlots.map(({ entry }) => entry.player.player_id));
+  }
+
   function rosterTable(team) {
     const wrap = el("div", { className: "roster-table" });
+    const nextWeekStarters = recommendedStartersNextWeek(team.roster || []);
     // Group by slot label so active slots come first (G, F, F/C, UTIL),
     // then bench. Preserves the slot order in pipeline/positions.py.
     const groups = new Map();
@@ -488,13 +537,13 @@
       const rows = groups.get(slot) || [];
       // Sort active slots by projected points desc; bench too.
       rows.sort((a, b) => (b.projected_points_this_week || 0) - (a.projected_points_this_week || 0));
-      rows.forEach((r) => wrap.appendChild(rosterRow(slot, r)));
+      rows.forEach((r) => wrap.appendChild(rosterRow(slot, r, nextWeekStarters.has(r.player.player_id))));
     });
     if (!seenOrder.length) wrap.appendChild(el("p", { className: "muted-cell", text: "Roster empty." }));
     return wrap;
   }
 
-  function rosterRow(slotLabel, r) {
+  function rosterRow(slotLabel, r, startsNextWeek) {
     const p = r.player;
     const slotChip = el("span", { className: `pill slot-chip ${r.is_active ? "slot-active" : "slot-bench"}`, text: slotLabel });
     const nameSpan = el("span", { className: "roster-name" });
@@ -507,6 +556,10 @@
     if (p.injury_status && p.injury_status !== "ACTIVE") {
       sub.appendChild(el("span", { className: "own-neg", text: p.injury_status }));
     }
+    sub.appendChild(el("span", {
+      className: `pill nextwk-pill ${startsNextWeek ? "nextwk-start" : "nextwk-sit"}`,
+      text: startsNextWeek ? "Start · next wk" : "Sit · next wk",
+    }));
     const proj = r.projected_points_this_week != null
       ? r.projected_points_this_week
       : r.projected_points;
@@ -639,6 +692,10 @@
     // Left column: full roster + recent transactions
     const detailSecondary = el("div", { className: "team-detail-secondary" });
     detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Full roster" }));
+    detailSecondary.appendChild(el("p", {
+      className: "roster-table-caption",
+      text: "“Start/Sit · next wk” recommends the 9-slot lineup (2 G, 3 F, 1 F/C, 3 UTIL) that maximizes next week's projected points.",
+    }));
     detailSecondary.appendChild(rosterTable(team));
     detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
     detailSecondary.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
@@ -1442,29 +1499,7 @@
   // Optimal lineup simulation after a trade.
   // WNBA fantasy slots: 2 G, 3 F, 1 F/C, 3 UTIL — 9 active total.
   function simulateLineup(rosterEntries) {
-    const byPpg = [...rosterEntries].sort((a, b) => (b.projected_per_game || 0) - (a.projected_per_game || 0));
-    const assigned = new Set();
-    const activeSlots = [];
-
-    function fill(slotLabel, n, test) {
-      let filled = 0;
-      for (const e of byPpg) {
-        if (filled >= n) break;
-        const pid = e.player.player_id;
-        if (!assigned.has(pid) && (e.projected_per_game || 0) > 0 && test(e)) {
-          assigned.add(pid);
-          activeSlots.push({ entry: e, sim_slot: slotLabel });
-          filled++;
-        }
-      }
-    }
-
-    fill("G",    2, e => e.player.bucket === "G");
-    fill("F",    3, e => e.player.bucket === "F");
-    fill("F/C",  1, e => e.player.bucket === "F" || e.player.bucket === "C");
-    fill("UTIL", 3, () => true);
-
-    const bench = byPpg.filter(e => !assigned.has(e.player.player_id));
+    const { activeSlots, bench } = optimalLineupSlots(rosterEntries, (e) => e.projected_per_game || 0);
     const thisWeek = activeSlots.reduce((s, { entry: e }) => s + (e.projected_points_this_week || 0), 0);
     const nextWeek = activeSlots.reduce((s, { entry: e }) => s + (e.projected_points_next_week || 0), 0);
     const ppg      = activeSlots.reduce((s, { entry: e }) => s + (e.projected_per_game || 0), 0);
