@@ -510,7 +510,7 @@ button.waiver-name-text {
 .bucket-rows { display: grid; gap: 4px; }
 .bucket-row {
   display: grid;
-  grid-template-columns: 16px 1fr auto;
+  grid-template-columns: minmax(16px, min-content) 1fr auto;
   gap: 8px;
   align-items: center;
   font-size: 12px;
@@ -1277,6 +1277,22 @@ body.modal-open { overflow: hidden; }
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
+
+/* "Show N more" — appended to news/txn/social lists once history exceeds
+   the initial page size. Plain-text button, no card chrome, so it reads as
+   a continuation of the list rather than a new section. */
+.player-modal-show-more { padding: 2px 0; }
+.player-modal-show-more-btn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+}
+.player-modal-show-more-btn:hover { text-decoration: underline; }
 
 .player-modal-reddit-item {
   display: flex;
