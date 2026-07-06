@@ -285,6 +285,30 @@
     }
   }
 
+  // Render `items` into `ulEl` (via `renderItemFn`), showing only the first
+  // `pageSize` up front with a "Show N more" li that reveals the rest on
+  // click — lets the player modal hold a full season of history without
+  // dumping it all on open.
+  function renderExpandableList(ulEl, items, pageSize, renderItemFn) {
+    ulEl.replaceChildren();
+    items.slice(0, pageSize).forEach((item) => ulEl.appendChild(renderItemFn(item)));
+    if (items.length > pageSize) {
+      const remaining = items.length - pageSize;
+      const moreLi = el("li", { className: "player-modal-show-more" });
+      const btn = el("button", {
+        className: "player-modal-show-more-btn",
+        text: `Show ${remaining} more`,
+        attrs: { type: "button" },
+      });
+      btn.addEventListener("click", () => {
+        items.slice(pageSize).forEach((item) => ulEl.insertBefore(renderItemFn(item), moreLi));
+        moreLi.remove();
+      });
+      moreLi.appendChild(btn);
+      ulEl.appendChild(moreLi);
+    }
+  }
+
   // ---------- Render: waiver targets ----------
   function bucketPill(bucket) {
     return el("span", {
@@ -870,44 +894,46 @@
       });
     });
 
-    // News tagged with this player's athleteId. Cap at 8.
+    // News tagged with this player's athleteId or team. Already capped
+    // server-side (build_state.MAX_HISTORY_PER_PLAYER); the modal paginates
+    // via "show more" rather than truncating here.
     Object.entries(state.news_by_player || {}).forEach(([pid, articles]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.news = (articles || []).slice(0, 8);
+      entry.news = articles || [];
     });
 
-    // Reddit r/wnba posts mentioning this player. Cap at 5.
+    // Reddit r/wnba posts mentioning this player. Capped server-side.
     Object.entries(state.reddit_posts_by_player || {}).forEach(([pid, posts]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.reddit = (posts || []).slice(0, 5);
+      entry.reddit = posts || [];
     });
 
-    // Twitter/X posts mentioning this player. Cap at 5.
+    // Twitter/X posts mentioning this player. Capped server-side.
     Object.entries(state.twitter_posts_by_player || {}).forEach(([pid, tweets]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.twitter = (tweets || []).slice(0, 5);
+      entry.twitter = tweets || [];
     });
 
-    // Bluesky posts mentioning this player. Cap at 5.
+    // Bluesky posts mentioning this player. Capped server-side.
     Object.entries(state.bluesky_posts_by_player || {}).forEach(([pid, posts]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.bluesky = (posts || []).slice(0, 5);
+      entry.bluesky = posts || [];
     });
 
-    // Instagram posts from/about this player. Cap at 5.
+    // Instagram posts from/about this player. Capped server-side.
     Object.entries(state.instagram_posts_by_player || {}).forEach(([pid, posts]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.instagram = (posts || []).slice(0, 5);
+      entry.instagram = posts || [];
     });
 
     // Social profile handles (for links in the modal footer).
@@ -1111,8 +1137,7 @@
 
       if (allPosts.length) {
         socialWrap.removeAttribute("hidden");
-        socialList.replaceChildren();
-        allPosts.slice(0, 12).forEach((post) => {
+        renderExpandableList(socialList, allPosts, 8, (post) => {
           const li = el("li", { className: "social-item" });
           li.appendChild(el("span", { className: `social-badge social-badge--${post.source}`, text: post.label }));
           li.appendChild(el("a", {
@@ -1121,7 +1146,7 @@
             attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
           }));
           if (post.ts) li.appendChild(el("span", { className: "social-time", text: fmtTime(post.ts) }));
-          socialList.appendChild(li);
+          return li;
         });
       } else {
         socialWrap.setAttribute("hidden", "");
@@ -1130,9 +1155,8 @@
 
     // News — compact: headline + time + direct/team tag only (no description).
     const newsList = $("#player-modal-news");
-    newsList.replaceChildren();
     if (entry.news && entry.news.length) {
-      entry.news.forEach((n) => {
+      renderExpandableList(newsList, entry.news, 5, (n) => {
         const isDirectMention = Array.isArray(n.athlete_ids) && n.athlete_ids.includes(p.player_id);
         const li = el("li", { className: "player-modal-news-item" });
         const row = el("div", { className: "player-modal-news-row" });
@@ -1146,17 +1170,17 @@
         if (!isDirectMention) meta.appendChild(el("span", { className: "player-modal-news-team-tag", text: "Team" }));
         row.appendChild(meta);
         li.appendChild(row);
-        newsList.appendChild(li);
+        return li;
       });
     } else {
+      newsList.replaceChildren();
       newsList.appendChild(el("li", { className: "empty", text: "No tagged headlines." }));
     }
 
     // Transactions (most recent first).
     const txnList = $("#player-modal-txns");
-    txnList.replaceChildren();
     if (entry.txns && entry.txns.length) {
-      entry.txns.slice(0, 10).forEach(({ tx, item }) => {
+      renderExpandableList(txnList, entry.txns, 10, ({ tx, item }) => {
         const teamBy = TEAM_BY_ID;
         const head = el("div", {
           className: "player-modal-txn-head",
@@ -1170,13 +1194,14 @@
         });
         const direction = formatTxnDirection(item, teamBy);
         const body = el("div", { className: "player-modal-txn-body", text: direction });
-        txnList.appendChild(el("li", {
+        return el("li", {
           className: "player-modal-txn-item",
           children: [head, body],
-        }));
+        });
       });
     } else {
-      txnList.appendChild(el("li", { className: "empty", text: "No transactions in the recent window." }));
+      txnList.replaceChildren();
+      txnList.appendChild(el("li", { className: "empty", text: "No transactions on record." }));
     }
 
     // Social profile links in footer.

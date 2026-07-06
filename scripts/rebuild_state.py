@@ -106,6 +106,17 @@ def main(argv: list[str] | None = None) -> int:
                 continue
         log.info("loaded %d transactions from history log", len(extra_transactions))
 
+    # Same treatment for news/social — full persistent archive, not just
+    # today's snapshot — so a player's history survives across replays.
+    history_root = ROOT / "data" / "history"
+    extra_news = build_state_mod.load_news_history(history_root)
+    extra_social = build_state_mod.load_social_history(history_root)
+    log.info(
+        "loaded history archive (news=%d reddit=%d twitter=%d bluesky=%d instagram=%d)",
+        len(extra_news), len(extra_social["reddit"]), len(extra_social["twitter"]),
+        len(extra_social["bluesky"]), len(extra_social["instagram"]),
+    )
+
     meta = json.loads((raw_dir / "_meta.json").read_text()) if (raw_dir / "_meta.json").exists() else {}
     captured_raw = meta.get("captured_at")
     captured_at = (
@@ -127,6 +138,11 @@ def main(argv: list[str] | None = None) -> int:
         ai_summaries=ai_summaries,
         summary_dates=summary_dates,
         extra_transactions=extra_transactions,
+        extra_news=extra_news,
+        extra_reddit=extra_social["reddit"],
+        extra_twitter=extra_social["twitter"],
+        extra_bluesky=extra_social["bluesky"],
+        extra_instagram=extra_social["instagram"],
     )
 
     out = build_state_mod.write_state(state, DOCS)
