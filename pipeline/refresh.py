@@ -230,6 +230,16 @@ def main(argv: list[str] | None = None) -> int:
     except (json.JSONDecodeError, OSError):
         pass
 
+    # Persistent news/social archives — merged in so a player's history
+    # survives after today's items scroll out of the live feed window.
+    extra_news = build_state_mod.load_news_history(history_root)
+    extra_social = build_state_mod.load_social_history(history_root)
+    log.info(
+        "refresh: loaded history archive (news=%d reddit=%d twitter=%d bluesky=%d instagram=%d)",
+        len(extra_news), len(extra_social["reddit"]), len(extra_social["twitter"]),
+        len(extra_social["bluesky"]), len(extra_social["instagram"]),
+    )
+
     state = build_state_mod.build_state(
         league_raw=snap.league,
         free_agents_raw=snap.free_agents,
@@ -244,10 +254,20 @@ def main(argv: list[str] | None = None) -> int:
         summary_dates=summary_dates,
         ext_projections_by_source=ext_projections_by_source or None,
         player_game_log=player_game_log,
+        extra_news=extra_news,
+        extra_reddit=extra_social["reddit"],
+        extra_twitter=extra_social["twitter"],
+        extra_bluesky=extra_social["bluesky"],
+        extra_instagram=extra_social["instagram"],
     )
 
     state_path = build_state_mod.write_state(state, docs_root)
     new_tx = build_state_mod.append_transactions_history(state, data_root / "history")
+    new_news = build_state_mod.append_news_history(news_raw, history_root)
+    new_social = build_state_mod.append_social_history(
+        {"reddit": reddit_posts, "twitter": twitter_posts, "bluesky": bluesky_posts, "instagram": instagram_posts},
+        history_root,
+    )
 
     # Concise summary for humans + the skill flow.
     ext_sources = list(ext_projections_by_source.keys()) if ext_projections_by_source else []
@@ -263,6 +283,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  waiver targets:  {len(state.waiver_targets_overall)} overall")
     print(f"  game log:        {total_game_log_entries} entries / {len(player_game_log)} players")
     print(f"  projection srcs: {', '.join(proj_sources)}")
+    print(f"  news archive:    {len(extra_news) + new_news} total / {new_news} new appended")
+    print(f"  social archive:  {sum(len(v) for v in extra_social.values()) + new_social} total / {new_social} new appended")
     print(f"  reddit posts:    {sum(len(v) for v in state.reddit_posts_by_player.values())} matched")
     print(f"  twitter posts:   {sum(len(v) for v in state.twitter_posts_by_player.values())} matched")
     print(f"  bluesky posts:   {sum(len(v) for v in state.bluesky_posts_by_player.values())} matched")

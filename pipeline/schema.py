@@ -48,6 +48,8 @@ class RosterEntry(_Strict):
     projected_per_game: float | None = None
     projected_points_this_week: float | None = None
     games_this_week: int = 0
+    projected_points_next_week: float | None = Field(None, description="proj_per_game × games_next_week")
+    games_next_week: int = Field(0, description="Pro-team games in the following week's window")
     actual_points: float | None = None
 
 

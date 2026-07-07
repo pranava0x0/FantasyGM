@@ -98,6 +98,29 @@
     if (Number.isNaN(d.getTime())) return "—";
     return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   }
+  // WNBA scoring periods are daily, so a game's date is the capture date
+  // (= the current/latest period) shifted by the period delta. Anchored on
+  // META.scoring_period_id / META.captured_at; returns a UTC Date or null.
+  function periodToDate(period) {
+    const anchorPeriod = Number(META.scoring_period_id);
+    if (!anchorPeriod || !META.captured_at) return null;
+    const base = new Date(META.captured_at);
+    if (Number.isNaN(base.getTime())) return null;
+    const d = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth(), base.getUTCDate()));
+    d.setUTCDate(d.getUTCDate() + (period - anchorPeriod));
+    return d;
+  }
+  // Compact "M/D" for the pill caption; falls back to "" when undatable.
+  function shortGameDate(period) {
+    const d = periodToDate(period);
+    return d ? `${d.getUTCMonth() + 1}/${d.getUTCDate()}` : "";
+  }
+  // "Mon Jun 16" for the hover tooltip; falls back to the period number.
+  function longGameDate(period) {
+    const d = periodToDate(period);
+    if (!d) return `Period ${period}`;
+    return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
+  }
   function fmtTime(iso) {
     if (!iso) return "—";
     const d = new Date(iso);
@@ -259,6 +282,30 @@
       } else {
         weekEl.textContent = "—";
       }
+    }
+  }
+
+  // Render `items` into `ulEl` (via `renderItemFn`), showing only the first
+  // `pageSize` up front with a "Show N more" li that reveals the rest on
+  // click — lets the player modal hold a full season of history without
+  // dumping it all on open.
+  function renderExpandableList(ulEl, items, pageSize, renderItemFn) {
+    ulEl.replaceChildren();
+    items.slice(0, pageSize).forEach((item) => ulEl.appendChild(renderItemFn(item)));
+    if (items.length > pageSize) {
+      const remaining = items.length - pageSize;
+      const moreLi = el("li", { className: "player-modal-show-more" });
+      const btn = el("button", {
+        className: "player-modal-show-more-btn",
+        text: `Show ${remaining} more`,
+        attrs: { type: "button" },
+      });
+      btn.addEventListener("click", () => {
+        items.slice(pageSize).forEach((item) => ulEl.insertBefore(renderItemFn(item), moreLi));
+        moreLi.remove();
+      });
+      moreLi.appendChild(btn);
+      ulEl.appendChild(moreLi);
     }
   }
 
@@ -424,8 +471,57 @@
     });
   }
 
+  // Fills the 9 active WNBA fantasy slots (2 G, 3 F, 1 F/C, 3 UTIL) from a
+  // roster, ranking candidates within each slot by `scoreFn` descending.
+  // Shared by the trade calculator's post-trade simulation and the Team
+  // Needs tab's next-week start/sit recommendation.
+  function optimalLineupSlots(rosterEntries, scoreFn) {
+    const ranked = [...rosterEntries].sort((a, b) => scoreFn(b) - scoreFn(a));
+    const assigned = new Set();
+    const activeSlots = [];
+
+    function fill(slotLabel, n, test) {
+      let filled = 0;
+      for (const e of ranked) {
+        if (filled >= n) break;
+        const pid = e.player.player_id;
+        if (!assigned.has(pid) && (e.projected_per_game || 0) > 0 && test(e)) {
+          assigned.add(pid);
+          activeSlots.push({ entry: e, sim_slot: slotLabel });
+          filled++;
+        }
+      }
+    }
+
+    fill("G",    2, e => e.player.bucket === "G");
+    fill("F",    3, e => e.player.bucket === "F");
+    fill("F/C",  1, e => e.player.bucket === "F" || e.player.bucket === "C");
+    fill("UTIL", 3, () => true);
+
+    const bench = ranked.filter(e => !assigned.has(e.player.player_id));
+    return { activeSlots, bench };
+  }
+
+  // Mirrors pipeline/analyze.py's _is_out() — statuses ESPN uses for
+  // confirmed-unavailable players. DTD/QUESTIONABLE stay eligible (may play).
+  const CONFIRMED_OUT_STATUSES = new Set(["OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"]);
+
+  // Recommended starters for *next* week — ranks by projected_points_next_week
+  // (per-game rate × next week's game count) rather than the flat per-game
+  // rate, so a player with a bye/light slate next week correctly drops
+  // behind a lower-ppg player who has more games. Confirmed-unavailable
+  // players are excluded from the candidate pool entirely so they never
+  // show as a recommended starter. Returns a Set of player_ids that should
+  // start.
+  function recommendedStartersNextWeek(rosterEntries) {
+    const eligible = rosterEntries.filter((e) => !CONFIRMED_OUT_STATUSES.has(e.player.injury_status));
+    const { activeSlots } = optimalLineupSlots(eligible, (e) => e.projected_points_next_week || 0);
+    return new Set(activeSlots.map(({ entry }) => entry.player.player_id));
+  }
+
   function rosterTable(team) {
     const wrap = el("div", { className: "roster-table" });
+    const nextWeekStarters = recommendedStartersNextWeek(team.roster || []);
     // Group by slot label so active slots come first (G, F, F/C, UTIL),
     // then bench. Preserves the slot order in pipeline/positions.py.
     const groups = new Map();
@@ -441,13 +537,13 @@
       const rows = groups.get(slot) || [];
       // Sort active slots by projected points desc; bench too.
       rows.sort((a, b) => (b.projected_points_this_week || 0) - (a.projected_points_this_week || 0));
-      rows.forEach((r) => wrap.appendChild(rosterRow(slot, r)));
+      rows.forEach((r) => wrap.appendChild(rosterRow(slot, r, nextWeekStarters.has(r.player.player_id))));
     });
     if (!seenOrder.length) wrap.appendChild(el("p", { className: "muted-cell", text: "Roster empty." }));
     return wrap;
   }
 
-  function rosterRow(slotLabel, r) {
+  function rosterRow(slotLabel, r, startsNextWeek) {
     const p = r.player;
     const slotChip = el("span", { className: `pill slot-chip ${r.is_active ? "slot-active" : "slot-bench"}`, text: slotLabel });
     const nameSpan = el("span", { className: "roster-name" });
@@ -460,6 +556,10 @@
     if (p.injury_status && p.injury_status !== "ACTIVE") {
       sub.appendChild(el("span", { className: "own-neg", text: p.injury_status }));
     }
+    sub.appendChild(el("span", {
+      className: `pill nextwk-pill ${startsNextWeek ? "nextwk-start" : "nextwk-sit"}`,
+      text: startsNextWeek ? "Start · next wk" : "Sit · next wk",
+    }));
     const proj = r.projected_points_this_week != null
       ? r.projected_points_this_week
       : r.projected_points;
@@ -592,6 +692,10 @@
     // Left column: full roster + recent transactions
     const detailSecondary = el("div", { className: "team-detail-secondary" });
     detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Full roster" }));
+    detailSecondary.appendChild(el("p", {
+      className: "roster-table-caption",
+      text: "“Start/Sit · next wk” recommends the 9-slot lineup (2 G, 3 F, 1 F/C, 3 UTIL) that maximizes next week's projected points.",
+    }));
     detailSecondary.appendChild(rosterTable(team));
     detailSecondary.appendChild(el("h4", { className: "team-detail-head", text: "Recent transactions" }));
     detailSecondary.appendChild(teamTransactionsBlock(team, allTeamsForLookup, txnsByIdLookup));
@@ -779,11 +883,14 @@
   let PLAYER_INDEX = new Map();
   // Team ID -> team object, used by the modal for "rostered by".
   let TEAM_BY_ID = new Map();
+  // League meta (scoring period + capture date), used to date recent games.
+  let META = {};
   // Element to restore focus to when the modal closes.
   let lastFocusedTrigger = null;
 
   function buildPlayerIndex(state) {
     const idx = new Map();
+    META = state.meta || {};
     const teamsById = new Map((state.teams || []).map((t) => [t.team_id, t]));
     TEAM_BY_ID = teamsById;
 
@@ -844,44 +951,46 @@
       });
     });
 
-    // News tagged with this player's athleteId. Cap at 8.
+    // News tagged with this player's athleteId or team. Already capped
+    // server-side (build_state.MAX_HISTORY_PER_PLAYER); the modal paginates
+    // via "show more" rather than truncating here.
     Object.entries(state.news_by_player || {}).forEach(([pid, articles]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.news = (articles || []).slice(0, 8);
+      entry.news = articles || [];
     });
 
-    // Reddit r/wnba posts mentioning this player. Cap at 5.
+    // Reddit r/wnba posts mentioning this player. Capped server-side.
     Object.entries(state.reddit_posts_by_player || {}).forEach(([pid, posts]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.reddit = (posts || []).slice(0, 5);
+      entry.reddit = posts || [];
     });
 
-    // Twitter/X posts mentioning this player. Cap at 5.
+    // Twitter/X posts mentioning this player. Capped server-side.
     Object.entries(state.twitter_posts_by_player || {}).forEach(([pid, tweets]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.twitter = (tweets || []).slice(0, 5);
+      entry.twitter = tweets || [];
     });
 
-    // Bluesky posts mentioning this player. Cap at 5.
+    // Bluesky posts mentioning this player. Capped server-side.
     Object.entries(state.bluesky_posts_by_player || {}).forEach(([pid, posts]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.bluesky = (posts || []).slice(0, 5);
+      entry.bluesky = posts || [];
     });
 
-    // Instagram posts from/about this player. Cap at 5.
+    // Instagram posts from/about this player. Capped server-side.
     Object.entries(state.instagram_posts_by_player || {}).forEach(([pid, posts]) => {
       const num = Number(pid);
       if (!Number.isFinite(num)) return;
       const entry = ensure(num);
-      entry.instagram = (posts || []).slice(0, 5);
+      entry.instagram = posts || [];
     });
 
     // Social profile handles (for links in the modal footer).
@@ -1041,9 +1150,15 @@
         recentGames.forEach((g) => {
           const isHigh = g.fantasy_points === max && max >= 20;
           container.appendChild(el("span", {
-            className: `recent-game-pill${isHigh ? " recent-game-pill--high" : ""}`,
-            text: String(Math.round(g.fantasy_points)),
-            attrs: { title: `Period ${g.scoring_period_id}: ${g.fantasy_points} fpts` },
+            className: "recent-game",
+            attrs: { title: `${longGameDate(g.scoring_period_id)} · ${g.fantasy_points} fpts` },
+            children: [
+              el("span", {
+                className: `recent-game-pill${isHigh ? " recent-game-pill--high" : ""}`,
+                text: String(Math.round(g.fantasy_points)),
+              }),
+              el("span", { className: "recent-game-date", text: shortGameDate(g.scoring_period_id) }),
+            ],
           }));
         });
         const avg = recentGames.reduce((s, g) => s + g.fantasy_points, 0) / recentGames.length;
@@ -1079,8 +1194,7 @@
 
       if (allPosts.length) {
         socialWrap.removeAttribute("hidden");
-        socialList.replaceChildren();
-        allPosts.slice(0, 12).forEach((post) => {
+        renderExpandableList(socialList, allPosts, 8, (post) => {
           const li = el("li", { className: "social-item" });
           li.appendChild(el("span", { className: `social-badge social-badge--${post.source}`, text: post.label }));
           li.appendChild(el("a", {
@@ -1089,7 +1203,7 @@
             attrs: { href: post.url || "#", target: "_blank", rel: "noopener noreferrer" },
           }));
           if (post.ts) li.appendChild(el("span", { className: "social-time", text: fmtTime(post.ts) }));
-          socialList.appendChild(li);
+          return li;
         });
       } else {
         socialWrap.setAttribute("hidden", "");
@@ -1098,9 +1212,8 @@
 
     // News — compact: headline + time + direct/team tag only (no description).
     const newsList = $("#player-modal-news");
-    newsList.replaceChildren();
     if (entry.news && entry.news.length) {
-      entry.news.forEach((n) => {
+      renderExpandableList(newsList, entry.news, 5, (n) => {
         const isDirectMention = Array.isArray(n.athlete_ids) && n.athlete_ids.includes(p.player_id);
         const li = el("li", { className: "player-modal-news-item" });
         const row = el("div", { className: "player-modal-news-row" });
@@ -1114,17 +1227,17 @@
         if (!isDirectMention) meta.appendChild(el("span", { className: "player-modal-news-team-tag", text: "Team" }));
         row.appendChild(meta);
         li.appendChild(row);
-        newsList.appendChild(li);
+        return li;
       });
     } else {
+      newsList.replaceChildren();
       newsList.appendChild(el("li", { className: "empty", text: "No tagged headlines." }));
     }
 
     // Transactions (most recent first).
     const txnList = $("#player-modal-txns");
-    txnList.replaceChildren();
     if (entry.txns && entry.txns.length) {
-      entry.txns.slice(0, 10).forEach(({ tx, item }) => {
+      renderExpandableList(txnList, entry.txns, 10, ({ tx, item }) => {
         const teamBy = TEAM_BY_ID;
         const head = el("div", {
           className: "player-modal-txn-head",
@@ -1138,13 +1251,14 @@
         });
         const direction = formatTxnDirection(item, teamBy);
         const body = el("div", { className: "player-modal-txn-body", text: direction });
-        txnList.appendChild(el("li", {
+        return el("li", {
           className: "player-modal-txn-item",
           children: [head, body],
-        }));
+        });
       });
     } else {
-      txnList.appendChild(el("li", { className: "empty", text: "No transactions in the recent window." }));
+      txnList.replaceChildren();
+      txnList.appendChild(el("li", { className: "empty", text: "No transactions on record." }));
     }
 
     // Social profile links in footer.
@@ -1385,29 +1499,7 @@
   // Optimal lineup simulation after a trade.
   // WNBA fantasy slots: 2 G, 3 F, 1 F/C, 3 UTIL — 9 active total.
   function simulateLineup(rosterEntries) {
-    const byPpg = [...rosterEntries].sort((a, b) => (b.projected_per_game || 0) - (a.projected_per_game || 0));
-    const assigned = new Set();
-    const activeSlots = [];
-
-    function fill(slotLabel, n, test) {
-      let filled = 0;
-      for (const e of byPpg) {
-        if (filled >= n) break;
-        const pid = e.player.player_id;
-        if (!assigned.has(pid) && (e.projected_per_game || 0) > 0 && test(e)) {
-          assigned.add(pid);
-          activeSlots.push({ entry: e, sim_slot: slotLabel });
-          filled++;
-        }
-      }
-    }
-
-    fill("G",    2, e => e.player.bucket === "G");
-    fill("F",    3, e => e.player.bucket === "F");
-    fill("F/C",  1, e => e.player.bucket === "F" || e.player.bucket === "C");
-    fill("UTIL", 3, () => true);
-
-    const bench = byPpg.filter(e => !assigned.has(e.player.player_id));
+    const { activeSlots, bench } = optimalLineupSlots(rosterEntries, (e) => e.projected_per_game || 0);
     const thisWeek = activeSlots.reduce((s, { entry: e }) => s + (e.projected_points_this_week || 0), 0);
     const nextWeek = activeSlots.reduce((s, { entry: e }) => s + (e.projected_points_next_week || 0), 0);
     const ppg      = activeSlots.reduce((s, { entry: e }) => s + (e.projected_per_game || 0), 0);

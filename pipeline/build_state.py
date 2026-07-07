@@ -21,6 +21,19 @@ import re
 from pipeline import analyze, bluesky as bluesky_mod, instagram as instagram_mod, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
 from pipeline.projections_ext import resolve_external_projections
 
+# Per-player cap on news/social items surfaced in state.json. High enough to
+# cover a full season of history (see data/history/{news,social}.jsonl) while
+# bounding state.json's page weight for a handful of extremely prolific
+# sources. The UI paginates ("show more") rather than rendering all at once.
+MAX_HISTORY_PER_PLAYER = 50
+
+# News articles only mention a player directly sometimes — the rest of the
+# time they're tagged via the player's pro team (a team recap that happens
+# to roster them). Direct mentions are the player's own story and get the
+# full cap above; team-only mentions are ambient context and capped much
+# lower so a busy team doesn't drown a player's history in generic recaps.
+MAX_TEAM_ONLY_NEWS_PER_PLAYER = 10
+
 # ---------------------------------------------------------------------------
 # Social-media return-from-injury signal detection
 # ---------------------------------------------------------------------------
@@ -167,6 +180,11 @@ def build_state(
     ext_projections_by_source: dict[str, dict[str, float]] | None = None,
     player_game_log: dict[int, list[dict[str, Any]]] | None = None,
     extra_transactions: list[dict[str, Any]] | None = None,
+    extra_news: list[dict[str, Any]] | None = None,
+    extra_reddit: list[dict[str, Any]] | None = None,
+    extra_twitter: list[dict[str, Any]] | None = None,
+    extra_bluesky: list[dict[str, Any]] | None = None,
+    extra_instagram: list[dict[str, Any]] | None = None,
 ) -> schema.LeagueState:
     """Compose the LeagueState from raw responses + analysis.
 
@@ -178,6 +196,10 @@ def build_state(
     `player_game_log` is the accumulated per-game history from game_log.py —
     {player_id → [{scoring_period_id, fantasy_points}]}. Extends rolling
     averages and "Last 2 weeks" displays beyond ESPN's current snapshot window.
+    `extra_news`/`extra_reddit`/`extra_twitter`/`extra_bluesky`/`extra_instagram`
+    are the persistent archives from `data/history/{news,social}.jsonl` — merged
+    in (deduped by id/url) so a player's history survives after today's items
+    scroll out of the live feed. Same pattern as `extra_transactions`.
     All default to None so tests and legacy callers don't need to change.
     """
     # Compute the upcoming week's game-count signal first; team views and
@@ -212,6 +234,7 @@ def build_state(
     teams_view = analyze.build_team_views(
         league_raw,
         games_by_pro_team=games_by_pro_team,
+        games_by_pro_team_next_week=games_by_pro_team_next_week,
         ext_projections_by_player=ext_projections_by_player,
         player_game_log=player_game_log,
     )
@@ -331,6 +354,8 @@ def build_state(
                 projected_per_game=float(p.get("projected_per_game") or 0.0) or None,
                 projected_points_this_week=float(p.get("projected_points_this_week") or 0.0) or None,
                 games_this_week=int(p.get("games_this_week") or 0),
+                projected_points_next_week=float(p.get("projected_points_next_week") or 0.0) or None,
+                games_next_week=int(p.get("games_next_week") or 0),
                 actual_points=p["actual_points"],
             )
             for p in t["roster"]
@@ -422,12 +447,23 @@ def build_state(
         week_end_period=week_end,
     )
 
-    # News: cheap to compute from the raw feed; falls back to empty when
-    # the caller didn't pass news_raw.
+    # News: today's feed merged with the persistent archive (deduped by
+    # article id) so a player's news survives after it scrolls out of
+    # ESPN's own feed window. Falls back to just the archive when the
+    # caller didn't pass news_raw (e.g. social-only refresh).
     news_items: list[schema.NewsItem] = []
     news_by_player: dict[int, list[schema.NewsItem]] = {}
-    if news_raw:
-        articles = news.normalize_articles(news_raw)
+    articles = news.normalize_articles(news_raw) if news_raw else []
+    if extra_news:
+        seen_article_ids = {a["id"] for a in articles}
+        for a in extra_news:
+            aid = a.get("id")
+            if aid is None or aid in seen_article_ids:
+                continue
+            articles.append({**a, "published_at": _coerce_dt(a.get("published_at"))})
+            seen_article_ids.add(aid)
+        articles.sort(key=lambda r: r["published_at"] or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
+    if articles:
         news_items = [_to_news_item(a) for a in articles[:30]]
 
         # Build the player → news map (rostered players + waiver targets).
@@ -458,15 +494,25 @@ def build_state(
         raw_player_to_articles = news.match_to_players(
             articles, all_player_ids, pro_team_to_players,
         )
-        # Cap per-player article count so a verbose team day doesn't flood
-        # the UI; convert to NewsItem.
+        # Direct mentions (the player's own story) get the full cap; team-only
+        # mentions (roster overlap, not named) fill in the rest at a much
+        # lower cap so one prolific team doesn't drown a player's history.
         for pid, arts in raw_player_to_articles.items():
-            news_by_player[pid] = [_to_news_item(a) for a in arts[:5]]
+            direct = [a for a in arts if pid in a["athlete_ids"]][:MAX_HISTORY_PER_PLAYER]
+            team_only = [a for a in arts if pid not in a["athlete_ids"]][:MAX_TEAM_ONLY_NEWS_PER_PLAYER]
+            combined = sorted(
+                direct + team_only,
+                key=lambda a: a["published_at"] or datetime.min.replace(tzinfo=timezone.utc),
+                reverse=True,
+            )
+            news_by_player[pid] = [_to_news_item(a) for a in combined]
 
-    # Reddit: match posts to players by name.
+    # Reddit: today's fetch merged with the persistent archive (deduped by
+    # url), matched to players by name.
     reddit_by_player: dict[int, list[schema.RedditPost]] = {}
-    if reddit_posts:
-        raw_reddit_by_player = reddit_mod.match_to_players(reddit_posts, player_name_index)
+    merged_reddit = _merge_by_url(reddit_posts, extra_reddit)
+    if merged_reddit:
+        raw_reddit_by_player = reddit_mod.match_to_players(merged_reddit, player_name_index)
         for pid, posts in raw_reddit_by_player.items():
             reddit_by_player[pid] = [
                 schema.RedditPost(
@@ -475,13 +521,14 @@ def build_state(
                     published_at=p.get("published_at"),
                     subreddit=p.get("subreddit") or "wnba",
                 )
-                for p in posts[:5]
+                for p in posts[:MAX_HISTORY_PER_PLAYER]
             ]
 
-    # Twitter/X: match tweets to players by name.
+    # Twitter/X: same merge-then-match pattern.
     twitter_by_player: dict[int, list[schema.TwitterPost]] = {}
-    if twitter_posts:
-        raw_twitter_by_player = twitter_mod.match_to_players(twitter_posts, player_name_index)
+    merged_twitter = _merge_by_url(twitter_posts, extra_twitter)
+    if merged_twitter:
+        raw_twitter_by_player = twitter_mod.match_to_players(merged_twitter, player_name_index)
         for pid, tweets in raw_twitter_by_player.items():
             twitter_by_player[pid] = [
                 schema.TwitterPost(
@@ -490,13 +537,14 @@ def build_state(
                     published_at=t.get("published_at"),
                     screen_name=t.get("screen_name") or "",
                 )
-                for t in tweets[:5]
+                for t in tweets[:MAX_HISTORY_PER_PLAYER]
             ]
 
-    # Bluesky: match posts to players by name.
+    # Bluesky: same merge-then-match pattern.
     bluesky_by_player: dict[int, list[schema.BlueskyPost]] = {}
-    if bluesky_posts:
-        raw_bsky_by_player = bluesky_mod.match_to_players(bluesky_posts, player_name_index)
+    merged_bluesky = _merge_by_url(bluesky_posts, extra_bluesky)
+    if merged_bluesky:
+        raw_bsky_by_player = bluesky_mod.match_to_players(merged_bluesky, player_name_index)
         for pid, posts in raw_bsky_by_player.items():
             bluesky_by_player[pid] = [
                 schema.BlueskyPost(
@@ -505,17 +553,18 @@ def build_state(
                     published_at=p.get("published_at"),
                     handle=p.get("handle") or "",
                 )
-                for p in posts[:5]
+                for p in posts[:MAX_HISTORY_PER_PLAYER]
             ]
 
-    # Instagram: match posts to players by profile handle or name mention.
+    # Instagram: same merge-then-match pattern; matches by profile handle or name mention.
     instagram_by_player: dict[int, list[schema.InstagramPost]] = {}
-    if instagram_posts:
+    merged_instagram = _merge_by_url(instagram_posts, extra_instagram)
+    if merged_instagram:
         socials_for_match = {
             int(pid): v for pid, v in (player_socials_raw or {}).items() if pid.isdigit()
         }
         raw_ig_by_player = instagram_mod.match_to_players(
-            instagram_posts, player_name_index, player_socials=socials_for_match
+            merged_instagram, player_name_index, player_socials=socials_for_match
         )
         for pid, posts in raw_ig_by_player.items():
             instagram_by_player[pid] = [
@@ -526,7 +575,7 @@ def build_state(
                     username=p.get("username") or "",
                     post_type=p.get("post_type") or "post",
                 )
-                for p in posts[:5]
+                for p in posts[:MAX_HISTORY_PER_PLAYER]
             ]
 
     # Player social profiles (for direct links in the UI).
@@ -612,7 +661,153 @@ def append_transactions_history(
     return appended
 
 
+def append_news_history(news_raw: dict[str, Any] | None, history_root: Path) -> int:
+    """Append today's normalized articles (deduped by `id`) to `data/history/news.jsonl`.
+
+    Returns count of new entries appended.
+    """
+    if not news_raw:
+        return 0
+    history_root.mkdir(parents=True, exist_ok=True)
+    log_path = history_root / "news.jsonl"
+    seen: set[int] = set()
+    if log_path.exists():
+        for line in log_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            try:
+                seen.add(json.loads(line)["id"])
+            except (json.JSONDecodeError, KeyError):
+                continue
+
+    appended = 0
+    with log_path.open("a") as fp:
+        for a in news.normalize_articles(news_raw):
+            if a["id"] in seen:
+                continue
+            fp.write(_to_news_item(a).model_dump_json() + "\n")
+            seen.add(a["id"])
+            appended += 1
+    log.info("build_state: appended %d new articles to %s", appended, log_path)
+    return appended
+
+
+def load_news_history(history_root: Path) -> list[dict[str, Any]]:
+    """Load the persistent news archive as plain dicts for `extra_news=`."""
+    log_path = history_root / "news.jsonl"
+    if not log_path.exists():
+        return []
+    out: list[dict[str, Any]] = []
+    for line in log_path.read_text().splitlines():
+        if not line.strip():
+            continue
+        try:
+            out.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return out
+
+
+# Social sources keyed the same way build_state's extra_* params are named,
+# so callers can round-trip a single dict through append/load.
+_SOCIAL_SOURCES = ("reddit", "twitter", "bluesky", "instagram")
+
+
+def append_social_history(posts_by_source: dict[str, list[dict[str, Any]]], history_root: Path) -> int:
+    """Append today's social posts (deduped by `(source, url)`) to `data/history/social.jsonl`.
+
+    `posts_by_source` maps source name ("reddit"/"twitter"/"bluesky"/"instagram")
+    to that source's normalized post dicts. Returns count of new entries appended.
+    """
+    history_root.mkdir(parents=True, exist_ok=True)
+    log_path = history_root / "social.jsonl"
+    seen: set[tuple[str, str]] = set()
+    if log_path.exists():
+        for line in log_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+                seen.add((row["source"], row["url"]))
+            except (json.JSONDecodeError, KeyError):
+                continue
+
+    appended = 0
+    with log_path.open("a") as fp:
+        for source in _SOCIAL_SOURCES:
+            for p in posts_by_source.get(source) or []:
+                url = p.get("url")
+                if not url or (source, url) in seen:
+                    continue
+                published = p.get("published_at")
+                row = {
+                    "source": source,
+                    "title": p.get("title", ""),
+                    "url": url,
+                    "published_at": published.isoformat() if isinstance(published, datetime) else published,
+                }
+                # Carry the source-specific attribution field (subreddit/handle/etc).
+                for extra_key in ("subreddit", "handle", "screen_name", "username", "post_type"):
+                    if extra_key in p:
+                        row[extra_key] = p[extra_key]
+                fp.write(json.dumps(row) + "\n")
+                seen.add((source, url))
+                appended += 1
+    log.info("build_state: appended %d new social posts to %s", appended, log_path)
+    return appended
+
+
+def load_social_history(history_root: Path) -> dict[str, list[dict[str, Any]]]:
+    """Load the persistent social archive, split by source, for `extra_reddit=`/etc."""
+    log_path = history_root / "social.jsonl"
+    out: dict[str, list[dict[str, Any]]] = {s: [] for s in _SOCIAL_SOURCES}
+    if not log_path.exists():
+        return out
+    for line in log_path.read_text().splitlines():
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+            source = row.pop("source")
+        except (json.JSONDecodeError, KeyError):
+            continue
+        if source in out:
+            out[source].append(row)
+    return out
+
+
 # --- helpers --------------------------------------------------------------
+
+def _coerce_dt(value: Any) -> datetime | None:
+    """Parse an ISO-8601 string (from a jsonl archive) into a datetime; pass datetimes through."""
+    if value is None or isinstance(value, datetime):
+        return value
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _merge_by_url(
+    today: list[dict[str, Any]] | None,
+    archive: list[dict[str, Any]] | None,
+) -> list[dict[str, Any]]:
+    """Merge today's fetch with the persistent archive, deduped by `url`.
+
+    `archive` entries have `published_at` as an ISO string (loaded from
+    jsonl); coerced to datetime so callers can sort/compare uniformly.
+    """
+    merged = list(today or [])
+    if not archive:
+        return merged
+    seen_urls = {p["url"] for p in merged if p.get("url")}
+    for p in archive:
+        url = p.get("url")
+        if not url or url in seen_urls:
+            continue
+        merged.append({**p, "published_at": _coerce_dt(p.get("published_at"))})
+        seen_urls.add(url)
+    return merged
 
 def _build_matchup_history(
     league_raw: dict[str, Any],
