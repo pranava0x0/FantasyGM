@@ -1,9 +1,6 @@
----
-name: refresh-fantasy-gm
-description: Run the FantasyGM pipeline against the user's ESPN fantasy WNBA league, summarize what changed, and optionally commit + push so GitHub Pages updates. Use whenever the user asks to "refresh fantasy", "update the league", "pull latest WNBA data", "rerun the GM", or otherwise wants the static site refreshed with the latest ESPN snapshot.
----
-
 # Refresh FantasyGM
+
+> Project refresh playbook, read by the generic `data-refresh` skill (~/.claude/skills/data-refresh). Keep current: every refresh run appends learned patterns; structural pipeline changes get edited into the body.
 
 Single-purpose skill: pull ESPN, rebuild the static site, show the user what changed, and (with consent) commit + push.
 
@@ -446,3 +443,7 @@ If you discover a *new* class of discrepancy, document it as:
 3. A regression test in `tests/` if it's testable without live API access.
 
 That's the loop: every surprise becomes a piece of documented scar tissue, so the next pipeline run avoids the same trap.
+
+## Learned patterns (append-only, dated)
+
+- (none yet)
