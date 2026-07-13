@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-12T11:05:00Z",
+  "generated_at": "2026-07-13T08:41:00Z",
   "model": "claude-sonnet-5",
   "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull), social/news signals, and team needs analysis.",
   "summaries": {
-    "4065692": "Wilson's box score line this week looks video-game (147 proj, 49/g), but with no ESPN season average yet, that's a tiny sample skewing hard on one huge outing rather than a repeatable role. Speculative Guard-need dart throw at 0.21% owned -- confirm she's actually seeing consistent Indiana minutes before committing a spot.",
+    "4065692": "Wilson's projection has cooled from last check but still looks video-game (114 proj, 38.1/g); with no ESPN season average yet that's a small sample built on one huge outing rather than a repeatable role. Speculative Guard-need dart throw at 0.21% owned -- confirm she's actually seeing consistent Indiana minutes before committing a spot.",
     "4280886": "L. Williams projects 26.5/g across a repeating 3-game week for Indiana, but with no season average logged yet, treat the number as small-sample noise rather than an established role. X chatter ties her to Indiana's rookie-class pedigree alongside Flaujae Johnson -- a speculative Frontcourt-need stash at 0.04% owned.",
     "4398883": "M. Williams shows a 26.5/g pace across 3 games for Phoenix, but the missing season average signals a limited sample so far -- don't chase the raw number yet. Worth a speculative Frontcourt-need look at 0.03% owned while Phoenix's rotation shakes out around A'ja Wilson-driven games.",
     "4282168": "K. Williams landed with LA after being waived by Phoenix (per Reddit), and her week expands from 3 games (43.8 pts) to a fuller 4-game slate next (58.4 proj, 14.6/g) -- well above her 9.0 season average. A cheap Guard-need speculative add at 0.14% owned worth riding through the fuller schedule.",
@@ -39,7 +39,7 @@
     "3907781": "Cunningham is riding a hot streak for Indiana -- X highlighted her big scoring night -- and ownership is climbing fast (+1.69% this week) to 28.8%. A Guard-need add worth grabbing before waivers dry up.",
     "4257500": "Zandalasini is part of Golden State's six-game win streak, running just ahead of her 19.1 season average (19.6/g) with a big 3-game week (58.9 pts) before a lighter 2-game slate next (39.3 proj). A Frontcourt-need value play at 5.3% owned.",
     "4280850": "Caldwell is quietly outproducing her 14.35 season average with steady minutes (13.6/g), and X notes she's making a case for consistent run. At just 1% owned, a low-cost Guard-need speculative add.",
-    "5105729": "Gray is a near-unowned (0.16%) LA guard whose schedule expands from 3 games this week (30.6 pts) to 4 next week (40.75 proj) -- the deepest slate on this board. A deep-bench Guard-need dart throw for teams with a spare roster spot.",
+    "5105729": "Gray's outlook has climbed sharply -- a 3-game week now projects 47.4 points (15.8/g), well above her 7.9 season average, and the slate expands to 4 games next week (63.2 proj). Still nearly unowned at 0.16%, she's shifting from deep-bench flier to a real Guard-need speculative add.",
     "4682855": "Pissott projects a strong 20.0/g across a repeating 3-game week for Indiana, but with no ESPN season average logged yet, that's a small, early sample rather than an established role -- confirm she's actually seeing consistent minutes before trusting the number. A speculative Guard-need dart throw at just 0.06% owned for rosters with a spare wire spot."
   }
 }
