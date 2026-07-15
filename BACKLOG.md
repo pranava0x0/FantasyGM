@@ -4,6 +4,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## High
 
+- **ESPN cookies stale for 9+ days — run a local full refresh.** Cloud sessions have run in `--social-only` mode continuously since the 2026-07-06 snapshot (at least 8 consecutive refreshes through 2026-07-15); transactions, rosters, and FAAB budget are all still that old. Social/news/rankings stay current, but a real waiver claim, drop, or roster move since 2026-07-06 won't show up anywhere in the UI. Run `/refresh-fantasy-gm` (or `python -m pipeline.refresh`) locally with `.env` cookies set to pull a fresh ESPN snapshot.
 - **Social signals expansion — Bluesky + Reddit r/fantasywbasketball.** Full spec in [docs/social-signals-plan.md](docs/social-signals-plan.md). Bluesky: public AT Protocol API (`public.api.bsky.app/xrpc/app.bsky.feed.searchPosts`), no auth, per-player queries for top-15 targets. Reddit: add `r/fantasywbasketball` RSS alongside existing `r/wnba` feed (same code path, one URL addition). Both land together. Preserve canonical URLs in full.
 - **Social signals expansion — Threads.** Full spec in [docs/social-signals-plan.md](docs/social-signals-plan.md). Chrome scraping step in skill (same pattern as X), `threads_raw.json`, `pipeline/threads.py`. Depends on user having Instagram session in browser. Ship after Bluesky is stable.
 
