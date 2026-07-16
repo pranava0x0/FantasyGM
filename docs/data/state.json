@@ -18392,6 +18392,18 @@
         ]
       },
       {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
         "id": 49303218,
         "headline": "WNBA All-Star 2026: Snubs, top questions after roster named",
         "description": "Who should have been named a WNBA All-Star? Who might be the first pick? Will there be a Bueckers-Malonga alley-oop?",
@@ -18512,6 +18524,34 @@
         "pro_team_ids": [
           18,
           132052
+        ]
+      },
+      {
+        "id": 49329910,
+        "headline": "Valkyries beat the Sun 79-64 for a franchise-record 7th straight win",
+        "description": "— Veronica Burton scored 17 points, Janelle Salaun had 16 points and four 3-pointers off the bench, and the Golden State Valkyries beat the Connecticut Sun 79-64 on Friday night for a franchise-record seventh straight victory.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857054",
+        "published_at": "2026-07-11T01:45:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
+        "id": 49329849,
+        "headline": "Connecticut Sun vs. Golden State Valkyries - Game Highlights",
+        "description": "Watch the Game Highlights from Connecticut Sun vs. Golden State Valkyries, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329849/connecticut-sun-vs-golden-state-valkyries-game-highlights",
+        "published_at": "2026-07-11T01:38:08Z",
+        "athlete_ids": [
+          4257500,
+          4398935,
+          4398966
+        ],
+        "pro_team_ids": [
+          18,
+          129689
         ]
       },
       {
@@ -19469,6 +19509,18 @@
         ]
       },
       {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
         "id": 49320476,
         "headline": "Angel Reese secures 64th career double-double and the Dream beat the Storm 89-78 to end 5-game skid",
         "description": "— Allisha Gray scored 22 points, Angel Reese had 18 points and 11 rebounds for her league-best 15th double-double of the season, and the Atlanta Dream beat the Seattle Storm 89-78 on Thursday night to end a five-game losing streak.",
@@ -19628,6 +19680,59 @@
         ],
         "pro_team_ids": [
           3,
+          19
+        ]
+      },
+      {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
           19
         ]
       },
@@ -20156,6 +20261,18 @@
           4398911,
           5017726
         ],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
         "pro_team_ids": [
           14,
           16
@@ -20752,6 +20869,59 @@
         ],
         "pro_team_ids": [
           3,
+          19
+        ]
+      },
+      {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
           19
         ]
       },
@@ -21917,6 +22087,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -22549,6 +22732,59 @@
         ]
       },
       {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
+          19
+        ]
+      },
+      {
         "id": 49312199,
         "headline": "Los Angeles hosts Chicago after Ogwumike's 24-point game",
         "description": "Chicago Sky (7-14, 1-7 Eastern Conference) at Los Angeles Sparks (9-11, 5-6 Western Conference)",
@@ -22862,6 +23098,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -22961,6 +23210,34 @@
         "pro_team_ids": [
           18,
           132052
+        ]
+      },
+      {
+        "id": 49329910,
+        "headline": "Valkyries beat the Sun 79-64 for a franchise-record 7th straight win",
+        "description": "— Veronica Burton scored 17 points, Janelle Salaun had 16 points and four 3-pointers off the bench, and the Golden State Valkyries beat the Connecticut Sun 79-64 on Friday night for a franchise-record seventh straight victory.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857054",
+        "published_at": "2026-07-11T01:45:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
+        "id": 49329849,
+        "headline": "Connecticut Sun vs. Golden State Valkyries - Game Highlights",
+        "description": "Watch the Game Highlights from Connecticut Sun vs. Golden State Valkyries, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329849/connecticut-sun-vs-golden-state-valkyries-game-highlights",
+        "published_at": "2026-07-11T01:38:08Z",
+        "athlete_ids": [
+          4257500,
+          4398935,
+          4398966
+        ],
+        "pro_team_ids": [
+          18,
+          129689
         ]
       },
       {
@@ -24566,6 +24843,34 @@
         ]
       },
       {
+        "id": 49329910,
+        "headline": "Valkyries beat the Sun 79-64 for a franchise-record 7th straight win",
+        "description": "— Veronica Burton scored 17 points, Janelle Salaun had 16 points and four 3-pointers off the bench, and the Golden State Valkyries beat the Connecticut Sun 79-64 on Friday night for a franchise-record seventh straight victory.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857054",
+        "published_at": "2026-07-11T01:45:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
+        "id": 49329849,
+        "headline": "Connecticut Sun vs. Golden State Valkyries - Game Highlights",
+        "description": "Watch the Game Highlights from Connecticut Sun vs. Golden State Valkyries, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329849/connecticut-sun-vs-golden-state-valkyries-game-highlights",
+        "published_at": "2026-07-11T01:38:08Z",
+        "athlete_ids": [
+          4257500,
+          4398935,
+          4398966
+        ],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
         "id": 49310780,
         "headline": "Saniya Rivers leaves Sun's loss with sprained left ankle",
         "description": "Connecticut Sun guard Saniya Rivers sprained her left ankle in the game against the Minnesota Lynx on Wednesday night.",
@@ -24723,6 +25028,34 @@
         "pro_team_ids": [
           6,
           20
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
         ]
       },
       {
@@ -27143,21 +27476,7 @@
           4433403
         ],
         "pro_team_ids": [
-          3,
-          5,
-          6,
-          8,
-          9,
-          11,
-          14,
-          16,
-          17,
-          18,
-          19,
-          20,
-          129689,
-          131935,
-          132052
+          5
         ]
       },
       {
@@ -29132,6 +29451,59 @@
         ]
       },
       {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
+          19
+        ]
+      },
+      {
         "id": 49312199,
         "headline": "Los Angeles hosts Chicago after Ogwumike's 24-point game",
         "description": "Chicago Sky (7-14, 1-7 Eastern Conference) at Los Angeles Sparks (9-11, 5-6 Western Conference)",
@@ -30413,6 +30785,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -30510,6 +30895,18 @@
           4398911,
           5017726
         ],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
         "pro_team_ids": [
           14,
           16
@@ -31642,6 +32039,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -31739,6 +32149,18 @@
           4398911,
           5017726
         ],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
         "pro_team_ids": [
           14,
           16
@@ -32886,6 +33308,18 @@
           4398911,
           5017726
         ],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
         "pro_team_ids": [
           14,
           16
@@ -34263,6 +34697,45 @@
         "pro_team_ids": [
           3,
           19
+        ]
+      },
+      {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49329872,
+        "headline": "WNBA regular-season record crowd of 20,996 watch Wings beat Tempo",
+        "description": "Paige Bueckers scored 34 points and Dallas beat expansion Toronto 108-95 on Friday night in front of a WNBA regular-season record crowd of 20,996 at Bell Centre.",
+        "url": "https://www.espn.com/wnba/story/_/id/49329872/wnba-regular-season-record-crowd-20996-watch-wings-beat-tempo",
+        "published_at": "2026-07-11T03:38:12Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          131935
+        ]
+      },
+      {
+        "id": 49329860,
+        "headline": "Toronto Tempo vs. Dallas Wings - Game Highlights",
+        "description": "Watch the Game Highlights from Toronto Tempo vs. Dallas Wings, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329860/toronto-tempo-vs-dallas-wings-game-highlights",
+        "published_at": "2026-07-11T01:40:35Z",
+        "athlete_ids": [
+          3904576,
+          3904577
+        ],
+        "pro_team_ids": [
+          3,
+          131935
         ]
       },
       {
@@ -41488,6 +41961,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -42147,6 +42633,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -42439,6 +42938,19 @@
         "pro_team_ids": [
           5,
           17
+        ]
+      },
+      {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
         ]
       },
       {
@@ -43200,6 +43712,34 @@
         ]
       },
       {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
         "id": 49312199,
         "headline": "Los Angeles hosts Chicago after Ogwumike's 24-point game",
         "description": "Chicago Sky (7-14, 1-7 Eastern Conference) at Los Angeles Sparks (9-11, 5-6 Western Conference)",
@@ -43320,6 +43860,45 @@
         "pro_team_ids": [
           3,
           19
+        ]
+      },
+      {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49329872,
+        "headline": "WNBA regular-season record crowd of 20,996 watch Wings beat Tempo",
+        "description": "Paige Bueckers scored 34 points and Dallas beat expansion Toronto 108-95 on Friday night in front of a WNBA regular-season record crowd of 20,996 at Bell Centre.",
+        "url": "https://www.espn.com/wnba/story/_/id/49329872/wnba-regular-season-record-crowd-20996-watch-wings-beat-tempo",
+        "published_at": "2026-07-11T03:38:12Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          131935
+        ]
+      },
+      {
+        "id": 49329860,
+        "headline": "Toronto Tempo vs. Dallas Wings - Game Highlights",
+        "description": "Watch the Game Highlights from Toronto Tempo vs. Dallas Wings, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329860/toronto-tempo-vs-dallas-wings-game-highlights",
+        "published_at": "2026-07-11T01:40:35Z",
+        "athlete_ids": [
+          3904576,
+          3904577
+        ],
+        "pro_team_ids": [
+          3,
+          131935
         ]
       },
       {
@@ -43753,6 +44332,18 @@
         ]
       },
       {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
         "id": 49320476,
         "headline": "Angel Reese secures 64th career double-double and the Dream beat the Storm 89-78 to end 5-game skid",
         "description": "— Allisha Gray scored 22 points, Angel Reese had 18 points and 11 rebounds for her league-best 15th double-double of the season, and the Atlanta Dream beat the Seattle Storm 89-78 on Thursday night to end a five-game losing streak.",
@@ -43912,6 +44503,59 @@
         ],
         "pro_team_ids": [
           3,
+          19
+        ]
+      },
+      {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
           19
         ]
       },
@@ -44423,6 +45067,34 @@
         "pro_team_ids": [
           6,
           20
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
         ]
       },
       {
@@ -45509,6 +46181,34 @@
         "pro_team_ids": [
           6,
           20
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
         ]
       },
       {
@@ -48456,6 +49156,34 @@
         "pro_team_ids": [
           6,
           20
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
         ]
       },
       {
@@ -51966,6 +52694,59 @@
         ]
       },
       {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
+          19
+        ]
+      },
+      {
         "id": 49312199,
         "headline": "Los Angeles hosts Chicago after Ogwumike's 24-point game",
         "description": "Chicago Sky (7-14, 1-7 Eastern Conference) at Los Angeles Sparks (9-11, 5-6 Western Conference)",
@@ -53590,6 +54371,59 @@
         ]
       },
       {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
+          19
+        ]
+      },
+      {
         "id": 49312199,
         "headline": "Los Angeles hosts Chicago after Ogwumike's 24-point game",
         "description": "Chicago Sky (7-14, 1-7 Eastern Conference) at Los Angeles Sparks (9-11, 5-6 Western Conference)",
@@ -54804,6 +55638,45 @@
         ]
       },
       {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49329872,
+        "headline": "WNBA regular-season record crowd of 20,996 watch Wings beat Tempo",
+        "description": "Paige Bueckers scored 34 points and Dallas beat expansion Toronto 108-95 on Friday night in front of a WNBA regular-season record crowd of 20,996 at Bell Centre.",
+        "url": "https://www.espn.com/wnba/story/_/id/49329872/wnba-regular-season-record-crowd-20996-watch-wings-beat-tempo",
+        "published_at": "2026-07-11T03:38:12Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          131935
+        ]
+      },
+      {
+        "id": 49329860,
+        "headline": "Toronto Tempo vs. Dallas Wings - Game Highlights",
+        "description": "Watch the Game Highlights from Toronto Tempo vs. Dallas Wings, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329860/toronto-tempo-vs-dallas-wings-game-highlights",
+        "published_at": "2026-07-11T01:40:35Z",
+        "athlete_ids": [
+          3904576,
+          3904577
+        ],
+        "pro_team_ids": [
+          3,
+          131935
+        ]
+      },
+      {
         "id": 49312197,
         "headline": "Dallas faces Toronto on 3-game win streak",
         "description": "Dallas Wings (14-8, 6-6 Western Conference) at Toronto Tempo (9-12, 4-6 Eastern Conference)",
@@ -55799,6 +56672,49 @@
         ]
       },
       {
+        "id": 49329872,
+        "headline": "WNBA regular-season record crowd of 20,996 watch Wings beat Tempo",
+        "description": "Paige Bueckers scored 34 points and Dallas beat expansion Toronto 108-95 on Friday night in front of a WNBA regular-season record crowd of 20,996 at Bell Centre.",
+        "url": "https://www.espn.com/wnba/story/_/id/49329872/wnba-regular-season-record-crowd-20996-watch-wings-beat-tempo",
+        "published_at": "2026-07-11T03:38:12Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          131935
+        ]
+      },
+      {
+        "id": 49329860,
+        "headline": "Toronto Tempo vs. Dallas Wings - Game Highlights",
+        "description": "Watch the Game Highlights from Toronto Tempo vs. Dallas Wings, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329860/toronto-tempo-vs-dallas-wings-game-highlights",
+        "published_at": "2026-07-11T01:40:35Z",
+        "athlete_ids": [
+          3904576,
+          3904577
+        ],
+        "pro_team_ids": [
+          3,
+          131935
+        ]
+      },
+      {
+        "id": 48713412,
+        "headline": "Fantasy women's hoops: Lacan among weekend streaming options",
+        "description": "Eric Moody provides a preview for the weekend's action and offers six picks to consider as streaming options.",
+        "url": "https://www.espn.com/fantasy/womens-basketball/story/_/id/48713412/espn-wnba-fantasy-womens-basketball-lineups-adds-drops-news-players",
+        "published_at": "2026-07-10T18:00:17Z",
+        "athlete_ids": [
+          3934218,
+          4001679,
+          4398764,
+          4398938,
+          4790266,
+          5208981
+        ],
+        "pro_team_ids": []
+      },
+      {
         "id": 49312197,
         "headline": "Dallas faces Toronto on 3-game win streak",
         "description": "Dallas Wings (14-8, 6-6 Western Conference) at Toronto Tempo (9-12, 4-6 Eastern Conference)",
@@ -56724,6 +57640,18 @@
         ]
       },
       {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
         "id": 49303218,
         "headline": "WNBA All-Star 2026: Snubs, top questions after roster named",
         "description": "Who should have been named a WNBA All-Star? Who might be the first pick? Will there be a Bueckers-Malonga alley-oop?",
@@ -57532,6 +58460,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -57629,6 +58570,18 @@
           4398911,
           5017726
         ],
+        "pro_team_ids": [
+          14,
+          16
+        ]
+      },
+      {
+        "id": 49331283,
+        "headline": "Seattle takes on Washington after Hiedeman's 20-point outing",
+        "description": "Seattle Storm (6-18, 1-12 Western Conference) at Washington Mystics (10-10, 7-5 Eastern Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857061",
+        "published_at": "2026-07-11T06:09:45Z",
+        "athlete_ids": [],
         "pro_team_ids": [
           14,
           16
@@ -57807,6 +58760,34 @@
         "pro_team_ids": [
           18,
           132052
+        ]
+      },
+      {
+        "id": 49329910,
+        "headline": "Valkyries beat the Sun 79-64 for a franchise-record 7th straight win",
+        "description": "— Veronica Burton scored 17 points, Janelle Salaun had 16 points and four 3-pointers off the bench, and the Golden State Valkyries beat the Connecticut Sun 79-64 on Friday night for a franchise-record seventh straight victory.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857054",
+        "published_at": "2026-07-11T01:45:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
+        "id": 49329849,
+        "headline": "Connecticut Sun vs. Golden State Valkyries - Game Highlights",
+        "description": "Watch the Game Highlights from Connecticut Sun vs. Golden State Valkyries, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329849/connecticut-sun-vs-golden-state-valkyries-game-highlights",
+        "published_at": "2026-07-11T01:38:08Z",
+        "athlete_ids": [
+          4257500,
+          4398935,
+          4398966
+        ],
+        "pro_team_ids": [
+          18,
+          129689
         ]
       },
       {
@@ -59829,6 +60810,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -60551,6 +61545,34 @@
         "athlete_ids": [],
         "pro_team_ids": [
           5,
+          129689
+        ]
+      },
+      {
+        "id": 49329910,
+        "headline": "Valkyries beat the Sun 79-64 for a franchise-record 7th straight win",
+        "description": "— Veronica Burton scored 17 points, Janelle Salaun had 16 points and four 3-pointers off the bench, and the Golden State Valkyries beat the Connecticut Sun 79-64 on Friday night for a franchise-record seventh straight victory.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857054",
+        "published_at": "2026-07-11T01:45:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
+        "id": 49329849,
+        "headline": "Connecticut Sun vs. Golden State Valkyries - Game Highlights",
+        "description": "Watch the Game Highlights from Connecticut Sun vs. Golden State Valkyries, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329849/connecticut-sun-vs-golden-state-valkyries-game-highlights",
+        "published_at": "2026-07-11T01:38:08Z",
+        "athlete_ids": [
+          4257500,
+          4398935,
+          4398966
+        ],
+        "pro_team_ids": [
+          18,
           129689
         ]
       },
@@ -61625,6 +62647,34 @@
         ]
       },
       {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
         "id": 49312199,
         "headline": "Los Angeles hosts Chicago after Ogwumike's 24-point game",
         "description": "Chicago Sky (7-14, 1-7 Eastern Conference) at Los Angeles Sparks (9-11, 5-6 Western Conference)",
@@ -62016,6 +63066,59 @@
         ],
         "pro_team_ids": [
           3,
+          19
+        ]
+      },
+      {
+        "id": 49331286,
+        "headline": "Dallas faces Chicago following Bueckers' 34-point showing",
+        "description": "Chicago Sky (7-15, 1-7 Eastern Conference) at Dallas Wings (15-8, 6-6 Western Conference)",
+        "url": "http://www.espn.com/wnba/preview?gameId=401857062",
+        "published_at": "2026-07-11T06:10:30Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          3,
+          19
+        ]
+      },
+      {
+        "id": 49331202,
+        "headline": "Los Angeles Sparks vs. Chicago Sky - Game Highlights",
+        "description": "Watch the Game Highlights from Los Angeles Sparks vs. Chicago Sky, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49331202/los-angeles-sparks-vs-chicago-sky-game-highlights",
+        "published_at": "2026-07-11T05:53:33Z",
+        "athlete_ids": [
+          1068,
+          2491214,
+          4433405
+        ],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49330891,
+        "headline": "Nneka Ogwumike has a double-double to lead the Sparks past the Sky, 102-87",
+        "description": "— Nneka Ogwumike had 25 points, 12 rebounds and five assists, Erica Wheeler added 15 points and eight assists, and the Los Angeles Sparks beat the Chicago Sky 102-87 on Friday night.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857056",
+        "published_at": "2026-07-11T04:27:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          6,
+          19
+        ]
+      },
+      {
+        "id": 49321738,
+        "headline": "Natasha Cloud, Chicago Sky might be perfect fit after all",
+        "description": "After a tumultuous offseason that left her without a team at the start of training camp, Cloud and the Sky hope the best lies ahead.",
+        "url": "https://www.espn.com/wnba/story/_/id/49321738/wnba-natasha-cloud-chicago-sky",
+        "published_at": "2026-07-10T13:38:33Z",
+        "athlete_ids": [
+          2529137
+        ],
+        "pro_team_ids": [
           19
         ]
       },
@@ -63339,6 +64442,19 @@
         ]
       },
       {
+        "id": 49323824,
+        "headline": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "description": "Dales: Caitlin Clark outside top 10 in WNBA All-Star voting is 'egregious'",
+        "url": "https://www.espn.com/video/clip/_/id/49323824/caitlin-clark-top-10-wnba-all-star-voting-egregious",
+        "published_at": "2026-07-10T13:46:25Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
         "id": 49321521,
         "headline": "With Caitlin Clark out, Kelsey Mitchell powers Fever past Mercury",
         "description": "Kelsey Mitchell's layup with 10.1 seconds lifted the Fever over the Mercury 92-89 Thursday night. Mitchell put Indiana up 90-89 with her layup and Sophie Cunningham added two free throws to secure the win with Caitlin Clark on the bench in street clothes.",
@@ -63410,6 +64526,34 @@
         "athlete_ids": [],
         "pro_team_ids": [
           5,
+          129689
+        ]
+      },
+      {
+        "id": 49329910,
+        "headline": "Valkyries beat the Sun 79-64 for a franchise-record 7th straight win",
+        "description": "— Veronica Burton scored 17 points, Janelle Salaun had 16 points and four 3-pointers off the bench, and the Golden State Valkyries beat the Connecticut Sun 79-64 on Friday night for a franchise-record seventh straight victory.",
+        "url": "http://www.espn.com/wnba/recap?gameId=401857054",
+        "published_at": "2026-07-11T01:45:31Z",
+        "athlete_ids": [],
+        "pro_team_ids": [
+          18,
+          129689
+        ]
+      },
+      {
+        "id": 49329849,
+        "headline": "Connecticut Sun vs. Golden State Valkyries - Game Highlights",
+        "description": "Watch the Game Highlights from Connecticut Sun vs. Golden State Valkyries, 07/10/2026",
+        "url": "https://www.espn.com/video/clip/_/id/49329849/connecticut-sun-vs-golden-state-valkyries-game-highlights",
+        "published_at": "2026-07-11T01:38:08Z",
+        "athlete_ids": [
+          4257500,
+          4398935,
+          4398966
+        ],
+        "pro_team_ids": [
+          18,
           129689
         ]
       },
