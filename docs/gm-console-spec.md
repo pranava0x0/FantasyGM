@@ -1,8 +1,9 @@
 # Spec: GM Console — Waivers 2.0, Trades 2.0, Lineup Reset
 
-> Status: **P1 + P2 shipped 2026-07-16** (`lineups.py`, My Team, lineup panel, Today, mobile
-> bottom nav). P3–P5 planned. Deviations from this document, and what using it taught us that
-> reading it couldn't, are recorded in §10 — read that before starting P3.
+> Status: **P1 + P2 + P3 shipped 2026-07-16** (`lineups.py`, `faab.py`, My Team, lineup panel,
+> Today, mobile bottom nav, Waivers 2.0). P4–P5 planned. Deviations from this document, and
+> what building it taught us that writing it couldn't, are recorded in §10 — read that before
+> starting P4. Several §3 assumptions did not survive contact with the data.
 >
 > Authored 2026-07-16 from a codebase audit
 > plus a competitive survey of ESPN, Yahoo Fantasy Plus, Sleeper, HashtagBasketball,
@@ -494,10 +495,10 @@ Condensed per-product findings; kept here so the spec is self-contained.
 
 ---
 
-## 10. Build log — P1 + P2 (2026-07-16)
+## 10. Build log — P1 + P2 + P3 (2026-07-16)
 
 What shipped, where it diverged from the plan above, and what the plan got wrong. Read this
-before P3; the sections above are the *intent*, this is the *ground truth*.
+before P4; the sections above are the *intent*, this is the *ground truth*.
 
 ### 10.1 Shipped
 
@@ -532,12 +533,55 @@ before P3; the sections above are the *intent*, this is the *ground truth*.
   agree whenever every gap clears the churn threshold, but defining it as the latter would
   advertise points the moves list deliberately declines to chase.
 
-### 10.3 Traps for P3+
+### 10.3 P3 — where §3's assumptions met the data
+
+Waivers 2.0 shipped in full (net gain, add/drop pairing, FAAB bands, intent tags, urgency
+chips). The reframing works: on the 2026-07-06 pool, Monique Akoa Makani projects **52.4
+points and nets Nut +0.0** — she never cracks the optimal nine. Raw projection ranked her a
+top-4 add; net gain correctly says "good, but redundant for you". That single number is the
+phase's whole argument.
+
+But **three of §3's assumptions were wrong**, and each was only findable by measuring:
+
+| §3 said | The data said | What shipped |
+| --- | --- | --- |
+| "$1–8 market" (A3) | 26 paid claims run **$1–$28**; five exceeded $8 | Quote the real distribution — median, high, **and n**. Never clip the tail: the >$8 claims *are* the contested players bid guidance exists for. |
+| Bucket bids by trailing value, `<10 / 10–20 / 20+` ppg (A3) | The `<10` tier is **empty by construction** — nobody claims a sub-10 player; every claimed player trails 15–35/g. correlation(bid, rate) = **0.30, n=27**, not significant. | No tiering. The band scales by our own `net_gain_for_add` — computed, not correlated. |
+| `streamer` = high week proj / low season rate; `anchor` = high rate (A4) | Rate **doesn't vary** among claimable FAs (all 18–23/g). The FA median (16.2) tags everyone an anchor; the rostered median (26.3) tags everyone a streamer. | Split on **schedule**, which does vary: streamer = heavy slate now, ≤2 games next. Real pool: 16 anchor / 2 streamer / 12 untagged — and both streamers are players whose own AI takes independently flagged a lighter slate. |
+
+Also worth knowing:
+
+- **A third of executed claims cost $0** (13 of 39) — uncontested claims are genuinely free.
+  Zero-bid wins stay in the distribution; dropping them would inflate the price of an average
+  add.
+- **`drop_candidate`'s ties are the common case, not the edge case.** Adding a star pushes
+  *two* players out of the optimal nine, so dropping either costs 0 this week. Breaking that
+  tie by roster order discards the better player for nothing. Resolves injured-first, then
+  lowest rate, then fewest games.
+- **Net loss is a this-week number; `is_core` is the rest-of-season guard.** A high-rate
+  player on a light slate can genuinely cost 0 points to drop *this week* while still being a
+  bad drop. That's exactly the real Nut case (Bridget Carleton, 26.3/g, 2 games), and it's why
+  the core warning exists rather than being decoration. If P5's efficiency work gives us a
+  rest-of-season loss estimate, revisit.
+- **A5's claim deep link is still unbuilt** — see §8 Q1. It waits on verification rather than
+  a guessed URL.
+
+### 10.4 Traps for P4+
 
 - **`trades.py` prices OUT players at full value** (12 of 85 in current packages). The lineup
   checker won't start them; the trade generator will acquire them. P2 surfaced the status
   next to the price as a stopgap — **fix the valuation in P4**, and reuse
   `positions.is_confirmed_out()` rather than adding a fourth copy of the status list.
+- **Measure §4's assumptions before building on them.** Three of §3's did not survive contact
+  with the data (10.3), and §4 was written by the same hand on the same day. Specifically:
+  B1's complementarity, B2's fairness ratio, and B3's "you've lost 2 games by less" all assume
+  distributions nobody has checked. `matchup_history` is ~8 games per team — verify a claim
+  like "lost 2 games by less" is actually true before shipping it as the product's most
+  persuasive line. A number that's wrong is worse than a number that's absent.
+- **Reuse `lineups.net_gain_for_add`/`optimal_lineup` for trade impact.** They already handle
+  slot eligibility, OUT players, and saturation, and the parity test keeps them honest against
+  the UI. A second optimizer in `trades.py` would be a fourth place for the nine-slot plan to
+  drift.
 - **Anything bound after `main()`'s `await` is inert during the load.** `state.json` is 2.8 MB;
   the bottom nav and chip were dead until it landed. All chrome now uses one parse-time
   delegated listener — keep new chrome there, not in a post-fetch init.
