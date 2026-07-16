@@ -12905,6 +12905,37 @@
     },
     {
       "player": {
+        "player_id": 4595910,
+        "name": "Haley Jones",
+        "team": "DAL",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 16.51,
+      "projected_per_game": 23.35,
+      "projected_points_this_week": 70.05,
+      "games_this_week": 3,
+      "projected_points_next_week": 46.7,
+      "games_next_week": 2,
+      "season_avg_points": 11.2,
+      "percent_owned": 1.81,
+      "percent_change": -0.02,
+      "base_score": 80.56,
+      "injury_signal": "returning",
+      "recent_games": [],
+      "ai_summary": "Three games next week push her raw weekly total to a top-5 mark (67.8) despite a modest 22.6 per-game rate against an 11.2 season average — this is schedule volume doing the heavy lifting, not a role change. Reasonable Guard-need streamer for the heavy slate, but temper expectations once the schedule normalizes.",
+      "ai_summary_date": null
+    },
+    {
+      "player": {
         "player_id": 5108587,
         "name": "Madina Okot",
         "team": "ATL",
@@ -13151,6 +13182,46 @@
         }
       ],
       "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
+      "ai_summary_date": null
+    },
+    {
+      "player": {
+        "player_id": 4065760,
+        "name": "Tyasha Harris",
+        "team": "IND",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 9.6,
+      "projected_per_game": 14.11,
+      "projected_points_this_week": 14.11,
+      "games_this_week": 1,
+      "projected_points_next_week": 42.32,
+      "games_next_week": 3,
+      "season_avg_points": 9.71,
+      "percent_owned": 0.51,
+      "percent_change": 0.01,
+      "base_score": 14.11,
+      "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 51,
+          "fantasy_points": 31.0
+        },
+        {
+          "scoring_period_id": 42,
+          "fantasy_points": 6.0
+        }
+      ],
+      "ai_summary": "Projecting above her season average (14.11 vs 9.71) at negligible ownership (0.51%) — a cheap speculative Guard-need flier with modest upside evidence.",
       "ai_summary_date": null
     },
     {
@@ -13432,18 +13503,18 @@
     },
     {
       "player": {
-        "player_id": 4257500,
-        "name": "Cecilia Zandalasini",
-        "team": "GS",
-        "position": "F",
-        "bucket": "F",
+        "player_id": 4433797,
+        "name": "Raven Johnson",
+        "team": "IND",
+        "position": "G",
+        "bucket": "G",
         "eligible_slots": [
-          2,
+          1,
           3,
-          4,
           5,
           6,
-          7
+          7,
+          9
         ],
         "injury_status": "ACTIVE"
       },
@@ -13473,7 +13544,7 @@
         },
         {
           "scoring_period_id": 48,
-          "fantasy_points": 27.0
+          "fantasy_points": 16.0
         },
         {
           "scoring_period_id": 45,
@@ -13481,6 +13552,115 @@
         }
       ],
       "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
+      "ai_summary_date": null
+    },
+    {
+      "player": {
+        "player_id": 3099736,
+        "name": "Stephanie Talbot",
+        "team": "LV",
+        "position": "F",
+        "bucket": "F",
+        "eligible_slots": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 9.76,
+      "projected_per_game": 12.46,
+      "projected_points_this_week": 24.92,
+      "games_this_week": 2,
+      "projected_points_next_week": 37.37,
+      "games_next_week": 3,
+      "season_avg_points": 14.32,
+      "percent_owned": 1.37,
+      "percent_change": 0.03,
+      "base_score": 24.92,
+      "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 52,
+          "fantasy_points": 13.0
+        },
+        {
+          "scoring_period_id": 49,
+          "fantasy_points": 8.0
+        },
+        {
+          "scoring_period_id": 47,
+          "fantasy_points": 7.0
+        },
+        {
+          "scoring_period_id": 45,
+          "fantasy_points": 9.0
+        },
+        {
+          "scoring_period_id": 41,
+          "fantasy_points": 16.0
+        }
+      ],
+      "ai_summary": "Modest per-game rate (12.46) against a healthy 14.32 season average, with a two-game week still worth 37.37 raw points. Low-cost Frontcourt-need depth at just 1.37% owned.",
+      "ai_summary_date": null
+    },
+    {
+      "player": {
+        "player_id": 4038379,
+        "name": "Marine Johannes",
+        "team": "NY",
+        "position": "G",
+        "bucket": "G",
+        "eligible_slots": [
+          1,
+          3,
+          5,
+          6,
+          7
+        ],
+        "injury_status": "ACTIVE"
+      },
+      "projected_points_next_period": 13.24,
+      "projected_per_game": 18.65,
+      "projected_points_this_week": 37.3,
+      "games_this_week": 2,
+      "projected_points_next_week": 37.3,
+      "games_next_week": 2,
+      "season_avg_points": 22.8,
+      "percent_owned": 42.18,
+      "percent_change": -0.42,
+      "base_score": 37.3,
+      "injury_signal": null,
+      "recent_games": [
+        {
+          "scoring_period_id": 52,
+          "fantasy_points": 12.0
+        },
+        {
+          "scoring_period_id": 49,
+          "fantasy_points": 11.0
+        },
+        {
+          "scoring_period_id": 47,
+          "fantasy_points": 18.0
+        },
+        {
+          "scoring_period_id": 45,
+          "fantasy_points": 15.0
+        },
+        {
+          "scoring_period_id": 43,
+          "fantasy_points": 16.0
+        },
+        {
+          "scoring_period_id": 41,
+          "fantasy_points": 15.0
+        }
+      ],
+      "ai_summary": "By far the most-owned name in this tier (42.18%) despite an ownership drop of 0.42% this week, Johannes is projecting below her strong 22.8 season average (18.65) and drew social buzz for signing a multi-year Unrivaled deal — worth monitoring for any offseason-focus signal affecting her WNBA workload. Steady Guard-need value if the dip proves temporary.",
       "ai_summary_date": null
     }
   ],
@@ -14904,6 +15084,95 @@
           ],
           "ai_summary": null,
           "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 4433408,
+            "name": "Aaliyah Edwards",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 13.63,
+          "projected_per_game": 17.49,
+          "projected_points_this_week": 34.99,
+          "games_this_week": 2,
+          "projected_points_next_week": 52.48,
+          "games_next_week": 3,
+          "season_avg_points": 18.23,
+          "percent_owned": 10.75,
+          "percent_change": 0.02,
+          "base_score": 34.99,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 26.0
+            },
+            {
+              "scoring_period_id": 43,
+              "fantasy_points": 12.0
+            },
+            {
+              "scoring_period_id": 41,
+              "fantasy_points": 15.0
+            }
+          ],
+          "ai_summary": "Outproducing her season average this week (17.74 vs 18.23 is essentially flat, but the two-game week scales to 53.22 next week), Edwards is a steady 10.75%-owned Frontcourt-need option with real season-long production behind her.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.42,
+          "projected_per_game": 22.47,
+          "projected_points_this_week": 44.95,
+          "games_this_week": 2,
+          "projected_points_next_week": 44.95,
+          "games_next_week": 2,
+          "season_avg_points": 22.5,
+          "percent_owned": 22.51,
+          "percent_change": -0.03,
+          "base_score": 44.95,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 19.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "The definition of proven, stable value — 22.47 projected essentially matches her 22.5 season average, and at 22.51% owned she's no secret. A safe floor Guard-need add for teams that want predictability over upside.",
+          "ai_summary_date": null
         }
       ]
     },
@@ -15350,6 +15619,58 @@
           ],
           "ai_summary": null,
           "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 4399342,
+            "name": "Lexi Held",
+            "team": "PHX",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 17.48,
+          "projected_points_this_week": 34.97,
+          "games_this_week": 2,
+          "projected_points_next_week": 52.45,
+          "games_next_week": 3,
+          "season_avg_points": 12.05,
+          "percent_owned": 1.35,
+          "percent_change": 0.07,
+          "base_score": 34.97,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 10.0
+            },
+            {
+              "scoring_period_id": 44,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 41,
+              "fantasy_points": 9.0
+            }
+          ],
+          "ai_summary": "A modest bump over her season average (14.82 vs 12.05) on next-to-nothing ownership (1.35%) — cheap Guard-need depth riding the same favorable Phoenix schedule as her teammates.",
+          "ai_summary_date": null
         }
       ]
     },
@@ -15491,6 +15812,166 @@
             }
           ],
           "ai_summary": "Vandersloot has been dealing with a knee issue (per an X game-status report listing her OUT), but Reddit chatter suggests her return isn't far off, and her 22.0 season average matches her projected pace once back. Worth a Guard-need stash for the playmaking floor she provides -- confirm her status before the lineup lock.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 4065692,
+            "name": "Aaliyah Wilson",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 56.0,
+          "projected_points_this_week": 56.0,
+          "games_this_week": 1,
+          "projected_points_next_week": 168.0,
+          "games_next_week": 3,
+          "season_avg_points": null,
+          "percent_owned": 0.21,
+          "percent_change": 0.0,
+          "base_score": 56.0,
+          "injury_signal": null,
+          "recent_games": [],
+          "ai_summary": "The clear #1 name in the pool — a 46.5/g projection this week and 139.5 points across three games next week dwarf everything else on the board. Ownership sits at just 0.21% with no season baseline yet, so this reads as a freshly elevated Indiana role; Guard-need teams (Spda, Nut, C9, KylB) should move first given the lack of track record.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 5349415,
+            "name": "Alicia Florez",
+            "team": "WSH",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 23.5,
+          "projected_points_this_week": 47.0,
+          "games_this_week": 2,
+          "projected_points_next_week": 47.0,
+          "games_next_week": 2,
+          "season_avg_points": 15.0,
+          "percent_owned": 0.19,
+          "percent_change": 0.01,
+          "base_score": 54.05,
+          "injury_signal": "returning",
+          "recent_games": [
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 32.0
+            }
+          ],
+          "ai_summary": "The standout signal here: Florez hit late-game heroics in a 4OT thriller, per social buzz calling out her clutch fourth-quarter floater, and projects 23.5/g against a 15.0 season average on almost no ownership (0.19%). Speculative but real-production-backed Guard-need pickup worth a bench spot.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 4433807,
+            "name": "Aziaha James",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 15.46,
+          "projected_per_game": 16.89,
+          "projected_points_this_week": 50.68,
+          "games_this_week": 3,
+          "projected_points_next_week": 33.79,
+          "games_next_week": 2,
+          "season_avg_points": 17.79,
+          "percent_owned": 7.28,
+          "percent_change": -0.04,
+          "base_score": 50.68,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 3.0
+            },
+            {
+              "scoring_period_id": 49,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 40.0
+            },
+            {
+              "scoring_period_id": 44,
+              "fantasy_points": 13.0
+            },
+            {
+              "scoring_period_id": 41,
+              "fantasy_points": 8.0
+            }
+          ],
+          "ai_summary": null,
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.42,
+          "projected_per_game": 22.47,
+          "projected_points_this_week": 44.95,
+          "games_this_week": 2,
+          "projected_points_next_week": 44.95,
+          "games_next_week": 2,
+          "season_avg_points": 22.5,
+          "percent_owned": 22.51,
+          "percent_change": -0.03,
+          "base_score": 44.95,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 19.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "The definition of proven, stable value — 22.47 projected essentially matches her 22.5 season average, and at 22.51% owned she's no secret. A safe floor Guard-need add for teams that want predictability over upside.",
           "ai_summary_date": null
         },
         {
@@ -16456,6 +16937,63 @@
         },
         {
           "player": {
+            "player_id": 4257500,
+            "name": "Cecilia Zandalasini",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 17.75,
+          "projected_points_this_week": 35.5,
+          "games_this_week": 2,
+          "projected_points_next_week": 35.5,
+          "games_next_week": 2,
+          "season_avg_points": 18.75,
+          "percent_owned": 5.54,
+          "percent_change": -0.07,
+          "base_score": 35.5,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 45,
+              "fantasy_points": 15.0
+            },
+            {
+              "scoring_period_id": 43,
+              "fantasy_points": 33.0
+            },
+            {
+              "scoring_period_id": 41,
+              "fantasy_points": 10.0
+            }
+          ],
+          "ai_summary": "Slightly outperforming her season average (19.38 vs 18.75) on a two-game week, Zandalasini is a steady, low-owned (5.54%) Frontcourt-need option with real season-long data behind the number.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
             "player_id": 4433408,
             "name": "Aaliyah Edwards",
             "team": "CON",
@@ -17186,6 +17724,46 @@
             }
           ],
           "ai_summary": "Gustafson just delivered a standout Portland win (per Reddit) and X coverage confirms she's finally settled into a real role with the expansion franchise, matching her 22.05 season average. Her 3-game week next projects 66.8 points (22.3/g) -- a Frontcourt-need target even at 30.5% owned, though this week's ownership dip (-2.83%) is worth watching before the next scoring period.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.42,
+          "projected_per_game": 22.47,
+          "projected_points_this_week": 44.95,
+          "games_this_week": 2,
+          "projected_points_next_week": 44.95,
+          "games_next_week": 2,
+          "season_avg_points": 22.5,
+          "percent_owned": 22.51,
+          "percent_change": -0.03,
+          "base_score": 44.95,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 19.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "The definition of proven, stable value — 22.47 projected essentially matches her 22.5 season average, and at 22.51% owned she's no secret. A safe floor Guard-need add for teams that want predictability over upside.",
           "ai_summary_date": null
         }
       ]
@@ -42730,21 +43308,7 @@
           4433403
         ],
         "pro_team_ids": [
-          3,
-          5,
-          6,
-          8,
-          9,
-          11,
-          14,
-          16,
-          17,
-          18,
-          19,
-          20,
-          129689,
-          131935,
-          132052
+          5
         ]
       },
       {
@@ -42824,9 +43388,7 @@
           17,
           132052
         ]
-      }
-    ],
-    "2999035": [
+      },
       {
         "id": 49349716,
         "headline": "WNBA Power Rankings: The Indiana Fever are running hot",
@@ -51895,6 +52457,32 @@
         "pro_team_ids": [
           8,
           9
+        ]
+      },
+      {
+        "id": 49260740,
+        "headline": "Caitlin Clark condemns hatred, says she's out Sunday (back)",
+        "description": "Caitlin Clark condemns the negative attention directed toward her, the Fever and opposing WNBA players.",
+        "url": "https://www.espn.com/wnba/story/_/id/49260740/caitlin-clark-condemns-hatred-says-sunday-back",
+        "published_at": "2026-07-03T21:49:05Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
+        ]
+      },
+      {
+        "id": 49261095,
+        "headline": "Caitlin Clark condemns hatred toward WNBA players",
+        "description": "Caitlin Clark condemns hatred toward WNBA players",
+        "url": "https://www.espn.com/video/clip/_/id/49261095/caitlin-clark-condemns-hatred-wnba-players",
+        "published_at": "2026-07-03T20:24:38Z",
+        "athlete_ids": [
+          4433403
+        ],
+        "pro_team_ids": [
+          5
         ]
       },
       {
@@ -68507,7 +69095,7 @@
         "subreddit": "wnba"
       }
     ],
-    "4433790": [
+    "5277552": [
       {
         "title": "Azzi Fudd for All-Defensive Team",
         "url": "https://www.reddit.com/r/wnba/comments/1uuy9kz/azzi_fudd_for_alldefensive_team/",
@@ -68853,7 +69441,7 @@
         "subreddit": "fantasywnba"
       }
     ],
-    "4433635": [
+    "2529140": [
       {
         "title": "I need diamond miller and aaliyah edwards to do good today with no Saniya and aneesah",
         "url": "https://www.reddit.com/r/fantasywnba/comments/1uglucj/i_need_diamond_miller_and_aaliyah_edwards_to_do/",
@@ -68879,7 +69467,7 @@
         "subreddit": "wnba"
       }
     ],
-    "5105737": [
+    "4433402": [
       {
         "title": "Betts or Salaun today??",
         "url": "https://www.reddit.com/r/fantasywnba/comments/1uggfbq/betts_or_salaun_today/",
@@ -76883,8 +77471,8 @@
           "composite_score": 0.979
         },
         {
-          "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_id": 8,
+          "from_team_abbrev": "KylB",
           "pkg_received": {
             "players": [
               {
@@ -76960,12 +77548,12 @@
           "pkg_received": {
             "players": [
               {
-                "player_id": 2988756,
-                "name": "Brittney Sykes",
+                "player_id": 3142328,
+                "name": "Gabby Williams",
                 "fantasy_team_id": 1,
                 "fantasy_team_abbrev": "KAH",
-                "projected_per_game": 27.5,
-                "bucket": "G"
+                "projected_per_game": 24.0,
+                "bucket": "F"
               },
               {
                 "player_id": 4698736,
@@ -77100,8 +77688,8 @@
           "pkg_received": {
             "players": [
               {
-                "player_id": 2987891,
-                "name": "Courtney Williams",
+                "player_id": 4684384,
+                "name": "Aneesah Morrow",
                 "fantasy_team_id": 10,
                 "fantasy_team_abbrev": "A-B",
                 "projected_per_game": 33.0,
@@ -77515,8 +78103,8 @@
           "composite_score": 0.975
         },
         {
-          "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_id": 7,
+          "from_team_abbrev": "C9",
           "pkg_received": {
             "players": [
               {
@@ -77540,8 +78128,8 @@
           "pkg_received": {
             "players": [
               {
-                "player_id": 4433790,
-                "name": "Azzi Fudd",
+                "player_id": 3142250,
+                "name": "Jordin Canada",
                 "fantasy_team_id": 10,
                 "fantasy_team_abbrev": "A-B",
                 "projected_per_game": 33.8,
@@ -77692,8 +78280,8 @@
           "pkg_received": {
             "players": [
               {
-                "player_id": 2529130,
-                "name": "Natasha Howard",
+                "player_id": 4433404,
+                "name": "Cameron Brink",
                 "fantasy_team_id": 7,
                 "fantasy_team_abbrev": "C9",
                 "projected_per_game": 25.8,
@@ -77740,8 +78328,8 @@
           "pkg_received": {
             "players": [
               {
-                "player_id": 3142010,
-                "name": "Azura Stevens",
+                "player_id": 4281929,
+                "name": "Satou Sabally",
                 "fantasy_team_id": 5,
                 "fantasy_team_abbrev": "Spda",
                 "projected_per_game": 31.6,
