@@ -18,7 +18,7 @@ from typing import Any
 
 import re
 
-from pipeline import analyze, bluesky as bluesky_mod, instagram as instagram_mod, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
+from pipeline import analyze, bluesky as bluesky_mod, instagram as instagram_mod, lineups, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
 from pipeline.projections_ext import resolve_external_projections
 
 # Per-player cap on news/social items surfaced in state.json. High enough to
@@ -215,6 +215,13 @@ def build_state(
     rolling_window_start = max(1, current_period - 14)
     games_in_rolling_window = schedule.games_per_team(league_raw, rolling_window_start, current_period)
 
+    # Per-day schedule with tip-off times, spanning today's slate through the
+    # end of the upcoming week. `lineups.check_team` needs the day granularity
+    # for "tonight" and the tip-off times to know which players are locked.
+    games_by_period = schedule.games_by_period(
+        league_raw, min(current_period, week_start), week_end
+    )
+
     # Build the player name index first so external projections can be
     # resolved by player_id before the main analysis runs.
     player_name_index = _player_name_index(league_raw, free_agents_raw)
@@ -239,6 +246,37 @@ def build_state(
         player_game_log=player_game_log,
     )
     needs = analyze.compute_team_needs(teams_view)
+
+    # Current-vs-optimal lineup diff per team. `captured_at` is the honest
+    # "now" for lock detection — it's the instant this snapshot describes.
+    # One team's bad roster row must never sink the whole refresh, so each
+    # check is isolated; a team that fails simply ships no lineup panel.
+    lineup_checks: dict[int, schema.TeamLineupCheck] = {}
+    for t in teams_view:
+        team_id_for_check = int(t["team_id"])
+        try:
+            lineup_checks[team_id_for_check] = schema.TeamLineupCheck(
+                **lineups.check_team(
+                    t["roster"],
+                    current_period=current_period,
+                    week_start=week_start,
+                    week_end=week_end,
+                    games_by_period=games_by_period,
+                    now=captured_at,
+                )
+            )
+        except Exception:
+            log.exception(
+                "build_state: lineup check failed for team %s — shipping without a lineup panel",
+                team_id_for_check,
+            )
+    moves_total = sum(
+        len(c.tonight.moves) if c.tonight else 0 for c in lineup_checks.values()
+    )
+    log.info(
+        "build_state: lineup checks for %d/%d teams — %d tonight move(s) available league-wide",
+        len(lineup_checks), len(teams_view), moves_total,
+    )
 
     ranked_fas_dicts = analyze.rank_free_agents(
         free_agents_raw,
@@ -385,6 +423,7 @@ def build_state(
                 frontcourt_gap_vs_league=w["frontcourt_gap_vs_league"],
                 top_need_bucket=w["top_need_bucket"],
             ),
+            lineup_check=lineup_checks.get(team_id_int),
             summary=summaries.get(team_id_int, []),
             recent_transaction_ids=team_txn_ids.get(team_id_int, []),
         )

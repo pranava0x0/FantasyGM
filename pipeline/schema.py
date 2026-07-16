@@ -94,6 +94,59 @@ class TeamNeeds(_Strict):
     top_need_bucket: Literal["G", "FC"]
 
 
+class LineupMove(_Strict):
+    """One lineup action: start `player_in`, gaining `gain_pts`.
+
+    `action="swap"` benches `player_out` to make room. `action="start"` fills
+    an empty active slot (roster shorter than the nine slots) and carries no
+    outgoing player.
+    """
+    action: Literal["swap", "start"]
+    player_in_id: int
+    player_in_name: str
+    player_out_id: int | None = Field(None, description="None when action is 'start' — no one is benched.")
+    player_out_name: str | None = None
+    slot_label: str = Field(..., description="Active slot the incoming player fills (G / F / F/C / UTIL)")
+    gain_pts: float = Field(..., description="Projected points gained by this move; always >= lineups.MIN_SWAP_GAIN_PTS")
+    player_in_game_time: datetime | None = Field(
+        None,
+        description="Tip-off for the incoming player's game. Set on the 'tonight' horizon only; None over a week (several games, no single time) or when ESPN lists the start as TBD.",
+    )
+    player_out_reason: str = Field(
+        ...,
+        description="Why the slot is available: an ESPN injury status (OUT / INJURY_RESERVE / …), 'no game', 'lower projection', or 'empty slot' when action is 'start'.",
+    )
+
+
+class LineupCheck(_Strict):
+    """Current-vs-optimal diff for one team over one horizon."""
+    horizon: Literal["tonight", "week"]
+    status: Literal["set", "moves_available"]
+    points_left_on_bench: float = Field(
+        ...,
+        description="Points the recommended moves would capture — the sum of their gains, not optimal-minus-current, so the headline never promises points the moves list doesn't deliver.",
+    )
+    moves: list[LineupMove] = Field(default_factory=list, description="Minimal swap set, highest gain first.")
+    computed_for_period: int = Field(..., description="Scoring period the check was computed against.")
+    current_points: float = Field(..., description="Projected points from the lineup as actually set.")
+    optimal_points: float = Field(..., description="Projected points from the optimal lineup, locks respected.")
+    locked_player_ids: list[int] = Field(
+        default_factory=list,
+        description="Players whose game already tipped off — immovable, pinned to their current slot. Tonight horizon only.",
+    )
+
+
+class TeamLineupCheck(_Strict):
+    """Both horizons for one team."""
+    tonight: LineupCheck | None = Field(
+        None,
+        description="None when nobody on the roster plays in the current period — an off day has no lineup decision.",
+    )
+    week: LineupCheck
+    week_start_period: int
+    week_end_period: int
+
+
 class TeamState(_Strict):
     team_id: int
     abbrev: str
@@ -109,6 +162,10 @@ class TeamState(_Strict):
     faab_remaining: int | None = None
     roster: list[RosterEntry]
     needs: TeamNeeds
+    lineup_check: TeamLineupCheck | None = Field(
+        None,
+        description="Current-vs-optimal lineup diff. None when the pipeline ran without a per-day schedule (legacy snapshots / tests).",
+    )
     summary: list[str] = Field(default_factory=list, description="Auto-generated bullet summary")
     recent_transaction_ids: list[str] = Field(
         default_factory=list,

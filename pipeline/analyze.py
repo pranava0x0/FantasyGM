@@ -35,6 +35,7 @@ from typing import Any, Literal
 from pipeline.positions import (
     ACTIVE_SLOT_IDS,
     LINEUP_SLOT_LABEL,
+    is_confirmed_out,
     position_bucket,
     position_label,
     slot_label,
@@ -418,11 +419,11 @@ def rank_free_agents(
 def _is_out(player: dict[str, Any]) -> bool:
     """True when the player is confirmed unavailable (OUT or IR).
 
-    DTD and QUESTIONABLE stay in the pool — they may play.
-    ESPN uses the string "OUT" and "INJURY_RESERVE".
+    DTD and QUESTIONABLE stay in the pool — they may play. The status set
+    lives in positions.CONFIRMED_OUT_STATUSES so the ranker, the lineup
+    checker, and the UI all read from one list.
     """
-    status = (player.get("injuryStatus") or "").upper()
-    return status in {"OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"}
+    return is_confirmed_out(player.get("injuryStatus"))
 
 
 def _player_rolling_game_count(player: dict[str, Any], scoring_period_id: int) -> int:

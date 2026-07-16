@@ -5,9 +5,13 @@ team's schedule as `settings.proTeams[*].proGamesByScoringPeriod` — a
 map of `scoringPeriodId -> [games]`. Scoring periods in WNBA fantasy are
 1-day windows, so counting entries gives games-per-team-per-day.
 
-Two surfaces:
+Three surfaces:
 - `games_per_team(league_raw, start, end)` for any closed range
   [start, end].
+- `games_by_period(league_raw, start, end)` for the same range but keeping
+  each game's tip-off time and opponent — the per-day granularity the
+  lineup checker needs to answer "does she play *tonight*, and has that
+  game already locked?"
 - `upcoming_week_periods(league_raw)` for the conventional "next 7 days"
   window used by `analyze.rank_free_agents`. We start at
   `transactionScoringPeriod` (the first period a new pickup actually plays)
@@ -21,9 +25,24 @@ The game-count signal lets the ranker reward players whose pro team has
 from __future__ import annotations
 
 import logging
-from typing import Any
+from datetime import datetime, timezone
+from typing import Any, TypedDict
 
 log = logging.getLogger(__name__)
+
+
+class ProGame(TypedDict):
+    """One pro game, normalized from `proGamesByScoringPeriod`.
+
+    `start_time` is ESPN's `date` (epoch milliseconds, UTC) — present even
+    for future games, which is what makes per-game lineup locks knowable.
+    It is None when ESPN hasn't scheduled a tip-off yet (`startTimeTBD`).
+    """
+    scoring_period_id: int
+    start_time: datetime | None
+    opponent_pro_team_id: int | None
+    is_home: bool
+    valid_for_locking: bool
 
 # Game-count tiers used downstream for both UI labelling and the
 # weight multiplier in `rank_free_agents`. Keep `tier_label` and
@@ -78,6 +97,71 @@ def games_per_team(
             if start_period <= sp <= end_period:
                 count += len(games or [])
         out[int(pid)] = count
+    return out
+
+
+def _game_start_time(game: dict[str, Any]) -> datetime | None:
+    """Parse ESPN's epoch-millisecond `date` into an aware UTC datetime.
+
+    Returns None for TBD tip-offs or unparseable values — callers treat an
+    unknown start time as "not locked yet", which is the safe default: we'd
+    rather suggest a move the user finds already locked on ESPN than hide a
+    move that was still available.
+    """
+    if game.get("startTimeTBD"):
+        return None
+    raw = game.get("date")
+    if not isinstance(raw, (int, float)) or raw <= 0:
+        return None
+    try:
+        return datetime.fromtimestamp(raw / 1000.0, tz=timezone.utc)
+    except (OverflowError, OSError, ValueError):
+        log.warning("schedule: unparseable game date %r on game %s", raw, game.get("id"))
+        return None
+
+
+def games_by_period(
+    league_raw: dict[str, Any],
+    start_period: int,
+    end_period: int,
+) -> dict[int, dict[int, list[ProGame]]]:
+    """Return {proTeamId: {scoringPeriodId: [ProGame, ...]}} for [start, end].
+
+    Same source as `games_per_team`, but keeps each game rather than
+    collapsing to a count — `pipeline.lineups` needs tip-off times to decide
+    which players are already locked tonight. A proTeamId with no games in
+    the window is absent from the result.
+    """
+    if end_period < start_period:
+        raise ValueError(f"end_period {end_period} precedes start_period {start_period}")
+    out: dict[int, dict[int, list[ProGame]]] = {}
+    pro_teams = ((league_raw.get("settings") or {}).get("proTeams") or [])
+    for t in pro_teams:
+        pid = t.get("id")
+        if pid is None:
+            continue
+        pid = int(pid)
+        schedule = t.get("proGamesByScoringPeriod") or {}
+        by_period: dict[int, list[ProGame]] = {}
+        for k, games in schedule.items():
+            try:
+                sp = int(k)
+            except (TypeError, ValueError):
+                continue
+            if not (start_period <= sp <= end_period):
+                continue
+            for g in games or []:
+                is_home = g.get("homeProTeamId") == pid
+                opponent = g.get("awayProTeamId") if is_home else g.get("homeProTeamId")
+                by_period.setdefault(sp, []).append(ProGame(
+                    scoring_period_id=sp,
+                    start_time=_game_start_time(g),
+                    opponent_pro_team_id=int(opponent) if opponent is not None else None,
+                    is_home=bool(is_home),
+                    valid_for_locking=bool(g.get("validForLocking", True)),
+                ))
+        if by_period:
+            out[pid] = by_period
     return out
 
 
