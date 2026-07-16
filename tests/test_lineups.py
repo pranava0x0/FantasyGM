@@ -351,6 +351,166 @@ class TestOptimalLineup:
         assert (9, "UTIL") in [(e["player_id"], slot) for e, slot in active]
 
 
+class TestNetGainForAdd:
+    """The reframing in spec §3.A1: what she *adds*, not what she projects."""
+
+    def test_saturated_position_collapses_the_gain(self) -> None:
+        # The headline case. A 30/g Guard is worth ~nothing to a team whose
+        # optimal nine already contains better Guards everywhere she'd fit —
+        # raw projection can't express that, a lineup diff can.
+        roster = _full_roster()
+        weak_guard = _player(99, "Fringe Guard", "G", slot=7, per_game=5)
+        assert lineups.net_gain_for_add(roster, weak_guard) == 0.0
+
+    def test_real_upgrade_yields_positive_gain(self) -> None:
+        roster = _full_roster()
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        # She displaces the weakest *starter* — Util Two at 16/g — not the
+        # roster's weakest player (Util Three, 14/g), who was already sitting
+        # behind Bench Star. The gain is that difference over 3 games, never
+        # her full projection.
+        assert lineups.net_gain_for_add(roster, star) == pytest.approx(
+            (50 - 16) * 3, abs=0.02
+        )
+
+    def test_empty_slot_gains_her_whole_projection(self) -> None:
+        roster = _full_roster()[:8]      # 8 players, 9 slots
+        add = _player(99, "Add", "F", slot=7, per_game=10)
+        assert lineups.net_gain_for_add(roster, add) == pytest.approx(30.0, abs=0.02)
+
+    def test_out_candidate_gains_nothing(self) -> None:
+        roster = _full_roster()[:8]
+        hurt = _player(99, "Hurt Star", "F", slot=7, per_game=50, injury="OUT")
+        assert lineups.net_gain_for_add(roster, hurt) == 0.0
+
+    def test_gain_is_never_negative(self) -> None:
+        # Adding a player can only ever leave the optimal lineup alone or
+        # improve it — she's optional.
+        roster = _full_roster()
+        for rate in (0, 1, 14, 15, 100):
+            add = _player(99, "X", "G", slot=7, per_game=rate)
+            assert lineups.net_gain_for_add(roster, add) >= 0.0, rate
+
+
+class TestDropCandidate:
+    def test_picks_the_player_the_lineup_misses_least(self) -> None:
+        roster = _full_roster()
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        drop = lineups.drop_candidate(roster, star)
+        assert drop is not None
+        # Adding the star pushes *two* players out of the optimal nine (Util
+        # Two, 16/g and Util Three, 14/g), so dropping either costs 0 this
+        # week. The tie must resolve to the lower-rate player — same price
+        # now, worse asset later.
+        assert drop["player_id"] == 9
+        assert drop["net_loss"] == 0.0
+
+    def test_zero_loss_tie_breaks_to_the_lesser_player(self) -> None:
+        # Regression: breaking the tie by roster order discarded the better
+        # player for nothing.
+        roster = _full_roster()
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        drop = lineups.drop_candidate(roster, star)
+        assert drop is not None
+        by_id = {e["player_id"]: e for e in roster}
+        assert by_id[drop["player_id"]]["projected_per_game"] == 14
+
+    def test_zero_loss_tie_prefers_an_injured_player(self) -> None:
+        roster = _full_roster()
+        roster[7]["injury_status"] = "OUT"     # Util Two — costs 0 either way
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        drop = lineups.drop_candidate(roster, star)
+        assert drop is not None
+        assert drop["player_id"] == 8, "kept an OUT player over a healthy one"
+
+    def test_prefers_a_non_core_player_when_one_is_free(self) -> None:
+        # Spec §3.A2: never propose dropping a top-6 player without warning.
+        # With 7 players and core_rank=6, exactly one is expendable — and the
+        # cheapest drop should be precisely that player.
+        roster = _full_roster()[:7]
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        drop = lineups.drop_candidate(roster, star, core_rank=6)
+        assert drop is not None
+        assert drop["player_id"] == 7      # Util One, the only non-core player
+        assert drop["is_core"] is False
+
+    def test_warns_when_the_only_drop_is_a_core_player(self) -> None:
+        roster = _full_roster()[:4]        # every player is top-6 by rate
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        drop = lineups.drop_candidate(roster, star, core_rank=6)
+        assert drop is not None
+        assert drop["is_core"] is True
+
+    def test_core_is_ranked_by_season_rate_not_this_week(self) -> None:
+        # A star on a 1-game week has low week value but dropping her is still
+        # a mistake — the core flag must key off rate, not the weekly total.
+        roster = _full_roster()
+        roster[0]["games_this_week"] = 1
+        roster[0]["projected_points_this_week"] = 30    # lowest weekly total
+        star = _player(99, "Star", "F", slot=7, per_game=50)
+        drop = lineups.drop_candidate(roster, star)
+        assert drop is not None
+        assert drop["player_id"] != 1, "dropped the roster's best player by rate"
+
+    def test_empty_roster_has_no_drop(self) -> None:
+        assert lineups.drop_candidate([], _player(99, "X", "G", slot=7)) is None
+
+    def test_reports_availability_and_slate(self) -> None:
+        roster = _full_roster()
+        drop = lineups.drop_candidate(roster, _player(99, "Star", "F", slot=7, per_game=50))
+        assert drop is not None
+        assert "injury_status" in drop and "games_this_week" in drop
+
+    def test_no_internal_rank_key_leaks(self) -> None:
+        # The sort key is scaffolding; it must not reach the schema.
+        drop = lineups.drop_candidate(_full_roster(), _player(99, "S", "F", slot=7, per_game=50))
+        assert drop is not None
+        assert "_rank" not in drop
+
+
+class TestTagTarget:
+    """Schedule-based, not rate-based — see tag_target's docstring for why."""
+
+    def test_collapsing_slate_is_a_streamer(self) -> None:
+        p = _player(1, "P", "G", slot=7, per_game=20, games_this_week=3)
+        p["games_next_week"] = 2
+        assert lineups.tag_target(p, reference_rate=16.0) == ["streamer"]
+
+    def test_holding_slate_with_good_rate_is_an_anchor(self) -> None:
+        p = _player(1, "P", "G", slot=7, per_game=20, games_this_week=3)
+        p["games_next_week"] = 3
+        assert lineups.tag_target(p, reference_rate=16.0) == ["anchor"]
+
+    def test_holding_slate_with_weak_rate_is_untagged(self) -> None:
+        # Saying nothing beats inventing a category for "not interesting".
+        p = _player(1, "P", "G", slot=7, per_game=10, games_this_week=3)
+        p["games_next_week"] = 3
+        assert lineups.tag_target(p, reference_rate=16.0) == []
+
+    def test_streamer_beats_anchor_when_both_could_match(self) -> None:
+        # A high rate whose slate evaporates is still a churn candidate.
+        p = _player(1, "P", "G", slot=7, per_game=40, games_this_week=4)
+        p["games_next_week"] = 1
+        assert lineups.tag_target(p, reference_rate=16.0) == ["streamer"]
+
+    def test_thin_slate_both_weeks_is_untagged(self) -> None:
+        p = _player(1, "P", "G", slot=7, per_game=40, games_this_week=2)
+        p["games_next_week"] = 2
+        assert lineups.tag_target(p, reference_rate=16.0) == []
+
+    def test_no_projection_no_tag(self) -> None:
+        p = _player(1, "P", "G", slot=7, per_game=0, games_this_week=3)
+        p["games_next_week"] = 1
+        assert lineups.tag_target(p, reference_rate=16.0) == []
+
+    def test_tags_are_mutually_exclusive(self) -> None:
+        for gtw in range(0, 5):
+            for gnw in range(0, 5):
+                p = _player(1, "P", "G", slot=7, per_game=20, games_this_week=gtw)
+                p["games_next_week"] = gnw
+                assert len(lineups.tag_target(p, reference_rate=16.0)) <= 1
+
+
 class TestFrontendParity:
     """docs/assets/app.js mirrors two pipeline constants. Assert they match.
 

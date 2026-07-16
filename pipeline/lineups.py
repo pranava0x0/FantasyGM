@@ -298,6 +298,159 @@ def check_lineup(
     }
 
 
+# ---------------------------------------------------------------------------
+# Waiver math — net gain and the drop it implies (docs/gm-console-spec.md §3)
+# ---------------------------------------------------------------------------
+
+
+def _lineup_points(roster: list[dict[str, Any]], score_fn: Callable[[dict[str, Any]], float]) -> float:
+    active, _bench = optimal_lineup(roster, score_fn)
+    return sum(score_fn(e) for e, _slot in active)
+
+
+def _week_score(entry: dict[str, Any]) -> float:
+    if is_confirmed_out(entry.get("injury_status")):
+        return 0.0
+    return _score_week(entry)
+
+
+def _next_week_score(entry: dict[str, Any]) -> float:
+    if is_confirmed_out(entry.get("injury_status")):
+        return 0.0
+    return float(entry.get("projected_points_next_week") or 0.0)
+
+
+def net_gain_for_add(
+    roster: list[dict[str, Any]],
+    candidate: dict[str, Any],
+    *,
+    score_fn: Callable[[dict[str, Any]], float] | None = None,
+) -> float:
+    """Points this candidate would add to the team's *optimal lineup*.
+
+    Not her projection — the difference she makes. This is the whole point of
+    the reframing in spec §3.A1: a 30-point Guard is worth ~0 to a team whose
+    nine best already include four better Guards, because she never cracks the
+    lineup. Raw projection can't express that; a lineup diff can.
+
+    Implemented as optimal(roster + her) - optimal(roster), which handles slot
+    saturation for free: if she doesn't make the optimal nine, the two totals
+    are identical and the gain is 0.
+    """
+    fn = score_fn or _week_score
+    before = _lineup_points(roster, fn)
+    after = _lineup_points([*roster, candidate], fn)
+    return round(after - before, 2)
+
+
+def drop_candidate(
+    roster: list[dict[str, Any]],
+    candidate: dict[str, Any],
+    *,
+    score_fn: Callable[[dict[str, Any]], float] | None = None,
+    core_rank: int = 6,
+) -> dict[str, Any] | None:
+    """Who to drop to make room — the player the lineup misses least.
+
+    A claim is a pair in a full-roster league, so a recommendation that names
+    only the add is half an answer.
+
+    Chosen by *net loss*: for each droppable player, what does the optimal
+    lineup lose if she goes (with the candidate added)? Someone who never
+    cracks the lineup costs 0 to drop, which is exactly right.
+
+    Ties are common and matter: adding a star pushes two players out of the
+    optimal nine, and dropping *either* costs 0 points this week. Breaking
+    that tie by roster order would happily discard the better player for
+    nothing, so ties resolve by the spec's rule (§3.A2) — injured first, then
+    lowest season rate, then fewest games left. Cost the same this week, keep
+    the one worth more after it.
+
+    Returns None if the roster is empty. Never returns a player without also
+    reporting whether she's `is_core` (top `core_rank` by season rate): the UI
+    warns rather than silently proposing you drop a cornerstone.
+    """
+    fn = score_fn or _week_score
+    if not roster:
+        return None
+
+    with_add = [*roster, candidate]
+    baseline = _lineup_points(with_add, fn)
+
+    # Season-rate ranking marks cornerstones. Deliberately *not* the same
+    # signal as lineup value: a star on a 1-game week has low week-value but
+    # dropping her is still a mistake.
+    by_rate = sorted(roster, key=lambda e: float(e.get("projected_per_game") or 0.0), reverse=True)
+    core_ids = {int(e["player_id"]) for e in by_rate[:core_rank]}
+
+    best: dict[str, Any] | None = None
+    for entry in roster:
+        pid = int(entry["player_id"])
+        kept = [e for e in with_add if int(e["player_id"]) != pid]
+        loss = round(baseline - _lineup_points(kept, fn), 2)
+        rank = (
+            loss,
+            not is_confirmed_out(entry.get("injury_status")),   # injured first
+            float(entry.get("projected_per_game") or 0.0),      # then lowest rate
+            int(entry.get("games_this_week") or 0),             # then fewest games
+        )
+        if best is None or rank < best["_rank"]:
+            best = {
+                "_rank": rank,
+                "player_id": pid,
+                "player_name": str(entry.get("name") or f"#{pid}"),
+                "net_loss": loss,
+                "is_core": pid in core_ids,
+                "injury_status": entry.get("injury_status"),
+                "games_this_week": int(entry.get("games_this_week") or 0),
+            }
+    if best is not None:
+        best.pop("_rank", None)
+    return best
+
+
+# A slate of this many games or fewer makes a player bench fodder for the
+# week — 2 games can't carry a lineup slot regardless of rate.
+_THIN_SLATE = 2
+
+
+def tag_target(candidate: dict[str, Any], *, reference_rate: float) -> list[str]:
+    """Intent tag: is this a one-week plug or someone to hold?
+
+    `streamer` — a heavy slate now that collapses to <= 2 games next week.
+    Her value is the *schedule*, and the schedule expires. Claim her, start
+    her, drop her when the slate turns.
+    `anchor` — the slate holds next week too, and her rate is at or above the
+    target pool's median. Worth the roster spot.
+
+    Answers "keep or churn?" at a glance and heads off the classic loop of
+    picking someone up for the games and never letting go of the bench spot.
+
+    **Why schedule and not rate.** The spec framed this as rate-vs-rate
+    ("streamer = high this-week proj, low season per-game"). Measured against
+    the real pool, that can't split anything: every claimable free agent rates
+    18-23 fpts/g, so any rate threshold tags all of them the same way — the FA
+    median (16.2) makes everyone an anchor, the rostered median (26.3) makes
+    everyone a streamer. Rate simply doesn't vary among players worth claiming.
+    Games do (2-4 a week, swinging week to week), and that variance is exactly
+    what "keep or churn" turns on. Verified on the 2026-07-06 pool: 16 anchor /
+    2 streamer / 12 untagged across the top 30 — and the two streamers are the
+    players whose own AI takes independently flagged a lighter slate ahead.
+    """
+    per_game = float(candidate.get("projected_per_game") or 0.0)
+    games_this = int(candidate.get("games_this_week") or 0)
+    games_next = int(candidate.get("games_next_week") or 0)
+    if per_game <= 0:
+        return []
+    if games_this > _THIN_SLATE and games_next <= _THIN_SLATE:
+        return ["streamer"]
+    if games_next > _THIN_SLATE and reference_rate > 0 and per_game >= reference_rate:
+        return ["anchor"]
+    # Neither a spike nor a hold. Saying nothing beats inventing a category
+    # for "not especially interesting".
+    return []
+
+
 def check_team(
     roster: list[dict[str, Any]],
     *,

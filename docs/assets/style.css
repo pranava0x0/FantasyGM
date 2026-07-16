@@ -2266,6 +2266,99 @@ body.modal-open { overflow: hidden; }
    other card in the row to match it. */
 .team-grid { align-items: start; }
 
+/* ---------- Waivers 2.0 (spec §3) ---------- */
+
+/* Intent tags. Amber = the schedule is doing the work and it expires;
+   green = she holds. Deliberately quieter than the net-gain number — the
+   tag is context, the number is the decision. */
+.intent-pill {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  border: 1px solid currentColor; border-radius: 999px; padding: 1px 6px;
+}
+.intent-streamer { color: var(--bucket-forward); }
+.intent-anchor   { color: var(--gap-strong); }
+
+.tonight-pill {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 1px 6px; white-space: nowrap;
+}
+
+/* The decision number. Serif display, matching the lineup panel's headline —
+   our signature against ESPN's all-sans (DESIGN.md §2). */
+.waiver-net {
+  display: grid; justify-items: end; align-content: center; gap: 1px;
+  min-width: 92px;
+}
+.waiver-net-num {
+  font-family: var(--font-serif); font-variant-numeric: tabular-nums;
+  font-size: 20px; font-weight: 700; line-height: 1.1;
+}
+.waiver-net-num.is-pos  { color: var(--gap-strong); }
+/* A zero gain is information, not an error — muted, never alarming. */
+.waiver-net-num.is-zero { color: var(--text-muted); font-size: 16px; }
+.waiver-net-label {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); white-space: nowrap;
+}
+.waiver-net-sub { font-size: 10.5px; color: var(--text-muted); }
+
+/* Claim sheet line: drop + bid, spanning the card. */
+.waiver-claim {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  border-top: 1px dashed var(--border);
+  margin-top: 6px; padding-top: 6px;
+  font-size: 12px;
+}
+.waiver-claim-verb {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--gap-weak);
+}
+.waiver-claim-name { font-weight: 600; }
+.waiver-claim-cost { color: var(--text-muted); font-size: 11.5px; }
+
+.core-pill {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--gap-weak); border: 1px solid currentColor;
+  border-radius: 999px; padding: 1px 6px; white-space: nowrap;
+}
+
+.waiver-bid {
+  margin-left: auto;
+  display: inline-flex; align-items: baseline; gap: 6px;
+  cursor: help;
+}
+.waiver-bid-amt {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: 13px; font-weight: 700; color: var(--text);
+}
+/* Provenance rides next to the band, always. n= is what separates "this
+   league's revealed prices" from an invented market rate. */
+.waiver-bid-ctx { font-size: 10px; color: var(--text-muted); white-space: nowrap; }
+
+.waiver-fit {
+  grid-column: 1 / -1;
+  display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+  font-size: 11.5px; margin-top: 4px;
+}
+.waiver-fit-label {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.waiver-fit-team {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--gap-strong); background: var(--surface-2);
+  border-radius: 4px; padding: 1px 5px;
+}
+
+@media (max-width: 480px) {
+  /* The net-gain block sits in the schedule's grid area on mobile, so it
+     inherits the card's existing reflow instead of squeezing the name. */
+  .waiver-net { justify-items: start; min-width: 0; }
+  .waiver-bid { margin-left: 0; }
+}
+
 /* ---------- Sheets (team picker, More) ---------- */
 
 .sheet { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; }

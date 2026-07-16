@@ -487,6 +487,86 @@
     });
   }
 
+  // The headline number, team-scoped: what she adds to *your* optimal lineup.
+  // A zero here is the most useful thing on the card — it means "she's good,
+  // but not for you", which a raw projection actively hides.
+  function netGainBlock(t) {
+    const gain = t.net_gain_this_week || 0;
+    const helps = gain > 0.05;
+    const block = el("div", { className: "waiver-net" });
+    block.appendChild(el("span", {
+      className: `waiver-net-num ${helps ? "is-pos" : "is-zero"}`,
+      text: helps ? `▲ +${fmtPoints(gain)}` : "—",
+    }));
+    block.appendChild(el("span", {
+      className: "waiver-net-label",
+      text: helps ? "net this wk" : "no lineup gain",
+    }));
+    // Always show the raw projection the net gain is derived from. The whole
+    // point of this block is that the two numbers differ — hiding the input
+    // would just replace one unexplained number with another.
+    block.appendChild(el("span", {
+      className: "waiver-net-sub",
+      text: `${fmtPoints(t.projected_points_this_week)} proj`
+        + (helps && t.net_gain_next_week != null && t.net_gain_next_week > 0.05
+            ? ` · +${fmtPoints(t.net_gain_next_week)} next`
+            : ""),
+    }));
+    return block;
+  }
+
+  // "ADD her · DROP K. Martin · bid $3–7" — the whole claim in one line.
+  // A claim is a pair in a full-roster league, so naming only the add is
+  // half an answer.
+  function claimLine(t) {
+    const drop = t.drop_candidate;
+    const bid = t.bid_guidance;
+    if (!drop && !bid) return null;
+
+    const line = el("div", { className: "waiver-claim" });
+    if (drop) {
+      line.appendChild(el("span", { className: "waiver-claim-verb", text: "Drop" }));
+      line.appendChild(playerNameBtn(drop.player_id, drop.player_name, "waiver-claim-name"));
+      if (drop.injury_status && drop.injury_status !== "ACTIVE") {
+        line.appendChild(el("span", { className: "own-neg injury-pill", text: drop.injury_status.replace(/_/g, " ") }));
+      }
+      line.appendChild(el("span", {
+        className: "waiver-claim-cost",
+        text: drop.net_loss > 0.05 ? `costs ${fmtPoints(drop.net_loss)}` : "costs nothing",
+      }));
+      // Spec §3.A2: never propose dropping a cornerstone silently. The pick
+      // is still right on this week's points — the warning is about the rest
+      // of the season, which weekly net-loss can't see.
+      if (drop.is_core) {
+        line.appendChild(el("span", {
+          className: "pill core-pill",
+          attrs: { title: "Top 6 on your roster by season rate. She may cost nothing this week only because her slate is light — dropping her is a rest-of-season downgrade." },
+          text: "Core player",
+        }));
+      }
+    }
+    if (bid) {
+      const bidEl = el("span", { className: "waiver-bid" });
+      bidEl.appendChild(el("span", {
+        className: "waiver-bid-amt",
+        text: bid.suggested_lo === bid.suggested_hi ? `$${bid.suggested_lo}` : `$${bid.suggested_lo}–${bid.suggested_hi}`,
+      }));
+      // The band's provenance, always. Without the n this reads like a market
+      // rate; with it, it reads as what it is — this league's own prices.
+      bidEl.setAttribute(
+        "title",
+        `This league's ${bid.sample_n} executed claims: median $${bid.league_median}, high $${bid.league_max}, ` +
+        `${bid.free_claims} went for $0. You have $${bid.faab_remaining ?? "?"}.`,
+      );
+      bidEl.appendChild(el("span", {
+        className: "waiver-bid-ctx",
+        text: `med $${bid.league_median} · hi $${bid.league_max} · n=${bid.sample_n}`,
+      }));
+      line.appendChild(bidEl);
+    }
+    return line;
+  }
+
   function waiverCard(t, idx, fitBucket) {
     const p = t.player;
     const sub = el("span", { className: "waiver-sub" });
@@ -509,8 +589,11 @@
 
     const nameLine = el("span", { className: "waiver-name" });
     nameLine.appendChild(playerNameBtn(p.player_id, p.name, "waiver-name-text"));
-    if (fitBucket && p.bucket === fitBucket) {
-      nameLine.appendChild(el("span", { className: "fit-pill", text: `Fits ${fitBucket}` }));
+    // `fitBucket` is a needs bucket ("G" or "FC"), the player's is a position
+    // ("G"/"F"/"C") — so FC has to match F or C. Comparing them directly
+    // meant the pill silently never rendered for a frontcourt need.
+    if (fitBucket && (fitBucket === "FC" ? (p.bucket === "F" || p.bucket === "C") : p.bucket === fitBucket)) {
+      nameLine.appendChild(el("span", { className: "fit-pill", text: `Fits ${fitBucket === "FC" ? "F/C" : fitBucket}` }));
     }
     if (t.promoted_for_need) {
       nameLine.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
@@ -526,20 +609,73 @@
     const thisWkPts = t.projected_points_this_week ?? t.projected_points_next_period ?? 0;
     const nextWkPts = t.projected_points_next_week ?? 0;
 
+    // Games this week. Load-bearing, not decoration: it's the usual reason a
+    // high-rate player shows no lineup gain. Without it the card reads
+    // "24.6/g · no lineup gain", which looks like a bug rather than "she only
+    // plays twice this week".
+    const gp = gamesPill(t.games_this_week);
+    if (gp) sub.appendChild(gp);
+
+    // Waivers 2.0 chips (spec §3.A4): why this player, why now. Rendered
+    // before the projections so the *reason* precedes the arithmetic.
+    (t.tags || []).forEach((tag) => {
+      sub.appendChild(el("span", {
+        className: `pill intent-pill intent-${tag}`,
+        attrs: {
+          title: tag === "streamer"
+            ? "Heavy slate this week, ≤2 games next — the value is the schedule. Claim, start, then drop."
+            : "Her rate holds and so does the slate. Worth the roster spot.",
+        },
+        text: tag === "streamer" ? "Streamer" : "Anchor",
+      }));
+    });
+    if (t.plays_tonight) {
+      sub.appendChild(el("span", { className: "pill tonight-pill", text: "Plays tonight" }));
+    }
+
     const children = [
       el("span", { className: "waiver-rank", text: String(idx + 1) }),
       el("div", {
         className: "waiver-body",
         children: [nameLine, sub],
       }),
-      el("div", {
+    ];
+
+    // Team-scoped: the decision number is net gain over your current lineup,
+    // not the raw projection (spec §3.A1). "31.4 proj" doesn't tell you
+    // whether she'd even play for you; "+9.2 net" does.
+    if (t.net_gain_this_week != null) {
+      children.push(netGainBlock(t));
+    } else {
+      children.push(el("div", {
         className: "waiver-schedule",
         children: [
           weekBlock(t.games_this_week, thisWkPts, "this wk"),
           weekBlock(t.games_next_week, nextWkPts, "next wk"),
         ],
-      }),
-    ];
+      }));
+    }
+
+    // The claim sheet: add/drop pairing + what to bid (spec §3.A2-A3). Only
+    // when she'd actually improve the lineup — proposing a drop and a bid for
+    // a player who never cracks the nine is advice to spend budget and a
+    // roster spot for zero points.
+    const claim = claimLine(t);
+    if (claim) children.push(claim);
+
+    // League-wide: no roster to measure against, so answer "who does she help
+    // most?" instead of showing a net gain we can't compute (spec §3.A1).
+    if ((t.best_fit || []).length) {
+      const fit = el("div", { className: "waiver-fit" });
+      fit.appendChild(el("span", { className: "waiver-fit-label", text: "Best fit" }));
+      t.best_fit.forEach((f) => {
+        fit.appendChild(el("span", {
+          className: "waiver-fit-team",
+          text: `${f.team_abbrev} +${fmtPoints(f.net_gain)}`,
+        }));
+      });
+      children.push(fit);
+    }
 
     // AI "why pick them up" take, spanning the full card width below the
     // top row. Clamped to keep the list scannable; full text in the modal.
@@ -559,14 +695,34 @@
     return el("li", { className: "waiver-card", children });
   }
 
-  function renderWaivers(overall) {
+  // Scopes to My Team when one is picked (spec §6): the per-team list is
+  // already reordered for your needs and carries the net-gain / drop / bid
+  // fields. Falls back to the league-wide list otherwise — that view stays a
+  // feature, not a casualty.
+  function renderWaivers(state) {
     const list = $("#waiver-list");
+    const sub = $("#waivers-sub");
     list.replaceChildren();
-    if (!overall || overall.length === 0) {
+
+    const team = myTeam();
+    const scoped = team
+      ? (state.waiver_targets_by_team || []).find((r) => r.team_id === team.team_id)
+      : null;
+    const targets = scoped ? scoped.targets : (state.waiver_targets_overall || []);
+
+    if (sub) {
+      sub.textContent = team
+        ? `Ranked by what each add gives ${team.abbrev}'s optimal lineup this week — not raw projection. ` +
+          `A target with no gain is good but redundant for this roster. Bids are priced off the league's own claim history.`
+        : "Ranked by projected points next week (per-game projection × games next week). " +
+          "Pick your team in the header to see net gain over your own lineup, plus the drop and bid each claim implies.";
+    }
+
+    if (!targets.length) {
       list.appendChild(el("li", { className: "empty", text: "No waiver targets — pipeline hasn't run yet." }));
       return;
     }
-    overall.forEach((t, i) => list.appendChild(waiverCard(t, i)));
+    targets.forEach((t, i) => list.appendChild(waiverCard(t, i, team ? team.needs.top_need_bucket : null)));
   }
 
   // ---------- Render: team needs ----------
@@ -2184,6 +2340,9 @@
     // no refetch) and keeps "switch team" from needing a page reload.
     const rerender = () => {
       renderToday(state);
+      // Waivers re-scope to the newly picked team — net gain, drop pairing,
+      // and bid band are all roster-relative.
+      renderWaivers(state);
       renderTeams(teams, state.waiver_targets_by_team, state.transactions_recent);
       renderTeamPicker(teams, rerender);
     };
@@ -2253,7 +2412,7 @@
       initMyTeam(state.teams);
       renderMeta(state.meta || {});
       renderToday(state);
-      renderWaivers(state.waiver_targets_overall);
+      renderWaivers(state);
       renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);
       renderTrades(state);
       initTradeCalc(state);

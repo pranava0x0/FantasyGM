@@ -12,13 +12,14 @@ from __future__ import annotations
 
 import json
 import logging
+import statistics
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import re
 
-from pipeline import analyze, bluesky as bluesky_mod, instagram as instagram_mod, lineups, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
+from pipeline import analyze, bluesky as bluesky_mod, faab, instagram as instagram_mod, lineups, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
 from pipeline.projections_ext import resolve_external_projections
 
 # Per-player cap on news/social items surfaced in state.json. High enough to
@@ -322,6 +323,13 @@ def build_state(
     ai_summaries = ai_summaries or {}
     summary_dates = summary_dates or {}
 
+    # Median projected rate across this week's ranked targets. The streamer /
+    # anchor split is rate-vs-rate against this, so the tag means "relative to
+    # what else is actually available" rather than an arbitrary constant.
+    _rates = [float(d.get("projected_per_game") or 0.0) for d in ranked_fas_dicts]
+    _rates = [r for r in _rates if r > 0]
+    reference_rate = statistics.median(_rates) if _rates else 0.0
+
     # Normalize transactions once up front — we need them for both the
     # global feed and per-team grouping.
     transactions_raw = analyze.normalize_transactions(league_raw)
@@ -348,6 +356,11 @@ def build_state(
             reverse=True,
         )
         log.info("build_state: merged %d extra transactions (total=%d)", len(extra_transactions), len(transactions_raw))
+
+    # FAAB market — priced off the league's own executed claims. Computed
+    # *after* the history merge: league_raw alone carries only a recent
+    # window, and a season of claims is the whole point of the band.
+    faab_market = faab.build_market(transactions_raw)
 
     current_matchup_period = int((league_raw.get("status") or {}).get("currentMatchupPeriod") or 0)
 
@@ -436,14 +449,70 @@ def build_state(
             active_counts={k: int(v) for k, v in t["active_counts"].items()},
             limit=10,
         )
+        # Waivers 2.0: reframe each card from "what she projects" to "what she
+        # adds to *your* lineup, and who you'd drop for her" (spec §3.A1-A3).
+        gains = [
+            lineups.net_gain_for_add(t["roster"], d) for d in team_targets
+        ]
+        median_gain = statistics.median([g for g in gains if g > 0]) if any(g > 0 for g in gains) else 0.0
+        team_extras: list[dict[str, Any]] = []
+        for d, gain in zip(team_targets, gains):
+            # A pickup that never cracks the optimal nine implies no drop and
+            # no bid — proposing either would be advice to spend budget and a
+            # roster spot for zero points.
+            drop = lineups.drop_candidate(t["roster"], d) if gain > 0 else None
+            team_extras.append({
+                "net_gain_this_week": gain,
+                "net_gain_next_week": lineups.net_gain_for_add(
+                    t["roster"], d, score_fn=lineups._next_week_score
+                ),
+                "drop_candidate": schema.DropCandidate(**drop) if drop else None,
+                "bid_guidance": (
+                    schema.BidGuidance(**bg)
+                    if gain > 0 and (bg := faab.suggest_bid(
+                        faab_market,
+                        net_gain=gain,
+                        reference_gain=median_gain,
+                        faab_remaining=t["faab_remaining"],
+                    )) else None
+                ),
+                "tags": lineups.tag_target(d, reference_rate=reference_rate),
+                "plays_tonight": _plays_tonight(d, current_period, games_by_period),
+            })
         by_team_targets.append(
             schema.WaiverTargetsByTeam(
                 team_id=team_id_int,
-                targets=[_to_waiver_target(d, ai_summaries, summary_dates) for d in team_targets],
+                targets=[
+                    _to_waiver_target(d, ai_summaries, summary_dates, extras=x)
+                    for d, x in zip(team_targets, team_extras)
+                ],
             )
         )
 
-    overall_targets = [_to_waiver_target(d, ai_summaries, summary_dates) for d in ranked_fas_dicts[:30]]
+    # League-wide list: no roster to measure against, so instead of a net gain
+    # it answers "who does she help most?" — the two teams who gain the most.
+    overall_targets = []
+    for d in ranked_fas_dicts[:30]:
+        fits = sorted(
+            (
+                {
+                    "team_id": int(t["team_id"]),
+                    "team_abbrev": str(t["abbrev"] or f"T{t['team_id']}"),
+                    "net_gain": lineups.net_gain_for_add(t["roster"], d),
+                }
+                for t in teams_view
+            ),
+            key=lambda f: f["net_gain"],
+            reverse=True,
+        )
+        overall_targets.append(_to_waiver_target(
+            d, ai_summaries, summary_dates,
+            extras={
+                "tags": lineups.tag_target(d, reference_rate=reference_rate),
+                "plays_tonight": _plays_tonight(d, current_period, games_by_period),
+                "best_fit": [schema.BestFit(**f) for f in fits[:2] if f["net_gain"] > 0],
+            },
+        ))
 
     # Trade scenario evaluator: per-team "trade your best player" analysis.
     from pipeline import trades as trades_mod
@@ -899,6 +968,19 @@ def _build_matchup_history(
     return by_team
 
 
+def _plays_tonight(
+    d: dict[str, Any],
+    current_period: int,
+    games_by_period: dict[int, dict[int, list[Any]]],
+) -> bool:
+    """Does this target's pro team play in the current scoring period?
+
+    The "claim her now, not tomorrow" signal — Hashtag's core filter, and the
+    one urgency cue a ranked list otherwise can't express.
+    """
+    return bool(lineups.plays_in_period(d.get("pro_team_id"), current_period, games_by_period))
+
+
 def _build_current_matchups(
     league_raw: dict[str, Any],
     current_matchup_period: int,
@@ -957,9 +1039,22 @@ def _to_waiver_target(
     d: dict[str, Any],
     ai_summaries: dict[str, str] | None = None,
     summary_dates: dict[str, str] | None = None,
+    *,
+    extras: dict[str, Any] | None = None,
 ) -> schema.WaiverTarget:
+    """Build one WaiverTarget. `extras` carries the Waivers 2.0 fields
+    (net gain, drop pairing, bid band, tags) — absent on the league-wide
+    list, which has no roster to measure a gain against."""
     pid = str(d["player_id"])
+    extras = extras or {}
     return schema.WaiverTarget(
+        net_gain_this_week=extras.get("net_gain_this_week"),
+        net_gain_next_week=extras.get("net_gain_next_week"),
+        drop_candidate=extras.get("drop_candidate"),
+        bid_guidance=extras.get("bid_guidance"),
+        tags=extras.get("tags") or [],
+        plays_tonight=bool(extras.get("plays_tonight", False)),
+        best_fit=extras.get("best_fit") or [],
         player=schema.PlayerRef(
             player_id=int(d["player_id"]),
             name=str(d["name"] or "Unknown"),

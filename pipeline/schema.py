@@ -190,6 +190,41 @@ class TeamState(_Strict):
     )
 
 
+class BidGuidance(_Strict):
+    """What to bid, priced off this league's own executed claims.
+
+    Deliberately carries `sample_n` and `free_claims` so the UI can show the
+    band's provenance. A band with n=26 quoted without its n reads like a
+    market rate; quoted with it, it reads like what it is — this league's
+    revealed prices. See `pipeline/faab.py` for why the spec's value-tier
+    bucketing was dropped.
+    """
+    suggested_lo: int
+    suggested_hi: int
+    league_median: int = Field(..., description="Median winning bid across executed claims (zero-bid wins included).")
+    league_max: int = Field(..., description="Largest winning bid on record — the tail the '$1-8 market' assumption missed.")
+    sample_n: int = Field(..., description="Executed claims behind the band.")
+    free_claims: int = Field(..., description="How many of those cost $0 — an uncontested claim is genuinely free.")
+    faab_remaining: int | None = Field(None, description="The team's budget at capture; the band is clamped to it.")
+
+
+class DropCandidate(_Strict):
+    """Who to drop to make room — a claim is a pair in a full-roster league."""
+    player_id: int
+    player_name: str
+    net_loss: float = Field(..., description="Points the optimal lineup loses without her. 0 = she never cracked it.")
+    is_core: bool = Field(..., description="True when she's top-6 on the roster by season rate — the UI warns rather than proposing it silently.")
+    injury_status: str | None = None
+    games_this_week: int = 0
+
+
+class BestFit(_Strict):
+    """Which teams gain most from an add — the league-wide view's sub-line."""
+    team_id: int
+    team_abbrev: str
+    net_gain: float
+
+
 class WaiverTarget(_Strict):
     """A free-agent ranked for pickup, optionally with per-team adjustment."""
     player: PlayerRef
@@ -224,6 +259,33 @@ class WaiverTarget(_Strict):
     ai_summary_date: str | None = Field(
         None,
         description="ISO date (YYYY-MM-DD) when ai_summary was last authored. Used to surface staleness when a player drops off the top-30 and the summary is not refreshed.",
+    )
+    # --- Waivers 2.0 (spec §3). Team-scoped fields are None on the
+    # league-wide list, which has no roster to measure a gain against.
+    net_gain_this_week: float | None = Field(
+        None,
+        description="Points this add would add to the team's OPTIMAL lineup this week — not her projection. Collapses toward 0 when the team is saturated at her position, which raw projection can't express.",
+    )
+    net_gain_next_week: float | None = None
+    drop_candidate: DropCandidate | None = Field(
+        None,
+        description="The paired drop. None on the league-wide list.",
+    )
+    bid_guidance: BidGuidance | None = Field(
+        None,
+        description="None when the league's claim history is too thin to quote (< faab.MIN_SAMPLE) or the team has no budget left.",
+    )
+    tags: list[str] = Field(
+        default_factory=list,
+        description="Intent tags: 'streamer' (below-median rate, heavy slate — churn) or 'anchor' (at/above-median rate — hold). Empty when neither applies.",
+    )
+    plays_tonight: bool = Field(
+        False,
+        description="Her pro team plays in the current scoring period — Hashtag's core filter primitive, and the reason to claim now rather than tomorrow.",
+    )
+    best_fit: list[BestFit] = Field(
+        default_factory=list,
+        description="League-wide list only: the teams who gain most from this add, best first.",
     )
 
 
