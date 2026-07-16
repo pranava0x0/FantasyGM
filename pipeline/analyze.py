@@ -35,6 +35,7 @@ from typing import Any, Literal
 from pipeline.positions import (
     ACTIVE_SLOT_IDS,
     LINEUP_SLOT_LABEL,
+    is_confirmed_out,
     position_bucket,
     position_label,
     slot_label,
@@ -214,7 +215,13 @@ def build_team_views(
             "logo": t.get("logo"),
             "division_id": t.get("divisionId"),
             "waiver_position": t.get("waiverRank"),
-            "faab_remaining": ((t.get("transactionCounter") or {}).get("acquisitionBudgetSpent") is not None) and _faab_remaining(t, league_raw) or None,
+            # Straight call: `_faab_remaining` already returns None for every
+            # unknown case. Guarding it with `... and _faab_remaining(...) or None`
+            # collapsed a real remaining balance of *zero* to None — a team that
+            # had spent its whole budget read as "unknown", which reads as
+            # "no limit" downstream and let `faab.suggest_bid` quote bids it
+            # could not pay.
+            "faab_remaining": _faab_remaining(t, league_raw),
             "record": {
                 "wins": int(record.get("wins") or 0),
                 "losses": int(record.get("losses") or 0),
@@ -418,11 +425,11 @@ def rank_free_agents(
 def _is_out(player: dict[str, Any]) -> bool:
     """True when the player is confirmed unavailable (OUT or IR).
 
-    DTD and QUESTIONABLE stay in the pool — they may play.
-    ESPN uses the string "OUT" and "INJURY_RESERVE".
+    DTD and QUESTIONABLE stay in the pool — they may play. The status set
+    lives in positions.CONFIRMED_OUT_STATUSES so the ranker, the lineup
+    checker, and the UI all read from one list.
     """
-    status = (player.get("injuryStatus") or "").upper()
-    return status in {"OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"}
+    return is_confirmed_out(player.get("injuryStatus"))
 
 
 def _player_rolling_game_count(player: dict[str, Any], scoring_period_id: int) -> int:

@@ -49,6 +49,8 @@ A subagent is not a free "go find it" button. It carries fixed overhead — its 
 
 > **Scar tissue (2026-06-19).** Spawned an `Explore` agent to "find the sorting logic" for the waiver list. It cost a large multi-file report and recommended two edit sites — but **missed `build_state.py:254`**, a downstream re-sort that actually controlled the displayed order. `grep -rn '\.sort(\|sorted(' pipeline/ docs/` would have surfaced all 22 sort sites (including that one) in a single cheap call. Lesson: for "where is X?" on a greppable codebase, grep first; reserve subagents for real fan-out.
 
+> **Scar tissue (2026-07-16) — grep before you *write* a tool, not just before you read one.** Needed to rebuild `state.json` from a snapshot without ESPN cookies, and hand-rolled a ~100-line script in the scratchpad to do it. `scripts/rebuild_state.py` already existed and did exactly that, better (it passes `extra_transactions`, which the hand-rolled one missed — collapsing `transactions_recent` from 338 rows to 4). One `ls scripts/` or `grep -rn "def build_state(" --include=*.py` would have found it in seconds. **The search ladder applies to "does a tool for this exist?" as much as to "where is X?" — check `scripts/` and grep for the function you're about to call before writing a caller for it.**
+
 ---
 
 ## Verifying changes
@@ -67,6 +69,13 @@ Default verification matrix (project-specific `AGENTS.md` should override with c
 **For UI changes**, also run the app locally and click through the affected views — type checks and unit tests verify code correctness, not feature correctness.
 
 **For data changes**, diff the canonical output (`docs/data/*.json` or equivalent) and skim the diff before committing. A 30-second skim catches regressions tests miss (especially around character encoding, pretty-printer drift, and unintended fields).
+
+### Browser-automation scar tissue (2026-07-16)
+
+- **The first click after a `navigate` is swallowed.** It activates the page instead of hitting the element. Reproduced exactly: same button, same ref, same coordinates — first click no-ops, second works. Cost ~8 turns of debugging a "broken" button that was never broken, and produced a wrong root-cause hypothesis on the way. **Always click twice, or click something harmless first, before concluding a control is dead.**
+- **`computer` coordinates are not screenshot pixels.** A screenshot returns 800×450 for a 1280×720 viewport; passing those coordinates back clicks somewhere else entirely (silently). **Use `read_page` → `ref_N` and click by ref.** Refs are also stable across re-renders.
+- **`read_page` is the a11y tree, and that's a feature.** It exposes what a screenshot cannot: an icon+label button with an `aria-hidden` icon renders perfectly and exposes *no accessible name*. Two whole nav bars shipped that way this session and only `read_page` caught it. Read the tree, not the pixels, for anything interactive.
+- **Scrolling far past content can blank the renderer** and then `computer` times out at 30s. Prefer `get_page_text` / `read_page` over scroll-and-screenshot for content far down a long list.
 
 ---
 
@@ -88,6 +97,8 @@ Rules learned from running research and data-collection workflows across this fo
 
 **7 — Seed-then-spawn.** Run cheap inline searches first to fix the JSON contract (field names, id shapes, ranking keys). Only then spawn agents with the exact schema baked into their prompt. This session had zero parse/retry loops because the contract was proven before agents were launched. Spawning first and debugging the schema across 8 parallel agents costs 8× the tokens.
 
+**8 — Sequential implementation is a zero-agent task; don't manufacture fan-out.** The GM Console P1–P3 build (2026-07-16, ~2.9k lines across pipeline + UI + tests) used **zero subagents**, correctly. Each phase depended on the previous one's schema, so there was nothing independent to parallelize — a fan-out would have paid orchestration overhead to produce merge conflicts. The expensive turns were *reading* (a 1.7k-line `app.js`, a 955-line `build_state.py`), and a subagent returns a summary of those, not the lines you need to edit. Fan out for **breadth** (many independent files/questions); stay inline for **depth** (one dependent chain). The honest token sinks here were re-screenshotting a 375px viewport and re-reading files after edits — cheaper fixes than delegation: `get_page_text` over screenshot for text assertions, and trusting the Edit tool's confirmation instead of re-Reading.
+
 ---
 
 ## Common tasks (FantasyGM-specific)
@@ -105,6 +116,33 @@ python -m pipeline.refresh              # full pull, writes data/raw + docs/data
 ```
 
 Or via the slash command: `/refresh-fantasy-gm` runs the same flow, shows the diff summary, and asks before committing.
+
+### Rebuild `state.json` without cookies (developing against real data)
+
+`scripts/rebuild_state.py` replays the latest committed `data/raw/<date>/` snapshot through
+`build_state` with **no network and no ESPN cookies**. This is the right tool whenever you
+change the schema or a derived field and want the page to show real data — running a live
+refresh instead would mix a data pull into a code branch (REFRESH.md step 1 warns against
+exactly that) and needs credentials you may not have.
+
+```bash
+python3 scripts/rebuild_state.py            # latest snapshot
+python3 scripts/rebuild_state.py 2026-06-01 # a specific date
+```
+
+Two traps, both hit on 2026-07-16:
+
+- **From a worktree it writes to the main checkout.** It resolves the project root by walking
+  up for a `.env`, which lives in `/Users/pranava/Projects/FantasyGM`, not in
+  `.claude/worktrees/*`. Copy the output back into the worktree and `git checkout --
+  docs/data/state.json` in main. Always `git -C /Users/pranava/Projects/FantasyGM status`
+  afterwards — leaving the user's main checkout dirty is the failure mode.
+- **Don't hand-roll a replacement** (see Search economics). A scratchpad reimplementation
+  missed `extra_transactions` and silently collapsed `transactions_recent` from 338 rows to 4.
+
+**Verify a rebuild is faithful before committing it:** `git diff -U0 docs/data/state.json |
+grep -c "^-[^-]"` should be `0` for a pure schema addition, and `captured_at` must not move.
+A rebuild that only adds fields is safe to commit as a `data:` commit separate from the code.
 
 ### Preview the static site
 

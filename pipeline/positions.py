@@ -54,6 +54,40 @@ ACTIVE_SLOT_IDS: frozenset[int] = frozenset({1, 2, 3, 4, 5, 6})
 BENCH_SLOT_IDS: frozenset[int] = frozenset({0, 7, 8})
 IR_SLOT_IDS: frozenset[int] = frozenset()  # No dedicated IR slot in this league.
 
+# Statuses ESPN uses for a confirmed-unavailable player. DTD and QUESTIONABLE
+# are deliberately absent — they may still play, so they stay in every
+# candidate pool. Mirrored in docs/assets/app.js as CONFIRMED_OUT_STATUSES;
+# tests/test_lineups.py::TestFrontendParity asserts the copies match.
+CONFIRMED_OUT_STATUSES: frozenset[str] = frozenset(
+    {"OUT", "INJURY_RESERVE", "IR", "IR_LT_ACTIVE", "SUSPENDED"}
+)
+
+# The nine active slots a WNBA fantasy lineup fills, in the greedy fill order
+# used by every optimizer we ship: scarcest eligibility first (a Guard-only
+# slot can't be filled by anyone else), flex last. Each entry is
+# (slot_label, count, eligible position buckets).
+#
+# `isBenchUnlimited: true` means the bench beyond these nine is uncapped, so
+# there is no bench row here — everyone who doesn't make the nine sits.
+#
+# Mirrored in docs/assets/app.js as optimalLineupSlots(); the parity test in
+# tests/test_lineups.py parses the JS and asserts the plans match, because a
+# silent divergence would make the pipeline's advice contradict the UI's.
+ACTIVE_SLOT_PLAN: tuple[tuple[str, int, frozenset[str]], ...] = (
+    ("G", 2, frozenset({"G"})),
+    ("F", 3, frozenset({"F"})),
+    ("F/C", 1, frozenset({"F", "C"})),
+    ("UTIL", 3, frozenset({"G", "F", "C"})),
+)
+
+# Total active slots — 9 in this league (2 G + 3 F + 1 F/C + 3 UTIL).
+ACTIVE_SLOT_COUNT: int = sum(count for _, count, _ in ACTIVE_SLOT_PLAN)
+
+
+def is_confirmed_out(injury_status: str | None) -> bool:
+    """True when the status marks a player as confirmed unavailable."""
+    return (injury_status or "").upper() in CONFIRMED_OUT_STATUSES
+
 
 def position_label(default_position_id: int | None) -> str:
     """Return a short position label for a player's defaultPositionId."""

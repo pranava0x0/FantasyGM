@@ -2062,6 +2062,421 @@ body.modal-open { overflow: hidden; }
   font-style: italic;
 }
 
+/* ============================================================
+   GM Console — My Team, Lineup panel, Today, mobile nav
+   (docs/gm-console-spec.md P1 + P2)
+   ============================================================ */
+
+/* ---------- My Team chip ---------- */
+
+.topbar-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.myteam-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 0 12px;
+  background: transparent; border: 1px solid var(--border); border-radius: 8px;
+  font: inherit; font-size: 13px; font-weight: 600;
+  color: var(--text-muted); cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.myteam-chip:hover { background: var(--surface-2); color: var(--text); }
+.myteam-chip--set { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.myteam-chip-label { white-space: nowrap; }
+/* Mono + a width cap suit a 3–4 char abbrev, not the "Pick your team"
+   placeholder — which the cap was clipping to "Pick your …". */
+.myteam-chip--set .myteam-chip-label {
+  font-family: var(--font-mono); letter-spacing: 0.02em;
+  max-width: 12ch; overflow: hidden; text-overflow: ellipsis;
+}
+.myteam-chip-caret { font-size: 10px; opacity: 0.7; }
+
+/* ---------- Lineup panel ---------- */
+
+.lineup-panel {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gap-neutral);
+  border-radius: 8px;
+  background: var(--surface-2);
+  padding: 10px 12px;
+  display: grid; gap: 8px;
+}
+/* Moves waiting = the only time-sensitive thing on the page. Amber, not red:
+   an available upgrade is an opportunity, not a failure (DESIGN.md §0 voice). */
+.lineup-panel--moves { border-left-color: var(--bucket-forward); }
+.lineup-panel--set   { border-left-color: var(--gap-strong); }
+
+.lineup-panel-head {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.lineup-panel-icon { font-size: 13px; line-height: 1; }
+.lineup-panel--moves .lineup-panel-icon { color: var(--bucket-forward); }
+.lineup-panel--set   .lineup-panel-icon { color: var(--gap-strong); }
+.lineup-panel-title { font-size: 13px; font-weight: 700; color: var(--text); }
+/* The one number that decides whether to act — serif display, our signature
+   against ESPN's all-sans (DESIGN.md §2). */
+.lineup-panel-headline {
+  font-family: var(--font-serif);
+  font-size: 15px; font-weight: 700;
+  color: var(--bucket-forward);
+  margin-left: auto;
+}
+
+.lineup-move-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lineup-move {
+  display: grid;
+  grid-template-columns: 16px 1fr auto;
+  gap: 8px; align-items: baseline;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+}
+.lineup-move-rank {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+}
+.lineup-move-body { display: grid; gap: 2px; min-width: 0; }
+.lineup-move-line { display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap; font-size: 13px; }
+.lineup-move-line--out { font-size: 12px; color: var(--text-muted); }
+.lineup-move-verb { color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+.lineup-move-name { font-weight: 600; }
+.lineup-move-meta, .lineup-move-reason { color: var(--text-muted); font-size: 11.5px; }
+.lineup-move-gain {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: 13px; font-weight: 700; color: var(--gap-strong);
+}
+
+.lineup-panel-foot {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border-top: 1px solid var(--border); padding-top: 8px;
+}
+.lineup-apply-btn {
+  display: inline-flex; align-items: center;
+  min-height: 36px; padding: 0 12px;
+  background: var(--accent); color: #fff;
+  border-radius: 8px; text-decoration: none;
+  font-size: 12.5px; font-weight: 700;
+}
+.lineup-apply-btn:hover { filter: none; opacity: 0.9; }
+.lineup-panel-note { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+
+.lineup-panel--compact { padding: 8px 10px; }
+.lineup-panel--compact .lineup-panel-headline { font-size: 14px; }
+
+/* ---------- Today ---------- */
+
+.today-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+.today-h { font-family: var(--font-serif); font-size: 22px; font-weight: 700; margin: 0; }
+.today-sub { font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+.today-grid { display: grid; gap: 12px; }
+
+.today-block {
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface); padding: 10px 12px;
+  display: grid; gap: 8px;
+}
+.today-block-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.today-block-label {
+  margin: 0; font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.today-block-link {
+  background: transparent; border: 0; padding: 4px 6px; margin: -4px -6px;
+  font: inherit; font-size: 12px; font-weight: 600;
+  color: var(--accent); cursor: pointer; border-radius: 6px;
+}
+.today-block-link:hover { background: var(--accent-soft); }
+
+/* A Today block wrapping the lineup panel already has a card border. */
+.today-block .lineup-panel { border: 0; border-left: 3px solid var(--gap-neutral); border-radius: 0; background: transparent; padding: 0 0 0 10px; }
+.today-block .lineup-panel--moves { border-left-color: var(--bucket-forward); }
+.today-block .lineup-panel--set   { border-left-color: var(--gap-strong); }
+
+.today-matchup { display: grid; gap: 4px; }
+.today-matchup-score { display: flex; align-items: baseline; gap: 8px; }
+.today-matchup-abbr { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+.today-matchup-pts {
+  font-family: var(--font-serif); font-variant-numeric: tabular-nums;
+  font-size: 22px; font-weight: 700; color: var(--text-muted);
+}
+.today-matchup-pts.is-lead { color: var(--text); }
+.today-matchup-sep { color: var(--text-muted); }
+.today-matchup-sub { display: flex; gap: 10px; font-size: 12px; }
+.today-matchup-lead { font-weight: 600; }
+.today-matchup-odds { color: var(--text-muted); }
+
+.today-claim { display: grid; gap: 6px; }
+.today-claim-name { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.today-claim-name-text { font-weight: 700; font-size: 15px; }
+.today-claim-stat { display: flex; align-items: baseline; gap: 6px; }
+.today-hero-num {
+  font-family: var(--font-serif); font-variant-numeric: tabular-nums;
+  font-size: 26px; font-weight: 700; color: var(--text);
+}
+.today-hero-unit { font-size: 11.5px; color: var(--text-muted); }
+/* AI is an ingredient, not a persona (spec §7.1): the take is subordinate to
+   the number above it and always carries its credit badge. */
+.today-claim-take {
+  margin: 0; font-size: 12px; color: var(--text-muted); line-height: 1.45;
+  display: flex; gap: 6px; align-items: baseline;
+}
+
+.injury-pill {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.05em;
+  border: 1px solid currentColor; border-radius: 999px;
+  padding: 1px 5px; white-space: nowrap;
+}
+
+.today-trade { display: grid; gap: 4px; }
+.today-trade-line { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; }
+.today-trade-name { font-weight: 600; }
+.today-trade-meta { display: flex; gap: 10px; font-size: 11.5px; color: var(--text-muted); }
+
+.today-note {
+  display: flex; gap: 8px; align-items: baseline;
+  border-left: 3px solid var(--accent); background: var(--accent-soft);
+  border-radius: 0 8px 8px 0; padding: 8px 12px;
+  font-size: 12.5px; color: var(--text); line-height: 1.5;
+}
+.today-note-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--accent); flex-shrink: 0;
+}
+
+.today-empty { display: grid; gap: 8px; justify-items: start; padding: 24px 4px; }
+.today-empty-h { margin: 0; font-family: var(--font-serif); font-size: 19px; font-weight: 700; }
+.today-empty-sub { margin: 0; font-size: 13px; color: var(--text-muted); max-width: 46ch; }
+.today-empty-btn {
+  min-height: 44px; padding: 0 18px; margin-top: 4px;
+  background: var(--accent); color: #fff; border: 0; border-radius: 8px;
+  font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+
+.team-mine-pill {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 2px 7px;
+  /* Pills never wrap or fall across columns (DESIGN.md §12.7) — without
+     this "YOUR TEAM" breaks onto two lines inside the flex head. */
+  white-space: nowrap; flex-shrink: 0;
+}
+.team-card--mine { border-color: var(--accent); }
+
+/* Cards size to their own content. A team with pending lineup moves is much
+   taller than one that's set, and stretch (the grid default) would pad every
+   other card in the row to match it. */
+.team-grid { align-items: start; }
+
+/* ---------- Waivers 2.0 (spec §3) ---------- */
+
+/* Intent tags. Amber = the schedule is doing the work and it expires;
+   green = she holds. Deliberately quieter than the net-gain number — the
+   tag is context, the number is the decision. */
+.intent-pill {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  border: 1px solid currentColor; border-radius: 999px; padding: 1px 6px;
+}
+.intent-streamer { color: var(--bucket-forward); }
+.intent-anchor   { color: var(--gap-strong); }
+
+.tonight-pill {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 1px 6px; white-space: nowrap;
+}
+
+/* The decision number. Serif display, matching the lineup panel's headline —
+   our signature against ESPN's all-sans (DESIGN.md §2). */
+.waiver-net {
+  display: grid; justify-items: end; align-content: center; gap: 1px;
+  min-width: 92px;
+}
+.waiver-net-num {
+  font-family: var(--font-serif); font-variant-numeric: tabular-nums;
+  font-size: 20px; font-weight: 700; line-height: 1.1;
+}
+.waiver-net-num.is-pos  { color: var(--gap-strong); }
+/* A zero gain is information, not an error — muted, never alarming. */
+.waiver-net-num.is-zero { color: var(--text-muted); font-size: 16px; }
+.waiver-net-label {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); white-space: nowrap;
+}
+.waiver-net-sub { font-size: 10.5px; color: var(--text-muted); }
+
+/* Claim sheet line: drop + bid, spanning the card. */
+.waiver-claim {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  border-top: 1px dashed var(--border);
+  margin-top: 6px; padding-top: 6px;
+  font-size: 12px;
+}
+.waiver-claim-verb {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--gap-weak);
+}
+.waiver-claim-name { font-weight: 600; }
+.waiver-claim-cost { color: var(--text-muted); font-size: 11.5px; }
+
+.core-pill {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--gap-weak); border: 1px solid currentColor;
+  border-radius: 999px; padding: 1px 6px; white-space: nowrap;
+}
+
+.waiver-bid {
+  margin-left: auto;
+  display: inline-flex; align-items: baseline; gap: 6px;
+  cursor: help;
+}
+.waiver-bid-amt {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: 13px; font-weight: 700; color: var(--text);
+}
+/* Provenance rides next to the band, always. n= is what separates "this
+   league's revealed prices" from an invented market rate. */
+.waiver-bid-ctx { font-size: 10px; color: var(--text-muted); white-space: nowrap; }
+
+.waiver-fit {
+  grid-column: 1 / -1;
+  display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+  font-size: 11.5px; margin-top: 4px;
+}
+.waiver-fit-label {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.waiver-fit-team {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--gap-strong); background: var(--surface-2);
+  border-radius: 4px; padding: 1px 5px;
+}
+
+@media (max-width: 480px) {
+  /* The net-gain block sits in the schedule's grid area on mobile, so it
+     inherits the card's existing reflow instead of squeezing the name. */
+  .waiver-net { justify-items: start; min-width: 0; }
+  .waiver-bid { margin-left: 0; }
+}
+
+/* ---------- Sheets (team picker, More) ---------- */
+
+.sheet { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; }
+.sheet[hidden] { display: none; }
+.sheet-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }
+.sheet-panel {
+  position: relative;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  padding: 16px; width: min(440px, calc(100vw - 32px));
+  max-height: min(80vh, 640px); overflow-y: auto;
+  display: grid; gap: 8px;
+}
+.sheet-grabber { display: none; }
+.sheet-h { margin: 0; font-family: var(--font-serif); font-size: 19px; font-weight: 700; }
+.sheet-sub { margin: 0 0 4px; font-size: 12.5px; color: var(--text-muted); line-height: 1.45; }
+.sheet-item {
+  min-height: 48px; padding: 0 14px;
+  background: transparent; border: 1px solid var(--border); border-radius: 8px;
+  font: inherit; font-size: 14px; font-weight: 600; color: var(--text);
+  cursor: pointer; text-align: left;
+}
+.sheet-item:hover { background: var(--surface-2); }
+.sheet-item--muted { color: var(--text-muted); font-weight: 500; border-style: dashed; }
+
+.team-picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.team-picker-btn {
+  display: grid; gap: 2px; justify-items: start;
+  min-height: 56px; padding: 8px 10px;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px;
+  cursor: pointer; text-align: left; font: inherit;
+}
+.team-picker-btn:hover { border-color: var(--accent); }
+.team-picker-btn.is-current { border-color: var(--accent); background: var(--accent-soft); }
+.team-picker-abbr { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--accent); }
+.team-picker-name {
+  font-size: 11.5px; color: var(--text-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%;
+}
+
+/* ---------- Mobile bottom nav ---------- */
+
+/* Hidden by default; the top tab row owns navigation at >=640px. Pairing the
+   display override with the [hidden] guard is the DESIGN.md §12.1 trap —
+   here the global `[hidden] { display: none !important }` covers it, and the
+   .sheet[hidden] rule above is belt-and-braces for the same reason. */
+.bottom-nav { display: none; }
+
+@media (max-width: 639px) {
+  .bottom-nav {
+    display: flex;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-nav-btn {
+    flex: 1; min-height: 52px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    background: transparent; border: 0; padding: 6px 2px;
+    font: inherit; color: var(--text-muted); cursor: pointer;
+  }
+  .bottom-nav-btn[aria-current="page"] { color: var(--accent); }
+  .bottom-nav-icon { font-size: 15px; line-height: 1; }
+  .bottom-nav-label { font-size: 10px; font-weight: 600; letter-spacing: 0.01em; }
+
+  /* The top tab row is retired on mobile — thumb reach beats a top strip for
+     a check-in app (spec §7.3). */
+  .tabs { display: none; }
+
+  /* Season and team count are fixed facts, not daily decisions. On mobile
+     they wrapped the meta strip to a second row and pushed tonight's lineup
+     moves toward the fold — the one thing Today exists to show without a
+     scroll. Period / week / matchup / as-of stay. */
+  .meta-strip { gap: 12px; padding-bottom: 8px; }
+  .meta-strip .meta-item:nth-child(4),
+  .meta-strip .meta-item:nth-child(5) { display: none; }
+  .meta-captured { margin-left: 0; }
+
+  /* Clear the fixed bar so the last card isn't trapped under it. */
+  main { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+  /* Detail panels become bottom sheets at this band (DESIGN.md §7). */
+  .sheet { align-items: flex-end; }
+  .sheet-panel {
+    width: 100vw; max-width: none;
+    border-radius: 14px 14px 0 0;
+    border-left: 0; border-right: 0; border-bottom: 0;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    max-height: 85vh;
+    animation: sheet-up 200ms ease;
+  }
+  .sheet-grabber {
+    display: block; width: 36px; height: 4px; border-radius: 999px;
+    background: var(--border); margin: 0 auto 6px;
+  }
+  .player-modal-panel {
+    border-radius: 14px 14px 0 0;
+    max-height: 88vh;
+    animation: sheet-up 200ms ease;
+  }
+  .player-modal { align-items: flex-end; }
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(12px); }
+  to   { transform: translateY(0); }
+}
+
+@media (min-width: 640px) {
+  .today-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .today-grid { grid-template-columns: repeat(3, 1fr); }
+  /* The lineup block is the reason to open the page — give it the width. */
+  .today-grid .today-block:first-child { grid-column: span 2; }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2069,4 +2484,6 @@ body.modal-open { overflow: hidden; }
     transition-duration: 0ms !important;
     animation-duration: 0ms !important;
   }
+  /* Kill the sheet slide entirely rather than merely shortening it. */
+  .sheet-panel, .player-modal-panel { animation: none !important; }
 }
