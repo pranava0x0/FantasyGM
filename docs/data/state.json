@@ -12087,8 +12087,8 @@
         "position": "C",
         "bucket": "C",
         "eligible_slots": [
-          0,
-          4,
+          1,
+          3,
           5,
           6,
           7
@@ -12116,8 +12116,8 @@
           "fantasy_points": 41.0
         },
         {
-          "scoring_period_id": 50,
-          "fantasy_points": 22.0
+          "scoring_period_id": 49,
+          "fantasy_points": 31.0
         },
         {
           "scoring_period_id": 48,
@@ -13562,14 +13562,13 @@
         "position": "F",
         "bucket": "F",
         "eligible_slots": [
-          2,
+          1,
           3,
-          4,
           5,
           6,
           7
         ],
-        "injury_status": "ACTIVE"
+        "injury_status": null
       },
       "projected_points_next_period": 9.76,
       "projected_per_game": 12.46,
@@ -14061,11 +14060,11 @@
         },
         {
           "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
-            "position": "G",
-            "bucket": "G",
+            "player_id": 3934218,
+            "name": "Megan Gustafson",
+            "team": "POR",
+            "position": "C",
+            "bucket": "C",
             "eligible_slots": [
               1,
               3,
@@ -14258,6 +14257,38 @@
         },
         {
           "player": {
+            "player_id": 4398883,
+            "name": "Madi Williams",
+            "team": "PHX",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 19.5,
+          "projected_points_this_week": 39.0,
+          "games_this_week": 2,
+          "projected_points_next_week": 58.5,
+          "games_next_week": 3,
+          "season_avg_points": null,
+          "percent_owned": 0.03,
+          "percent_change": 0.0,
+          "base_score": 44.85,
+          "injury_signal": "returning",
+          "recent_games": [],
+          "ai_summary": "Unowned (0.03%) Phoenix forward projecting 21.9/g on a favorable two-game week as Phoenix hosts Seattle. No season track record yet, so this is a speculative Frontcourt-need flier riding matchup and schedule rather than proven production.",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
             "player_id": 3922628,
             "name": "Kennedy Burke",
             "team": "CON",
@@ -14352,6 +14383,37 @@
             }
           ],
           "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
+          "ai_summary_date": null
+        },
+        {
+          "player": {
+            "player_id": 4398965,
+            "name": "Christyn Williams",
+            "team": "DAL",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 19.5,
+          "projected_points_this_week": 58.5,
+          "games_this_week": 3,
+          "projected_points_next_week": 39.0,
+          "games_next_week": 2,
+          "season_avg_points": null,
+          "percent_owned": 0.05,
+          "percent_change": 0.0,
+          "base_score": 67.27,
+          "injury_signal": "returning",
+          "recent_games": [],
+          "ai_summary": "The rookie-debut story of the group: signed to Dallas on an extreme hardship contract due to roster injuries, Williams scored her first pro points and first basket this week per direct social confirmation. Three games next week make this a real, schedule-driven Guard-need opportunity, but treat it as thin-margin since it depends on Dallas staying short-handed.",
           "ai_summary_date": null
         },
         {
@@ -15880,58 +15942,6 @@
             }
           ],
           "ai_summary": "The standout signal here: Florez hit late-game heroics in a 4OT thriller, per social buzz calling out her clutch fourth-quarter floater, and projects 23.5/g against a 15.0 season average on almost no ownership (0.19%). Speculative but real-production-backed Guard-need pickup worth a bench spot.",
-          "ai_summary_date": null
-        },
-        {
-          "player": {
-            "player_id": 4433807,
-            "name": "Aziaha James",
-            "team": "DAL",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 15.46,
-          "projected_per_game": 16.89,
-          "projected_points_this_week": 50.68,
-          "games_this_week": 3,
-          "projected_points_next_week": 33.79,
-          "games_next_week": 2,
-          "season_avg_points": 17.79,
-          "percent_owned": 7.28,
-          "percent_change": -0.04,
-          "base_score": 50.68,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 3.0
-            },
-            {
-              "scoring_period_id": 49,
-              "fantasy_points": 16.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 40.0
-            },
-            {
-              "scoring_period_id": 44,
-              "fantasy_points": 13.0
-            },
-            {
-              "scoring_period_id": 41,
-              "fantasy_points": 8.0
-            }
-          ],
-          "ai_summary": null,
           "ai_summary_date": null
         },
         {
@@ -77089,8 +77099,8 @@
       "team_abbrev": "KAH",
       "team_name": "Copper Futures",
       "best_player": {
-        "player_id": 2529140,
-        "name": "Alyssa Thomas",
+        "player_id": 5208982,
+        "name": "Carla Leite",
         "fantasy_team_id": 1,
         "fantasy_team_abbrev": "KAH",
         "projected_per_game": 40.6,
