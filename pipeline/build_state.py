@@ -361,6 +361,7 @@ def build_state(
     )
 
     matchup_history_by_team = _build_matchup_history(league_raw, current_matchup_period)
+    current_matchup_by_team = _build_current_matchups(league_raw, current_matchup_period)
 
     # Per-team transaction id grouping (newest first).
     team_txn_ids: dict[int, list[str]] = {}
@@ -409,6 +410,7 @@ def build_state(
             division_id=t["division_id"],
             record=schema.TeamRecord(**t["record"]),
             matchup_history=matchup_history_by_team.get(team_id_int, []),
+            current_matchup=current_matchup_by_team.get(team_id_int),
             waiver_position=t["waiver_position"],
             faab_remaining=t["faab_remaining"],
             roster=roster_entries,
@@ -894,6 +896,42 @@ def _build_matchup_history(
             ))
     for results in by_team.values():
         results.sort(key=lambda r: r.matchup_period_id)
+    return by_team
+
+
+def _build_current_matchups(
+    league_raw: dict[str, Any],
+    current_matchup_period: int,
+) -> dict[int, schema.CurrentMatchup]:
+    """Return {team_id: CurrentMatchup} for the in-progress matchup period.
+
+    Unlike `_build_matchup_history` this keeps zero-zero pairings — a matchup
+    the user hasn't started scoring yet is still the matchup they're in, and
+    it's exactly when "who am I playing?" matters most.
+    """
+    by_team: dict[int, schema.CurrentMatchup] = {}
+    for m in league_raw.get("schedule") or []:
+        if int(m.get("matchupPeriodId") or 0) != current_matchup_period:
+            continue
+        home = m.get("home") or {}
+        away = m.get("away") or {}
+        home_id = int(home.get("teamId") or 0)
+        away_id = int(away.get("teamId") or 0)
+        home_pts = float(home.get("totalPoints") or 0.0)
+        away_pts = float(away.get("totalPoints") or 0.0)
+        if home_id and away_id:
+            by_team[home_id] = schema.CurrentMatchup(
+                matchup_period_id=current_matchup_period,
+                opponent_team_id=away_id,
+                team_points=home_pts,
+                opponent_points=away_pts,
+            )
+            by_team[away_id] = schema.CurrentMatchup(
+                matchup_period_id=current_matchup_period,
+                opponent_team_id=home_id,
+                team_points=away_pts,
+                opponent_points=home_pts,
+            )
     return by_team
 
 

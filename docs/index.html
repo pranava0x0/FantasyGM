@@ -17,9 +17,15 @@
         <span class="brand-mark" aria-hidden="true">Fantasy<span>·</span>GM</span>
         <span class="brand-tag" id="league-name">Fantasy GM</span>
       </div>
-      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle theme">
-        <span class="theme-icon" aria-hidden="true">◐</span>
-      </button>
+      <div class="topbar-actions">
+        <button class="myteam-chip" type="button" id="myteam-chip" aria-haspopup="dialog" aria-label="Choose your team">
+          <span class="myteam-chip-label" id="myteam-chip-label">Pick your team</span>
+          <span class="myteam-chip-caret" aria-hidden="true">▾</span>
+        </button>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+        </button>
+      </div>
     </div>
     <div class="meta-strip" aria-live="polite">
       <span class="meta-item"><span class="meta-label">Period</span> <span class="meta-value" id="meta-period">—</span></span>
@@ -33,15 +39,23 @@
 
   <main id="main" role="main">
     <nav class="tabs" role="tablist" aria-label="Sections">
-      <button class="tab" role="tab" id="tab-waivers"      aria-controls="section-waivers"      aria-selected="true">Waivers</button>
+      <button class="tab" role="tab" id="tab-today"        aria-controls="section-today"        aria-selected="true">Today</button>
+      <button class="tab" role="tab" id="tab-waivers"      aria-controls="section-waivers"      aria-selected="false">Waivers</button>
       <button class="tab" role="tab" id="tab-teams"        aria-controls="section-teams"        aria-selected="false">Team Needs</button>
       <button class="tab" role="tab" id="tab-trades"       aria-controls="section-trades"       aria-selected="false">Trades</button>
       <button class="tab" role="tab" id="tab-news"         aria-controls="section-news"         aria-selected="false">News</button>
       <button class="tab" role="tab" id="tab-transactions" aria-controls="section-transactions" aria-selected="false">Transactions</button>
     </nav>
 
+    <!-- ========== Today — the standing daily brief ========== -->
+    <section class="surface tab-panel" id="section-today" role="tabpanel" aria-labelledby="tab-today">
+      <div id="today-mount">
+        <p class="loading">Loading today's brief…</p>
+      </div>
+    </section>
+
     <!-- ========== Waiver Targets ========== -->
-    <section class="surface tab-panel" id="section-waivers" role="tabpanel" aria-labelledby="tab-waivers">
+    <section class="surface tab-panel" id="section-waivers" role="tabpanel" aria-labelledby="tab-waivers" hidden>
       <header class="surface-head">
         <h2 id="h-waivers">Top Waiver Targets</h2>
         <p class="surface-sub">Ranked by projected points next week (per-game projection × games next week), with this week as the tiebreaker. Open the Team Needs tab to see picks tailored to each team.</p>
@@ -114,6 +128,52 @@
   <footer role="contentinfo" class="footer">
     <p>Data via the user's authenticated ESPN session. Built with <code>python -m pipeline.refresh</code>. <a href="https://github.com/pranava0x0/FantasyGM">Source</a>.</p>
   </footer>
+
+  <!--
+    Mobile bottom tab bar (<640px only; the top tab row takes over above that).
+    Thumb-reach beats top tabs for a check-in app. Mirrors the top tabs rather
+    than duplicating content — same panels, same selectTab() path.
+  -->
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Sections">
+    <button class="bottom-nav-btn" type="button" data-panel="section-today" aria-current="page" aria-label="Today">
+      <span class="bottom-nav-icon" aria-hidden="true">◎</span><span class="bottom-nav-label">Today</span>
+    </button>
+    <button class="bottom-nav-btn" type="button" data-panel="section-waivers" aria-label="Waivers">
+      <span class="bottom-nav-icon" aria-hidden="true">✛</span><span class="bottom-nav-label">Waivers</span>
+    </button>
+    <button class="bottom-nav-btn" type="button" data-panel="section-teams" aria-label="Team Needs">
+      <span class="bottom-nav-icon" aria-hidden="true">▦</span><span class="bottom-nav-label">Teams</span>
+    </button>
+    <button class="bottom-nav-btn" type="button" data-panel="section-trades" aria-label="Trades">
+      <span class="bottom-nav-icon" aria-hidden="true">⇄</span><span class="bottom-nav-label">Trades</span>
+    </button>
+    <button class="bottom-nav-btn" type="button" id="bottom-nav-more" aria-haspopup="dialog" aria-expanded="false" aria-label="More sections">
+      <span class="bottom-nav-icon" aria-hidden="true">⋯</span><span class="bottom-nav-label">More</span>
+    </button>
+  </nav>
+
+  <!-- "More" overflow sheet — the two low-frequency panels. -->
+  <div id="more-sheet" class="sheet" role="dialog" aria-modal="true" aria-label="More sections" aria-hidden="true" hidden>
+    <div class="sheet-backdrop" data-sheet-close></div>
+    <div class="sheet-panel" role="document">
+      <div class="sheet-grabber" aria-hidden="true"></div>
+      <button class="sheet-item" type="button" data-panel="section-news">News</button>
+      <button class="sheet-item" type="button" data-panel="section-transactions">Transactions</button>
+      <button class="sheet-item sheet-item--muted" type="button" data-sheet-close>Cancel</button>
+    </div>
+  </div>
+
+  <!-- Team picker — first visit, and any time you switch teams. -->
+  <div id="team-picker" class="sheet" role="dialog" aria-modal="true" aria-labelledby="team-picker-h" aria-hidden="true" hidden>
+    <div class="sheet-backdrop" data-sheet-close></div>
+    <div class="sheet-panel sheet-panel--picker" role="document">
+      <div class="sheet-grabber" aria-hidden="true"></div>
+      <h2 class="sheet-h" id="team-picker-h">Which team is yours?</h2>
+      <p class="sheet-sub">Scopes lineup checks, waiver picks, and trade openers to your roster. Stored on this device only — no account.</p>
+      <div class="team-picker-grid" id="team-picker-grid"></div>
+      <button class="sheet-item sheet-item--muted" type="button" id="team-picker-clear">Browse all teams instead</button>
+    </div>
+  </div>
 
   <!-- Lazy-mounted toast -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>

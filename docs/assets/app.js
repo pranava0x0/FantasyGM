@@ -14,6 +14,20 @@
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+  // ---------- ESPN deep links ----------
+  //
+  // Advice-only by design (docs/gm-console-spec.md §5.1): ESPN's write API
+  // has no public implementation, so every recommendation ends in a one-tap
+  // link that lands the user in ESPN's own confirm flow. We stage the move;
+  // ESPN applies it.
+  //
+  // The player-page shape is the one already in production (the modal's
+  // "View on ESPN" link) and is known-good. The team shape is ESPN's
+  // conventional fantasy team URL — spec §8 Q1 flags it for a live check
+  // against the authenticated league, which needs the user's session.
+  const ESPN_TEAM_PAGE = (leagueId, teamId) =>
+    `https://fantasy.espn.com/wbasketball/team?leagueId=${leagueId}&teamId=${teamId}`;
+
   // ---------- Theme ----------
   const themeKey = "fgm-theme";
   function applyTheme(t) {
@@ -28,6 +42,13 @@
     }
     applyTheme(t);
   }
+  // One delegated listener for all chrome, attached at parse time.
+  //
+  // Deliberately NOT per-element listeners in a post-fetch init: main()
+  // awaits a ~2.8 MB state.json before it could bind them, which left the
+  // bottom nav and team chip inert for the whole load on a slow connection —
+  // taps silently doing nothing. Delegation makes navigation work from first
+  // paint; the panels it reveals fill in when the data lands.
   document.addEventListener("click", (e) => {
     if (e.target.closest("#theme-toggle")) {
       const cur = document.documentElement.getAttribute("data-theme") || "light";
@@ -38,7 +59,91 @@
       const panelId = tabBtn.getAttribute("aria-controls");
       if (panelId) selectTab(panelId);
     }
+    if (e.target.closest("[data-sheet-close]")) closeAllSheets();
+
+    // Bottom-nav items and the More sheet's entries both just select a panel.
+    const panelBtn = e.target.closest("[data-panel]");
+    if (panelBtn) {
+      closeAllSheets();
+      selectTab(panelBtn.getAttribute("data-panel"));
+    }
+
+    const moreBtn = e.target.closest("#bottom-nav-more");
+    if (moreBtn) {
+      moreBtn.setAttribute("aria-expanded", "true");
+      openSheet("more-sheet", moreBtn);
+    }
+
+    const chip = e.target.closest("#myteam-chip");
+    if (chip) openSheet("team-picker", chip);
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAllSheets();
+  });
+
+  // ---------- My Team ----------
+  //
+  // The page knows whose GM it is. Everything sharpens from there: Today
+  // leads with your lineup, waivers reorder to your roster, trades lead with
+  // your best partner. No accounts, no backend — a localStorage key and an
+  // optional ?team= override for sharing a link.
+  //
+  // League-wide stays one tap away (header chip → "Browse all teams"): the
+  // symmetric view is a feature (it's the commissioner's view), not a
+  // casualty of personalization.
+  const MY_TEAM_KEY = "fgm_my_team";
+  let MY_TEAM_ID = null;
+
+  function readStoredTeamId() {
+    try {
+      const raw = localStorage.getItem(MY_TEAM_KEY);
+      const n = Number(raw);
+      return raw != null && Number.isFinite(n) ? n : null;
+    } catch (_) { return null; }   // private mode
+  }
+
+  function setMyTeam(teamId, { persist = true } = {}) {
+    MY_TEAM_ID = teamId == null ? null : Number(teamId);
+    if (persist) {
+      try {
+        if (MY_TEAM_ID == null) localStorage.removeItem(MY_TEAM_KEY);
+        else localStorage.setItem(MY_TEAM_KEY, String(MY_TEAM_ID));
+      } catch (_) { /* private mode — selection lasts the session */ }
+    }
+    renderMyTeamChip();
+  }
+
+  function myTeam() {
+    return MY_TEAM_ID == null ? null : TEAM_BY_ID.get(MY_TEAM_ID) || null;
+  }
+
+  // `?team=NUT` (abbrev, case-insensitive) or `?team=6` (id) overrides the
+  // stored pick without clobbering it — so a shared link shows the sender's
+  // team without hijacking the recipient's saved choice.
+  function initMyTeam(teams) {
+    const param = new URLSearchParams(location.search).get("team");
+    if (param) {
+      const wanted = param.trim().toLowerCase();
+      const match = (teams || []).find(
+        (t) => String(t.abbrev).toLowerCase() === wanted || String(t.team_id) === wanted,
+      );
+      if (match) { setMyTeam(match.team_id, { persist: false }); return; }
+      toast(`No team "${param}" in this league.`);
+    }
+    const stored = readStoredTeamId();
+    // A stored id from a prior season may no longer exist — verify before trusting.
+    setMyTeam((teams || []).some((t) => t.team_id === stored) ? stored : null, { persist: false });
+  }
+
+  function renderMyTeamChip() {
+    const label = $("#myteam-chip-label");
+    const chip = $("#myteam-chip");
+    if (!label || !chip) return;
+    const t = myTeam();
+    label.textContent = t ? t.abbrev : "Pick your team";
+    chip.classList.toggle("myteam-chip--set", !!t);
+    chip.setAttribute("aria-label", t ? `Your team: ${t.name}. Change team.` : "Choose your team");
+  }
 
   // ---------- Tabs ----------
   function selectTab(panelId) {
@@ -49,6 +154,7 @@
       if (p.id === panelId) p.removeAttribute("hidden");
       else p.setAttribute("hidden", "");
     });
+    syncBottomNav(panelId);
     // Persist in the URL so a refresh keeps your tab and you can deep-link.
     const slug = panelId.replace("section-", "");
     if (location.hash.replace(/^#/, "") !== slug) {
@@ -63,6 +169,42 @@
     if (slug && valid.includes(slug)) selectTab(`section-${slug}`);
   }
   window.addEventListener("hashchange", initTabsFromHash);
+
+  // ---------- Sheets (team picker, More menu) ----------
+  //
+  // One primitive for both. On mobile these render as bottom sheets (CSS);
+  // on desktop as centered dialogs. `lastSheetTrigger` restores focus on
+  // close so keyboard users don't get dumped at the top of the document.
+  let lastSheetTrigger = null;
+
+  function openSheet(id, trigger) {
+    const sheet = document.getElementById(id);
+    if (!sheet) return;
+    lastSheetTrigger = trigger || document.activeElement;
+    sheet.removeAttribute("hidden");
+    sheet.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    const focusable = sheet.querySelector("button:not([data-sheet-close]), [href]");
+    if (focusable) focusable.focus();
+  }
+
+  function closeSheet(id) {
+    const sheet = document.getElementById(id);
+    if (!sheet) return;
+    sheet.setAttribute("hidden", "");
+    sheet.setAttribute("aria-hidden", "true");
+    // Don't release the scroll lock while the player modal is still up.
+    const modal = $("#player-modal");
+    if (!modal || modal.hasAttribute("hidden")) document.body.classList.remove("modal-open");
+    const moreBtn = $("#bottom-nav-more");
+    if (moreBtn) moreBtn.setAttribute("aria-expanded", "false");
+    if (lastSheetTrigger && document.contains(lastSheetTrigger)) lastSheetTrigger.focus();
+    lastSheetTrigger = null;
+  }
+
+  function closeAllSheets() {
+    ["more-sheet", "team-picker"].forEach(closeSheet);
+  }
 
   // ---------- Toast ----------
   let toastTimer = null;
@@ -519,6 +661,121 @@
     return new Set(activeSlots.map(({ entry }) => entry.player.player_id));
   }
 
+  // ---------- Lineup panel (the "reset my lineup" surface) ----------
+  //
+  // Renders `team.lineup_check` from the pipeline: a minimal swap list and
+  // the one scalar that says whether to bother — points left on the bench.
+  // Empty state is a *win* state, not a scold (vocabulary discipline: this
+  // page never says "lazy lineup" or "mistakes").
+
+  // "7:00" — the tip-off, in the reader's own timezone.
+  function fmtTipoff(iso) {
+    if (!iso) return null;
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  }
+
+  function lineupMoveRow(m, idx) {
+    const row = el("li", { className: "lineup-move" });
+    row.appendChild(el("span", { className: "lineup-move-rank", text: String(idx + 1) }));
+
+    const body = el("div", { className: "lineup-move-body" });
+    const inLine = el("span", { className: "lineup-move-line" });
+    inLine.appendChild(el("span", { className: "lineup-move-verb", text: "Start" }));
+    inLine.appendChild(playerNameBtn(m.player_in_id, m.player_in_name, "lineup-move-name"));
+
+    const tip = fmtTipoff(m.player_in_game_time);
+    const meta = [m.slot_label, tip ? `plays ${tip}` : null].filter(Boolean).join(" · ");
+    inLine.appendChild(el("span", { className: "lineup-move-meta", text: `(${meta})` }));
+    body.appendChild(inLine);
+
+    // A "start" move fills an empty slot — there is no one to bench, and
+    // saying "over nobody" would be nonsense.
+    if (m.action === "swap" && m.player_out_id != null) {
+      const outLine = el("span", { className: "lineup-move-line lineup-move-line--out" });
+      outLine.appendChild(el("span", { className: "lineup-move-verb", text: "over" }));
+      outLine.appendChild(playerNameBtn(m.player_out_id, m.player_out_name, "lineup-move-name"));
+      outLine.appendChild(el("span", { className: "lineup-move-reason", text: `(${m.player_out_reason})` }));
+      body.appendChild(outLine);
+    } else {
+      body.appendChild(el("span", {
+        className: "lineup-move-line lineup-move-line--out",
+        text: "into an open slot",
+      }));
+    }
+    row.appendChild(body);
+    row.appendChild(el("span", { className: "lineup-move-gain", text: `+${fmtPoints(m.gain_pts)}` }));
+    return row;
+  }
+
+  // `horizon` picks which check to show: "tonight" falls back to the week
+  // when nobody plays today (the pipeline sends tonight: null on an off day).
+  function lineupPanel(team, { horizon = "tonight", compact = false } = {}) {
+    const lc = team.lineup_check;
+    // Older snapshots predate lineup_check. Render nothing rather than an
+    // empty shell — the panel returns null and callers skip it.
+    if (!lc || !lc.week) return null;
+
+    const check = (horizon === "tonight" && lc.tonight) ? lc.tonight : lc.week;
+    const isTonight = check.horizon === "tonight";
+    const when = isTonight ? "tonight" : "this week";
+    const hasMoves = check.status === "moves_available" && check.moves.length > 0;
+
+    const panel = el("section", {
+      className: `lineup-panel ${hasMoves ? "lineup-panel--moves" : "lineup-panel--set"}${compact ? " lineup-panel--compact" : ""}`,
+      attrs: { "aria-label": `Lineup check for ${team.abbrev}` },
+    });
+
+    const head = el("div", { className: "lineup-panel-head" });
+    head.appendChild(el("span", { className: "lineup-panel-icon", attrs: { "aria-hidden": "true" }, text: hasMoves ? "⚠" : "✓" }));
+    if (hasMoves) {
+      const n = check.moves.length;
+      head.appendChild(el("span", {
+        className: "lineup-panel-title",
+        text: `${n} move${n === 1 ? "" : "s"} available ${when}`,
+      }));
+      head.appendChild(el("span", {
+        className: "lineup-panel-headline",
+        text: `${fmtPoints(check.points_left_on_bench)} pts on your bench`,
+      }));
+    } else {
+      head.appendChild(el("span", { className: "lineup-panel-title", text: `Lineup set — optimal for ${when}` }));
+    }
+    panel.appendChild(head);
+
+    if (hasMoves) {
+      const list = el("ol", { className: "lineup-move-list" });
+      check.moves.forEach((m, i) => list.appendChild(lineupMoveRow(m, i)));
+      panel.appendChild(list);
+    }
+
+    const foot = el("div", { className: "lineup-panel-foot" });
+    if (hasMoves) {
+      foot.appendChild(el("a", {
+        className: "lineup-apply-btn",
+        text: "Apply on ESPN ↗",
+        attrs: {
+          href: ESPN_TEAM_PAGE(META.league_id, team.team_id),
+          target: "_blank",
+          rel: "noopener",
+        },
+      }));
+    }
+    // Say what the numbers are measured against — a projection with no stated
+    // basis is just a vibe. Locked players are called out because their
+    // absence from the moves list is otherwise unexplained.
+    const notes = [];
+    if (isTonight) notes.push(`Period ${check.computed_for_period}`);
+    else notes.push(`Week P${lc.week_start_period}–${lc.week_end_period}`);
+    if (check.locked_player_ids.length) {
+      notes.push(`${check.locked_player_ids.length} already locked`);
+    }
+    foot.appendChild(el("span", { className: "lineup-panel-note", text: notes.join(" · ") }));
+    panel.appendChild(foot);
+    return panel;
+  }
+
   function rosterTable(team) {
     const wrap = el("div", { className: "roster-table" });
     const nextWeekStarters = recommendedStartersNextWeek(team.roster || []);
@@ -636,6 +893,10 @@
       ],
     });
 
+    // Lineup check rides at the top of every team card — it's the only
+    // time-sensitive thing on the card, so it outranks the bucket bars.
+    const lineup = lineupPanel(team, { compact: true });
+
     const detail = el("div", { className: "team-detail", attrs: { hidden: "" } });
 
     // Left column: summary + top picks
@@ -708,15 +969,18 @@
     // clickable player-name buttons inside it (button-in-button is
     // invalid HTML). tabindex + Enter/Space handling keep it
     // keyboard-equivalent.
+    const isMine = MY_TEAM_ID != null && team.team_id === MY_TEAM_ID;
+    if (isMine) head.appendChild(el("span", { className: "team-mine-pill", text: "Your team" }));
+
     const card = el("div", {
-      className: "team-card",
+      className: `team-card${isMine ? " team-card--mine" : ""}`,
       attrs: {
         role: "button",
         tabindex: "0",
         "aria-expanded": "false",
         "data-team-id": String(team.team_id),
       },
-      children: [head, meta, rows, detail],
+      children: [head, meta, lineup, rows, detail].filter(Boolean),
     });
     const toggle = () => {
       const expanded = card.getAttribute("aria-expanded") === "true";
@@ -724,7 +988,12 @@
       if (expanded) detail.setAttribute("hidden", "");
       else detail.removeAttribute("hidden");
     };
-    card.addEventListener("click", toggle);
+    card.addEventListener("click", (e) => {
+      // The "Apply on ESPN" link lives inside the card; following it must not
+      // also collapse the card behind the new tab.
+      if (e.target.closest("a")) { e.stopPropagation(); return; }
+      toggle();
+    });
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -744,7 +1013,235 @@
     const targetIndex = new Map((byTeam || []).map((row) => [row.team_id, row.targets]));
     const teamByIdMap = new Map((teams || []).map((t) => [t.team_id, t]));
     const txnsByIdMap = new Map((transactions || []).map((tx) => [String(tx.transaction_id), tx]));
-    teams.forEach((t) => grid.appendChild(teamCard(t, targetIndex.get(t.team_id), teamByIdMap, txnsByIdMap)));
+    // Your team sorts first; league order is otherwise untouched.
+    const ordered = teams.slice().sort((a, b) => {
+      if (a.team_id === MY_TEAM_ID) return -1;
+      if (b.team_id === MY_TEAM_ID) return 1;
+      return 0;
+    });
+    ordered.forEach((t) => grid.appendChild(teamCard(t, targetIndex.get(t.team_id), teamByIdMap, txnsByIdMap)));
+  }
+
+  // ---------- Render: Today (the standing daily brief) ----------
+  //
+  // The artifact no competitor builds: the page is already right when it
+  // opens. Five blocks, each one action with one number and one tap-through,
+  // targeted to fit a 375×812 viewport without scrolling.
+  //
+  // Everything here is a recomposition of data already on the page — Today
+  // introduces no new numbers, so it can never disagree with the tab you'd
+  // check to verify it.
+
+  // An availability pill for a player we only know by id (trade packages
+  // don't carry injury_status; the player index does).
+  //
+  // Load-bearing on the trade block: trades.py values every player at their
+  // healthy per-game rate, so an OUT player is offered at full price with no
+  // hint she's hurt. Repricing is Trades 2.0's job — until then the status
+  // is at least visible, so the number is never the only thing the user sees.
+  function injuryPillFor(playerId) {
+    const p = PLAYER_INDEX.get(Number(playerId));
+    const status = p && p.profile && p.profile.injury_status;
+    if (!status || status === "ACTIVE") return null;
+    return el("span", { className: "own-neg injury-pill", text: status.replace(/_/g, " ") });
+  }
+
+  function todayBlock(label, bodyEl, { action } = {}) {
+    if (!bodyEl) return null;
+    const head = el("div", { className: "today-block-head" });
+    head.appendChild(el("h3", { className: "today-block-label", text: label }));
+    if (action) head.appendChild(action);
+    return el("section", { className: "today-block", children: [head, bodyEl] });
+  }
+
+  // Season form: each side's average weekly score from completed matchups.
+  //
+  // Deliberately NOT a win probability. The spec (§5.5) proposed a normal
+  // approximation over weekly-score variance, and it was built and pulled:
+  // that model can only say which team is better *on the season*, so it
+  // ignores the live score and renders "52% odds" next to a 50-point lead —
+  // a number that visibly contradicts the one above it.
+  //
+  // An honest matchup win-probability needs remaining-schedule modelling
+  // (how many games each side has left in the period), which the current
+  // state doesn't carry. Backlogged. Until then this shows the two averages
+  // and lets the reader draw the comparison — no false precision.
+  function seasonForm(team) {
+    const hist = team.matchup_history || [];
+    if (hist.length < 3) return null;
+    return hist.reduce((s, r) => s + r.team_points, 0) / hist.length;
+  }
+
+  function matchupBlock(team) {
+    const cm = team.current_matchup;
+    if (!cm) return null;
+    const opp = TEAM_BY_ID.get(cm.opponent_team_id);
+    const lead = cm.team_points - cm.opponent_points;
+    const wrap = el("div", { className: "today-matchup" });
+
+    const score = el("div", { className: "today-matchup-score" });
+    score.appendChild(el("span", { className: "today-matchup-abbr", text: team.abbrev }));
+    score.appendChild(el("span", {
+      className: `today-matchup-pts ${lead >= 0 ? "is-lead" : ""}`.trim(),
+      text: fmtPoints(cm.team_points),
+    }));
+    score.appendChild(el("span", { className: "today-matchup-sep", text: "–" }));
+    score.appendChild(el("span", {
+      className: `today-matchup-pts ${lead < 0 ? "is-lead" : ""}`.trim(),
+      text: fmtPoints(cm.opponent_points),
+    }));
+    score.appendChild(el("span", { className: "today-matchup-abbr", text: opp ? opp.abbrev : "—" }));
+    wrap.appendChild(score);
+
+    const sub = el("div", { className: "today-matchup-sub" });
+    const verb = lead > 0 ? "up" : lead < 0 ? "down" : "level";
+    sub.appendChild(el("span", {
+      className: `today-matchup-lead ${lead > 0 ? "own-pos" : lead < 0 ? "own-neg" : ""}`.trim(),
+      text: lead === 0 ? "Level" : `${verb} ${fmtPoints(Math.abs(lead))}`,
+    }));
+    const myForm = seasonForm(team);
+    const oppForm = opp ? seasonForm(opp) : null;
+    if (myForm != null && oppForm != null) {
+      sub.appendChild(el("span", {
+        className: "today-matchup-odds",
+        text: `season avg ${Math.round(myForm)} vs ${Math.round(oppForm)}/wk`,
+      }));
+    }
+    wrap.appendChild(sub);
+    return wrap;
+  }
+
+  function claimBlock(state, team) {
+    const row = (state.waiver_targets_by_team || []).find((r) => r.team_id === team.team_id);
+    const top = (row && row.targets && row.targets[0]) || (state.waiver_targets_overall || [])[0];
+    if (!top) return null;
+    const p = top.player;
+    const wrap = el("div", { className: "today-claim" });
+
+    const nameLine = el("div", { className: "today-claim-name" });
+    nameLine.appendChild(playerNameBtn(p.player_id, p.name, "today-claim-name-text"));
+    nameLine.appendChild(bucketPill(p.bucket));
+    if (p.team) nameLine.appendChild(el("span", { className: "pill team-mono", text: p.team }));
+    if (top.promoted_for_need) nameLine.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
+    wrap.appendChild(nameLine);
+
+    const stat = el("div", { className: "today-claim-stat" });
+    stat.appendChild(el("span", {
+      className: "today-hero-num",
+      text: fmtPoints(top.projected_points_this_week ?? top.base_score),
+    }));
+    stat.appendChild(el("span", {
+      className: "today-hero-unit",
+      text: `proj this wk · ${top.games_this_week ?? 0} gms`,
+    }));
+    wrap.appendChild(stat);
+
+    if (top.ai_summary) {
+      wrap.appendChild(el("p", {
+        className: "today-claim-take",
+        children: [
+          el("span", { className: "waiver-summary-badge", text: "AI" }),
+          el("span", { text: top.ai_summary }),
+        ],
+      }));
+    }
+    return wrap;
+  }
+
+  function tradeBlock(state, team) {
+    const sc = (state.trade_scenarios || []).find((s) => s.team_id === team.team_id);
+    if (!sc || !sc.offers || !sc.offers.length) return null;
+    const offer = sc.offers[0];
+    const wrap = el("div", { className: "today-trade" });
+
+    // "OUT"/"IN" here are trade directions, not availability — hence the
+    // separate injury pill, which is why it reads "IN · Olivia Miles · OUT".
+    const line = el("div", { className: "today-trade-line" });
+    line.appendChild(el("span", { className: "trade-result-tag trade-result-tag--out", text: "OUT" }));
+    line.appendChild(playerNameBtn(sc.best_player.player_id, sc.best_player.name, "today-trade-name"));
+    const givePill = injuryPillFor(sc.best_player.player_id);
+    if (givePill) line.appendChild(givePill);
+    wrap.appendChild(line);
+
+    const inLine = el("div", { className: "today-trade-line" });
+    inLine.appendChild(el("span", { className: "trade-result-tag trade-result-tag--in", text: "IN" }));
+    offer.pkg_received.players.forEach((pl, i) => {
+      if (i) inLine.appendChild(el("span", { className: "trade-pkg-plus", text: "+" }));
+      inLine.appendChild(playerNameBtn(pl.player_id, pl.name, "today-trade-name"));
+      const pill = injuryPillFor(pl.player_id);
+      if (pill) inLine.appendChild(pill);
+    });
+    wrap.appendChild(inLine);
+
+    wrap.appendChild(el("div", {
+      className: "today-trade-meta",
+      children: [
+        el("span", { text: `with ${offer.from_team_abbrev}` }),
+        el("span", { text: `fit ${Math.round(offer.need_fit_score * 100)}%` }),
+      ],
+    }));
+    return wrap;
+  }
+
+  function teamPickerPrompt() {
+    const wrap = el("div", { className: "today-empty" });
+    wrap.appendChild(el("p", {
+      className: "today-empty-h",
+      text: "Pick your team to get your daily brief.",
+    }));
+    wrap.appendChild(el("p", {
+      className: "today-empty-sub",
+      text: "Tonight's lineup moves, your top claim, and your best trade opener — scoped to your roster.",
+    }));
+    const btn = el("button", { className: "today-empty-btn", text: "Choose team", attrs: { type: "button" } });
+    btn.addEventListener("click", () => openSheet("team-picker", btn));
+    wrap.appendChild(btn);
+    return wrap;
+  }
+
+  function renderToday(state) {
+    const mount = $("#today-mount");
+    if (!mount) return;
+    mount.replaceChildren();
+
+    const team = myTeam();
+    if (!team) { mount.appendChild(teamPickerPrompt()); return; }
+
+    const head = el("header", { className: "today-head" });
+    head.appendChild(el("h2", { className: "today-h", text: team.name }));
+    head.appendChild(el("span", {
+      className: "today-sub",
+      text: `${team.record.wins}–${team.record.losses}${team.record.ties ? `–${team.record.ties}` : ""}` +
+            (team.faab_remaining != null ? ` · $${team.faab_remaining} FAAB` : ""),
+    }));
+    mount.appendChild(head);
+
+    const grid = el("div", { className: "today-grid" });
+    const blocks = [
+      todayBlock("Lineup", lineupPanel(team, { horizon: "tonight" })),
+      todayBlock("Matchup", matchupBlock(team)),
+      todayBlock("Top claim", claimBlock(state, team), {
+        action: tabLink("Waivers", "section-waivers"),
+      }),
+      todayBlock("Trade opener", tradeBlock(state, team), {
+        action: tabLink("Trades", "section-trades"),
+      }),
+    ].filter(Boolean);
+    blocks.forEach((b) => grid.appendChild(b));
+    mount.appendChild(grid);
+
+    if (Array.isArray(team.summary) && team.summary.length) {
+      const note = el("div", { className: "today-note", attrs: { "aria-label": "Auto-generated team note" } });
+      note.appendChild(el("span", { className: "today-note-badge", text: "AUTO" }));
+      note.appendChild(el("span", { className: "today-note-text", text: team.summary.slice(0, 2).join(" ") }));
+      mount.appendChild(note);
+    }
+  }
+
+  function tabLink(label, panelId) {
+    const b = el("button", { className: "today-block-link", text: `${label} →`, attrs: { type: "button" } });
+    b.addEventListener("click", () => selectTab(panelId));
+    return b;
   }
 
   // ---------- Render: news ----------
@@ -1384,12 +1881,18 @@
             const pkg = offer.pkg_received;
             const badge = fairBadge(offer.value_ratio);
 
-            const pkgHtml = pkg.players.map(p =>
-              `<span class="trade-pkg-player">` +
-              `<button class="player-name-btn" data-player-id="${p.player_id}">${p.name}</button>` +
-              `<span class="trade-pkg-ppg">${fmtPoints(p.projected_per_game)}/g</span>` +
-              `</span>`
-            ).join('<span class="trade-pkg-plus">+</span>');
+            const pkgHtml = pkg.players.map(p => {
+              // Packages are priced at each player's healthy per-game rate,
+              // so an unavailable player looks like a bargain. Surface the
+              // status next to the price until Trades 2.0 discounts it.
+              const st = PLAYER_INDEX.get(Number(p.player_id))?.profile?.injury_status;
+              const inj = st && st !== "ACTIVE"
+                ? `<span class="own-neg injury-pill">${st.replace(/_/g, " ")}</span>` : "";
+              return `<span class="trade-pkg-player">` +
+                `<button class="player-name-btn" data-player-id="${p.player_id}">${p.name}</button>` +
+                `<span class="trade-pkg-ppg">${fmtPoints(p.projected_per_game)}/g</span>${inj}` +
+                `</span>`;
+            }).join('<span class="trade-pkg-plus">+</span>');
 
             const rankClass = oi < 3 ? ` trade-offer--rank${oi + 1}` : "";
             return `<li class="trade-offer${rankClass}" data-si="${si}" data-oi="${oi}">
@@ -1653,9 +2156,75 @@
     });
   }
 
+  // ---------- Team picker + navigation wiring ----------
+  function renderTeamPicker(teams, onPick) {
+    const grid = $("#team-picker-grid");
+    if (!grid) return;
+    grid.replaceChildren();
+    (teams || []).slice().sort((a, b) => a.abbrev.localeCompare(b.abbrev)).forEach((t) => {
+      const btn = el("button", {
+        className: `team-picker-btn${t.team_id === MY_TEAM_ID ? " is-current" : ""}`,
+        // Explicit label: the visible name can be ellipsised to fit the tile,
+        // and name-from-contents on a two-span button reads as one run-on
+        // string. Screen readers get the clean version.
+        attrs: { type: "button", "aria-label": `${t.name} (${t.abbrev})` },
+        children: [
+          el("span", { className: "team-picker-abbr", text: t.abbrev }),
+          el("span", { className: "team-picker-name", text: t.name }),
+        ],
+      });
+      btn.addEventListener("click", () => { setMyTeam(t.team_id); closeSheet("team-picker"); onPick(); });
+      grid.appendChild(btn);
+    });
+  }
+
+  function initNav(state) {
+    const teams = state.teams || [];
+    // Re-render every my-team-sensitive surface. Cheap (one state object,
+    // no refetch) and keeps "switch team" from needing a page reload.
+    const rerender = () => {
+      renderToday(state);
+      renderTeams(teams, state.waiver_targets_by_team, state.transactions_recent);
+      renderTeamPicker(teams, rerender);
+    };
+
+    renderTeamPicker(teams, rerender);
+
+    // Chrome (chip, bottom nav, sheet close, Escape) is wired by the
+    // parse-time delegated listener above. Only the data-dependent bits
+    // bind here.
+    const clear = $("#team-picker-clear");
+    if (clear) {
+      clear.addEventListener("click", () => {
+        setMyTeam(null);
+        closeSheet("team-picker");
+        rerender();
+        selectTab("section-teams");
+      });
+    }
+  }
+
+  // Keep the bottom bar's highlight in step with whatever selected the tab
+  // (top tabs, hash, or a Today block link).
+  function syncBottomNav(panelId) {
+    const direct = $$(".bottom-nav-btn").some((b) => b.getAttribute("data-panel") === panelId);
+    $$(".bottom-nav-btn").forEach((b) => {
+      // Panels reached through the More sheet (News, Transactions) have no
+      // bar item of their own — light up More so the bar never reads as
+      // "you are nowhere".
+      const on = b.id === "bottom-nav-more"
+        ? !direct
+        : b.getAttribute("data-panel") === panelId;
+      if (on) b.setAttribute("aria-current", "page");
+      else b.removeAttribute("aria-current");
+    });
+  }
+
   // ---------- Render error states ----------
   function renderEmptyAll(reason) {
     renderMeta({});
+    const today = $("#today-mount");
+    if (today) today.replaceChildren(el("p", { className: "empty", text: reason }));
     $("#waiver-list").replaceChildren(el("li", { className: "empty", text: reason }));
     $("#team-grid").replaceChildren(el("p", { className: "empty", text: reason }));
     const newsList = $("#news-list");
@@ -1666,7 +2235,6 @@
   // ---------- Bootstrap ----------
   async function main() {
     initTheme();
-    initTabsFromHash();
     try {
       const resp = await fetch(STATE_URL, { cache: "no-store" });
       if (!resp.ok) {
@@ -1679,15 +2247,23 @@
       const state = await resp.json();
       // Build the per-player index BEFORE rendering — the player-name
       // buttons rendered inside team cards, waivers, and txns expect it
-      // to exist when a click fires.
+      // to exist when a click fires. It also populates TEAM_BY_ID, which
+      // myTeam() reads, so it has to precede initMyTeam().
       PLAYER_INDEX = buildPlayerIndex(state);
+      initMyTeam(state.teams);
       renderMeta(state.meta || {});
+      renderToday(state);
       renderWaivers(state.waiver_targets_overall);
       renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);
       renderTrades(state);
       initTradeCalc(state);
       renderNews(state.news_recent, state.teams);
       renderTxns(state.transactions_recent, state.teams);
+      initNav(state);
+      // The hash wins over the default tab, but only after Today has
+      // rendered — otherwise a #waivers deep link would leave Today empty
+      // if the user tabs back to it.
+      initTabsFromHash();
     } catch (err) {
       console.error("FantasyGM: failed to load state", err);
       renderEmptyAll(

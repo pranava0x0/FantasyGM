@@ -69,6 +69,19 @@ class MatchupResult(_Strict):
     result: Literal["W", "L", "T"]
 
 
+class CurrentMatchup(_Strict):
+    """The in-progress H2H matchup — who you're playing and the live score.
+
+    Distinct from `matchup_history`, which is completed weeks only. Points are
+    ESPN's running totals as of `captured_at`, so they trail the live site by
+    however stale the snapshot is.
+    """
+    matchup_period_id: int
+    opponent_team_id: int
+    team_points: float
+    opponent_points: float
+
+
 class TeamNeeds(_Strict):
     """Per-team production by bucket, with league-average comparison.
 
@@ -157,6 +170,10 @@ class TeamState(_Strict):
     matchup_history: list[MatchupResult] = Field(
         default_factory=list,
         description="Completed H2H matchup results, sorted by matchup_period_id ascending.",
+    )
+    current_matchup: CurrentMatchup | None = Field(
+        None,
+        description="The in-progress matchup. None during a bye or when the season's schedule doesn't cover the current period.",
     )
     waiver_position: int | None = None
     faab_remaining: int | None = None
