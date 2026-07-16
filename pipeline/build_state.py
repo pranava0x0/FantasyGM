@@ -35,6 +35,15 @@ MAX_HISTORY_PER_PLAYER = 50
 # lower so a busy team doesn't drown a player's history in generic recaps.
 MAX_TEAM_ONLY_NEWS_PER_PLAYER = 10
 
+# How many need-adjusted candidates to measure net gain for before cutting the
+# per-team waiver list to its top 10. Larger than the shelf because projection
+# rank and net-gain rank genuinely disagree: an add can rank ~15th on raw
+# projection and still be the best available upgrade to a given nine (or rank
+# 2nd and gain nothing, if the roster is already saturated at her position).
+# 25 covers the observed disagreement with room to spare; the cost is one
+# lineup sim per candidate per team.
+NET_GAIN_CANDIDATE_POOL = 25
+
 # ---------------------------------------------------------------------------
 # Social-media return-from-injury signal detection
 # ---------------------------------------------------------------------------
@@ -444,16 +453,19 @@ def build_state(
         )
         teams.append(team_state)
 
-        team_targets = analyze.waiver_targets_for_team(
-            w, ranked_fas_dicts,
-            active_counts={k: int(v) for k, v in t["active_counts"].items()},
-            limit=10,
-        )
         # Waivers 2.0: reframe each card from "what she projects" to "what she
         # adds to *your* lineup, and who you'd drop for her" (spec §3.A1-A3).
-        gains = [
-            lineups.net_gain_for_add(t["roster"], d) for d in team_targets
-        ]
+        # `waiver_targets_for_team` picks the candidates (need-adjusted
+        # projection); `rank_by_net_gain` decides which ten actually help and
+        # in what order. See its docstring for why the pool is wider than ten.
+        candidates = analyze.waiver_targets_for_team(
+            w, ranked_fas_dicts,
+            active_counts={k: int(v) for k, v in t["active_counts"].items()},
+            limit=NET_GAIN_CANDIDATE_POOL,
+        )
+        ranked_pairs = lineups.rank_by_net_gain(t["roster"], candidates, limit=10)
+        team_targets = [d for d, _gain in ranked_pairs]
+        gains = [gain for _d, gain in ranked_pairs]
         median_gain = statistics.median([g for g in gains if g > 0]) if any(g > 0 for g in gains) else 0.0
         team_extras: list[dict[str, Any]] = []
         for d, gain in zip(team_targets, gains):

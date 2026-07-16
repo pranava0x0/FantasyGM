@@ -346,3 +346,61 @@ class TestNormalizeTransactions:
             assert "memberId" not in tx
             assert "isActingAsTeamOwner" not in tx
             assert "isLeagueManager" not in tx
+
+
+class TestFaabRemaining:
+    """A team that has spent its whole budget has $0, not 'unknown'.
+
+    Regression: `faab_remaining` was built as
+    `(spent is not None) and _faab_remaining(...) or None`. Python's `or`
+    treats a remaining balance of 0 as falsy, so a fully-spent team came out
+    as None — indistinguishable from a league with no FAAB at all. Downstream
+    that reads as "no known limit": `faab.suggest_bid` only suppresses its
+    band for `<= 0`, so a broke team was quoted bids it could not pay.
+    """
+
+    def _league(self, budget, spent) -> dict:
+        return {
+            "settings": {"acquisitionSettings": {"acquisitionBudget": budget}},
+            "teams": [{
+                "id": 1, "abbrev": "AAA", "location": "A", "nickname": "B",
+                "record": {"overall": {"wins": 0, "losses": 0, "ties": 0, "percentage": 0.0}},
+                "roster": {"entries": []},
+                "transactionCounter": {"acquisitionBudgetSpent": spent},
+            }],
+        }
+
+    def test_fully_spent_budget_is_zero_not_none(self) -> None:
+        view = analyze.build_team_views(self._league(100, 100))[0]
+        assert view["faab_remaining"] == 0
+
+    def test_partial_budget_is_the_difference(self) -> None:
+        view = analyze.build_team_views(self._league(100, 45))[0]
+        assert view["faab_remaining"] == 55
+
+    def test_unknown_budget_stays_none(self) -> None:
+        assert analyze.build_team_views(self._league(None, 5))[0]["faab_remaining"] is None
+
+    def test_unknown_spend_stays_none(self) -> None:
+        assert analyze.build_team_views(self._league(100, None))[0]["faab_remaining"] is None
+
+    def test_zero_faab_suppresses_bid_guidance(self) -> None:
+        """The end-to-end point of the fix: $0 must reach `suggest_bid` as 0.
+
+        Uses a market above `faab.MIN_SAMPLE` so the band is suppressed by the
+        team's empty wallet and nothing else — a thinner market returns None on
+        its own and the test would pass without the fix.
+        """
+        from pipeline import faab
+        market = faab.build_market([
+            {"type": "WAIVER", "status": "EXECUTED", "bid_amount": b,
+             "items": [{"type": "ADD", "player_id": i}]}
+            for i, b in enumerate(range(1, faab.MIN_SAMPLE + 3))
+        ])
+        assert market is not None, "market must be quotable for this test to mean anything"
+        assert faab.suggest_bid(market, net_gain=10.0, reference_gain=10.0,
+                                faab_remaining=50) is not None, "control: a funded team gets a band"
+
+        remaining = analyze.build_team_views(self._league(100, 100))[0]["faab_remaining"]
+        assert faab.suggest_bid(market, net_gain=10.0, reference_gain=10.0,
+                                faab_remaining=remaining) is None

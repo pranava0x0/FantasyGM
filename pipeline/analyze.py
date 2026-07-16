@@ -215,7 +215,13 @@ def build_team_views(
             "logo": t.get("logo"),
             "division_id": t.get("divisionId"),
             "waiver_position": t.get("waiverRank"),
-            "faab_remaining": ((t.get("transactionCounter") or {}).get("acquisitionBudgetSpent") is not None) and _faab_remaining(t, league_raw) or None,
+            # Straight call: `_faab_remaining` already returns None for every
+            # unknown case. Guarding it with `... and _faab_remaining(...) or None`
+            # collapsed a real remaining balance of *zero* to None — a team that
+            # had spent its whole budget read as "unknown", which reads as
+            # "no limit" downstream and let `faab.suggest_bid` quote bids it
+            # could not pay.
+            "faab_remaining": _faab_remaining(t, league_raw),
             "record": {
                 "wins": int(record.get("wins") or 0),
                 "losses": int(record.get("losses") or 0),

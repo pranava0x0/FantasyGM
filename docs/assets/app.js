@@ -1269,7 +1269,8 @@
 
   function claimBlock(state, team) {
     const row = (state.waiver_targets_by_team || []).find((r) => r.team_id === team.team_id);
-    const top = (row && row.targets && row.targets[0]) || (state.waiver_targets_overall || [])[0];
+    const scoped = !!(row && row.targets && row.targets.length);
+    const top = (scoped && row.targets[0]) || (state.waiver_targets_overall || [])[0];
     if (!top) return null;
     const p = top.player;
     const wrap = el("div", { className: "today-claim" });
@@ -1281,14 +1282,25 @@
     if (top.promoted_for_need) nameLine.appendChild(el("span", { className: "fit-pill need", text: "Need" }));
     wrap.appendChild(nameLine);
 
+    // Lead with the number that made her #1. The team list is ranked by net
+    // gain, so quoting her raw projection here contradicts the Waivers card
+    // one tab away: the same player read "69.1 proj this wk" on Today and
+    // "+16.5 net" on Waivers, a 4x gap on two surfaces the user reads in one
+    // sitting. League-wide there's no roster to measure against, so the
+    // projection is the honest number there and keeps its own label.
+    const netGain = scoped ? top.net_gain_this_week : null;
     const stat = el("div", { className: "today-claim-stat" });
     stat.appendChild(el("span", {
       className: "today-hero-num",
-      text: fmtPoints(top.projected_points_this_week ?? top.base_score),
+      text: netGain == null
+        ? fmtPoints(top.projected_points_this_week ?? top.base_score)
+        : fmtDelta(netGain),
     }));
     stat.appendChild(el("span", {
       className: "today-hero-unit",
-      text: `proj this wk · ${top.games_this_week ?? 0} gms`,
+      text: netGain == null
+        ? `proj this wk · ${top.games_this_week ?? 0} gms`
+        : `net this wk · ${fmtPoints(top.projected_points_this_week ?? top.base_score)} proj · ${top.games_this_week ?? 0} gms`,
     }));
     wrap.appendChild(stat);
 

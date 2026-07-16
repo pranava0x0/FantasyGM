@@ -206,18 +206,19 @@ def check_lineup(
             return bool(games_for.get(int(entry["player_id"])))
         return int(entry.get("games_this_week") or 0) > 0
 
-    def score(entry: dict[str, Any]) -> float:
-        if is_confirmed_out(entry.get("injury_status")):
-            return 0.0
-        if horizon == "tonight":
-            return _score_tonight(entry, has_games(entry))
-        return _score_week(entry)
-
     # Tonight only: a player whose game already tipped is frozen wherever she
     # currently sits. Over a week horizon there's always a later game to move
     # her for, so nothing is pinned.
+    #
+    # Freezing cuts both ways. A locked player who is *already starting* is
+    # pinned into her slot and keeps her points. A locked player on the *bench*
+    # is unreachable: ESPN will refuse to start her, so her points are not ours
+    # to capture and she must not appear as a `player_in`. Recording her in
+    # `locked_player_ids` is not enough — `optimal_lineup` picks on score, and
+    # hers is high precisely because her game is underway.
     pinned: dict[int, str] = {}
     locked_ids: list[int] = []
+    unreachable: set[int] = set()
     if horizon == "tonight":
         for entry in roster:
             pid = int(entry["player_id"])
@@ -226,6 +227,17 @@ def check_lineup(
             locked_ids.append(pid)
             if int(entry.get("lineup_slot_id") or -1) in ACTIVE_SLOT_IDS:
                 pinned[pid] = str(entry.get("lineup_slot_label") or "UTIL")
+            else:
+                unreachable.add(pid)
+
+    def score(entry: dict[str, Any]) -> float:
+        if is_confirmed_out(entry.get("injury_status")):
+            return 0.0
+        if horizon == "tonight":
+            if int(entry["player_id"]) in unreachable:
+                return 0.0
+            return _score_tonight(entry, has_games(entry))
+        return _score_week(entry)
 
     active, _bench = optimal_lineup(roster, score, pinned=pinned)
 
@@ -341,6 +353,37 @@ def net_gain_for_add(
     before = _lineup_points(roster, fn)
     after = _lineup_points([*roster, candidate], fn)
     return round(after - before, 2)
+
+
+def rank_by_net_gain(
+    roster: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    *,
+    limit: int,
+    score_fn: Callable[[dict[str, Any]], float] | None = None,
+) -> list[tuple[dict[str, Any], float]]:
+    """Order waiver candidates by what each actually adds to `roster`'s nine.
+
+    Returns `[(candidate, net_gain), ...]`, best first, cut to `limit`.
+
+    Net gain is the number the card leads with, so it has to be the sort key
+    too — otherwise the page asserts an order the data doesn't have and "Top
+    claim" names a worse add than the one below it.
+
+    It also has to be the *cut* key, not a re-sort of an already-cut list.
+    Callers select candidates by need-adjusted projection, and the two orders
+    genuinely disagree: an add can rank ~15th on projection and still be the
+    best available upgrade to a given nine, or rank 2nd and gain nothing
+    because the roster is already saturated at her position. Pass a pool
+    wider than `limit` and let this decide.
+
+    Sorting is stable, so equal gains keep the caller's order — this refines
+    that ranking rather than replacing it. Ties are the common case: every
+    add that misses the optimal nine gains exactly 0.0.
+    """
+    scored = [(c, net_gain_for_add(roster, c, score_fn=score_fn)) for c in candidates]
+    scored.sort(key=lambda pair: pair[1], reverse=True)
+    return scored[:limit]
 
 
 def drop_candidate(

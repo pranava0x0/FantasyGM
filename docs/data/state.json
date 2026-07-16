@@ -1691,24 +1691,12 @@
       "lineup_check": {
         "tonight": {
           "horizon": "tonight",
-          "status": "moves_available",
-          "points_left_on_bench": 31.91,
-          "moves": [
-            {
-              "action": "swap",
-              "player_in_id": 3904576,
-              "player_in_name": "Marina Mabrey",
-              "player_out_id": 869,
-              "player_out_name": "DeWanna Bonner",
-              "slot_label": "G",
-              "gain_pts": 31.91,
-              "player_in_game_time": "2026-07-05T19:00:00Z",
-              "player_out_reason": "no game"
-            }
-          ],
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
           "computed_for_period": 59,
           "current_points": 30.98,
-          "optimal_points": 62.89,
+          "optimal_points": 30.98,
           "locked_player_ids": [
             3904576,
             3906949
@@ -2498,24 +2486,12 @@
       "lineup_check": {
         "tonight": {
           "horizon": "tonight",
-          "status": "moves_available",
-          "points_left_on_bench": 23.03,
-          "moves": [
-            {
-              "action": "swap",
-              "player_in_id": 4398768,
-              "player_in_name": "Nyara Sabally",
-              "player_out_id": 4433405,
-              "player_out_name": "Kamilla Cardoso",
-              "slot_label": "F",
-              "gain_pts": 23.03,
-              "player_in_game_time": "2026-07-05T19:00:00Z",
-              "player_out_reason": "no game"
-            }
-          ],
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
           "computed_for_period": 59,
           "current_points": 30.86,
-          "optimal_points": 53.89,
+          "optimal_points": 30.86,
           "locked_player_ids": [
             3142191,
             4398768
@@ -14441,7 +14417,216 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 6,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 55
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 5017726,
+            "name": "Jade Melbourne",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 22.23,
+          "projected_points_this_week": 66.68,
+          "games_this_week": 3,
+          "projected_points_next_week": 44.45,
+          "games_next_week": 2,
+          "season_avg_points": 18.95,
+          "percent_owned": 12.83,
+          "percent_change": -2.48,
+          "base_score": 66.68,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 58,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 28.0
+            },
+            {
+              "scoring_period_id": 49,
+              "fantasy_points": 36.0
+            }
+          ],
+          "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 66.68,
+          "net_gain_next_week": 44.45,
+          "drop_candidate": {
+            "player_id": 2988756,
+            "player_name": "Brittney Sykes",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 55
+          },
+          "tags": [
+            "streamer"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4703609,
+            "name": "Charlisse Leger-Walker",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 22.06,
+          "projected_points_this_week": 66.17,
+          "games_this_week": 3,
+          "projected_points_next_week": 66.17,
+          "games_next_week": 3,
+          "season_avg_points": 15.45,
+          "percent_owned": 3.51,
+          "percent_change": 0.41,
+          "base_score": 66.17,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 33.0
+            }
+          ],
+          "ai_summary": "Leger-Walker projects 22.06/g across a 3-game week for Connecticut, well above her 15.45 season average, with X/Bluesky coverage tying her into a deepening frontcourt-guard rotation. A Guard-need speculative pickup at 3.51% owned riding a hot recent stretch.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 66.17,
+          "net_gain_next_week": 66.17,
+          "drop_candidate": {
+            "player_id": 2988756,
+            "player_name": "Brittney Sykes",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 55
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.42,
+          "projected_per_game": 22.0,
+          "projected_points_this_week": 66.0,
+          "games_this_week": 3,
+          "projected_points_next_week": 66.0,
+          "games_next_week": 3,
+          "season_avg_points": 22.0,
+          "percent_owned": 22.18,
+          "percent_change": -0.73,
+          "base_score": 66.0,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 57,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 19.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "Vandersloot has been dealing with a knee issue (per an X game-status report listing her OUT), but Reddit chatter suggests her return isn't far off, and her 22.0 season average matches her projected pace once back. Worth a Guard-need stash for the playmaking floor she provides -- confirm her status before the lineup lock.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 66.0,
+          "net_gain_next_week": 66.0,
+          "drop_candidate": {
+            "player_id": 2988756,
+            "player_name": "Brittney Sykes",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -14744,226 +14929,9 @@
         },
         {
           "player": {
-            "player_id": 3934218,
-            "name": "Megan Gustafson",
-            "team": "POR",
-            "position": "C",
-            "bucket": "C",
-            "eligible_slots": [
-              0,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 6.08,
-          "projected_per_game": 25.9,
-          "projected_points_this_week": 51.8,
-          "games_this_week": 2,
-          "projected_points_next_week": 77.7,
-          "games_next_week": 3,
-          "season_avg_points": 22.05,
-          "percent_owned": 30.52,
-          "percent_change": -2.83,
-          "base_score": 51.8,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 58,
-              "fantasy_points": 30.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 41.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 22.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 26.0
-            }
-          ],
-          "ai_summary": "Gustafson matches her 22.05 season average with X coverage confirming she's settled into a real role with the expansion franchise, and her 3-game week next projects 66.8 points (22.3/g) -- but Reddit reports she's getting married Saturday and will miss the game against the Lynx, so expect one fewer game than the raw projection assumes. A Frontcourt-need target at 30.5% owned, though this week's ownership dip (-2.83%) plus the missed game are worth watching before the next scoring period.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 51.8,
-          "net_gain_next_week": 77.7,
-          "drop_candidate": {
-            "player_id": 2988756,
-            "player_name": "Brittney Sykes",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 55
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 2566081,
-            "name": "Elizabeth Williams",
-            "team": "CHI",
-            "position": "C",
-            "bucket": "C",
-            "eligible_slots": [
-              0,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 20.88,
-          "projected_per_game": 14.85,
-          "projected_points_this_week": 44.55,
-          "games_this_week": 3,
-          "projected_points_next_week": 44.55,
-          "games_next_week": 3,
-          "season_avg_points": 15.5,
-          "percent_owned": 33.63,
-          "percent_change": -0.45,
-          "base_score": 44.55,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 57,
-              "fantasy_points": 13.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 14.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 24.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 11.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 9.0
-            }
-          ],
-          "ai_summary": "Williams projects 14.85/g across a 3-game week for Chicago, close to her 15.5 season average, and Bluesky confirms she re-signed with the Sky as an unrestricted free agent -- a role-security signal. Reddit's \"Sheldon or Elizabeth Williams\" stream debate shows she's still in the mainstream Frontcourt-need conversation at 33.63% owned.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 44.55,
-          "net_gain_next_week": 44.55,
-          "drop_candidate": {
-            "player_id": 2988756,
-            "player_name": "Brittney Sykes",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 55
-          },
-          "tags": [],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 3142055,
-            "name": "Myisha Hines-Allen",
-            "team": "IND",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 17.85,
-          "projected_per_game": 14.43,
-          "projected_points_this_week": 43.28,
-          "games_this_week": 3,
-          "projected_points_next_week": 43.28,
-          "games_next_week": 3,
-          "season_avg_points": 14.35,
-          "percent_owned": 8.79,
-          "percent_change": 0.49,
-          "base_score": 43.28,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 59,
-              "fantasy_points": 3.0
-            },
-            {
-              "scoring_period_id": 51,
-              "fantasy_points": 22.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 22.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 11.0
-            }
-          ],
-          "ai_summary": "Hines-Allen projects 13.8/g across a 3-game week for Indiana, close to her 14.35 season average, with no fresh social buzz this cycle -- a steady but unspectacular Frontcourt-need floor piece at 8.79% owned (+0.49% this week).",
-          "ai_summary_date": null,
-          "net_gain_this_week": 43.28,
-          "net_gain_next_week": 43.28,
-          "drop_candidate": {
-            "player_id": 2988756,
-            "player_name": "Brittney Sykes",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 55
-          },
-          "tags": [],
-          "plays_tonight": true,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -14975,108 +14943,35 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 22.23,
-          "projected_points_this_week": 66.68,
+          "projected_points_next_period": 18.43,
+          "projected_per_game": 18.72,
+          "projected_points_this_week": 56.17,
           "games_this_week": 3,
-          "projected_points_next_week": 44.45,
-          "games_next_week": 2,
-          "season_avg_points": 18.95,
-          "percent_owned": 12.83,
-          "percent_change": -2.48,
-          "base_score": 66.68,
+          "projected_points_next_week": 74.89,
+          "games_next_week": 4,
+          "season_avg_points": 19.44,
+          "percent_owned": 22.83,
+          "percent_change": -0.09,
+          "base_score": 56.17,
           "injury_signal": null,
           "recent_games": [
             {
-              "scoring_period_id": 58,
-              "fantasy_points": 14.0
-            },
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 24.0
-            },
-            {
               "scoring_period_id": 51,
-              "fantasy_points": 28.0
+              "fantasy_points": 9.0
             },
             {
               "scoring_period_id": 49,
-              "fantasy_points": 36.0
-            }
-          ],
-          "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 66.68,
-          "net_gain_next_week": 44.45,
-          "drop_candidate": {
-            "player_id": 2988756,
-            "player_name": "Brittney Sykes",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 6,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 55
-          },
-          "tags": [
-            "streamer"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 4703609,
-            "name": "Charlisse Leger-Walker",
-            "team": "CON",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 22.06,
-          "projected_points_this_week": 66.17,
-          "games_this_week": 3,
-          "projected_points_next_week": 66.17,
-          "games_next_week": 3,
-          "season_avg_points": 15.45,
-          "percent_owned": 3.51,
-          "percent_change": 0.41,
-          "base_score": 66.17,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 22.0
+              "fantasy_points": 14.0
             },
             {
-              "scoring_period_id": 50,
+              "scoring_period_id": 45,
               "fantasy_points": 31.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 33.0
             }
           ],
-          "ai_summary": "Leger-Walker projects 22.06/g across a 3-game week for Connecticut, well above her 15.45 season average, with X/Bluesky coverage tying her into a deepening frontcourt-guard rotation. A Guard-need speculative pickup at 3.51% owned riding a hot recent stretch.",
+          "ai_summary": "Wheeler anchors LA's backcourt with a durable 19.4 season average, and a 4-game slate next week bumps her projection to 80.6 points (20.2/g) -- one of the fuller schedules on this board. Bluesky flagged a clutch buzzer-beater three against Washington, reinforcing her closing-lineup role. A steady Guard-need pickup at 22.8% owned with room to keep climbing.",
           "ai_summary_date": null,
-          "net_gain_this_week": 66.17,
-          "net_gain_next_week": 66.17,
+          "net_gain_this_week": 56.17,
+          "net_gain_next_week": 74.89,
           "drop_candidate": {
             "player_id": 2988756,
             "player_name": "Brittney Sykes",
@@ -15087,7 +14982,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -15098,6 +14993,61 @@
             "anchor"
           ],
           "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "projected_per_game": 18.64,
+          "projected_points_this_week": 55.91,
+          "games_this_week": 3,
+          "projected_points_next_week": 55.91,
+          "games_next_week": 3,
+          "season_avg_points": null,
+          "percent_owned": 0.7,
+          "percent_change": 0.0,
+          "base_score": 55.91,
+          "injury_signal": null,
+          "recent_games": [],
+          "ai_summary": "McDonald is a deep speculative flier for Indiana -- 18.64/g this week, but with no ESPN season average yet, it's an unproven small sample. At 0.7% owned, confirm she's actually seeing consistent minutes before committing a Guard-need spot.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 55.91,
+          "net_gain_next_week": 55.91,
+          "drop_candidate": {
+            "player_id": 2988756,
+            "player_name": "Brittney Sykes",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 4,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 55
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": true,
           "best_fit": []
         }
       ]
@@ -15166,7 +15116,216 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 6,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 69
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 5017726,
+            "name": "Jade Melbourne",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 22.23,
+          "projected_points_this_week": 66.68,
+          "games_this_week": 3,
+          "projected_points_next_week": 44.45,
+          "games_next_week": 2,
+          "season_avg_points": 18.95,
+          "percent_owned": 12.83,
+          "percent_change": -2.48,
+          "base_score": 66.68,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 58,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 28.0
+            },
+            {
+              "scoring_period_id": 49,
+              "fantasy_points": 36.0
+            }
+          ],
+          "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 66.68,
+          "net_gain_next_week": 44.45,
+          "drop_candidate": {
+            "player_id": 4433403,
+            "player_name": "Caitlin Clark",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 69
+          },
+          "tags": [
+            "streamer"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4703609,
+            "name": "Charlisse Leger-Walker",
+            "team": "CON",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 22.06,
+          "projected_points_this_week": 66.17,
+          "games_this_week": 3,
+          "projected_points_next_week": 66.17,
+          "games_next_week": 3,
+          "season_avg_points": 15.45,
+          "percent_owned": 3.51,
+          "percent_change": 0.41,
+          "base_score": 66.17,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 33.0
+            }
+          ],
+          "ai_summary": "Leger-Walker projects 22.06/g across a 3-game week for Connecticut, well above her 15.45 season average, with X/Bluesky coverage tying her into a deepening frontcourt-guard rotation. A Guard-need speculative pickup at 3.51% owned riding a hot recent stretch.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 66.17,
+          "net_gain_next_week": 66.17,
+          "drop_candidate": {
+            "player_id": 4433403,
+            "player_name": "Caitlin Clark",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 69
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 981,
+            "name": "Courtney Vandersloot",
+            "team": "CHI",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 22.42,
+          "projected_per_game": 22.0,
+          "projected_points_this_week": 66.0,
+          "games_this_week": 3,
+          "projected_points_next_week": 66.0,
+          "games_next_week": 3,
+          "season_avg_points": 22.0,
+          "percent_owned": 22.18,
+          "percent_change": -0.73,
+          "base_score": 66.0,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 57,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 19.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "Vandersloot has been dealing with a knee issue (per an X game-status report listing her OUT), but Reddit chatter suggests her return isn't far off, and her 22.0 season average matches her projected pace once back. Worth a Guard-need stash for the playmaking floor she provides -- confirm her status before the lineup lock.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 66.0,
+          "net_gain_next_week": 66.0,
+          "drop_candidate": {
+            "player_id": 4433403,
+            "player_name": "Caitlin Clark",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -15469,53 +15628,49 @@
         },
         {
           "player": {
-            "player_id": 3934218,
-            "name": "Megan Gustafson",
-            "team": "POR",
-            "position": "C",
-            "bucket": "C",
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
+            "position": "G",
+            "bucket": "G",
             "eligible_slots": [
-              0,
-              4,
+              1,
+              3,
               5,
               6,
               7
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 6.08,
-          "projected_per_game": 25.9,
-          "projected_points_this_week": 51.8,
-          "games_this_week": 2,
-          "projected_points_next_week": 77.7,
-          "games_next_week": 3,
-          "season_avg_points": 22.05,
-          "percent_owned": 30.52,
-          "percent_change": -2.83,
-          "base_score": 51.8,
+          "projected_points_next_period": 18.43,
+          "projected_per_game": 18.72,
+          "projected_points_this_week": 56.17,
+          "games_this_week": 3,
+          "projected_points_next_week": 74.89,
+          "games_next_week": 4,
+          "season_avg_points": 19.44,
+          "percent_owned": 22.83,
+          "percent_change": -0.09,
+          "base_score": 56.17,
           "injury_signal": null,
           "recent_games": [
             {
-              "scoring_period_id": 58,
-              "fantasy_points": 30.0
+              "scoring_period_id": 51,
+              "fantasy_points": 9.0
             },
             {
-              "scoring_period_id": 52,
-              "fantasy_points": 41.0
+              "scoring_period_id": 49,
+              "fantasy_points": 14.0
             },
             {
-              "scoring_period_id": 50,
-              "fantasy_points": 22.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 26.0
+              "scoring_period_id": 45,
+              "fantasy_points": 31.0
             }
           ],
-          "ai_summary": "Gustafson matches her 22.05 season average with X coverage confirming she's settled into a real role with the expansion franchise, and her 3-game week next projects 66.8 points (22.3/g) -- but Reddit reports she's getting married Saturday and will miss the game against the Lynx, so expect one fewer game than the raw projection assumes. A Frontcourt-need target at 30.5% owned, though this week's ownership dip (-2.83%) plus the missed game are worth watching before the next scoring period.",
+          "ai_summary": "Wheeler anchors LA's backcourt with a durable 19.4 season average, and a 4-game slate next week bumps her projection to 80.6 points (20.2/g) -- one of the fuller schedules on this board. Bluesky flagged a clutch buzzer-beater three against Washington, reinforcing her closing-lineup role. A steady Guard-need pickup at 22.8% owned with room to keep climbing.",
           "ai_summary_date": null,
-          "net_gain_this_week": 51.8,
-          "net_gain_next_week": 77.7,
+          "net_gain_this_week": 56.17,
+          "net_gain_next_week": 74.89,
           "drop_candidate": {
             "player_id": 4433403,
             "player_name": "Caitlin Clark",
@@ -15541,57 +15696,36 @@
         },
         {
           "player": {
-            "player_id": 2566081,
-            "name": "Elizabeth Williams",
-            "team": "CHI",
-            "position": "C",
-            "bucket": "C",
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
             "eligible_slots": [
-              0,
-              4,
+              1,
+              3,
               5,
               6,
               7
             ],
-            "injury_status": "ACTIVE"
+            "injury_status": null
           },
-          "projected_points_next_period": 20.88,
-          "projected_per_game": 14.85,
-          "projected_points_this_week": 44.55,
+          "projected_points_next_period": 18.64,
+          "projected_per_game": 18.64,
+          "projected_points_this_week": 55.91,
           "games_this_week": 3,
-          "projected_points_next_week": 44.55,
+          "projected_points_next_week": 55.91,
           "games_next_week": 3,
-          "season_avg_points": 15.5,
-          "percent_owned": 33.63,
-          "percent_change": -0.45,
-          "base_score": 44.55,
+          "season_avg_points": null,
+          "percent_owned": 0.7,
+          "percent_change": 0.0,
+          "base_score": 55.91,
           "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 57,
-              "fantasy_points": 13.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 14.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 24.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 11.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 9.0
-            }
-          ],
-          "ai_summary": "Williams projects 14.85/g across a 3-game week for Chicago, close to her 15.5 season average, and Bluesky confirms she re-signed with the Sky as an unrestricted free agent -- a role-security signal. Reddit's \"Sheldon or Elizabeth Williams\" stream debate shows she's still in the mainstream Frontcourt-need conversation at 33.63% owned.",
+          "recent_games": [],
+          "ai_summary": "McDonald is a deep speculative flier for Indiana -- 18.64/g this week, but with no ESPN season average yet, it's an unproven small sample. At 0.7% owned, confirm she's actually seeing consistent minutes before committing a Guard-need spot.",
           "ai_summary_date": null,
-          "net_gain_this_week": 44.55,
-          "net_gain_next_week": 44.55,
+          "net_gain_this_week": 55.91,
+          "net_gain_next_week": 55.91,
           "drop_candidate": {
             "player_id": 4433403,
             "player_name": "Caitlin Clark",
@@ -15601,7 +15735,7 @@
             "games_this_week": 3
           },
           "bid_guidance": {
-            "suggested_lo": 1,
+            "suggested_lo": 2,
             "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
@@ -15609,14 +15743,95 @@
             "free_claims": 13,
             "faab_remaining": 69
           },
-          "tags": [],
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": true,
+          "best_fit": []
+        }
+      ]
+    },
+    {
+      "team_id": 5,
+      "targets": [
+        {
+          "player": {
+            "player_id": 3919496,
+            "name": "Valeriane Ayayi",
+            "team": "PHX",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              9
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 23.02,
+          "projected_points_this_week": 69.07,
+          "games_this_week": 3,
+          "projected_points_next_week": 69.07,
+          "games_next_week": 3,
+          "season_avg_points": 15.8,
+          "percent_owned": 6.3,
+          "percent_change": -0.07,
+          "base_score": 69.07,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 31.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 39.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 19.0
+            }
+          ],
+          "ai_summary": "Ayayi projects 20.02/g across a 3-game week for Phoenix, above her 15.8 season average, and X coverage has Kristi Toliver singling her out as a key Mercury contributor. A Frontcourt-need pickup at 6.3% owned with real recent buzz behind it.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 69.07,
+          "net_gain_next_week": 69.07,
+          "drop_candidate": {
+            "player_id": 4565505,
+            "player_name": "Kiki Rice",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 6,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 72
+          },
+          "tags": [
+            "anchor"
+          ],
           "plays_tonight": false,
           "best_fit": []
         },
         {
           "player": {
-            "player_id": 3142055,
-            "name": "Myisha Hines-Allen",
+            "player_id": 3142255,
+            "name": "Monique Billings",
             "team": "IND",
             "position": "F",
             "bucket": "F",
@@ -15630,181 +15845,42 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 17.85,
-          "projected_per_game": 14.43,
-          "projected_points_this_week": 43.28,
+          "projected_points_next_period": 15.0,
+          "projected_per_game": 21.39,
+          "projected_points_this_week": 64.18,
           "games_this_week": 3,
-          "projected_points_next_week": 43.28,
+          "projected_points_next_week": 64.18,
           "games_next_week": 3,
-          "season_avg_points": 14.35,
-          "percent_owned": 8.79,
-          "percent_change": 0.49,
-          "base_score": 43.28,
+          "season_avg_points": 18.79,
+          "percent_owned": 13.08,
+          "percent_change": 1.98,
+          "base_score": 64.18,
           "injury_signal": null,
           "recent_games": [
             {
               "scoring_period_id": 59,
-              "fantasy_points": 3.0
+              "fantasy_points": 17.0
             },
             {
               "scoring_period_id": 51,
-              "fantasy_points": 22.0
+              "fantasy_points": 32.0
             },
             {
               "scoring_period_id": 48,
-              "fantasy_points": 22.0
+              "fantasy_points": 13.0
             },
             {
               "scoring_period_id": 46,
-              "fantasy_points": 11.0
+              "fantasy_points": 34.0
             }
           ],
-          "ai_summary": "Hines-Allen projects 13.8/g across a 3-game week for Indiana, close to her 14.35 season average, with no fresh social buzz this cycle -- a steady but unspectacular Frontcourt-need floor piece at 8.79% owned (+0.49% this week).",
+          "ai_summary": "Billings' projection (19.27/g) sits just above her 18.79 season average, but X chatter is split on whether her recent role dip is a scheme fit issue, and Reddit's \"Sug or Billings\" thread shows managers weighing whether to keep her. A Frontcourt-need option at 13.08% owned (+1.98% this week) -- worth a look, but watch the role before banking on it.",
           "ai_summary_date": null,
-          "net_gain_this_week": 43.28,
-          "net_gain_next_week": 43.28,
+          "net_gain_this_week": 64.18,
+          "net_gain_next_week": 64.18,
           "drop_candidate": {
-            "player_id": 4433403,
-            "player_name": "Caitlin Clark",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 69
-          },
-          "tags": [],
-          "plays_tonight": true,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 22.23,
-          "projected_points_this_week": 66.68,
-          "games_this_week": 3,
-          "projected_points_next_week": 44.45,
-          "games_next_week": 2,
-          "season_avg_points": 18.95,
-          "percent_owned": 12.83,
-          "percent_change": -2.48,
-          "base_score": 66.68,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 58,
-              "fantasy_points": 14.0
-            },
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 24.0
-            },
-            {
-              "scoring_period_id": 51,
-              "fantasy_points": 28.0
-            },
-            {
-              "scoring_period_id": 49,
-              "fantasy_points": 36.0
-            }
-          ],
-          "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 66.68,
-          "net_gain_next_week": 44.45,
-          "drop_candidate": {
-            "player_id": 4433403,
-            "player_name": "Caitlin Clark",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 6,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 69
-          },
-          "tags": [
-            "streamer"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 4703609,
-            "name": "Charlisse Leger-Walker",
-            "team": "CON",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 22.06,
-          "projected_points_this_week": 66.17,
-          "games_this_week": 3,
-          "projected_points_next_week": 66.17,
-          "games_next_week": 3,
-          "season_avg_points": 15.45,
-          "percent_owned": 3.51,
-          "percent_change": 0.41,
-          "base_score": 66.17,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 22.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 31.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 33.0
-            }
-          ],
-          "ai_summary": "Leger-Walker projects 22.06/g across a 3-game week for Connecticut, well above her 15.45 season average, with X/Bluesky coverage tying her into a deepening frontcourt-guard rotation. A Guard-need speculative pickup at 3.51% owned riding a hot recent stretch.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 66.17,
-          "net_gain_next_week": 66.17,
-          "drop_candidate": {
-            "player_id": 4433403,
-            "player_name": "Caitlin Clark",
+            "player_id": 4565505,
+            "player_name": "Kiki Rice",
             "net_loss": 0.0,
             "is_core": true,
             "injury_status": "OUT",
@@ -15817,19 +15893,83 @@
             "league_max": 28,
             "sample_n": 39,
             "free_claims": 13,
-            "faab_remaining": 69
+            "faab_remaining": 72
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": true,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 3922628,
+            "name": "Kennedy Burke",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 12.76,
+          "projected_per_game": 20.75,
+          "projected_points_this_week": 62.26,
+          "games_this_week": 3,
+          "projected_points_next_week": 62.26,
+          "games_next_week": 3,
+          "season_avg_points": 18.84,
+          "percent_owned": 12.42,
+          "percent_change": -0.2,
+          "base_score": 62.26,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 13.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 25.0
+            }
+          ],
+          "ai_summary": "Burke projects 20.75/g across a 3-game week for Connecticut, above her 18.84 season average, and shows up in Reddit's \"Edwards, Burke or Miller?\" waiver debate -- a sign managers are actively weighing her against Connecticut's other frontcourt adds. A solid Frontcourt-need pickup at 12.42% owned.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 62.26,
+          "net_gain_next_week": 62.26,
+          "drop_candidate": {
+            "player_id": 4565505,
+            "player_name": "Kiki Rice",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 72
           },
           "tags": [
             "anchor"
           ],
           "plays_tonight": false,
           "best_fit": []
-        }
-      ]
-    },
-    {
-      "team_id": 5,
-      "targets": [
+        },
         {
           "player": {
             "player_id": 5017726,
@@ -15889,7 +16029,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 6,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -15958,7 +16098,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 6,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16026,7 +16166,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 6,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16041,41 +16181,58 @@
         },
         {
           "player": {
-            "player_id": 5274110,
-            "name": "Monique Akoa Makani",
-            "team": "PHX",
-            "position": "G",
-            "bucket": "G",
+            "player_id": 4257500,
+            "name": "Cecilia Zandalasini",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              1,
+              2,
               3,
+              4,
               5,
               6,
               7
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 16.47,
-          "projected_per_game": 17.45,
-          "projected_points_this_week": 52.35,
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 19.63,
+          "projected_points_this_week": 58.89,
           "games_this_week": 3,
-          "projected_points_next_week": 52.35,
-          "games_next_week": 3,
-          "season_avg_points": 20.9,
-          "percent_owned": 6.56,
-          "percent_change": -0.29,
-          "base_score": 60.2,
-          "injury_signal": "returning",
+          "projected_points_next_week": 39.26,
+          "games_next_week": 2,
+          "season_avg_points": 19.06,
+          "percent_owned": 5.3,
+          "percent_change": -0.59,
+          "base_score": 58.89,
+          "injury_signal": null,
           "recent_games": [
             {
-              "scoring_period_id": 56,
+              "scoring_period_id": 58,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 50,
               "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 45,
+              "fantasy_points": 15.0
             }
           ],
-          "ai_summary": "Akoa Makani projects 17.47/g across a 3-game week for Phoenix, below her stronger 20.9 season average, with Reddit chatter (\"Makani insight\") suggesting continued interest despite this week's ownership dip (-0.29%). A Guard-need option at 6.56% owned worth monitoring for a bounce-back week.",
+          "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
           "ai_summary_date": null,
-          "net_gain_this_week": 46.35,
-          "net_gain_next_week": 52.35,
+          "net_gain_this_week": 58.89,
+          "net_gain_next_week": 39.26,
           "drop_candidate": {
             "player_id": 4565505,
             "player_name": "Kiki Rice",
@@ -16094,16 +16251,16 @@
             "faab_remaining": 72
           },
           "tags": [
-            "anchor"
+            "streamer"
           ],
           "plays_tonight": false,
           "best_fit": []
         },
         {
           "player": {
-            "player_id": 3919496,
-            "name": "Valeriane Ayayi",
-            "team": "PHX",
+            "player_id": 4433408,
+            "name": "Aaliyah Edwards",
+            "team": "CON",
             "position": "F",
             "bucket": "F",
             "eligible_slots": [
@@ -16112,109 +16269,39 @@
               4,
               5,
               6,
-              7,
-              9
+              7
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 23.02,
-          "projected_points_this_week": 69.07,
+          "projected_points_next_period": 13.63,
+          "projected_per_game": 19.11,
+          "projected_points_this_week": 57.32,
           "games_this_week": 3,
-          "projected_points_next_week": 69.07,
+          "projected_points_next_week": 57.32,
           "games_next_week": 3,
-          "season_avg_points": 15.8,
-          "percent_owned": 6.3,
+          "season_avg_points": 18.21,
+          "percent_owned": 10.01,
           "percent_change": -0.07,
-          "base_score": 69.07,
+          "base_score": 57.32,
           "injury_signal": null,
           "recent_games": [
             {
               "scoring_period_id": 56,
-              "fantasy_points": 31.0
+              "fantasy_points": 18.0
             },
             {
-              "scoring_period_id": 51,
-              "fantasy_points": 39.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 32.0
+              "scoring_period_id": 50,
+              "fantasy_points": 16.0
             },
             {
               "scoring_period_id": 46,
-              "fantasy_points": 19.0
+              "fantasy_points": 26.0
             }
           ],
-          "ai_summary": "Ayayi projects 20.02/g across a 3-game week for Phoenix, above her 15.8 season average, and X coverage has Kristi Toliver singling her out as a key Mercury contributor. A Frontcourt-need pickup at 6.3% owned with real recent buzz behind it.",
+          "ai_summary": "Edwards projects 19.11/g across a 3-game week for Connecticut, close to her 18.21 season average, with Reddit noting she and Diamond Miller are seeing expanded usage with Saniya Rivers and another rotation piece out. A Frontcourt-need pickup at 10.01% owned riding the temporary opportunity.",
           "ai_summary_date": null,
-          "net_gain_this_week": 69.07,
-          "net_gain_next_week": 69.07,
-          "drop_candidate": {
-            "player_id": 4565505,
-            "player_name": "Kiki Rice",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 3,
-            "suggested_hi": 7,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 72
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 5349415,
-            "name": "Alicia Florez",
-            "team": "WSH",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 24.65,
-          "projected_points_this_week": 49.3,
-          "games_this_week": 2,
-          "projected_points_next_week": 73.95,
-          "games_next_week": 3,
-          "season_avg_points": 16.8,
-          "percent_owned": 0.8,
-          "percent_change": 0.34,
-          "base_score": 56.69,
-          "injury_signal": "returning",
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 33.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 32.0
-            }
-          ],
-          "ai_summary": "Florez is running hot for Washington -- 24.65/g this week and a projection that holds at 74.0 points (24.65/g) over 3 games next week, well above her 16.8 season average. Coach Sydney Johnson's post-practice comments (via X) suggest she's locked into rotation minutes. A cheap Guard-need speculative add at 0.8% owned worth riding while the role holds.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 43.3,
-          "net_gain_next_week": 73.95,
+          "net_gain_this_week": 57.32,
+          "net_gain_next_week": 57.32,
           "drop_candidate": {
             "player_id": 4565505,
             "player_name": "Kiki Rice",
@@ -16225,7 +16312,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 4,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16293,7 +16380,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16348,7 +16435,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16360,72 +16447,79 @@
           ],
           "plays_tonight": true,
           "best_fit": []
-        },
+        }
+      ]
+    },
+    {
+      "team_id": 6,
+      "targets": [
         {
           "player": {
-            "player_id": 4399342,
-            "name": "Lexi Held",
+            "player_id": 3919496,
+            "name": "Valeriane Ayayi",
             "team": "PHX",
-            "position": "G",
-            "bucket": "G",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              1,
+              2,
               3,
+              4,
               5,
               6,
-              7
+              7,
+              9
             ],
             "injury_status": "ACTIVE"
           },
           "projected_points_next_period": 0.0,
-          "projected_per_game": 18.5,
-          "projected_points_this_week": 55.5,
+          "projected_per_game": 23.02,
+          "projected_points_this_week": 69.07,
           "games_this_week": 3,
-          "projected_points_next_week": 55.5,
+          "projected_points_next_week": 69.07,
           "games_next_week": 3,
-          "season_avg_points": 13.25,
-          "percent_owned": 1.44,
-          "percent_change": 0.01,
-          "base_score": 55.5,
+          "season_avg_points": 15.8,
+          "percent_owned": 6.3,
+          "percent_change": -0.07,
+          "base_score": 69.07,
           "injury_signal": null,
           "recent_games": [
             {
               "scoring_period_id": 56,
-              "fantasy_points": 36.0
+              "fantasy_points": 31.0
             },
             {
               "scoring_period_id": 51,
-              "fantasy_points": 30.0
+              "fantasy_points": 39.0
             },
             {
               "scoring_period_id": 48,
-              "fantasy_points": 18.0
+              "fantasy_points": 32.0
             },
             {
               "scoring_period_id": 46,
-              "fantasy_points": 11.0
+              "fantasy_points": 19.0
             }
           ],
-          "ai_summary": "Held projects 17.62/g across a 3-game week for Phoenix, above her 13.25 season average, with X noting the Mercury's best net rating over their last five games and Reddit confirming she's freshly signed. A speculative Guard-need add at 1.44% owned worth riding while the role is fresh and expanding.",
+          "ai_summary": "Ayayi projects 20.02/g across a 3-game week for Phoenix, above her 15.8 season average, and X coverage has Kristi Toliver singling her out as a key Mercury contributor. A Frontcourt-need pickup at 6.3% owned with real recent buzz behind it.",
           "ai_summary_date": null,
-          "net_gain_this_week": 49.5,
-          "net_gain_next_week": 55.5,
+          "net_gain_this_week": 16.46,
+          "net_gain_next_week": 30.07,
           "drop_candidate": {
-            "player_id": 4565505,
-            "player_name": "Kiki Rice",
+            "player_id": 3906972,
+            "player_name": "Bridget Carleton",
             "net_loss": 0.0,
             "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
+            "injury_status": "ACTIVE",
+            "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_lo": 3,
+            "suggested_hi": 8,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
             "free_claims": 13,
-            "faab_remaining": 72
+            "faab_remaining": 85
           },
           "tags": [
             "anchor"
@@ -16433,87 +16527,6 @@
           "plays_tonight": false,
           "best_fit": []
         },
-        {
-          "player": {
-            "player_id": 4038379,
-            "name": "Marine Johannes",
-            "team": "NY",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 13.24,
-          "projected_per_game": 18.44,
-          "projected_points_this_week": 55.31,
-          "games_this_week": 3,
-          "projected_points_next_week": 36.88,
-          "games_next_week": 2,
-          "season_avg_points": 22.48,
-          "percent_owned": 38.21,
-          "percent_change": -1.6,
-          "base_score": 55.31,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 57,
-              "fantasy_points": 16.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 12.0
-            },
-            {
-              "scoring_period_id": 49,
-              "fantasy_points": 11.0
-            },
-            {
-              "scoring_period_id": 47,
-              "fantasy_points": 18.0
-            },
-            {
-              "scoring_period_id": 45,
-              "fantasy_points": 15.0
-            }
-          ],
-          "ai_summary": null,
-          "ai_summary_date": null,
-          "net_gain_this_week": 49.31,
-          "net_gain_next_week": 36.88,
-          "drop_candidate": {
-            "player_id": 4565505,
-            "player_name": "Kiki Rice",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 72
-          },
-          "tags": [
-            "streamer"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        }
-      ]
-    },
-    {
-      "team_id": 6,
-      "targets": [
         {
           "player": {
             "player_id": 5017726,
@@ -16572,8 +16585,8 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 6,
-            "suggested_hi": 15,
+            "suggested_lo": 3,
+            "suggested_hi": 7,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16641,8 +16654,8 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 6,
-            "suggested_hi": 15,
+            "suggested_lo": 3,
+            "suggested_hi": 6,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16709,8 +16722,8 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 6,
-            "suggested_hi": 15,
+            "suggested_lo": 3,
+            "suggested_hi": 6,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16725,43 +16738,140 @@
         },
         {
           "player": {
-            "player_id": 5274110,
-            "name": "Monique Akoa Makani",
-            "team": "PHX",
-            "position": "G",
-            "bucket": "G",
+            "player_id": 3142255,
+            "name": "Monique Billings",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              1,
+              2,
               3,
+              4,
               5,
               6,
               7
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 16.47,
-          "projected_per_game": 17.45,
-          "projected_points_this_week": 52.35,
+          "projected_points_next_period": 15.0,
+          "projected_per_game": 21.39,
+          "projected_points_this_week": 64.18,
           "games_this_week": 3,
-          "projected_points_next_week": 52.35,
+          "projected_points_next_week": 64.18,
           "games_next_week": 3,
-          "season_avg_points": 20.9,
-          "percent_owned": 6.56,
-          "percent_change": -0.29,
-          "base_score": 60.2,
-          "injury_signal": "returning",
+          "season_avg_points": 18.79,
+          "percent_owned": 13.08,
+          "percent_change": 1.98,
+          "base_score": 64.18,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 59,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 13.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 34.0
+            }
+          ],
+          "ai_summary": "Billings' projection (19.27/g) sits just above her 18.79 season average, but X chatter is split on whether her recent role dip is a scheme fit issue, and Reddit's \"Sug or Billings\" thread shows managers weighing whether to keep her. A Frontcourt-need option at 13.08% owned (+1.98% this week) -- worth a look, but watch the role before banking on it.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 11.57,
+          "net_gain_next_week": 25.18,
+          "drop_candidate": {
+            "player_id": 3906972,
+            "player_name": "Bridget Carleton",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "ACTIVE",
+            "games_this_week": 2
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 85
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": true,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 3922628,
+            "name": "Kennedy Burke",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 12.76,
+          "projected_per_game": 20.75,
+          "projected_points_this_week": 62.26,
+          "games_this_week": 3,
+          "projected_points_next_week": 62.26,
+          "games_next_week": 3,
+          "season_avg_points": 18.84,
+          "percent_owned": 12.42,
+          "percent_change": -0.2,
+          "base_score": 62.26,
+          "injury_signal": null,
           "recent_games": [
             {
               "scoring_period_id": 56,
-              "fantasy_points": 14.0
+              "fantasy_points": 13.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 25.0
             }
           ],
-          "ai_summary": "Akoa Makani projects 17.47/g across a 3-game week for Phoenix, below her stronger 20.9 season average, with Reddit chatter (\"Makani insight\") suggesting continued interest despite this week's ownership dip (-0.29%). A Guard-need option at 6.56% owned worth monitoring for a bounce-back week.",
+          "ai_summary": "Burke projects 20.75/g across a 3-game week for Connecticut, above her 18.84 season average, and shows up in Reddit's \"Edwards, Burke or Miller?\" waiver debate -- a sign managers are actively weighing her against Connecticut's other frontcourt adds. A solid Frontcourt-need pickup at 12.42% owned.",
           "ai_summary_date": null,
-          "net_gain_this_week": 0.0,
-          "net_gain_next_week": 13.35,
-          "drop_candidate": null,
-          "bid_guidance": null,
+          "net_gain_this_week": 9.65,
+          "net_gain_next_week": 23.26,
+          "drop_candidate": {
+            "player_id": 3906972,
+            "player_name": "Bridget Carleton",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "ACTIVE",
+            "games_this_week": 2
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 85
+          },
           "tags": [
             "anchor"
           ],
@@ -16770,48 +16880,144 @@
         },
         {
           "player": {
-            "player_id": 5349415,
-            "name": "Alicia Florez",
-            "team": "WSH",
-            "position": "G",
-            "bucket": "G",
+            "player_id": 4257500,
+            "name": "Cecilia Zandalasini",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              1,
+              2,
               3,
+              4,
               5,
               6,
-              7,
-              9
+              7
             ],
             "injury_status": "ACTIVE"
           },
           "projected_points_next_period": 0.0,
-          "projected_per_game": 24.65,
-          "projected_points_this_week": 49.3,
-          "games_this_week": 2,
-          "projected_points_next_week": 73.95,
-          "games_next_week": 3,
-          "season_avg_points": 16.8,
-          "percent_owned": 0.8,
-          "percent_change": 0.34,
-          "base_score": 56.69,
-          "injury_signal": "returning",
+          "projected_per_game": 19.63,
+          "projected_points_this_week": 58.89,
+          "games_this_week": 3,
+          "projected_points_next_week": 39.26,
+          "games_next_week": 2,
+          "season_avg_points": 19.06,
+          "percent_owned": 5.3,
+          "percent_change": -0.59,
+          "base_score": 58.89,
+          "injury_signal": null,
           "recent_games": [
             {
-              "scoring_period_id": 56,
-              "fantasy_points": 33.0
+              "scoring_period_id": 58,
+              "fantasy_points": 24.0
             },
             {
               "scoring_period_id": 52,
-              "fantasy_points": 32.0
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 45,
+              "fantasy_points": 15.0
             }
           ],
-          "ai_summary": "Florez is running hot for Washington -- 24.65/g this week and a projection that holds at 74.0 points (24.65/g) over 3 games next week, well above her 16.8 season average. Coach Sydney Johnson's post-practice comments (via X) suggest she's locked into rotation minutes. A cheap Guard-need speculative add at 0.8% owned worth riding while the role holds.",
+          "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
           "ai_summary_date": null,
-          "net_gain_this_week": 0.0,
-          "net_gain_next_week": 34.95,
-          "drop_candidate": null,
-          "bid_guidance": null,
+          "net_gain_this_week": 6.28,
+          "net_gain_next_week": 0.26,
+          "drop_candidate": {
+            "player_id": 3906972,
+            "player_name": "Bridget Carleton",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "ACTIVE",
+            "games_this_week": 2
+          },
+          "bid_guidance": {
+            "suggested_lo": 1,
+            "suggested_hi": 3,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 85
+          },
+          "tags": [
+            "streamer"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4433408,
+            "name": "Aaliyah Edwards",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 13.63,
+          "projected_per_game": 19.11,
+          "projected_points_this_week": 57.32,
+          "games_this_week": 3,
+          "projected_points_next_week": 57.32,
+          "games_next_week": 3,
+          "season_avg_points": 18.21,
+          "percent_owned": 10.01,
+          "percent_change": -0.07,
+          "base_score": 57.32,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "Edwards projects 19.11/g across a 3-game week for Connecticut, close to her 18.21 season average, with Reddit noting she and Diamond Miller are seeing expanded usage with Saniya Rivers and another rotation piece out. A Frontcourt-need pickup at 10.01% owned riding the temporary opportunity.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 4.71,
+          "net_gain_next_week": 18.32,
+          "drop_candidate": {
+            "player_id": 3906972,
+            "player_name": "Bridget Carleton",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "ACTIVE",
+            "games_this_week": 2
+          },
+          "bid_guidance": {
+            "suggested_lo": 1,
+            "suggested_hi": 2,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 85
+          },
           "tags": [
             "anchor"
           ],
@@ -16872,8 +17078,8 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_lo": 1,
+            "suggested_hi": 2,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16927,8 +17133,8 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_lo": 1,
+            "suggested_hi": 2,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -16940,72 +17146,79 @@
           ],
           "plays_tonight": true,
           "best_fit": []
-        },
+        }
+      ]
+    },
+    {
+      "team_id": 7,
+      "targets": [
         {
           "player": {
-            "player_id": 4399342,
-            "name": "Lexi Held",
+            "player_id": 3919496,
+            "name": "Valeriane Ayayi",
             "team": "PHX",
-            "position": "G",
-            "bucket": "G",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              1,
+              2,
               3,
+              4,
               5,
               6,
-              7
+              7,
+              9
             ],
             "injury_status": "ACTIVE"
           },
           "projected_points_next_period": 0.0,
-          "projected_per_game": 18.5,
-          "projected_points_this_week": 55.5,
+          "projected_per_game": 23.02,
+          "projected_points_this_week": 69.07,
           "games_this_week": 3,
-          "projected_points_next_week": 55.5,
+          "projected_points_next_week": 69.07,
           "games_next_week": 3,
-          "season_avg_points": 13.25,
-          "percent_owned": 1.44,
-          "percent_change": 0.01,
-          "base_score": 55.5,
+          "season_avg_points": 15.8,
+          "percent_owned": 6.3,
+          "percent_change": -0.07,
+          "base_score": 69.07,
           "injury_signal": null,
           "recent_games": [
             {
               "scoring_period_id": 56,
-              "fantasy_points": 36.0
+              "fantasy_points": 31.0
             },
             {
               "scoring_period_id": 51,
-              "fantasy_points": 30.0
+              "fantasy_points": 39.0
             },
             {
               "scoring_period_id": 48,
-              "fantasy_points": 18.0
+              "fantasy_points": 32.0
             },
             {
               "scoring_period_id": 46,
-              "fantasy_points": 11.0
+              "fantasy_points": 19.0
             }
           ],
-          "ai_summary": "Held projects 17.62/g across a 3-game week for Phoenix, above her 13.25 season average, with X noting the Mercury's best net rating over their last five games and Reddit confirming she's freshly signed. A speculative Guard-need add at 1.44% owned worth riding while the role is fresh and expanding.",
+          "ai_summary": "Ayayi projects 20.02/g across a 3-game week for Phoenix, above her 15.8 season average, and X coverage has Kristi Toliver singling her out as a key Mercury contributor. A Frontcourt-need pickup at 6.3% owned with real recent buzz behind it.",
           "ai_summary_date": null,
-          "net_gain_this_week": 2.89,
-          "net_gain_next_week": 16.5,
+          "net_gain_this_week": 69.07,
+          "net_gain_next_week": 69.07,
           "drop_candidate": {
-            "player_id": 3906972,
-            "player_name": "Bridget Carleton",
+            "player_id": 4433404,
+            "player_name": "Cameron Brink",
             "net_loss": 0.0,
             "is_core": true,
-            "injury_status": "ACTIVE",
-            "games_this_week": 2
+            "injury_status": "OUT",
+            "games_this_week": 3
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 4,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
             "free_claims": 13,
-            "faab_remaining": 85
+            "faab_remaining": 95
           },
           "tags": [
             "anchor"
@@ -17013,163 +17226,6 @@
           "plays_tonight": false,
           "best_fit": []
         },
-        {
-          "player": {
-            "player_id": 4038379,
-            "name": "Marine Johannes",
-            "team": "NY",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 13.24,
-          "projected_per_game": 18.44,
-          "projected_points_this_week": 55.31,
-          "games_this_week": 3,
-          "projected_points_next_week": 36.88,
-          "games_next_week": 2,
-          "season_avg_points": 22.48,
-          "percent_owned": 38.21,
-          "percent_change": -1.6,
-          "base_score": 55.31,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 57,
-              "fantasy_points": 16.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 12.0
-            },
-            {
-              "scoring_period_id": 49,
-              "fantasy_points": 11.0
-            },
-            {
-              "scoring_period_id": 47,
-              "fantasy_points": 18.0
-            },
-            {
-              "scoring_period_id": 45,
-              "fantasy_points": 15.0
-            }
-          ],
-          "ai_summary": null,
-          "ai_summary_date": null,
-          "net_gain_this_week": 2.7,
-          "net_gain_next_week": 0.0,
-          "drop_candidate": {
-            "player_id": 3906972,
-            "player_name": "Bridget Carleton",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "ACTIVE",
-            "games_this_week": 2
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 85
-          },
-          "tags": [
-            "streamer"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 4065780,
-            "name": "Kaila Charles",
-            "team": "GS",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 12.24,
-          "projected_per_game": 18.0,
-          "projected_points_this_week": 54.01,
-          "games_this_week": 3,
-          "projected_points_next_week": 36.01,
-          "games_next_week": 2,
-          "season_avg_points": 17.81,
-          "percent_owned": 3.63,
-          "percent_change": -0.02,
-          "base_score": 54.01,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 58,
-              "fantasy_points": 32.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 21.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 13.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 10.0
-            },
-            {
-              "scoring_period_id": 45,
-              "fantasy_points": 15.0
-            }
-          ],
-          "ai_summary": null,
-          "ai_summary_date": null,
-          "net_gain_this_week": 1.4,
-          "net_gain_next_week": 0.0,
-          "drop_candidate": {
-            "player_id": 3906972,
-            "player_name": "Bridget Carleton",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "ACTIVE",
-            "games_this_week": 2
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 2,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 85
-          },
-          "tags": [
-            "streamer"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        }
-      ]
-    },
-    {
-      "team_id": 7,
-      "targets": [
         {
           "player": {
             "player_id": 5017726,
@@ -17229,7 +17285,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 6,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -17381,140 +17437,6 @@
         },
         {
           "player": {
-            "player_id": 3919496,
-            "name": "Valeriane Ayayi",
-            "team": "PHX",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 23.02,
-          "projected_points_this_week": 69.07,
-          "games_this_week": 3,
-          "projected_points_next_week": 69.07,
-          "games_next_week": 3,
-          "season_avg_points": 15.8,
-          "percent_owned": 6.3,
-          "percent_change": -0.07,
-          "base_score": 69.07,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 31.0
-            },
-            {
-              "scoring_period_id": 51,
-              "fantasy_points": 39.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 32.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 19.0
-            }
-          ],
-          "ai_summary": "Ayayi projects 20.02/g across a 3-game week for Phoenix, above her 15.8 season average, and X coverage has Kristi Toliver singling her out as a key Mercury contributor. A Frontcourt-need pickup at 6.3% owned with real recent buzz behind it.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 69.07,
-          "net_gain_next_week": 69.07,
-          "drop_candidate": {
-            "player_id": 4433404,
-            "player_name": "Cameron Brink",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 6,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 95
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 5274110,
-            "name": "Monique Akoa Makani",
-            "team": "PHX",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 16.47,
-          "projected_per_game": 17.45,
-          "projected_points_this_week": 52.35,
-          "games_this_week": 3,
-          "projected_points_next_week": 52.35,
-          "games_next_week": 3,
-          "season_avg_points": 20.9,
-          "percent_owned": 6.56,
-          "percent_change": -0.29,
-          "base_score": 60.2,
-          "injury_signal": "returning",
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 14.0
-            }
-          ],
-          "ai_summary": "Akoa Makani projects 17.47/g across a 3-game week for Phoenix, below her stronger 20.9 season average, with Reddit chatter (\"Makani insight\") suggesting continued interest despite this week's ownership dip (-0.29%). A Guard-need option at 6.56% owned worth monitoring for a bounce-back week.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 52.35,
-          "net_gain_next_week": 52.35,
-          "drop_candidate": {
-            "player_id": 4433404,
-            "player_name": "Cameron Brink",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 95
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
             "player_id": 3142255,
             "name": "Monique Billings",
             "team": "IND",
@@ -17588,46 +17510,50 @@
         },
         {
           "player": {
-            "player_id": 5349415,
-            "name": "Alicia Florez",
-            "team": "WSH",
-            "position": "G",
-            "bucket": "G",
+            "player_id": 3922628,
+            "name": "Kennedy Burke",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              1,
+              2,
               3,
+              4,
               5,
               6,
-              7,
-              9
+              7
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 24.65,
-          "projected_points_this_week": 49.3,
-          "games_this_week": 2,
-          "projected_points_next_week": 73.95,
+          "projected_points_next_period": 12.76,
+          "projected_per_game": 20.75,
+          "projected_points_this_week": 62.26,
+          "games_this_week": 3,
+          "projected_points_next_week": 62.26,
           "games_next_week": 3,
-          "season_avg_points": 16.8,
-          "percent_owned": 0.8,
-          "percent_change": 0.34,
-          "base_score": 56.69,
-          "injury_signal": "returning",
+          "season_avg_points": 18.84,
+          "percent_owned": 12.42,
+          "percent_change": -0.2,
+          "base_score": 62.26,
+          "injury_signal": null,
           "recent_games": [
             {
               "scoring_period_id": 56,
-              "fantasy_points": 33.0
+              "fantasy_points": 13.0
             },
             {
-              "scoring_period_id": 52,
-              "fantasy_points": 32.0
+              "scoring_period_id": 50,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 25.0
             }
           ],
-          "ai_summary": "Florez is running hot for Washington -- 24.65/g this week and a projection that holds at 74.0 points (24.65/g) over 3 games next week, well above her 16.8 season average. Coach Sydney Johnson's post-practice comments (via X) suggest she's locked into rotation minutes. A cheap Guard-need speculative add at 0.8% owned worth riding while the role holds.",
+          "ai_summary": "Burke projects 20.75/g across a 3-game week for Connecticut, above her 18.84 season average, and shows up in Reddit's \"Edwards, Burke or Miller?\" waiver debate -- a sign managers are actively weighing her against Connecticut's other frontcourt adds. A solid Frontcourt-need pickup at 12.42% owned.",
           "ai_summary_date": null,
-          "net_gain_this_week": 49.3,
-          "net_gain_next_week": 73.95,
+          "net_gain_this_week": 62.26,
+          "net_gain_next_week": 62.26,
           "drop_candidate": {
             "player_id": 4433404,
             "player_name": "Cameron Brink",
@@ -17638,7 +17564,153 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 4,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 95
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4257500,
+            "name": "Cecilia Zandalasini",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 19.63,
+          "projected_points_this_week": 58.89,
+          "games_this_week": 3,
+          "projected_points_next_week": 39.26,
+          "games_next_week": 2,
+          "season_avg_points": 19.06,
+          "percent_owned": 5.3,
+          "percent_change": -0.59,
+          "base_score": 58.89,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 58,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 45,
+              "fantasy_points": 15.0
+            }
+          ],
+          "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
+          "ai_summary_date": null,
+          "net_gain_this_week": 58.89,
+          "net_gain_next_week": 39.26,
+          "drop_candidate": {
+            "player_id": 4433404,
+            "player_name": "Cameron Brink",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 95
+          },
+          "tags": [
+            "streamer"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4433408,
+            "name": "Aaliyah Edwards",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 13.63,
+          "projected_per_game": 19.11,
+          "projected_points_this_week": 57.32,
+          "games_this_week": 3,
+          "projected_points_next_week": 57.32,
+          "games_next_week": 3,
+          "season_avg_points": 18.21,
+          "percent_owned": 10.01,
+          "percent_change": -0.07,
+          "base_score": 57.32,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "Edwards projects 19.11/g across a 3-game week for Connecticut, close to her 18.21 season average, with Reddit noting she and Diamond Miller are seeing expanded usage with Saniya Rivers and another rotation piece out. A Frontcourt-need pickup at 10.01% owned riding the temporary opportunity.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 57.32,
+          "net_gain_next_week": 57.32,
+          "drop_candidate": {
+            "player_id": 4433404,
+            "player_name": "Cameron Brink",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -17706,7 +17778,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -17761,7 +17833,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 2,
-            "suggested_hi": 5,
+            "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -17773,156 +17845,12 @@
           ],
           "plays_tonight": true,
           "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 4399342,
-            "name": "Lexi Held",
-            "team": "PHX",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 18.5,
-          "projected_points_this_week": 55.5,
-          "games_this_week": 3,
-          "projected_points_next_week": 55.5,
-          "games_next_week": 3,
-          "season_avg_points": 13.25,
-          "percent_owned": 1.44,
-          "percent_change": 0.01,
-          "base_score": 55.5,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 36.0
-            },
-            {
-              "scoring_period_id": 51,
-              "fantasy_points": 30.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 18.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 11.0
-            }
-          ],
-          "ai_summary": "Held projects 17.62/g across a 3-game week for Phoenix, above her 13.25 season average, with X noting the Mercury's best net rating over their last five games and Reddit confirming she's freshly signed. A speculative Guard-need add at 1.44% owned worth riding while the role is fresh and expanding.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 55.5,
-          "net_gain_next_week": 55.5,
-          "drop_candidate": {
-            "player_id": 4433404,
-            "player_name": "Cameron Brink",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 95
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
         }
       ]
     },
     {
       "team_id": 8,
       "targets": [
-        {
-          "player": {
-            "player_id": 5017726,
-            "name": "Jade Melbourne",
-            "team": "SEA",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 22.23,
-          "projected_points_this_week": 66.68,
-          "games_this_week": 3,
-          "projected_points_next_week": 44.45,
-          "games_next_week": 2,
-          "season_avg_points": 18.95,
-          "percent_owned": 12.83,
-          "percent_change": -2.48,
-          "base_score": 66.68,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 58,
-              "fantasy_points": 14.0
-            },
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 24.0
-            },
-            {
-              "scoring_period_id": 51,
-              "fantasy_points": 28.0
-            },
-            {
-              "scoring_period_id": 49,
-              "fantasy_points": 36.0
-            }
-          ],
-          "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 44.01,
-          "net_gain_next_week": 10.45,
-          "drop_candidate": {
-            "player_id": 4433791,
-            "player_name": "Olivia Miles",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 84
-          },
-          "tags": [
-            "streamer"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
         {
           "player": {
             "player_id": 3919496,
@@ -17993,6 +17921,78 @@
           },
           "tags": [
             "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 5017726,
+            "name": "Jade Melbourne",
+            "team": "SEA",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 22.23,
+          "projected_points_this_week": 66.68,
+          "games_this_week": 3,
+          "projected_points_next_week": 44.45,
+          "games_next_week": 2,
+          "season_avg_points": 18.95,
+          "percent_owned": 12.83,
+          "percent_change": -2.48,
+          "base_score": 66.68,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 58,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 28.0
+            },
+            {
+              "scoring_period_id": 49,
+              "fantasy_points": 36.0
+            }
+          ],
+          "ai_summary": "Melbourne's week-over-week projection drops from 66.7 points (3 games) to 44.5 points (2 games) next week for Seattle -- a lighter slate worth planning around -- though her 22.23/g this week is well clear of her 18.95 season average. Betting-card chatter (via X) still has her in over/under conversations. A Guard-need pickup at 12.83% owned, but this week's ownership dip (-2.48%) plus the shorter next-week schedule are worth watching.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 44.01,
+          "net_gain_next_week": 10.45,
+          "drop_candidate": {
+            "player_id": 4433791,
+            "player_name": "Olivia Miles",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 84
+          },
+          "tags": [
+            "streamer"
           ],
           "plays_tonight": false,
           "best_fit": []
@@ -18209,66 +18209,6 @@
         },
         {
           "player": {
-            "player_id": 5274110,
-            "name": "Monique Akoa Makani",
-            "team": "PHX",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 16.47,
-          "projected_per_game": 17.45,
-          "projected_points_this_week": 52.35,
-          "games_this_week": 3,
-          "projected_points_next_week": 52.35,
-          "games_next_week": 3,
-          "season_avg_points": 20.9,
-          "percent_owned": 6.56,
-          "percent_change": -0.29,
-          "base_score": 60.2,
-          "injury_signal": "returning",
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 14.0
-            }
-          ],
-          "ai_summary": "Akoa Makani projects 17.47/g across a 3-game week for Phoenix, below her stronger 20.9 season average, with Reddit chatter (\"Makani insight\") suggesting continued interest despite this week's ownership dip (-0.29%). A Guard-need option at 6.56% owned worth monitoring for a bounce-back week.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 29.68,
-          "net_gain_next_week": 18.35,
-          "drop_candidate": {
-            "player_id": 4433791,
-            "player_name": "Olivia Miles",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 4,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 84
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
             "player_id": 3922628,
             "name": "Kennedy Burke",
             "team": "CON",
@@ -18324,71 +18264,6 @@
           "bid_guidance": {
             "suggested_lo": 2,
             "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 84
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 5349415,
-            "name": "Alicia Florez",
-            "team": "WSH",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7,
-              9
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 24.65,
-          "projected_points_this_week": 49.3,
-          "games_this_week": 2,
-          "projected_points_next_week": 73.95,
-          "games_next_week": 3,
-          "season_avg_points": 16.8,
-          "percent_owned": 0.8,
-          "percent_change": 0.34,
-          "base_score": 56.69,
-          "injury_signal": "returning",
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 33.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 32.0
-            }
-          ],
-          "ai_summary": "Florez is running hot for Washington -- 24.65/g this week and a projection that holds at 74.0 points (24.65/g) over 3 games next week, well above her 16.8 season average. Coach Sydney Johnson's post-practice comments (via X) suggest she's locked into rotation minutes. A cheap Guard-need speculative add at 0.8% owned worth riding while the role holds.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 26.63,
-          "net_gain_next_week": 39.95,
-          "drop_candidate": {
-            "player_id": 4433791,
-            "player_name": "Olivia Miles",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 3,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -18480,6 +18355,75 @@
         },
         {
           "player": {
+            "player_id": 4433408,
+            "name": "Aaliyah Edwards",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 13.63,
+          "projected_per_game": 19.11,
+          "projected_points_this_week": 57.32,
+          "games_this_week": 3,
+          "projected_points_next_week": 57.32,
+          "games_next_week": 3,
+          "season_avg_points": 18.21,
+          "percent_owned": 10.01,
+          "percent_change": -0.07,
+          "base_score": 57.32,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 18.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 16.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 26.0
+            }
+          ],
+          "ai_summary": "Edwards projects 19.11/g across a 3-game week for Connecticut, close to her 18.21 season average, with Reddit noting she and Diamond Miller are seeing expanded usage with Saniya Rivers and another rotation piece out. A Frontcourt-need pickup at 10.01% owned riding the temporary opportunity.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 34.65,
+          "net_gain_next_week": 23.32,
+          "drop_candidate": {
+            "player_id": 4433791,
+            "player_name": "Olivia Miles",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 4,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 84
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
             "player_id": 2491214,
             "name": "Erica Wheeler",
             "team": "LA",
@@ -18544,6 +18488,61 @@
             "anchor"
           ],
           "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
+            "eligible_slots": [
+              1,
+              3,
+              5,
+              6,
+              7
+            ],
+            "injury_status": null
+          },
+          "projected_points_next_period": 18.64,
+          "projected_per_game": 18.64,
+          "projected_points_this_week": 55.91,
+          "games_this_week": 3,
+          "projected_points_next_week": 55.91,
+          "games_next_week": 3,
+          "season_avg_points": null,
+          "percent_owned": 0.7,
+          "percent_change": 0.0,
+          "base_score": 55.91,
+          "injury_signal": null,
+          "recent_games": [],
+          "ai_summary": "McDonald is a deep speculative flier for Indiana -- 18.64/g this week, but with no ESPN season average yet, it's an unproven small sample. At 0.7% owned, confirm she's actually seeing consistent minutes before committing a Guard-need spot.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 33.24,
+          "net_gain_next_week": 21.91,
+          "drop_candidate": {
+            "player_id": 4433791,
+            "player_name": "Olivia Miles",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 4,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 84
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": true,
           "best_fit": []
         }
       ]
@@ -18685,7 +18684,7 @@
           },
           "bid_guidance": {
             "suggested_lo": 3,
-            "suggested_hi": 7,
+            "suggested_hi": 6,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -18753,8 +18752,8 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 3,
-            "suggested_hi": 7,
+            "suggested_lo": 2,
+            "suggested_hi": 6,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
@@ -18830,7 +18829,7 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 3,
+            "suggested_lo": 2,
             "suggested_hi": 6,
             "league_median": 2,
             "league_max": 28,
@@ -18915,6 +18914,77 @@
         },
         {
           "player": {
+            "player_id": 3142055,
+            "name": "Myisha Hines-Allen",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 17.85,
+          "projected_per_game": 14.43,
+          "projected_points_this_week": 43.28,
+          "games_this_week": 3,
+          "projected_points_next_week": 43.28,
+          "games_next_week": 3,
+          "season_avg_points": 14.35,
+          "percent_owned": 8.79,
+          "percent_change": 0.49,
+          "base_score": 43.28,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 59,
+              "fantasy_points": 3.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 22.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 11.0
+            }
+          ],
+          "ai_summary": "Hines-Allen projects 13.8/g across a 3-game week for Indiana, close to her 14.35 season average, with no fresh social buzz this cycle -- a steady but unspectacular Frontcourt-need floor piece at 8.79% owned (+0.49% this week).",
+          "ai_summary_date": null,
+          "net_gain_this_week": 43.28,
+          "net_gain_next_week": 43.28,
+          "drop_candidate": {
+            "player_id": 4433524,
+            "player_name": "Sonia Citron",
+            "net_loss": 0.0,
+            "is_core": true,
+            "injury_status": "OUT",
+            "games_this_week": 2
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 4,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 68
+          },
+          "tags": [],
+          "plays_tonight": true,
+          "best_fit": []
+        },
+        {
+          "player": {
             "player_id": 5017726,
             "name": "Jade Melbourne",
             "team": "SEA",
@@ -18971,7 +19041,7 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 2,
+            "suggested_lo": 1,
             "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
@@ -19040,7 +19110,7 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 2,
+            "suggested_lo": 1,
             "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
@@ -19108,7 +19178,7 @@
             "games_this_week": 2
           },
           "bid_guidance": {
-            "suggested_lo": 2,
+            "suggested_lo": 1,
             "suggested_hi": 4,
             "league_median": 2,
             "league_max": 28,
@@ -19124,13 +19194,14 @@
         },
         {
           "player": {
-            "player_id": 3934218,
-            "name": "Megan Gustafson",
-            "team": "POR",
-            "position": "C",
-            "bucket": "C",
+            "player_id": 5278237,
+            "name": "Anastasiia Olairi Kosu",
+            "team": "MIN",
+            "position": "F",
+            "bucket": "F",
             "eligible_slots": [
-              0,
+              2,
+              3,
               4,
               5,
               6,
@@ -19138,99 +19209,39 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 6.08,
-          "projected_per_game": 25.9,
-          "projected_points_this_week": 51.8,
-          "games_this_week": 2,
-          "projected_points_next_week": 77.7,
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 11.49,
+          "projected_points_this_week": 34.46,
+          "games_this_week": 3,
+          "projected_points_next_week": 34.46,
           "games_next_week": 3,
-          "season_avg_points": 22.05,
-          "percent_owned": 30.52,
-          "percent_change": -2.83,
-          "base_score": 51.8,
+          "season_avg_points": 13.47,
+          "percent_owned": 0.43,
+          "percent_change": 0.0,
+          "base_score": 34.46,
           "injury_signal": null,
           "recent_games": [
             {
-              "scoring_period_id": 58,
-              "fantasy_points": 30.0
+              "scoring_period_id": 57,
+              "fantasy_points": 17.0
             },
             {
               "scoring_period_id": 52,
-              "fantasy_points": 41.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 22.0
+              "fantasy_points": 7.0
             },
             {
               "scoring_period_id": 48,
-              "fantasy_points": 26.0
-            }
-          ],
-          "ai_summary": "Gustafson matches her 22.05 season average with X coverage confirming she's settled into a real role with the expansion franchise, and her 3-game week next projects 66.8 points (22.3/g) -- but Reddit reports she's getting married Saturday and will miss the game against the Lynx, so expect one fewer game than the raw projection assumes. A Frontcourt-need target at 30.5% owned, though this week's ownership dip (-2.83%) plus the missed game are worth watching before the next scoring period.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 22.01,
-          "net_gain_next_week": 77.7,
-          "drop_candidate": {
-            "player_id": 4433524,
-            "player_name": "Sonia Citron",
-            "net_loss": 0.0,
-            "is_core": true,
-            "injury_status": "OUT",
-            "games_this_week": 2
-          },
-          "bid_guidance": {
-            "suggested_lo": 1,
-            "suggested_hi": 2,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 68
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 5274110,
-            "name": "Monique Akoa Makani",
-            "team": "PHX",
-            "position": "G",
-            "bucket": "G",
-            "eligible_slots": [
-              1,
-              3,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 16.47,
-          "projected_per_game": 17.45,
-          "projected_points_this_week": 52.35,
-          "games_this_week": 3,
-          "projected_points_next_week": 52.35,
-          "games_next_week": 3,
-          "season_avg_points": 20.9,
-          "percent_owned": 6.56,
-          "percent_change": -0.29,
-          "base_score": 60.2,
-          "injury_signal": "returning",
-          "recent_games": [
+              "fantasy_points": 13.0
+            },
             {
-              "scoring_period_id": 56,
-              "fantasy_points": 14.0
+              "scoring_period_id": 45,
+              "fantasy_points": 1.0
             }
           ],
-          "ai_summary": "Akoa Makani projects 17.47/g across a 3-game week for Phoenix, below her stronger 20.9 season average, with Reddit chatter (\"Makani insight\") suggesting continued interest despite this week's ownership dip (-0.29%). A Guard-need option at 6.56% owned worth monitoring for a bounce-back week.",
+          "ai_summary": null,
           "ai_summary_date": null,
-          "net_gain_this_week": 22.56,
-          "net_gain_next_week": 52.35,
+          "net_gain_this_week": 34.46,
+          "net_gain_next_week": 34.46,
           "drop_candidate": {
             "player_id": 4433524,
             "player_name": "Sonia Citron",
@@ -19241,16 +19252,14 @@
           },
           "bid_guidance": {
             "suggested_lo": 1,
-            "suggested_hi": 2,
+            "suggested_hi": 3,
             "league_median": 2,
             "league_max": 28,
             "sample_n": 39,
             "free_claims": 13,
             "faab_remaining": 68
           },
-          "tags": [
-            "anchor"
-          ],
+          "tags": [],
           "plays_tonight": false,
           "best_fit": []
         }
@@ -19329,225 +19338,6 @@
           },
           "tags": [
             "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 3142255,
-            "name": "Monique Billings",
-            "team": "IND",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 15.0,
-          "projected_per_game": 21.39,
-          "projected_points_this_week": 64.18,
-          "games_this_week": 3,
-          "projected_points_next_week": 64.18,
-          "games_next_week": 3,
-          "season_avg_points": 18.79,
-          "percent_owned": 13.08,
-          "percent_change": 1.98,
-          "base_score": 64.18,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 59,
-              "fantasy_points": 17.0
-            },
-            {
-              "scoring_period_id": 51,
-              "fantasy_points": 32.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 13.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 34.0
-            }
-          ],
-          "ai_summary": "Billings' projection (19.27/g) sits just above her 18.79 season average, but X chatter is split on whether her recent role dip is a scheme fit issue, and Reddit's \"Sug or Billings\" thread shows managers weighing whether to keep her. A Frontcourt-need option at 13.08% owned (+1.98% this week) -- worth a look, but watch the role before banking on it.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 64.18,
-          "net_gain_next_week": 64.18,
-          "drop_candidate": {
-            "player_id": 4068042,
-            "player_name": "Natasha Mack",
-            "net_loss": 0.0,
-            "is_core": false,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 89
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": true,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 3922628,
-            "name": "Kennedy Burke",
-            "team": "CON",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 12.76,
-          "projected_per_game": 20.75,
-          "projected_points_this_week": 62.26,
-          "games_this_week": 3,
-          "projected_points_next_week": 62.26,
-          "games_next_week": 3,
-          "season_avg_points": 18.84,
-          "percent_owned": 12.42,
-          "percent_change": -0.2,
-          "base_score": 62.26,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 56,
-              "fantasy_points": 13.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 30.0
-            },
-            {
-              "scoring_period_id": 46,
-              "fantasy_points": 25.0
-            }
-          ],
-          "ai_summary": "Burke projects 20.75/g across a 3-game week for Connecticut, above her 18.84 season average, and shows up in Reddit's \"Edwards, Burke or Miller?\" waiver debate -- a sign managers are actively weighing her against Connecticut's other frontcourt adds. A solid Frontcourt-need pickup at 12.42% owned.",
-          "ai_summary_date": null,
-          "net_gain_this_week": 62.26,
-          "net_gain_next_week": 62.26,
-          "drop_candidate": {
-            "player_id": 4068042,
-            "player_name": "Natasha Mack",
-            "net_loss": 0.0,
-            "is_core": false,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 89
-          },
-          "tags": [
-            "anchor"
-          ],
-          "plays_tonight": false,
-          "best_fit": []
-        },
-        {
-          "player": {
-            "player_id": 4257500,
-            "name": "Cecilia Zandalasini",
-            "team": "GS",
-            "position": "F",
-            "bucket": "F",
-            "eligible_slots": [
-              2,
-              3,
-              4,
-              5,
-              6,
-              7
-            ],
-            "injury_status": "ACTIVE"
-          },
-          "projected_points_next_period": 0.0,
-          "projected_per_game": 19.63,
-          "projected_points_this_week": 58.89,
-          "games_this_week": 3,
-          "projected_points_next_week": 39.26,
-          "games_next_week": 2,
-          "season_avg_points": 19.06,
-          "percent_owned": 5.3,
-          "percent_change": -0.59,
-          "base_score": 58.89,
-          "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 58,
-              "fantasy_points": 24.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 21.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 14.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 27.0
-            },
-            {
-              "scoring_period_id": 45,
-              "fantasy_points": 15.0
-            }
-          ],
-          "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
-          "ai_summary_date": null,
-          "net_gain_this_week": 58.89,
-          "net_gain_next_week": 39.26,
-          "drop_candidate": {
-            "player_id": 4068042,
-            "player_name": "Natasha Mack",
-            "net_loss": 0.0,
-            "is_core": false,
-            "injury_status": "OUT",
-            "games_this_week": 3
-          },
-          "bid_guidance": {
-            "suggested_lo": 2,
-            "suggested_hi": 5,
-            "league_median": 2,
-            "league_max": 28,
-            "sample_n": 39,
-            "free_claims": 13,
-            "faab_remaining": 89
-          },
-          "tags": [
-            "streamer"
           ],
           "plays_tonight": false,
           "best_fit": []
@@ -19763,6 +19553,225 @@
         },
         {
           "player": {
+            "player_id": 3142255,
+            "name": "Monique Billings",
+            "team": "IND",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 15.0,
+          "projected_per_game": 21.39,
+          "projected_points_this_week": 64.18,
+          "games_this_week": 3,
+          "projected_points_next_week": 64.18,
+          "games_next_week": 3,
+          "season_avg_points": 18.79,
+          "percent_owned": 13.08,
+          "percent_change": 1.98,
+          "base_score": 64.18,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 59,
+              "fantasy_points": 17.0
+            },
+            {
+              "scoring_period_id": 51,
+              "fantasy_points": 32.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 13.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 34.0
+            }
+          ],
+          "ai_summary": "Billings' projection (19.27/g) sits just above her 18.79 season average, but X chatter is split on whether her recent role dip is a scheme fit issue, and Reddit's \"Sug or Billings\" thread shows managers weighing whether to keep her. A Frontcourt-need option at 13.08% owned (+1.98% this week) -- worth a look, but watch the role before banking on it.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 64.18,
+          "net_gain_next_week": 64.18,
+          "drop_candidate": {
+            "player_id": 4068042,
+            "player_name": "Natasha Mack",
+            "net_loss": 0.0,
+            "is_core": false,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 89
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": true,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 3922628,
+            "name": "Kennedy Burke",
+            "team": "CON",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 12.76,
+          "projected_per_game": 20.75,
+          "projected_points_this_week": 62.26,
+          "games_this_week": 3,
+          "projected_points_next_week": 62.26,
+          "games_next_week": 3,
+          "season_avg_points": 18.84,
+          "percent_owned": 12.42,
+          "percent_change": -0.2,
+          "base_score": 62.26,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 56,
+              "fantasy_points": 13.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 30.0
+            },
+            {
+              "scoring_period_id": 46,
+              "fantasy_points": 25.0
+            }
+          ],
+          "ai_summary": "Burke projects 20.75/g across a 3-game week for Connecticut, above her 18.84 season average, and shows up in Reddit's \"Edwards, Burke or Miller?\" waiver debate -- a sign managers are actively weighing her against Connecticut's other frontcourt adds. A solid Frontcourt-need pickup at 12.42% owned.",
+          "ai_summary_date": null,
+          "net_gain_this_week": 62.26,
+          "net_gain_next_week": 62.26,
+          "drop_candidate": {
+            "player_id": 4068042,
+            "player_name": "Natasha Mack",
+            "net_loss": 0.0,
+            "is_core": false,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 89
+          },
+          "tags": [
+            "anchor"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
+            "player_id": 4257500,
+            "name": "Cecilia Zandalasini",
+            "team": "GS",
+            "position": "F",
+            "bucket": "F",
+            "eligible_slots": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "injury_status": "ACTIVE"
+          },
+          "projected_points_next_period": 0.0,
+          "projected_per_game": 19.63,
+          "projected_points_this_week": 58.89,
+          "games_this_week": 3,
+          "projected_points_next_week": 39.26,
+          "games_next_week": 2,
+          "season_avg_points": 19.06,
+          "percent_owned": 5.3,
+          "percent_change": -0.59,
+          "base_score": 58.89,
+          "injury_signal": null,
+          "recent_games": [
+            {
+              "scoring_period_id": 58,
+              "fantasy_points": 24.0
+            },
+            {
+              "scoring_period_id": 52,
+              "fantasy_points": 21.0
+            },
+            {
+              "scoring_period_id": 50,
+              "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 48,
+              "fantasy_points": 27.0
+            },
+            {
+              "scoring_period_id": 45,
+              "fantasy_points": 15.0
+            }
+          ],
+          "ai_summary": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
+          "ai_summary_date": null,
+          "net_gain_this_week": 58.89,
+          "net_gain_next_week": 39.26,
+          "drop_candidate": {
+            "player_id": 4068042,
+            "player_name": "Natasha Mack",
+            "net_loss": 0.0,
+            "is_core": false,
+            "injury_status": "OUT",
+            "games_this_week": 3
+          },
+          "bid_guidance": {
+            "suggested_lo": 2,
+            "suggested_hi": 5,
+            "league_median": 2,
+            "league_max": 28,
+            "sample_n": 39,
+            "free_claims": 13,
+            "faab_remaining": 89
+          },
+          "tags": [
+            "streamer"
+          ],
+          "plays_tonight": false,
+          "best_fit": []
+        },
+        {
+          "player": {
             "player_id": 4433408,
             "name": "Aaliyah Edwards",
             "team": "CON",
@@ -19832,9 +19841,9 @@
         },
         {
           "player": {
-            "player_id": 5274110,
-            "name": "Monique Akoa Makani",
-            "team": "PHX",
+            "player_id": 2491214,
+            "name": "Erica Wheeler",
+            "team": "LA",
             "position": "G",
             "bucket": "G",
             "eligible_slots": [
@@ -19846,27 +19855,35 @@
             ],
             "injury_status": "ACTIVE"
           },
-          "projected_points_next_period": 16.47,
-          "projected_per_game": 17.45,
-          "projected_points_this_week": 52.35,
+          "projected_points_next_period": 18.43,
+          "projected_per_game": 18.72,
+          "projected_points_this_week": 56.17,
           "games_this_week": 3,
-          "projected_points_next_week": 52.35,
-          "games_next_week": 3,
-          "season_avg_points": 20.9,
-          "percent_owned": 6.56,
-          "percent_change": -0.29,
-          "base_score": 60.2,
-          "injury_signal": "returning",
+          "projected_points_next_week": 74.89,
+          "games_next_week": 4,
+          "season_avg_points": 19.44,
+          "percent_owned": 22.83,
+          "percent_change": -0.09,
+          "base_score": 56.17,
+          "injury_signal": null,
           "recent_games": [
             {
-              "scoring_period_id": 56,
+              "scoring_period_id": 51,
+              "fantasy_points": 9.0
+            },
+            {
+              "scoring_period_id": 49,
               "fantasy_points": 14.0
+            },
+            {
+              "scoring_period_id": 45,
+              "fantasy_points": 31.0
             }
           ],
-          "ai_summary": "Akoa Makani projects 17.47/g across a 3-game week for Phoenix, below her stronger 20.9 season average, with Reddit chatter (\"Makani insight\") suggesting continued interest despite this week's ownership dip (-0.29%). A Guard-need option at 6.56% owned worth monitoring for a bounce-back week.",
+          "ai_summary": "Wheeler anchors LA's backcourt with a durable 19.4 season average, and a 4-game slate next week bumps her projection to 80.6 points (20.2/g) -- one of the fuller schedules on this board. Bluesky flagged a clutch buzzer-beater three against Washington, reinforcing her closing-lineup role. A steady Guard-need pickup at 22.8% owned with room to keep climbing.",
           "ai_summary_date": null,
-          "net_gain_this_week": 52.35,
-          "net_gain_next_week": 52.35,
+          "net_gain_this_week": 56.17,
+          "net_gain_next_week": 74.89,
           "drop_candidate": {
             "player_id": 4068042,
             "player_name": "Natasha Mack",
@@ -19892,53 +19909,36 @@
         },
         {
           "player": {
-            "player_id": 3934218,
-            "name": "Megan Gustafson",
-            "team": "POR",
-            "position": "C",
-            "bucket": "C",
+            "player_id": 4066553,
+            "name": "Aari McDonald",
+            "team": "IND",
+            "position": "G",
+            "bucket": "G",
             "eligible_slots": [
-              0,
-              4,
+              1,
+              3,
               5,
               6,
               7
             ],
-            "injury_status": "ACTIVE"
+            "injury_status": null
           },
-          "projected_points_next_period": 6.08,
-          "projected_per_game": 25.9,
-          "projected_points_this_week": 51.8,
-          "games_this_week": 2,
-          "projected_points_next_week": 77.7,
+          "projected_points_next_period": 18.64,
+          "projected_per_game": 18.64,
+          "projected_points_this_week": 55.91,
+          "games_this_week": 3,
+          "projected_points_next_week": 55.91,
           "games_next_week": 3,
-          "season_avg_points": 22.05,
-          "percent_owned": 30.52,
-          "percent_change": -2.83,
-          "base_score": 51.8,
+          "season_avg_points": null,
+          "percent_owned": 0.7,
+          "percent_change": 0.0,
+          "base_score": 55.91,
           "injury_signal": null,
-          "recent_games": [
-            {
-              "scoring_period_id": 58,
-              "fantasy_points": 30.0
-            },
-            {
-              "scoring_period_id": 52,
-              "fantasy_points": 41.0
-            },
-            {
-              "scoring_period_id": 50,
-              "fantasy_points": 22.0
-            },
-            {
-              "scoring_period_id": 48,
-              "fantasy_points": 26.0
-            }
-          ],
-          "ai_summary": "Gustafson matches her 22.05 season average with X coverage confirming she's settled into a real role with the expansion franchise, and her 3-game week next projects 66.8 points (22.3/g) -- but Reddit reports she's getting married Saturday and will miss the game against the Lynx, so expect one fewer game than the raw projection assumes. A Frontcourt-need target at 30.5% owned, though this week's ownership dip (-2.83%) plus the missed game are worth watching before the next scoring period.",
+          "recent_games": [],
+          "ai_summary": "McDonald is a deep speculative flier for Indiana -- 18.64/g this week, but with no ESPN season average yet, it's an unproven small sample. At 0.7% owned, confirm she's actually seeing consistent minutes before committing a Guard-need spot.",
           "ai_summary_date": null,
-          "net_gain_this_week": 51.8,
-          "net_gain_next_week": 77.7,
+          "net_gain_this_week": 55.91,
+          "net_gain_next_week": 55.91,
           "drop_candidate": {
             "player_id": 4068042,
             "player_name": "Natasha Mack",
@@ -19959,7 +19959,7 @@
           "tags": [
             "anchor"
           ],
-          "plays_tonight": false,
+          "plays_tonight": true,
           "best_fit": []
         }
       ]

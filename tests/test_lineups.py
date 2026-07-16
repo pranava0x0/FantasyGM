@@ -182,6 +182,53 @@ class TestLocks:
         assert res["locked_player_ids"] == []
         assert res["status"] == "moves_available"
 
+    def test_locked_bench_player_is_never_started(self) -> None:
+        """A benched player whose game already tipped is unreachable.
+
+        The regression this guards: locking only *pinned* players who were
+        already active. A locked player on the bench was recorded in
+        `locked_player_ids` and then left in the candidate pool, where her
+        score — high precisely because her game is underway — won her a slot.
+        The result was a confident "Start Bench Star" that ESPN refuses.
+
+        Bench Star's game tipped an hour ago; every starter tips in three
+        hours, so the starters are still movable and she is not.
+        """
+        schedule = {
+            11: {PERIOD: [_game(start=NOW + timedelta(hours=3))]},   # starters
+            12: {PERIOD: [_game(start=NOW - timedelta(hours=1))]},   # Bench Star
+        }
+        roster = _full_roster(**{"10": {"pro_team_id": 12}})
+        res = _check(roster, horizon="tonight", schedule=schedule)
+
+        assert res is not None
+        assert 10 in res["locked_player_ids"]
+        assert all(m["player_in_id"] != 10 for m in res["moves"])
+        # Her points aren't ours to capture, so they're not "left on the bench"
+        # either — the panel must not quote a gain the user cannot collect.
+        assert res["status"] == "set"
+        assert res["moves"] == []
+        assert res["points_left_on_bench"] == 0.0
+
+    def test_locked_bench_player_does_not_block_a_real_move(self) -> None:
+        """Being unreachable must not suppress the moves that *are* available.
+
+        Same shape as above, plus a second bench player who tips later. The
+        locked one stays put; the reachable one still gets recommended.
+        """
+        schedule = {
+            11: {PERIOD: [_game(start=NOW + timedelta(hours=3))]},
+            12: {PERIOD: [_game(start=NOW - timedelta(hours=1))]},
+        }
+        roster = _full_roster(**{"10": {"pro_team_id": 12}})
+        roster.append(_player(11, "Bench Sub", "F", slot=7, per_game=35, pro_team_id=11))
+        res = _check(roster, horizon="tonight", schedule=schedule)
+
+        assert res is not None
+        moved_in = [m["player_in_id"] for m in res["moves"]]
+        assert 11 in moved_in
+        assert 10 not in moved_in
+
 
 class TestMinimality:
     def test_no_moves_when_lineup_is_optimal(self) -> None:
@@ -534,3 +581,77 @@ class TestFrontendParity:
         m = re.search(r"CONFIRMED_OUT_STATUSES\s*=\s*new Set\(\[([^\]]*)\]", js)
         assert m, "could not find CONFIRMED_OUT_STATUSES in app.js"
         assert set(re.findall(r'"([^"]+)"', m.group(1))) == set(CONFIRMED_OUT_STATUSES)
+
+
+class TestRankByNetGain:
+    """The per-team waiver list must be ordered by the number the card shows.
+
+    The regression: the list kept the caller's need-adjusted-projection order
+    while every card led with net gain and the page claimed it was "ranked by
+    what each add gives your optimal lineup." In the committed state.json that
+    put a +69.1 add at rank 4 behind a +66.7, and zero-gain adds above
+    positive-gain ones — so Today's "Top claim" named a worse add than the one
+    beneath it.
+
+    The scenario below is the one that makes the two orders disagree, and it's
+    the realistic one: a roster stacked at Forward with its Guard slots open.
+    A 30/g Forward can't crack a wall of 50/g Forwards (gain 0), while a
+    lowly 10/g Guard walks into an empty Guard slot (gain 10).
+    """
+
+    def _saturated_roster(self) -> list[dict]:
+        """Nine elite Forwards: F/F-C/UTIL full, both Guard slots empty."""
+        return [
+            _player(i, f"Fwd {i}", "F", slot=(4 if i <= 3 else 7), per_game=50, games_this_week=1)
+            for i in range(1, 10)
+        ]
+
+    def _fa(self, pid: int, bucket: str, per_game: float) -> dict:
+        cand = _player(pid, f"FA {pid}", bucket, slot=7, per_game=per_game, games_this_week=1)
+        cand["projected_points_this_week"] = per_game
+        return cand
+
+    def test_ranks_by_gain_not_projection(self) -> None:
+        roster = self._saturated_roster()
+        big_proj_no_gain = self._fa(100, "F", 30.0)   # blocked by the Forward wall
+        small_proj_real_gain = self._fa(101, "G", 10.0)  # walks into an empty Guard slot
+
+        # Precondition: the candidate order handed in is projection-descending,
+        # i.e. the *wrong* order. If this ever stops holding the test is moot.
+        candidates = [big_proj_no_gain, small_proj_real_gain]
+        ranked = lineups.rank_by_net_gain(roster, candidates, limit=10)
+
+        assert [c["player_id"] for c, _g in ranked] == [101, 100], (
+            f"expected the Guard first on net gain, got {[(c['player_id'], g) for c, g in ranked]}"
+        )
+        assert ranked[0][1] == 10.0
+        assert ranked[1][1] == 0.0
+
+    def test_cut_is_by_gain_so_a_deep_candidate_can_surface(self) -> None:
+        """The cut must use net gain too, not just the final ordering.
+
+        The useful Guard sits last in a pool of blocked Forwards. Cutting the
+        pool before measuring (`limit=1` on the caller) would drop her.
+        """
+        roster = self._saturated_roster()
+        candidates = [self._fa(200 + i, "F", 30.0 - i) for i in range(5)]
+        candidates.append(self._fa(300, "G", 10.0))
+
+        ranked = lineups.rank_by_net_gain(roster, candidates, limit=1)
+        assert [c["player_id"] for c, _g in ranked] == [300]
+
+    def test_limit_is_respected(self) -> None:
+        roster = self._saturated_roster()
+        candidates = [self._fa(400 + i, "G", 10.0 + i) for i in range(6)]
+        assert len(lineups.rank_by_net_gain(roster, candidates, limit=3)) == 3
+
+    def test_ties_keep_caller_order(self) -> None:
+        """Stability matters: every blocked add gains exactly 0.0."""
+        roster = self._saturated_roster()
+        candidates = [self._fa(500 + i, "F", 30.0 - i) for i in range(4)]
+        ranked = lineups.rank_by_net_gain(roster, candidates, limit=10)
+        assert all(g == 0.0 for _c, g in ranked)
+        assert [c["player_id"] for c, _g in ranked] == [500, 501, 502, 503]
+
+    def test_empty_candidates(self) -> None:
+        assert lineups.rank_by_net_gain(self._saturated_roster(), [], limit=10) == []

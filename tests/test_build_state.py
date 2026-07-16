@@ -268,3 +268,26 @@ def test_ai_summary_absent_by_default(
         league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
     )
     assert all(t.ai_summary is None for t in state.waiver_targets_overall)
+
+
+def test_team_targets_are_ranked_by_net_gain(
+    league_raw: dict, free_agents_raw: dict, captured_at,
+) -> None:
+    """The per-team waiver list must be sorted by the number it displays.
+
+    Regression: the list kept `waiver_targets_for_team`'s order, which ranks by
+    need-adjusted projection, while every card led with net gain and the page
+    claimed the list was "ranked by what each add gives your optimal lineup."
+    In the committed state.json that put a +69.1 add at rank 4 behind a +66.7,
+    and zero-gain adds above positive-gain ones — so "Top claim" on Today named
+    a worse add than the one beneath it.
+    """
+    state = bs.build_state(
+        league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
+    )
+    assert state.waiver_targets_by_team, "fixture produced no per-team targets"
+    for bt in state.waiver_targets_by_team:
+        gains = [t.net_gain_this_week for t in bt.targets]
+        assert gains == sorted(gains, reverse=True), (
+            f"team {bt.team_id} targets out of net-gain order: {gains}"
+        )
