@@ -76,6 +76,12 @@
           "result": "W"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 2,
+        "team_points": 226.0,
+        "opponent_points": 198.0
+      },
       "waiver_position": 2,
       "faab_remaining": 55,
       "roster": [
@@ -368,6 +374,33 @@
         "frontcourt_gap_vs_league": -25.76,
         "top_need_bucket": "FC"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 59,
+          "current_points": 19.68,
+          "optimal_points": 19.68,
+          "locked_player_ids": [
+            2988756,
+            5345444
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 60,
+          "current_points": 581.44,
+          "optimal_points": 581.44,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 4–3 — above .500 so far.",
         "Top need: add F/C production — ~26 pts below league average this week.",
@@ -508,6 +541,12 @@
           "result": "L"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 1,
+        "team_points": 198.0,
+        "opponent_points": 226.0
+      },
       "waiver_position": 6,
       "faab_remaining": 69,
       "roster": [
@@ -773,6 +812,33 @@
         "frontcourt_gap_vs_league": -30.94,
         "top_need_bucket": "FC"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 59,
+          "current_points": 17.0,
+          "optimal_points": 17.0,
+          "locked_player_ids": [
+            3910470,
+            4433403
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 60,
+          "current_points": 652.18,
+          "optimal_points": 652.18,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 2–5 — needs to turn it around.",
         "Top need: add F/C production — ~31 pts below league average this week.",
@@ -903,6 +969,12 @@
           "result": "L"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 7,
+        "team_points": 146.0,
+        "opponent_points": 186.0
+      },
       "waiver_position": 3,
       "faab_remaining": 72,
       "roster": [
@@ -1193,6 +1265,36 @@
         "frontcourt_gap_vs_league": 125.58,
         "top_need_bucket": "G"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 59,
+          "current_points": 52.84,
+          "optimal_points": 52.84,
+          "locked_player_ids": [
+            2529122,
+            3149391,
+            3904577,
+            4280892,
+            4565505
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 60,
+          "current_points": 473.55,
+          "optimal_points": 473.55,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 4–3 — above .500 so far.",
         "Top need: add Guard production — ~53 pts below league average this week.",
@@ -1317,6 +1419,12 @@
           "result": "W"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 8,
+        "team_points": 235.0,
+        "opponent_points": 185.0
+      },
       "waiver_position": 8,
       "faab_remaining": 85,
       "roster": [
@@ -1580,6 +1688,57 @@
         "frontcourt_gap_vs_league": 35.6,
         "top_need_bucket": "G"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "moves_available",
+          "points_left_on_bench": 31.91,
+          "moves": [
+            {
+              "action": "swap",
+              "player_in_id": 3904576,
+              "player_in_name": "Marina Mabrey",
+              "player_out_id": 869,
+              "player_out_name": "DeWanna Bonner",
+              "slot_label": "G",
+              "gain_pts": 31.91,
+              "player_in_game_time": "2026-07-05T19:00:00Z",
+              "player_out_reason": "no game"
+            }
+          ],
+          "computed_for_period": 59,
+          "current_points": 30.98,
+          "optimal_points": 62.89,
+          "locked_player_ids": [
+            3904576,
+            3906949
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "moves_available",
+          "points_left_on_bench": 95.74,
+          "moves": [
+            {
+              "action": "start",
+              "player_in_id": 3904576,
+              "player_in_name": "Marina Mabrey",
+              "player_out_id": null,
+              "player_out_name": null,
+              "slot_label": "G",
+              "gain_pts": 95.74,
+              "player_in_game_time": null,
+              "player_out_reason": "empty slot"
+            }
+          ],
+          "computed_for_period": 60,
+          "current_points": 594.73,
+          "optimal_points": 690.47,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 4–3 — above .500 so far.",
         "Top need: add Guard production — ~86 pts below league average this week.",
@@ -1674,6 +1833,12 @@
           "result": "W"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 5,
+        "team_points": 186.0,
+        "opponent_points": 146.0
+      },
       "waiver_position": 1,
       "faab_remaining": 95,
       "roster": [
@@ -1910,6 +2075,34 @@
         "frontcourt_gap_vs_league": -38.68,
         "top_need_bucket": "G"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 59,
+          "current_points": 78.38,
+          "optimal_points": 78.38,
+          "locked_player_ids": [
+            4065870,
+            4398776,
+            4433730
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 60,
+          "current_points": 480.31,
+          "optimal_points": 480.31,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 3–4 — needs to turn it around.",
         "Top need: add Guard production — ~75 pts below league average this week.",
@@ -2004,6 +2197,12 @@
           "result": "W"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 6,
+        "team_points": 185.0,
+        "opponent_points": 235.0
+      },
       "waiver_position": 4,
       "faab_remaining": 84,
       "roster": [
@@ -2296,6 +2495,57 @@
         "frontcourt_gap_vs_league": 61.61,
         "top_need_bucket": "G"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "moves_available",
+          "points_left_on_bench": 23.03,
+          "moves": [
+            {
+              "action": "swap",
+              "player_in_id": 4398768,
+              "player_in_name": "Nyara Sabally",
+              "player_out_id": 4433405,
+              "player_out_name": "Kamilla Cardoso",
+              "slot_label": "F",
+              "gain_pts": 23.03,
+              "player_in_game_time": "2026-07-05T19:00:00Z",
+              "player_out_reason": "no game"
+            }
+          ],
+          "computed_for_period": 59,
+          "current_points": 30.86,
+          "optimal_points": 53.89,
+          "locked_player_ids": [
+            3142191,
+            4398768
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "moves_available",
+          "points_left_on_bench": 69.09,
+          "moves": [
+            {
+              "action": "swap",
+              "player_in_id": 4398768,
+              "player_in_name": "Nyara Sabally",
+              "player_out_id": 4433791,
+              "player_out_name": "Olivia Miles",
+              "slot_label": "F",
+              "gain_pts": 69.09,
+              "player_in_game_time": null,
+              "player_out_reason": "OUT"
+            }
+          ],
+          "computed_for_period": 60,
+          "current_points": 579.04,
+          "optimal_points": 648.13,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 5–2 — above .500 so far.",
         "Top need: add Guard production — ~13 pts below league average this week.",
@@ -2393,6 +2643,12 @@
           "result": "L"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 10,
+        "team_points": 223.0,
+        "opponent_points": 110.0
+      },
       "waiver_position": 7,
       "faab_remaining": 68,
       "roster": [
@@ -2683,6 +2939,32 @@
         "frontcourt_gap_vs_league": -86.02,
         "top_need_bucket": "FC"
       },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 59,
+          "current_points": 22.39,
+          "optimal_points": 22.39,
+          "locked_player_ids": [
+            2987869
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 60,
+          "current_points": 473.07,
+          "optimal_points": 473.07,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
+      },
       "summary": [
         "Currently 1–6 — needs to turn it around.",
         "Top need: add F/C production — ~86 pts below league average this week.",
@@ -2814,6 +3096,12 @@
           "result": "L"
         }
       ],
+      "current_matchup": {
+        "matchup_period_id": 8,
+        "opponent_team_id": 9,
+        "team_points": 110.0,
+        "opponent_points": 223.0
+      },
       "waiver_position": 5,
       "faab_remaining": 89,
       "roster": [
@@ -3105,6 +3393,34 @@
         "center_gap_vs_league": -63.28,
         "frontcourt_gap_vs_league": -41.38,
         "top_need_bucket": "FC"
+      },
+      "lineup_check": {
+        "tonight": {
+          "horizon": "tonight",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 59,
+          "current_points": 84.14,
+          "optimal_points": 84.14,
+          "locked_player_ids": [
+            2566453,
+            4432831,
+            4433790
+          ]
+        },
+        "week": {
+          "horizon": "week",
+          "status": "set",
+          "points_left_on_bench": 0.0,
+          "moves": [],
+          "computed_for_period": 60,
+          "current_points": 540.33,
+          "optimal_points": 540.33,
+          "locked_player_ids": []
+        },
+        "week_start_period": 60,
+        "week_end_period": 66
       },
       "summary": [
         "Currently 5–2 — above .500 so far.",
