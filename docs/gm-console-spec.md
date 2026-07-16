@@ -1,6 +1,10 @@
 # Spec: GM Console — Waivers 2.0, Trades 2.0, Lineup Reset
 
-> Status: **planned** (backlog placeholder under High). Authored 2026-07-16 from a codebase audit
+> Status: **P1 + P2 shipped 2026-07-16** (`lineups.py`, My Team, lineup panel, Today, mobile
+> bottom nav). P3–P5 planned. Deviations from this document, and what using it taught us that
+> reading it couldn't, are recorded in §10 — read that before starting P3.
+>
+> Authored 2026-07-16 from a codebase audit
 > plus a competitive survey of ESPN, Yahoo Fantasy Plus, Sleeper, HashtagBasketball,
 > Basketball Monster, RotoWire/RotoBaller, KeepTradeCut, and the AI-assistant field
 > (Duello, League Loom, WalterPicks, FantasySP, Yahoo Assistant GM).
@@ -415,10 +419,20 @@ round-trips with `extra="forbid"`.
 pipeline runs, no accounts/backend, no owner names anywhere, no category-league support
 (league is H2H points), no NBA generalization until the WNBA loop is airtight.
 
-**Open questions for the user:**
-1. Confirm ESPN deep-link URL shapes on the live league (add-player and team-roster pages) — 5-minute browser check during P1.
-2. Dark-as-default: preference confirmed, or keep light default?
-3. Chrome-assisted lineup apply (C1 tier 2): worth building after P2, or is deep-link enough in practice?
+**Open questions — resolved 2026-07-16:**
+1. **ESPN deep-link URL shapes** — *partially open.* The team-roster shape
+   (`fantasy.espn.com/wbasketball/team?leagueId=…&teamId=…`) ships as the lineup panel's
+   "Apply on ESPN" target; it's ESPN's conventional fantasy team URL but has **not** been
+   verified against the live authenticated league (that needs the user's session, which
+   never leaves their machine — a 30-second check next time they're logged in). The
+   add-player shape (§3.A5) is **not** shipped: rather than guess a URL, P3 should verify it
+   first and fall back to the known-good player-page link the modal already uses.
+2. **Dark-as-default** — **declined.** The page already follows `prefers-color-scheme` and
+   persists the toggle, so a dark-OS user *already* gets dark. Forcing dark would override
+   the OS signal for users who deliberately chose light, buying nothing the current
+   behaviour doesn't already deliver.
+3. **Chrome-assisted lineup apply (C1 tier 2)** — deferred, unchanged. Revisit once the
+   deep link has been used in anger for a week or two.
 
 **Success metrics (checkable from history files + UAT):** lineup efficiency trend ≥ 95%
 after P1 (from C4 retro math); time-to-first-action in UAT ≤ 10s cold load on mobile;
@@ -477,3 +491,62 @@ Condensed per-product findings; kept here so the spec is self-contained.
   points default; ~9 active slots in our league (2 G / 3 F / 1 F/C / 3 UTIL + unlimited
   bench); default lineup locks are per-player at game time → daily-streaming dynamics on
   weekly matchups; 2–4 games/team/week makes schedule density the dominant edge.
+
+---
+
+## 10. Build log — P1 + P2 (2026-07-16)
+
+What shipped, where it diverged from the plan above, and what the plan got wrong. Read this
+before P3; the sections above are the *intent*, this is the *ground truth*.
+
+### 10.1 Shipped
+
+- `pipeline/lineups.py` — both horizons, minimal move set, lock handling. `positions.py` now
+  owns `ACTIVE_SLOT_PLAN` + `CONFIRMED_OUT_STATUSES` as the single source of truth; the
+  `app.js` copies are asserted against them by `tests/test_lineups.py::TestFrontendParity`
+  (verified to actually fail on a simulated drift — a parity test that can't fail is
+  decoration).
+- `schedule.games_by_period()` — per-day slate **with tip-off times**. ESPN ships each game's
+  `date` as epoch ms even for future games, which is what makes per-player locks knowable.
+  This is also the input P5's planner grid and a real win-odds model both need.
+- `TeamState.lineup_check` + `TeamState.current_matchup`; My Team, lineup panel, Today,
+  mobile bottom nav + sheets.
+
+### 10.2 Where reality diverged from the spec
+
+- **§5.5 win odds: built, then pulled.** The prescribed normal approximation over
+  `matchup_history` variance can only rank teams *on the season* — it can't see the live
+  score, so it printed "52% rough odds" beside a live 50-point lead. Two numbers, same
+  block, contradicting each other. Today ships season averages instead. A real version needs
+  each side's *remaining* games in the matchup period; `games_by_period()` now makes that
+  computable. Backlogged.
+- **§8's "P2 needs no new pipeline surface" was wrong.** Today's matchup block (§5.5) needs
+  the in-progress matchup, and `matchup_history` is completed weeks only. It was one small
+  addition (`_build_current_matchups`, straight out of `league_raw.schedule`), but the phase
+  table under-counted it. Expect the same for P5's efficiency retro.
+- **A move is not always a swap.** The spec's move shape assumed `player_in` + `player_out`.
+  A roster shorter than nine slots leaves a slot *empty*, where the fix is "start her" with
+  nobody benched — and that's the highest-value case, since an empty slot scores zero.
+  `LineupMove.action` is `"swap" | "start"`. Found only by running against the real snapshot.
+- **`points_left_on_bench` is the sum of recommended gains, not optimal-minus-current.** They
+  agree whenever every gap clears the churn threshold, but defining it as the latter would
+  advertise points the moves list deliberately declines to chase.
+
+### 10.3 Traps for P3+
+
+- **`trades.py` prices OUT players at full value** (12 of 85 in current packages). The lineup
+  checker won't start them; the trade generator will acquire them. P2 surfaced the status
+  next to the price as a stopgap — **fix the valuation in P4**, and reuse
+  `positions.is_confirmed_out()` rather than adding a fourth copy of the status list.
+- **Anything bound after `main()`'s `await` is inert during the load.** `state.json` is 2.8 MB;
+  the bottom nav and chip were dead until it landed. All chrome now uses one parse-time
+  delegated listener — keep new chrome there, not in a post-fetch init.
+- **Icon+label buttons need an explicit `aria-label`.** The picker tiles and nav buttons
+  exposed no accessible name at all. Screenshots look perfect while the a11y tree is empty —
+  check the tree, not the pixels.
+- **`state.json` is already ~48% over the §7.4 payload budget** (296 KB gzipped; 64% of it is
+  `news_by_player`). P1+P2 added 0.9 KB. Do the core/`extras.json` split before P5 grows it.
+- **`scripts/rebuild_state.py` regenerates state with no network and no ESPN cookies** — the
+  right tool for developing against real data without running a live refresh. Note it resolves
+  the project root by finding `.env`, so **from a worktree it writes to the main checkout**.
+  Copy the file back and `git checkout --` the main tree.
