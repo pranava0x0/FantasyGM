@@ -25,6 +25,8 @@ AI-powered GM for the user's ESPN fantasy WNBA league (leagueId 2043154241, "50-
 - No real database. `data/raw/<date>/*.json` + `data/history/transactions.jsonl` is the audit trail. The UI reads `docs/data/state.json`.
 - No owner names anywhere — not in raw snapshots, not in derived state, not in commit messages, not in test fixtures.
 
+**The nine-slot lineup plan and the OUT-status list live in `pipeline/positions.py`.** Both are mirrored in `docs/assets/app.js` (`optimalLineupSlots()`, `CONFIRMED_OUT_STATUSES`), and `tests/test_lineups.py::TestFrontendParity` parses the JS to assert the copies match. Drift here is the worst class of bug this repo can have: the pipeline's advice and the page's would contradict each other while each stays internally consistent. Add new lineup math to `pipeline/lineups.py` and let the UI read the result — don't grow a second optimizer. (2026-07-16: a guard like this is only real if it fails on drift — the parity test was verified against a deliberately mutated `app.js` before being trusted.)
+
 **ESPN scar tissue (read before touching `pipeline/`):**
 
 - **Game code is `wfba`.** Public URL paths use `womens-basketball`; many forum examples show `wbasketball`. The fantasy API only answers to `wfba`. The other codes return 404.

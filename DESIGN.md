@@ -310,6 +310,20 @@ Reset buttons, dropdown populators, persona buttons — anything that touches "a
 
 When a row has a "Program" column and a "Status" column, the Status cell must render Status-specific content (or `—`), never the Program pill as a fallback. Two identical pills doubles visual noise without adding signal.
 
+### 12.8 Icon + label buttons expose no accessible name
+
+A button built as `<span aria-hidden="true">◎</span><span>Today</span>` looks perfect in a screenshot and exposes **no accessible name** in the accessibility tree — screen-reader users hear a row of unlabeled buttons. Name-from-contents doesn't reliably survive the `aria-hidden` sibling.
+
+**Always put an explicit `aria-label` on any button whose visible text sits beside an `aria-hidden` icon**, and on any tile whose label can be ellipsised (the truncated text becomes the accessible name). Shipped twice on 2026-07-16 — a bottom tab bar and a team picker — and caught only by reading `read_page`'s tree. **Screenshots cannot verify a11y; read the tree.**
+
+### 12.9 A recommendation must never hide the number it's derived from
+
+If a card replaces a raw metric with a derived one ("+14.1 net" instead of "66.7 proj"), keep the input visible. Shipped a waiver card reading "24.6/g · **no lineup gain**", which looks like a bug — the cause (she plays twice this week) had been rendered by the block the new one replaced. A conclusion without its cause reads as broken, and the reader can't tell a real zero from a rendering fault.
+
+### 12.10 Two numbers in one block must answer the same question
+
+"Up 50.0" beside "52% rough odds" reads as a contradiction, because the odds were computed from season-long scoring variance and can't see the live score. Before putting a second number next to a first, check they're answering the same question over the same window. When they aren't, either fix the model or drop the number — **a number that visibly contradicts the one above it is worse than no number.**
+
 ---
 
 ## 13. What's intentionally NOT in design
