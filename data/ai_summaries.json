@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T07:40:00Z",
+  "generated_at": "2026-07-17T15:07:19Z",
   "model": "claude-sonnet-5",
   "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull), social/news signals, and team needs analysis.",
   "summaries": {
@@ -32,6 +32,16 @@
     "4433514": "Rivers projects 13.63/g across a 3-game week for Connecticut, below her stronger 17.26 season average, with Reddit's \"Cut Paopao or Rivers?\" thread showing some managers are ready to move on. A Guard-need option at 17.74% owned, but this week's ownership dip (-0.28%) is a caution flag.",
     "4433797": "Johnson projects 13.82/g across a 3-game week for Indiana, above her 12.65 season average, with X noting she outperformed her projected line in a recent game (16.0 actual vs. 10.5 expected) and Reddit tracking her growth as a defender. A speculative Guard-need add at 2.92% owned (+0.17% this week).",
     "4280850": "Caldwell projects 13.55/g across a 3-game week for Minnesota, below her 14.35 season average, with X buzz about her carving out more consistent minutes recently. A speculative Guard-need add at 1.02% owned worth monitoring for continued role growth.",
-    "4257500": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%)."
+    "4257500": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
+    "4065692": "Three Fever games project to just 10.8 fpts/game with no established season average, so this is a speculative dart at 0.21% owned, not a proven contributor. Worth a stash for Guard-need teams only if she starts seeing real run behind Indiana's crowded backcourt.",
+    "4595150": "Minnesota's forward has three games projected this week for roughly 17.7 fpts/game but carries no season track record and sits at 0.05% owned, making this a pure speculative add. Frontcourt-need teams can stash and monitor, but there's no signal yet she's carved out consistent minutes."
+  },
+  "scores": {
+    "4065692": 97.5,
+    "4595150": 53.1
+  },
+  "summary_dates": {
+    "4065692": "2026-07-17T15:07:19Z",
+    "4595150": "2026-07-17T15:07:19Z"
   }
 }
