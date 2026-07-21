@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-20T07:00:00Z",
+  "generated_at": "2026-07-21T07:00:00Z",
   "model": "claude-sonnet-5",
-  "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull), social/news signals, and team needs analysis.",
+  "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull since 2026-07-06 snapshot), social/news signals, and team needs analysis.",
   "summaries": {
     "2491214": "Wheeler is riding a plus-19.4 season average into a 4-game week projected at 78.5 points, one of the fuller slates on the board. Reddit chatter has her hitting clutch late-game threes, backing up her closing-lineup trust. A steady Guard-need pickup near 23% owned with room to keep climbing.",
     "5349415": "Florez is the board's biggest per-game outlier at 24.7 projected points a night against a 16.8 season average, and ownership is still under 1% -- pure buy-low territory. Coach post-practice comments on X point to an expanding role in Washington. A high-upside Guard-need stash while the price is this low.",
@@ -31,10 +31,10 @@
     "3907781": "Cunningham is trending up (+1.69% owned, now near 29%) off a strong recent outing X specifically called out, and projects 13.7 points a game -- below her 18.4 season average, so some regression is likely. Still a reasonable Guard-need rotation piece given the recent role bump.",
     "4433514": "Rivers projects 13.6 points a game, below her 17.3 season average, with ownership dipping slightly. Reddit debate suggests she's on some rosters' bubble -- a moderate-priority Guard-need option rather than a must-add.",
     "4433797": "Johnson is trending up (+0.17% owned) after outproducing her expected line by 5+ points in a recent box score per X tracking, and projects 17.5 points a game this week. A cheap, rising Guard-need add at under 3% owned.",
-    "4280850": "Caldwell is a deep Guard-need flier at just 1% owned, with X coverage noting she's building a case for consistent Fever minutes. Projects 13.6 points a game, close to her 14.4 season average -- worth a speculative add on role growth alone.",
-    "4257500": "Zandalasini's week-over-week projection drops from 58.9 points (3 games) to 39.3 points (2 games) next week for Golden State -- a lighter slate worth planning around -- though her 19.63/g this week is in line with her 19.06 season average. Reddit's \"Zandalasini or Cotie\" thread shows she's in the mainstream Frontcourt-need conversation at 5.3% owned, despite this week's ownership dip (-0.59%).",
     "4065692": "Three Fever games project to just 10.8 fpts/game with no established season average, so this is a speculative dart at 0.21% owned, not a proven contributor. Worth a stash for Guard-need teams only if she starts seeing real run behind Indiana's crowded backcourt.",
-    "4595150": "Taylor projects for 21.1 points a game across a 3-game week for Minnesota with essentially no ownership yet (0.05%), making her a pure speculative Frontcourt-need add. No season average on record yet, so this is a schedule-and-role bet rather than a proven-production one."
+    "4595150": "Taylor projects for 21.1 points a game across a 3-game week for Minnesota with essentially no ownership yet (0.05%), making her a pure speculative Frontcourt-need add. No season average on record yet, so this is a schedule-and-role bet rather than a proven-production one.",
+    "4280850": "Caldwell projects 13.6 points a game roughly in line with her 14.4 season average, with X coverage noting she's carving out consistent minutes in Indiana's rotation. Ownership sits under 2%, making her a cheap Guard-need depth stash while the role holds.",
+    "4257500": "Zandalasini's 3-game week (58.9 pts) outpaces her already-solid 19.1 season average, and Reddit has her in the mix as a streaming option over comparable frontcourt adds. A Frontcourt-need pickup worth rostering at just 5.3% owned."
   },
   "scores": {
     "4065692": 97.5,
