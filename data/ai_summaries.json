@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T07:40:00Z",
+  "generated_at": "2026-07-24T07:40:00Z",
   "model": "claude-sonnet-5",
   "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull since 2026-07-06 snapshot), social/news signals, and team needs analysis.",
   "summaries": {
@@ -93,9 +93,9 @@
     "3142055": "2026-07-23T07:40:00Z",
     "5017726": "2026-07-23T07:40:00Z",
     "3907781": "2026-07-23T07:40:00Z",
-    "4433514": "2026-07-23T07:40:00Z",
-    "5105729": "2026-07-23T07:40:00Z",
-    "4280850": "2026-07-23T07:40:00Z",
-    "4257500": "2026-07-23T07:40:00Z"
+    "4433514": "2026-07-24",
+    "5105729": "2026-07-24",
+    "4280850": "2026-07-24",
+    "4257500": "2026-07-24"
   }
 }
