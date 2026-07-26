@@ -291,3 +291,31 @@ def test_team_targets_are_ranked_by_net_gain(
         assert gains == sorted(gains, reverse=True), (
             f"team {bt.team_id} targets out of net-gain order: {gains}"
         )
+
+
+def test_social_return_signal_ignores_ambiguous_surname() -> None:
+    """A return-from-injury story about one player must not boost a same-surname FA.
+
+    Regression: on 2026-07-26, a deep-bench free agent "Charli Collier" (Dallas)
+    got flagged with injury_signal="returning" and a +15% score boost because
+    social/news text about the unrelated star "Napheesa Collier" (Minnesota)
+    matched on bare last name "collier". Bare-last-name matching must only fire
+    when the surname is unique across the player pool.
+    """
+    player_id_to_name = {
+        1: "Charli Collier",
+        2: "Napheesa Collier",
+    }
+    social_texts = [
+        "napheesa collier returns with 20-point double-double",
+    ]
+    result = bs._detect_social_return_signals(player_id_to_name, {1}, social_texts)
+    assert result == set(), "ambiguous surname must not match a different player's story"
+
+
+def test_social_return_signal_matches_unique_surname() -> None:
+    """A unique surname still matches its own return-from-injury story."""
+    player_id_to_name = {1: "Aari McDonald"}
+    social_texts = ["mcdonald cleared to return from ankle injury"]
+    result = bs._detect_social_return_signals(player_id_to_name, {1}, social_texts)
+    assert result == {1}
