@@ -141,10 +141,19 @@ def _detect_social_return_signals(
     For each free-agent player, check whether any social/news text both
     mentions their name and contains a return-from-injury signal. Name
     matching is done on last name (≥5 chars) plus first-initial to reduce
-    false positives from common last names.
+    false positives from common last names. The bare last name is only used
+    as a match token when it's unique across the full player pool — two
+    players sharing a surname (e.g. Charli Collier vs. Napheesa Collier)
+    must not let a story about one boost the other's ranking.
     """
     if not social_texts or not fa_player_ids:
         return set()
+
+    surname_counts: dict[str, int] = {}
+    for name in player_id_to_name.values():
+        parts = (name or "").strip().lower().split()
+        if len(parts) >= 2:
+            surname_counts[parts[-1]] = surname_counts.get(parts[-1], 0) + 1
 
     result: set[int] = set()
     for pid in fa_player_ids:
@@ -153,11 +162,12 @@ def _detect_social_return_signals(
             continue
 
         parts = full_name.lower().split()
-        # Build match tokens: full name, last name (if ≥5 chars), and
-        # first-initial + last ("a. wilson").
+        # Build match tokens: full name, last name (if ≥5 chars and unique
+        # across the player pool), and first-initial + last ("a. wilson").
         tokens: list[str] = [full_name.lower()]
         if len(parts) >= 2 and len(parts[-1]) >= _MIN_NAME_LEN:
-            tokens.append(parts[-1])
+            if surname_counts.get(parts[-1], 0) <= 1:
+                tokens.append(parts[-1])
             tokens.append(f"{parts[0][0]}. {parts[-1]}")
 
         for text in social_texts:
