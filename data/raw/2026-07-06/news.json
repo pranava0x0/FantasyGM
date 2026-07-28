@@ -15,6 +15,239 @@
   },
   "articles": [
     {
+      "id": 49467283,
+      "nowId": "1-49467283",
+      "contentKey": "49467283-1-22-1",
+      "dataSourceIdentifier": "d49f41bad437c",
+      "type": "Preview",
+      "headline": "Atlanta faces Dallas following Gray's 29-point showing",
+      "description": "Atlanta Dream (16-10, 9-3 Eastern Conference) at Dallas Wings (18-9, 8-6 Western Conference)",
+      "lastModified": "2026-07-28T06:10:29Z",
+      "published": "2026-07-28T06:10:29Z",
+      "images": [
+        {
+          "type": "stitcher",
+          "name": "espn.applewatch.awayhome.1",
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.applewatch.awayhome.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.applewatch.homeaway.1",
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.applewatch.homeaway.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.awayhome.16x9.1",
+          "ratio": "16x9",
+          "height": 173,
+          "width": 308,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.awayhome.16x9.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.homeaway.16x9.1",
+          "ratio": "16x9",
+          "height": 173,
+          "width": 308,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.homeaway.16x9.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.awayhome.1x1.1",
+          "ratio": "1x1",
+          "height": 308,
+          "width": 308,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.awayhome.1x1.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.homeaway.1x1.1",
+          "ratio": "1x1",
+          "height": 308,
+          "width": 308,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.homeaway.1x1.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.awayhome.5x2.1",
+          "ratio": "5x2",
+          "height": 124,
+          "width": 308,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.awayhome.5x2.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.homeaway.5x2.1",
+          "ratio": "5x2",
+          "height": 124,
+          "width": 308,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.homeaway.5x2.1"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.awayhome.16x9.2",
+          "ratio": "16x9",
+          "height": 353,
+          "width": 628,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.awayhome.16x9.2"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.homeaway.16x9.2",
+          "ratio": "16x9",
+          "height": 353,
+          "width": 628,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.homeaway.16x9.2"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.awayhome.5x2.2",
+          "ratio": "5x2",
+          "height": 251,
+          "width": 628,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.awayhome.5x2.2"
+        },
+        {
+          "type": "stitcher",
+          "name": "espn.all.homeaway.5x2.2",
+          "ratio": "5x2",
+          "height": 251,
+          "width": 628,
+          "url": "https://s.espncdn.com/stitcher/sports/basketball/wnba/events/401857097.png?templateId=espn.all.homeaway.5x2.2"
+        }
+      ],
+      "categories": [
+        {
+          "id": 9579,
+          "type": "league",
+          "uid": "s:40~l:59",
+          "guid": "f74a6d24-af0c-30a0-bc20-e987c7093a68",
+          "description": "WNBA",
+          "sportId": 59,
+          "leagueId": 59,
+          "league": {
+            "id": 59,
+            "description": "WNBA",
+            "abbreviation": "WNBA",
+            "links": {
+              "web": {
+                "leagues": {
+                  "href": "https://www.espn.com/wnba/"
+                }
+              },
+              "mobile": {
+                "leagues": {
+                  "href": "https://www.espn.com/wnba/"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": 144630,
+          "type": "team",
+          "uid": "s:40~l:59~t:3",
+          "guid": "34946ff8-281e-c57d-bb76-37fb1ebe3ec6",
+          "description": "Dallas Wings",
+          "sportId": 59,
+          "teamId": 3,
+          "team": {
+            "id": 3,
+            "description": "Dallas Wings",
+            "abbreviation": "DAL",
+            "shortDisplayName": "Wings",
+            "links": {
+              "web": {
+                "teams": {
+                  "href": "https://www.espn.com/wnba/team/_/name/dal/dallas-wings"
+                }
+              },
+              "mobile": {
+                "teams": {
+                  "href": "https://www.espn.com/wnba/team/_/name/dal/dallas-wings"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": 36562,
+          "type": "team",
+          "uid": "s:40~l:59~t:20",
+          "guid": "bceea196-4263-d338-17a7-9ae40f3aed3f",
+          "description": "Atlanta Dream",
+          "sportId": 59,
+          "teamId": 20,
+          "team": {
+            "id": 20,
+            "description": "Atlanta Dream",
+            "abbreviation": "ATL",
+            "shortDisplayName": "Dream",
+            "links": {
+              "web": {
+                "teams": {
+                  "href": "https://www.espn.com/wnba/team/_/name/atl/atlanta-dream"
+                }
+              },
+              "mobile": {
+                "teams": {
+                  "href": "https://www.espn.com/wnba/team/_/name/atl/atlanta-dream"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "event",
+          "uid": "s:40~l:59~e:401857097",
+          "guid": "64644426-281f-33e4-8ddc-30541a3dce58",
+          "description": "Atlanta Dream @ Dallas Wings",
+          "eventId": 401857097,
+          "event": {
+            "id": 401857097,
+            "sport": "basketball",
+            "league": "wnba",
+            "description": "Atlanta Dream @ Dallas Wings"
+          }
+        },
+        {
+          "type": "guid",
+          "guid": "f74a6d24-af0c-30a0-bc20-e987c7093a68"
+        },
+        {
+          "type": "guid",
+          "guid": "34946ff8-281e-c57d-bb76-37fb1ebe3ec6"
+        },
+        {
+          "type": "guid",
+          "guid": "bceea196-4263-d338-17a7-9ae40f3aed3f"
+        },
+        {
+          "type": "guid",
+          "guid": "64644426-281f-33e4-8ddc-30541a3dce58"
+        }
+      ],
+      "premium": false,
+      "links": {
+        "web": {
+          "href": "http://www.espn.com/wnba/preview?gameId=401857097"
+        },
+        "mobile": {
+          "href": "http://m.espn.go.com/wnba/story?storyId=49467283"
+        },
+        "api": {
+          "self": {
+            "href": "https://content.core.api.espn.com/v1/sports/news/49467283"
+          }
+        },
+        "app": {
+          "sportscenter": {
+            "href": "sportscenter://x-callback-url/showStory?uid=49467283"
+          }
+        }
+      }
+    },
+    {
       "id": 49460243,
       "nowId": "1-49460243",
       "contentKey": "49460243-1-22-1",
@@ -14369,459 +14602,6 @@
         }
       },
       "byline": "Alexa Philippou"
-    },
-    {
-      "id": 49420142,
-      "nowId": "1-49420142",
-      "contentKey": "49420142-1-5-1",
-      "dataSourceIdentifier": "f05c67b9cd34e",
-      "type": "HeadlineNews",
-      "headline": "Fudd, Mabrey, Howard among WNBA All-Star 3-point contestants",
-      "description": "Azzi Fudd will participate in the 3-point contest as part of WNBA All-Star Weekend in Chicago, joined by Rhyne Howard, Marina Mabrey, Bridget Carleton, Natisha Hiedeman and Janelle Salaun.",
-      "lastModified": "2026-07-23T15:36:51Z",
-      "published": "2026-07-23T15:36:51Z",
-      "images": [
-        {
-          "dataSourceIdentifier": "5a4d6123fec83",
-          "id": 48687430,
-          "type": "header",
-          "name": "Azzi Fudd [600x400]",
-          "caption": "Dallas Wings guard Azzi Fudd is the early frontrunner for Rookie of the Year.",
-          "alt": "Azzi Fudd #35 of the Dallas Wings looks to pass the ball during the game against the Las Vegas Aces on May 3, 2026 at the College Park Center in Arlington, TX.",
-          "credit": "Michael Gonzales/NBAE via Getty Images",
-          "height": 400,
-          "width": 600,
-          "url": "https://a.espncdn.com/photo/2026/0505/r1653984_600x400_3-2.jpg"
-        },
-        {
-          "type": "Media",
-          "name": "Azzi Fudd nails the 3",
-          "caption": "Azzi Fudd shows off the range with 3-pointer",
-          "height": 324,
-          "width": 576,
-          "url": "https://a.espncdn.com/media/motion/wsc/2026/0721/65387b93-3355-40c1-b93f-0c971b68efd5/65387b93-3355-40c1-b93f-0c971b68efd5.jpg"
-        }
-      ],
-      "categories": [
-        {
-          "id": 409224,
-          "type": "topic",
-          "guid": "52313677-19f8-b106-ec91-d8d17e6087fe",
-          "description": "news",
-          "sportId": 0,
-          "topicId": 781
-        },
-        {
-          "id": 9579,
-          "type": "league",
-          "uid": "s:40~l:59",
-          "guid": "f74a6d24-af0c-30a0-bc20-e987c7093a68",
-          "description": "WNBA",
-          "sportId": 59,
-          "leagueId": 59,
-          "league": {
-            "id": 59,
-            "description": "WNBA",
-            "abbreviation": "WNBA",
-            "links": {
-              "web": {
-                "leagues": {
-                  "href": "https://www.espn.com/wnba/"
-                }
-              },
-              "mobile": {
-                "leagues": {
-                  "href": "https://www.espn.com/wnba/"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 144630,
-          "type": "team",
-          "uid": "s:40~l:59~t:3",
-          "guid": "34946ff8-281e-c57d-bb76-37fb1ebe3ec6",
-          "description": "Dallas Wings",
-          "sportId": 59,
-          "teamId": 3,
-          "team": {
-            "id": 3,
-            "description": "Dallas Wings",
-            "abbreviation": "DAL",
-            "shortDisplayName": "Wings",
-            "links": {
-              "web": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/dal/dallas-wings"
-                }
-              },
-              "mobile": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/dal/dallas-wings"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 556240,
-          "type": "athlete",
-          "uid": "s:40~l:59~a:4433790",
-          "guid": "343afb44-7a8b-3984-8141-361e8045fdaa",
-          "description": "Azzi Fudd",
-          "sportId": 59,
-          "athleteId": 4433790,
-          "athlete": {
-            "id": 4433790,
-            "description": "Azzi Fudd",
-            "links": {
-              "web": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/4433790/azzi-fudd"
-                }
-              },
-              "mobile": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/4433790/azzi-fudd"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 36562,
-          "type": "team",
-          "uid": "s:40~l:59~t:20",
-          "guid": "bceea196-4263-d338-17a7-9ae40f3aed3f",
-          "description": "Atlanta Dream",
-          "sportId": 59,
-          "teamId": 20,
-          "team": {
-            "id": 20,
-            "description": "Atlanta Dream",
-            "abbreviation": "ATL",
-            "shortDisplayName": "Dream",
-            "links": {
-              "web": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/atl/atlanta-dream"
-                }
-              },
-              "mobile": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/atl/atlanta-dream"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 528565,
-          "type": "athlete",
-          "uid": "s:40~l:59~a:4398674",
-          "guid": "940914f8-5293-4fb8-0f4c-7c5436f2c5bd",
-          "description": "Rhyne Howard",
-          "sportId": 59,
-          "athleteId": 4398674,
-          "athlete": {
-            "id": 4398674,
-            "description": "Rhyne Howard",
-            "links": {
-              "web": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/4398674/rhyne-howard"
-                }
-              },
-              "mobile": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/4398674/rhyne-howard"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 749010,
-          "type": "team",
-          "uid": "s:40~l:59~t:131935",
-          "guid": "9e09cc68-e065-3a02-a870-9b4c1562ea68",
-          "description": "Toronto Tempo",
-          "sportId": 59,
-          "teamId": 131935,
-          "team": {
-            "id": 131935,
-            "description": "Toronto Tempo",
-            "abbreviation": "TOR",
-            "shortDisplayName": "Tempo",
-            "links": {
-              "web": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/tor/toronto-tempo"
-                }
-              },
-              "mobile": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/tor/toronto-tempo"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 379577,
-          "type": "athlete",
-          "uid": "s:40~l:59~a:3904576",
-          "guid": "1bce47f0-de18-db37-1f24-f707afb155a8",
-          "description": "Marina Mabrey",
-          "sportId": 59,
-          "athleteId": 3904576,
-          "athlete": {
-            "id": 3904576,
-            "description": "Marina Mabrey",
-            "links": {
-              "web": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/3904576/marina-mabrey"
-                }
-              },
-              "mobile": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/3904576/marina-mabrey"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 379385,
-          "type": "athlete",
-          "uid": "s:40~l:59~a:3906972",
-          "guid": "45bb9001-d6d5-f987-3e64-fe45e12895f8",
-          "description": "Bridget Carleton",
-          "sportId": 59,
-          "athleteId": 3906972,
-          "athlete": {
-            "id": 3906972,
-            "description": "Bridget Carleton",
-            "links": {
-              "web": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/3906972/bridget-carleton"
-                }
-              },
-              "mobile": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/3906972/bridget-carleton"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 5851,
-          "type": "team",
-          "uid": "s:40~l:59~t:14",
-          "guid": "2da9bce5-382a-83d9-132c-b6c59d0e8eb9",
-          "description": "Seattle Storm",
-          "sportId": 59,
-          "teamId": 14,
-          "team": {
-            "id": 14,
-            "description": "Seattle Storm",
-            "abbreviation": "SEA",
-            "shortDisplayName": "Storm",
-            "links": {
-              "web": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/sea/seattle-storm"
-                }
-              },
-              "mobile": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/sea/seattle-storm"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 379294,
-          "type": "athlete",
-          "uid": "s:40~l:59~a:3906753",
-          "guid": "9fd561fc-eb90-7974-fdde-77acc2436dd0",
-          "description": "Natisha Hiedeman",
-          "sportId": 59,
-          "athleteId": 3906753,
-          "athlete": {
-            "id": 3906753,
-            "description": "Natisha Hiedeman",
-            "links": {
-              "web": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/3906753/natisha-hiedeman"
-                }
-              },
-              "mobile": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/3906753/natisha-hiedeman"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 692570,
-          "type": "team",
-          "uid": "s:40~l:59~t:129689",
-          "guid": "170598de-f63a-3497-a04d-1fc514508f56",
-          "description": "Golden State Valkyries",
-          "sportId": 59,
-          "teamId": 129689,
-          "team": {
-            "id": 129689,
-            "description": "Golden State Valkyries",
-            "abbreviation": "GS",
-            "shortDisplayName": "Valkyries",
-            "links": {
-              "web": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/gs/golden-state-valkyries"
-                }
-              },
-              "mobile": {
-                "teams": {
-                  "href": "https://www.espn.com/wnba/team/_/name/gs/golden-state-valkyries"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 704260,
-          "type": "athlete",
-          "uid": "s:40~l:59~a:4790264",
-          "guid": "ea04a1f9-4ef0-3d47-8345-30f7da76a396",
-          "description": "Janelle Salaun",
-          "sportId": 59,
-          "athleteId": 4790264,
-          "athlete": {
-            "id": 4790264,
-            "description": "Janelle Salaun",
-            "links": {
-              "web": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/4790264/janelle-salaun"
-                }
-              },
-              "mobile": {
-                "athletes": {
-                  "href": "https://www.espn.com/wnba/player/_/id/4790264/janelle-salaun"
-                }
-              }
-            }
-          }
-        },
-        {
-          "id": 116550,
-          "type": "topic",
-          "guid": "fe879255-6324-4784-385f-a1a18c22b5cc",
-          "description": "espnw",
-          "sportId": 0,
-          "topicId": 5
-        },
-        {
-          "id": 696269,
-          "type": "contributor",
-          "guid": "d95bce36-78a4-3c71-8fc9-5b0434e17279",
-          "description": "Kendra Andrews",
-          "slug": "kendra-andrews",
-          "contributor": {
-            "id": 3898,
-            "description": "Kendra Andrews"
-          }
-        },
-        {
-          "type": "guid",
-          "guid": "52313677-19f8-b106-ec91-d8d17e6087fe"
-        },
-        {
-          "type": "guid",
-          "guid": "f74a6d24-af0c-30a0-bc20-e987c7093a68"
-        },
-        {
-          "type": "guid",
-          "guid": "34946ff8-281e-c57d-bb76-37fb1ebe3ec6"
-        },
-        {
-          "type": "guid",
-          "guid": "343afb44-7a8b-3984-8141-361e8045fdaa"
-        },
-        {
-          "type": "guid",
-          "guid": "bceea196-4263-d338-17a7-9ae40f3aed3f"
-        },
-        {
-          "type": "guid",
-          "guid": "940914f8-5293-4fb8-0f4c-7c5436f2c5bd"
-        },
-        {
-          "type": "guid",
-          "guid": "9e09cc68-e065-3a02-a870-9b4c1562ea68"
-        },
-        {
-          "type": "guid",
-          "guid": "1bce47f0-de18-db37-1f24-f707afb155a8"
-        },
-        {
-          "type": "guid",
-          "guid": "45bb9001-d6d5-f987-3e64-fe45e12895f8"
-        },
-        {
-          "type": "guid",
-          "guid": "2da9bce5-382a-83d9-132c-b6c59d0e8eb9"
-        },
-        {
-          "type": "guid",
-          "guid": "9fd561fc-eb90-7974-fdde-77acc2436dd0"
-        },
-        {
-          "type": "guid",
-          "guid": "170598de-f63a-3497-a04d-1fc514508f56"
-        },
-        {
-          "type": "guid",
-          "guid": "ea04a1f9-4ef0-3d47-8345-30f7da76a396"
-        },
-        {
-          "type": "guid",
-          "guid": "fe879255-6324-4784-385f-a1a18c22b5cc"
-        },
-        {
-          "type": "guid",
-          "guid": "d95bce36-78a4-3c71-8fc9-5b0434e17279"
-        }
-      ],
-      "premium": false,
-      "links": {
-        "web": {
-          "href": "https://www.espn.com/wnba/story/_/id/49420142/fudd-mabrey-howard-wnba-all-star-3-point-contestants"
-        },
-        "mobile": {
-          "href": "http://m.espn.go.com/wnba/story?storyId=49420142"
-        },
-        "api": {
-          "self": {
-            "href": "https://content.core.api.espn.com/v1/sports/news/49420142"
-          }
-        },
-        "app": {
-          "sportscenter": {
-            "href": "sportscenter://x-callback-url/showStory?uid=49420142"
-          }
-        }
-      },
-      "byline": "Kendra Andrews"
     }
   ]
 }
