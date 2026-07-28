@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T08:48:00Z",
+  "generated_at": "2026-07-28T07:40:00Z",
   "model": "claude-sonnet-5",
   "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull since 2026-07-06 snapshot), social/news signals, and team needs analysis.",
   "summaries": {
@@ -35,7 +35,12 @@
     "4398988": "Collier's strong 33.0 points/game this week comes on a shrinking slate -- 3 games falls to just 2 next week -- so the per-game pace is likely to cool. Still unowned at 0.11%, she's a thin-sample Frontcourt-need flier; verify she's actually rotation-locked in Dallas before adding.",
     "5105729": "Gray is a deep Guard-need flier at 0.16% owned, but a 4-game week next projects her to 40.75 points -- the extra game is the entire case here. Season numbers are thin (7.88 avg) so treat this as a volume-driven streaming play, not a long-term add.",
     "4280850": "Caldwell projects 13.55 points a game roughly in line with her 14.35 season average, with X coverage noting she's carving out consistent minutes in Indiana's rotation. Ownership sits near 1%, making her a cheap Guard-need depth stash while the role holds.",
-    "4257500": "Zandalasini's 3-game week (58.9 pts) outpaces her already-solid 19.06 season average, and Reddit has her in the mix as a streaming option over comparable frontcourt adds. A Frontcourt-need pickup worth rostering at just 5.3% owned."
+    "4257500": "Zandalasini's 3-game week (58.9 pts) outpaces her already-solid 19.06 season average, and Reddit has her in the mix as a streaming option over comparable frontcourt adds. A Frontcourt-need pickup worth rostering at just 5.3% owned.",
+    "4280886": "Williams is a thin-sample rookie flier -- no season average yet and just 0.04% owned -- with X chatter mostly comparing her 2nd-round draft slot to other rookies rather than confirming a locked-in role. The 27.0/g week-ahead projection reflects a raw 3-game slate, not proven production; a deep speculative Frontcourt-need stash for KAH, PEZ, NNZ, or A-B, worth dropping the moment the minutes don't show up.",
+    "4398883": "Williams enters the board with zero season average and 0.03% ownership -- the thinnest possible sample -- and this week's news coverage is All-Star-recap noise with no direct signal on her role. The 27.0/g projected week is a 3-game-slate artifact rather than evidence of a rotation spot; treat as an ultra-speculative Frontcourt-need flier only, and verify she's actually getting run before adding.",
+    "4282168": "Reddit reporting has Phoenix waiving Williams, and she now sits in Los Angeles on a rebuilt 14.78/g weekly pace with a fuller 4-game slate (59.11 pts) coming next week -- both well above her thin 9.0 season average. Still just 0.14% owned, she's a Guard-need pickup worth a claim for Spda, Nut, C9, or KylB, but confirm the Sparks roster spot has actually stuck before committing FAAB.",
+    "4398965": "X coverage frames Williams as finally back on the floor after missing her entire rookie year to a torn ACL, and she's projecting a strong 27.0/g across Dallas's 3-game week even with no season average yet on record to anchor it. Next week's slate thins to 2 games (54.0 total), so the sample is still short -- a Guard-need speculative add for Spda, Nut, C9, or KylB worth rostering on the comeback storyline while confirming the role holds.",
+    "5108550": "Reddit's actively debating streaming Williams over Cotie McMahon today, a sign she's a real second-tier streaming option rather than filler, and next week's fuller 3-game slate (45.47 pts) tops this week's 2-game output, both comfortably above her 9.47 season average. A confirmed-active Frontcourt-need stream at just 0.24% owned for KAH, PEZ, NNZ, or A-B."
   },
   "scores": {
     "2491214": 56.17,
@@ -70,7 +75,12 @@
     "4398988": 99.0,
     "5105729": 30.56,
     "4280850": 40.65,
-    "4257500": 58.89
+    "4257500": 58.89,
+    "4280886": 81.0,
+    "4398883": 81.0,
+    "4282168": 44.33,
+    "4398965": 81.0,
+    "5108550": 30.31
   },
   "summary_dates": {
     "2491214": "2026-07-23T07:40:00Z",
@@ -105,6 +115,11 @@
     "4398988": "2026-07-27T08:48:00Z",
     "5105729": "2026-07-26T07:40:00Z",
     "4280850": "2026-07-26T07:40:00Z",
-    "4257500": "2026-07-26T07:40:00Z"
+    "4257500": "2026-07-26T07:40:00Z",
+    "4280886": "2026-07-28T07:40:00Z",
+    "4398883": "2026-07-28T07:40:00Z",
+    "4282168": "2026-07-28T07:40:00Z",
+    "4398965": "2026-07-28T07:40:00Z",
+    "5108550": "2026-07-28T07:40:00Z"
   }
 }
