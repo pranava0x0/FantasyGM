@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T07:40:00Z",
+  "generated_at": "2026-07-31T07:40:00Z",
   "model": "claude-sonnet-5",
   "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull since 2026-07-06 snapshot), refreshed Reddit/news signals (live RSS re-pull), and team needs analysis.",
   "summaries": {
@@ -30,9 +30,12 @@
     "5017726": "Melbourne's 22.23/g pace this week clears her already-solid 18.95 season average, but next week's slate drops to just 2 games (44.45 total) and ownership fell nearly 2.5 points -- a scheduling-driven cooldown, not a talent decline. Guard-need teams should treat her as a stream-this-week, bench-next-week play.",
     "3142055": "Hines-Allen is trending up (+0.49% owned) and projects 14.43 points a game, roughly matching her 14.35 season average for Indiana. A steady, if unspectacular, Frontcourt-need depth option under 9% owned.",
     "4433514": "Rivers projects 13.63 points a game, below her 17.26 season average, with ownership dipping slightly (-0.28). A moderate-priority Guard-need option amid a crowded Connecticut backcourt story rather than a must-add.",
-    "5105729": "Gray is a deep Guard-need flier at 0.16% owned, but a 4-game week next projects her to 40.75 points -- the extra game is the entire case here. Season numbers are thin (7.88 avg) so treat this as a volume-driven streaming play, not a long-term add.",
-    "4280850": "Caldwell projects 13.55 points a game, roughly in line with her 14.35 season average. Ownership sits near 1%, making her a cheap Guard-need depth stash while the role holds.",
-    "4257500": "Zandalasini's 3-game week (19.63/g) edges out her already-solid 19.06 season average, though next week's slate thins to 2 games (39.26 total). A Frontcourt-need pickup worth rostering at just 5.3% owned."
+    "4065692": "Aaliyah Wilson is a deep-waiver flier for Indiana with no established season average yet, but the ROS window (115.5 projected over 3 games, 38.5/g pace) is the best of anyone on the board. At 0.21% owned she's pure speculation until a role emerges -- worth a low-cost add for Guard-need teams (Spda, Nut, C9, KylB) willing to stash and monitor.",
+    "4595150": "Camryn Taylor is riding Minnesota's 9-game win streak but still lacks a season average, projecting 19.0/g on a full 3-game week. Practically unowned at 0.05%, she's a speculative Frontcourt-need stash for KAH, PEZ, NNZ, or A-B -- watch for consistent rotation minutes before committing a full roster spot.",
+    "4398988": "Charli Collier's per-game pace (21.5) is strong but her next-week slate shrinks to 2 games (43.0 total) versus 3 this week (64.5), so the raw totals will dip even as efficiency holds. Still 0.11% owned with no season average on record -- a Frontcourt-need speculative add for KAH, PEZ, NNZ, or A-B, but treat as unproven until the sample grows.",
+    "5105729": "Chance Gray's slate expands to 4 games next week (40.75 projected) versus 3 this week, pushing her ROS outlook above her modest 7.88 season average even though her per-game pace (10.19) stays light. Still just 0.16% owned -- a depth-chasing Guard-need stash for Spda, Nut, C9, or KylB banking on the extra game, not a difference-maker yet.",
+    "4280850": "Maya Caldwell projects a steady 13.55/g across a full 3-game week, roughly matching her 14.35 season average, with X noting she's building a case for consistent Indiana minutes. Only 1.02% owned, she's a reasonable Guard-need speculative add for Spda, Nut, C9, or KylB if that role continues to solidify.",
+    "4257500": "Zandalasini is coming off a strong 3-game week (58.89, 19.63/g) that tops her already-solid 19.06 season average, though next week's slate shrinks to 2 games (39.26 total). Reddit and X chatter around her expanding role and new-CBA earning power make her a Frontcourt-need buy for KAH, PEZ, NNZ, or A-B at just 5.3% owned -- watch the lighter next-week schedule."
   },
   "scores": {
     "3934218": 51.8,
