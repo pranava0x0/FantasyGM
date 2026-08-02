@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T07:38:33Z",
+  "generated_at": "2026-08-02T07:38:00Z",
   "model": "claude-sonnet-5",
   "note": "Social-mode refresh: GM-authored summaries grounded in ESPN projections (no fresh API pull since 2026-07-06 snapshot), refreshed Reddit/news/X/Bluesky signals (live pull), and team needs analysis.",
   "scores": {
@@ -37,7 +37,9 @@
     "4433514": 40.89,
     "5105729": 30.56,
     "4280850": 40.65,
-    "4257500": 58.89
+    "4257500": 58.89,
+    "4398988": 64.5,
+    "924": 68.79
   },
   "summaries": {
     "3934218": "Gustafson keeps producing at 25.9 fpts/game, above her already-solid 22.05 season average, with X coverage crediting her as finally settling into a consistent role for expansion Portland and Reddit highlighting a recent statement win. Ownership slipped almost 3 points despite the production, opening a Frontcourt-need buy window before it reverses.",
@@ -76,7 +78,9 @@
     "4433514": "Rivers projects 13.63 points a game, below her 17.26 season average, with ownership dipping slightly (-0.28). A moderate-priority Guard-need option amid a crowded Connecticut backcourt story rather than a must-add.",
     "5105729": "Chance Gray's slate expands to 4 games next week (40.75 projected) versus 3 this week, pushing her ROS outlook above her modest 7.88 season average even though her per-game pace (10.19) stays light. Still just 0.16% owned -- a depth-chasing Guard-need stash for Spda, Nut, C9, or KylB banking on the extra game, not a difference-maker yet.",
     "4280850": "Maya Caldwell projects a steady 13.55/g across a full 3-game week, roughly matching her 14.35 season average, with X noting she's building a case for consistent Indiana minutes. Only 1.02% owned, she's a reasonable Guard-need speculative add for Spda, Nut, C9, or KylB if that role continues to solidify.",
-    "4257500": "Zandalasini is coming off a strong 3-game week (58.89, 19.63/g) that tops her already-solid 19.06 season average, though next week's slate shrinks to 2 games (39.26 total). Reddit and X chatter around her expanding role and new-CBA earning power make her a Frontcourt-need buy for KAH, PEZ, NNZ, or A-B at just 5.3% owned -- watch the lighter next-week schedule."
+    "4257500": "Zandalasini is coming off a strong 3-game week (58.89, 19.63/g) that tops her already-solid 19.06 season average, though next week's slate shrinks to 2 games (39.26 total). Reddit and X chatter around her expanding role and new-CBA earning power make her a Frontcourt-need buy for KAH, PEZ, NNZ, or A-B at just 5.3% owned -- watch the lighter next-week schedule.",
+    "4398988": "Collier is projected for 21.5 fpts/game this week on a 3-game slate, but she still has no established season average -- she has barely featured for Dallas and the only Wings coverage this cycle centers on frontcourt mate Jessica Shepard's breakout, not her. Practically unowned at 0.11%, she is a speculative Frontcourt-need dart throw pending an actual role change, not a confirmed add yet.",
+    "924": "Clark projects at 22.93 fpts/game this week on a heavy 3-game slate, roughly 3x her 7.29 season average -- a gap wide enough to double-check playing time before trusting it, since no fresh news or social signal explains the jump. Still almost unrostered at 1.13% owned, she is worth a look for Frontcourt-need teams (KAH, PEZ, NNZ, A-B) if the role increase holds past this week."
   },
   "summary_dates": {
     "3934218": "2026-07-30T07:40:00Z",
@@ -113,6 +117,8 @@
     "4433514": "2026-07-30T07:40:00Z",
     "5105729": "2026-07-30T07:40:00Z",
     "4280850": "2026-07-30T07:40:00Z",
-    "4257500": "2026-07-30T07:40:00Z"
+    "4257500": "2026-07-30T07:40:00Z",
+    "4398988": "2026-08-02T07:38:00Z",
+    "924": "2026-08-02T07:38:00Z"
   }
 }
