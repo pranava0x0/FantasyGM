@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-03T22:46:19Z",
+  "generated_at": "2026-08-04T07:38:39Z",
   "model": "claude-sonnet-5",
-  "note": "Full refresh with fresh ESPN session cookies (extracted from an authenticated Chrome tab): live ESPN API pull, refreshed Reddit/news/X(archive)/Bluesky signals, and team needs analysis. GM-authored summaries for the current top-30.",
+  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): refreshed news + live Reddit RSS pull, rebuilt rankings, GM-authored summary added for Raven Johnson (newly in top-30, rest unchanged from prior refresh).",
   "scores": {
     "4065692": 103.4,
     "981": 73.88,
@@ -36,7 +36,8 @@
     "4432865": 39.38,
     "5346554": 25.92,
     "4433433": 38.5,
-    "2593770": 38.47
+    "2593770": 38.47,
+    "4433797": 27.49
   },
   "summaries": {
     "4065692": "Wilson has no season track record yet but projects a massive 155.1-point, 3-game week ahead (51.7/g pace) for a thin Indiana roster -- production this size at 0.2% owned is the kind of signal that gets missed. No player-specific news or social chatter has caught up to the workload yet. A must-look Guard-need speculative add before the ownership catches up.",
@@ -72,6 +73,7 @@
     "4432865": "Sheldon projects 13.13/g across identical 3-game weeks for Chicago, just below her 14.59 season average, with ownership ticking up slightly (+0.05). Bluesky flags her holding the starting nod over Sydney Taylor despite X noting some scoring inefficiency, and Reddit still has her in the weekly streaming conversation. A steady Guard-need floor play near 4% owned.",
     "5346554": "Oblak's light 2-game week (12.96/g) still trails her 14.17 season average, and a fuller 3-game slate projects 38.88 points next week for Portland. An X game-status report flagged her questionable with a lower-back issue -- worth confirming health before rostering -- while Bluesky highlights a 9-assist WNBA debut showing real playmaking upside. A speculative Guard-need stash at 0.25% owned, health permitting.",
     "4433433": "Coulibaly projects 12.83/g across a full 3-game week for Chicago, above her 11.67 season average, with ownership nudging up (+0.14) off a near-zero base. Bluesky chatter pushes back on her minutes share (favoring Sydney Taylor), so the role reads as contested rather than settled. A deep Guard-need speculative add worth monitoring the rotation.",
-    "2593770": "Laney-Hamilton projects 12.82/g across a full 3-game week for New York, right at her 12.82 season average, with ownership holding steady near 8%. Reddit coverage of an on-court exchange with Marina Mabrey confirms she's a regular rotation piece, not a fringe name. A dependable Frontcourt-need floor play for PEZ, NNZ, or A-B."
+    "2593770": "Laney-Hamilton projects 12.82/g across a full 3-game week for New York, right at her 12.82 season average, with ownership holding steady near 8%. Reddit coverage of an on-court exchange with Marina Mabrey confirms she's a regular rotation piece, not a fringe name. A dependable Frontcourt-need floor play for PEZ, NNZ, or A-B.",
+    "4433797": "Johnson projects a light 27.49-point, 2-game week that jumps to 41.24 over a fuller 3-game slate next week (13.75/g pace), running well above her 11.54 season average. Ownership sits at just 2.19% despite X noting a recent 16-point outburst that beat expectation, and Reddit tracking her growth as a two-way defender. A speculative, low-cost Guard-need stash for KAH, Spda, Nut, C9, or KylB banking on the role continuing to trend up."
   }
 }
