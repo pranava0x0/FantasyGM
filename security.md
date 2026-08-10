@@ -18,6 +18,7 @@ This project uses ESPN session cookies (`SWID`, `espn_s2`) to read your private 
 | 2026-05-17 | initial seed | Dependencies: httpx, pydantic, python-dotenv, pytest. All pinned in `requirements.txt`. |
 | 2026-07-09 | vibe-coding-security llms-ctx.txt | No advisories match httpx 0.27.2, pydantic 2.9.2, python-dotenv 1.0.1, eval_type_backport 0.2.0, or pytest 8.3.3. General PyPI supply-chain campaigns noted (Hades Campaign, Operation Navy Ghost) do not target these packages. |
 | 2026-08-01 | vibe-coding-security llms-ctx.txt | No advisories match httpx 0.27.2, pydantic 2.9.2, python-dotenv 1.0.1, eval_type_backport 0.2.0, pytest 8.3.3, or the Anthropic Python SDK. |
+| 2026-08-10 | vibe-coding-security llms-ctx.txt | No advisories match httpx 0.27.2, pydantic 2.9.2, python-dotenv 1.0.1, eval_type_backport 0.2.0, pytest 8.3.3, or the Anthropic Python SDK. |
 
 **Refresh schedule:** if `Last updated` is more than 7 days old, before any `pip install` or dep upgrade fetch `https://pranava0x0.github.io/vibe-coding-security/llms-ctx.txt` and surface any matching advisory.
 
