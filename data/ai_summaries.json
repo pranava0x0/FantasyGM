@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-09",
+  "generated_at": "2026-08-11",
   "model": "claude-sonnet-5",
-  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): refreshed news + Reddit/X/Bluesky signal history, re-ranked free agents off updated Yahoo external projections + the current week window. GM-authored summaries verified against the top-30 actually committed by scripts/rebuild_state.py (which ranks from the ESPN snapshot + game log only, without live Yahoo data, per the 2026-07-10 scar-tissue note in REFRESH.md) — this differs slightly from the live --social-only refresh's Yahoo-augmented dump (Aaliyah Wilson, Sam Thomas, Charli Collier, Haley Jones appear there but not in the committed ranking, so no summaries were authored for them this pass). All 30 committed targets carry a current GM take. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
+  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): refreshed news + Reddit/X/Bluesky signal history, re-ranked free agents off updated Yahoo external projections + the current week window. This pass's committed ranking is the live pipeline.refresh --social-only output (Yahoo-augmented) directly, not a scripts/rebuild_state.py replay, so it carries the previously-uncovered names (Aaliyah Wilson, Charli Collier, Sam Thomas, LaDazhia Williams, Chance Gray, Haley Jones, Ta'Niya Latson) noted as missing on 2026-08-09 — GM takes authored for all 7 this pass. All 30 committed targets now carry a current GM take. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
   "scores": {
     "981": 73.88,
     "3142255": 47.38,
@@ -32,7 +32,14 @@
     "5105406": 26.55,
     "4432865": 39.38,
     "4433433": 38.5,
-    "2593770": 38.47
+    "2593770": 38.47,
+    "4065692": 66.0,
+    "4398988": 87.9,
+    "4281914": 100.0,
+    "4280886": 30.8,
+    "5105729": 42.27,
+    "4595910": 63.3,
+    "4609797": 53.94
   },
   "summaries": {
     "981": "Vandersloot projects a steady 73.9-point, 3-game week (24.6/g pace), running above her 21.9 season average with ownership climbing +2.2% this week. She's listed ACTIVE despite an older injury report still circulating on social — worth a status check before locking her in — but the volume makes her a reliable Guard-need add for KAH, Nut, C9, or KylB.",
@@ -64,7 +71,14 @@
     "5105406": "Buhner's light 2-game week (26.6 pts) undersells her; next week's 3-game slate projects 39.8 (13.3/g pace), above her 12.3 season average, though ownership has slipped 0.73% this week amid Portland's thin sample size. A speculative Frontcourt-need flier for PEZ, Spda, NNZ, or A-B.",
     "4432865": "Sheldon projects a 39.4-point, 3-game week (13.1/g pace), below her 14.6 season average, and social chatter flags shooting inefficiency alongside teammate Rachel Banham — still a rotation regular for Chicago at 4.14% owned. A depth Guard-need option for KAH, Nut, C9, or KylB.",
     "4433433": "Coulibaly projects a 38.5-point, 3-game week (12.8/g pace), above her 11.7 season average, though social commentary questions her rotation spot in Chicago — still just 0.24% owned. A speculative Guard-need flier for KAH, Nut, C9, or KylB.",
-    "2593770": "Laney-Hamilton projects a 38.5-point, 3-game week (12.8/g pace), right at her 12.8 season average, now a true free agent after being waived by the Liberty (who signed Fauthoux in her place) — 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B."
+    "2593770": "Laney-Hamilton projects a 38.5-point, 3-game week (12.8/g pace), right at her 12.8 season average, now a true free agent after being waived by the Liberty (who signed Fauthoux in her place) — 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B.",
+    "4065692": "Aaliyah Wilson has no season baseline yet but her 3-game week ahead projects a 33.0/g pace after a 66-point 2-game stretch — pure upside on IND's crowded wing rotation at 0.2% owned. Guard-need KAH, Nut, C9, and KylB can speculate here with zero roster cost if the volume holds.",
+    "4398988": "Charli Collier is unranked on season average but just banked 87.9 points over 3 games (29.3/g pace) before a lighter 2-game week ahead — a real role signal in Dallas's frontcourt at 0.09% owned. Frontcourt-need PEZ, Spda, NNZ, and A-B should grab her before the ownership catches up.",
+    "4281914": "Sam Thomas posted a 100-point, 4-game week and Phoenix just ruled Kelsey Plum out with a leg injury — that's a direct path to more minutes for Thomas at 0.02% owned. Frontcourt-need PEZ, Spda, NNZ, and A-B have a free look while Plum is out, though next week's slate drops to just 2 games.",
+    "4280886": "LaDazhia Williams is a former first-round pick still finding minutes in Indiana's deep frontcourt — a modest 30.8-point 2-game week but next week's 3-game slate lifts her to a 15.4/g pace at 0.03% owned. Speculative add for Frontcourt-need PEZ, Spda, NNZ, or A-B; production hasn't caught up to pedigree yet.",
+    "5105729": "Chance Gray is running a 14.1/g pace over her last 3-game week, nearly double her 7.4 season average — a real role bump in LA's backcourt at 0.13% owned. Guard-need KAH, Nut, C9, and KylB can stream her while the uptick holds; she carries no established injury flag.",
+    "4595910": "Haley Jones signed a developmental deal with Dallas and immediately outproduced her 11.2 season average, running a 21.1/g pace over a 3-game week — worth a look for Guard-need KAH, Nut, C9, and KylB at 1.67% owned. Next week's slate thins to 2 games, so treat the workload bump as unconfirmed until it repeats.",
+    "4609797": "Ta'Niya Latson signed a developmental contract with Las Vegas and immediately outpaced her 4.45 season average, banking a 4-game week at a 13.5/g pace — a cheap speculative add for Guard-need KAH, Nut, C9, or KylB at 0.15% owned. Next week's 3-game slate keeps the volume intact; worth stashing while the role holds."
   },
   "summary_dates": {
     "981": "2026-08-08",
@@ -96,6 +110,13 @@
     "5105406": "2026-08-08",
     "4432865": "2026-08-08",
     "4433433": "2026-08-08",
-    "2593770": "2026-08-08"
+    "2593770": "2026-08-08",
+    "4065692": "2026-08-11",
+    "4398988": "2026-08-11",
+    "4281914": "2026-08-11",
+    "4280886": "2026-08-11",
+    "5105729": "2026-08-11",
+    "4595910": "2026-08-11",
+    "4609797": "2026-08-11"
   }
 }
