@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-11",
+  "generated_at": "2026-08-17",
   "model": "claude-sonnet-5",
-  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): refreshed news + Reddit/X/Bluesky signal history, re-ranked free agents off updated Yahoo external projections + the current week window. This pass's committed ranking is the live pipeline.refresh --social-only output (Yahoo-augmented) directly, not a scripts/rebuild_state.py replay, so it carries the previously-uncovered names (Aaliyah Wilson, Charli Collier, Sam Thomas, LaDazhia Williams, Chance Gray, Haley Jones, Ta'Niya Latson) noted as missing on 2026-08-09 — GM takes authored for all 7 this pass. All 30 committed targets now carry a current GM take. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
+  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): forced a fresh r/wnba + r/fantasywnba RSS pull (r/wnba 429'd twice, succeeded on a 20s backoff) to replace the stale cached reddit_raw.json, refetched the WNBA news feed, and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — this cloud session has no browser or API credentials for those platforms (see REFRESH.md step 4 for the local Chrome-scraping path). Authored the one missing GM take (Serah Williams, POR C) so all 30 committed targets carry a current summary; left the rest as-is since the underlying snapshot/ranking didn't move enough to warrant a rewrite. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
   "scores": {
     "981": 73.88,
     "3142255": 47.38,
@@ -39,7 +39,8 @@
     "4280886": 30.8,
     "5105729": 42.27,
     "4595910": 63.3,
-    "4609797": 53.94
+    "4609797": 53.94,
+    "5108550": 28.4
   },
   "summaries": {
     "981": "Vandersloot projects a steady 73.9-point, 3-game week (24.6/g pace), running above her 21.9 season average with ownership climbing +2.2% this week. She's listed ACTIVE despite an older injury report still circulating on social — worth a status check before locking her in — but the volume makes her a reliable Guard-need add for KAH, Nut, C9, or KylB.",
@@ -78,7 +79,8 @@
     "4280886": "LaDazhia Williams is a former first-round pick still finding minutes in Indiana's deep frontcourt — a modest 30.8-point 2-game week but next week's 3-game slate lifts her to a 15.4/g pace at 0.03% owned. Speculative add for Frontcourt-need PEZ, Spda, NNZ, or A-B; production hasn't caught up to pedigree yet.",
     "5105729": "Chance Gray is running a 14.1/g pace over her last 3-game week, nearly double her 7.4 season average — a real role bump in LA's backcourt at 0.13% owned. Guard-need KAH, Nut, C9, and KylB can stream her while the uptick holds; she carries no established injury flag.",
     "4595910": "Haley Jones signed a developmental deal with Dallas and immediately outproduced her 11.2 season average, running a 21.1/g pace over a 3-game week — worth a look for Guard-need KAH, Nut, C9, and KylB at 1.67% owned. Next week's slate thins to 2 games, so treat the workload bump as unconfirmed until it repeats.",
-    "4609797": "Ta'Niya Latson signed a developmental contract with Las Vegas and immediately outpaced her 4.45 season average, banking a 4-game week at a 13.5/g pace — a cheap speculative add for Guard-need KAH, Nut, C9, or KylB at 0.15% owned. Next week's 3-game slate keeps the volume intact; worth stashing while the role holds."
+    "4609797": "Ta'Niya Latson signed a developmental contract with Las Vegas and immediately outpaced her 4.45 season average, banking a 4-game week at a 13.5/g pace — a cheap speculative add for Guard-need KAH, Nut, C9, or KylB at 0.15% owned. Next week's 3-game slate keeps the volume intact; worth stashing while the role holds.",
+    "5108550": "Williams' next-week 3-game slate projects 42.6 points (14.2/g pace), well above her 10.85 season average, as Portland leans on her more in the frontcourt — Reddit streamers are already debating her over Cotie McMahon for tonight's slot. Still just 0.58% owned (down 0.15% this week), a cheap Frontcourt-need speculative add for PEZ, Spda, NNZ, or A-B."
   },
   "summary_dates": {
     "981": "2026-08-08",
@@ -117,6 +119,7 @@
     "4280886": "2026-08-11",
     "5105729": "2026-08-11",
     "4595910": "2026-08-11",
-    "4609797": "2026-08-11"
+    "4609797": "2026-08-11",
+    "5108550": "2026-08-17"
   }
 }
