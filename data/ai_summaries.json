@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-08-19",
   "model": "claude-sonnet-5",
   "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): forced a fresh r/wnba + r/fantasywnba RSS pull (r/wnba 429'd twice, succeeded on a 20s backoff) to replace the stale cached reddit_raw.json, refetched the WNBA news feed, and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — this cloud session has no browser or API credentials for those platforms (see REFRESH.md step 4 for the local Chrome-scraping path). Authored the one missing GM take (Serah Williams, POR C) so all 30 committed targets carry a current summary; left the rest as-is since the underlying snapshot/ranking didn't move enough to warrant a rewrite. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
   "scores": {
@@ -21,7 +21,6 @@
     "3910470": 46.18,
     "2327695": 45.81,
     "3102133": 43.1,
-    "5346554": 27.94,
     "4433635": 20.95,
     "4001679": 41.66,
     "5208983": 41.62,
@@ -31,16 +30,9 @@
     "4432830": 40.24,
     "5105406": 26.55,
     "4432865": 39.38,
+    "5346554": 27.94,
     "4433433": 38.5,
-    "2593770": 38.47,
-    "4065692": 66.0,
-    "4398988": 87.9,
-    "4281914": 100.0,
-    "4280886": 30.8,
-    "5105729": 42.27,
-    "4595910": 63.3,
-    "4609797": 53.94,
-    "5108550": 28.4
+    "2593770": 38.47
   },
   "summaries": {
     "981": "Vandersloot projects a steady 73.9-point, 3-game week (24.6/g pace), running above her 21.9 season average with ownership climbing +2.2% this week. She's listed ACTIVE despite an older injury report still circulating on social — worth a status check before locking her in — but the volume makes her a reliable Guard-need add for KAH, Nut, C9, or KylB.",
@@ -61,7 +53,6 @@
     "3910470": "Conde projects a 46.2-point, 2-game week (23.1/g pace), above her 20.9 season average, even as Toronto's expansion-season struggles continue — ownership has cooled 0.94% this week. Still a productive Frontcourt-need add for PEZ, Spda, NNZ, or A-B on a per-game basis.",
     "2327695": "Gardner projects a 45.8-point, 3-game week (15.3/g pace), well above her 13.1 season average, at just 1.3% owned as New York's roster shuffles after the Fauthoux signing. A cheap Guard-need speculative add for KAH, Nut, C9, or KylB.",
     "3102133": "Allen projects a 43.1-point, 3-game week (14.4/g pace), well above her 10.3 season average, as New York's depth chart opens up post-Laney-Hamilton — ownership ticking up (+0.16%). A depth Guard-need flier for KAH, Nut, C9, or KylB.",
-    "5346554": "Oblak's next-week 3-game slate projects 41.9 (14.0/g pace), roughly matching her 14.2 season average, at a still-microscopic 0.25% owned — she's shown flashes (9 assists in her WNBA debut) but carries a questionable tag worth monitoring. A speculative Guard-need stash for KAH, Nut, C9, or KylB.",
     "4433635": "Miller's next-week 2-game slate projects 41.9 (21.0/g pace), well above her 17.6 season average, with ownership climbing (+0.23%) as Connecticut leans on her more. A rising Guard-need option for KAH, Nut, C9, or KylB.",
     "4001679": "Allemand projects a 41.7-point, 2-game week (20.8/g pace), close to her 21.9 season average, running Toronto's offense at 14.02% owned despite the team's struggles — ownership dipped 0.44% this week. A steady Guard-need floor play for KAH, Nut, C9, or KylB.",
     "5208983": "Borlase projects a 41.6-point, 3-game week (13.9/g pace), well above her 11.8 season average, backing up a strong recent bench performance at just 0.5% owned. A cheap Guard-need speculative add for KAH, Nut, C9, or KylB.",
@@ -71,16 +62,9 @@
     "4432830": "Horston projects a 40.2-point, 3-game week (13.4/g pace), right at her 13.6 season average, as she rounds back into form in Seattle's rotation at just 0.72% owned. A cheap Guard-need speculative add for KAH, Nut, C9, or KylB.",
     "5105406": "Buhner's light 2-game week (26.6 pts) undersells her; next week's 3-game slate projects 39.8 (13.3/g pace), above her 12.3 season average, though ownership has slipped 0.73% this week amid Portland's thin sample size. A speculative Frontcourt-need flier for PEZ, Spda, NNZ, or A-B.",
     "4432865": "Sheldon projects a 39.4-point, 3-game week (13.1/g pace), below her 14.6 season average, and social chatter flags shooting inefficiency alongside teammate Rachel Banham — still a rotation regular for Chicago at 4.14% owned. A depth Guard-need option for KAH, Nut, C9, or KylB.",
+    "5346554": "Oblak's next-week 3-game slate projects 41.9 (14.0/g pace), roughly matching her 14.2 season average, at a still-microscopic 0.25% owned — she's shown flashes (9 assists in her WNBA debut) but carries a questionable tag worth monitoring. A speculative Guard-need stash for KAH, Nut, C9, or KylB.",
     "4433433": "Coulibaly projects a 38.5-point, 3-game week (12.8/g pace), above her 11.7 season average, though social commentary questions her rotation spot in Chicago — still just 0.24% owned. A speculative Guard-need flier for KAH, Nut, C9, or KylB.",
-    "2593770": "Laney-Hamilton projects a 38.5-point, 3-game week (12.8/g pace), right at her 12.8 season average, now a true free agent after being waived by the Liberty (who signed Fauthoux in her place) — 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B.",
-    "4065692": "Aaliyah Wilson has no season baseline yet but her 3-game week ahead projects a 33.0/g pace after a 66-point 2-game stretch — pure upside on IND's crowded wing rotation at 0.2% owned. Guard-need KAH, Nut, C9, and KylB can speculate here with zero roster cost if the volume holds.",
-    "4398988": "Charli Collier is unranked on season average but just banked 87.9 points over 3 games (29.3/g pace) before a lighter 2-game week ahead — a real role signal in Dallas's frontcourt at 0.09% owned. Frontcourt-need PEZ, Spda, NNZ, and A-B should grab her before the ownership catches up.",
-    "4281914": "Sam Thomas posted a 100-point, 4-game week and Phoenix just ruled Kelsey Plum out with a leg injury — that's a direct path to more minutes for Thomas at 0.02% owned. Frontcourt-need PEZ, Spda, NNZ, and A-B have a free look while Plum is out, though next week's slate drops to just 2 games.",
-    "4280886": "LaDazhia Williams is a former first-round pick still finding minutes in Indiana's deep frontcourt — a modest 30.8-point 2-game week but next week's 3-game slate lifts her to a 15.4/g pace at 0.03% owned. Speculative add for Frontcourt-need PEZ, Spda, NNZ, or A-B; production hasn't caught up to pedigree yet.",
-    "5105729": "Chance Gray is running a 14.1/g pace over her last 3-game week, nearly double her 7.4 season average — a real role bump in LA's backcourt at 0.13% owned. Guard-need KAH, Nut, C9, and KylB can stream her while the uptick holds; she carries no established injury flag.",
-    "4595910": "Haley Jones signed a developmental deal with Dallas and immediately outproduced her 11.2 season average, running a 21.1/g pace over a 3-game week — worth a look for Guard-need KAH, Nut, C9, and KylB at 1.67% owned. Next week's slate thins to 2 games, so treat the workload bump as unconfirmed until it repeats.",
-    "4609797": "Ta'Niya Latson signed a developmental contract with Las Vegas and immediately outpaced her 4.45 season average, banking a 4-game week at a 13.5/g pace — a cheap speculative add for Guard-need KAH, Nut, C9, or KylB at 0.15% owned. Next week's 3-game slate keeps the volume intact; worth stashing while the role holds.",
-    "5108550": "Williams' next-week 3-game slate projects 42.6 points (14.2/g pace), well above her 10.85 season average, as Portland leans on her more in the frontcourt — Reddit streamers are already debating her over Cotie McMahon for tonight's slot. Still just 0.58% owned (down 0.15% this week), a cheap Frontcourt-need speculative add for PEZ, Spda, NNZ, or A-B."
+    "2593770": "Laney-Hamilton projects a 38.5-point, 3-game week (12.8/g pace), right at her 12.8 season average, now a true free agent after being waived by the Liberty (who signed Fauthoux in her place) — 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B."
   },
   "summary_dates": {
     "981": "2026-08-08",
@@ -101,7 +85,6 @@
     "3910470": "2026-08-08",
     "2327695": "2026-08-08",
     "3102133": "2026-08-08",
-    "5346554": "2026-08-08",
     "4433635": "2026-08-08",
     "4001679": "2026-08-08",
     "5208983": "2026-08-08",
@@ -111,15 +94,8 @@
     "4432830": "2026-08-08",
     "5105406": "2026-08-08",
     "4432865": "2026-08-08",
+    "5346554": "2026-08-08",
     "4433433": "2026-08-08",
-    "2593770": "2026-08-08",
-    "4065692": "2026-08-11",
-    "4398988": "2026-08-11",
-    "4281914": "2026-08-11",
-    "4280886": "2026-08-11",
-    "5105729": "2026-08-11",
-    "4595910": "2026-08-11",
-    "4609797": "2026-08-11",
-    "5108550": "2026-08-17"
+    "2593770": "2026-08-08"
   }
 }
