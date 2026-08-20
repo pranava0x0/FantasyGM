@@ -1,8 +1,16 @@
 {
-  "generated_at": "2026-08-19",
+  "generated_at": "2026-08-20",
   "model": "claude-sonnet-5",
-  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): forced a fresh r/wnba + r/fantasywnba RSS pull (r/wnba 429'd twice, succeeded on a 20s backoff) to replace the stale cached reddit_raw.json, refetched the WNBA news feed, and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — this cloud session has no browser or API credentials for those platforms (see REFRESH.md step 4 for the local Chrome-scraping path). Authored the one missing GM take (Serah Williams, POR C) so all 30 committed targets carry a current summary; left the rest as-is since the underlying snapshot/ranking didn't move enough to warrant a rewrite. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
+  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 snapshot): forced a fresh r/wnba + r/fantasywnba RSS pull to replace the stale cached reddit_raw.json, refetched the WNBA news feed, and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — this cloud session has no browser or API credentials for those platforms (see REFRESH.md step 4 for the local Chrome-scraping path). The upcoming-week schedule window rolled forward and surfaced 8 new high-game-count names in the top 30 (several with no season average yet — recent DP/hardship signings or rookies): authored fresh GM takes for all 8 so every committed target carries a current summary. Team-need callouts: Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
   "scores": {
+    "4065692": 80.6,
+    "4280886": 49.0,
+    "4281914": 140.0,
+    "4398988": 87.0,
+    "5105729": 57.57,
+    "4398883": 98.0,
+    "4398965": 73.5,
+    "5108550": 31.4,
     "981": 73.88,
     "3142255": 47.38,
     "3934218": 46.98,
@@ -35,6 +43,14 @@
     "2593770": 38.47
   },
   "summaries": {
+    "4065692": "Wilson projects a massive 120.9-point, 3-game week next week (40.3/g pace) amid Indiana's roster shuffle, still just 0.2% owned with no season track record yet to lean on. A high-upside speculative Guard-need stash for KAH, Nut, C9, or KylB while Indiana's rotation sorts out.",
+    "4280886": "Williams projects a 73.5-point, 3-game week (24.5/g pace) next week in Indiana's deep frontcourt rotation, still a virtual free-roll at 0.03% owned with no season line established — social chatter has her in this year's rookie draft class alongside Flau'jae Johnson. A speculative Frontcourt-need stash for PEZ, Spda, NNZ, or A-B.",
+    "4281914": "Thomas already banked a monster 140-point, 4-game week and still projects 70.0 next week on a lighter 2-game slate (35.0/g pace), at a rock-bottom 0.02% owned with no season average yet established. A high-ceiling Frontcourt-need speculative add for PEZ, Spda, NNZ, or A-B chasing Phoenix's game-volume swing.",
+    "4398988": "Collier projects a 58.0-point, 2-game week (29.0/g pace) after an 87-point 3-game week, still just 0.09% owned, with Dallas needing frontcourt minutes after rookie Azzi Fudd's season-ending knee injury. A cheap, role-driven Frontcourt-need speculative add for PEZ, Spda, NNZ, or A-B.",
+    "5105729": "Gray projects a steady 57.6-point, 3-game week both this week and next (19.2/g pace), well above her modest 7.4 season average as her role expands in LA's rotation — still just 0.13% owned. A rising Guard-need speculative add for KAH, Nut, C9, or KylB.",
+    "4398883": "Williams put up a huge 98-point, 4-game week and still projects 49.0 next week on a lighter 2-game slate (24.5/g pace), at just 0.03% owned with no established season average. A boom-or-bust Frontcourt-need speculative flier for PEZ, Spda, NNZ, or A-B riding Phoenix's game-count swing.",
+    "4398965": "Williams projects a 49.0-point, 2-game week (24.5/g pace) after a strong 73.5-point 3-game week, signed to a DP contract as Dallas back-fills minutes lost to rookie Azzi Fudd's season-ending knee injury — still just 0.04% owned. A ground-floor Guard-need pickup for KAH, Nut, C9, or KylB while the role holds.",
+    "5108550": "Williams projects a 47.1-point, 3-game week (15.7/g pace), well above her 10.85 season average, drawing stream-or-sit chatter alongside Cotie McMahon as Portland leans on her more — still just 0.58% owned. A trending Frontcourt-need speculative add for PEZ, Spda, NNZ, or A-B.",
     "981": "Vandersloot projects a steady 73.9-point, 3-game week (24.6/g pace), running above her 21.9 season average with ownership climbing +2.2% this week. She's listed ACTIVE despite an older injury report still circulating on social — worth a status check before locking her in — but the volume makes her a reliable Guard-need add for KAH, Nut, C9, or KylB.",
     "3142255": "Billings' light 2-game week (47.4 pts) undersells her — next week's 3-game slate projects 71.1 (23.7/g pace), above her 20.4 season average — though ownership has slipped 0.77% amid social chatter questioning her role fit. Frontcourt-need teams PEZ, Spda, NNZ, and A-B should look past the noise and buy the schedule bump.",
     "3934218": "DiLeo's current 2-game week (47.0 pts) undersells her; next week's 3-game slate projects 70.5 (23.5/g pace), right at her 23.0 season average, despite ownership slipping 1.47% this week. A steady Frontcourt-need option for PEZ, Spda, NNZ, or A-B once the extra game lands.",
@@ -67,6 +83,14 @@
     "2593770": "Laney-Hamilton projects a 38.5-point, 3-game week (12.8/g pace), right at her 12.8 season average, now a true free agent after being waived by the Liberty (who signed Fauthoux in her place) — 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B."
   },
   "summary_dates": {
+    "4065692": "2026-08-20",
+    "4280886": "2026-08-20",
+    "4281914": "2026-08-20",
+    "4398988": "2026-08-20",
+    "5105729": "2026-08-20",
+    "4398883": "2026-08-20",
+    "4398965": "2026-08-20",
+    "5108550": "2026-08-20",
     "981": "2026-08-08",
     "3142255": "2026-08-08",
     "3934218": "2026-08-08",
