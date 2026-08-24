@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-23",
+  "generated_at": "2026-08-24",
   "model": "claude-sonnet-5",
-  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 ESPN snapshot): forced a fresh r/wnba + r/fantasywnba RSS pull (19 new posts), refetched the WNBA news feed, and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — no browser or API credentials for those platforms in this session (see REFRESH.md step 4 for the local Chrome-scraping path). ANTHROPIC_API_KEY is not set in this session, so the top-30 GM-take summaries below were hand-authored (not Anthropic-API-generated) directly from today's docs/data/state.json top-30 stats + matched news/X/Bluesky/Reddit signals, replacing the 2026-08-22 pass. Team-need callouts (unchanged this run): Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
+  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 ESPN snapshot): reused the cached r/wnba RSS (Reddit 429-rate-limited that endpoint from this session — see issues.md) but forced a fresh r/fantasywnba pull (3 new posts), refetched the WNBA news feed (14 new articles), and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — no browser or API credentials for those platforms in this session (see REFRESH.md step 4 for the local Chrome-scraping path). ANTHROPIC_API_KEY is not set in this session, so the 12 waiver targets whose rank score moved ≥5 pts (or are newly top-25) got hand-authored GM-take summaries below (not Anthropic-API-generated) directly from today's docs/data/state.json stats + matched news/X/Bluesky/Reddit signals; the other 24 targets' summaries were unchanged since their scores didn't move enough to warrant regeneration, matching the API's own re-score threshold. Team-need callouts (unchanged this run): Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
   "scores": {
     "4065692": 72.0,
     "4281914": 144.0,
@@ -19,7 +19,7 @@
     "4433546": 34.89,
     "4583144": 52.12,
     "2566081": 50.75,
-    "4038379": 49.0,
+    "4038379": 56.35,
     "5105729": 48.27,
     "4790260": 47.9,
     "5208981": 23.18,
@@ -38,7 +38,19 @@
     "4432865": 39.38,
     "5346554": 25.92,
     "4433433": 38.5,
-    "2593770": 38.47
+    "2593770": 38.47,
+    "4280877": 61.66,
+    "4398938": 56.3,
+    "4065780": 53.98,
+    "4595910": 53.82,
+    "4682855": 53.47,
+    "3913881": 53.24,
+    "4280850": 50.72,
+    "4873359": 49.74,
+    "4399415": 49.55,
+    "4899328": 48.71,
+    "5345524": 48.69,
+    "4433797": 34.52
   },
   "summaries": {
     "4065692": "Wilson's next-week slate jumps to 108.0 points over 3 games (36.0/g pace) after a hot 72.0-point 2-game week, though she's still untested with no season average and sits at a bare 0.2% owned. A boom-or-bust speculative Guard-need stash for KAH, Nut, C9, or KylB until real minutes confirm the role.",
@@ -57,7 +69,7 @@
     "4433546": "Timpson's next-week 3-game slate projects 52.33 points (17.44/g pace), well above her 14.48 season average, with Reddit already flagging a highlight-reel block at the rim. A cheap Frontcourt-need dart throw for PEZ, Spda, NNZ, or A-B at just 1.77% owned.",
     "4583144": "McMahon projects 52.12 points over a 3-game week (17.38/g pace), tracking above her 16.0 season average, and is drawing coach's-comments buzz from Washington's beat reporters alongside a Reddit stream-or-sit debate versus Serah Williams. A low-owned (2.93%) Frontcourt-need streamer for PEZ, Spda, NNZ, or A-B.",
     "2566081": "Williams projects 50.75 points over a 3-game week (16.92/g pace), just ahead of her 15.48 season average, with Bluesky confirming she re-signed and remains entrenched in Chicago's rotation. A reliable Frontcourt-need floor piece for PEZ, Spda, NNZ, or A-B.",
-    "4038379": "Johannès projects 49.0 points over a 3-game week (16.33/g pace), below her 20.67 season average, but she's a top-3 league leader in made threes per social trackers (32 makes). A Guard-need option for KAH, Nut, C9, or KylB leaning on three-point volume.",
+    "4038379": "Johannès projects 16.3 fpts/g over 3 games — below her 20.67 season average after a quieter 12-point return from injury — but Reddit still ranks her 2nd league-wide in made threes (32). A Guard-need hold for KAH, Nut, C9, or KylB at 28% owned.",
     "5105729": "Gray projects 48.27 points across a 3-game week (16.09/g pace) — more than double her 7.4 season average — while still sitting at a barely-owned 0.13%. A speculative Guard-need flier for KAH, Nut, C9, or KylB if the recent role bump is sticking.",
     "4790260": "Fauthoux projects 47.9 points over a 3-game week (15.97/g pace), well above her 13.33 season average, and Reddit reports she's locking in a multi-year deal with New York. A very cheap (0.34% owned) Guard-need speculative add for KAH, Nut, C9, or KylB.",
     "5208981": "Lacan's single-game week is light (23.18 pts), but next week's 2-game slate projects 46.37 (23.18/g pace), just below her strong 25.62 season average — ownership dropped a sharp 4.78% this week, likely overreacting to the thin schedule, and Reddit is already weighing her against Kiki Rice. A buy-low Guard-need target for KAH, Nut, C9, or KylB once game volume normalizes.",
@@ -76,7 +88,19 @@
     "4432865": "Sheldon projects 39.38 points over a 3-game week (13.13/g pace), below her 14.59 season average, and both X and Bluesky flag shooting-efficiency concerns even as she holds her starting spot over Sydney Taylor. A volume-based Guard-need option for KAH, Nut, C9, or KylB, but watch the efficiency dip.",
     "5346554": "Oblak's next-week 3-game slate projects 38.88 points (12.96/g pace), above her 14.17 season average, at a still-microscopic 0.25% owned — she's shown flashes (9 assists in her WNBA debut) but carries a questionable shoulder tag worth monitoring. A speculative Guard-need stash for KAH, Nut, C9, or KylB.",
     "4433433": "Coulibaly projects a 38.5-point, 3-game week (12.83/g pace), above her 11.67 season average, though Bluesky commentary questions her rotation spot behind Sydney Taylor in Chicago — still just 0.24% owned. A speculative Guard-need flier for KAH, Nut, C9, or KylB.",
-    "2593770": "Laney-Hamilton projects a 38.47-point, 3-game week (12.82/g pace), right at her 12.82 season average, with Reddit covering an on-court incident with Tempo's Mabrey — still just 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B."
+    "2593770": "Laney-Hamilton projects a 38.47-point, 3-game week (12.82/g pace), right at her 12.82 season average, with Reddit covering an on-court incident with Tempo's Mabrey — still just 8.38% owned and available in most leagues. A ready-now Frontcourt-need add for PEZ, Spda, NNZ, or A-B.",
+    "4280877": "Bibby projects 17.9 fpts/g across 3 games this week — well above her 13.75 season average — after an encouraging 22-point return, and Reddit confirms the Lynx tendered her a qualifying offer. A speculative Frontcourt-need stash for PEZ, Spda, NNZ, or A-B at just 0.3% owned.",
+    "4398938": "Juhász projects 18.8 fpts/g over 3 games, right at her 19.33 season average, riding five straight double-digit outings (32-point peak) — Reddit's roster debates already rank her a keeper over Johannès. A strong Frontcourt-need add for PEZ, Spda, NNZ, or A-B at just 5.7% owned.",
+    "4065780": "Charles projects 18.0 fpts/g over 3 games, tracking above her 17.66 season average behind a 28-point spike, and Reddit's waiver roundup already flags her as a name worth rostering. A Guard-need add for KAH, Nut, C9, or KylB at just 3.8% owned.",
+    "4595910": "Jones projects 15.6 fpts/g across 3 games on return, well above her 11.2 season average, though Reddit notes she's on a developmental deal in Dallas and her minutes are being questioned versus Teja Oblak. A speculative Guard-need flier for KAH, Nut, C9, or KylB at 1.7% owned.",
+    "4682855": "Pissott projects 11.6 fpts/g but gets 4 games this week, the most volume of any target here, after a 19-point Aces debut per Reddit even as her last two outings cooled to 11 and 8. A volume-driven Guard-need add for KAH, Nut, C9, or KylB at 0.5% owned.",
+    "3913881": "Smith projects 15.4 fpts/g over 3 games, above her 13.86 season average, backed by back-to-back 17-point games on her return — already the highest-owned name here at 44%. A safe Frontcourt-need add for PEZ, Spda, NNZ, or A-B before she's fully rostered.",
+    "4280850": "Caldwell projects 16.9 fpts/g over 3 games, above her 14.61 season average, riding five straight double-digit games (three 20-plus) — Reddit credits her with locking down consistent Fever minutes. A clear buy-low Guard-need add for KAH, Nut, C9, or KylB at just 1.2% owned.",
+    "4873359": "Linskens gets 4 games this week — tied for the most volume on this list — on return from a missed stretch, though her 10.81 projection matches a modest season average. A deep-league-only Frontcourt-need stash for PEZ, Spda, NNZ, or A-B at 0.2% owned.",
+    "4399415": "Siegrist projects 16.5 fpts/g over 3 games, above her 15.04 season average, off a 30-point spike that X is already calling a must-add night for Wings fantasy managers. A solid Frontcourt-need add for PEZ, Spda, NNZ, or A-B at 16% owned.",
+    "4899328": "Chen projects 16.2 fpts/g over 3 games, above her 15.14 season average, powered by a 32-point explosion that has Reddit floating her for Sixth Player or Most Improved — and she's re-signed with the Valkyries long-term. A trending Guard-need add for KAH, Nut, C9, or KylB at just 3.1% owned.",
+    "5345524": "Brochant gets 4 games this week but her projection cools to 12.2 fpts/g, below her 14.34 season average, after a quieter 9-10-11 stretch — Reddit's already debating streaming her over Held. A volume-only Frontcourt-need option for PEZ, Spda, NNZ, or A-B at 1.7% owned.",
+    "4433797": "Johnson projects 15.0 fpts/g with volume ramping to 3 games next week, well above her 11.54 season average, after X flagged a 16-point outburst that beat her 10.5-point expected line. A Guard-need speculative add for KAH, Nut, C9, or KylB at just 2.2% owned as she develops on the fly per Reddit."
   },
   "summary_dates": {
     "4065692": "2026-08-23",
@@ -95,7 +119,7 @@
     "4433546": "2026-08-23",
     "4583144": "2026-08-23",
     "2566081": "2026-08-23",
-    "4038379": "2026-08-23",
+    "4038379": "2026-08-24",
     "5105729": "2026-08-23",
     "4790260": "2026-08-23",
     "5208981": "2026-08-23",
@@ -114,6 +138,18 @@
     "4432865": "2026-08-23",
     "5346554": "2026-08-23",
     "4433433": "2026-08-23",
-    "2593770": "2026-08-23"
+    "2593770": "2026-08-23",
+    "4280877": "2026-08-24",
+    "4398938": "2026-08-24",
+    "4065780": "2026-08-24",
+    "4595910": "2026-08-24",
+    "4682855": "2026-08-24",
+    "3913881": "2026-08-24",
+    "4280850": "2026-08-24",
+    "4873359": "2026-08-24",
+    "4399415": "2026-08-24",
+    "4899328": "2026-08-24",
+    "5345524": "2026-08-24",
+    "4433797": "2026-08-24"
   }
 }
