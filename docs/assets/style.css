@@ -2477,6 +2477,354 @@ body.modal-open { overflow: hidden; }
   .today-grid .today-block:first-child { grid-column: span 2; }
 }
 
+/* ---------- Season banner ----------
+   Sits between the tab strip and the active panel, so the season's outcome
+   reads on every tab. `hidden` on the mount is honoured by the global
+   [hidden] rule near the top of this file — do not give the mount its own
+   `display`, or the attribute becomes a no-op (see DESIGN.md, the [hidden]
+   trap). */
+
+.season-banner {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+.season-banner.is-final { border-left-color: var(--bucket-center); }
+
+.season-banner-badge {
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--surface);
+}
+.season-banner.is-final .season-banner-badge { background: var(--bucket-center); color: #fff; }
+
+.season-banner-body { display: grid; gap: 4px; }
+.season-banner-h {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.season-banner-sub { margin: 0; font-size: 14px; color: var(--text); }
+.season-banner-note {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.season-banner-link {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.season-banner-link:hover { border-color: var(--accent); }
+
+@media (min-width: 720px) {
+  .season-banner {
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: 14px;
+  }
+  .season-banner-badge { margin-top: 3px; }
+  .season-banner-link { align-self: center; }
+}
+
+/* ---------- Retrospective ---------- */
+
+.retro-head { margin-bottom: 18px; }
+.retro-h {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.2;
+}
+.retro-lede {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.retro-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+.retro-stat {
+  display: grid;
+  gap: 2px;
+  align-content: start;
+  padding: 12px 14px;
+  background: var(--surface);
+}
+.retro-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.retro-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.retro-stat-note { font-size: 12px; color: var(--text-muted); line-height: 1.35; }
+
+.retro-layout { display: grid; gap: 18px; }
+/* Grid items default to min-width:auto, so the 560px-min-width bug table
+   inside .retro-pane would widen the whole page instead of scrolling inside
+   its own wrapper. Verified at 375px: without this the document scroll width
+   goes to 612px. */
+.retro-pane { min-width: 0; }
+.retro-chapter { min-width: 0; }
+
+/* Mobile: the chapter rail is a scrolling chip row above the content. */
+.retro-rail {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+.retro-rail::-webkit-scrollbar { display: none; }
+
+.retro-rail-btn {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: left;
+}
+.retro-rail-btn[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+}
+.retro-rail-kicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  opacity: 0.72;
+}
+
+.retro-chapter-kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.retro-chapter-h {
+  margin: 4px 0 8px;
+  font-family: var(--font-serif);
+  font-size: 23px;
+  line-height: 1.2;
+}
+.retro-chapter-lede {
+  margin: 0 0 18px;
+  max-width: 64ch;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+  border-left: 2px solid var(--border);
+  padding-left: 12px;
+}
+.retro-prose {
+  margin: 0 0 14px;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.retro-listwrap { margin: 0 0 18px; max-width: 68ch; }
+.retro-list-h {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.retro-list { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.retro-list li { font-size: 14.5px; line-height: 1.55; }
+
+.retro-callout {
+  margin: 0 0 14px;
+  max-width: 70ch;
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gap-neutral);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.retro-callout--good { border-left-color: var(--gap-strong); }
+.retro-callout--bad  { border-left-color: var(--gap-weak); }
+.retro-callout--note { border-left-color: var(--accent); }
+.retro-callout-h {
+  margin: 0 0 6px;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.retro-callout-body { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text); }
+
+.retro-timeline { margin: 0 0 18px; padding: 0; list-style: none; display: grid; gap: 2px; }
+.retro-tl-item {
+  display: grid;
+  gap: 2px;
+  padding: 12px 0 14px 14px;
+  border-left: 2px solid var(--border);
+}
+.retro-tl-item:last-child { border-left-color: transparent; }
+.retro-tl-date {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.retro-tl-h { margin: 2px 0 4px; font-size: 15px; line-height: 1.3; }
+.retro-tl-text { margin: 0; max-width: 66ch; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+
+/* Wide tables scroll in their own box — the page body must never scroll
+   sideways at 375px. */
+.retro-tablewrap {
+  margin: 0 0 18px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.retro-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 560px;
+  font-size: 13.5px;
+}
+.retro-table th, .retro-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.55;
+}
+.retro-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface-2);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.retro-table tbody th {
+  font-weight: 700;
+  color: var(--text);
+  width: 20%;
+  min-width: 150px;
+}
+.retro-table tbody tr:last-child th,
+.retro-table tbody tr:last-child td { border-bottom: 0; }
+
+.retro-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.retro-pager-btn {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.retro-pager-btn:hover { border-color: var(--accent); }
+.retro-pager-btn--next { margin-left: auto; }
+
+.retro-foot {
+  margin: 26px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* Desktop: rail becomes a sticky vertical table of contents. */
+@media (min-width: 900px) {
+  .retro-layout { grid-template-columns: 210px 1fr; gap: 32px; align-items: start; }
+  .retro-rail {
+    flex-direction: column;
+    overflow: visible;
+    position: sticky;
+    top: 16px;
+    gap: 2px;
+  }
+  .retro-rail-btn {
+    width: 100%;
+    border-radius: 8px;
+    border-color: transparent;
+    background: transparent;
+    white-space: normal;
+    padding: 8px 10px;
+    align-items: baseline;
+  }
+  .retro-rail-btn:hover { background: var(--surface-2); }
+  .retro-rail-btn[aria-selected="true"] {
+    background: var(--accent-soft);
+    border-color: transparent;
+    color: var(--accent);
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

@@ -19,7 +19,7 @@ from typing import Any
 
 import re
 
-from pipeline import analyze, bluesky as bluesky_mod, faab, instagram as instagram_mod, lineups, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, summary, twitter as twitter_mod
+from pipeline import analyze, bluesky as bluesky_mod, faab, instagram as instagram_mod, lineups, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, season as season_mod, summary, twitter as twitter_mod
 from pipeline.projections_ext import resolve_external_projections
 
 # Per-player cap on news/social items surfaced in state.json. High enough to
@@ -540,6 +540,17 @@ def build_state(
     from pipeline import trades as trades_mod
     trade_scenarios = trades_mod.build_trade_scenarios(teams)
 
+    # Final standings + playoff bracket. None until ESPN's schedule settings
+    # are present; the UI treats a missing block as "season still running".
+    season_result = season_mod.build_season_result(league_raw, current_matchup_period)
+    if season_result is not None:
+        log.info(
+            "build_state: season result — regular season %s, bracket %d game(s), champion=%s",
+            "complete" if season_result.regular_season_complete else "in progress",
+            len(season_result.bracket),
+            season_result.champion_team_id if season_result.champion_team_id else "undecided",
+        )
+
     transactions_view: list[schema.Transaction] = []
     for tx in transactions_raw:
         items = [
@@ -736,6 +747,7 @@ def build_state(
         instagram_posts_by_player=instagram_by_player,
         player_socials=player_socials_by_id,
         trade_scenarios=trade_scenarios,
+        season_result=season_result,
     )
 
 

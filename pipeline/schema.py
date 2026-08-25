@@ -324,6 +324,58 @@ class LeagueMeta(_Strict):
     week_end_period: int = Field(..., description="Inclusive end of the upcoming-week window")
 
 
+class BracketGame(_Strict):
+    """One playoff-bracket game.
+
+    `winner_team_id` is None while the game is undecided — ESPN pre-creates
+    each bracket game at `0–0` as soon as the pairing is known, so an unplayed
+    final and a played one are told apart by `played`, never by the score.
+    """
+    matchup_period_id: int
+    round: str = Field(..., description="final | semifinal | quarterfinal | third place | consolation")
+    home_team_id: int
+    away_team_id: int
+    home_points: float
+    away_points: float
+    winner_team_id: int | None = None
+    played: bool
+
+
+class SeasonStanding(_Strict):
+    """A team's final regular-season line plus how its playoffs ended."""
+    team_id: int
+    seed: int | None
+    wins: int
+    losses: int
+    ties: int
+    points_for: float
+    points_against: float
+    made_playoffs: bool
+    placement: int | None = Field(None, description="1–4 once the bracket decides it")
+    placement_label: str | None = None
+    eliminated_round: str | None = Field(
+        None, description="Championship round this team lost in, if any"
+    )
+
+
+class SeasonResult(_Strict):
+    """How the season ended — final standings and the playoff bracket.
+
+    Present once the regular season is complete. `champion_team_id` stays
+    None until the final is actually played, so the UI can say "eliminated"
+    without also claiming a champion that doesn't exist yet.
+    """
+    regular_season_complete: bool
+    playoffs_complete: bool
+    regular_season_periods: int
+    playoff_team_count: int
+    final_matchup_period_id: int
+    champion_team_id: int | None = None
+    runner_up_team_id: int | None = None
+    standings: list[SeasonStanding] = Field(default_factory=list)
+    bracket: list[BracketGame] = Field(default_factory=list)
+
+
 class WaiverTargetsByTeam(_Strict):
     team_id: int
     targets: list[WaiverTarget]
@@ -427,3 +479,4 @@ class LeagueState(_Strict):
     instagram_posts_by_player: dict[int, list[InstagramPost]] = Field(default_factory=dict)
     player_socials: dict[int, PlayerSocials] = Field(default_factory=dict)
     trade_scenarios: list[TradeScenario] = Field(default_factory=list)
+    season_result: SeasonResult | None = None
