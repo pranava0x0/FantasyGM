@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-08-24",
-  "model": "claude-sonnet-5",
-  "note": "Social-only refresh (no ESPN cookies in this cloud session; baseline stays the 2026-08-03 ESPN snapshot): reused the cached r/wnba RSS (Reddit 429-rate-limited that endpoint from this session — see issues.md) but forced a fresh r/fantasywnba pull (3 new posts), refetched the WNBA news feed (14 new articles), and re-ran external Yahoo projections. Twitter/X, Bluesky, and Instagram stayed on cached/history data — no browser or API credentials for those platforms in this session (see REFRESH.md step 4 for the local Chrome-scraping path). ANTHROPIC_API_KEY is not set in this session, so the 12 waiver targets whose rank score moved ≥5 pts (or are newly top-25) got hand-authored GM-take summaries below (not Anthropic-API-generated) directly from today's docs/data/state.json stats + matched news/X/Bluesky/Reddit signals; the other 24 targets' summaries were unchanged since their scores didn't move enough to warrant regeneration, matching the API's own re-score threshold. Team-need callouts (unchanged this run): Guard-need KAH, Nut, C9, KylB; Frontcourt-need PEZ, Spda, NNZ, A-B.",
+  "model": "claude-opus-5",
+  "note": "Season-close refresh. Full ESPN pull with local session cookies (snapshot data/raw/2026-08-25, scoring period 109, matchup period 14), then scripts/rebuild_state.py to merge the 362-row transaction history and the real FAAB market back in per REFRESH.md 5b-iii. The 2026 fantasy season is over for waiver purposes: ESPN's transactionScoringPeriod has advanced to 116 and no WNBA games fall in the P116-122 claim window (the regular season's last games are P115 / 2026-08-31), so every target's projected_points_this_week and base_score are a legitimate 0.0 -- an add made now cannot score. The 15 summaries authored this run are therefore season-close reads grounded in season average, the rolling game log, ownership trend, and matched news/X/Bluesky/Reddit signals, not week-ahead claim advice. ANTHROPIC_API_KEY is not set in this session, so these were hand-authored from docs/data/state.json rather than API-generated.",
   "scores": {
     "4065692": 72.0,
     "4281914": 144.0,
@@ -50,7 +50,22 @@
     "4399415": 49.55,
     "4899328": 48.71,
     "5345524": 48.69,
-    "4433797": 34.52
+    "4433797": 34.52,
+    "2491214": 0.0,
+    "4433514": 0.0,
+    "2529458": 0.0,
+    "4066548": 0.0,
+    "4790266": 0.0,
+    "4683006": 0.0,
+    "4257500": 0.0,
+    "2590093": 0.0,
+    "4280892": 0.0,
+    "4433408": 0.0,
+    "4282173": 0.0,
+    "4703609": 0.0,
+    "3142055": 0.0,
+    "2529183": 0.0,
+    "5108587": 0.0
   },
   "summaries": {
     "4065692": "Wilson's next-week slate jumps to 108.0 points over 3 games (36.0/g pace) after a hot 72.0-point 2-game week, though she's still untested with no season average and sits at a bare 0.2% owned. A boom-or-bust speculative Guard-need stash for KAH, Nut, C9, or KylB until real minutes confirm the role.",
@@ -100,7 +115,22 @@
     "4399415": "Siegrist projects 16.5 fpts/g over 3 games, above her 15.04 season average, off a 30-point spike that X is already calling a must-add night for Wings fantasy managers. A solid Frontcourt-need add for PEZ, Spda, NNZ, or A-B at 16% owned.",
     "4899328": "Chen projects 16.2 fpts/g over 3 games, above her 15.14 season average, powered by a 32-point explosion that has Reddit floating her for Sixth Player or Most Improved — and she's re-signed with the Valkyries long-term. A trending Guard-need add for KAH, Nut, C9, or KylB at just 3.1% owned.",
     "5345524": "Brochant gets 4 games this week but her projection cools to 12.2 fpts/g, below her 14.34 season average, after a quieter 9-10-11 stretch — Reddit's already debating streaming her over Held. A volume-only Frontcourt-need option for PEZ, Spda, NNZ, or A-B at 1.7% owned.",
-    "4433797": "Johnson projects 15.0 fpts/g with volume ramping to 3 games next week, well above her 11.54 season average, after X flagged a 16-point outburst that beat her 10.5-point expected line. A Guard-need speculative add for KAH, Nut, C9, or KylB at just 2.2% owned as she develops on the fly per Reddit."
+    "4433797": "Johnson projects 15.0 fpts/g with volume ramping to 3 games next week, well above her 11.54 season average, after X flagged a 16-point outburst that beat her 10.5-point expected line. A Guard-need speculative add for KAH, Nut, C9, or KylB at just 2.2% owned as she develops on the fly per Reddit.",
+    "2491214": "Wheeler ends the year as the board's biggest riser — ownership climbed 4.8 points to 34.9% on a 21.1/g season average, the top rate among the unrostered Guards with a full game log. The last six outings swing 4 to 26, so she paid off on volume rather than a floor. No games left in the claim window; the ownership curve is the signal to carry into next draft season.",
+    "4433514": "Rivers closed with three straight 26+ games (28, 26, 31) before cooling to 16 and 10, lifting ownership 2.1 points to 19.6% on a 17.6/g season line. Her 19.9 per-game projection sits above that season average — the model read the late run as the truer form. A watch-list Guard rather than a settled one.",
+    "2529458": "Parker-Tyus carries a returning-player signal: only three logged games in the rolling window (11, 37, 2) against a 14.1/g season average, which is the absence pattern, not a production collapse. Ownership held flat at 16.1%. Whatever the Aces' rotation looked like at the close, the sample is too thin to read as decline.",
+    "4066548": "Carrington is the volatility case on this board — 13, 13, 22, 9, 45 over her last five against an 18.7/g season average, with a Flagrant 2 ejection in the Reddit feed. Ownership sat flat at 16.0% all the way through. High ceiling, no floor; she never became the reliable Guard the rate suggested.",
+    "4790266": "Kuier finished hottest of anyone unrostered: 28, 46, 18, 25, 30 over her last five, a 23.5 per-game projection well clear of her 17.5/g season average, and ownership up 1.8 to 15.9%. The projection catching up to the recent form is the pattern you want; she is the clearest breakout name left on the wire.",
+    "4683006": "Fiebich is the one live returning-player signal in this final snapshot — a single 40-point game back from injury, a 23.6/g season average, and the top per-game projection on the board at 31.8. Ownership jumped 3.5 to 15.7% on that one appearance. The 15% rostered rate against that rate is the sharpest gap the season closed with.",
+    "4257500": "Zandalasini alternated 33s with high-teens (33, 9, 18, 17, 33) on a 19.4/g season average while ownership rose 2.5 points to 10.8% — the second-largest climb here. Golden State's expansion year gave her a real role; the bimodal game log is what kept her off most rosters.",
+    "2590093": "Stokes trended the wrong way into the close — 23, 5, 9, 12 over her last four against an 18.9/g season average, with the 15.6 per-game projection already marked down below it. Ownership crept up 0.7 to 10.0% anyway. A rebounding-driven Center whose late minutes stopped supporting the season rate.",
+    "4280892": "Carter is the roster-status outlier: waived by Las Vegas per the news feed, so she carries no pro team, no games in the log, and a 21.9/g season average frozen at whatever she produced before the move. Ownership 10.0% and drifting. Nothing actionable until she signs somewhere — the highest per-game rate on the board attached to no schedule at all.",
+    "4433408": "Edwards shows the same returning-player signal as Fiebich but on far less evidence — one 24-point game in the window against an 18.6/g season average, with a 21.3 per-game projection. Ownership up 1.0 to 9.4%. Connecticut's frontcourt usage is the open question; the single game can't answer it.",
+    "4282173": "Onyenwere was the steadiest producer this far down the board — 19, 16, 32, 12, 16, 9 across six games on a 19.6/g season average, no ownership movement at 8.7%. One caveat the sources disagree on: a Mystics status report circulating on X flagged her OUT with a left knee while ESPN still lists her ACTIVE. Treat the ESPN status as the weaker signal of the two.",
+    "4703609": "Leger-Walker built to 30 and 33 before a 11-point close, finishing on a 16.8/g season average with a 19.5 per-game projection reading the late spike. Ownership essentially unmoved at 7.0%. A rookie-year Guard whose best stretch arrived too late in the season to matter to anyone's playoff roster.",
+    "3142055": "Hines-Allen is the floor play of the group — 22, 12, 11, 12, 13 over her last five against a 13.8/g season average, which is about as little week-to-week variance as this board offers. Ownership flat at 6.8%. Never a difference-maker, never a zero either.",
+    "2529183": "Dolson posts the lowest rate here at 9.6/g season, and the game log explains why: 1, 2, 1, and then a 20. Three of her last four were effectively empty. Ownership 6.4% and flat — correctly priced.",
+    "5108587": "Okot has the longest recent log on the board (5, 17, 25, 12, 22, 16 across seven games) on a 13.8/g season average, with ownership up 1.0 to 5.1% — a rookie Center whose minutes were still climbing as Atlanta's season ended. The lowest-owned name here and the one with the most runway left."
   },
   "summary_dates": {
     "4065692": "2026-08-23",
@@ -150,6 +180,21 @@
     "4399415": "2026-08-24",
     "4899328": "2026-08-24",
     "5345524": "2026-08-24",
-    "4433797": "2026-08-24"
+    "4433797": "2026-08-24",
+    "2491214": "2026-08-24",
+    "4433514": "2026-08-24",
+    "2529458": "2026-08-24",
+    "4066548": "2026-08-24",
+    "4790266": "2026-08-24",
+    "4683006": "2026-08-24",
+    "4257500": "2026-08-24",
+    "2590093": "2026-08-24",
+    "4280892": "2026-08-24",
+    "4433408": "2026-08-24",
+    "4282173": "2026-08-24",
+    "4703609": "2026-08-24",
+    "3142055": "2026-08-24",
+    "2529183": "2026-08-24",
+    "5108587": "2026-08-24"
   }
 }

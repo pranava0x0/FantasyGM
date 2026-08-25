@@ -155,6 +155,8 @@
       else p.setAttribute("hidden", "");
     });
     syncBottomNav(panelId);
+    // Retrospective content is fetched on first open, not at boot.
+    if (panelId === "section-retro") loadRetro();
     // Persist in the URL so a refresh keeps your tab and you can deep-link.
     const slug = panelId.replace("section-", "");
     if (location.hash.replace(/^#/, "") !== slug) {
@@ -1406,6 +1408,342 @@
     }
   }
 
+  // ---------- Render: season banner ----------
+  //
+  // Lives above every panel, not inside Today, for two reasons: the season's
+  // outcome is a league-level fact, and it is also the *explanation* for the
+  // zeroed weekly numbers on Waivers and Team Needs (ESPN's claim window has
+  // advanced past the last scheduled WNBA game, so an add made now genuinely
+  // cannot score).
+  //
+  // The one rule this must not break: never crown a champion the bracket
+  // hasn't produced. `season_result.champion_team_id` stays null until the
+  // final is actually played, and the copy branches on that rather than
+  // assuming the last round is over.
+  // "Copper Futures's" reads badly; team names ending in s take a bare
+  // apostrophe. Three of this league's eight names end in s.
+  function possessive(name) {
+    return /s$/i.test(name) ? `${name}'` : `${name}'s`;
+  }
+
+  function seasonBannerCopy(sr, team) {
+    const champ = sr.champion_team_id != null ? TEAM_BY_ID.get(sr.champion_team_id) : null;
+    const final = (sr.bracket || []).find((g) => g.round === "final");
+    const standing = team ? (sr.standings || []).find((s) => s.team_id === team.team_id) : null;
+
+    // Headline: your team's outcome when a team is selected, the league's otherwise.
+    let headline;
+    let detail = null;
+    if (standing) {
+      const rec = `${standing.wins}–${standing.losses}`;
+      if (standing.placement_label) {
+        headline = `${team.name} finished ${standing.placement_label}.`;
+      } else if (standing.eliminated_round) {
+        const loss = (sr.bracket || []).find(
+          (g) => g.round === standing.eliminated_round && g.played &&
+                 g.winner_team_id != null && g.winner_team_id !== team.team_id &&
+                 (g.home_team_id === team.team_id || g.away_team_id === team.team_id),
+        );
+        headline = `${possessive(team.name)} season is over — knocked out in the ${standing.eliminated_round}.`;
+        if (loss) {
+          const mine = loss.home_team_id === team.team_id ? loss.home_points : loss.away_points;
+          const theirs = loss.home_team_id === team.team_id ? loss.away_points : loss.home_points;
+          const winner = TEAM_BY_ID.get(loss.winner_team_id);
+          detail = `Lost ${Math.round(mine)}–${Math.round(theirs)} to ${winner ? winner.name : "their opponent"} after finishing ${rec} as the #${standing.seed} seed.`;
+        }
+      } else if (standing.made_playoffs) {
+        headline = `${team.name} is still alive — #${standing.seed} seed, ${rec}.`;
+      } else {
+        headline = `${team.name} missed the playoffs — ${rec}, #${standing.seed} seed.`;
+      }
+    } else {
+      headline = champ
+        ? `Season over — ${champ.name} won the ${new Date().getFullYear()} title.`
+        : "Regular season complete — the playoff bracket is still running.";
+    }
+
+    // Title line: who won, or who is still playing for it.
+    let titleLine;
+    if (champ) {
+      const runner = sr.runner_up_team_id != null ? TEAM_BY_ID.get(sr.runner_up_team_id) : null;
+      titleLine = runner
+        ? `Champion: ${champ.name}, over ${runner.name}.`
+        : `Champion: ${champ.name}.`;
+    } else if (final) {
+      const a = TEAM_BY_ID.get(final.home_team_id);
+      const b = TEAM_BY_ID.get(final.away_team_id);
+      const seed = (t) => {
+        const st = (sr.standings || []).find((x) => x.team_id === (t && t.team_id));
+        return st && st.seed ? `#${st.seed} ` : "";
+      };
+      titleLine = final.played
+        ? `Final in progress: ${seed(a)}${a ? a.name : "?"} vs ${seed(b)}${b ? b.name : "?"}.`
+        : `Title still undecided — ${seed(a)}${a ? a.name : "?"} vs ${seed(b)}${b ? b.name : "?"} has not been played.`;
+    } else {
+      titleLine = null;
+    }
+    return { headline, detail, titleLine };
+  }
+
+  function renderSeasonBanner(state) {
+    const mount = $("#season-banner-mount");
+    if (!mount) return;
+    const sr = state.season_result;
+    // Nothing to say until the regular season is actually done.
+    if (!sr || !sr.regular_season_complete) {
+      mount.setAttribute("hidden", "");
+      return;
+    }
+    mount.removeAttribute("hidden");
+    mount.replaceChildren();
+
+    const { headline, detail, titleLine } = seasonBannerCopy(sr, myTeam());
+    const done = !!sr.playoffs_complete;
+
+    const wrap = el("div", {
+      className: `season-banner ${done ? "is-final" : "is-running"}`,
+      attrs: { role: "status" },
+    });
+    wrap.appendChild(el("span", {
+      className: "season-banner-badge",
+      text: done ? "SEASON OVER" : "PLAYOFFS",
+    }));
+
+    const body = el("div", { className: "season-banner-body" });
+    body.appendChild(el("p", { className: "season-banner-h", text: headline }));
+    const subParts = [detail, titleLine].filter(Boolean);
+    if (subParts.length) {
+      body.appendChild(el("p", { className: "season-banner-sub", text: subParts.join(" ") }));
+    }
+    // The weekly loops are closed, and every zero downstream depends on this
+    // sentence. Say it once, here, rather than repeating it on each surface.
+    body.appendChild(el("p", {
+      className: "season-banner-note",
+      text: "Waiver and lineup numbers now read zero league-wide: ESPN's claim window has advanced past the last scheduled WNBA game, so an add made today cannot score. Season totals, transaction history, and the bracket are still live.",
+    }));
+    wrap.appendChild(body);
+
+    const link = el("button", {
+      className: "season-banner-link",
+      text: "Read the retrospective →",
+      attrs: { type: "button" },
+    });
+    link.addEventListener("click", () => selectTab("section-retro"));
+    wrap.appendChild(link);
+
+    mount.appendChild(wrap);
+  }
+
+  // ---------- Render: retrospective ----------
+  //
+  // Prose, not league data, so it is fetched lazily on first open rather than
+  // riding along in the 396 KB state.json the page already blocks on.
+  const RETRO_URL = "./data/retrospective.json";
+  let retroLoaded = false;
+
+  function retroBlock(b) {
+    switch (b.type) {
+      case "prose":
+        return el("p", { className: "retro-prose", text: b.text });
+
+      case "list": {
+        const wrap = el("div", { className: "retro-listwrap" });
+        if (b.title) wrap.appendChild(el("h4", { className: "retro-list-h", text: b.title }));
+        const ul = el("ul", { className: "retro-list" });
+        (b.items || []).forEach((i) => ul.appendChild(el("li", { text: i })));
+        wrap.appendChild(ul);
+        return wrap;
+      }
+
+      case "callout": {
+        const tone = ["good", "bad", "note"].includes(b.tone) ? b.tone : "note";
+        const wrap = el("div", { className: `retro-callout retro-callout--${tone}` });
+        wrap.appendChild(el("h4", { className: "retro-callout-h", text: b.title || "" }));
+        wrap.appendChild(el("p", { className: "retro-callout-body", text: b.text || "" }));
+        return wrap;
+      }
+
+      case "timeline": {
+        const ol = el("ol", { className: "retro-timeline" });
+        (b.items || []).forEach((i) => {
+          const li = el("li", { className: "retro-tl-item" });
+          li.appendChild(el("span", { className: "retro-tl-date", text: i.date }));
+          const bodyEl = el("div", { className: "retro-tl-body" });
+          bodyEl.appendChild(el("h4", { className: "retro-tl-h", text: i.title }));
+          bodyEl.appendChild(el("p", { className: "retro-tl-text", text: i.text }));
+          li.appendChild(bodyEl);
+          ol.appendChild(li);
+        });
+        return ol;
+      }
+
+      case "table": {
+        // Wide tables scroll inside their own container so the page body
+        // never scrolls horizontally at 375px.
+        const scroller = el("div", { className: "retro-tablewrap" });
+        const table = el("table", { className: "retro-table" });
+        const thead = el("thead");
+        const hrow = el("tr");
+        (b.head || []).forEach((h) => hrow.appendChild(el("th", { text: h, attrs: { scope: "col" } })));
+        thead.appendChild(hrow);
+        table.appendChild(thead);
+        const tbody = el("tbody");
+        (b.rows || []).forEach((r) => {
+          const tr = el("tr");
+          r.forEach((c, i) => tr.appendChild(
+            el(i === 0 ? "th" : "td", { text: c, attrs: i === 0 ? { scope: "row" } : {} }),
+          ));
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        scroller.appendChild(table);
+        return scroller;
+      }
+
+      default:
+        return null;
+    }
+  }
+
+  function renderRetro(data) {
+    const mount = $("#retro-mount");
+    if (!mount) return;
+    mount.replaceChildren();
+
+    const head = el("header", { className: "retro-head" });
+    head.appendChild(el("h2", { className: "retro-h", text: data.title || "Retrospective" }));
+    if (data.lede) head.appendChild(el("p", { className: "retro-lede", text: data.lede }));
+    mount.appendChild(head);
+
+    if ((data.stats || []).length) {
+      const strip = el("div", { className: "retro-stats", attrs: { "aria-label": "Project by the numbers" } });
+      data.stats.forEach((s) => {
+        const card = el("div", { className: "retro-stat" });
+        card.appendChild(el("span", { className: "retro-stat-value", text: s.value }));
+        card.appendChild(el("span", { className: "retro-stat-label", text: s.label }));
+        if (s.note) card.appendChild(el("span", { className: "retro-stat-note", text: s.note }));
+        strip.appendChild(card);
+      });
+      mount.appendChild(strip);
+    }
+
+    const chapters = data.chapters || [];
+    if (!chapters.length) return;
+
+    // Chapter rail + one visible chapter. Click-through rather than one long
+    // scroll: seven chapters of prose is a document, and a document needs a
+    // table of contents you can steer with.
+    const layout = el("div", { className: "retro-layout" });
+    const rail = el("nav", { className: "retro-rail", attrs: { "aria-label": "Retrospective chapters" } });
+    const pane = el("div", { className: "retro-pane" });
+
+    const railBtns = [];
+    const panels = [];
+
+    const show = (idx) => {
+      railBtns.forEach((b, i) => {
+        b.setAttribute("aria-selected", i === idx ? "true" : "false");
+        b.tabIndex = i === idx ? 0 : -1;
+      });
+      panels.forEach((p, i) => {
+        if (i === idx) p.removeAttribute("hidden");
+        else p.setAttribute("hidden", "");
+      });
+    };
+
+    chapters.forEach((ch, idx) => {
+      const btn = el("button", {
+        className: "retro-rail-btn",
+        // Explicit label: name-from-contents would concatenate the kicker
+        // straight onto the title ("01The premise"). The kicker is ordering,
+        // not content, so it's hidden from the tree.
+        attrs: { type: "button", role: "tab", "aria-selected": idx === 0 ? "true" : "false",
+                 "aria-controls": `retro-panel-${ch.id}`, id: `retro-tab-${ch.id}`,
+                 "aria-label": `Chapter ${idx + 1} of ${chapters.length}: ${ch.title}` },
+      });
+      btn.appendChild(el("span", {
+        className: "retro-rail-kicker",
+        text: ch.kicker || String(idx + 1).padStart(2, "0"),
+        attrs: { "aria-hidden": "true" },
+      }));
+      btn.appendChild(el("span", { className: "retro-rail-label", text: ch.title }));
+      btn.addEventListener("click", () => show(idx));
+      btn.addEventListener("keydown", (e) => {
+        const delta = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1
+                    : e.key === "ArrowUp" || e.key === "ArrowLeft" ? -1 : 0;
+        if (!delta) return;
+        e.preventDefault();
+        const next = (idx + delta + chapters.length) % chapters.length;
+        show(next);
+        railBtns[next].focus();
+      });
+      rail.appendChild(btn);
+      railBtns.push(btn);
+
+      const panel = el("article", {
+        className: "retro-chapter",
+        attrs: { id: `retro-panel-${ch.id}`, role: "tabpanel", "aria-labelledby": `retro-tab-${ch.id}` },
+      });
+      panel.appendChild(el("span", { className: "retro-chapter-kicker", text: ch.kicker || "" }));
+      panel.appendChild(el("h3", { className: "retro-chapter-h", text: ch.title }));
+      if (ch.lede) panel.appendChild(el("p", { className: "retro-chapter-lede", text: ch.lede }));
+      (ch.blocks || []).forEach((b) => {
+        const node = retroBlock(b);
+        if (node) panel.appendChild(node);
+      });
+
+      // Prev / next so the report reads straight through without the rail.
+      const pager = el("div", { className: "retro-pager" });
+      if (idx > 0) {
+        const prev = el("button", { className: "retro-pager-btn", text: `← ${chapters[idx - 1].title}`, attrs: { type: "button" } });
+        prev.addEventListener("click", () => { show(idx - 1); railBtns[idx - 1].focus(); });
+        pager.appendChild(prev);
+      }
+      if (idx < chapters.length - 1) {
+        const next = el("button", { className: "retro-pager-btn retro-pager-btn--next", text: `${chapters[idx + 1].title} →`, attrs: { type: "button" } });
+        next.addEventListener("click", () => { show(idx + 1); railBtns[idx + 1].focus(); });
+        pager.appendChild(next);
+      }
+      panel.appendChild(pager);
+
+      if (idx !== 0) panel.setAttribute("hidden", "");
+      pane.appendChild(panel);
+      panels.push(panel);
+    });
+
+    rail.setAttribute("role", "tablist");
+    layout.appendChild(rail);
+    layout.appendChild(pane);
+    mount.appendChild(layout);
+
+    if (data.generated_at) {
+      mount.appendChild(el("p", {
+        className: "retro-foot",
+        text: `Compiled ${data.generated_at} from the repository's commit history, ISSUES.md, BACKLOG.md, and the committed data snapshots.`,
+      }));
+    }
+  }
+
+  async function loadRetro() {
+    if (retroLoaded) return;
+    retroLoaded = true;  // set first: a second tab click must not race a second fetch
+    const mount = $("#retro-mount");
+    try {
+      const resp = await fetch(RETRO_URL, { cache: "no-store" });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      renderRetro(await resp.json());
+    } catch (err) {
+      console.error("FantasyGM: failed to load retrospective", err);
+      retroLoaded = false;  // let a later click retry
+      if (mount) {
+        mount.replaceChildren(el("p", {
+          className: "empty",
+          text: "Couldn't load the retrospective (docs/data/retrospective.json). Reload to try again.",
+        }));
+      }
+    }
+  }
+
   function tabLink(label, panelId) {
     const b = el("button", { className: "today-block-link", text: `${label} →`, attrs: { type: "button" } });
     b.addEventListener("click", () => selectTab(panelId));
@@ -2351,6 +2689,8 @@
     // Re-render every my-team-sensitive surface. Cheap (one state object,
     // no refetch) and keeps "switch team" from needing a page reload.
     const rerender = () => {
+      // The banner leads with *your* team's outcome, so it re-scopes too.
+      renderSeasonBanner(state);
       renderToday(state);
       // Waivers re-scope to the newly picked team — net gain, drop pairing,
       // and bid band are all roster-relative.
@@ -2394,6 +2734,8 @@
   // ---------- Render error states ----------
   function renderEmptyAll(reason) {
     renderMeta({});
+    const banner = $("#season-banner-mount");
+    if (banner) banner.setAttribute("hidden", "");
     const today = $("#today-mount");
     if (today) today.replaceChildren(el("p", { className: "empty", text: reason }));
     $("#waiver-list").replaceChildren(el("li", { className: "empty", text: reason }));
@@ -2423,6 +2765,7 @@
       PLAYER_INDEX = buildPlayerIndex(state);
       initMyTeam(state.teams);
       renderMeta(state.meta || {});
+      renderSeasonBanner(state);
       renderToday(state);
       renderWaivers(state);
       renderTeams(state.teams, state.waiver_targets_by_team, state.transactions_recent);

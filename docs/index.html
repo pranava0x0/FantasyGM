@@ -45,7 +45,16 @@
       <button class="tab" role="tab" id="tab-trades"       aria-controls="section-trades"       aria-selected="false">Trades</button>
       <button class="tab" role="tab" id="tab-news"         aria-controls="section-news"         aria-selected="false">News</button>
       <button class="tab" role="tab" id="tab-transactions" aria-controls="section-transactions" aria-selected="false">Transactions</button>
+      <button class="tab" role="tab" id="tab-retro"         aria-controls="section-retro"        aria-selected="false">Retrospective</button>
     </nav>
+
+    <!--
+      Season banner. Lives outside the panels so the season's outcome is
+      visible on every tab — it is also the explanation for the zeroed
+      weekly projections on Waivers and Team Needs. Rendered from
+      state.season_result; stays hidden while the regular season runs.
+    -->
+    <div id="season-banner-mount" hidden></div>
 
     <!-- ========== Today — the standing daily brief ========== -->
     <section class="surface tab-panel" id="section-today" role="tabpanel" aria-labelledby="tab-today">
@@ -123,6 +132,18 @@
         <li class="loading">Loading…</li>
       </ul>
     </section>
+
+    <!-- ========== Retrospective ========== -->
+    <!--
+      Project retrospective. Content lives in docs/data/retrospective.json and
+      is fetched lazily the first time this tab opens — it is prose, not league
+      data, and state.json is already the page's heaviest request.
+    -->
+    <section class="surface tab-panel" id="section-retro" role="tabpanel" aria-labelledby="tab-retro" hidden>
+      <div id="retro-mount">
+        <p class="loading">Loading retrospective…</p>
+      </div>
+    </section>
   </main>
 
   <footer role="contentinfo" class="footer">
@@ -159,6 +180,7 @@
       <div class="sheet-grabber" aria-hidden="true"></div>
       <button class="sheet-item" type="button" data-panel="section-news">News</button>
       <button class="sheet-item" type="button" data-panel="section-transactions">Transactions</button>
+      <button class="sheet-item" type="button" data-panel="section-retro">Retrospective</button>
       <button class="sheet-item sheet-item--muted" type="button" data-sheet-close>Cancel</button>
     </div>
   </div>

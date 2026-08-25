@@ -1,0 +1,327 @@
+{
+  "generated_at": "2026-08-24",
+  "title": "Fantasy GM — project retrospective",
+  "lede": "One season, 237 commits, one hard constraint. What this project was, what worked, what didn't, and what the session-cookie requirement cost.",
+  "stats": [
+    { "label": "Commits", "value": "237", "note": "2026-05-17 → 2026-08-24, 99 days" },
+    { "label": "Data refreshes", "value": "104", "note": "68 social-only, 36 with ESPN auth" },
+    { "label": "ESPN snapshots", "value": "15", "note": "only 15 authenticated pulls in 99 days" },
+    { "label": "Tests", "value": "255", "note": "fixture-based, no network" },
+    { "label": "Issues logged", "value": "33", "note": "25 code bugs, 6 process, 3 still open" },
+    { "label": "History rows", "value": "7,662", "note": "game logs, news, social, transactions" }
+  ],
+  "chapters": [
+    {
+      "id": "premise",
+      "title": "The premise",
+      "kicker": "01",
+      "lede": "An AI general manager for one private ESPN fantasy WNBA league — and the single constraint that decided the entire architecture.",
+      "blocks": [
+        {
+          "type": "prose",
+          "text": "Fantasy GM answers one question every day: who should this team pick up off the waiver wire? Each of the eight teams in the 50-40-90 Club gets a \"top need\" — a positional upgrade opportunity, framed proactively, never as a weakness — and that need reorders the waiver list per team. Everything else on the site exists to make that answer defensible: rosters, projections, the pro-team schedule, news, social chatter, transaction history, trade packages."
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "title": "The constraint that shaped everything",
+          "text": "The league is private. ESPN's fantasy API returns 401 for it without the owner's live browser session cookies — SWID and espn_s2. Those are account-level credentials, so they never leave the user's machine: not into CI, not into a container, not into a cloud session. The pipeline therefore runs locally and only locally."
+        },
+        {
+          "type": "prose",
+          "text": "That one rule cascaded into every architectural decision. No server to babysit, because a server would need the cookies. No database, because there was nothing to serve. Instead: a Python pipeline that writes committed JSON snapshots, a single derived state.json, and a static page on GitHub Pages that reads it. Boring on purpose — Python 3.9, pydantic, httpx, and vanilla HTML/CSS/JS with no framework and no build step."
+        },
+        {
+          "type": "list",
+          "title": "Non-goals held all season",
+          "items": [
+            "No automated CI run of the pipeline — cookies in CI is too much blast radius.",
+            "No real database. data/raw/<date>/*.json plus four append-only .jsonl files are the audit trail.",
+            "No owner names anywhere — not in snapshots, not in derived state, not in commit messages, not in test fixtures. Teams are tracked by ESPN team.id so mid-season renames don't break continuity.",
+            "No projection sources beyond ESPN until one was actually needed; Yahoo was added late as a second opinion, CBS was tried and 404'd."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "timeline",
+      "title": "How it got built",
+      "kicker": "02",
+      "lede": "One build day, a signal layer, a history layer, one large console rewrite, and then eleven weeks of just running it.",
+      "blocks": [
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "date": "2026-05-17",
+              "title": "Day one — the whole loop, end to end",
+              "text": "22 commits. Schema, ESPN client, ingest, analysis, state builder, CLI, static frontend, dev server, and a 45-test suite. Also on day one: the scar-tissue file. Four of the most expensive ESPN gotchas — the game code is wfba (not wbasketball), team IDs are not dense, defaultPositionId 1/2/3 means G/F/C in WNBA (unlike NBA), and standings order is not team-ID order — were found and written down before anything was built on top of them."
+            },
+            {
+              "date": "2026-05-31 → 06-07",
+              "title": "The signal layer",
+              "text": "ESPN news feed with per-player matching, then Reddit (r/wnba and r/fantasywnba), Twitter/X via session cookies, Bluesky over the public AT Protocol API, Instagram, and per-player social handles. The first AI \"why pick them up\" GM takes landed here, hand-authored per refresh and keyed by player_id."
+            },
+            {
+              "date": "2026-06-12",
+              "title": "History becomes infrastructure",
+              "text": "A full-season transaction backfill (305 entries) and per-game score accumulation into game_logs.jsonl. This is the commit that let the app say anything about a range longer than ESPN's own windows: the transaction feed rolls off, and the rolling-average API window is two weeks. Everything long-range the site knows, it knows from these files."
+            },
+            {
+              "date": "2026-06-12",
+              "title": "Trades",
+              "text": "A scenario evaluator that finds fair return packages for each team's best player, plus an interactive calculator that simulates the resulting lineups on both sides."
+            },
+            {
+              "date": "2026-07-16",
+              "title": "GM Console — the one large rewrite (PR #33)",
+              "text": "The biggest single change of the season, shipped in phases against a written spec. A real lineup optimizer with per-day tip-off times and lock detection, a new default Today tab, a mobile bottom tab bar, waiver cards reframed around net gain over your worst starter rather than raw projection, and FAAB bid bands mined from the league's own claim history. Three of the spec's own assumptions were disproven by measurement during the build and rewritten."
+            },
+            {
+              "date": "2026-07-17 → 08-24",
+              "title": "The daily cadence",
+              "text": "The project stopped being built and started being run. 104 data commits in total, most of them social-only refreshes from cloud sessions with no ESPN credentials, punctuated by occasional local runs with fresh cookies."
+            },
+            {
+              "date": "2026-08-25",
+              "title": "Season close",
+              "text": "A final authenticated refresh, a new pipeline/season.py that derives final standings and the playoff bracket from the raw league response, and this report."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "worked",
+      "title": "What worked",
+      "kicker": "03",
+      "lede": "Six things that paid for themselves more than once.",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "good",
+          "title": "Writing the scar tissue down on day one",
+          "text": "Every ESPN quirk that cost real time got one line in CLAUDE.md the day it was found. The game code is wfba. isBenchUnlimited:true overrides the slot count, so slot 7 is bench regardless of what lineupSlotCounts says. Forwards can fill the C-eligible slot 5, so label it F/C. WNBA proTeamId does not follow NBA convention — 3 is Dallas, 6 is LA, 19 is Chicago. Each cost hours once and zero minutes after."
+        },
+        {
+          "type": "callout",
+          "tone": "good",
+          "title": "A duplicated constant with a test that asserts the copies match",
+          "text": "The nine-slot lineup plan and the OUT-status list live in pipeline/positions.py and are mirrored in app.js, because the page needs them without a round trip. tests/test_lineups.py::TestFrontendParity parses the JavaScript and asserts the copies agree — drift here would have the pipeline's advice and the page's contradict each other while each stayed internally consistent. The guard was verified against a deliberately mutated app.js before being trusted: a guard you have never watched fail is not yet a guard."
+        },
+        {
+          "type": "callout",
+          "tone": "good",
+          "title": "Append-only history files",
+          "text": "transactions.jsonl (362 rows), game_logs.jsonl (4,127), news.jsonl (928), social.jsonl (2,245). Deduped on a stable key, never rewritten. They outlive every API window they were built to work around, and they made a real season-long retrospective possible at all."
+        },
+        {
+          "type": "callout",
+          "tone": "good",
+          "title": "Measuring the spec's assumptions instead of implementing them",
+          "text": "The GM Console spec proposed splitting waiver targets into \"streamers\" and \"anchors\" by scoring rate — high this week, low on the season. Measured against the actual pool, that split nothing: every free agent worth claiming rates 18–23 points a game, so the median tags them all the same way. Rate does not vary among claimable players. Schedule does. Shipped as schedule-based instead, which splits the real pool 16/2/12."
+        },
+        {
+          "type": "callout",
+          "tone": "good",
+          "title": "Killing features that lied",
+          "text": "A matchup win-probability estimate was built, shipped to a branch, and pulled. A normal approximation over weekly-score variance can only say which team is better on the season — so it rendered \"52% odds\" next to a live 50-point lead. Two numbers on one screen that visibly contradicted each other. An honest version needs remaining-schedule modelling the state file doesn't carry. Today shows both sides' season averages instead and lets the reader draw the comparison."
+        },
+        {
+          "type": "callout",
+          "tone": "good",
+          "title": "Making the loop closeable without an authenticated pull",
+          "text": "Two small tools did most of the work here. python -m pipeline.refresh --dry-run validates cookies in one cheap request and exits with a code that classifies the failure. scripts/rebuild_state.py replays the latest on-disk snapshot through the full state builder with no network and no cookies — so a frontend change, a schema tweak, or a new set of AI summaries can be verified against real data without spending a pull."
+        }
+      ]
+    },
+    {
+      "id": "didnt",
+      "title": "What didn't",
+      "kicker": "04",
+      "lede": "Five things that stayed broken, stayed slow, or never arrived.",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "The daily-fresh-data dream never happened",
+          "text": "15 authenticated ESPN pulls in 99 days, with a 28-day gap and a 22-day gap in the middle. The ESPN half of the dataset only moved when the user physically sat down at their own machine. Everything downstream of that — rosters, transactions, FAAB, matchup scores — moved at that same rate, no matter how often the social layer refreshed."
+        },
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "Twitter/X scraping was a running battle",
+          "text": "Three separate platform constraints, each found the hard way. The browser javascript tool has no top-level await, so everything needs an async IIFE. window globals are wiped on every navigation, so accumulation has to go through localStorage. And the tool's own output filter blocks tweet JSON containing status URLs — while x.com's CSP blocks fetch to localhost, closing the obvious escape hatch. The working method is a two-phase extraction (metadata, then URL-stripped text) reassembled in Python. It works. It is also forty lines of playbook for one data source, and it needs a logged-in browser, so it never ran in a cloud session."
+        },
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "Page weight was specced and never fixed",
+          "text": "state.json is 3.1 MB raw, 396 KB gzipped, and the page blocks on it before rendering anything. Per-player news is 48% of the bytes; the social feeds add another 15%. The fix was written down early — split the core payload (meta, teams, waivers, trades) from an extras file lazy-loaded on tab open — and never shipped. It stayed on the backlog for two months while the payload grew."
+        },
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "Trades never got its correctness pass",
+          "text": "The trade generator prices every player at their healthy per-game rate and filters nothing by availability: 12 of 85 players in currently generated packages are OUT and offered at full value. The lineup checker refuses to start an OUT player while the trade generator recommends acquiring one — two parts of the same app disagreeing about the same fact. The display was mitigated (injury status now renders next to the price) but the valuation, which drives the sort order, is still wrong. Still open."
+        },
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "The AI summaries were never automated",
+          "text": "Every \"GM take\" on the site was hand-authored during a refresh session — including the fifteen written for this final run. pipeline/ai_summary.py exists, has a re-score threshold so unchanged players aren't regenerated, and logs \"ANTHROPIC_API_KEY not set — skipping generation\" on every single run of the season. The automation was built and never switched on."
+        }
+      ]
+    },
+    {
+      "id": "bugs",
+      "title": "Bugs worth remembering",
+      "kicker": "05",
+      "lede": "33 issues logged. The classes are more useful than the list — most of these recur in different clothes.",
+      "blocks": [
+        {
+          "type": "table",
+          "head": ["Class", "The bug", "Why it's a class, not a one-off"],
+          "rows": [
+            [
+              "Two vocabularies, one ===",
+              "The \"Fits your need\" pill never rendered for a frontcourt need. It compared a needs bucket (\"FC\") against a player position (\"G\"/\"F\"/\"C\"), which can never match.",
+              "Silent failure. Nothing errored; the pill simply never appeared. Any time two enums describe overlapping concepts with different spellings, equality will quietly return false forever."
+            ],
+            [
+              "Surname collisions",
+              "A deep-bench free agent named Collier got a +15% \"returning from injury\" boost driven entirely by coverage of a different, unrostered Collier. Fixed with a surname-uniqueness guard.",
+              "The identical bug reappeared a week later in the hand-authored summary path, which has no such guard — a summary about Megan Gustafson was attached to Megan DiLeo. Fixing a matcher does not fix the other matcher."
+            ],
+            [
+              "zip() dropping the valuable case",
+              "The lineup checker paired every \"start her\" to a \"bench him\" using zip(). A roster shorter than nine active slots leaves a slot empty, so the correct move has no counterpart — and zip() truncated it away.",
+              "The dropped item was the most valuable kind: an empty slot scores zero. The result was a check reporting status \"set\" beside 95.7 points of headroom. Truncating pair-ups always drops the asymmetric case, which is usually the interesting one."
+            ],
+            [
+              "A legitimate zero read as falsy",
+              "(spent is not None) and _faab_remaining(...) or None returned None — \"unknown budget\" — for a team that had spent its entire FAAB, so a broke team was quoted bids it could not pay.",
+              "Python's or treats 0 as falsy. Any and/or chain guarding a numeric result will mistake a real zero for a missing value."
+            ],
+            [
+              "A conclusion shown without its cause",
+              "A waiver card read \"24.6/g · NO LINEUP GAIN\" with nothing explaining it. The net-gain block had replaced the schedule block that showed the two-game week causing the zero.",
+              "Caught by reading the rendered card, not the diff. A refactor that swaps one block for another can remove the evidence for a claim while leaving the claim."
+            ],
+            [
+              "Computed but never used",
+              "Net gain was computed for every per-team target and then not used as the sort or cut key, so the page's own caption — \"ranked by what each add gives your optimal lineup\" — was false, and Today's \"Top claim\" named a worse add than the one directly beneath it.",
+              "Also a cut bug, not just a sort bug: the best add for a roster could sit outside the projection-ranked top ten and never be measured at all. Found by an automated review on the pull request, not by a human read."
+            ],
+            [
+              "Two surfaces, two numbers, one fact",
+              "Today's \"Top claim\" led with raw projection while the Waivers card for the same player led with net gain: 69.1 versus +16.5 for the same add, on two screens read in one sitting.",
+              "Any number that appears on more than one surface needs one function computing it, or the surfaces will drift the moment either one is edited."
+            ],
+            [
+              "Data newer than its own audit trail",
+              "A refresh committed a state.json captured at 21:07Z built against raw snapshot files from 17:45Z, so the derived state carried transactions that appeared nowhere in the committed raw data.",
+              "Recovered by finding the uncommitted 21:07Z pull still sitting in the working tree and rebuilding from it. Derived artifacts and their sources have to be committed together or the audit trail is fiction."
+            ],
+            [
+              "Invisible in a screenshot",
+              "The team-picker tiles and the bottom-nav buttons exposed no accessible name at all — each is an aria-hidden icon span plus a label span, and name-from-contents didn't resolve. A screen reader would announce a row of unlabeled buttons.",
+              "Caught by reading the accessibility tree, not by looking at the page. Visual verification cannot find this class of bug by construction."
+            ],
+            [
+              "The [hidden] trap",
+              "Writing display: inline-flex on an element that also uses the hidden HTML attribute makes the CSS rule win and the attribute a silent no-op.",
+              "Now a standing rule in the project's frontend guidance: always pair a display override with an explicit [hidden] { display: none } rule."
+            ]
+          ]
+        },
+        {
+          "type": "prose",
+          "text": "Six of the 33 were process bugs rather than code bugs — a hardcoded wrong path in the refresh playbook, a dependency pinned but not installed, a documented second step that a session skipped. Those were fixed by editing the playbook, which is why the playbook kept growing."
+        }
+      ]
+    },
+    {
+      "id": "local-vs-container",
+      "title": "Local vs. container",
+      "kicker": "06",
+      "lede": "The session-cookie requirement split this project into two modes with very different capabilities — and the weaker one degrades quietly.",
+      "blocks": [
+        {
+          "type": "prose",
+          "text": "A private ESPN league returns 401 to any request without SWID and espn_s2. Those are the owner's live browser session cookies, and their blast radius is the entire ESPN account, not one fantasy league. So they live in a gitignored .env on one machine and go nowhere else. Every capability of this project sorts into one of two buckets depending on whether that file is present."
+        },
+        {
+          "type": "table",
+          "head": ["", "Local, with cookies", "Cloud / container, without"],
+          "rows": [
+            ["Command", "python -m pipeline.refresh", "python -m pipeline.refresh --social-only"],
+            ["Runs this season", "15 authenticated snapshots", "68 social-only refreshes"],
+            ["Rosters, lineup slots", "Fresh from ESPN", "Frozen at the last committed snapshot"],
+            ["Transactions, FAAB budgets", "Fresh", "Frozen"],
+            ["Matchup scores, standings", "Fresh", "Frozen"],
+            ["Pro-team schedule and tip-off locks", "Fresh", "Frozen"],
+            ["WNBA news feed", "Fresh", "Fresh — public endpoint, no auth"],
+            ["Reddit, Bluesky", "Fresh", "Fresh — public APIs"],
+            ["Public WNBA team stats and re-ranking", "Fresh", "Fresh — site.api.espn.com needs no auth"],
+            ["Twitter/X", "Chrome scrape, needs a logged-in browser", "Skipped entirely"],
+            ["AI \"GM take\" summaries", "Hand-authored in session", "Hand-authored in session"]
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "The failure mode is silence, not an error",
+          "text": "In social-only mode the page keeps rendering rosters, FAAB budgets and matchup scores exactly as before — dated to a snapshot that may be weeks old. Between 2026-07-06 and 2026-08-03 that was 28 consecutive days: a waiver claim, a drop, or a roster move made in that window appeared nowhere in the UI, and nothing on the page said so louder than a small \"as of\" timestamp. Graceful degradation is only half the job; the other half is being loud about what degraded."
+        },
+        {
+          "type": "callout",
+          "tone": "bad",
+          "title": "The second-order trap: a partial run that logs like a complete one",
+          "text": "refresh.py --social-only on its own writes a state.json with only the frozen snapshot's own 12 transactions and a FAAB market too thin to quote — because refresh.py never passes the accumulated history to the state builder, the way scripts/rebuild_state.py does. The two-step sequence is documented, and at least one shipped commit skipped it anyway, because refresh.py's own summary output looks perfectly complete on its own. A pipeline that logs success for a partial result will eventually ship one."
+        },
+        {
+          "type": "list",
+          "title": "What made the split survivable",
+          "items": [
+            "--dry-run validates cookies in a single cheap request and exits with a code that classifies the failure: 2 means no credentials at all, 3 means expired. A session knows which mode it is in before doing any work.",
+            "--social-only is a designed fallback, not an accident. It explicitly loads the last committed snapshot as its baseline and refreshes only what public endpoints can supply.",
+            "scripts/rebuild_state.py can rebuild every derived artifact from an on-disk snapshot with no network and no cookies, so frontend and schema work never needed a pull.",
+            "The raw snapshots are committed. A cloud session inherits the last local pull instead of starting from nothing."
+          ]
+        },
+        {
+          "type": "prose",
+          "text": "The honest summary: the cookie constraint was correct — the credentials genuinely should not have been in CI — but it capped the product. A daily-brief app whose core data refreshed fifteen times in a season is a daily-brief app in name only. If there is a version two, the interesting question is whether a narrow, revocable credential could do the authenticated read without handing a container the keys to the whole account."
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "title": "Where it ended",
+      "kicker": "07",
+      "lede": "The season, the open items, and the line under it.",
+      "blocks": [
+        {
+          "type": "prose",
+          "text": "Copper Futures finished the regular season 7–5 and took the third seed, then lost the semifinal 762–1049 to Plumdog Millionaire. The final — top-seeded Rhyne 'em dine 'em 69 'em at 9–3 against Plumdog Millionaire at 8–4 — had not been played when this snapshot was taken, so the site reports the bracket as it stands rather than crowning anyone. Copper Futures plays Hot Stew Comin Through for third."
+        },
+        {
+          "type": "list",
+          "title": "Still open",
+          "items": [
+            "Trades 2.0: OUT players are priced at their full healthy rate and drive the sort order.",
+            "state.json needs the core/extras split — 396 KB gzipped blocks first paint.",
+            "Matchup win odds need remaining-schedule modelling before they can be honest.",
+            "The AI summary generator needs an API key wired into the refresh to stop being hand-authored.",
+            "The surname-uniqueness guard needs to reach the summary-authoring signal dump, not just the return-signal detector."
+          ]
+        },
+        {
+          "type": "prose",
+          "text": "The thing that most justified itself, across 99 days: writing down what surprised you, the same day it surprised you. The ESPN scar-tissue list, the issue log with root causes, and the refresh playbook are together maybe six pages of prose, and they are the reason the second month cost less than the first. The code was rewritten several times. Those notes never were."
+        }
+      ]
+    }
+  ]
+}
