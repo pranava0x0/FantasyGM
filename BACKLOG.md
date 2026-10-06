@@ -67,3 +67,5 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 - User requested 2026-10-06: measure mobile task interactions before changes; retain repeatable UAT, reduce worst scrolling paths, fix PR #74 bot findings, merge after verification.
 
 - High: unified WNBA/NFL and multi-league mobile console; shared cached sport collection, isolated league advice, Sleeper live ingestion, Yahoo/ESPN validated import, deadlines/status alerts, daily/deep refresh and performance checks. Migration: docs/multi-sport-plan.md.
+
+- User requested 2026-10-06: collapse seasonal sport/league controls into one small header button; publish existing sanitized NFL snapshots to GitHub Pages and verify production.

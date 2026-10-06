@@ -80,7 +80,7 @@
   }
   async function fetchJSON(path) { const response = await fetch(path); if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }
   $("sport").addEventListener("change", () => {
-    const wnba = $("sport").value === "wnba"; store.set("fgm.sport",$("sport").value);
+    const wnba = $("sport").value === "wnba"; $("sport-name").textContent = wnba ? "WNBA" : "NFL"; store.set("fgm.sport",$("sport").value);
     $("wnba").hidden = !wnba; $("nfl").hidden = wnba; $("league-label").hidden = wnba; $("team-label").hidden = wnba || !current;
     if (wnba && !$("wnba-frame").getAttribute("src")) {
       if (!store.get("fgm_my_team")) store.set("fgm_my_team",index?.wnba?.my_team || "1");
@@ -91,9 +91,11 @@
     }
     if (!wnba) $("wnba-frame").removeAttribute("src");
   });
-  $("league").addEventListener("change",chooseLeague);
-  $("team").addEventListener("change", () => { store.set("fgm.team." + current.league.id,$("team").value); page = 0; render(); });
+  $("league").addEventListener("change", () => { $("switcher").open = false; chooseLeague(); });
+  $("team").addEventListener("change", () => { $("switcher").open = false; store.set("fgm.team." + current.league.id,$("team").value); page = 0; render(); });
+  document.addEventListener("keydown",event => { if (event.key === "Escape" && $("switcher").open) { $("switcher").open = false; $("switcher").querySelector("summary").focus(); } });
   document.addEventListener("click",event => {
+    if (!event.target.closest("#switcher")) $("switcher").open = false;
     const button = event.target.closest("button"); if (!button || !current) return;
     if (button.dataset.view) { view = button.dataset.view; page = 0; render(); $("panel").scrollIntoView(); }
     if (button.dataset.jump) $(button.dataset.jump)?.scrollIntoView();

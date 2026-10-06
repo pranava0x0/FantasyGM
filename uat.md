@@ -125,3 +125,7 @@ Additional smoke: 279 assertions, 375px/1440px, light/dark, all three connected 
 Bot fixes: 275 Python tests pass. Isolated cached rebuild: three leagues, 266 players, zero network requests; roster capture timestamps unchanged. Synthetic 10,000-player/32-team analysis: 3.629 seconds, 5.12 MiB traced allocations; isolated offline rebuild: 0.153 seconds, 14.43 MiB. Four Codex review threads resolved after fixes were pushed.
 
 WNBA automation note: expected desktop tabs/meta and all 30 waiver targets to be visible on mobile; desktop chrome is intentionally hidden and the list initially pages ten targets. The iframe also needs one outer-page swipe to expose its bottom navigation. Test loaded meta text with `state: attached`, use `.bottom-nav-btn`, scope cards to the active section, and verify paging rather than assuming all cards render at once.
+
+## Seasonal header — 2026-10-06
+
+Collapsed header: 61px including border at 375px and 1440px; one NFL/WNBA disclosure, 44px target. Browser checks: three imported leagues, all five NFL views, default teams, selection persistence after reload, WNBA loading, Escape close, zero overflow/errors. 74 assertions passed locally. Full suite: 275 passed. When testing league controls, open the header disclosure; hidden enabled controls should be checked as attached, not visible.

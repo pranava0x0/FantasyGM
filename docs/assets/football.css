@@ -5,3 +5,11 @@
 .card{padding:12px;margin:8px 0}.grid{gap:8px}.grid .card{margin:0}.jump-links,.pager{display:flex;align-items:center;gap:8px;justify-content:space-between;margin:12px 0}.jump-links button{flex:1;padding:8px}.pager span{font-size:13px;text-align:center}.pager button{font-size:14px}button:disabled{opacity:.5;cursor:default}#panel,section,#decisions,#picks,.list{scroll-margin-top:12px}#panel details p:last-child{margin-bottom:0}#panel .grid .card p{margin:6px 0}.switches{grid-template-columns:1fr 1fr}#league-label{grid-column:1/-1;grid-row:2}.brand span{margin-left:auto}#meta{font-size:12px}.row label:first-child{flex:1}#panel .grid{margin:12px 0}
 @media(max-width:639px){#views{position:fixed;top:auto;bottom:0;left:0;right:0;padding:8px 8px max(8px,env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--border)}#views button{font-size:14px;min-width:44px}body:has(#connected:not([hidden])){padding-bottom:80px}.grid{gap:8px}header{padding:8px 16px}.switches{margin-top:8px}}
 @media(min-width:640px){.switches{grid-template-columns:1fr 2fr 1fr}#league-label{grid-column:auto;grid-row:auto}#panel,section,#decisions,#picks,.list{scroll-margin-top:72px}}
+
+/* Seasonal switching occupies one header button; controls open only on demand. */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;padding-block:8px}
+#switcher{margin-left:auto}#switcher>summary{display:flex;align-items:center;justify-content:center;gap:8px;min-width:64px;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-weight:650;list-style:none}
+#switcher>summary::-webkit-details-marker{display:none}#switcher>summary::after{content:"▾"}#switcher[open]>summary::after{content:"▴"}
+#switcher .switches{position:absolute;top:calc(100% + 4px);right:16px;z-index:4;width:min(420px,calc(100vw - 32px));margin:0;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;grid-template-columns:1fr 1fr}
+#switcher #league-label{grid-column:1/-1;grid-row:2}
+iframe{height:calc(100vh - 140px)}
