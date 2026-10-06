@@ -79,3 +79,5 @@ See [security.md](security.md). Short version: cookies live in `.env` (gitignore
 - Visual design: [DESIGN.md](DESIGN.md)
 - Open bugs: [ISSUES.md](ISSUES.md)
 - What's next: [BACKLOG.md](BACKLOG.md)
+
+Mobile UAT: [task costs and before/after results](docs/mobile-uat.md), [baseline flows](uat.md), and `scripts/mobile_uat.cjs`. Run against local NFL snapshots; `UAT_BUDGET=8` enforces a maximum task cost.

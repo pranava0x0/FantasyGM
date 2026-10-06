@@ -194,7 +194,7 @@ def eligible(player: Player, slot: str) -> bool:
 
 
 def points(player: Player, scoring: dict[str, float], now: datetime) -> float | None:
-    if not player.stats or not player.stats_at or not player.stats_source:
+    if not scoring or not player.stats or not player.stats_at or not player.stats_source:
         return None
     at = datetime.fromisoformat(player.stats_at.replace("Z", "+00:00"))
     if at.tzinfo is None or (now - at).total_seconds() > 7 * 86400:
@@ -221,9 +221,28 @@ def analyze(league: League, players: dict[str, Player], now: datetime) -> dict[s
         roster = [players[p] for p in team.players if p in players]
         issues = []
         slots = [s for s in league.slots if s not in {"BN", "IR", "TAXI"}]
-        needs = {s for s in slots if sum(eligible(p, s) and status(p) not in OUT and p.id not in league.bye_players for p in roster) < slots.count(s)}
+        available = [p for p in roster if status(p) not in OUT and p.id not in league.bye_players and p.id not in team.reserve]
+        assigned: dict[str, int] = {}
+        def assign(index: int, seen: set[str]) -> bool:
+            for p in available:
+                if p.id in seen or not eligible(p, slots[index]):
+                    continue
+                seen.add(p.id)
+                if p.id not in assigned or assign(assigned[p.id], seen):
+                    assigned[p.id] = index
+                    return True
+            return False
+        # Dedicated slots first: when depth runs out, surface the flexible vacancy.
+        for index in sorted(range(len(slots)), key=lambda i: slots[i] in {"FLEX", "SUPER_FLEX"}):
+            assign(index, set())
+        needs = {s for i, s in enumerate(slots) if i not in assigned.values()}
         for p in roster:
             state = status(p)
+            if stale and (p.id in league.bye_players or state and state != "Healthy"):
+                issues.append({"player_id": p.id, "status": "Bye" if p.id in league.bye_players else state,
+                               "starter": p.id in team.starters, "advice": "Old snapshot; current status and advice unavailable. Refresh before acting.",
+                               "reason": "Historical provider status; roster snapshot older than 24 hours."})
+                continue
             if p.id in league.bye_players:
                 issues.append({"player_id": p.id, "status": "Bye", "starter": p.id in team.starters,
                                "advice": "Bench for the bye; find an eligible replacement. A bye alone is not a drop reason.",
@@ -345,6 +364,15 @@ def refresh(root: Path = ROOT, deep: bool = False, offline: bool = False) -> dic
         except (OSError, ValueError, KeyError) as exc:
             log.error("league %s failed: %s", lid, exc)
             errors.append("Sleeper " + lid + ": " + str(exc))
+            try:
+                league_cache = json.loads((cache.root / ("league-" + lid + ".json")).read_text())
+                roster_cache = json.loads((cache.root / ("roster-" + lid + ".json")).read_text())
+                leagues.append(normalize_sleeper(league_cache["data"], roster_cache["data"], roster_cache["captured_at"]))
+                log.warning("Retaining cached league %s captured %s", lid, roster_cache["captured_at"])
+            except (OSError, ValueError, KeyError):
+                previous = destination / ("sleeper-" + lid + ".json")
+                if previous.exists():
+                    leagues.append(League.model_validate(json.loads(previous.read_text())["league"]))
     imports = root / "data/nfl/imports"
     additions: dict[str, Player] = {}
     for path in sorted(imports.glob("*.json")) if imports.exists() else []:

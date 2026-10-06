@@ -129,3 +129,59 @@ def test_unknown_projection_starter_replacement_has_no_fake_gain() -> None:
 
 def test_one_healthy_starter_does_not_create_backup_position_need() -> None:
     assert "WR" not in analyze(league(),pool(),NOW)["teams"]["9"]["needs"]
+
+
+def test_flexible_coverage_uses_each_player_once() -> None:
+    players = {str(i): Player(id=str(i), name=str(i), positions=[position], team="BUF", adds=1)
+               for i, position in enumerate(["RB", "RB", "WR", "WR", "TE", "WR"])}
+    l = league(slots=["RB", "RB", "WR", "WR", "TE", "FLEX"],
+               teams=[Team(id="9", players=list(players)[:5])])
+    a = analyze(l, players, NOW)["teams"]["9"]
+    assert a["needs"] == ["FLEX"] and a["waivers"][0]["need_fit"]
+    l.teams[0].players.append("5")
+    assert not analyze(l, players, NOW)["teams"]["9"]["needs"]
+    l.teams[0].reserve = ["5"]
+    assert analyze(l, players, NOW)["teams"]["9"]["needs"] == ["FLEX"]
+
+
+def test_coverage_reassigns_multi_position_players() -> None:
+    players = {"both": Player(id="both", name="Both", positions=["WR", "TE"]),
+               "wr": Player(id="wr", name="WR", positions=["WR"])}
+    assert not analyze(league(slots=["WR", "TE"], teams=[Team(id="9",players=list(players))]), players, NOW)["teams"]["9"]["needs"]
+
+
+def test_missing_scoring_is_unavailable() -> None:
+    p = Player(id="p", name="P", positions=["WR"], stats={"rec":5}, stats_at=NOW.isoformat(), stats_source="https://example.com")
+    assert points(p, {}, NOW) is None
+    assert points(p, {"rec":0}, NOW) == 0
+
+
+def test_stale_alerts_preserve_status_without_action_advice() -> None:
+    players = pool(); players["owned"].status = "Out"
+    a = analyze(league(captured_at=(NOW-timedelta(days=2)).isoformat(), bye_players=["owned"]), players, NOW)["teams"]["9"]["alerts"][0]
+    assert a["status"] == "Bye" and "Old snapshot" in a["advice"]
+    assert "IR" not in a["advice"] and "drop" not in a["advice"]
+
+
+def test_refresh_retains_expired_league_on_fetch_failure(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from pipeline.football import LEAGUES
+    cache = tmp_path / "data/nfl/cache"; cache.mkdir(parents=True)
+    def save(key: str, data: Any) -> None:
+        (cache / (key+".json")).write_text(json.dumps({"data":data,"captured_at":(NOW-timedelta(days=2)).isoformat()}))
+    save("catalog", {}); save("trends", []); save("news", {}); save("schedule", {})
+    for lid in LEAGUES:
+        save("league-"+lid, {"league_id":lid,"sport":"nfl","name":"Retained","season":"2026","roster_positions":["WR"],"settings":{},"scoring_settings":{}})
+        save("roster-"+lid, [{"roster_id":9,"players":[],"starters":[],"reserve":[],"settings":{}}])
+    def fail(self: Cache, key: str, url: str, ttl: int, **kwargs: Any) -> tuple[Any, str]:
+        if key.startswith(("league-", "roster-")):
+            raise OSError("Temporary outage")
+        saved = json.loads((cache / (key+".json")).read_text())
+        return saved["data"], saved["captured_at"]
+    monkeypatch.setattr(Cache, "get", fail)
+    result = refresh(tmp_path)
+    assert len(result["errors"]) == 2
+    assert {l["id"] for l in result["leagues"] if l["path"]} == {"sleeper-"+lid for lid in LEAGUES}
+    for lid in LEAGUES:
+        saved = json.loads((tmp_path / "docs/data/football" / ("sleeper-"+lid+".json")).read_text())
+        assert saved["analysis"]["stale"]
+        assert saved["league"]["captured_at"] == (NOW-timedelta(days=2)).isoformat()

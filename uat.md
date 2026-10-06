@@ -9,7 +9,7 @@ _Last run: 2026-06-05 (post-refresh pass — scoring period 29, fresh AI summari
 - **Dev server**: `node scripts/serve.mjs` (also wired into `.claude/launch.json` as `site`)
 - **Entry point**: `docs/index.html`
 - **Data source**: `./data/state.json` fetched by `docs/assets/app.js` on load
-- **Surfaces**: single-page scroll layout — Meta strip → Top Waiver Targets → Team Weakness grid → Recent Transactions
+- **Surfaces**: single-page scroll layout — Meta strip → Top Waiver Targets → Team Needs grid → Recent Transactions
 
 ## Critical flows (run every time)
 
