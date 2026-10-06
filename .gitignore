@@ -41,4 +41,10 @@ data/raw/*/yahoo_stats.html
 /data/nfl/imports/
 /data/nfl/stats.json
 /data/nfl/teams.json
-/docs/data/football/
+# Publish only the three requested leagues and their shared sanitized payload.
+/docs/data/football/*
+!/docs/data/football/index.json
+!/docs/data/football/nfl.json
+!/docs/data/football/sleeper-1389723841625849857.json
+!/docs/data/football/sleeper-1389752644595089408.json
+!/docs/data/football/yahoo-544768.json

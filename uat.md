@@ -129,3 +129,7 @@ WNBA automation note: expected desktop tabs/meta and all 30 waiver targets to be
 ## Seasonal header — 2026-10-06
 
 Collapsed header: 61px including border at 375px and 1440px; one NFL/WNBA disclosure, 44px target. Browser checks: three imported leagues, all five NFL views, default teams, selection persistence after reload, WNBA loading, Escape close, zero overflow/errors. 74 assertions passed locally. Full suite: 275 passed. When testing league controls, open the header disclosure; hidden enabled controls should be checked as attached, not visible.
+
+## Pages payload recovery — 2026-10-06
+
+Recovered previously captured local imports: two Sleeper leagues and Yahoo 544768 Team 9. Rebuilt through `pipeline.football --offline`: three leagues, 266 players, zero requests; original roster capture dates retained. Strict schema and deployment-path checks cover all connected league references, selected team IDs, player references, ignore rules and prohibited owner/credential fields. Raw imports/cache stay ignored; only the requested output files are allowlisted. Full Python suite: 276 passed.

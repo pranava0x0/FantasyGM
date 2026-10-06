@@ -15,7 +15,7 @@ python3 -m pipeline.football --offline # rebuild from local cache/imports
 PORT=9876 node scripts/serve.mjs       # open http://localhost:9876
 ```
 
-Two Sleeper leagues use the public read-only API. Yahoo's private league uses a local validated browser snapshot; automated refresh does not renew that snapshot. ESPN NFL requires a verified league import. Private imports and generated NFL data are gitignored. Owner names and IDs never persist. Read [NFL refresh and imports](docs/nfl-refresh.html) and [schema](docs/football-import.schema.json).
+Two Sleeper leagues use the public read-only API. Yahoo's private league uses a local validated browser snapshot; automated refresh does not renew that snapshot. ESPN NFL requires a verified league import. Raw caches and private imports are gitignored. Sanitized snapshots for the two requested Sleeper leagues and Yahoo Team 9 are committed for GitHub Pages. After refresh, inspect and commit `docs/data/football/*.json` to update the public site; a local refresh alone does not deploy data. Owner names and IDs never persist. Read [NFL refresh and imports](docs/nfl-refresh.html) and [schema](docs/football-import.schema.json).
 
 Sleeper supplies status and trending adds, not point projections. Rankings show unfilled roster coverage and popularity until verified stat inputs are supplied. Yahoo's imported Week 5 projections stay scoped to Yahoo scoring. Hold/IR guidance shows roster capacity and source-linked news; recovery timelines remain unknown unless verified. Exact waiver cutoffs require confirmation in Rules; kickoff times come from provider schedules. Calendar export includes a two-hour reminder. No roster changes are submitted.
 

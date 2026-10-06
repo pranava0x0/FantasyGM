@@ -185,3 +185,39 @@ def test_refresh_retains_expired_league_on_fetch_failure(tmp_path: Path, monkeyp
         saved = json.loads((tmp_path / "docs/data/football" / ("sleeper-"+lid+".json")).read_text())
         assert saved["analysis"]["stale"]
         assert saved["league"]["captured_at"] == (NOW-timedelta(days=2)).isoformat()
+
+
+def test_pages_nfl_payloads_are_deployable_and_complete() -> None:
+    """Catch local-only success: Pages must receive every registered payload."""
+    import subprocess
+    root = Path(__file__).resolve().parents[1]
+    registry_path = root / "docs/data/football/index.json"
+    registry = json.loads(registry_path.read_text())
+    shared_path = root / "docs/data/football/nfl.json"
+    shared = json.loads(shared_path.read_text())
+    players = {pid: Player.model_validate(p) for pid, p in shared["players"].items()}
+    connected = [entry for entry in registry["leagues"] if entry["path"]]
+    assert {entry["id"] for entry in connected} == {
+        "sleeper-1389723841625849857", "sleeper-1389752644595089408", "yahoo-544768"
+    }
+    paths = [registry_path, shared_path]
+    for entry in connected:
+        path = root / "docs" / entry["path"]
+        assert path.resolve().is_relative_to((root / "docs/data/football").resolve())
+        data = json.loads(path.read_text())
+        imported = League.model_validate(data["league"])
+        assert imported.id == entry["id"]
+        assert imported.my_team in {team.id for team in imported.teams}
+        for team in imported.teams:
+            assert set(team.players) <= players.keys()
+            assert team.id in data["analysis"]["teams"]
+        paths.append(path)
+    for path in paths:
+        # --no-index catches accidental ignore rules even if a file is already tracked.
+        result = subprocess.run(["git", "check-ignore", "--no-index", str(path.relative_to(root))], cwd=root, capture_output=True)
+        assert result.returncode == 1, f"Pages payload ignored: {path.name}"
+        text = path.read_text()
+        assert not any(token in text.lower() for token in [
+            '"owner_id"', '"user_id"', '"members"', '"email"', '"display_name"',
+            '"espn_s2"', '"swid"', '"cookie"', '"access_token"', '"refresh_token"'
+        ])
