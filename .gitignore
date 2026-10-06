@@ -35,3 +35,10 @@ dist/
 scratch/
 tmp/
 data/raw/*/yahoo_stats.html
+
+# NFL local cache and private league imports
+/data/nfl/cache/
+/data/nfl/imports/
+/data/nfl/stats.json
+/data/nfl/teams.json
+/docs/data/football/

@@ -1,10 +1,27 @@
 # Fantasy GM
 
-AI-powered GM for an ESPN fantasy WNBA league. Identifies trending waiver-wire targets, surfaces each team's biggest positional need (proactive framing — "top need," not "weakness"), and tracks transactions over time.
+Fantasy decision desk for WNBA and NFL. Switch sports, leagues and your team. WNBA keeps the existing ESPN optimizer and transaction history. NFL shares player status, news, schedules and trends across leagues; roster availability, scoring and advice remain league-specific.
 
 The data pipeline runs locally on your machine. The output is a static page hosted on GitHub Pages. No backend, no secrets in this repo.
 
-## Quick start
+## NFL quick start
+
+Existing installed dependencies suffice; no new packages.
+
+```bash
+python3 -m pipeline.football           # daily: TTL-cached Sleeper refresh
+python3 -m pipeline.football --deep    # once or twice weekly: force enrichment
+python3 -m pipeline.football --offline # rebuild from local cache/imports
+PORT=9876 node scripts/serve.mjs       # open http://localhost:9876
+```
+
+Two Sleeper leagues use the public read-only API. Yahoo's private league uses a local validated browser snapshot; automated refresh does not renew that snapshot. ESPN NFL requires a verified league import. Private imports and generated NFL data are gitignored. Owner names and IDs never persist. Read [NFL refresh and imports](docs/nfl-refresh.html) and [schema](docs/football-import.schema.json).
+
+Sleeper supplies status and trending adds, not point projections. Rankings show unfilled roster coverage and popularity until verified stat inputs are supplied. Yahoo's imported Week 5 projections stay scoped to Yahoo scoring. Hold/IR guidance shows roster capacity and source-linked news; recovery timelines remain unknown unless verified. Exact waiver cutoffs require confirmation in Rules; kickoff times come from provider schedules. Calendar export includes a two-hour reminder. No roster changes are submitted.
+
+Performance check: `python3 scripts/benchmark_football.py`. NFL uses a shared compact payload plus one selected league, with at most two league objects cached. WNBA's larger legacy payload loads only on sport selection, and its iframe unloads when returning to NFL.
+
+## WNBA quick start
 
 ```bash
 # 1. Install deps (Python 3.9+)
@@ -62,3 +79,5 @@ See [security.md](security.md). Short version: cookies live in `.env` (gitignore
 - Visual design: [DESIGN.md](DESIGN.md)
 - Open bugs: [ISSUES.md](ISSUES.md)
 - What's next: [BACKLOG.md](BACKLOG.md)
+
+Mobile UAT: [task costs and before/after results](docs/mobile-uat.md), [baseline flows](uat.md), and `scripts/mobile_uat.cjs`. Run against local NFL snapshots; `UAT_BUDGET=8` enforces a maximum task cost.

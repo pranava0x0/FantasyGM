@@ -1,7 +1,11 @@
 # UAT Baseline — FantasyGM
 
 _Created: 2026-05-17_
-_Last run: 2026-06-05 (post-refresh pass — scoring period 29, fresh AI summaries, X/Twitter signals)_
+_Last run: 2026-10-06 (PR #74 mobile interaction costs and NFL release checks)_
+
+## Legacy WNBA baseline
+
+The following original flows apply to `docs/wnba.html`. Current NFL release and repeatable mobile-cost checks appear below.
 
 ## Project Info
 
@@ -9,7 +13,7 @@ _Last run: 2026-06-05 (post-refresh pass — scoring period 29, fresh AI summari
 - **Dev server**: `node scripts/serve.mjs` (also wired into `.claude/launch.json` as `site`)
 - **Entry point**: `docs/index.html`
 - **Data source**: `./data/state.json` fetched by `docs/assets/app.js` on load
-- **Surfaces**: single-page scroll layout — Meta strip → Top Waiver Targets → Team Weakness grid → Recent Transactions
+- **Surfaces**: single-page scroll layout — Meta strip → Top Waiver Targets → Team Needs grid → Recent Transactions
 
 ## Critical flows (run every time)
 
@@ -88,3 +92,36 @@ See `issues.md` for the audit table.
 - No new issues found.
 - Verified: scoring period 29, 2026-06-05 capture date, 30/30 AI summaries with today's fresh text, X/Twitter social feed in player modal, all 8 teams in Team Needs with FC/G bars, FUTURE ROSTER transaction with correct slot labels, mobile 375px clean.
 - `pytest`: 138 passed. Secret scan: clean.
+
+## NFL release — 2026-10-06
+
+- Initial My team selector visible and enabled after selected league loads; persisted IDs are scoped per league.
+- Mobile 375px and desktop 1440px: no horizontal page overflow; all controls at least 44px.
+- Switch both Sleeper leagues; own rosters 9 and 11. Yahoo browser-imported own Team 9; partial availability explicit. ESPN setup remains honest.
+- Yahoo: Nico Collins replacement for OUT Justin Jefferson; Kelce bye and TE coverage need; IR-held Tyson preserve value. Imported Week 5 projection has a source and capture time.
+- Waivers: sequentially type Dulcich; stable search input, one matching candidate. Position filter composes with search; no data reload.
+- Injury alert news links require exact athlete IDs; shared news rows without URL excluded.
+- WNBA: Copper Futures default, August snapshot visibly stale, legacy console intact; unload iframe when returning NFL.
+- Rules: confirm timezone-aware cutoff, Today shows it; calendar export should import as UTC event with two-hour alarm. Exact processing hour not guessed.
+- Performance script stresses 10,000 players / 32 teams and offline full rebuild; checks <64MiB stress allocations and <200KB gzipped per JSON.
+
+## Mobile interaction baseline — 2026-10-06
+
+`scripts/mobile_uat.cjs` measures 10 tasks across three locally connected NFL leagues at 375×812 and 390×812. PR #74 baseline: 60 journeys, median 4 interactions, p95/max 18, total 258 swipes. Saved report: `docs/mobile-uat-before.json`.
+
+Serve `docs/`, then run:
+
+```bash
+NODE_PATH=/path/to/node_modules node scripts/mobile_uat.cjs tmp/mobile-current.json
+NODE_PATH=/path/to/node_modules node scripts/mobile_uat.cjs tmp/mobile-after.json docs/mobile-uat-before.json
+```
+
+Requires existing Playwright and Chrome (`CHROME_PATH` optional). `UAT_URL` defaults to `http://127.0.0.1:8000`. NFL snapshots must exist locally. Fresh saved-team page per task; one tap or text entry counts one, swipe travels at most 609px. Content must expose its first 300px without nav overlap. Browser auto-scroll excluded. Native selector interactions excluded; costs start after league/team selection. Same task list and snapshot required for comparison. These are equal-weight scripted task costs, not real-user telemetry. Screenshots saved under ignored `tmp/uat-screenshots/`.
+
+After fixes: median 3, p95/max 8, total 32 swipes across the same 60 journeys. Details and per-task ranges: `docs/mobile-uat.md`; raw result: `docs/mobile-uat-after.json`. `UAT_BUDGET=8` enforces the maximum independently of old snapshot identity. Five-result paging must keep all IDs reachable, reset on filters, preserve sequential-typing focus, and switch from a deep list to another view without scrolling back. Sources remain accessible via native disclosure.
+
+Additional smoke: 279 assertions, 375px/1440px, light/dark, all three connected NFL leagues, complete paging without missing/duplicate IDs, zero matches, search clearing and sequential focus, sources disclosure, local cutoff/calendar download, all views/44px controls, ESPN setup, WNBA embed load/unload, stale snapshot advice suppression. Zero page errors. Full Python suite: 275 passed.
+
+Bot fixes: 275 Python tests pass. Isolated cached rebuild: three leagues, 266 players, zero network requests; roster capture timestamps unchanged. Synthetic 10,000-player/32-team analysis: 3.629 seconds, 5.12 MiB traced allocations; isolated offline rebuild: 0.153 seconds, 14.43 MiB. Four Codex review threads resolved after fixes were pushed.
+
+WNBA automation note: expected desktop tabs/meta and all 30 waiver targets to be visible on mobile; desktop chrome is intentionally hidden and the list initially pages ten targets. The iframe also needs one outer-page swipe to expose its bottom navigation. Test loaded meta text with `state: attached`, use `.bottom-nav-btn`, scope cards to the active section, and verify paging rather than assuming all cards render at once.
