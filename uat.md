@@ -133,3 +133,7 @@ Collapsed header: 61px including border at 375px and 1440px; one NFL/WNBA disclo
 ## Pages payload recovery — 2026-10-06
 
 Recovered previously captured local imports: two Sleeper leagues and Yahoo 544768 Team 9. Rebuilt through `pipeline.football --offline`: three leagues, 266 players, zero requests; original roster capture dates retained. Strict schema and deployment-path checks cover all connected league references, selected team IDs, player references, ignore rules and prohibited owner/credential fields. Raw imports/cache stay ignored; only the requested output files are allowlisted. Full Python suite: 276 passed.
+
+## One-tap league switching — 2026-10-06
+
+Three connected league buttons stay visible above NFL content; switching takes one click/tap, compared with opening the seasonal menu then opening/selecting the league dropdown. Selected button uses aria-pressed; full accessible names/title text survive mobile truncation. The row stays 44px at 375px and 1440px, with no page overflow. Browser verified each league, active state, selected roster, reload persistence, all NFL views and WNBA switching. No page errors. Python suite: 276 passed.

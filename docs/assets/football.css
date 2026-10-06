@@ -13,3 +13,10 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;po
 #switcher .switches{position:absolute;top:calc(100% + 4px);right:16px;z-index:4;width:min(420px,calc(100vw - 32px));margin:0;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;grid-template-columns:1fr 1fr}
 #switcher #league-label{grid-column:1/-1;grid-row:2}
 iframe{height:calc(100vh - 140px)}
+
+/* One tap between connected leagues, without opening the seasonal menu. */
+.league-shortcuts{display:flex;gap:6px;margin-bottom:8px}
+.league-shortcuts button{flex:1;min-width:44px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px;font-size:13px}
+.league-shortcuts button[aria-pressed=true]{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+@media(prefers-color-scheme:dark){.league-shortcuts button[aria-pressed=true]{color:var(--bg)}}
+@media(min-width:640px){.league-shortcuts button{flex:0 1 auto;padding-inline:12px}}

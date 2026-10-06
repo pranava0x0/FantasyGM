@@ -60,6 +60,7 @@
   async function chooseLeague() {
     const token = ++load;
     const entry = index.leagues.find(l => l.id === $("league").value);
+    $("league-shortcuts").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.league === entry.id)));
     store.set("fgm.league.nfl",entry.id); page = 0; current = null; $("error").hidden = true;
     $("team").disabled = true; $("team").innerHTML = '<option>Loading roster…</option>'; $("connected").hidden = true; $("setup").hidden = !!entry.path; $("team-label").hidden = !entry.path;
     if (!entry.path) {
@@ -96,7 +97,9 @@
   document.addEventListener("keydown",event => { if (event.key === "Escape" && $("switcher").open) { $("switcher").open = false; $("switcher").querySelector("summary").focus(); } });
   document.addEventListener("click",event => {
     if (!event.target.closest("#switcher")) $("switcher").open = false;
-    const button = event.target.closest("button"); if (!button || !current) return;
+    const button = event.target.closest("button");
+    if (button?.dataset.league) { $("league").value = button.dataset.league; chooseLeague(); return; }
+    if (!button || !current) return;
     if (button.dataset.view) { view = button.dataset.view; page = 0; render(); $("panel").scrollIntoView(); }
     if (button.dataset.jump) $(button.dataset.jump)?.scrollIntoView();
     if (button.id === "next-page" || button.id === "prev-page") {
@@ -140,6 +143,8 @@
   document.addEventListener("change",event => { if(event.target.id === "position") { page = 0; filterPage(); } });
   Promise.all([fetchJSON("data/football/index.json"),fetchJSON("data/football/nfl.json")]).then(([registry,sport]) => {
     index=registry; shared=sport;
+    $("league-shortcuts").innerHTML = index.leagues.filter(l => l.path).map(l => `<button data-league="${esc(l.id)}" aria-label="${esc(l.name)}" title="${esc(l.name)}" aria-pressed="false">${esc(l.name)}</button>`).join("");
+    $("league-shortcuts").hidden = !$("league-shortcuts").children.length;
     $("league").innerHTML=index.leagues.map(l => `<option value="${esc(l.id)}">${esc(l.name)}</option>`).join("");
     $("league").value=index.leagues.some(l => l.id === store.get("fgm.league.nfl")) ? store.get("fgm.league.nfl") : index.leagues[0].id;
     if(index.errors.length) { $("error").hidden=false; $("error").textContent=index.errors.join(" · "); }
