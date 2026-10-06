@@ -100,3 +100,16 @@ See `issues.md` for the audit table.
 - WNBA: Copper Futures default, August snapshot visibly stale, legacy console intact; unload iframe when returning NFL.
 - Rules: confirm timezone-aware cutoff, Today shows it; calendar export should import as UTC event with two-hour alarm. Exact processing hour not guessed.
 - Performance script stresses 10,000 players / 32 teams and offline full rebuild; checks <64MiB stress allocations and <200KB gzipped per JSON.
+
+## Mobile interaction baseline — 2026-10-06
+
+`scripts/mobile_uat.cjs` measures 10 tasks across three locally connected NFL leagues at 375×812 and 390×812. PR #74 baseline: 60 journeys, median 4 interactions, p95/max 18, total 258 swipes. Saved report: `docs/mobile-uat-before.json`.
+
+Serve `docs/`, then run:
+
+```bash
+NODE_PATH=/path/to/node_modules node scripts/mobile_uat.cjs tmp/mobile-current.json
+NODE_PATH=/path/to/node_modules node scripts/mobile_uat.cjs tmp/mobile-after.json docs/mobile-uat-before.json
+```
+
+Requires existing Playwright and Chrome (`CHROME_PATH` optional). `UAT_URL` defaults to `http://127.0.0.1:8000`. NFL snapshots must exist locally. Fresh saved-team page per task; one tap or text entry counts one, swipe travels at most 609px. Content must expose its first 300px without nav overlap. Browser auto-scroll excluded. Native selector interactions excluded; costs start after league/team selection. Same task list and snapshot required for comparison. These are equal-weight scripted task costs, not real-user telemetry. Screenshots saved under ignored `tmp/uat-screenshots/`.
