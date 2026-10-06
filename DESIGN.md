@@ -355,3 +355,7 @@ Decisions made by *omission*:
 - **Apple Human Interface Guidelines** — touch targets, safe areas, mobile-first ergonomics.
 - **Pieter Levels (levels.io)** — "you don't need a backend, you don't need a CSS framework, you don't need a font, you don't need npm." When in doubt, ship the simpler thing.
 - **Andrej Karpathy** — performance budgets are real constraints, not afterthoughts; measure before optimizing; the smallest version that works is the right starting point.
+
+## NFL desk (2026-10-06)
+
+Sport → league → own roster is the persistent selection order. NFL Today leads with verified upcoming kickoffs, explicit confirmed cutoffs, unavailable-player replacement checks and injury/IR alerts. Waiver shortlist search filters stable DOM nodes so keyboard focus survives typing. Mobile uses one column; desktop uses the same cards in two columns. No full player catalog or per-league copy of shared news is shipped. Global adds are labeled popularity; imported projections carry their league and week. Unfilled coverage means fewer eligible available roster players than required slots; it does not imply backup kicker/defense needs. WNBA retains the proven console and displays snapshot freshness above it.

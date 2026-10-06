@@ -61,3 +61,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 - **PWA install + offline cache.** Make the static page installable; show last successful snapshot when offline.
 - **Light/dark theme parity audit.** Run a contrast check across both themes once frontend has more components.
 - **Move the site to its own domain** if/when GitHub Pages URL becomes a friction point.
+
+## User-requested NFL release (2026-10-05)
+
+- High: unified WNBA/NFL and multi-league mobile console; shared cached sport collection, isolated league advice, Sleeper live ingestion, Yahoo/ESPN validated import, deadlines/status alerts, daily/deep refresh and performance checks. Migration: docs/multi-sport-plan.md.

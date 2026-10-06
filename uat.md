@@ -88,3 +88,15 @@ See `issues.md` for the audit table.
 - No new issues found.
 - Verified: scoring period 29, 2026-06-05 capture date, 30/30 AI summaries with today's fresh text, X/Twitter social feed in player modal, all 8 teams in Team Needs with FC/G bars, FUTURE ROSTER transaction with correct slot labels, mobile 375px clean.
 - `pytest`: 138 passed. Secret scan: clean.
+
+## NFL release — 2026-10-06
+
+- Initial My team selector visible and enabled after selected league loads; persisted IDs are scoped per league.
+- Mobile 375px and desktop 1440px: no horizontal page overflow; all controls at least 44px.
+- Switch both Sleeper leagues; own rosters 9 and 11. Yahoo browser-imported own Team 9; partial availability explicit. ESPN setup remains honest.
+- Yahoo: Nico Collins replacement for OUT Justin Jefferson; Kelce bye and TE coverage need; IR-held Tyson preserve value. Imported Week 5 projection has a source and capture time.
+- Waivers: sequentially type Dulcich; stable search input, one matching candidate. Position filter composes with search; no data reload.
+- Injury alert news links require exact athlete IDs; shared news rows without URL excluded.
+- WNBA: Copper Futures default, August snapshot visibly stale, legacy console intact; unload iframe when returning NFL.
+- Rules: confirm timezone-aware cutoff, Today shows it; calendar export should import as UTC event with two-hour alarm. Exact processing hour not guessed.
+- Performance script stresses 10,000 players / 32 teams and offline full rebuild; checks <64MiB stress allocations and <200KB gzipped per JSON.
