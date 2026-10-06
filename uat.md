@@ -113,3 +113,7 @@ NODE_PATH=/path/to/node_modules node scripts/mobile_uat.cjs tmp/mobile-after.jso
 ```
 
 Requires existing Playwright and Chrome (`CHROME_PATH` optional). `UAT_URL` defaults to `http://127.0.0.1:8000`. NFL snapshots must exist locally. Fresh saved-team page per task; one tap or text entry counts one, swipe travels at most 609px. Content must expose its first 300px without nav overlap. Browser auto-scroll excluded. Native selector interactions excluded; costs start after league/team selection. Same task list and snapshot required for comparison. These are equal-weight scripted task costs, not real-user telemetry. Screenshots saved under ignored `tmp/uat-screenshots/`.
+
+After fixes: median 3, p95/max 8, total 32 swipes across the same 60 journeys. Details and per-task ranges: `docs/mobile-uat.md`; raw result: `docs/mobile-uat-after.json`. `UAT_BUDGET=8` enforces the maximum independently of old snapshot identity. Five-result paging must keep all IDs reachable, reset on filters, preserve sequential-typing focus, and switch from a deep list to another view without scrolling back. Sources remain accessible via native disclosure.
+
+Additional smoke: 279 assertions, 375px/1440px, light/dark, all three connected NFL leagues, complete paging without missing/duplicate IDs, zero matches, search clearing and sequential focus, sources disclosure, local cutoff/calendar download, all views/44px controls, ESPN setup, WNBA embed load/unload, stale snapshot advice suppression. Zero page errors. Full Python suite: 275 passed.

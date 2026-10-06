@@ -88,7 +88,9 @@ const compare = process.argv[3];
     assert.equal(errors.length,0,errors.join('\n'));
     const totals=rows.map(r=>r.interactions).sort((a,b)=>a-b);
     const summary={journeys:rows.length,median:totals[Math.ceil(totals.length*.5)-1],p95:totals[Math.ceil(totals.length*.95)-1],max:totals.at(-1),swipes:rows.reduce((s,r)=>s+r.swipes,0)};
-    const report={url,measuredAt:new Date().toISOString(),snapshotAt:registry.built_at,method:'Fresh page per task, saved own team; tap=1, text entry=1, swipe=609px (75% of 812px); target first 300px unobscured. Native dropdown selection excluded. Equal task weighting; not user telemetry.',summary,rows};
+    assert(rows.length > 0, 'No journeys measured');
+    if (process.env.UAT_BUDGET) assert(summary.max <= Number(process.env.UAT_BUDGET), 'Interaction budget exceeded');
+    const report={url,measuredAt:new Date().toISOString(),snapshotAt:registry.built_at,method:'Fresh page per task, saved own team; tap=1, text entry=1, swipe at most 609px (75% of 812px); target first 300px unobscured. Native dropdown selection excluded. Equal task weighting; not user telemetry.',summary,rows};
     if (compare) {
       const before=JSON.parse(fs.readFileSync(compare));
       assert.equal(before.snapshotAt, report.snapshotAt,'Snapshot changed; comparison invalid');
