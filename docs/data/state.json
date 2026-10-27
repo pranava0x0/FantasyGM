@@ -1,7 +1,7 @@
 {
   "meta": {
     "league_id": 2043154241,
-    "league_name": "50-40-90 Club",
+    "league_name": "League 2043154241",
     "season_id": 2026,
     "scoring_period_id": 109,
     "matchup_period_id": 14,
@@ -15,9 +15,9 @@
   "teams": [
     {
       "team_id": 1,
-      "abbrev": "KAH",
-      "name": "Copper Futures",
-      "logo_url": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/1c02dee0-4eea-11f1-8cd3-5550ce44b587",
+      "abbrev": "T1",
+      "name": "Team 1",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 7,
@@ -496,9 +496,9 @@
     },
     {
       "team_id": 2,
-      "abbrev": "PEZ",
-      "name": "Empire State Farm",
-      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/Incredibles/incredibles_12.svg",
+      "abbrev": "T2",
+      "name": "Team 2",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 5,
@@ -998,9 +998,9 @@
     },
     {
       "team_id": 5,
-      "abbrev": "Spda",
-      "name": "Plumdog Millionaire",
-      "logo_url": "https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg",
+      "abbrev": "T5",
+      "name": "Team 5",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 8,
@@ -1490,9 +1490,9 @@
     },
     {
       "team_id": 6,
-      "abbrev": "Nut",
-      "name": "Hot Stew Comin Through",
-      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/StarWarsTheRiseOfSkywalker/rise-skywalker-chewy.svg",
+      "abbrev": "T6",
+      "name": "Team 6",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 6,
@@ -1952,9 +1952,9 @@
     },
     {
       "team_id": 7,
-      "abbrev": "C9",
-      "name": "Honolulu Cloud Wine",
-      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_doughnut.svg",
+      "abbrev": "T7",
+      "name": "Team 7",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 6,
@@ -2360,9 +2360,9 @@
     },
     {
       "team_id": 8,
-      "abbrev": "KylB",
-      "name": "Rhyne 'em dine 'em 69 'em",
-      "logo_url": "https://www.athletespeakers.com/storage/celebrities/1661452080_Screenshot%202022-08-25%20142501.png",
+      "abbrev": "T8",
+      "name": "Team 8",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 9,
@@ -2825,9 +2825,9 @@
     },
     {
       "team_id": 9,
-      "abbrev": "NNZ",
-      "name": "Nothing But Net Zero",
-      "logo_url": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/607f0770-659b-11f1-ba11-258ab190f341",
+      "abbrev": "T9",
+      "name": "Team 9",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 2,
@@ -3325,9 +3325,9 @@
     },
     {
       "team_id": 10,
-      "abbrev": "A-B",
-      "name": "Nobody's Business",
-      "logo_url": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_beer.svg",
+      "abbrev": "T10",
+      "name": "Team 10",
+      "logo_url": null,
       "division_id": 0,
       "record": {
         "wins": 5,
@@ -81704,345 +81704,131 @@
     ]
   },
   "reddit_posts_by_player": {
-    "4282168": [
+    "2491205": [
       {
-        "title": "Tempo sign Kiana Williams to a 7-day extreme hardship contract",
-        "url": "https://www.reddit.com/r/wnba/comments/1vxdumd/tempo_sign_kiana_williams_to_a_7day_extreme/",
-        "published_at": "2026-08-24T20:05:18Z",
+        "title": "Skylar Diggins hired as Special Advisor for Notre Dame WBB Team",
+        "url": "https://www.reddit.com/r/wnba/comments/1xg5rcg/skylar_diggins_hired_as_special_advisor_for_notre/",
+        "published_at": "2026-10-26T18:57:02Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Mercury waive Kiana Williams",
-        "url": "https://www.reddit.com/r/wnba/comments/1tt4dgg/mercury_waive_kiana_williams/",
-        "published_at": "2026-05-31T19:09:25Z",
+        "title": "Sheryl Swoopes and Skylar Diggins-Smith to Front ‘Gamechangers: Mother/Athlete’ Docuseries on Roku",
+        "url": "https://www.reddit.com/r/wnba/comments/1us1o5a/sheryl_swoopes_and_skylar_digginssmith_to_front/",
+        "published_at": "2026-07-09T20:14:26Z",
         "subreddit": "wnba"
       },
       {
-        "title": "LA Sparks waived Kiana Williams to offer Ashlon Jackson a roster spot. Connecticut Sun matched waiving Rayah Marshall",
-        "url": "https://www.reddit.com/r/wnba/comments/1vp97e5/la_sparks_waived_kiana_williams_to_offer_ashlon/",
-        "published_at": "2026-08-15T17:46:38Z",
-        "subreddit": "wnba"
-      }
-    ],
-    "3142328": [
-      {
-        "title": "Gabby Williams is the media front runner for DPOY -does it actually make sense?",
-        "url": "https://www.reddit.com/r/wnba/comments/1vxal9o/gabby_williams_is_the_media_front_runner_for_dpoy/",
-        "published_at": "2026-08-24T18:11:06Z",
+        "title": "10 WNBA trade candidates (Skylar Diggins!) ahead of the 2026 deadline (For the Win)",
+        "url": "https://www.reddit.com/r/wnba/comments/1usyvhh/10_wnba_trade_candidates_skylar_diggins_ahead_of/",
+        "published_at": "2026-07-10T20:15:41Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Golden State Valkyries’ Veronica Burton & Gabby Williams on the cover of SLAM",
-        "url": "https://www.reddit.com/r/wnba/comments/1ttxdgx/golden_state_valkyries_veronica_burton_gabby/",
-        "published_at": "2026-06-01T16:24:10Z",
+        "title": "Was Sky moving away from Diggins right?",
+        "url": "https://www.reddit.com/r/wnba/comments/1uuwf9a/was_sky_moving_away_from_diggins_right/",
+        "published_at": "2026-07-13T00:31:58Z",
         "subreddit": "wnba"
       },
       {
-        "title": "How Gabby Williams became Valkyries’ go-to star: ‘What can I do more?’",
-        "url": "https://www.reddit.com/r/wnba/comments/1umgrxw/how_gabby_williams_became_valkyries_goto_star/",
-        "published_at": "2026-07-03T15:00:02Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Gabby Williams/Leila Lacan Trade",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1urv5ac/gabby_williamsleila_lacan_trade/",
-        "published_at": "2026-07-09T16:24:23Z",
+        "title": "So what are we doing with Skylar Diggins?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uwucml/so_what_are_we_doing_with_skylar_diggins/",
+        "published_at": "2026-07-15T03:33:06Z",
         "subreddit": "fantasywnba"
       },
       {
-        "title": "Trade Advice - Gabby Williams for Nyara Sabally and Natasha Cloud",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uvq3vj/trade_advice_gabby_williams_for_nyara_sabally_and/",
-        "published_at": "2026-07-13T22:15:35Z",
+        "title": "Diggins, Cloud, or Vandersloot?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uznle3/diggins_cloud_or_vandersloot/",
+        "published_at": "2026-07-18T05:54:51Z",
         "subreddit": "fantasywnba"
       },
       {
-        "title": "Gabby Williams: \"If I piss off a bigot, then that's a great day for me, you know?\"",
-        "url": "https://www.reddit.com/r/wnba/comments/1uz9k3x/gabby_williams_if_i_piss_off_a_bigot_then_thats_a/",
-        "published_at": "2026-07-17T19:26:00Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Gabby Williams Is Anti-Athleisure, Pro ‘Bougie’ Makeup Splurges",
-        "url": "https://www.reddit.com/r/wnba/comments/1vlxkgn/gabby_williams_is_antiathleisure_pro_bougie/",
-        "published_at": "2026-08-11T23:27:18Z",
-        "subreddit": "wnba"
-      }
-    ],
-    "3917450": [
-      {
-        "title": "Will Napheesa Collier's midseason return boost Lynx's WNBA title chances?",
-        "url": "https://www.reddit.com/r/wnba/comments/1vx9ixd/will_napheesa_colliers_midseason_return_boost/",
-        "published_at": "2026-08-24T17:33:50Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Napheesa Collier, Dorka Juhasz still a few weeks away from practicing, per coach Reeve.",
-        "url": "https://www.reddit.com/r/wnba/comments/1uc0rnv/napheesa_collier_dorka_juhasz_still_a_few_weeks/",
-        "published_at": "2026-06-21T20:45:40Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "The Lynx celebrate Cheryl Reeve’s record-setting 380th win. (via Napheesa Collier’s IG)",
-        "url": "https://www.reddit.com/r/wnba/comments/1urde9t/the_lynx_celebrate_cheryl_reeves_recordsetting/",
-        "published_at": "2026-07-09T02:30:09Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Cheryl Reeve: Lynx still Napheesa Collier's team despite Olivia Miles' emergence",
-        "url": "https://www.reddit.com/r/wnba/comments/1utsi4x/cheryl_reeve_lynx_still_napheesa_colliers_team/",
-        "published_at": "2026-07-11T18:57:53Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Nia Coffey + Natasha Mack for Napheesa Collier?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uxc0ul/nia_coffey_natasha_mack_for_napheesa_collier/",
-        "published_at": "2026-07-15T17:08:08Z",
+        "title": "[Sports] - Skylar Diggins remains out but says role conversations are moving forward | Chicago Sun-Times",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1v0arp4/sports_skylar_diggins_remains_out_but_says_role/",
+        "published_at": "2026-07-18T23:32:53Z",
         "subreddit": "fantasywnba"
       },
       {
-        "title": "Napheesa Collier is Probable for Wednesday",
-        "url": "https://www.reddit.com/r/wnba/comments/1v2z2gg/napheesa_collier_is_probable_for_wednesday/",
-        "published_at": "2026-07-21T23:34:43Z",
+        "title": "Where is Skylar Diggins? Did I miss something?",
+        "url": "https://www.reddit.com/r/wnba/comments/1v2jz6l/where_is_skylar_diggins_did_i_miss_something/",
+        "published_at": "2026-07-21T14:25:17Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Cheryl on Napheesa Collier",
-        "url": "https://www.reddit.com/r/wnba/comments/1v9jgkw/cheryl_on_napheesa_collier/",
-        "published_at": "2026-07-29T02:46:03Z",
+        "title": "Skylar Diggins knee injury is week-to-week according to Tyler Marsh",
+        "url": "https://www.reddit.com/r/wnba/comments/1v8cn49/skylar_diggins_knee_injury_is_weektoweek/",
+        "published_at": "2026-07-27T20:43:31Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Becky Hammon says A’ja Wilson, Breanna Stewart, and Napheesa Collier the best 3 players in the WNBA 🏀",
-        "url": "https://www.reddit.com/r/wnba/comments/1vkpa5e/becky_hammon_says_aja_wilson_breanna_stewart_and/",
-        "published_at": "2026-08-10T16:13:39Z",
+        "title": "Diggins or Dijonai for IR?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1v9agbc/diggins_or_dijonai_for_ir/",
+        "published_at": "2026-07-28T20:39:03Z",
+        "subreddit": "fantasywnba"
+      },
+      {
+        "title": "What’s the end game for Skyler Diggins and Chicago?",
+        "url": "https://www.reddit.com/r/wnba/comments/1va71lk/whats_the_end_game_for_skyler_diggins_and_chicago/",
+        "published_at": "2026-07-29T19:52:10Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Is Skylar Diggins Really Hurt?",
+        "url": "https://www.reddit.com/r/wnba/comments/1vqc9r5/is_skylar_diggins_really_hurt/",
+        "published_at": "2026-08-16T23:41:50Z",
         "subreddit": "wnba"
       }
     ],
-    "869": [
+    "3146151": [
       {
-        "title": "Phoenix Mercury agree to buyout for DeWanna Bonner",
-        "url": "https://www.reddit.com/r/wnba/comments/1vx7t1t/phoenix_mercury_agree_to_buyout_for_dewanna_bonner/",
-        "published_at": "2026-08-24T16:33:01Z",
+        "title": "Women's World Cup and WNBA stars Atkins, Canada, Carleton, Gray, Griner and Toliver to headline first Women's Basketball Without Borders Next Up Camp in Singapore",
+        "url": "https://www.reddit.com/r/wnba/comments/1xfxwuy/womens_world_cup_and_wnba_stars_atkins_canada/",
+        "published_at": "2026-10-26T14:10:44Z",
         "subreddit": "wnba"
       },
       {
-        "title": "HighPostHoops: DeWanna Bonner is not being praised enough for how she's handling this season",
-        "url": "https://www.reddit.com/r/wnba/comments/1uus3n3/highposthoops_dewanna_bonner_is_not_being_praised/",
-        "published_at": "2026-07-12T21:28:31Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Bonner moves into No. 2 on the W's all-time games played list",
-        "url": "https://www.reddit.com/r/wnba/comments/1vf0f9n/bonner_moves_into_no_2_on_the_ws_alltime_games/",
-        "published_at": "2026-08-04T04:45:07Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "With the Aces resting their big 3 tomorrow should I stream DeWanna Bonner?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1vjd7to/with_the_aces_resting_their_big_3_tomorrow_should/",
-        "published_at": "2026-08-09T01:51:05Z",
+        "title": "Start 2 of 4 tonight: Sykes, Rice, Atkins, Diamond Miller",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1vrxik9/start_2_of_4_tonight_sykes_rice_atkins_diamond/",
+        "published_at": "2026-08-18T18:24:10Z",
         "subreddit": "fantasywnba"
       }
     ],
-    "4433403": [
+    "3906972": [
       {
-        "title": "8/23. Historic night for Caitlin Clark",
-        "url": "https://www.reddit.com/r/wnba/comments/1vwpgh8/823_historic_night_for_caitlin_clark/",
-        "published_at": "2026-08-24T01:48:37Z",
+        "title": "Women's World Cup and WNBA stars Atkins, Canada, Carleton, Gray, Griner and Toliver to headline first Women's Basketball Without Borders Next Up Camp in Singapore",
+        "url": "https://www.reddit.com/r/wnba/comments/1xfxwuy/womens_world_cup_and_wnba_stars_atkins_canada/",
+        "published_at": "2026-10-26T14:10:44Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Kara Lawson sets early tone for Caitlin Clark’s FIBA World Cup with Team USA (High Post Hoops)",
-        "url": "https://www.reddit.com/r/wnba/comments/1vwdshg/kara_lawson_sets_early_tone_for_caitlin_clarks/",
-        "published_at": "2026-08-23T17:47:28Z",
+        "title": "Bridget Carleton - Max Player? Max Player.",
+        "url": "https://www.reddit.com/r/wnba/comments/1tsjosh/bridget_carleton_max_player_max_player/",
+        "published_at": "2026-05-31T03:16:58Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Every foul on Caitlin Clark against the Portland Fire",
-        "url": "https://www.reddit.com/r/wnba/comments/1tts9mo/every_foul_on_caitlin_clark_against_the_portland/",
-        "published_at": "2026-06-01T13:29:08Z",
-        "subreddit": "wnba"
+        "title": "What are we doing with Carleton?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1u8iqsv/what_are_we_doing_with_carleton/",
+        "published_at": "2026-06-17T18:43:08Z",
+        "subreddit": "fantasywnba"
       },
       {
-        "title": "Caitlin Clark Debuts Nike Kobe 6 \"Eras Tour\" 🌈🪩",
-        "url": "https://www.reddit.com/r/wnba/comments/1u3ezb4/caitlin_clark_debuts_nike_kobe_6_eras_tour/",
-        "published_at": "2026-06-11T23:30:21Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark’s first signature shoe, the Caitlin 1, is set to debut Sep. 29th (via JustFreshKicks)",
-        "url": "https://www.reddit.com/r/wnba/comments/1u23ocw/caitlin_clarks_first_signature_shoe_the_caitlin_1/",
-        "published_at": "2026-06-10T14:23:54Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark and the Fever are not WNBA title contenders right now",
-        "url": "https://www.reddit.com/r/wnba/comments/1ub70r9/caitlin_clark_and_the_fever_are_not_wnba_title/",
-        "published_at": "2026-06-20T20:44:05Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark makes statement on Alyssa Thomas incident, 'no place' for hate",
-        "url": "https://www.reddit.com/r/wnba/comments/1umg8md/caitlin_clark_makes_statement_on_alyssa_thomas/",
-        "published_at": "2026-07-03T14:38:52Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark wanted more playing time",
-        "url": "https://www.reddit.com/r/wnba/comments/1us3ick/caitlin_clark_wanted_more_playing_time/",
-        "published_at": "2026-07-09T21:22:47Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Candace Parker slams WNBA players over baffling Caitlin Clark All-Star ranking",
-        "url": "https://www.reddit.com/r/wnba/comments/1ur1vie/candace_parker_slams_wnba_players_over_baffling/",
-        "published_at": "2026-07-08T18:51:20Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Fever's record, stats without Caitlin Clark are becoming impossible to ignore",
-        "url": "https://www.reddit.com/r/wnba/comments/1usve57/fevers_record_stats_without_caitlin_clark_are/",
-        "published_at": "2026-07-10T18:08:51Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark Fastest to 600 Assists",
-        "url": "https://www.reddit.com/r/wnba/comments/1uuzkez/caitlin_clark_fastest_to_600_assists/",
-        "published_at": "2026-07-13T03:00:24Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark not happy at all with the refs, return to locker room.",
-        "url": "https://www.reddit.com/r/wnba/comments/1uxo072/caitlin_clark_not_happy_at_all_with_the_refs/",
-        "published_at": "2026-07-16T00:52:14Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark gets new career high 45 and 10 assists",
-        "url": "https://www.reddit.com/r/wnba/comments/1uzj11m/caitlin_clark_gets_new_career_high_45_and_10/",
-        "published_at": "2026-07-18T02:03:26Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Saniya on threads after her back and forth exchange with Caitlin Clark",
-        "url": "https://www.reddit.com/r/wnba/comments/1v4flbc/saniya_on_threads_after_her_back_and_forth/",
-        "published_at": "2026-07-23T14:30:30Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Barack Obama gives Caitlin Clark advice",
-        "url": "https://www.reddit.com/r/wnba/comments/1v5kixc/barack_obama_gives_caitlin_clark_advice/",
-        "published_at": "2026-07-24T18:57:52Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark’s Been Very Good for the WNBA. Is That Starting to Change?",
-        "url": "https://www.reddit.com/r/wnba/comments/1v9bxfy/caitlin_clarks_been_very_good_for_the_wnba_is/",
-        "published_at": "2026-07-28T21:33:06Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "WNBA TV audience up 12% in Year 1 of new rights deal, with Caitlin Clark still a big draw",
-        "url": "https://www.reddit.com/r/wnba/comments/1v8yx86/wnba_tv_audience_up_12_in_year_1_of_new_rights/",
-        "published_at": "2026-07-28T13:43:30Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Aliyah Boston, Candace Parker discuss Caitlin Clark technical foul issues",
-        "url": "https://www.reddit.com/r/wnba/comments/1vablgz/aliyah_boston_candace_parker_discuss_caitlin/",
-        "published_at": "2026-07-29T22:43:03Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "[Highlights] Caitlin Clark highlights for her fourth triple double!!!",
-        "url": "https://www.reddit.com/r/wnba/comments/1vcdqyd/highlights_caitlin_clark_highlights_for_her/",
-        "published_at": "2026-08-01T04:51:08Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark is on a generational run right now",
-        "url": "https://www.reddit.com/r/wnba/comments/1vcdnzx/caitlin_clark_is_on_a_generational_run_right_now/",
-        "published_at": "2026-08-01T04:46:54Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "A’ja Wilson and Caitlin Clark are the players of the week!",
-        "url": "https://www.reddit.com/r/wnba/comments/1vfgodj/aja_wilson_and_caitlin_clark_are_the_players_of/",
-        "published_at": "2026-08-04T17:17:33Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark needs to 'toughen up, take those licks' according to Shaquille O'Neal",
-        "url": "https://www.reddit.com/r/wnba/comments/1vhf1j2/caitlin_clark_needs_to_toughen_up_take_those/",
-        "published_at": "2026-08-06T20:01:50Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "WNBA has rescinded the technical foul on Caitlin Clark",
-        "url": "https://www.reddit.com/r/wnba/comments/1vjagdp/wnba_has_rescinded_the_technical_foul_on_caitlin/",
-        "published_at": "2026-08-08T23:37:20Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark will serve 1-game suspension if 8th tech is not rescinded",
-        "url": "https://www.reddit.com/r/wnba/comments/1vj75ci/caitlin_clark_will_serve_1game_suspension_if_8th/",
-        "published_at": "2026-08-08T21:08:59Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "How Caitlin Clark's game has grown -- and where it still needs to improve",
-        "url": "https://www.reddit.com/r/wnba/comments/1vjtmw4/how_caitlin_clarks_game_has_grown_and_where_it/",
-        "published_at": "2026-08-09T16:03:14Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark says Fever fans’ booing of coach White “made me a little sick”",
-        "url": "https://www.reddit.com/r/wnba/comments/1vm6ghu/caitlin_clark_says_fever_fans_booing_of_coach/",
-        "published_at": "2026-08-12T06:43:38Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "CAITLIN CLARK CLUTCH 🚨 Fever pull off EPIC double-digit OT comeback vs. Atlanta Dream | WNBA on ESPN",
-        "url": "https://www.reddit.com/r/wnba/comments/1vqcqyj/caitlin_clark_clutch_fever_pull_off_epic/",
-        "published_at": "2026-08-17T00:02:59Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "It’s hard to be a Caitlin Clark fan knowing the people cheering her on",
-        "url": "https://www.reddit.com/r/wnba/comments/1vqvigt/its_hard_to_be_a_caitlin_clark_fan_knowing_the/",
-        "published_at": "2026-08-17T15:27:21Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark and Olivia Miles are ridiculous",
-        "url": "https://www.reddit.com/r/wnba/comments/1vs0c33/caitlin_clark_and_olivia_miles_are_ridiculous/",
-        "published_at": "2026-08-18T20:03:51Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Olivia Miles and Caitlin Clark POTW Week 12",
-        "url": "https://www.reddit.com/r/wnba/comments/1vrucwc/olivia_miles_and_caitlin_clark_potw_week_12/",
-        "published_at": "2026-08-18T16:34:38Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Caitlin Clark Breaks Down the Nike Caitlin 1 For the Cover of KICKS 29",
-        "url": "https://www.reddit.com/r/wnba/comments/1vvrb2y/caitlin_clark_breaks_down_the_nike_caitlin_1_for/",
-        "published_at": "2026-08-22T23:32:24Z",
-        "subreddit": "wnba"
+        "title": "Awa Fam or Bridget Carleton?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uxltj3/awa_fam_or_bridget_carleton/",
+        "published_at": "2026-07-15T23:18:24Z",
+        "subreddit": "fantasywnba"
       }
     ],
-    "585": [
+    "2490553": [
       {
-        "title": "Taurasi starting & ending w/ the Mercury for 20 years. More of this & roles for former W players in the league?",
-        "url": "https://www.reddit.com/r/wnba/comments/1vwj2oh/taurasi_starting_ending_w_the_mercury_for_20/",
-        "published_at": "2026-08-23T21:08:41Z",
+        "title": "Women's World Cup and WNBA stars Atkins, Canada, Carleton, Gray, Griner and Toliver to headline first Women's Basketball Without Borders Next Up Camp in Singapore",
+        "url": "https://www.reddit.com/r/wnba/comments/1xfxwuy/womens_world_cup_and_wnba_stars_atkins_canada/",
+        "published_at": "2026-10-26T14:10:44Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Ranking WNBA’s top 30 stars through 30 years: Catchings, Taurasi, Wilson, Stewart (via NY Times)",
-        "url": "https://www.reddit.com/r/wnba/comments/1ub7eox/ranking_wnbas_top_30_stars_through_30_years/",
-        "published_at": "2026-06-20T21:00:40Z",
+        "title": "Brittney Griner becomes 18th player in WNBA history to score 6,000 career points",
+        "url": "https://www.reddit.com/r/wnba/comments/1tsfqlk/brittney_griner_becomes_18th_player_in_wnba/",
+        "published_at": "2026-05-31T00:07:25Z",
         "subreddit": "wnba"
       },
       {
@@ -82052,201 +81838,93 @@
         "subreddit": "wnba"
       },
       {
-        "title": "Diana Taurasi Sits Down to Talk Her Legendary Career Ahead of Jersey Retirement (SLAM)",
-        "url": "https://www.reddit.com/r/wnba/comments/1vopr1q/diana_taurasi_sits_down_to_talk_her_legendary/",
-        "published_at": "2026-08-15T01:38:50Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Diana Taurasi hopes to join ownership group",
-        "url": "https://www.reddit.com/r/wnba/comments/1vopkir/diana_taurasi_hopes_to_join_ownership_group/",
-        "published_at": "2026-08-15T01:30:12Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Diana Taurasi’s Phoenix Mercury jersey retirement ceremony",
-        "url": "https://www.reddit.com/r/wnba/comments/1vqh1rn/diana_taurasis_phoenix_mercury_jersey_retirement/",
-        "published_at": "2026-08-17T03:28:06Z",
+        "title": "Brittney Griner's Chevelle Feature - The WNBA-Worthy Chevelle",
+        "url": "https://www.reddit.com/r/wnba/comments/1v89c85/brittney_griners_chevelle_feature_the_wnbaworthy/",
+        "published_at": "2026-07-27T18:46:52Z",
         "subreddit": "wnba"
       }
     ],
-    "3906753": [
+    "3142250": [
       {
-        "title": "Natisha Hiedeman Built A Brand Bigger Than Basketball & Is Doing the Same In Seattle",
-        "url": "https://www.reddit.com/r/wnba/comments/1vwennr/natisha_hiedeman_built_a_brand_bigger_than/",
-        "published_at": "2026-08-23T18:19:14Z",
+        "title": "Women's World Cup and WNBA stars Atkins, Canada, Carleton, Gray, Griner and Toliver to headline first Women's Basketball Without Borders Next Up Camp in Singapore",
+        "url": "https://www.reddit.com/r/wnba/comments/1xfxwuy/womens_world_cup_and_wnba_stars_atkins_canada/",
+        "published_at": "2026-10-26T14:10:44Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Natisha Hiedeman for Best Friend of the League 💙",
-        "url": "https://www.reddit.com/r/wnba/comments/1v78rl5/natisha_hiedeman_for_best_friend_of_the_league/",
-        "published_at": "2026-07-26T16:34:07Z",
+        "title": "Jordin Canada",
+        "url": "https://www.reddit.com/r/wnba/comments/1unkyhs/jordin_canada/",
+        "published_at": "2026-07-04T21:46:47Z",
         "subreddit": "wnba"
       },
       {
-        "title": "Hiedeman outlook",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1vktdwy/hiedeman_outlook/",
-        "published_at": "2026-08-10T18:39:51Z",
+        "title": "Toronto Tempo's Vancouver games show WNBA expansion side's Canada-wide reach",
+        "url": "https://www.reddit.com/r/wnba/comments/1vtxrj5/toronto_tempos_vancouver_games_show_wnba/",
+        "published_at": "2026-08-20T22:12:32Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "3142055": [
+      {
+        "title": "Myisha Hines-Allen will be Monmouth women’s basketball team’s assistant coach.",
+        "url": "https://www.reddit.com/r/wnba/comments/1xfde38/myisha_hinesallen_will_be_monmouth_womens/",
+        "published_at": "2026-10-25T20:48:06Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "3102133": [
+      {
+        "title": "Myisha Hines-Allen will be Monmouth women’s basketball team’s assistant coach.",
+        "url": "https://www.reddit.com/r/wnba/comments/1xfde38/myisha_hinesallen_will_be_monmouth_womens/",
+        "published_at": "2026-10-25T20:48:06Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Rebecca Allen announces this will be her last WNBA season",
+        "url": "https://www.reddit.com/r/wnba/comments/1vjdrrb/rebecca_allen_announces_this_will_be_her_last/",
+        "published_at": "2026-08-09T02:19:59Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "2590093": [
+      {
+        "title": "Kiah Stokes makes WNBA Finals Defensive History",
+        "url": "https://www.reddit.com/r/wnba/comments/1xek7hs/kiah_stokes_makes_wnba_finals_defensive_history/",
+        "published_at": "2026-10-24T21:20:09Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "4398935": [
+      {
+        "title": "Bulldog Burton parries the Stripes",
+        "url": "https://www.reddit.com/r/wnba/comments/1xej79u/bulldog_burton_parries_the_stripes/",
+        "published_at": "2026-10-24T20:37:20Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Veronica Burton gets into midrange for turnaround dagger",
+        "url": "https://www.reddit.com/r/wnba/comments/1xehs4k/veronica_burton_gets_into_midrange_for_turnaround/",
+        "published_at": "2026-10-24T19:38:26Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Golden State Valkyries’ Veronica Burton & Gabby Williams on the cover of SLAM",
+        "url": "https://www.reddit.com/r/wnba/comments/1ttxdgx/golden_state_valkyries_veronica_burton_gabby/",
+        "published_at": "2026-06-01T16:24:10Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Drop Burton?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uphhse/drop_burton/",
+        "published_at": "2026-07-07T02:03:05Z",
         "subreddit": "fantasywnba"
-      },
-      {
-        "title": "Natisha Hiedeman started a run club in Seattle",
-        "url": "https://www.reddit.com/r/wnba/comments/1vpg66w/natisha_hiedeman_started_a_run_club_in_seattle/",
-        "published_at": "2026-08-15T22:34:53Z",
-        "subreddit": "wnba"
       }
     ],
-    "4683006": [
+    "5208983": [
       {
-        "title": "Leonie Fiebich returns from injury to drop 20/5/5 on 85 TS%",
-        "url": "https://www.reddit.com/r/wnba/comments/1vvxv98/leonie_fiebich_returns_from_injury_to_drop_2055/",
-        "published_at": "2026-08-23T04:57:23Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Fiebich Out?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uqb07j/fiebich_out/",
-        "published_at": "2026-07-07T22:58:55Z",
-        "subreddit": "fantasywnba"
-      },
-      {
-        "title": "Leonie Fiebich rehabbing 7 hours a day in hopes of playing Liberty second half, FIBA World Cup",
-        "url": "https://www.reddit.com/r/wnba/comments/1v4iala/leonie_fiebich_rehabbing_7_hours_a_day_in_hopes/",
-        "published_at": "2026-07-23T16:08:00Z",
-        "subreddit": "wnba"
-      }
-    ],
-    "4433402": [
-      {
-        "title": "Angel Reese tonight: 31 points, 14 rebounds, 2 assists and 4 steals on 14-21 FG",
-        "url": "https://www.reddit.com/r/wnba/comments/1vvx1c5/angel_reese_tonight_31_points_14_rebounds_2/",
-        "published_at": "2026-08-23T04:12:02Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Tyler Marsh Praising Angel Reese",
-        "url": "https://www.reddit.com/r/wnba/comments/1u25bkp/tyler_marsh_praising_angel_reese/",
-        "published_at": "2026-06-10T15:23:32Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Kim Mulkey Came To See Angel Reese and Flau'jae Johnson Today",
-        "url": "https://www.reddit.com/r/wnba/comments/1us7dqk/kim_mulkey_came_to_see_angel_reese_and_flaujae/",
-        "published_at": "2026-07-09T23:54:25Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese vs LA Sparks",
-        "url": "https://www.reddit.com/r/wnba/comments/1uvwnb1/angel_reese_vs_la_sparks/",
-        "published_at": "2026-07-14T03:01:41Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Sandy Brondello suspended 1 game for an inappropriate comment she made regarding Angel Reese.",
-        "url": "https://www.reddit.com/r/wnba/comments/1v09roa/sandy_brondello_suspended_1_game_for_an/",
-        "published_at": "2026-07-18T22:48:30Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese ‘grateful’ WNBA took action after Sandy Brondello’s comments",
-        "url": "https://www.reddit.com/r/wnba/comments/1v14g33/angel_reese_grateful_wnba_took_action_after_sandy/",
-        "published_at": "2026-07-19T23:00:32Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese has an official AR1xBarbie collab coming August 2nd",
-        "url": "https://www.reddit.com/r/wnba/comments/1v3v9dz/angel_reese_has_an_official_ar1xbarbie_collab/",
-        "published_at": "2026-07-22T22:25:07Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Ryan Clark says ESPN Executives didn't like that he stood up for Angel Reese",
-        "url": "https://www.reddit.com/r/wnba/comments/1v69r2q/ryan_clark_says_espn_executives_didnt_like_that/",
-        "published_at": "2026-07-25T14:23:14Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Malonga describes moment with Reese that led to HISTORIC WNBA All-Star Game dunk",
-        "url": "https://www.reddit.com/r/wnba/comments/1v784fx/malonga_describes_moment_with_reese_that_led_to/",
-        "published_at": "2026-07-26T16:10:18Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "The WNBA posts a video of Paige Bueckers and Angel Reese betting on the ASG winner and later deletes it",
-        "url": "https://www.reddit.com/r/wnba/comments/1vapymj/the_wnba_posts_a_video_of_paige_bueckers_and/",
-        "published_at": "2026-07-30T10:37:38Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese vs Seattle Storm",
-        "url": "https://www.reddit.com/r/wnba/comments/1vce7fp/angel_reese_vs_seattle_storm/",
-        "published_at": "2026-08-01T05:14:22Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese Gives 1,000 Atlanta Kids a Back-to-School Boost",
-        "url": "https://www.reddit.com/r/wnba/comments/1ve2zn9/angel_reese_gives_1000_atlanta_kids_a/",
-        "published_at": "2026-08-03T04:14:50Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese's New Pink Shoe",
-        "url": "https://www.reddit.com/r/wnba/comments/1ves1gs/angel_reeses_new_pink_shoe/",
-        "published_at": "2026-08-03T22:25:45Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Coach Smesko repping Angel Reese for Barbie Game Day in Atlanta 🩷",
-        "url": "https://www.reddit.com/r/wnba/comments/1veq7dv/coach_smesko_repping_angel_reese_for_barbie_game/",
-        "published_at": "2026-08-03T21:14:15Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese is the Double-Diva 👑 Holds single-season records for most double-doubles for Atlanta Dream AND Chicago Sky",
-        "url": "https://www.reddit.com/r/wnba/comments/1vlb0fj/angel_reese_is_the_doublediva_holds_singleseason/",
-        "published_at": "2026-08-11T07:53:39Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese block block steal",
-        "url": "https://www.reddit.com/r/wnba/comments/1vosmba/angel_reese_block_block_steal/",
-        "published_at": "2026-08-15T04:00:28Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "The secrets behind Angel Reese's legendary rebounding. ESPN",
-        "url": "https://www.reddit.com/r/wnba/comments/1vqcmm7/the_secrets_behind_angel_reeses_legendary/",
-        "published_at": "2026-08-16T23:58:26Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese vs Las Vegas Aces",
-        "url": "https://www.reddit.com/r/wnba/comments/1vsehei/angel_reese_vs_las_vegas_aces/",
-        "published_at": "2026-08-19T06:33:34Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "The world has missed the mark with Angel Reese",
-        "url": "https://www.reddit.com/r/wnba/comments/1vsv8lo/the_world_has_missed_the_mark_with_angel_reese/",
-        "published_at": "2026-08-19T18:43:35Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese is the first player in WNBA History to have at least 20 points, 5 rebounds, and 5 assists and 100% in a game",
-        "url": "https://www.reddit.com/r/wnba/comments/1vu65u7/angel_reese_is_the_first_player_in_wnba_history/",
-        "published_at": "2026-08-21T04:30:01Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Angel Reese vs. LA Sparks: 20/8/10/3 on 100% FG",
-        "url": "https://www.reddit.com/r/wnba/comments/1vu61yk/angel_reese_vs_la_sparks_208103_on_100_fg/",
-        "published_at": "2026-08-21T04:24:14Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "\"I replayed that play so many times\" - Angel Reese admits missed game-winning layup vs. Fever kept her up at night",
-        "url": "https://www.reddit.com/r/wnba/comments/1vtkr8y/i_replayed_that_play_so_many_times_angel_reese/",
-        "published_at": "2026-08-20T14:16:24Z",
+        "title": "Nice feature on Izzy Borlase with her hometown TV news",
+        "url": "https://www.reddit.com/r/wnba/comments/1xdsczx/nice_feature_on_izzy_borlase_with_her_hometown_tv/",
+        "published_at": "2026-10-23T22:42:32Z",
         "subreddit": "wnba"
       }
     ],
@@ -82664,7 +82342,7 @@
         "subreddit": "wnba"
       }
     ],
-    "4398935": [
+    "3142328": [
       {
         "title": "Golden State Valkyries’ Veronica Burton & Gabby Williams on the cover of SLAM",
         "url": "https://www.reddit.com/r/wnba/comments/1ttxdgx/golden_state_valkyries_veronica_burton_gabby/",
@@ -82672,10 +82350,228 @@
         "subreddit": "wnba"
       },
       {
-        "title": "Drop Burton?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uphhse/drop_burton/",
-        "published_at": "2026-07-07T02:03:05Z",
+        "title": "How Gabby Williams became Valkyries’ go-to star: ‘What can I do more?’",
+        "url": "https://www.reddit.com/r/wnba/comments/1umgrxw/how_gabby_williams_became_valkyries_goto_star/",
+        "published_at": "2026-07-03T15:00:02Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Gabby Williams/Leila Lacan Trade",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1urv5ac/gabby_williamsleila_lacan_trade/",
+        "published_at": "2026-07-09T16:24:23Z",
         "subreddit": "fantasywnba"
+      },
+      {
+        "title": "Trade Advice - Gabby Williams for Nyara Sabally and Natasha Cloud",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uvq3vj/trade_advice_gabby_williams_for_nyara_sabally_and/",
+        "published_at": "2026-07-13T22:15:35Z",
+        "subreddit": "fantasywnba"
+      },
+      {
+        "title": "Gabby Williams: \"If I piss off a bigot, then that's a great day for me, you know?\"",
+        "url": "https://www.reddit.com/r/wnba/comments/1uz9k3x/gabby_williams_if_i_piss_off_a_bigot_then_thats_a/",
+        "published_at": "2026-07-17T19:26:00Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Gabby Williams Is Anti-Athleisure, Pro ‘Bougie’ Makeup Splurges",
+        "url": "https://www.reddit.com/r/wnba/comments/1vlxkgn/gabby_williams_is_antiathleisure_pro_bougie/",
+        "published_at": "2026-08-11T23:27:18Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Gabby Williams is the media front runner for DPOY -does it actually make sense?",
+        "url": "https://www.reddit.com/r/wnba/comments/1vxal9o/gabby_williams_is_the_media_front_runner_for_dpoy/",
+        "published_at": "2026-08-24T18:11:06Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "4433403": [
+      {
+        "title": "Every foul on Caitlin Clark against the Portland Fire",
+        "url": "https://www.reddit.com/r/wnba/comments/1tts9mo/every_foul_on_caitlin_clark_against_the_portland/",
+        "published_at": "2026-06-01T13:29:08Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark Debuts Nike Kobe 6 \"Eras Tour\" 🌈🪩",
+        "url": "https://www.reddit.com/r/wnba/comments/1u3ezb4/caitlin_clark_debuts_nike_kobe_6_eras_tour/",
+        "published_at": "2026-06-11T23:30:21Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark’s first signature shoe, the Caitlin 1, is set to debut Sep. 29th (via JustFreshKicks)",
+        "url": "https://www.reddit.com/r/wnba/comments/1u23ocw/caitlin_clarks_first_signature_shoe_the_caitlin_1/",
+        "published_at": "2026-06-10T14:23:54Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark and the Fever are not WNBA title contenders right now",
+        "url": "https://www.reddit.com/r/wnba/comments/1ub70r9/caitlin_clark_and_the_fever_are_not_wnba_title/",
+        "published_at": "2026-06-20T20:44:05Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark makes statement on Alyssa Thomas incident, 'no place' for hate",
+        "url": "https://www.reddit.com/r/wnba/comments/1umg8md/caitlin_clark_makes_statement_on_alyssa_thomas/",
+        "published_at": "2026-07-03T14:38:52Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark wanted more playing time",
+        "url": "https://www.reddit.com/r/wnba/comments/1us3ick/caitlin_clark_wanted_more_playing_time/",
+        "published_at": "2026-07-09T21:22:47Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Candace Parker slams WNBA players over baffling Caitlin Clark All-Star ranking",
+        "url": "https://www.reddit.com/r/wnba/comments/1ur1vie/candace_parker_slams_wnba_players_over_baffling/",
+        "published_at": "2026-07-08T18:51:20Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Fever's record, stats without Caitlin Clark are becoming impossible to ignore",
+        "url": "https://www.reddit.com/r/wnba/comments/1usve57/fevers_record_stats_without_caitlin_clark_are/",
+        "published_at": "2026-07-10T18:08:51Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark Fastest to 600 Assists",
+        "url": "https://www.reddit.com/r/wnba/comments/1uuzkez/caitlin_clark_fastest_to_600_assists/",
+        "published_at": "2026-07-13T03:00:24Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark not happy at all with the refs, return to locker room.",
+        "url": "https://www.reddit.com/r/wnba/comments/1uxo072/caitlin_clark_not_happy_at_all_with_the_refs/",
+        "published_at": "2026-07-16T00:52:14Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark gets new career high 45 and 10 assists",
+        "url": "https://www.reddit.com/r/wnba/comments/1uzj11m/caitlin_clark_gets_new_career_high_45_and_10/",
+        "published_at": "2026-07-18T02:03:26Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Saniya on threads after her back and forth exchange with Caitlin Clark",
+        "url": "https://www.reddit.com/r/wnba/comments/1v4flbc/saniya_on_threads_after_her_back_and_forth/",
+        "published_at": "2026-07-23T14:30:30Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Barack Obama gives Caitlin Clark advice",
+        "url": "https://www.reddit.com/r/wnba/comments/1v5kixc/barack_obama_gives_caitlin_clark_advice/",
+        "published_at": "2026-07-24T18:57:52Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark’s Been Very Good for the WNBA. Is That Starting to Change?",
+        "url": "https://www.reddit.com/r/wnba/comments/1v9bxfy/caitlin_clarks_been_very_good_for_the_wnba_is/",
+        "published_at": "2026-07-28T21:33:06Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "WNBA TV audience up 12% in Year 1 of new rights deal, with Caitlin Clark still a big draw",
+        "url": "https://www.reddit.com/r/wnba/comments/1v8yx86/wnba_tv_audience_up_12_in_year_1_of_new_rights/",
+        "published_at": "2026-07-28T13:43:30Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Aliyah Boston, Candace Parker discuss Caitlin Clark technical foul issues",
+        "url": "https://www.reddit.com/r/wnba/comments/1vablgz/aliyah_boston_candace_parker_discuss_caitlin/",
+        "published_at": "2026-07-29T22:43:03Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "[Highlights] Caitlin Clark highlights for her fourth triple double!!!",
+        "url": "https://www.reddit.com/r/wnba/comments/1vcdqyd/highlights_caitlin_clark_highlights_for_her/",
+        "published_at": "2026-08-01T04:51:08Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark is on a generational run right now",
+        "url": "https://www.reddit.com/r/wnba/comments/1vcdnzx/caitlin_clark_is_on_a_generational_run_right_now/",
+        "published_at": "2026-08-01T04:46:54Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "A’ja Wilson and Caitlin Clark are the players of the week!",
+        "url": "https://www.reddit.com/r/wnba/comments/1vfgodj/aja_wilson_and_caitlin_clark_are_the_players_of/",
+        "published_at": "2026-08-04T17:17:33Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark needs to 'toughen up, take those licks' according to Shaquille O'Neal",
+        "url": "https://www.reddit.com/r/wnba/comments/1vhf1j2/caitlin_clark_needs_to_toughen_up_take_those/",
+        "published_at": "2026-08-06T20:01:50Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "WNBA has rescinded the technical foul on Caitlin Clark",
+        "url": "https://www.reddit.com/r/wnba/comments/1vjagdp/wnba_has_rescinded_the_technical_foul_on_caitlin/",
+        "published_at": "2026-08-08T23:37:20Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark will serve 1-game suspension if 8th tech is not rescinded",
+        "url": "https://www.reddit.com/r/wnba/comments/1vj75ci/caitlin_clark_will_serve_1game_suspension_if_8th/",
+        "published_at": "2026-08-08T21:08:59Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "How Caitlin Clark's game has grown -- and where it still needs to improve",
+        "url": "https://www.reddit.com/r/wnba/comments/1vjtmw4/how_caitlin_clarks_game_has_grown_and_where_it/",
+        "published_at": "2026-08-09T16:03:14Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark says Fever fans’ booing of coach White “made me a little sick”",
+        "url": "https://www.reddit.com/r/wnba/comments/1vm6ghu/caitlin_clark_says_fever_fans_booing_of_coach/",
+        "published_at": "2026-08-12T06:43:38Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "CAITLIN CLARK CLUTCH 🚨 Fever pull off EPIC double-digit OT comeback vs. Atlanta Dream | WNBA on ESPN",
+        "url": "https://www.reddit.com/r/wnba/comments/1vqcqyj/caitlin_clark_clutch_fever_pull_off_epic/",
+        "published_at": "2026-08-17T00:02:59Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "It’s hard to be a Caitlin Clark fan knowing the people cheering her on",
+        "url": "https://www.reddit.com/r/wnba/comments/1vqvigt/its_hard_to_be_a_caitlin_clark_fan_knowing_the/",
+        "published_at": "2026-08-17T15:27:21Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark and Olivia Miles are ridiculous",
+        "url": "https://www.reddit.com/r/wnba/comments/1vs0c33/caitlin_clark_and_olivia_miles_are_ridiculous/",
+        "published_at": "2026-08-18T20:03:51Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Olivia Miles and Caitlin Clark POTW Week 12",
+        "url": "https://www.reddit.com/r/wnba/comments/1vrucwc/olivia_miles_and_caitlin_clark_potw_week_12/",
+        "published_at": "2026-08-18T16:34:38Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Caitlin Clark Breaks Down the Nike Caitlin 1 For the Cover of KICKS 29",
+        "url": "https://www.reddit.com/r/wnba/comments/1vvrb2y/caitlin_clark_breaks_down_the_nike_caitlin_1_for/",
+        "published_at": "2026-08-22T23:32:24Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "8/23. Historic night for Caitlin Clark",
+        "url": "https://www.reddit.com/r/wnba/comments/1vwpgh8/823_historic_night_for_caitlin_clark/",
+        "published_at": "2026-08-24T01:48:37Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Kara Lawson sets early tone for Caitlin Clark’s FIBA World Cup with Team USA (High Post Hoops)",
+        "url": "https://www.reddit.com/r/wnba/comments/1vwdshg/kara_lawson_sets_early_tone_for_caitlin_clarks/",
+        "published_at": "2026-08-23T17:47:28Z",
+        "subreddit": "wnba"
       }
     ],
     "4433635": [
@@ -82728,24 +82624,24 @@
         "subreddit": "fantasywnba"
       }
     ],
-    "3906972": [
+    "4282168": [
       {
-        "title": "Bridget Carleton - Max Player? Max Player.",
-        "url": "https://www.reddit.com/r/wnba/comments/1tsjosh/bridget_carleton_max_player_max_player/",
-        "published_at": "2026-05-31T03:16:58Z",
+        "title": "Mercury waive Kiana Williams",
+        "url": "https://www.reddit.com/r/wnba/comments/1tt4dgg/mercury_waive_kiana_williams/",
+        "published_at": "2026-05-31T19:09:25Z",
         "subreddit": "wnba"
       },
       {
-        "title": "What are we doing with Carleton?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1u8iqsv/what_are_we_doing_with_carleton/",
-        "published_at": "2026-06-17T18:43:08Z",
-        "subreddit": "fantasywnba"
+        "title": "LA Sparks waived Kiana Williams to offer Ashlon Jackson a roster spot. Connecticut Sun matched waiving Rayah Marshall",
+        "url": "https://www.reddit.com/r/wnba/comments/1vp97e5/la_sparks_waived_kiana_williams_to_offer_ashlon/",
+        "published_at": "2026-08-15T17:46:38Z",
+        "subreddit": "wnba"
       },
       {
-        "title": "Awa Fam or Bridget Carleton?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uxltj3/awa_fam_or_bridget_carleton/",
-        "published_at": "2026-07-15T23:18:24Z",
-        "subreddit": "fantasywnba"
+        "title": "Tempo sign Kiana Williams to a 7-day extreme hardship contract",
+        "url": "https://www.reddit.com/r/wnba/comments/1vxdumd/tempo_sign_kiana_williams_to_a_7day_extreme/",
+        "published_at": "2026-08-24T20:05:18Z",
+        "subreddit": "wnba"
       }
     ],
     "4433730": [
@@ -82861,26 +82757,6 @@
         "title": "Paige Bueckers shares her ‘genuine respect’ for Valkyries coach Natalie Nakase",
         "url": "https://www.reddit.com/r/wnba/comments/1vs0hlt/paige_bueckers_shares_her_genuine_respect_for/",
         "published_at": "2026-08-18T20:09:18Z",
-        "subreddit": "wnba"
-      }
-    ],
-    "2490553": [
-      {
-        "title": "Brittney Griner becomes 18th player in WNBA history to score 6,000 career points",
-        "url": "https://www.reddit.com/r/wnba/comments/1tsfqlk/brittney_griner_becomes_18th_player_in_wnba/",
-        "published_at": "2026-05-31T00:07:25Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Brittney Griner says Diana Taurasi taught her how to handle fame, marriage and money: “She let me wild”",
-        "url": "https://www.reddit.com/r/wnba/comments/1v8e04k/brittney_griner_says_diana_taurasi_taught_her_how/",
-        "published_at": "2026-07-27T21:33:56Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Brittney Griner's Chevelle Feature - The WNBA-Worthy Chevelle",
-        "url": "https://www.reddit.com/r/wnba/comments/1v89c85/brittney_griners_chevelle_feature_the_wnbaworthy/",
-        "published_at": "2026-07-27T18:46:52Z",
         "subreddit": "wnba"
       }
     ],
@@ -83120,6 +82996,140 @@
         "subreddit": "fantasywnba"
       }
     ],
+    "4433402": [
+      {
+        "title": "Tyler Marsh Praising Angel Reese",
+        "url": "https://www.reddit.com/r/wnba/comments/1u25bkp/tyler_marsh_praising_angel_reese/",
+        "published_at": "2026-06-10T15:23:32Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Kim Mulkey Came To See Angel Reese and Flau'jae Johnson Today",
+        "url": "https://www.reddit.com/r/wnba/comments/1us7dqk/kim_mulkey_came_to_see_angel_reese_and_flaujae/",
+        "published_at": "2026-07-09T23:54:25Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese vs LA Sparks",
+        "url": "https://www.reddit.com/r/wnba/comments/1uvwnb1/angel_reese_vs_la_sparks/",
+        "published_at": "2026-07-14T03:01:41Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Sandy Brondello suspended 1 game for an inappropriate comment she made regarding Angel Reese.",
+        "url": "https://www.reddit.com/r/wnba/comments/1v09roa/sandy_brondello_suspended_1_game_for_an/",
+        "published_at": "2026-07-18T22:48:30Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese ‘grateful’ WNBA took action after Sandy Brondello’s comments",
+        "url": "https://www.reddit.com/r/wnba/comments/1v14g33/angel_reese_grateful_wnba_took_action_after_sandy/",
+        "published_at": "2026-07-19T23:00:32Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese has an official AR1xBarbie collab coming August 2nd",
+        "url": "https://www.reddit.com/r/wnba/comments/1v3v9dz/angel_reese_has_an_official_ar1xbarbie_collab/",
+        "published_at": "2026-07-22T22:25:07Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Ryan Clark says ESPN Executives didn't like that he stood up for Angel Reese",
+        "url": "https://www.reddit.com/r/wnba/comments/1v69r2q/ryan_clark_says_espn_executives_didnt_like_that/",
+        "published_at": "2026-07-25T14:23:14Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Malonga describes moment with Reese that led to HISTORIC WNBA All-Star Game dunk",
+        "url": "https://www.reddit.com/r/wnba/comments/1v784fx/malonga_describes_moment_with_reese_that_led_to/",
+        "published_at": "2026-07-26T16:10:18Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "The WNBA posts a video of Paige Bueckers and Angel Reese betting on the ASG winner and later deletes it",
+        "url": "https://www.reddit.com/r/wnba/comments/1vapymj/the_wnba_posts_a_video_of_paige_bueckers_and/",
+        "published_at": "2026-07-30T10:37:38Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese vs Seattle Storm",
+        "url": "https://www.reddit.com/r/wnba/comments/1vce7fp/angel_reese_vs_seattle_storm/",
+        "published_at": "2026-08-01T05:14:22Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese Gives 1,000 Atlanta Kids a Back-to-School Boost",
+        "url": "https://www.reddit.com/r/wnba/comments/1ve2zn9/angel_reese_gives_1000_atlanta_kids_a/",
+        "published_at": "2026-08-03T04:14:50Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese's New Pink Shoe",
+        "url": "https://www.reddit.com/r/wnba/comments/1ves1gs/angel_reeses_new_pink_shoe/",
+        "published_at": "2026-08-03T22:25:45Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Coach Smesko repping Angel Reese for Barbie Game Day in Atlanta 🩷",
+        "url": "https://www.reddit.com/r/wnba/comments/1veq7dv/coach_smesko_repping_angel_reese_for_barbie_game/",
+        "published_at": "2026-08-03T21:14:15Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese is the Double-Diva 👑 Holds single-season records for most double-doubles for Atlanta Dream AND Chicago Sky",
+        "url": "https://www.reddit.com/r/wnba/comments/1vlb0fj/angel_reese_is_the_doublediva_holds_singleseason/",
+        "published_at": "2026-08-11T07:53:39Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese block block steal",
+        "url": "https://www.reddit.com/r/wnba/comments/1vosmba/angel_reese_block_block_steal/",
+        "published_at": "2026-08-15T04:00:28Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "The secrets behind Angel Reese's legendary rebounding. ESPN",
+        "url": "https://www.reddit.com/r/wnba/comments/1vqcmm7/the_secrets_behind_angel_reeses_legendary/",
+        "published_at": "2026-08-16T23:58:26Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese vs Las Vegas Aces",
+        "url": "https://www.reddit.com/r/wnba/comments/1vsehei/angel_reese_vs_las_vegas_aces/",
+        "published_at": "2026-08-19T06:33:34Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "The world has missed the mark with Angel Reese",
+        "url": "https://www.reddit.com/r/wnba/comments/1vsv8lo/the_world_has_missed_the_mark_with_angel_reese/",
+        "published_at": "2026-08-19T18:43:35Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese is the first player in WNBA History to have at least 20 points, 5 rebounds, and 5 assists and 100% in a game",
+        "url": "https://www.reddit.com/r/wnba/comments/1vu65u7/angel_reese_is_the_first_player_in_wnba_history/",
+        "published_at": "2026-08-21T04:30:01Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese vs. LA Sparks: 20/8/10/3 on 100% FG",
+        "url": "https://www.reddit.com/r/wnba/comments/1vu61yk/angel_reese_vs_la_sparks_208103_on_100_fg/",
+        "published_at": "2026-08-21T04:24:14Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "\"I replayed that play so many times\" - Angel Reese admits missed game-winning layup vs. Fever kept her up at night",
+        "url": "https://www.reddit.com/r/wnba/comments/1vtkr8y/i_replayed_that_play_so_many_times_angel_reese/",
+        "published_at": "2026-08-20T14:16:24Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Angel Reese tonight: 31 points, 14 rebounds, 2 assists and 4 steals on 14-21 FG",
+        "url": "https://www.reddit.com/r/wnba/comments/1vvx1c5/angel_reese_tonight_31_points_14_rebounds_2/",
+        "published_at": "2026-08-23T04:12:02Z",
+        "subreddit": "wnba"
+      }
+    ],
     "4420318": [
       {
         "title": "Ezi Magbegor (foot) has resumed 5 on 5 activities; to be re-evaluated in the coming weeks.",
@@ -83177,6 +83187,56 @@
         "title": "Nneka Ogwumike always looked out for the WNBA like family, and now it is growing thanks to her care",
         "url": "https://www.reddit.com/r/wnba/comments/1vtk5s3/nneka_ogwumike_always_looked_out_for_the_wnba/",
         "published_at": "2026-08-20T13:53:38Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "3917450": [
+      {
+        "title": "Napheesa Collier, Dorka Juhasz still a few weeks away from practicing, per coach Reeve.",
+        "url": "https://www.reddit.com/r/wnba/comments/1uc0rnv/napheesa_collier_dorka_juhasz_still_a_few_weeks/",
+        "published_at": "2026-06-21T20:45:40Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "The Lynx celebrate Cheryl Reeve’s record-setting 380th win. (via Napheesa Collier’s IG)",
+        "url": "https://www.reddit.com/r/wnba/comments/1urde9t/the_lynx_celebrate_cheryl_reeves_recordsetting/",
+        "published_at": "2026-07-09T02:30:09Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Cheryl Reeve: Lynx still Napheesa Collier's team despite Olivia Miles' emergence",
+        "url": "https://www.reddit.com/r/wnba/comments/1utsi4x/cheryl_reeve_lynx_still_napheesa_colliers_team/",
+        "published_at": "2026-07-11T18:57:53Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Nia Coffey + Natasha Mack for Napheesa Collier?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uxc0ul/nia_coffey_natasha_mack_for_napheesa_collier/",
+        "published_at": "2026-07-15T17:08:08Z",
+        "subreddit": "fantasywnba"
+      },
+      {
+        "title": "Napheesa Collier is Probable for Wednesday",
+        "url": "https://www.reddit.com/r/wnba/comments/1v2z2gg/napheesa_collier_is_probable_for_wednesday/",
+        "published_at": "2026-07-21T23:34:43Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Cheryl on Napheesa Collier",
+        "url": "https://www.reddit.com/r/wnba/comments/1v9jgkw/cheryl_on_napheesa_collier/",
+        "published_at": "2026-07-29T02:46:03Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Becky Hammon says A’ja Wilson, Breanna Stewart, and Napheesa Collier the best 3 players in the WNBA 🏀",
+        "url": "https://www.reddit.com/r/wnba/comments/1vkpa5e/becky_hammon_says_aja_wilson_breanna_stewart_and/",
+        "published_at": "2026-08-10T16:13:39Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Will Napheesa Collier's midseason return boost Lynx's WNBA title chances?",
+        "url": "https://www.reddit.com/r/wnba/comments/1vx9ixd/will_napheesa_colliers_midseason_return_boost/",
+        "published_at": "2026-08-24T17:33:50Z",
         "subreddit": "wnba"
       }
     ],
@@ -83263,6 +83323,44 @@
         "title": "Becky Hammon says A’ja Wilson, Breanna Stewart, and Napheesa Collier the best 3 players in the WNBA 🏀",
         "url": "https://www.reddit.com/r/wnba/comments/1vkpa5e/becky_hammon_says_aja_wilson_breanna_stewart_and/",
         "published_at": "2026-08-10T16:13:39Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "585": [
+      {
+        "title": "Ranking WNBA’s top 30 stars through 30 years: Catchings, Taurasi, Wilson, Stewart (via NY Times)",
+        "url": "https://www.reddit.com/r/wnba/comments/1ub7eox/ranking_wnbas_top_30_stars_through_30_years/",
+        "published_at": "2026-06-20T21:00:40Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Brittney Griner says Diana Taurasi taught her how to handle fame, marriage and money: “She let me wild”",
+        "url": "https://www.reddit.com/r/wnba/comments/1v8e04k/brittney_griner_says_diana_taurasi_taught_her_how/",
+        "published_at": "2026-07-27T21:33:56Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Diana Taurasi Sits Down to Talk Her Legendary Career Ahead of Jersey Retirement (SLAM)",
+        "url": "https://www.reddit.com/r/wnba/comments/1vopr1q/diana_taurasi_sits_down_to_talk_her_legendary/",
+        "published_at": "2026-08-15T01:38:50Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Diana Taurasi hopes to join ownership group",
+        "url": "https://www.reddit.com/r/wnba/comments/1vopkir/diana_taurasi_hopes_to_join_ownership_group/",
+        "published_at": "2026-08-15T01:30:12Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Diana Taurasi’s Phoenix Mercury jersey retirement ceremony",
+        "url": "https://www.reddit.com/r/wnba/comments/1vqh1rn/diana_taurasis_phoenix_mercury_jersey_retirement/",
+        "published_at": "2026-08-17T03:28:06Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Taurasi starting & ending w/ the Mercury for 20 years. More of this & roles for former W players in the league?",
+        "url": "https://www.reddit.com/r/wnba/comments/1vwj2oh/taurasi_starting_ending_w_the_mercury_for_20/",
+        "published_at": "2026-08-23T21:08:41Z",
         "subreddit": "wnba"
       }
     ],
@@ -83383,20 +83481,6 @@
         "title": "Marina Mabrey is visiting the Black Women’s Institute for Health Village Rising Summer Institute camp",
         "url": "https://www.reddit.com/r/wnba/comments/1vno6fc/marina_mabrey_is_visiting_the_black_womens/",
         "published_at": "2026-08-13T21:38:46Z",
-        "subreddit": "wnba"
-      }
-    ],
-    "3142250": [
-      {
-        "title": "Jordin Canada",
-        "url": "https://www.reddit.com/r/wnba/comments/1unkyhs/jordin_canada/",
-        "published_at": "2026-07-04T21:46:47Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Toronto Tempo's Vancouver games show WNBA expansion side's Canada-wide reach",
-        "url": "https://www.reddit.com/r/wnba/comments/1vtxrj5/toronto_tempos_vancouver_games_show_wnba/",
-        "published_at": "2026-08-20T22:12:32Z",
         "subreddit": "wnba"
       }
     ],
@@ -83682,74 +83766,6 @@
         "subreddit": "wnba"
       }
     ],
-    "2491205": [
-      {
-        "title": "Sheryl Swoopes and Skylar Diggins-Smith to Front ‘Gamechangers: Mother/Athlete’ Docuseries on Roku",
-        "url": "https://www.reddit.com/r/wnba/comments/1us1o5a/sheryl_swoopes_and_skylar_digginssmith_to_front/",
-        "published_at": "2026-07-09T20:14:26Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "10 WNBA trade candidates (Skylar Diggins!) ahead of the 2026 deadline (For the Win)",
-        "url": "https://www.reddit.com/r/wnba/comments/1usyvhh/10_wnba_trade_candidates_skylar_diggins_ahead_of/",
-        "published_at": "2026-07-10T20:15:41Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Was Sky moving away from Diggins right?",
-        "url": "https://www.reddit.com/r/wnba/comments/1uuwf9a/was_sky_moving_away_from_diggins_right/",
-        "published_at": "2026-07-13T00:31:58Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "So what are we doing with Skylar Diggins?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uwucml/so_what_are_we_doing_with_skylar_diggins/",
-        "published_at": "2026-07-15T03:33:06Z",
-        "subreddit": "fantasywnba"
-      },
-      {
-        "title": "Diggins, Cloud, or Vandersloot?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1uznle3/diggins_cloud_or_vandersloot/",
-        "published_at": "2026-07-18T05:54:51Z",
-        "subreddit": "fantasywnba"
-      },
-      {
-        "title": "[Sports] - Skylar Diggins remains out but says role conversations are moving forward | Chicago Sun-Times",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1v0arp4/sports_skylar_diggins_remains_out_but_says_role/",
-        "published_at": "2026-07-18T23:32:53Z",
-        "subreddit": "fantasywnba"
-      },
-      {
-        "title": "Where is Skylar Diggins? Did I miss something?",
-        "url": "https://www.reddit.com/r/wnba/comments/1v2jz6l/where_is_skylar_diggins_did_i_miss_something/",
-        "published_at": "2026-07-21T14:25:17Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Skylar Diggins knee injury is week-to-week according to Tyler Marsh",
-        "url": "https://www.reddit.com/r/wnba/comments/1v8cn49/skylar_diggins_knee_injury_is_weektoweek/",
-        "published_at": "2026-07-27T20:43:31Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Diggins or Dijonai for IR?",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1v9agbc/diggins_or_dijonai_for_ir/",
-        "published_at": "2026-07-28T20:39:03Z",
-        "subreddit": "fantasywnba"
-      },
-      {
-        "title": "What’s the end game for Skyler Diggins and Chicago?",
-        "url": "https://www.reddit.com/r/wnba/comments/1va71lk/whats_the_end_game_for_skyler_diggins_and_chicago/",
-        "published_at": "2026-07-29T19:52:10Z",
-        "subreddit": "wnba"
-      },
-      {
-        "title": "Is Skylar Diggins Really Hurt?",
-        "url": "https://www.reddit.com/r/wnba/comments/1vqc9r5/is_skylar_diggins_really_hurt/",
-        "published_at": "2026-08-16T23:41:50Z",
-        "subreddit": "wnba"
-      }
-    ],
     "4399415": [
       {
         "title": "Maddy Siegrist wants to be more than just a good luck charm for the Wings",
@@ -83799,6 +83815,26 @@
         "title": "Aliyah Boston, Candace Parker discuss Caitlin Clark technical foul issues",
         "url": "https://www.reddit.com/r/wnba/comments/1vablgz/aliyah_boston_candace_parker_discuss_caitlin/",
         "published_at": "2026-07-29T22:43:03Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "4683006": [
+      {
+        "title": "Fiebich Out?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1uqb07j/fiebich_out/",
+        "published_at": "2026-07-07T22:58:55Z",
+        "subreddit": "fantasywnba"
+      },
+      {
+        "title": "Leonie Fiebich rehabbing 7 hours a day in hopes of playing Liberty second half, FIBA World Cup",
+        "url": "https://www.reddit.com/r/wnba/comments/1v4iala/leonie_fiebich_rehabbing_7_hours_a_day_in_hopes/",
+        "published_at": "2026-07-23T16:08:00Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Leonie Fiebich returns from injury to drop 20/5/5 on 85 TS%",
+        "url": "https://www.reddit.com/r/wnba/comments/1vvxv98/leonie_fiebich_returns_from_injury_to_drop_2055/",
+        "published_at": "2026-08-23T04:57:23Z",
         "subreddit": "wnba"
       }
     ],
@@ -84211,6 +84247,32 @@
         "title": "Betnijah Laney-Hamilton has been waived by the Liberty.",
         "url": "https://www.reddit.com/r/wnba/comments/1vhgnm8/betnijah_laneyhamilton_has_been_waived_by_the/",
         "published_at": "2026-08-06T21:02:39Z",
+        "subreddit": "wnba"
+      }
+    ],
+    "869": [
+      {
+        "title": "HighPostHoops: DeWanna Bonner is not being praised enough for how she's handling this season",
+        "url": "https://www.reddit.com/r/wnba/comments/1uus3n3/highposthoops_dewanna_bonner_is_not_being_praised/",
+        "published_at": "2026-07-12T21:28:31Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Bonner moves into No. 2 on the W's all-time games played list",
+        "url": "https://www.reddit.com/r/wnba/comments/1vf0f9n/bonner_moves_into_no_2_on_the_ws_alltime_games/",
+        "published_at": "2026-08-04T04:45:07Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "With the Aces resting their big 3 tomorrow should I stream DeWanna Bonner?",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1vjd7to/with_the_aces_resting_their_big_3_tomorrow_should/",
+        "published_at": "2026-08-09T01:51:05Z",
+        "subreddit": "fantasywnba"
+      },
+      {
+        "title": "Phoenix Mercury agree to buyout for DeWanna Bonner",
+        "url": "https://www.reddit.com/r/wnba/comments/1vx7t1t/phoenix_mercury_agree_to_buyout_for_dewanna_bonner/",
+        "published_at": "2026-08-24T16:33:01Z",
         "subreddit": "wnba"
       }
     ],
@@ -84672,6 +84734,32 @@
         "subreddit": "wnba"
       }
     ],
+    "3906753": [
+      {
+        "title": "Natisha Hiedeman for Best Friend of the League 💙",
+        "url": "https://www.reddit.com/r/wnba/comments/1v78rl5/natisha_hiedeman_for_best_friend_of_the_league/",
+        "published_at": "2026-07-26T16:34:07Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Hiedeman outlook",
+        "url": "https://www.reddit.com/r/fantasywnba/comments/1vktdwy/hiedeman_outlook/",
+        "published_at": "2026-08-10T18:39:51Z",
+        "subreddit": "fantasywnba"
+      },
+      {
+        "title": "Natisha Hiedeman started a run club in Seattle",
+        "url": "https://www.reddit.com/r/wnba/comments/1vpg66w/natisha_hiedeman_started_a_run_club_in_seattle/",
+        "published_at": "2026-08-15T22:34:53Z",
+        "subreddit": "wnba"
+      },
+      {
+        "title": "Natisha Hiedeman Built A Brand Bigger Than Basketball & Is Doing the Same In Seattle",
+        "url": "https://www.reddit.com/r/wnba/comments/1vwennr/natisha_hiedeman_built_a_brand_bigger_than/",
+        "published_at": "2026-08-23T18:19:14Z",
+        "subreddit": "wnba"
+      }
+    ],
     "2529183": [
       {
         "title": "Stefanie Dolson dazzles while wearing a \"Trans Rights are Human Rights\" before the Seattle Storm vs Indiana Fever game.",
@@ -84775,14 +84863,6 @@
         "title": "Rori Harmon Signed to Developmental Contract with the Mystics",
         "url": "https://www.reddit.com/r/wnba/comments/1vl0cow/rori_harmon_signed_to_developmental_contract_with/",
         "published_at": "2026-08-10T23:05:22Z",
-        "subreddit": "wnba"
-      }
-    ],
-    "3102133": [
-      {
-        "title": "Rebecca Allen announces this will be her last WNBA season",
-        "url": "https://www.reddit.com/r/wnba/comments/1vjdrrb/rebecca_allen_announces_this_will_be_her_last/",
-        "published_at": "2026-08-09T02:19:59Z",
         "subreddit": "wnba"
       }
     ],
@@ -84902,14 +84982,6 @@
         "url": "https://www.reddit.com/r/wnba/comments/1vty3oq/tina_charles_wnba_mvp_and_threetime_olympic_gold/",
         "published_at": "2026-08-20T22:25:49Z",
         "subreddit": "wnba"
-      }
-    ],
-    "3146151": [
-      {
-        "title": "Start 2 of 4 tonight: Sykes, Rice, Atkins, Diamond Miller",
-        "url": "https://www.reddit.com/r/fantasywnba/comments/1vrxik9/start_2_of_4_tonight_sykes_rice_atkins_diamond/",
-        "published_at": "2026-08-18T18:24:10Z",
-        "subreddit": "fantasywnba"
       }
     ],
     "4898384": [
@@ -91913,13 +91985,13 @@
   "trade_scenarios": [
     {
       "team_id": 1,
-      "team_abbrev": "KAH",
-      "team_name": "Copper Futures",
+      "team_abbrev": "T1",
+      "team_name": "Team 1",
       "best_player": {
         "player_id": 2529140,
         "name": "Alyssa Thomas",
         "fantasy_team_id": 1,
-        "fantasy_team_abbrev": "KAH",
+        "fantasy_team_abbrev": "T1",
         "projected_per_game": 40.6,
         "bucket": "F"
       },
@@ -91927,14 +91999,14 @@
       "offers": [
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 869,
                 "name": "DeWanna Bonner",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 21.3,
                 "bucket": "F"
               },
@@ -91942,7 +92014,7 @@
                 "player_id": 4684384,
                 "name": "Aneesah Morrow",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               }
@@ -91955,14 +92027,14 @@
         },
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3934218,
                 "name": "Megan DiLeo",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 19.8,
                 "bucket": "C"
               },
@@ -91970,7 +92042,7 @@
                 "player_id": 5345444,
                 "name": "Laura Juskaite",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 21.1,
                 "bucket": "F"
               }
@@ -91983,14 +92055,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529622,
                 "name": "Kayla Thornton",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 17.8,
                 "bucket": "F"
               },
@@ -91998,7 +92070,7 @@
                 "player_id": 4398776,
                 "name": "NaLyssa Smith",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 23.5,
                 "bucket": "F"
               }
@@ -92011,14 +92083,14 @@
         },
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3058895,
                 "name": "Brionna Jones",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 29.7,
                 "bucket": "C"
               },
@@ -92026,7 +92098,7 @@
                 "player_id": 3054590,
                 "name": "Nia Coffey",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 12.9,
                 "bucket": "F"
               }
@@ -92039,14 +92111,14 @@
         },
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5220150,
                 "name": "Dominique Malonga",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 19.0,
                 "bucket": "C"
               },
@@ -92054,7 +92126,7 @@
                 "player_id": 4420318,
                 "name": "Ezi Magbegor",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 18.0,
                 "bucket": "C"
               }
@@ -92067,14 +92139,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4398966,
                 "name": "Olivia Nelson-Ododa",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -92082,7 +92154,7 @@
                 "player_id": 3913881,
                 "name": "Alanna Smith",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 25.6,
                 "bucket": "F"
               }
@@ -92095,14 +92167,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4433402,
                 "name": "Angel Reese",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 30.9,
                 "bucket": "F"
               },
@@ -92110,7 +92182,7 @@
                 "player_id": 4433635,
                 "name": "Diamond Miller",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 10.3,
                 "bucket": "G"
               }
@@ -92125,13 +92197,13 @@
     },
     {
       "team_id": 2,
-      "team_abbrev": "PEZ",
-      "team_name": "Empire State Farm",
+      "team_abbrev": "T2",
+      "team_name": "Team 2",
       "best_player": {
         "player_id": 4433403,
         "name": "Caitlin Clark",
         "fantasy_team_id": 2,
-        "fantasy_team_abbrev": "PEZ",
+        "fantasy_team_abbrev": "T2",
         "projected_per_game": 52.5,
         "bucket": "G"
       },
@@ -92139,14 +92211,14 @@
       "offers": [
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5345325,
                 "name": "Awa Fam",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 15.8,
                 "bucket": "C"
               },
@@ -92154,7 +92226,7 @@
                 "player_id": 4398915,
                 "name": "Naz Hillmon",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 16.8,
                 "bucket": "F"
               },
@@ -92162,7 +92234,7 @@
                 "player_id": 3934218,
                 "name": "Megan DiLeo",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 19.8,
                 "bucket": "C"
               }
@@ -92175,14 +92247,14 @@
         },
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4432831,
                 "name": "Aliyah Boston",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 34.0,
                 "bucket": "F"
               },
@@ -92190,7 +92262,7 @@
                 "player_id": 2566453,
                 "name": "Isabelle Harrison",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 18.4,
                 "bucket": "F"
               }
@@ -92203,14 +92275,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4433402,
                 "name": "Angel Reese",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 30.9,
                 "bucket": "F"
               },
@@ -92218,7 +92290,7 @@
                 "player_id": 2490553,
                 "name": "Brittney Griner",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 21.8,
                 "bucket": "C"
               }
@@ -92231,14 +92303,14 @@
         },
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3142328,
                 "name": "Gabby Williams",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 32.1,
                 "bucket": "F"
               },
@@ -92246,7 +92318,7 @@
                 "player_id": 4433546,
                 "name": "Makayla Timpson",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 20.9,
                 "bucket": "F"
               }
@@ -92259,14 +92331,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529130,
                 "name": "Natasha Howard",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 25.4,
                 "bucket": "F"
               },
@@ -92274,7 +92346,7 @@
                 "player_id": 4790264,
                 "name": "Janelle Salaun",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 26.1,
                 "bucket": "F"
               }
@@ -92287,14 +92359,14 @@
         },
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3149391,
                 "name": "A'ja Wilson",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 50.9,
                 "bucket": "F"
               }
@@ -92307,14 +92379,14 @@
         },
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 869,
                 "name": "DeWanna Bonner",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 21.3,
                 "bucket": "F"
               },
@@ -92322,7 +92394,7 @@
                 "player_id": 3906972,
                 "name": "Bridget Carleton",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 29.3,
                 "bucket": "F"
               }
@@ -92337,13 +92409,13 @@
     },
     {
       "team_id": 5,
-      "team_abbrev": "Spda",
-      "team_name": "Plumdog Millionaire",
+      "team_abbrev": "T5",
+      "team_name": "Team 5",
       "best_player": {
         "player_id": 3149391,
         "name": "A'ja Wilson",
         "fantasy_team_id": 5,
-        "fantasy_team_abbrev": "Spda",
+        "fantasy_team_abbrev": "T5",
         "projected_per_game": 50.9,
         "bucket": "F"
       },
@@ -92351,14 +92423,14 @@
       "offers": [
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3917450,
                 "name": "Napheesa Collier",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 32.1,
                 "bucket": "F"
               },
@@ -92366,7 +92438,7 @@
                 "player_id": 3142255,
                 "name": "Monique Billings",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 18.9,
                 "bucket": "F"
               }
@@ -92379,14 +92451,14 @@
         },
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 869,
                 "name": "DeWanna Bonner",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 21.3,
                 "bucket": "F"
               },
@@ -92394,7 +92466,7 @@
                 "player_id": 3906972,
                 "name": "Bridget Carleton",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 29.3,
                 "bucket": "F"
               }
@@ -92407,14 +92479,14 @@
         },
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4068042,
                 "name": "Natasha Mack",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -92422,7 +92494,7 @@
                 "player_id": 3054590,
                 "name": "Nia Coffey",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 12.9,
                 "bucket": "F"
               },
@@ -92430,7 +92502,7 @@
                 "player_id": 2566453,
                 "name": "Isabelle Harrison",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 18.4,
                 "bucket": "F"
               }
@@ -92443,14 +92515,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529130,
                 "name": "Natasha Howard",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 25.4,
                 "bucket": "F"
               },
@@ -92458,7 +92530,7 @@
                 "player_id": 4790264,
                 "name": "Janelle Salaun",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 26.1,
                 "bucket": "F"
               }
@@ -92471,14 +92543,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2999101,
                 "name": "Jonquel Jones",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 32.4,
                 "bucket": "F"
               },
@@ -92486,7 +92558,7 @@
                 "player_id": 4398966,
                 "name": "Olivia Nelson-Ododa",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               }
@@ -92499,14 +92571,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 1068,
                 "name": "Nneka Ogwumike",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 27.9,
                 "bucket": "F"
               },
@@ -92514,7 +92586,7 @@
                 "player_id": 2490553,
                 "name": "Brittney Griner",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 21.8,
                 "bucket": "C"
               }
@@ -92527,14 +92599,14 @@
         },
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5345325,
                 "name": "Awa Fam",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 15.8,
                 "bucket": "C"
               },
@@ -92542,7 +92614,7 @@
                 "player_id": 4398915,
                 "name": "Naz Hillmon",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 16.8,
                 "bucket": "F"
               },
@@ -92550,7 +92622,7 @@
                 "player_id": 3934218,
                 "name": "Megan DiLeo",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 19.8,
                 "bucket": "C"
               }
@@ -92565,13 +92637,13 @@
     },
     {
       "team_id": 6,
-      "team_abbrev": "Nut",
-      "team_name": "Hot Stew Comin Through",
+      "team_abbrev": "T6",
+      "team_name": "Team 6",
       "best_player": {
         "player_id": 2998928,
         "name": "Breanna Stewart",
         "fantasy_team_id": 6,
-        "fantasy_team_abbrev": "Nut",
+        "fantasy_team_abbrev": "T6",
         "projected_per_game": 37.9,
         "bucket": "F"
       },
@@ -92579,14 +92651,14 @@
       "offers": [
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4398915,
                 "name": "Naz Hillmon",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 16.8,
                 "bucket": "F"
               },
@@ -92594,7 +92666,7 @@
                 "player_id": 5345444,
                 "name": "Laura Juskaite",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 21.1,
                 "bucket": "F"
               }
@@ -92607,14 +92679,14 @@
         },
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4068042,
                 "name": "Natasha Mack",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -92622,7 +92694,7 @@
                 "player_id": 2566453,
                 "name": "Isabelle Harrison",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 18.4,
                 "bucket": "F"
               }
@@ -92635,14 +92707,14 @@
         },
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5220150,
                 "name": "Dominique Malonga",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 19.0,
                 "bucket": "C"
               },
@@ -92650,7 +92722,7 @@
                 "player_id": 4420318,
                 "name": "Ezi Magbegor",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 18.0,
                 "bucket": "C"
               }
@@ -92663,14 +92735,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529622,
                 "name": "Kayla Thornton",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 17.8,
                 "bucket": "F"
               },
@@ -92678,7 +92750,7 @@
                 "player_id": 4433404,
                 "name": "Cameron Brink",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 18.9,
                 "bucket": "F"
               }
@@ -92691,14 +92763,14 @@
         },
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3142255,
                 "name": "Monique Billings",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 18.9,
                 "bucket": "F"
               },
@@ -92706,7 +92778,7 @@
                 "player_id": 4433546,
                 "name": "Makayla Timpson",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 20.9,
                 "bucket": "F"
               }
@@ -92719,14 +92791,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2999101,
                 "name": "Jonquel Jones",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 32.4,
                 "bucket": "F"
               }
@@ -92739,14 +92811,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 1068,
                 "name": "Nneka Ogwumike",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 27.9,
                 "bucket": "F"
               },
@@ -92754,7 +92826,7 @@
                 "player_id": 4433635,
                 "name": "Diamond Miller",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 10.3,
                 "bucket": "G"
               }
@@ -92769,13 +92841,13 @@
     },
     {
       "team_id": 7,
-      "team_abbrev": "C9",
-      "team_name": "Honolulu Cloud Wine",
+      "team_abbrev": "T7",
+      "team_name": "Team 7",
       "best_player": {
         "player_id": 4433730,
         "name": "Paige Bueckers",
         "fantasy_team_id": 7,
-        "fantasy_team_abbrev": "C9",
+        "fantasy_team_abbrev": "T7",
         "projected_per_game": 44.0,
         "bucket": "G"
       },
@@ -92783,14 +92855,14 @@
       "offers": [
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4398915,
                 "name": "Naz Hillmon",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 16.8,
                 "bucket": "F"
               },
@@ -92798,7 +92870,7 @@
                 "player_id": 4398729,
                 "name": "Emily Engstler",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 26.6,
                 "bucket": "F"
               }
@@ -92811,14 +92883,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4398966,
                 "name": "Olivia Nelson-Ododa",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -92826,7 +92898,7 @@
                 "player_id": 3913881,
                 "name": "Alanna Smith",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 25.6,
                 "bucket": "F"
               }
@@ -92839,14 +92911,14 @@
         },
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3058895,
                 "name": "Brionna Jones",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 29.7,
                 "bucket": "C"
               },
@@ -92854,7 +92926,7 @@
                 "player_id": 3054590,
                 "name": "Nia Coffey",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 12.9,
                 "bucket": "F"
               }
@@ -92867,14 +92939,14 @@
         },
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3906949,
                 "name": "Jessica Shepard",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 27.0,
                 "bucket": "F"
               },
@@ -92882,7 +92954,7 @@
                 "player_id": 4684384,
                 "name": "Aneesah Morrow",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               }
@@ -92895,14 +92967,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4433405,
                 "name": "Kamilla Cardoso",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 25.4,
                 "bucket": "C"
               },
@@ -92910,7 +92982,7 @@
                 "player_id": 2490553,
                 "name": "Brittney Griner",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 21.8,
                 "bucket": "C"
               }
@@ -92923,14 +92995,14 @@
         },
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529140,
                 "name": "Alyssa Thomas",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 40.6,
                 "bucket": "F"
               }
@@ -92943,14 +93015,14 @@
         },
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3142010,
                 "name": "Azura Stevens",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 30.8,
                 "bucket": "F"
               },
@@ -92958,7 +93030,7 @@
                 "player_id": 4420318,
                 "name": "Ezi Magbegor",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 18.0,
                 "bucket": "C"
               }
@@ -92973,13 +93045,13 @@
     },
     {
       "team_id": 8,
-      "team_abbrev": "KylB",
-      "team_name": "Rhyne 'em dine 'em 69 'em",
+      "team_abbrev": "T8",
+      "team_name": "Team 8",
       "best_player": {
         "player_id": 3142191,
         "name": "Kelsey Mitchell",
         "fantasy_team_id": 8,
-        "fantasy_team_abbrev": "KylB",
+        "fantasy_team_abbrev": "T8",
         "projected_per_game": 42.9,
         "bucket": "G"
       },
@@ -92987,14 +93059,14 @@
       "offers": [
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3058895,
                 "name": "Brionna Jones",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 29.7,
                 "bucket": "C"
               },
@@ -93002,7 +93074,7 @@
                 "player_id": 3054590,
                 "name": "Nia Coffey",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 12.9,
                 "bucket": "F"
               }
@@ -93015,14 +93087,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529130,
                 "name": "Natasha Howard",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 25.4,
                 "bucket": "F"
               },
@@ -93030,7 +93102,7 @@
                 "player_id": 2529622,
                 "name": "Kayla Thornton",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 17.8,
                 "bucket": "F"
               }
@@ -93043,14 +93115,14 @@
         },
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5345325,
                 "name": "Awa Fam",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 15.8,
                 "bucket": "C"
               },
@@ -93058,7 +93130,7 @@
                 "player_id": 4398729,
                 "name": "Emily Engstler",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 26.6,
                 "bucket": "F"
               }
@@ -93071,14 +93143,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4398966,
                 "name": "Olivia Nelson-Ododa",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -93086,7 +93158,7 @@
                 "player_id": 3913881,
                 "name": "Alanna Smith",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 25.6,
                 "bucket": "F"
               }
@@ -93099,14 +93171,14 @@
         },
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529140,
                 "name": "Alyssa Thomas",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 40.6,
                 "bucket": "F"
               }
@@ -93119,14 +93191,14 @@
         },
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 869,
                 "name": "DeWanna Bonner",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 21.3,
                 "bucket": "F"
               },
@@ -93134,7 +93206,7 @@
                 "player_id": 4684384,
                 "name": "Aneesah Morrow",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               }
@@ -93147,14 +93219,14 @@
         },
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3142010,
                 "name": "Azura Stevens",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 30.8,
                 "bucket": "F"
               },
@@ -93162,7 +93234,7 @@
                 "player_id": 4420318,
                 "name": "Ezi Magbegor",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 18.0,
                 "bucket": "C"
               }
@@ -93177,13 +93249,13 @@
     },
     {
       "team_id": 9,
-      "team_abbrev": "NNZ",
-      "team_name": "Nothing But Net Zero",
+      "team_abbrev": "T9",
+      "team_name": "Team 9",
       "best_player": {
         "player_id": 4398911,
         "name": "Shakira Austin",
         "fantasy_team_id": 9,
-        "fantasy_team_abbrev": "NNZ",
+        "fantasy_team_abbrev": "T9",
         "projected_per_game": 39.5,
         "bucket": "C"
       },
@@ -93191,14 +93263,14 @@
       "offers": [
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3142255,
                 "name": "Monique Billings",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 18.9,
                 "bucket": "F"
               },
@@ -93206,7 +93278,7 @@
                 "player_id": 4433546,
                 "name": "Makayla Timpson",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 20.9,
                 "bucket": "F"
               }
@@ -93219,14 +93291,14 @@
         },
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 869,
                 "name": "DeWanna Bonner",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 21.3,
                 "bucket": "F"
               },
@@ -93234,7 +93306,7 @@
                 "player_id": 4684384,
                 "name": "Aneesah Morrow",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               }
@@ -93247,14 +93319,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529622,
                 "name": "Kayla Thornton",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 17.8,
                 "bucket": "F"
               },
@@ -93262,7 +93334,7 @@
                 "player_id": 4398776,
                 "name": "NaLyssa Smith",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 23.5,
                 "bucket": "F"
               }
@@ -93275,14 +93347,14 @@
         },
         {
           "from_team_id": 10,
-          "from_team_abbrev": "A-B",
+          "from_team_abbrev": "T10",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4068042,
                 "name": "Natasha Mack",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -93290,7 +93362,7 @@
                 "player_id": 2566453,
                 "name": "Isabelle Harrison",
                 "fantasy_team_id": 10,
-                "fantasy_team_abbrev": "A-B",
+                "fantasy_team_abbrev": "T10",
                 "projected_per_game": 18.4,
                 "bucket": "F"
               }
@@ -93303,14 +93375,14 @@
         },
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5220150,
                 "name": "Dominique Malonga",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 19.0,
                 "bucket": "C"
               },
@@ -93318,7 +93390,7 @@
                 "player_id": 4420318,
                 "name": "Ezi Magbegor",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 18.0,
                 "bucket": "C"
               }
@@ -93331,14 +93403,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4398966,
                 "name": "Olivia Nelson-Ododa",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 19.3,
                 "bucket": "F"
               },
@@ -93346,7 +93418,7 @@
                 "player_id": 3913881,
                 "name": "Alanna Smith",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 25.6,
                 "bucket": "F"
               }
@@ -93359,14 +93431,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4433402,
                 "name": "Angel Reese",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 30.9,
                 "bucket": "F"
               },
@@ -93374,7 +93446,7 @@
                 "player_id": 4433635,
                 "name": "Diamond Miller",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 10.3,
                 "bucket": "G"
               }
@@ -93389,13 +93461,13 @@
     },
     {
       "team_id": 10,
-      "team_abbrev": "A-B",
-      "team_name": "Nobody's Business",
+      "team_abbrev": "T10",
+      "team_name": "Team 10",
       "best_player": {
         "player_id": 4398935,
         "name": "Veronica Burton",
         "fantasy_team_id": 10,
-        "fantasy_team_abbrev": "A-B",
+        "fantasy_team_abbrev": "T10",
         "projected_per_game": 36.9,
         "bucket": "G"
       },
@@ -93403,14 +93475,14 @@
       "offers": [
         {
           "from_team_id": 5,
-          "from_team_abbrev": "Spda",
+          "from_team_abbrev": "T5",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5220150,
                 "name": "Dominique Malonga",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 19.0,
                 "bucket": "C"
               },
@@ -93418,7 +93490,7 @@
                 "player_id": 4420318,
                 "name": "Ezi Magbegor",
                 "fantasy_team_id": 5,
-                "fantasy_team_abbrev": "Spda",
+                "fantasy_team_abbrev": "T5",
                 "projected_per_game": 18.0,
                 "bucket": "C"
               }
@@ -93431,14 +93503,14 @@
         },
         {
           "from_team_id": 9,
-          "from_team_abbrev": "NNZ",
+          "from_team_abbrev": "T9",
           "pkg_received": {
             "players": [
               {
                 "player_id": 5345325,
                 "name": "Awa Fam",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 15.8,
                 "bucket": "C"
               },
@@ -93446,7 +93518,7 @@
                 "player_id": 5345444,
                 "name": "Laura Juskaite",
                 "fantasy_team_id": 9,
-                "fantasy_team_abbrev": "NNZ",
+                "fantasy_team_abbrev": "T9",
                 "projected_per_game": 21.1,
                 "bucket": "F"
               }
@@ -93459,14 +93531,14 @@
         },
         {
           "from_team_id": 7,
-          "from_team_abbrev": "C9",
+          "from_team_abbrev": "T7",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2529622,
                 "name": "Kayla Thornton",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 17.8,
                 "bucket": "F"
               },
@@ -93474,7 +93546,7 @@
                 "player_id": 4433404,
                 "name": "Cameron Brink",
                 "fantasy_team_id": 7,
-                "fantasy_team_abbrev": "C9",
+                "fantasy_team_abbrev": "T7",
                 "projected_per_game": 18.9,
                 "bucket": "F"
               }
@@ -93487,14 +93559,14 @@
         },
         {
           "from_team_id": 6,
-          "from_team_abbrev": "Nut",
+          "from_team_abbrev": "T6",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2998928,
                 "name": "Breanna Stewart",
                 "fantasy_team_id": 6,
-                "fantasy_team_abbrev": "Nut",
+                "fantasy_team_abbrev": "T6",
                 "projected_per_game": 37.9,
                 "bucket": "F"
               }
@@ -93507,14 +93579,14 @@
         },
         {
           "from_team_id": 1,
-          "from_team_abbrev": "KAH",
+          "from_team_abbrev": "T1",
           "pkg_received": {
             "players": [
               {
                 "player_id": 3142255,
                 "name": "Monique Billings",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 18.9,
                 "bucket": "F"
               },
@@ -93522,7 +93594,7 @@
                 "player_id": 4433546,
                 "name": "Makayla Timpson",
                 "fantasy_team_id": 1,
-                "fantasy_team_abbrev": "KAH",
+                "fantasy_team_abbrev": "T1",
                 "projected_per_game": 20.9,
                 "bucket": "F"
               }
@@ -93535,14 +93607,14 @@
         },
         {
           "from_team_id": 2,
-          "from_team_abbrev": "PEZ",
+          "from_team_abbrev": "T2",
           "pkg_received": {
             "players": [
               {
                 "player_id": 2999101,
                 "name": "Jonquel Jones",
                 "fantasy_team_id": 2,
-                "fantasy_team_abbrev": "PEZ",
+                "fantasy_team_abbrev": "T2",
                 "projected_per_game": 32.4,
                 "bucket": "F"
               }
@@ -93555,14 +93627,14 @@
         },
         {
           "from_team_id": 8,
-          "from_team_abbrev": "KylB",
+          "from_team_abbrev": "T8",
           "pkg_received": {
             "players": [
               {
                 "player_id": 4898384,
                 "name": "Kiki Iriafen",
                 "fantasy_team_id": 8,
-                "fantasy_team_abbrev": "KylB",
+                "fantasy_team_abbrev": "T8",
                 "projected_per_game": 31.9,
                 "bucket": "F"
               }
