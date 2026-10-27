@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from pipeline import season
 
-# Mirrors the real 50-40-90 Club shape: 8 teams, non-dense IDs, 12 regular
+# Mirrors the real league 2043154241 shape: 8 teams, non-dense IDs, 12 regular
 # matchup periods, top 4 make a two-round bracket (mp13 semis, mp14 final).
 _SEEDS = {1: 3, 2: 6, 5: 2, 6: 4, 7: 5, 8: 1, 9: 8, 10: 7}
 
@@ -164,7 +164,7 @@ class TestStandings:
         assert top.points_for == 6101.0
 
     def test_non_dense_team_ids_survive(self) -> None:
-        # 50-40-90 Club scar: IDs are [1,2,5,6,7,8,9,10] — gaps at 3 and 4.
+        # league 2043154241 scar: IDs are [1,2,5,6,7,8,9,10] — gaps at 3 and 4.
         result = season.build_season_result(_league(_semis()), current_matchup_period=13)
         assert {s.team_id for s in result.standings} == set(_SEEDS)
 

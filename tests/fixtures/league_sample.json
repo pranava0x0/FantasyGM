@@ -6,7 +6,7 @@
     "currentMatchupPeriod": 3
   },
   "settings": {
-    "name": "50-40-90 Club",
+    "name": "League 2043154241",
     "size": 8,
     "scoringSettings": {
       "scoringType": "H2H_POINTS"
@@ -62,10 +62,7 @@
   "teams": [
     {
       "id": 1,
-      "abbrev": "KAH",
-      "name": "Copper Futures",
       "divisionId": 0,
-      "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/1c02dee0-4eea-11f1-8cd3-5550ce44b587",
       "waiverRank": 5,
       "record": {
         "away": {
@@ -415,14 +412,13 @@
             }
           }
         ]
-      }
+      },
+      "name": "Team 1",
+      "abbrev": "T1"
     },
     {
       "id": 2,
-      "abbrev": "PEZ",
-      "name": "Empire State Farm",
       "divisionId": 0,
-      "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Incredibles/incredibles_12.svg",
       "waiverRank": 6,
       "record": {
         "away": {
@@ -772,14 +768,13 @@
             }
           }
         ]
-      }
+      },
+      "name": "Team 2",
+      "abbrev": "T2"
     },
     {
       "id": 5,
-      "abbrev": "Spda",
-      "name": "Plumdog Millionaire",
       "divisionId": 0,
-      "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg",
       "waiverRank": 4,
       "record": {
         "away": {
@@ -1130,7 +1125,9 @@
             }
           }
         ]
-      }
+      },
+      "name": "Team 5",
+      "abbrev": "T5"
     }
   ],
   "transactions": [

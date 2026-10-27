@@ -21,6 +21,7 @@ import re
 
 from pipeline import analyze, bluesky as bluesky_mod, faab, instagram as instagram_mod, lineups, news, reddit as reddit_mod, schedule, schema, scoring_formula as sf_mod, season as season_mod, summary, twitter as twitter_mod
 from pipeline.projections_ext import resolve_external_projections
+from pipeline.ingest import _redact_owners
 
 # Per-player cap on news/social items surfaced in state.json. High enough to
 # cover a full season of history (see data/history/{news,social}.jsonl) while
@@ -222,6 +223,8 @@ def build_state(
     scroll out of the live feed. Same pattern as `extra_transactions`.
     All default to None so tests and legacy callers don't need to change.
     """
+    # Legacy snapshots must pass the same identity boundary as new pulls.
+    league_raw = _redact_owners(league_raw)
     # Compute the upcoming week's game-count signal first; team views and
     # waiver ranking both consume it. Without it, team production is
     # measured in 1-day projection sums which conflates roster

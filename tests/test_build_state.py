@@ -28,11 +28,25 @@ def test_meta_populated(
     state = bs.build_state(
         league_raw=league_raw, free_agents_raw=free_agents_raw, captured_at=captured_at,
     )
-    assert state.meta.league_name == "50-40-90 Club"
+    assert state.meta.league_name == "League 2043154241"
     assert state.meta.season_id == 2026
     assert state.meta.scoring_period_id == 10
     assert state.meta.team_count == len(state.teams)
     assert state.meta.captured_at == captured_at
+
+
+def test_legacy_snapshot_identity_cannot_reach_dashboard(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime
+) -> None:
+    league_raw["settings"]["name"] = "PRIVATE_LEAGUE"
+    for team in league_raw["teams"]:
+        team.update(name="PRIVATE_TEAM", abbrev="PRIVATE_ABBREV",
+                    logo="https://example.com/PRIVATE_LOGO", owners=["PRIVATE_OWNER"])
+    state = bs.build_state(league_raw=league_raw, free_agents_raw=free_agents_raw,
+                           captured_at=captured_at)
+    assert "PRIVATE_" not in state.model_dump_json()
+    assert all(t.name == f"Team {t.team_id}" and t.abbrev == f"T{t.team_id}"
+               and t.logo_url is None for t in state.teams)
 
 
 def test_teams_have_needs_payload(
@@ -94,7 +108,7 @@ def test_write_state_creates_file(
     out_path = bs.write_state(state, tmp_path)
     assert out_path.exists()
     on_disk = json.loads(out_path.read_text())
-    assert on_disk["meta"]["league_name"] == "50-40-90 Club"
+    assert on_disk["meta"]["league_name"] == "League 2043154241"
 
 
 def test_append_transactions_history_dedupes(

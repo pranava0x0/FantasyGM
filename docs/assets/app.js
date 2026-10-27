@@ -1420,8 +1420,8 @@
   // hasn't produced. `season_result.champion_team_id` stays null until the
   // final is actually played, and the copy branches on that rather than
   // assuming the last round is over.
-  // "Copper Futures's" reads badly; team names ending in s take a bare
-  // apostrophe. Three of this league's eight names end in s.
+  // "Teams's" reads badly; team names ending in s take a bare
+  // apostrophe. Retain this for legacy labels.
   function possessive(name) {
     return /s$/i.test(name) ? `${name}'` : `${name}'s`;
   }

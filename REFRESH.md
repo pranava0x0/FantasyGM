@@ -17,7 +17,7 @@ If the user explicitly says they want a **dry run** or just wants to verify thei
 ## What this project is
 
 - Working dir: `/Users/pranava/Projects/FantasyGM`
-- League: ESPN fantasy women's basketball, `leagueId 2043154241` ("50-40-90 Club")
+- League: ESPN fantasy women's basketball, `leagueId 2043154241` ("league 2043154241")
 - Pipeline source: `pipeline/` (Python 3.9 + pydantic v2 + httpx)
 - Output:
   - `data/raw/<YYYY-MM-DD>/league.json` + `free_agents.json` — daily ESPN snapshots, PII-stripped, committed
@@ -404,11 +404,11 @@ These are the gotchas that cost the most time to discover the first time. If the
 | API returns 401 even with cookies set | Cookies are expired or the SWID is missing curly braces | Re-copy from Chrome DevTools; `ESPNCredentials.from_env()` enforces the `{...}` shape |
 | Roster shows fewer active players than expected | `lineupSlotCounts` shows count=1 for slot 7 but `isBenchUnlimited: true` overrides it | Slot 7 is bench. `pipeline/positions.py` labels it `BE`. Active set is {1, 4, 5, 6}. |
 | A Forward shows up in slot 5 (which we labeled C) | Slot 5 is "F/C eligible" — forwards can fill a center slot | `LINEUP_SLOT_LABEL[5] = "F/C"`. Don't change this just because one player surprises you. |
-| Player positions look wrong | NBA fantasy maps `defaultPositionId` 1=PG, 2=SG, …, 5=C. WNBA uses 1=G, 2=F, 3=C. | `pipeline/positions.py:DEFAULT_POSITION_LABEL` — verified empirically against the 50-40-90 Club roster. |
+| Player positions look wrong | NBA fantasy maps `defaultPositionId` 1=PG, 2=SG, …, 5=C. WNBA uses 1=G, 2=F, 3=C. | `pipeline/positions.py:DEFAULT_POSITION_LABEL` — verified empirically against the league 2043154241 roster. |
 | Transactions show `#playerId` instead of names | Player wasn't in the team's current roster or the FA top-N (`_player_name_index` is built from those two sources) | Backlog item: pull `kona_playercard` for unresolved IDs. Cosmetic, not a correctness bug. |
 | `python3 -m http.server` errors with `PermissionError: Operation not permitted` | Sandbox restricts `os.getcwd()` from the preview launcher's CWD | Use `node scripts/serve.mjs` (configured in `.claude/launch.json`) |
-| A team you saw yesterday is "missing" from `state.teams` | The owner renamed the team. Names are mutable; only `team.id` is stable. | Look up by `team.id`. Confirmed 2026-05-17: team_id 6 went Pheenatics → Hot Stew Comin Through mid-session. |
-| Code that loops `for i in range(team_count)` breaks | Team IDs are not dense. The 50-40-90 Club has IDs `[1, 2, 5, 6, 7, 8, 9, 10]` (gaps from prior-season drops). | Always iterate `league.teams[*].id`. Never assume 1..N. |
+| A team you saw yesterday is "missing" from `state.teams` | The owner renamed the team. Names are mutable; only `team.id` is stable. | Look up by `team.id`. Confirmed 2026-05-17: team_id 6 went one private label to another mid-session. |
+| Code that loops `for i in range(team_count)` breaks | Team IDs are not dense. The league 2043154241 has IDs `[1, 2, 5, 6, 7, 8, 9, 10]` (gaps from prior-season drops). | Always iterate `league.teams[*].id`. Never assume 1..N. |
 | Debugging mentions "team #4" and the wrong team is implicated | Standings display order ≠ team_id order. ESPN sorts standings by W-L %. | Click into the team on ESPN.com and read the `?teamId=N` URL parameter. |
 | Waiver-target / roster entries show wrong WNBA team abbrev (e.g. Brittney Sykes labeled "FA") | The `WNBA_TEAM_ABBR` map in `pipeline/build_state.py` is stale — likely missing an expansion team's 6-digit ID, or guessing NBA conventions. | `python scripts/refresh_pro_teams.py` regenerates the dict from ESPN's public site API. Paste output over `WNBA_TEAM_ABBR`. Re-run `pipeline.refresh`. |
 

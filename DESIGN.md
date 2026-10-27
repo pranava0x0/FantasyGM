@@ -51,7 +51,7 @@ Bucket colors are intentionally desaturated relative to ESPN's brand palette —
 
 **Content rules:**
 
-- **No owner names, ever.** UI shows team `name` + `abbrev` + `team.id`. Hover-tooltip on the team chip shows ID and division — never a person.
+- **No owner names, ever.** UI shows neutral `Team <id>` and `T<id>` labels. Save only platform, league ID and team/roster ID for participant identity; discard fantasy names, custom logos and owner identifiers. Division labels are ID-based too. Public professional athlete names remain visible.
 - **"Captured as of <date>"** is visible in the meta strip. The data is a snapshot, not live.
 - **Empty states** ("no transactions yet this period") render as italic muted — never a blank section.
 - **Projected points always show 1 decimal.** Whole-number projections look fake; one-decimal precision signals "this is a model output."

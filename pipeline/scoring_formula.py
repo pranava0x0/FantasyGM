@@ -5,7 +5,7 @@ Each item maps a `statId` → `points` weight. We use this to convert raw per-ga
 stat dicts from external sources (CBS Sports, Yahoo) into fantasy-point equivalents
 that can be averaged with ESPN's own `appliedTotal` figures.
 
-Verified for the 50-40-90 Club (H2H_POINTS, 7 scoring items):
+Verified for the league 2043154241 (H2H_POINTS, 7 scoring items):
   stat 0 (FGM)    × 1.0
   stat 1 (3PM)    × 2.0
   stat 2 (FTM)    × 2.0

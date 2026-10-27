@@ -90,6 +90,20 @@ def test_preserves_non_owner_fields() -> None:
     }
     out = _redact_owners(raw)
     assert out["id"] == 100
-    assert out["settings"]["name"] == "League"
-    assert out["teams"][0]["abbrev"] == "AAA"
+    assert out["settings"]["name"] == "League 100"
+    assert out["teams"][0]["abbrev"] == "T1"
     assert out["teams"][0]["record"]["overall"]["wins"] == 3
+
+
+def test_private_fantasy_labels_and_logos_are_removed() -> None:
+    raw = {"id": 42, "settings": {"name": "PRIVATE_LEAGUE",
+           "scheduleSettings": {"divisions": [{"id": 3, "name": "PRIVATE_DIVISION"}]}},
+           "teams": [{"id": 9, "name": "PRIVATE_TEAM", "nickname": "PRIVATE_NICK",
+                      "location": "PRIVATE_LOCATION", "abbrev": "PRIVATE_ABBREV",
+                      "logo": "https://example.com/PRIVATE_LOGO", "metadata": {"owner": "PRIVATE_OWNER"},
+                      "roster": {"entries": [{"player": {"fullName": "Public Athlete"}}]}}]}
+    out = _redact_owners(raw)
+    assert "PRIVATE_" not in json.dumps(out)
+    assert out["teams"][0]["name"] == "Team 9"
+    assert out["teams"][0]["abbrev"] == "T9"
+    assert "Public Athlete" in json.dumps(out)

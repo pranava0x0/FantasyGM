@@ -33,7 +33,7 @@ class TestDefaultPositionLabel:
 
 class TestLineupSlotLabel:
     def test_active_slots_have_labels(self) -> None:
-        # Slots actually used in the 50-40-90 Club league must all be labeled.
+        # Slots actually used in the league 2043154241 league must all be labeled.
         for slot in (1, 4, 5, 6):
             assert slot in LINEUP_SLOT_LABEL
             assert LINEUP_SLOT_LABEL[slot] != ""
