@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 from typing import Any
+from pathlib import Path
 
 import httpx
 import pytest
@@ -180,3 +181,35 @@ def test_browser_task_ignores_private_legacy_labels() -> None:
     assert "PRIVATE_" not in task
     assert "Sleeper league 123 / roster 9" in task
     assert "ESPN league 456 / team 2" in task
+
+
+def test_failed_refresh_preserves_roster_identity_without_stale_data(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from pipeline import multileague as module
+    saved = tmp_path / "report.json"
+    saved.write_text(json.dumps({"leagues": [{"key": "sleeper:123", "roster_id": 9}]}))
+    seen: list[int | None] = []
+
+    def sleeper(*args: Any, roster_id: int | None, **kwargs: Any) -> dict[str, Any]:
+        seen.append(roster_id)
+        if len(seen) == 1:
+            raise httpx.ConnectError("Temporary outage")
+        return {"key": "sleeper:123", "sport": "nfl", "roster_id": roster_id,
+                "url": "https://sleeper.com/leagues/123/team", "status": "test"}
+
+    monkeypatch.setattr(module, "SLEEPER_LEAGUES", ("123",))
+    monkeypatch.setattr(module, "_load_dotenv", lambda root: None)
+    monkeypatch.setattr(module, "refresh_sleeper", sleeper)
+    monkeypatch.setattr(module.ESPNCredentials, "from_env", lambda: object())
+    monkeypatch.setattr(module, "refresh_nba", lambda *args: {
+        "key": "espn:fba:456", "sport": "nba", "team_id": 2,
+        "url": "https://fantasy.espn.com/", "status": "test"})
+    args = ["--output", str(tmp_path), "--start-date", "2026-10-27"]
+    assert module.main(args) == 1
+    failed = json.loads(saved.read_text())
+    assert failed["roster_ids"] == {"sleeper:123": 9}
+    assert not any(l["key"] == "sleeper:123" for l in failed["leagues"])
+    assert module.main(args) == 0
+    assert seen == [9, 9]
+    assert json.loads(saved.read_text())["roster_ids"] == {"sleeper:123": 9}

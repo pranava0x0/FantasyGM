@@ -324,7 +324,12 @@ def main(argv: list[str] | None = None) -> int:
     report: dict[str, Any] = {"captured_at": datetime.now(timezone.utc).isoformat(), "leagues": [], "errors": []}
     user_id = None
     league_ids = list(SLEEPER_LEAGUES)
-    previous_rosters = {l["key"]: l.get("roster_id") for l in previous.get("leagues", [])}
+    previous_rosters = {**previous.get("roster_ids", {}),
+                        **{l["key"]: l["roster_id"] for l in previous.get("leagues", [])
+                           if l.get("roster_id") is not None}}
+    # Identity survives a failed fetch without retaining stale league data.
+    # Only platform/league keys and numeric roster IDs persist here.
+    report["roster_ids"] = dict(previous_rosters)
     with httpx.Client(timeout=30) as client:
         if args.sleeper_user:
             user = _get(client, f"user/{quote(args.sleeper_user, safe='')}")
@@ -336,8 +341,11 @@ def main(argv: list[str] | None = None) -> int:
             league_ids = [l["league_id"] for l in leagues if l.get("status") == "in_season"]
         for lid in league_ids:
             try:
-                report["leagues"].append(refresh_sleeper(client, lid, args.week, user_id,
-                                                        roster_id=previous_rosters.get(f"sleeper:{lid}")))
+                refreshed = refresh_sleeper(client, lid, args.week, user_id,
+                                            roster_id=previous_rosters.get(f"sleeper:{lid}"))
+                report["leagues"].append(refreshed)
+                if refreshed.get("roster_id") is not None:
+                    report["roster_ids"][refreshed["key"]] = refreshed["roster_id"]
             except (httpx.HTTPError, ValueError, KeyError, TypeError) as exc:
                 log.error("Sleeper league %s refresh failed (%s)", lid, type(exc).__name__)
                 report["errors"].append({"league": f"sleeper:{lid}", "error": type(exc).__name__})

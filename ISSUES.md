@@ -2,6 +2,8 @@
 
 ## Refresh publication review 2026 10 27
 
+Automated PR review found transient Sleeper failures could erase resolved roster identity when an incomplete report replaced the prior capture. The report now preserves a separate map of platform/league keys to roster IDs, including across errors; failed leagues stay absent from fresh results. A fail-then-recover CLI regression verifies identity survives without retaining stale league data or owner identifiers.
+
 Expected ID-only labels across every refresh entry point. Review found the WNBA dry run logged the provider's league name, while the NFL league cache and portable imports retained fantasy labels. Fixed logging to use IDs; allowlisted cached Sleeper rules and normalized imported league/team labels. Regression tests cover logs, fresh and legacy cache writes, imported labels, and published JSON. No credentials or participant text are included in review artifacts.
 
 Expected full refresh to preserve the transaction archive when the live season-end feed is empty. The live refresh omitted `extra_transactions`, collapsing the dashboard history to zero despite 362 archived rows. A shared archive loader now feeds both refresh and replay; regression coverage verifies an empty live feed retains archived transaction IDs.
