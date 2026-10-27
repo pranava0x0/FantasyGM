@@ -76,12 +76,15 @@ class ESPNClient:
         creds: ESPNCredentials,
         *,
         client: httpx.Client | None = None,
+        game_code: str = "wfba",
     ) -> None:
+        if game_code not in {"wfba", "fba", "ffl"}:
+            raise ValueError("Unsupported ESPN game code")
         self.league_id = league_id
         self.season = season
         self._creds = creds
-        self._base_url = BASE_URL_TMPL.format(season=season, league_id=league_id)
-        self._season_url = SEASON_URL_TMPL.format(season=season)
+        self._base_url = BASE_URL_TMPL.replace("/wfba", f"/{game_code}").format(season=season, league_id=league_id)
+        self._season_url = SEASON_URL_TMPL.replace("/wfba", f"/{game_code}").format(season=season)
         self._client = client or httpx.Client(
             timeout=DEFAULT_TIMEOUT,
             headers={

@@ -76,6 +76,31 @@ def test_redaction_uses_whitelist() -> None:
     assert "private" not in value.lower() and "Owner" not in value
 
 
+def test_private_import_labels_are_neutralized() -> None:
+    imported = league(name="PRIVATE_LEAGUE", teams=[Team(id="9", label="PRIVATE_TEAM", players=[])])
+    assert "PRIVATE_" not in imported.model_dump_json()
+    assert imported.name == "League sleeper-1"
+    assert imported.teams[0].label == "Team 9"
+
+
+def test_league_cache_never_saves_private_provider_labels(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from io import BytesIO
+    raw = {"league_id": "123", "name": "PRIVATE_LEAGUE", "season": "2026", "sport": "nfl",
+           "settings": {"leg": 8, "custom_owner": "PRIVATE_OWNER"},
+           "scoring_settings": {"rec": 0.5}, "roster_positions": ["QB"],
+           "metadata": {"owner": "PRIVATE_HANDLE"}}
+    monkeypatch.setattr("urllib.request.urlopen", lambda *args, **kwargs: BytesIO(json.dumps(raw).encode()))
+    cache = Cache(tmp_path)
+    safe, _ = cache.get("league-123", "https://example.com/123", 900)
+    assert "PRIVATE_" not in (tmp_path / "league-123.json").read_text()
+    assert safe["settings"] == {"leg": 8}
+    assert safe["name"] == "League sleeper-123"
+    # A legacy cache entry must not bypass the current write-time boundary.
+    (tmp_path / "league-123.json").write_text(json.dumps({"data": raw, "captured_at": NOW.isoformat()}))
+    cache.get("league-123", "https://example.com/123", 900)
+    assert "PRIVATE_" not in (tmp_path / "league-123.json").read_text()
+
+
 def test_timezone_and_finite_validation() -> None:
     with pytest.raises(ValidationError): Deadline(title="Waiver",at="2026-10-07T03:00",source_url="https://example.com")
     assert Deadline(title="Waiver",at="2026-10-07T03:00-04:00",source_url="https://example.com").at.endswith("-04:00")
@@ -207,6 +232,9 @@ def test_pages_nfl_payloads_are_deployable_and_complete() -> None:
         data = json.loads(path.read_text())
         imported = League.model_validate(data["league"])
         assert imported.id == entry["id"]
+        assert data["league"]["name"] == f"League {imported.id}"
+        assert entry["name"] == f"League {imported.id}"
+        assert all(t.get("label") in (None, f"Team {t['id']}") for t in data["league"]["teams"])
         assert imported.my_team in {team.id for team in imported.teams}
         for team in imported.teams:
             assert set(team.players) <= players.keys()

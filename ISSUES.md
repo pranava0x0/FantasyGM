@@ -1,5 +1,27 @@
 # Issues
 
+## Refresh publication review 2026 10 27
+
+Automated PR review found transient Sleeper failures could erase resolved roster identity when an incomplete report replaced the prior capture. The report now preserves a separate map of platform/league keys to roster IDs, including across errors; failed leagues stay absent from fresh results. A fail-then-recover CLI regression verifies identity survives without retaining stale league data or owner identifiers.
+
+Expected ID-only labels across every refresh entry point. Review found the WNBA dry run logged the provider's league name, while the NFL league cache and portable imports retained fantasy labels. Fixed logging to use IDs; allowlisted cached Sleeper rules and normalized imported league/team labels. Regression tests cover logs, fresh and legacy cache writes, imported labels, and published JSON. No credentials or participant text are included in review artifacts.
+
+Expected full refresh to preserve the transaction archive when the live season-end feed is empty. The live refresh omitted `extra_transactions`, collapsing the dashboard history to zero despite 362 archived rows. A shared archive loader now feeds both refresh and replay; regression coverage verifies an empty live feed retains archived transaction IDs.
+
+The local NFL imports and roster-ID mapping were absent after merging the separately published dashboard. Restored the existing Yahoo snapshot from its published ID-only payload and kept its original capture date; resolved Sleeper roster IDs from the existing local report. Refreshing does not make the Yahoo snapshot current. CBS WNBA enrichment returned HTTP 404; ESPN data and the Yahoo public stat source still refreshed successfully.
+
+## Multi league access and projection coverage 2026 10 26
+
+Expected signed-in Chrome league pages to expose roster controls. The connected Chrome profile instead showed ESPN's MyDisney sign-in form, while an open extension UI blocked Sleeper interaction. Stored ESPN API cookies still read the private NBA league successfully; browser and API authentication are separate sessions. Next time verify the actual team page and extension state before assuming browser access from working API credentials.
+
+Sleeper's undocumented projection feed omits nonzero scoring components used by these leagues, including some defense bands and kicker distance components. The new local report lists missing components and labels its lineup proposals tentative; verify league-scored projections and locks in the live UI before executing. NBA execution was subsequently verified; Sleeper browser execution remains blocked.
+
+## Identity labels and snapshot replay 2026 10 26
+
+Expected owner-field redaction to remove participant identity. Fantasy team labels, division names and custom logos survived because they lived outside owner fields. Ingest now replaces those labels with IDs, drops custom logos and repeats sanitization for legacy snapshot rebuilds; multi-league captures retain only roster IDs and selected rules. Public athlete names remain intact. Local snapshots and authored retrospective copy were sanitized too. Previously published history remains a separate cleanup task.
+
+Expected the snapshot rebuild to avoid network access. With no saved Reddit file, its loader attempted an RSS fallback (HTTP 429); replay also reordered archived Reddit items. The resulting dashboard changes were inspected separately from identity changes; captured_at, rosters and transaction counts stayed unchanged. Next time check missing social-source files before assuming a replay is fully offline.
+
 Audit trail of bugs. Each entry: date, area, description, root cause (**code bug** vs **test bug**), status (Open / Fixed) + commit on resolution.
 
 | Date | Area | Description | Root cause | Status | Resolved by |

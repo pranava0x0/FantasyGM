@@ -8,7 +8,7 @@ This project uses ESPN session cookies (`SWID`, `espn_s2`) to read your private 
 
 - Cookies live in a local `.env` file. `.env` is gitignored.
 - Never log, print, or include cookie values in commits, issues, screenshots, or tool output.
-- The pipeline runs **locally on your machine only** — there are no GitHub Actions secrets for ESPN cookies. The static site that GitHub Pages serves is built from already-public-to-your-league data (team names, public stats, public transactions).
+- The pipeline runs **locally on your machine only** — there are no GitHub Actions secrets for ESPN cookies. Published participant labels use platform, league ID and team/roster ID only. Private fantasy names, handles, owner identifiers and custom logos are removed before caching or publishing; public athlete names and professional statistics remain visible.
 - Rotate cookies if they ever leak: sign out of ESPN, sign back in, repeat the copy step from `.env.example`.
 
 ## Supply-chain advisory log

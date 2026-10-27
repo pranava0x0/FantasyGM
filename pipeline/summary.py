@@ -158,7 +158,7 @@ def _transaction_bullet(team_txns: list[dict[str, Any]]) -> str | None:
 def _shape_bullet(team_view: dict[str, Any]) -> str | None:
     """Only call out genuinely imbalanced rosters.
 
-    5 G + 4 FC is the typical 50-40-90 Club lineup (2 G slots + 3 UTIL
+    5 G + 4 FC is the typical league 2043154241 lineup (2 G slots + 3 UTIL
     typically deployed as guards = 5 Gs), so flagging that as
     "guard-heavy" was noisy. Require 6+ in one bucket for the label.
     """

@@ -3,6 +3,11 @@
 from __future__ import annotations
 
 import json
+import logging
+from pathlib import Path
+from typing import Any
+
+import pytest
 
 from pipeline.ingest import _redact_owners
 
@@ -90,6 +95,47 @@ def test_preserves_non_owner_fields() -> None:
     }
     out = _redact_owners(raw)
     assert out["id"] == 100
-    assert out["settings"]["name"] == "League"
-    assert out["teams"][0]["abbrev"] == "AAA"
+    assert out["settings"]["name"] == "League 100"
+    assert out["teams"][0]["abbrev"] == "T1"
     assert out["teams"][0]["record"]["overall"]["wins"] == 3
+
+
+def test_private_fantasy_labels_and_logos_are_removed() -> None:
+    raw = {"id": 42, "settings": {"name": "PRIVATE_LEAGUE",
+           "scheduleSettings": {"divisions": [{"id": 3, "name": "PRIVATE_DIVISION"}]}},
+           "teams": [{"id": 9, "name": "PRIVATE_TEAM", "nickname": "PRIVATE_NICK",
+                      "location": "PRIVATE_LOCATION", "abbrev": "PRIVATE_ABBREV",
+                      "logo": "https://example.com/PRIVATE_LOGO", "metadata": {"owner": "PRIVATE_OWNER"},
+                      "roster": {"entries": [{"player": {"fullName": "Public Athlete"}}]}}]}
+    out = _redact_owners(raw)
+    assert "PRIVATE_" not in json.dumps(out)
+    assert out["teams"][0]["name"] == "Team 9"
+    assert out["teams"][0]["abbrev"] == "T9"
+    assert "Public Athlete" in json.dumps(out)
+
+
+def test_dry_run_logs_ids_without_private_league_names(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture, tmp_path: Path
+) -> None:
+    from pipeline import refresh
+
+    class FakeClient:
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            pass
+
+        def __enter__(self) -> FakeClient:
+            return self
+
+        def __exit__(self, *args: Any) -> None:
+            pass
+
+        def fetch_league(self, **kwargs: Any) -> dict[str, Any]:
+            return {"settings": {"name": "PRIVATE_LEAGUE"}, "scoringPeriodId": 8}
+
+    monkeypatch.setattr(refresh, "ESPNClient", FakeClient)
+    monkeypatch.setattr(refresh.ESPNCredentials, "from_env", lambda: object())
+    monkeypatch.setenv("ESPN_LEAGUE_ID", "42")
+    with caplog.at_level(logging.INFO):
+        assert refresh.main(["--root", str(tmp_path), "--dry-run"]) == 0
+    assert "PRIVATE_" not in caplog.text
+    assert "league_id=42" in caplog.text

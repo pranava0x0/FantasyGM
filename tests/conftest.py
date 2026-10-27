@@ -13,7 +13,7 @@ FIXTURE_DIR = Path(__file__).parent / "fixtures"
 
 @pytest.fixture(scope="session")
 def league_raw() -> dict:
-    """Slim, owner-redacted league response — 3 teams from 50-40-90 Club."""
+    """Slim, owner-redacted league response — 3 teams from league 2043154241."""
     return json.loads((FIXTURE_DIR / "league_sample.json").read_text())
 
 

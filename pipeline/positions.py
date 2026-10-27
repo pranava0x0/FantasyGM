@@ -2,7 +2,7 @@
 
 ESPN's API uses small integer codes for positions and lineup slots. These
 codes are not documented publicly; mappings here are derived empirically
-from the 50-40-90 Club league response (see scripts/probe_positions.py if
+from the league 2043154241 league response (see scripts/probe_positions.py if
 we ever need to re-verify).
 
 Keep the raw IDs alongside the labels in stored data so a wrong mapping
@@ -17,7 +17,7 @@ PositionBucket = Literal["G", "F", "C"]
 
 # Default position ID -> short position label.
 # WNBA only uses G / F / C; mapping is based on observed `defaultPositionId`
-# values for known players in the 50-40-90 Club league.
+# values for known players in the league 2043154241 league.
 DEFAULT_POSITION_LABEL: dict[int, str] = {
     1: "G",
     2: "F",
@@ -25,7 +25,7 @@ DEFAULT_POSITION_LABEL: dict[int, str] = {
 }
 
 # Lineup slot ID -> label. WNBA leagues on ESPN use a small subset.
-# Verified empirically from 50-40-90 Club rosters:
+# Verified empirically from league 2043154241 rosters:
 #   slot 1  (count 2)  — Guards. Confirmed: Copper, Sykes both in slot 1.
 #   slot 4  (count 3)  — Forwards. Confirmed: Alyssa Thomas in slot 4.
 #   slot 5  (count 1)  — Center-eligible. Forwards can fill (Napheesa Collier

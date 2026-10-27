@@ -19,6 +19,18 @@ from pipeline.espn_client import ESPNClient
 
 log = logging.getLogger(__name__)
 
+# Persist selected numeric Sleeper rules, never arbitrary provider metadata.
+SLEEPER_RULE_KEYS = frozenset({
+    "best_ball", "start_week", "leg", "bench_lock", "reserve_slots", "taxi_slots",
+    "reserve_allow_na", "reserve_allow_doubtful", "reserve_allow_dnr", "reserve_allow_out",
+    "reserve_allow_sus", "reserve_allow_cov", "reserve_allow_pup", "max_subs", "sub_start_time_eligibility",
+    "sub_lock_if_starter_active", "waiver_budget", "waiver_type", "waiver_bid_min",
+    "waiver_clear_days", "waiver_day_of_week", "daily_waivers", "daily_waivers_days",
+    "daily_waivers_hour", "disable_adds", "disable_trades", "trade_deadline",
+    "trade_review_days", "playoff_week_start", "playoff_teams", "playoff_round_type",
+    "league_average_match", "type", "max_keepers", "taxi_deadline", "taxi_allow_vets", "taxi_years",
+})
+
 # ESPN member IDs are UUIDs wrapped in curly braces — the exact shape
 # as the SWID auth cookie. The user's own member ID literally IS their
 # SWID value. Scrubbing any string matching this pattern is a defense
@@ -165,6 +177,7 @@ def _dump(path: Path, obj: Any) -> None:
 # raw snapshots committed to the repo never carry them. Keeping a denylist here
 # (not on the team objects directly) makes the policy obvious in one place.
 _OWNER_FIELDS: tuple[str, ...] = (
+    "members",
     "owners",
     "primaryOwner",
     "memberId",
@@ -174,13 +187,21 @@ _OWNER_FIELDS: tuple[str, ...] = (
     "userId",
     "isActingAsTeamOwner",
     "isLeagueManager",
+    "owner_id",
+    "co_owners",
+    "user_id",
+    "username",
+    "email",
+    "phone",
+    "avatar",
+    "metadata",
 )
 
 
 def _redact_owners(league: dict[str, Any]) -> dict[str, Any]:
     """Return a copy with all owner-identifying fields removed.
 
-    Two passes:
+    Identity scrubbing:
     1. Drop fields by name (_OWNER_FIELDS): owners[], primaryOwner, memberId,
        displayName, firstName, lastName, userId, isLeagueManager,
        isActingAsTeamOwner.
@@ -192,6 +213,8 @@ def _redact_owners(league: dict[str, Any]) -> dict[str, Any]:
        pattern with a stable placeholder. Catches member IDs that travel
        in other fields (e.g. `transactions[*].source`) and any new
        member-ID surface ESPN adds in the future without us noticing.
+    4. Replace fantasy league/team/division labels with ID-based labels and
+       discard custom logos. Keep public athlete and professional-team names.
 
     Idempotent.
     """
@@ -208,4 +231,18 @@ def _redact_owners(league: dict[str, Any]) -> dict[str, Any]:
     # Even after key+value scrubbing, drop members[] entirely — we never
     # consume it downstream, so the safest move is "no member list at all".
     cleaned.pop("members", None)
+    # Fantasy labels and custom logos can identify participants even when
+    # members[] is absent. Pro-team/player names are public and stay intact.
+    for team in cleaned.get("teams") or []:
+        tid = team.get("id")
+        for field in ("name", "location", "nickname", "abbrev", "logo", "logoType"):
+            team.pop(field, None)
+        team.update(name=f"Team {tid}", abbrev=f"T{tid}")
+    settings = cleaned.get("settings") or {}
+    if "name" in settings:
+        settings["name"] = f"League {cleaned['id']}" if "id" in cleaned else "League"
+    for division in (settings.get("scheduleSettings") or {}).get("divisions") or []:
+        if "name" in division:
+            division["name"] = f"Division {division.get('id', '')}".strip()
+    settings.pop("financeSettings", None)
     return cleaned

@@ -5,7 +5,7 @@ Verified against real Jewell Loyd game logs from the 2026-06-01 snapshot:
 - Period 16: stats {0:10, 1:0, 2:0, 3:2, 6:0, 17:3, 43:0} → appliedTotal=15.0
 - Period 10: stats {0:7, 1:0, 2:1, 3:1, 6:5, 17:2, 43:1} → appliedTotal=22.0
 
-Formula for the 50-40-90 Club (7 scoring items):
+Formula for the league 2043154241 (7 scoring items):
   FGM(0)×1.0  3PM(1)×2.0  FTM(2)×2.0  REB(3)×1.0
   AST(6)×1.0  STL(17)×1.0  TD(43)×5.0
 """

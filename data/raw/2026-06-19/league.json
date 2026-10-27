@@ -678,20 +678,10 @@
       "timePerSelection": 60,
       "type": "SNAKE"
     },
-    "financeSettings": {
-      "entryFee": 0.0,
-      "miscFee": 0.0,
-      "perLoss": 0.0,
-      "perTrade": 0.0,
-      "playerAcquisition": 0.0,
-      "playerDrop": 0.0,
-      "playerMoveToActive": 0.0,
-      "playerMoveToIR": 0.0
-    },
     "isAutoReactivate": false,
     "isCustomizable": true,
     "isPublic": false,
-    "name": "50-40-90 Club",
+    "name": "League 2043154241",
     "proTeams": [
       {
         "abbrev": "PHX",
@@ -8808,7 +8798,7 @@
       "divisions": [
         {
           "id": 0,
-          "name": "East",
+          "name": "Division 0",
           "size": 8
         }
       ],
@@ -8996,7 +8986,7 @@
   },
   "teams": [
     {
-      "abbrev": "KAH",
+      "abbrev": "T1",
       "currentProjectedRank": 3,
       "currentSimulationResults": {
         "divisionWinPct": 0.1505,
@@ -10597,9 +10587,7 @@
       },
       "id": 1,
       "isActive": false,
-      "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/1c02dee0-4eea-11f1-8cd3-5550ce44b587",
-      "logoType": "CUSTOM_UPLOAD",
-      "name": "Copper Futures",
+      "name": "Team 1",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 3,
       "points": 2405.0,
@@ -18240,7 +18228,7 @@
       ]
     },
     {
-      "abbrev": "PEZ",
+      "abbrev": "T2",
       "currentProjectedRank": 6,
       "currentSimulationResults": {
         "divisionWinPct": 0.0305,
@@ -18285,9 +18273,7 @@
       },
       "id": 2,
       "isActive": false,
-      "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Incredibles/incredibles_12.svg",
-      "logoType": "VECTOR",
-      "name": "Empire State Farm",
+      "name": "Team 2",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 6,
       "points": 2271.0,
@@ -26058,7 +26044,7 @@
       "waiverRank": 3
     },
     {
-      "abbrev": "Spda",
+      "abbrev": "T5",
       "currentProjectedRank": 5,
       "currentSimulationResults": {
         "divisionWinPct": 0.124,
@@ -26087,9 +26073,7 @@
       },
       "id": 5,
       "isActive": false,
-      "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/16.svg",
-      "logoType": "VECTOR",
-      "name": "Plumdog Millionaire",
+      "name": "Team 5",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 4,
       "points": 2388.0,
@@ -33969,7 +33953,7 @@
       "waiverRank": 4
     },
     {
-      "abbrev": "Nut",
+      "abbrev": "T6",
       "currentProjectedRank": 2,
       "currentSimulationResults": {
         "divisionWinPct": 0.22525,
@@ -33998,9 +33982,7 @@
       },
       "id": 6,
       "isActive": false,
-      "logo": "https://g.espncdn.com/lm-static/logo-packs/core/StarWarsTheRiseOfSkywalker/rise-skywalker-chewy.svg",
-      "logoType": "VECTOR",
-      "name": "Hot Stew Comin Through",
+      "name": "Team 6",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 2,
       "points": 2595.0,
@@ -41992,7 +41974,7 @@
       "waiverRank": 7
     },
     {
-      "abbrev": "C9",
+      "abbrev": "T7",
       "currentProjectedRank": 7,
       "currentSimulationResults": {
         "divisionWinPct": 0.0085,
@@ -42021,9 +42003,7 @@
       },
       "id": 7,
       "isActive": false,
-      "logo": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_doughnut.svg",
-      "logoType": "VECTOR",
-      "name": "Honolulu Cloud Wine",
+      "name": "Team 7",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 7,
       "points": 2320.0,
@@ -48844,7 +48824,7 @@
       "waiverRank": 2
     },
     {
-      "abbrev": "KylB",
+      "abbrev": "T8",
       "currentProjectedRank": 4,
       "currentSimulationResults": {
         "divisionWinPct": 0.13825,
@@ -48874,9 +48854,7 @@
       },
       "id": 8,
       "isActive": false,
-      "logo": "https://www.athletespeakers.com/storage/celebrities/1661452080_Screenshot%202022-08-25%20142501.png",
-      "logoType": "CUSTOM_VALID",
-      "name": "Rhyne 'em dine 'em 69 'em",
+      "name": "Team 8",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 5,
       "points": 2376.0,
@@ -56402,7 +56380,7 @@
       "waiverRank": 5
     },
     {
-      "abbrev": "NNZ",
+      "abbrev": "T9",
       "currentProjectedRank": 8,
       "currentSimulationResults": {
         "divisionWinPct": 0.00075,
@@ -56431,9 +56409,7 @@
       },
       "id": 9,
       "isActive": false,
-      "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/607f0770-659b-11f1-ba11-258ab190f341",
-      "logoType": "CUSTOM_UPLOAD",
-      "name": "Nothing But Net Zero",
+      "name": "Team 9",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 8,
       "points": 1816.0,
@@ -63746,7 +63722,7 @@
       "waiverRank": 1
     },
     {
-      "abbrev": "A-B",
+      "abbrev": "T10",
       "currentProjectedRank": 1,
       "currentSimulationResults": {
         "divisionWinPct": 0.32225,
@@ -63775,9 +63751,7 @@
       },
       "id": 10,
       "isActive": false,
-      "logo": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_beer.svg",
-      "logoType": "VECTOR",
-      "name": "Nobody's Business",
+      "name": "Team 10",
       "playoffClinchType": "UNKNOWN",
       "playoffSeed": 1,
       "points": 2336.0,

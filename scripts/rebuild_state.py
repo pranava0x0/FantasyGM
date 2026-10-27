@@ -94,17 +94,8 @@ def main(argv: list[str] | None = None) -> int:
 
     # Load full transaction history from the append-only log so state.json
     # reflects the complete season, not just the current period's snapshot.
-    txn_history_path = ROOT / "data" / "history" / "transactions.jsonl"
-    extra_transactions: list[dict] = []
-    if txn_history_path.exists():
-        for line in txn_history_path.read_text().splitlines():
-            if not line.strip():
-                continue
-            try:
-                extra_transactions.append(json.loads(line))
-            except json.JSONDecodeError:
-                continue
-        log.info("loaded %d transactions from history log", len(extra_transactions))
+    extra_transactions = build_state_mod.load_transactions_history(ROOT / "data" / "history")
+    log.info("loaded %d transactions from history log", len(extra_transactions))
 
     # Same treatment for news/social — full persistent archive, not just
     # today's snapshot — so a player's history survives across replays.

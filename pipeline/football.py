@@ -12,7 +12,9 @@ from pathlib import Path
 from typing import Any, Callable, Literal
 import urllib.request
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
+
+from pipeline.ingest import SLEEPER_RULE_KEYS
 
 log = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +66,11 @@ class Team(Strict):
     reserve: list[str] = Field(default_factory=list)
     budget_used: int | None = None
 
+    @field_validator("label", mode="before")
+    @classmethod
+    def neutral_label(cls, value: Any, info: ValidationInfo) -> str:
+        return f"Team {info.data.get('id', 'unknown')}"
+
 
 class Deadline(Strict):
     title: str
@@ -103,6 +110,11 @@ class League(Strict):
     collection: str = "public API"
     game_times: dict[str, str] = Field(default_factory=dict)
     reminders: list[str] = Field(default_factory=list)
+
+    @field_validator("name", mode="before")
+    @classmethod
+    def neutral_name(cls, value: Any, info: ValidationInfo) -> str:
+        return f"League {info.data.get('id', 'unknown')}"
 
     @field_validator("projection_at")
     @classmethod
@@ -167,7 +179,10 @@ class Cache:
         path = self.root / (key + ".json")
         prior = json.loads(path.read_text()) if path.exists() else None
         force = self.deep and key != "catalog"
-        if prior and not force and time.time() - path.stat().st_mtime < ttl:
+        # Re-fetch legacy league entries so private labels cannot survive a cache hit.
+        legacy_league = bool(prior and key.startswith("league-") and
+                             prior["data"] != sanitize_league(prior["data"]))
+        if prior and not force and not legacy_league and time.time() - path.stat().st_mtime < ttl:
             log.info("cache hit %s", key)
             return prior["data"], prior["captured_at"]
         log.info("fetch %s", key)
@@ -178,7 +193,7 @@ class Cache:
         if rosters:
             raw = sanitize_rosters(raw)
         if key.startswith("league-"):
-            raw = {k: raw[k] for k in ("league_id", "name", "season", "sport", "settings", "scoring_settings", "roster_positions")}
+            raw = sanitize_league(raw)
         if key == "catalog":
             raw = {pid: {k: p.get(k) for k in ("full_name", "first_name", "last_name", "fantasy_positions", "position", "team", "injury_status", "espn_id", "active")}
                    for pid, p in raw.items()}
@@ -319,6 +334,15 @@ def lineup_moves(league: League, team: Team, players: dict[str, Player],
             moves.append({"in": best.id, "out": pid, "slot": slots[i], "gain": round(gain, 2),
                           "reason": "Bye / unavailable starter" if unavailable else "Higher provider projection; verify both players are unlocked."})
     return moves
+
+
+def sanitize_league(raw: dict[str, Any]) -> dict[str, Any]:
+    """Keep league IDs and selected numeric rules; drop private labels before caching."""
+    safe = {k: raw[k] for k in ("league_id", "season", "sport", "scoring_settings", "roster_positions")}
+    safe["name"] = f"League sleeper-{raw['league_id']}"
+    safe["settings"] = {k: v for k, v in (raw.get("settings") or {}).items()
+                        if k in SLEEPER_RULE_KEYS and isinstance(v, (int, float))}
+    return safe
 
 
 def normalize_sleeper(raw: dict[str, Any], rosters: list[dict[str, Any]], captured: str) -> League:

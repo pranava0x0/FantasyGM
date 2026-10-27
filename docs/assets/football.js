@@ -88,7 +88,7 @@
       $("wnba-frame").src = index?.wnba?.path || "wnba.html";
       const note = $("wnba").querySelector("p");
       note.className = "notice";
-      note.innerHTML = `WNBA · ${esc(index?.wnba?.name || "50-40-90 Club")} · snapshot ${esc(fmt(index?.wnba?.captured_at))}. ${age(index?.wnba?.captured_at) > 86400000 ? "Stale: refresh ESPN data before lineup or season decisions." : ""} <a href="wnba.html">Open full console</a>`;
+      note.innerHTML = `WNBA · ${esc(index?.wnba?.name || "League 2043154241")} · snapshot ${esc(fmt(index?.wnba?.captured_at))}. ${age(index?.wnba?.captured_at) > 86400000 ? "Stale: refresh ESPN data before lineup or season decisions." : ""} <a href="wnba.html">Open full console</a>`;
     }
     if (!wnba) $("wnba-frame").removeAttribute("src");
   });

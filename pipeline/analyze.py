@@ -277,7 +277,7 @@ def compute_team_needs(teams: list[dict[str, Any]]) -> dict[int, dict[str, Any]]
     The structural decision: WNBA fantasy uses shared F/C lineup slots, so
     we treat F+C as a single 'frontcourt' bucket. A team with zero
     pure-Center players doesn't have a structural C need if they fill slot
-    5 with a Forward — three teams in the 50-40-90 Club do exactly that.
+    5 with a Forward — three teams in the league 2043154241 do exactly that.
 
     `top_need_bucket` is therefore the worse of two combined buckets:
     'G' (backcourt) or 'FC' (frontcourt). The granular F / C numbers stay

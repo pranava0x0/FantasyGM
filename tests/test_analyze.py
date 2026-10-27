@@ -37,7 +37,7 @@ class TestBuildTeamViews:
         assert isinstance(record["wins"], int)
 
     def test_handles_non_dense_team_ids(self) -> None:
-        # Regression for the 50-40-90 Club scar: team IDs are [1,2,5,6,7,8,9,10]
+        # Regression for the league 2043154241 scar: team IDs are [1,2,5,6,7,8,9,10]
         # (gaps from prior-season drops). Code must not loop 1..N or assume
         # team_id == position-in-array.
         league = {

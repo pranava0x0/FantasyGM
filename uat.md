@@ -29,9 +29,9 @@ The following original flows apply to `docs/wnba.html`. Current NFL release and 
 | Topbar / Brand / Theme toggle | 2026-06-01 | Stable. Light↔dark toggle persists via localStorage. |
 | Meta strip | 2026-06-05 | Period 29 / P32–38 / Matchup 4 / Teams 8 / 2026-06-05 13:40Z. Wraps to 3 lines at 375px. |
 | Waivers tab | 2026-06-05 | 30 targets render. AI "GM Take" summaries show on all cards with correct fresh text. RETURNING badges on Hiedeman, Allemand, Melbourne. Bucket pills, per-game, ownership %, trend all present. |
-| Team Needs tab | 2026-06-05 | All 8 teams present. G and FC bars rendering. FC-need teams: KAH, PEZ, C9 clearly FC-negative. G-need teams: KylB (-37.9), EET (-51.2). Expand/collapse and SUMMARY · AUTO-GENERATED work. |
+| Team Needs tab | 2026-06-05 | All 8 teams present. G and FC bars rendering. FC-need teams: T1, T2, T7 clearly FC-negative. G-need teams: T8 (-37.9), T9 (-51.2). Expand/collapse and SUMMARY · AUTO-GENERATED work. |
 | News tab | 2026-06-01 | Stable. WNBA-only articles. Player tags visible on highlighted items. |
-| Transactions tab | 2026-06-05 | 1 FUTURE ROSTER transaction (Spda lineup swap: Kiki Rice F/C↔UTIL, Arike Ogunbowale UTIL↔F/C). Slot labels correct. Player names resolving. |
+| Transactions tab | 2026-06-05 | 1 FUTURE ROSTER transaction (T5 lineup swap: Kiki Rice F/C↔UTIL, Arike Ogunbowale UTIL↔F/C). Slot labels correct. Player names resolving. |
 | Player modal — Desktop | 2026-06-05 | Stable. Fresh GM Take panel with today's AI text. Last-2-weeks game log. Social (X) feed: @BallersNewz, @DanielleHobeika, @EJayArrow, @WNBAStormChaser all rendering. |
 | Player modal — Mobile | 2026-06-01 | Stable. Fits 375px. 3-stat and 5-stat layouts correct. TEAM NEWS badges readable. Reddit section present. |
 | Mobile 375px | 2026-06-05 | All 4 tab labels fully visible. Player names unclipped. AI summary line rendering. No horizontal overflow. |
@@ -101,7 +101,7 @@ See `issues.md` for the audit table.
 - Yahoo: Nico Collins replacement for OUT Justin Jefferson; Kelce bye and TE coverage need; IR-held Tyson preserve value. Imported Week 5 projection has a source and capture time.
 - Waivers: sequentially type Dulcich; stable search input, one matching candidate. Position filter composes with search; no data reload.
 - Injury alert news links require exact athlete IDs; shared news rows without URL excluded.
-- WNBA: Copper Futures default, August snapshot visibly stale, legacy console intact; unload iframe when returning NFL.
+- WNBA: Team 1 default, August snapshot visibly stale, legacy console intact; unload iframe when returning NFL.
 - Rules: confirm timezone-aware cutoff, Today shows it; calendar export should import as UTC event with two-hour alarm. Exact processing hour not guessed.
 - Performance script stresses 10,000 players / 32 teams and offline full rebuild; checks <64MiB stress allocations and <200KB gzipped per JSON.
 
