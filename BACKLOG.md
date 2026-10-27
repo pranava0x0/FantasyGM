@@ -65,3 +65,13 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 - **PWA install + offline cache.** Make the static page installable; show last successful snapshot when offline.
 - **Light/dark theme parity audit.** Run a contrast check across both themes once frontend has more components.
 - **Move the site to its own domain** if/when GitHub Pages URL becomes a friction point.
+
+## User-requested NFL release (2026-10-05)
+
+- User requested 2026-10-06: measure mobile task interactions before changes; retain repeatable UAT, reduce worst scrolling paths, fix PR #74 bot findings, merge after verification.
+
+- High: unified WNBA/NFL and multi-league mobile console; shared cached sport collection, isolated league advice, Sleeper live ingestion, Yahoo/ESPN validated import, deadlines/status alerts, daily/deep refresh and performance checks. Migration: docs/multi-sport-plan.md.
+
+- User requested 2026-10-06: collapse seasonal sport/league controls into one small header button; publish existing sanitized NFL snapshots to GitHub Pages and verify production.
+
+- User requested 2026-10-06: fewer league-switch clicks. Keep connected leagues directly visible as compact one-tap buttons; seasonal sport selector stays collapsed.

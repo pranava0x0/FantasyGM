@@ -264,3 +264,9 @@ The patterns above are distilled from running many small projects in this folder
 - **Pieter Levels (levels.io)** — ship fast and ugly; boring tech beats shiny tech; solo-friendly defaults (vanilla, SQLite, single-file apps, cheap hosting); profit before scale; don't add a dependency you can't maintain alone; talk to users daily.
 
 When in doubt, both would say the same thing: **ship the smallest version that works, then iterate based on what real users do, not what you imagine they'll do.**
+
+## NFL extension (2026-10-06)
+
+User promoted NFL and multiple leagues into scope. `pipeline/football.py` owns NFL validation, collection, sport-wide cache and league analysis; `docs/assets/football.js` owns the compact shell. Existing WNBA implementation remains at `docs/wnba.html`. Shared NFL stat inputs use raw categories and source dates; provider projections and eligibility remain league-scoped. Unknown recovery timelines and processing hours stay unknown. Yahoo private browser snapshots are local imports; public roster complements must never be inferred from partial imports. User requested publication to GitHub Pages on 2026-10-06. The sanitized shared NFL payload, registry, two specified Sleeper leagues and Yahoo 544768 snapshot are committed; raw caches, credentials, team mapping and private imports remain ignored. New league output stays ignored until publication is requested. Owner identities used for team mapping stay in memory only; saved preferences contain roster IDs.
+
+NFL coverage assigns each healthy non-reserve player to at most one active slot, dedicated slots before FLEX. Missing scoring rules mean unavailable points. Historical injury statuses may remain visible, but stale snapshots never supply roster action advice. Failed Sleeper fetches retain validated cached leagues and original capture dates, with visible refresh errors.

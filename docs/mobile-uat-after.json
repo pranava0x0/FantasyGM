@@ -1,0 +1,622 @@
+{
+  "url": "http://127.0.0.1:8000",
+  "measuredAt": "2026-10-06T04:28:43.112Z",
+  "snapshotAt": "2026-10-06T04:12:34.088855+00:00",
+  "method": "Fresh page per task, saved own team; tap=1, text entry=1, swipe at most 609px (75% of 812px); target first 300px unobscured. Native dropdown selection excluded. Equal task weighting; not user telemetry.",
+  "summary": {
+    "journeys": 60,
+    "median": 3,
+    "p95": 8,
+    "max": 8,
+    "swipes": 32
+  },
+  "rows": [
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "lineup",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-alert",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "deadline",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "first-pick",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-pick",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 376,
+      "interactions": 7
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "find-pick",
+      "taps": 2,
+      "textEntries": 1,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-roster",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1195,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-news",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "confirm-cutoff",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 278,
+      "interactions": 2
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389723841625849857",
+      "task": "deep-list-to-roster",
+      "taps": 7,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 376,
+      "interactions": 8
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "lineup",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-alert",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1218,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "deadline",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "first-pick",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-pick",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 376,
+      "interactions": 7
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "find-pick",
+      "taps": 2,
+      "textEntries": 1,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-roster",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1218,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-news",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "confirm-cutoff",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 278,
+      "interactions": 2
+    },
+    {
+      "width": 375,
+      "league": "sleeper-1389752644595089408",
+      "task": "deep-list-to-roster",
+      "taps": 7,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 376,
+      "interactions": 8
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "lineup",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "last-alert",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 609,
+      "interactions": 2
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "deadline",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "first-pick",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "last-pick",
+      "taps": 5,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 5
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "find-pick",
+      "taps": 2,
+      "textEntries": 1,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "last-roster",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1007,
+      "interactions": 3
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "last-news",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "confirm-cutoff",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 278,
+      "interactions": 2
+    },
+    {
+      "width": 375,
+      "league": "yahoo-544768",
+      "task": "deep-list-to-roster",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "lineup",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-alert",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "deadline",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "first-pick",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-pick",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 332,
+      "interactions": 7
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "find-pick",
+      "taps": 2,
+      "textEntries": 1,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-roster",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1151,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "last-news",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "confirm-cutoff",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 234,
+      "interactions": 2
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389723841625849857",
+      "task": "deep-list-to-roster",
+      "taps": 7,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 332,
+      "interactions": 8
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "lineup",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-alert",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1218,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "deadline",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "first-pick",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-pick",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 332,
+      "interactions": 7
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "find-pick",
+      "taps": 2,
+      "textEntries": 1,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-roster",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 1218,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "last-news",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "confirm-cutoff",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 234,
+      "interactions": 2
+    },
+    {
+      "width": 390,
+      "league": "sleeper-1389752644595089408",
+      "task": "deep-list-to-roster",
+      "taps": 7,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 332,
+      "interactions": 8
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "lineup",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "last-alert",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 609,
+      "interactions": 2
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "deadline",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "first-pick",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 1
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "last-pick",
+      "taps": 5,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 5
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "find-pick",
+      "taps": 2,
+      "textEntries": 1,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "last-roster",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 2,
+      "scrollPixels": 963,
+      "interactions": 3
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "last-news",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "confirm-cutoff",
+      "taps": 1,
+      "textEntries": 0,
+      "swipes": 1,
+      "scrollPixels": 210,
+      "interactions": 2
+    },
+    {
+      "width": 390,
+      "league": "yahoo-544768",
+      "task": "deep-list-to-roster",
+      "taps": 6,
+      "textEntries": 0,
+      "swipes": 0,
+      "scrollPixels": 0,
+      "interactions": 6
+    }
+  ],
+  "before": {
+    "journeys": 60,
+    "median": 4,
+    "p95": 18,
+    "max": 18,
+    "swipes": 258
+  }
+}

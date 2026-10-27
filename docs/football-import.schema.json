@@ -1,0 +1,386 @@
+{
+  "$defs": {
+    "Deadline": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "at": {
+          "title": "At",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "at",
+        "source_url"
+      ],
+      "title": "Deadline",
+      "type": "object"
+    },
+    "League": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "provider": {
+          "enum": [
+            "sleeper",
+            "yahoo",
+            "espn"
+          ],
+          "title": "Provider",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "captured_at": {
+          "title": "Captured At",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "slots": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Slots",
+          "type": "array"
+        },
+        "settings": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Settings",
+          "type": "object"
+        },
+        "scoring": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Scoring",
+          "type": "object"
+        },
+        "teams": {
+          "items": {
+            "$ref": "#/$defs/Team"
+          },
+          "title": "Teams",
+          "type": "array"
+        },
+        "deadlines": {
+          "items": {
+            "$ref": "#/$defs/Deadline"
+          },
+          "title": "Deadlines",
+          "type": "array"
+        },
+        "my_team": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "My Team"
+        },
+        "availability_complete": {
+          "default": false,
+          "title": "Availability Complete",
+          "type": "boolean"
+        },
+        "available_players": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Available Players",
+          "type": "array"
+        },
+        "projections": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Projections",
+          "type": "object"
+        },
+        "projection_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Projection At"
+        },
+        "projection_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Projection Source"
+        },
+        "projection_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Projection Label"
+        },
+        "player_status": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Player Status",
+          "type": "object"
+        },
+        "bye_players": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Bye Players",
+          "type": "array"
+        },
+        "collection": {
+          "default": "public API",
+          "title": "Collection",
+          "type": "string"
+        },
+        "game_times": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Game Times",
+          "type": "object"
+        },
+        "reminders": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reminders",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "provider",
+        "name",
+        "season",
+        "captured_at",
+        "source_url",
+        "slots",
+        "teams"
+      ],
+      "title": "League",
+      "type": "object"
+    },
+    "Player": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "positions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Positions",
+          "type": "array"
+        },
+        "team": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "espn_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Espn Id"
+        },
+        "adds": {
+          "default": 0,
+          "title": "Adds",
+          "type": "integer"
+        },
+        "stats": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Stats",
+          "type": "object"
+        },
+        "stats_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stats Source"
+        },
+        "stats_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stats At"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "positions"
+      ],
+      "title": "Player",
+      "type": "object"
+    },
+    "Team": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "players": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "starters": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Starters",
+          "type": "array"
+        },
+        "reserve": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reserve",
+          "type": "array"
+        },
+        "budget_used": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Budget Used"
+        }
+      },
+      "required": [
+        "id",
+        "players"
+      ],
+      "title": "Team",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "league": {
+      "$ref": "#/$defs/League"
+    },
+    "players": {
+      "items": {
+        "$ref": "#/$defs/Player"
+      },
+      "title": "Players",
+      "type": "array"
+    }
+  },
+  "required": [
+    "league"
+  ],
+  "title": "Import",
+  "type": "object"
+}
