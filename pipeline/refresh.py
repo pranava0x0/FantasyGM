@@ -103,8 +103,7 @@ def main(argv: list[str] | None = None) -> int:
                 except (ESPNAuthError, ESPNAPIError) as e:
                     log.error("dry-run failed: %s", e)
                     return 3
-                name = (league.get("settings") or {}).get("name")
-                log.info("dry-run OK: league=%r scoringPeriod=%s", name, league.get("scoringPeriodId"))
+                log.info("dry-run OK: league_id=%s scoringPeriod=%s", league_id, league.get("scoringPeriodId"))
                 return 0
 
             try:
@@ -233,6 +232,7 @@ def main(argv: list[str] | None = None) -> int:
     # Persistent news/social archives — merged in so a player's history
     # survives after today's items scroll out of the live feed window.
     extra_news = build_state_mod.load_news_history(history_root)
+    extra_transactions = build_state_mod.load_transactions_history(history_root)
     extra_social = build_state_mod.load_social_history(history_root)
     log.info(
         "refresh: loaded history archive (news=%d reddit=%d twitter=%d bluesky=%d instagram=%d)",
@@ -255,6 +255,7 @@ def main(argv: list[str] | None = None) -> int:
         ext_projections_by_source=ext_projections_by_source or None,
         player_game_log=player_game_log,
         extra_news=extra_news,
+        extra_transactions=extra_transactions,
         extra_reddit=extra_social["reddit"],
         extra_twitter=extra_social["twitter"],
         extra_bluesky=extra_social["bluesky"],

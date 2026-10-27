@@ -32,6 +32,8 @@ Migrate local session reports and raw discovery files, existing league snapshots
 
 Keep `docs/data/state.json` and existing WNBA schema unchanged. Store new league refreshes and generated plans under gitignored `scratch/lineups/` until a private or intentionally published multi-league view is selected. Never store owner names or identifiers in snapshots. Sleeper roster identity resolves in memory from a supplied username; persist roster ID only. ESPN cookies remain in `.env` and are sent only to ESPN.
 
+Integration with the separately published NFL dashboard preserves its existing requested league set. NFL cache writes use selected numeric rules and neutral league labels; portable imports normalize league/team labels before storage. WNBA dry-run logs use league IDs. Live refresh and replay both merge the persistent transaction archive, including when the current ESPN feed is empty. Historical Yahoo imports retain their original capture date until explicitly refreshed from a verified source.
+
 Add game-code selection to the existing ESPN reader with `wfba` as the default, so existing callers retain their behavior. NBA uses `fba` and season 2027 for 2026–27. Read NBA eligible slots from player data and counts from settings; never reuse WNBA position IDs.
 
 ## Optimization and injury checks

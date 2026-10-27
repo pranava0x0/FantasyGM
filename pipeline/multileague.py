@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 import httpx
 
 from pipeline.espn_client import ESPNClient, ESPNCredentials
-from pipeline.ingest import _redact_owners
+from pipeline.ingest import SLEEPER_RULE_KEYS, _redact_owners
 from pipeline.refresh import _load_dotenv
 
 log = logging.getLogger(__name__)
@@ -34,16 +34,6 @@ NFL_FLEX = {"FLEX": {"RB", "WR", "TE"}, "SUPER_FLEX": {"QB", "RB", "WR", "TE"},
 UNAVAILABLE = {"OUT", "IR", "INJURED_RESERVE", "SUSPENDED", "PUP", "DNR"}
 NBA_POINTS = {"0": 1, "6": 1, "3": 2, "2": 4, "1": 4, "11": -2,
               "13": 2, "14": -1, "15": 1, "16": -1, "17": 1}
-SLEEPER_RULE_KEYS = frozenset({
-    "best_ball", "start_week", "leg", "bench_lock", "reserve_slots", "taxi_slots",
-    "reserve_allow_na", "reserve_allow_doubtful", "reserve_allow_dnr", "reserve_allow_out",
-    "reserve_allow_sus", "reserve_allow_cov", "max_subs", "sub_start_time_eligibility",
-    "sub_lock_if_starter_active", "waiver_budget", "waiver_type", "waiver_bid_min",
-    "waiver_clear_days", "waiver_day_of_week", "daily_waivers", "daily_waivers_days",
-    "daily_waivers_hour", "disable_adds", "disable_trades", "trade_deadline",
-    "trade_review_days", "playoff_week_start", "playoff_teams", "playoff_round_type",
-    "league_average_match", "type", "max_keepers", "taxi_deadline", "taxi_allow_vets", "taxi_years",
-})
 
 
 def exact_assignment(players: list[dict[str, Any]], slots: list[str]) -> dict[int, str]:

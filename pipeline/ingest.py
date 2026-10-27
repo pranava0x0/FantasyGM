@@ -19,6 +19,18 @@ from pipeline.espn_client import ESPNClient
 
 log = logging.getLogger(__name__)
 
+# Persist selected numeric Sleeper rules, never arbitrary provider metadata.
+SLEEPER_RULE_KEYS = frozenset({
+    "best_ball", "start_week", "leg", "bench_lock", "reserve_slots", "taxi_slots",
+    "reserve_allow_na", "reserve_allow_doubtful", "reserve_allow_dnr", "reserve_allow_out",
+    "reserve_allow_sus", "reserve_allow_cov", "reserve_allow_pup", "max_subs", "sub_start_time_eligibility",
+    "sub_lock_if_starter_active", "waiver_budget", "waiver_type", "waiver_bid_min",
+    "waiver_clear_days", "waiver_day_of_week", "daily_waivers", "daily_waivers_days",
+    "daily_waivers_hour", "disable_adds", "disable_trades", "trade_deadline",
+    "trade_review_days", "playoff_week_start", "playoff_teams", "playoff_round_type",
+    "league_average_match", "type", "max_keepers", "taxi_deadline", "taxi_allow_vets", "taxi_years",
+})
+
 # ESPN member IDs are UUIDs wrapped in curly braces — the exact shape
 # as the SWID auth cookie. The user's own member ID literally IS their
 # SWID value. Scrubbing any string matching this pattern is a defense

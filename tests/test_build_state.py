@@ -333,3 +333,18 @@ def test_social_return_signal_matches_unique_surname() -> None:
     social_texts = ["mcdonald cleared to return from ankle injury"]
     result = bs._detect_social_return_signals(player_id_to_name, {1}, social_texts)
     assert result == {1}
+
+
+def test_transaction_archive_survives_empty_live_feed(
+    league_raw: dict, free_agents_raw: dict, captured_at: datetime, tmp_path: Path
+) -> None:
+    initial = bs.build_state(league_raw=league_raw, free_agents_raw=free_agents_raw,
+                             captured_at=captured_at)
+    assert initial.transactions_recent
+    bs.append_transactions_history(initial, tmp_path)
+    archived = bs.load_transactions_history(tmp_path)
+    league_raw["transactions"] = []
+    refreshed = bs.build_state(league_raw=league_raw, free_agents_raw=free_agents_raw,
+                               captured_at=captured_at, extra_transactions=archived)
+    assert {t.transaction_id for t in refreshed.transactions_recent} == {
+        t.transaction_id for t in initial.transactions_recent}

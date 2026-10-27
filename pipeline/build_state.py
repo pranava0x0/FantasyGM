@@ -839,6 +839,24 @@ def append_news_history(news_raw: dict[str, Any] | None, history_root: Path) -> 
     return appended
 
 
+def load_transactions_history(history_root: Path) -> list[dict[str, Any]]:
+    """Read the season archive for both live refresh and snapshot replay."""
+    path = history_root / "transactions.jsonl"
+    if not path.exists():
+        return []
+    records: list[dict[str, Any]] = []
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        try:
+            record = json.loads(line)
+            if isinstance(record, dict) and record.get("transaction_id"):
+                records.append(record)
+        except json.JSONDecodeError:
+            log.warning("Skipping malformed transaction archive row")
+    return records
+
+
 def load_news_history(history_root: Path) -> list[dict[str, Any]]:
     """Load the persistent news archive as plain dicts for `extra_news=`."""
     log_path = history_root / "news.jsonl"

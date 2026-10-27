@@ -1,5 +1,13 @@
 # Issues
 
+## Refresh publication review 2026 10 27
+
+Expected ID-only labels across every refresh entry point. Review found the WNBA dry run logged the provider's league name, while the NFL league cache and portable imports retained fantasy labels. Fixed logging to use IDs; allowlisted cached Sleeper rules and normalized imported league/team labels. Regression tests cover logs, fresh and legacy cache writes, imported labels, and published JSON. No credentials or participant text are included in review artifacts.
+
+Expected full refresh to preserve the transaction archive when the live season-end feed is empty. The live refresh omitted `extra_transactions`, collapsing the dashboard history to zero despite 362 archived rows. A shared archive loader now feeds both refresh and replay; regression coverage verifies an empty live feed retains archived transaction IDs.
+
+The local NFL imports and roster-ID mapping were absent after merging the separately published dashboard. Restored the existing Yahoo snapshot from its published ID-only payload and kept its original capture date; resolved Sleeper roster IDs from the existing local report. Refreshing does not make the Yahoo snapshot current. CBS WNBA enrichment returned HTTP 404; ESPN data and the Yahoo public stat source still refreshed successfully.
+
 ## Multi league access and projection coverage 2026 10 26
 
 Expected signed-in Chrome league pages to expose roster controls. The connected Chrome profile instead showed ESPN's MyDisney sign-in form, while an open extension UI blocked Sleeper interaction. Stored ESPN API cookies still read the private NBA league successfully; browser and API authentication are separate sessions. Next time verify the actual team page and extension state before assuming browser access from working API credentials.
