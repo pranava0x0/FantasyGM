@@ -1,5 +1,9 @@
 # Issues
 
+## Player social searches (2026-11-03)
+
+Bluesky returned valid timestamps with nanosecond precision that Python 3.9 rejected, losing other matches in the same search. The refresh normalizes fractional seconds before parsing. Reddit repeatedly returned HTTP 429; after a bounded retry the refresh records skipped queries separately from completed searches with no matches.
+
 ## Refresh publication review 2026 10 27
 
 Automated PR review found transient Sleeper failures could erase resolved roster identity when an incomplete report replaced the prior capture. The report now preserves a separate map of platform/league keys to roster IDs, including across errors; failed leagues stay absent from fresh results. A fail-then-recover CLI regression verifies identity survives without retaining stale league data or owner identifiers.
