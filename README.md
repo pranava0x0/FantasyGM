@@ -4,7 +4,13 @@ Fantasy decision desk for WNBA and NFL. Switch sports, leagues and your team. WN
 
 The data pipeline runs locally on your machine. The output is a static page hosted on GitHub Pages. No backend, no secrets in this repo.
 
-## NFL quick start
+## NFL and NBA refresh
+
+Run `.venv/bin/python -m pipeline.refresh_leagues` for the regular-season refresh. It updates the NFL dashboard, uses the dashboard schedule week for both Sleeper rosters, pulls ESPN NBA profiles, and searches each owned player and defense on Bluesky and Reddit for mentions from the past seven days. Queries use public player names only. The dated links and per-source outcomes are in `scratch/lineups/player-name-searches.md` (local only). A rate-limited source may provide partial coverage; the command exits nonzero if a roster failed or an entry had no successful search on either source.
+
+Live results can change. To reproduce the same Markdown from a saved capture without contacting providers, run `.venv/bin/python -m pipeline.refresh_leagues --replay scratch/lineups/social-history/<timestamp>.json`. The Markdown is written next to the capture.
+
+## NFL dashboard only
 
 Existing installed dependencies suffice; no new packages.
 

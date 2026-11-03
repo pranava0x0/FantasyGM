@@ -103,7 +103,11 @@ Rules learned from running research and data-collection workflows across this fo
 
 ## Common tasks (FantasyGM-specific)
 
-### Refresh the league data
+### Default refresh: NFL and NBA
+
+For an unqualified refresh request, run `.venv/bin/python -m pipeline.refresh_leagues` from the project root. This refreshes the NFL desk and owned NFL/NBA profiles, then searches each distinct player by name before any supplemental feed scan. Inspect the coverage in `scratch/lineups/player-name-searches.md`; never publish private reports. An explicit WNBA refresh uses the procedure below.
+
+### Refresh WNBA league data
 
 ```bash
 # 1. One-time: cookies + venv

@@ -4,6 +4,8 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## High
 
+- **Repeatable NFL/NBA refresh** (requested 2026-11-03). Include fresh roster profiles and individual, dated social searches on every refresh. Implemented by `pipeline.refresh_leagues`; captures and reports stay local.
+
 - **Participant privacy** (requested 2026-10-26). Use platform, league ID and team/roster ID only; remove fantasy labels, handles, owner identifiers and custom logos from saved data and reports. Ingest, legacy rebuild and local capture migration implemented with regression coverage. Previously published Git history requires a separate coordinated cleanup; do not rewrite it as part of a refresh.
 
 - **NFL and NBA league planning** (requested 2026-10-26). CLI refresh, exact assignment solver, injury comparison and generated computer-use task implemented for active Sleeper NFL leagues and ESPN NBA. User chose total fantasy points for every sport; NBA uses labeled ESPN standard points because the league scores categories. NBA lineups set through November 1 and verified, including a manual points-based correction to ESPN's category-rated Wednesday lineup. No scheduled runs. Pending: resolve Sleeper browser access, apply and verify NFL lineups, then consider a multi-league frontend. Plan: [docs/multileague-lineups.md](docs/multileague-lineups.md).
