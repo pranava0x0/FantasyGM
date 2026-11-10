@@ -228,9 +228,9 @@ def analyze(league: League, players: dict[str, Player], now: datetime) -> dict[s
                            (now - datetime.fromisoformat(league.projection_at)).total_seconds() <= 86400)
     def score(p: Player) -> float | None:
         return league.projections.get(p.id) if projected_fresh else points(p, league.scoring, now)
-    def status(p: Player) -> str | None:
-        return league.player_status.get(p.id, p.status)
     stale = (now - datetime.fromisoformat(league.captured_at)).total_seconds() > 86400
+    def status(p: Player) -> str | None:
+        return league.player_status.get(p.id, None if stale else p.status)
     teams: dict[str, Any] = {}
     for team in league.teams:
         roster = [players[p] for p in team.players if p in players]
@@ -408,7 +408,7 @@ def refresh(root: Path = ROOT, deep: bool = False, offline: bool = False) -> dic
     required = {str(t["player_id"]) for t in trends} | {p for l in leagues for t in l.teams for p in t.players} | {p for l in leagues for p in l.available_players}
     counts = {str(t["player_id"]): int(t["count"]) for t in trends}
     players: dict[str, Player] = {}
-    for pid in required | additions.keys():
+    for pid in sorted(required | additions.keys()):
         p = catalog.get(pid)
         snapshot = additions.get(pid)
         if p:
@@ -442,7 +442,8 @@ def refresh(root: Path = ROOT, deep: bool = False, offline: bool = False) -> dic
                 games.append({"team": c["team"]["abbreviation"], "at": event["date"], "name": event["name"], "source_url": schedule_url})
     bye_teams = {t["abbreviation"] for t in (schedule_raw.get("week") or {}).get("teamsOnBye", [])}
     for league in leagues:
-        league.bye_players = list(set(league.bye_players) | {p.id for p in players.values() if p.team in bye_teams})
+        if (datetime.now(timezone.utc) - datetime.fromisoformat(league.captured_at)).total_seconds() <= 86400:
+            league.bye_players = sorted(set(league.bye_players) | {p.id for p in players.values() if p.team in bye_teams})
     shared = {"schedule_week": (schedule_raw.get("week") or {}).get("number"), "schedule_source": schedule_url, "catalog_at": catalog_at, "news_at": news_at, "schedule_at": schedule_at, "trends_at": trends_at,
               "players": {k: v.model_dump() for k, v in players.items()}, "news": news, "games": games}
     write_json(destination / "nfl.json", shared)

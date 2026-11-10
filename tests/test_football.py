@@ -217,11 +217,13 @@ def test_old_import_cannot_replace_current_catalog_or_adds(tmp_path: Path, monke
     cache = tmp_path / "data/nfl/cache"
     cache.mkdir(parents=True)
     for key, data in {"catalog": {"owned": {"full_name": "Owned", "position": "WR", "team": "MIN"}},
-                      "trends": [{"player_id": "owned", "count": 12}], "news": {}, "schedule": {}}.items():
+                      "trends": [{"player_id": "owned", "count": 12}], "news": {},
+                      "schedule": {"week": {"teamsOnBye": [{"abbreviation": "MIN"}]}}}.items():
         (cache / (key + ".json")).write_text(json.dumps({"data": data, "captured_at": NOW.isoformat()}))
     imports = tmp_path / "data/nfl/imports"
     imports.mkdir()
-    old = league(id="yahoo-1", provider="yahoo", player_status={"owned": "Out"})
+    old = league(id="yahoo-1", provider="yahoo", player_status={"owned": "Out"},
+                 captured_at=(datetime.now(timezone.utc) - timedelta(days=8)).isoformat())
     records = [p.model_copy(update={"status": "Out", "adds": 999}).model_dump() for p in pool().values()]
     (imports / "yahoo.json").write_text(json.dumps({"league": old.model_dump(), "players": records}))
     refresh(tmp_path, offline=True)
@@ -229,7 +231,10 @@ def test_old_import_cannot_replace_current_catalog_or_adds(tmp_path: Path, monke
     players = json.loads((output / "nfl.json").read_text())["players"]
     assert players["owned"]["status"] is None and players["owned"]["adds"] == 12
     assert players["free"]["name"] == "Free" and players["free"]["adds"] == 0
-    assert json.loads((output / "yahoo-1.json").read_text())["league"]["player_status"] == {"owned": "Out"}
+    historical = json.loads((output / "yahoo-1.json").read_text())
+    assert historical["league"]["player_status"] == {"owned": "Out"}
+    assert historical["league"]["bye_players"] == []
+    assert historical["analysis"]["teams"]["9"]["alerts"][0]["status"] == "Out"
 
 
 def test_pages_nfl_payloads_are_deployable_and_complete() -> None:
