@@ -10,6 +10,10 @@ Run `.venv/bin/python -m pipeline.refresh_leagues` for the regular-season refres
 
 Live results can change. To reproduce the same Markdown from a saved capture without contacting providers, run `.venv/bin/python -m pipeline.refresh_leagues --replay scratch/lineups/social-history/<timestamp>.json`. The Markdown is written next to the capture.
 
+The same run writes `scratch/lineups/player-reports.md` and a full JSON capture. Each owned NFL/NBA player and each waiver lead displayed for your two current Sleeper teams gets one report, with separate league projections and ranks. Reports include available ESPN season stats, the last three game lines, seven-day athlete news, and dated RotoWire feed headlines. Defenses get team results. Missing profiles and incomplete feeds are labeled; unresolved ESPN profiles cause a nonzero exit. Fresh inputs are live, while saved captures replay exactly.
+
+To enrich the most recent local roster and dashboard again without repeating the roster or name searches, run `.venv/bin/python -m pipeline.player_reports`. To reproduce the scouting Markdown offline, use `.venv/bin/python -m pipeline.player_reports --replay scratch/lineups/player-history/<timestamp>.json`. The report and its source cache are private and gitignored.
+
 ## NFL dashboard only
 
 Existing installed dependencies suffice; no new packages.

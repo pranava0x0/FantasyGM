@@ -3,28 +3,25 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import json
 import logging
 from pathlib import Path
 import re
 import time
 from typing import Any
-import unicodedata
 import xml.etree.ElementTree as ET
 
 import httpx
 
 from pipeline import football, multileague
+from pipeline.player_reports import ALIASES, build, instant, normalize
 from pipeline.reddit import USER_AGENT
 
 log = logging.getLogger(__name__)
 ROOT = football.ROOT
 OUTPUT = ROOT / "scratch/lineups"
 SOURCES = ("Bluesky", "Reddit")
-ALIASES = {"Nikola Jokic": "Nikola Jokić", "Stephen Curry": "Steph Curry",
-           "Kenny Gainwell": "Kenneth Gainwell", "Luther Burden III": "Luther Burden",
-           "Wendell Carter Jr.": "Wendell Carter"}
 ATOM = "{http://www.w3.org/2005/Atom}"
 
 
@@ -43,20 +40,6 @@ def searchable_names(report: dict[str, Any], catalog: dict[str, Any]) -> list[di
                 aliases.append(ALIASES[name])
             players[sport, pid] = {"sport": sport, "player_id": pid, "name": name, "names": aliases}
     return [players[key] for key in sorted(players)]
-
-
-def normalize(text: str) -> str:
-    ascii_text = unicodedata.normalize("NFKD", text.casefold()).encode("ascii", "ignore").decode()
-    return " ".join(re.sub(r"[^a-z0-9 -]", "", ascii_text).replace("-", " ").split())
-
-
-def instant(value: str) -> datetime:
-    # Python 3.9 accepts microseconds, while AT Protocol timestamps can have nanoseconds.
-    value = re.sub(r"\.(\d+)", lambda m: "." + m[1][:6].ljust(6, "0"), value)
-    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    if dt.tzinfo is None:
-        raise ValueError("missing timestamp offset")
-    return dt.astimezone(timezone.utc)
 
 
 def search(client: httpx.Client, source: str, sport: str, name: str,
@@ -199,7 +182,8 @@ def main(argv: list[str] | None = None) -> int:
                      for q in p["sources"][s]["queries"])
         log.info("%s: %d unavailable or skipped queries", s, missed)
     log.info("Completed a name search for %d/%d roster entries. Report: %s", covered, len(players), OUTPUT / (stem + ".md"))
-    return int(bool(index["errors"] or incomplete or not players or covered != len(players)))
+    profiles_code = build(OUTPUT, ROOT)
+    return int(bool(index["errors"] or incomplete or not players or covered != len(players) or profiles_code))
 
 
 if __name__ == "__main__":

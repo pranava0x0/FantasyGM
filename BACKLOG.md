@@ -4,7 +4,7 @@ Living list of ideas, features, and enhancements. Each item: brief description +
 
 ## High
 
-- **Repeatable NFL/NBA refresh** (requested 2026-11-03). Include fresh roster profiles and individual, dated social searches on every refresh. Implemented by `pipeline.refresh_leagues`; captures and reports stay local.
+- **Repeatable NFL/NBA refresh** (requested 2026-11-03). Include fresh roster profiles and individual, dated social searches on every refresh. Implemented by `pipeline.refresh_leagues`; captures and reports stay local. Expanded 2026-11-09 to cover individual news, game logs, season statistics, and the owned teams’ waiver shortlists.
 
 - **Participant privacy** (requested 2026-10-26). Use platform, league ID and team/roster ID only; remove fantasy labels, handles, owner identifiers and custom logos from saved data and reports. Ingest, legacy rebuild and local capture migration implemented with regression coverage. Previously published Git history requires a separate coordinated cleanup; do not rewrite it as part of a refresh.
 
