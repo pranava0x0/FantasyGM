@@ -1,5 +1,9 @@
 # Issues
 
+## NFL catalog freshness (2026-11-09)
+
+The current Sleeper roster showed Justin Jefferson active, but the dashboard suggested replacing him because an October Yahoo import overwrote the shared catalog. The refresh now takes shared status from the catalog and add counts from the current trends feed. Imported player records still supply missing identities and dated stats; Yahoo-specific status remains in its league snapshot. Compare the dashboard alerts to the fresh roster report when verifying a refresh.
+
 ## Player social searches (2026-11-03)
 
 Bluesky returned valid timestamps with nanosecond precision that Python 3.9 rejected, losing other matches in the same search. The refresh normalizes fractional seconds before parsing. Reddit repeatedly returned HTTP 429; after a bounded retry the refresh records skipped queries separately from completed searches with no matches.
